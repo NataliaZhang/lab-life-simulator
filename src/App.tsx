@@ -11,6 +11,7 @@ export function App() {
     state,
     activeEvent,
     boundStudentName,
+    boundStudent2Name,
     modalVisible,
     canContinue,
     chooseOption,
@@ -74,6 +75,7 @@ export function App() {
           event={activeEvent}
           lab={state.lab}
           boundStudentName={boundStudentName}
+          boundStudent2Name={boundStudent2Name}
           onChoose={chooseOption}
         />
       )}

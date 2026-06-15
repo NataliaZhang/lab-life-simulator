@@ -87,7 +87,10 @@ export function createInitialState(): GameState {
     eventQueue: openingEventIds.map(id => ({ id } as QueuedEvent)),
     activeEventId: null,
     activeBoundStudentId: null,
+    activeBoundStudent2Id: null,
     activeParagraphIndex: 0,
+    graduationChecksSeen: [],
+    graduationExtensions: {},
     storyLog: [],
     lab: {
       funding: 0,
@@ -122,11 +125,18 @@ function studentStatLabel(stat: StudentStatKey): string {
 
 // ─── Placeholder resolution ────────────────────────────────────────────────
 
-function resolvePlaceholders(text: string, studentId: string | null, students: Student[]): string {
-  if (!studentId) return text;
-  const student = students.find(s => s.id === studentId);
-  if (!student) return text;
-  return text.replace(/\{studentName\}/g, student.name);
+function resolvePlaceholders(
+  text: string,
+  studentId: string | null,
+  students: Student[],
+  student2Id?: string | null,
+): string {
+  let result = text;
+  const s1 = studentId ? students.find(s => s.id === studentId) : null;
+  const s2 = student2Id ? students.find(s => s.id === student2Id) : null;
+  if (s1) result = result.replace(/\{studentName\}/g, s1.name);
+  if (s2) result = result.replace(/\{student2Name\}/g, s2.name);
+  return result;
 }
 
 // ─── Effect Application ────────────────────────────────────────────────────
@@ -166,6 +176,7 @@ function applyEffects(
   state: GameState,
   effects: StateEffect[],
   boundStudentId?: string,
+  boundStudent2Id?: string,
 ): ApplyEffectsResult {
   let lab = { ...state.lab };
   let students = [...state.students];
@@ -184,10 +195,14 @@ function applyEffects(
         statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
       }
     } else if (effect.type === 'allStudents') {
+      const activeStudents = students.filter(s => s.status === 'active');
       students = students.map(s =>
         s.status === 'active' ? applyStudentStat(s, effect.stat, effect.delta) : s,
       );
-      statChanges.push({ label: `全体·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+      const allLabel = activeStudents.length === 1 && activeStudents[0]
+        ? `${activeStudents[0].name}·${studentStatLabel(effect.stat)}`
+        : `全体·${studentStatLabel(effect.stat)}`;
+      statChanges.push({ label: allLabel, delta: effect.delta });
     } else if (effect.type === 'randomStudent') {
       const active = students.filter(s => s.status === 'active');
       const target = boundStudentId
@@ -199,7 +214,39 @@ function applyEffects(
         );
         statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
       }
+    } else if (effect.type === 'randomStudent2') {
+      const active = students.filter(s => s.status === 'active');
+      const target = boundStudent2Id
+        ? (students.find(s => s.id === boundStudent2Id && s.status === 'active') ?? active[Math.floor(Math.random() * active.length)])
+        : active[Math.floor(Math.random() * active.length)];
+      if (target) {
+        students = students.map(s =>
+          s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
+        );
+        statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+      }
+    } else if (effect.type === 'graduateStudent') {
+      const target = boundStudentId
+        ? students.find(s => s.id === boundStudentId && s.status === 'active')
+        : undefined;
+      if (target) {
+        students = students.map(s =>
+          s.id === target.id ? { ...s, status: 'graduated' as const } : s,
+        );
+        statChanges.push({ label: `${target.name}·毕业`, delta: 1 });
+      }
+    } else if (effect.type === 'leaveStudent') {
+      const target = boundStudentId
+        ? students.find(s => s.id === boundStudentId && s.status === 'active')
+        : undefined;
+      if (target) {
+        students = students.map(s =>
+          s.id === target.id ? { ...s, status: 'left' as const } : s,
+        );
+        statChanges.push({ label: `${target.name}·离组`, delta: -1 });
+      }
     }
+    // extendGraduation is a state-level side-effect handled in CHOOSE_OPTION, not here
   }
 
   return { lab, students, statChanges };
@@ -215,22 +262,35 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (!nextQueued) return state;
       const event = getEvent(nextQueued.id);
       const boundStudentId = nextQueued.studentId ?? null;
+      const boundStudent2Id = nextQueued.student2Id ?? null;
 
       const introEntry: LogEntry = {
         id: `${nextQueued.id}_p0_${Date.now()}`,
         eventId: nextQueued.id,
         time: { ...state.time },
         type: 'event-intro',
-        title: resolvePlaceholders(event.title, boundStudentId, state.students),
-        narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students),
+        title: resolvePlaceholders(event.title, boundStudentId, state.students, boundStudent2Id),
+        narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students, boundStudent2Id),
       };
+
+      // Track which graduation check stage has been presented for this student
+      const gradCheckKey =
+        nextQueued.id === 'graduation_check' ? boundStudentId
+        : nextQueued.id === 'graduation_check_2' ? (boundStudentId ? boundStudentId + ':2' : null)
+        : nextQueued.id === 'graduation_check_3' ? (boundStudentId ? boundStudentId + ':3' : null)
+        : null;
+      const graduationChecksSeen = gradCheckKey
+        ? [...state.graduationChecksSeen, gradCheckKey]
+        : state.graduationChecksSeen;
 
       return {
         ...state,
         eventQueue: restQueue,
         activeEventId: nextQueued.id,
         activeBoundStudentId: boundStudentId,
+        activeBoundStudent2Id: boundStudent2Id,
         activeParagraphIndex: 0,
+        graduationChecksSeen,
         storyLog: [...state.storyLog, introEntry],
       };
     }
@@ -245,6 +305,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         event.description[nextIdx] ?? '',
         state.activeBoundStudentId,
         state.students,
+        state.activeBoundStudent2Id,
       );
 
       // Append the new paragraph to the existing log entry for this event
@@ -284,35 +345,53 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (energyCost > 0) costEffects.push({ type: 'lab', stat: 'energy', delta: -energyCost });
 
       const boundStudentId = state.activeBoundStudentId ?? undefined;
+      const boundStudent2Id = state.activeBoundStudent2Id ?? undefined;
 
       const { lab, students, statChanges } = applyEffects(state, [
         ...costEffects,
         ...(outcome.effects ?? []),
-      ], boundStudentId);
+      ], boundStudentId, boundStudent2Id);
 
       const logEntry: LogEntry = {
         id: `${action.eventId}_${Date.now()}`,
         eventId: action.eventId,
         time: { ...state.time },
         type: 'event',
-        title: resolvePlaceholders(event.title, state.activeBoundStudentId, state.students),
-        choiceText: option.text,
-        narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students),
+        title: resolvePlaceholders(event.title, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
+        choiceText: resolvePlaceholders(option.text, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
+        narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
         statChanges: statChanges.length > 0 ? statChanges : undefined,
       };
 
       const nextQueue: typeof state.eventQueue = [
         ...state.eventQueue,
-        ...(outcome.nextEventIds ?? []).map(id => ({ id })),
+        // Chain events inherit the current bound students so {studentName} keeps resolving
+        ...(outcome.nextEventIds ?? []).map(id => ({
+          id,
+          studentId: boundStudentId,
+          student2Id: boundStudent2Id,
+        })),
       ];
+
+      // extendGraduation increments the per-student extension counter
+      const hasExtend = (outcome.effects ?? []).some(e => e.type === 'extendGraduation');
+      const graduationExtensions = hasExtend && boundStudentId
+        ? {
+            ...state.graduationExtensions,
+            [boundStudentId]: (state.graduationExtensions[boundStudentId] ?? 0) + 1,
+          }
+        : state.graduationExtensions;
 
       return {
         ...state,
+        phase: outcome.phaseChange ?? state.phase,
         lab,
         students,
         eventQueue: nextQueue,
         activeEventId: null,
         activeBoundStudentId: null,
+        activeBoundStudent2Id: null,
+        graduationExtensions,
         storyLog: [...state.storyLog, logEntry],
       };
     }

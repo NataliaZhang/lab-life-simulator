@@ -7,17 +7,19 @@
 
 import { mainlineEvents } from './mainline';
 import { dailyEvents } from './daily';
+import { groupEvents } from './group_events';
 import { studentSpecificEvents } from './student_specific';
 import { conditionalEvents } from './conditional';
 import { endingEvents } from './endings';
 
 import type { GameEvent } from '../../types';
 
-export { endingEventIds } from './endings';
+export { endingEventIds, specialEndingIds, timeEndingIds } from './endings';
 
 export const events: Record<string, GameEvent> = {
   ...mainlineEvents,
   ...dailyEvents,
+  ...groupEvents,
   ...studentSpecificEvents,
   ...conditionalEvents,
   ...endingEvents,
@@ -42,10 +44,13 @@ export const monthlyEventPool: string[] = [
   'gpu_oom',
   'student_allnighter',
   'arxiv_scooped',
-  'lab_birthday',
   'reviewer_two',
   'lab_meeting_drama',
   'nan_loss',
+
+  // 全组事件（triggerConditions: minStudentCount: 3）
+  'group_conference_ddl',
+  'group_celebration',
 
   // 学生专属（triggerConditions 控制时机）
   'thesis_timeline',

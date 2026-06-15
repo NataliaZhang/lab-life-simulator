@@ -4,20 +4,23 @@ interface Props {
   event: GameEvent;
   lab: LabStats;
   boundStudentName?: string;
+  boundStudent2Name?: string;
   onChoose: (eventId: string, optionId: string) => void;
 }
 
-function resolve(text: string, name?: string): string {
-  if (!name) return text;
-  return text.replace(/\{studentName\}/g, name);
+function resolve(text: string, name?: string, name2?: string): string {
+  let result = text;
+  if (name) result = result.replace(/\{studentName\}/g, name);
+  if (name2) result = result.replace(/\{student2Name\}/g, name2);
+  return result;
 }
 
-export function EventModal({ event, lab, boundStudentName, onChoose }: Props) {
+export function EventModal({ event, lab, boundStudentName, boundStudent2Name, onChoose }: Props) {
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
       <div className="modal">
-        <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName)}</h2>
-        <div className="modal__prompt">{resolve(event.prompt, boundStudentName)}</div>
+        <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
+        <div className="modal__prompt">{resolve(event.prompt, boundStudentName, boundStudent2Name)}</div>
         <div className="modal__options">
           {event.options.map(option => {
             const fundingOk = !option.fundingCost || lab.funding >= option.fundingCost;
@@ -30,7 +33,7 @@ export function EventModal({ event, lab, boundStudentName, onChoose }: Props) {
                 onClick={() => onChoose(event.id, option.id)}
                 disabled={disabled}
               >
-                <span className="modal__option-text">{resolve(option.text, boundStudentName)}</span>
+                <span className="modal__option-text">{resolve(option.text, boundStudentName, boundStudent2Name)}</span>
                 <span className="modal__option-costs">
                   {option.fundingCost != null && (
                     <span className={`option-cost${!fundingOk ? ' option-cost--unaffordable' : ''}`}>

@@ -1,7 +1,7 @@
 import type { GameState } from '../types';
 
 const SAVE_KEY = 'lab-life-simulator-save';
-const SAVE_VERSION = 4;
+const SAVE_VERSION = 7;
 
 interface SaveFile {
   version: number;

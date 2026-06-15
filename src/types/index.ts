@@ -60,7 +60,11 @@ export type StateEffect =
   | { type: 'lab'; stat: LabStatKey; delta: number }
   | { type: 'student'; studentId: string; stat: StudentStatKey; delta: number }
   | { type: 'allStudents'; stat: StudentStatKey; delta: number }
-  | { type: 'randomStudent'; stat: StudentStatKey; delta: number };
+  | { type: 'randomStudent'; stat: StudentStatKey; delta: number }
+  | { type: 'randomStudent2'; stat: StudentStatKey; delta: number } // targets the second bound student
+  | { type: 'graduateStudent' }   // marks the bound student as graduated
+  | { type: 'extendGraduation' }  // records one extension for bound student (handled in reducer)
+  | { type: 'leaveStudent' };     // marks the bound student as left
 
 // ─── Conditions ────────────────────────────────────────────────────────────
 
@@ -69,7 +73,8 @@ export type ConditionOp = '>=' | '<=' | '>' | '<' | '==';
 export type EventCondition =
   | { type: 'lab'; stat: LabStatKey; op: ConditionOp; value: number }
   | { type: 'student'; studentId: string; stat: StudentStatKey; op: ConditionOp; value: number }
-  | { type: 'anyStudent'; stat: StudentStatKey; op: ConditionOp; value: number };
+  | { type: 'anyStudent'; stat: StudentStatKey; op: ConditionOp; value: number }
+  | { type: 'minStudentCount'; value: number }; // event only triggers when ≥ N students are active
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
@@ -79,6 +84,7 @@ export interface WeightedOutcome {
   effects?: StateEffect[];
   nextEventIds?: string[];
   conditions?: EventCondition[]; // outcome eligible only if ALL conditions met
+  phaseChange?: GamePhase;       // if set, transitions game phase after this outcome resolves
 }
 
 export interface EventOption {
@@ -139,7 +145,8 @@ export interface AdmissionState {
 // effects at the correct person instead of picking randomly.
 export interface QueuedEvent {
   id: string;
-  studentId?: string;
+  studentId?: string;   // primary bound student ({studentName})
+  student2Id?: string;  // secondary bound student ({student2Name})
 }
 
 // ─── Game State ────────────────────────────────────────────────────────────
@@ -154,8 +161,11 @@ export interface GameState {
   admissionState: AdmissionState | null;
   eventQueue: QueuedEvent[];
   activeEventId: string | null;
-  activeBoundStudentId: string | null; // student bound to the active event
-  activeParagraphIndex: number;        // which description paragraph has been revealed (0-based)
+  activeBoundStudentId: string | null;  // primary bound student ({studentName})
+  activeBoundStudent2Id: string | null; // secondary bound student ({student2Name})
+  activeParagraphIndex: number;         // which description paragraph has been revealed (0-based)
+  graduationChecksSeen: string[];       // entries like "studentId", "studentId:2", "studentId:3"
+  graduationExtensions: Record<string, number>; // studentId → times延毕 chosen
   storyLog: LogEntry[];
   lab: LabStats;
 }

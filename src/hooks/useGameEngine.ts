@@ -41,6 +41,10 @@ export function useGameEngine(): GameEngine {
     ? state.students.find(s => s.id === state.activeBoundStudentId)?.name
     : undefined;
 
+  const boundStudent2Name: string | undefined = state.activeBoundStudent2Id
+    ? state.students.find(s => s.id === state.activeBoundStudent2Id)?.name
+    : undefined;
+
   // Button is available whenever there's no open modal and no admission pending
   const canContinue = state.phase === 'playing' && !modalVisible && state.admissionState === null;
 
@@ -109,6 +113,7 @@ export function useGameEngine(): GameEngine {
     state,
     activeEvent,
     boundStudentName,
+    boundStudent2Name,
     modalVisible,
     canContinue,
     chooseOption,

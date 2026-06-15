@@ -56,6 +56,9 @@ export function checkConditions(conditions: EventCondition[], state: GameState):
         s => s.status === 'active' && compare(getStudentStatValue(s, cond.stat), cond.op, cond.value),
       );
     }
+    if (cond.type === 'minStudentCount') {
+      return state.students.filter(s => s.status === 'active').length >= cond.value;
+    }
     return true;
   });
 }
@@ -89,23 +92,37 @@ export function filterUnseen(candidates: string[], seenIds: Set<string>): string
 // For events with anyStudent conditions, find the student who most urgently
 // satisfies the condition (lowest value for < / <=, highest for > / >=).
 // Returns undefined for events without anyStudent conditions.
-function findTriggeringStudent(conditions: EventCondition[], state: GameState): string | undefined {
+function findTriggeringStudents(
+  conditions: EventCondition[],
+  state: GameState,
+): { studentId?: string; student2Id?: string } {
+  const needsTwo = conditions.some(c => c.type === 'minStudentCount' && c.value >= 2);
+  const active = state.students.filter(s => s.status === 'active');
+
+  let studentId: string | undefined;
+
+  // Find primary student from anyStudent conditions
   for (const cond of conditions) {
     if (cond.type !== 'anyStudent') continue;
-    const active = state.students.filter(s => s.status === 'active');
-    const candidates = active.filter(s =>
-      compare(getStudentStatValue(s, cond.stat), cond.op, cond.value),
-    );
-    if (candidates.length === 0) continue;
-    const pickLowest = cond.op === '<' || cond.op === '<=';
-    candidates.sort((a, b) => {
-      const va = getStudentStatValue(a, cond.stat);
-      const vb = getStudentStatValue(b, cond.stat);
-      return pickLowest ? va - vb : vb - va;
-    });
-    return candidates[0]?.id;
+    const eligible = active.filter(s => compare(getStudentStatValue(s, cond.stat), cond.op, cond.value));
+    if (eligible.length === 0) continue;
+    const shuffled = [...eligible].sort(() => Math.random() - 0.5);
+    studentId = shuffled[0]?.id;
+    break;
   }
-  return undefined;
+
+  // If no anyStudent condition but we need a primary, pick at random
+  if (!studentId && active.length > 0) {
+    const shuffled = [...active].sort(() => Math.random() - 0.5);
+    studentId = shuffled[0]?.id;
+  }
+
+  if (!needsTwo) return { studentId };
+
+  // Pick a different second student
+  const others = active.filter(s => s.id !== studentId);
+  const shuffled2 = [...others].sort(() => Math.random() - 0.5);
+  return { studentId, student2Id: shuffled2[0]?.id };
 }
 
 // Collect studentIds that an event hard-codes in its effects (not randomStudent).
@@ -134,10 +151,10 @@ export function filterTriggerable(eventIds: string[], state: GameState): QueuedE
     // Skip events that explicitly target students not yet in the lab
     const required = getRequiredStudentIds(event);
     if (required.some(sid => !activeIds.has(sid))) continue;
-    const studentId = event.triggerConditions
-      ? findTriggeringStudent(event.triggerConditions, state)
-      : undefined;
-    result.push({ id, studentId });
+    const { studentId, student2Id } = event.triggerConditions
+      ? findTriggeringStudents(event.triggerConditions, state)
+      : {};
+    result.push({ id, studentId, student2Id });
   }
   return result;
 }
