@@ -8,6 +8,7 @@ export interface GameEngine {
   state: GameState;
   activeEvent: GameEvent | null;
   boundStudentName: string | undefined;
+  boundStudent2Name: string | undefined;
   modalVisible: boolean;
   canContinue: boolean;
   chooseOption: (eventId: string, optionId: string) => void;
