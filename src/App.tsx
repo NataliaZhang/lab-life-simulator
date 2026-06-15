@@ -25,6 +25,22 @@ export function App() {
 
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
 
+  const [fontSize, setFontSize] = useState<number>(() => {
+    const saved = localStorage.getItem('lab-font-size');
+    const size = saved ? parseInt(saved, 10) : 14;
+    document.documentElement.style.setProperty('--content-font-size', `${size}px`);
+    return size;
+  });
+
+  const changeFontSize = (delta: number) => {
+    setFontSize(prev => {
+      const next = Math.max(11, Math.min(20, prev + delta));
+      localStorage.setItem('lab-font-size', String(next));
+      document.documentElement.style.setProperty('--content-font-size', `${next}px`);
+      return next;
+    });
+  };
+
   const isGameOver = state.phase !== 'playing';
 
   return (
@@ -92,6 +108,26 @@ export function App() {
       )}
 
       <footer className="app__footer">
+        <div className="font-controls">
+          <button
+            className="btn btn--ghost btn--sm"
+            onClick={() => changeFontSize(-1)}
+            disabled={fontSize <= 11}
+            title="缩小字体"
+            aria-label="缩小字体"
+          >
+            A-
+          </button>
+          <button
+            className="btn btn--ghost btn--sm"
+            onClick={() => changeFontSize(1)}
+            disabled={fontSize >= 20}
+            title="放大字体"
+            aria-label="放大字体"
+          >
+            A+
+          </button>
+        </div>
         <button className="btn btn--ghost btn--sm" onClick={deleteSaveAndRestart}>
           重置游戏
         </button>
