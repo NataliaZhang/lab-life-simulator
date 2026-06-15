@@ -189,7 +189,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
           time: { ...next.time },
           type: 'system',
           title: '招生季',
-          narrative: '九月招生季到来，但实验室账面资金不足10万，今年无法招募新生。等经费充裕了再说吧。',
+          narrative: '九月招生季到来，但实验室账面资金不足10万，今年无法招募新生了。等经费充裕了再说吧。',
         });
       }
     }

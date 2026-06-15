@@ -29,7 +29,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}明显松了口气，用力点头，把论文抱紧了一点。接下来几个月进展顺利。答辩那天，你收到一条消息："通过了！谢谢老师！" 后面跟了七个感叹号。',
+            narrative: '{studentName}先是愣了一秒，然后用力点了点头，把论文抱得紧了一些，仿佛怕你反悔。接下来几个月进展顺利。答辩那天，你收到一条消息："通过了！谢谢老师！" 后面跟了七个感叹号，创下本组新高。',
             effects: [
               { type: 'graduateStudent' },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -44,7 +44,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}沉默了大约五秒，然后若无其事地把论文塞回背包。"好的老师，那我明年再来。" 语气平静得让你有点不安。',
+            narrative: '{studentName}盯着那本论文看了大约五秒，然后若无其事地把它塞回背包，动作缓慢而精确，像在拆弹。"好的老师，那我明年再来。" 语气稳得有点不对劲——稳到让你想打开那本论文重新看一遍。',
             effects: [
               { type: 'extendGraduation' },
               { type: 'randomStudent', stat: 'favor', delta: -5 },
@@ -118,7 +118,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}看了你很久，最后叹了口气，把 offer 的邮件关掉了。答辩那天哭了两次——一次是讲到致谢，一次是委员会说"通过"。你送{studentName}走的时候，他们回头说："老师，其实我早就可以毕业了。" 你没说话。',
+            narrative: '{studentName}看了你很久，最后叹了口气，把 offer 的邮件关掉了。答辩那天哭了两次——一次是讲到致谢，一次是委员会说"通过"。你送{studentName}走的时候，他们回头说："老师，其实我早就可以毕业了。" 你点了点头，想说什么，最终没说——有些话在那一刻说出来会太重，收着比较好。',
             effects: [
               { type: 'graduateStudent' },
               { type: 'lab', stat: 'reputation', delta: 2 },
@@ -147,65 +147,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
 
   // ── 叶知秋 ────────────────────────────────────────────────────────────────
 
-  thesis_timeline: {
-    id: 'thesis_timeline',
-    title: '叶知秋的毕业时间线',
-    description: [
-      '叶知秋敲开你的门，手里拿着一份打印好的甘特图。',
-      '她算了一下，按现在的进度可以明年毕业。但如果把某个方向的实验再做一遍，质量更高，要多花半年。她想听你的意见。',
-    ],
-    prompt: '叶知秋的毕业规划，你怎么建议？',
-    options: [
-      {
-        id: 'push_quality',
-        text: '再做半年，追求质量',
-        outcomes: [
-          {
-            weight: 2,
-            narrative: '叶知秋补做了实验，论文质量明显提升，最终投了顶刊。她说"谢谢老师当初的建议"，发了朵玫瑰表情。',
-            effects: [
-              { type: 'lab', stat: 'reputation', delta: 6 },
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 10 },
-            ],
-          },
-          {
-            weight: 1,
-            narrative: '叶知秋努力了半年，但实验没带来预期的提升。她有点疲惫，但没有抱怨。',
-            effects: [
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -5 },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'graduate_on_time',
-        text: '按时毕业最重要',
-        outcomes: [{
-          weight: 1,
-          narrative: '你支持她按时毕业，叶知秋明显松了口气。论文工作量合理，质量扎实，她顺利完成了答辩。',
-          effects: [
-            { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 10 },
-            { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
-            { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 8 },
-          ],
-        }],
-      },
-      {
-        id: 'let_her_decide',
-        text: '你来决定，我支持你',
-        outcomes: [{
-          weight: 1,
-          narrative: '叶知秋想了两天，选择了再做半年。她说她想要高质量的毕业作品。自主决策，她更有动力了。',
-          effects: [
-            { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 12 },
-            { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 8 },
-          ],
-        }],
-      },
-    ],
-    tags: ['student_specific'],
-  },
+  // TODO
 
   // ── 林小卷 ────────────────────────────────────────────────────────────────
 
@@ -213,8 +155,8 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     id: 'lin_theory_breakthrough',
     title: '林小卷：理论突破了',
     description: [
-      '林小卷发来一份推导笔记，密密麻麻三十页。她在最后一行写了一个"QED"，旁边还画了个小星星。',
-      '结论是她之前卡住的收敛性证明——推出来了。',
+      '林小卷发来一份推导笔记，密密麻麻三十页，每一行都是手写，字迹比平时工整，像是在誊正。她在最后一行写了一个"QED"，旁边还画了个小星星。',
+      '结论是她卡了将近两个月的收敛性证明——推出来了。你往前翻了翻，第八页有一处她用红笔圈出来的关键步骤，旁边写着三个感叹号。',
     ],
     prompt: '林小卷拿下了关键理论证明，你怎么回应？',
     triggerConditions: [
@@ -226,7 +168,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '整理成论文，赶快投出去',
         outcomes: [{
           weight: 1,
-          narrative: '你把笔记整理成了一篇理论文章的框架，推给了组里讨论。林小卷有点受宠若惊，她没想到自己的推导能成为论文核心。这一仗，打得漂亮。',
+          narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。她愣了两秒，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 15 },
@@ -240,7 +182,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你叫上叶知秋一起检查。发现了两处小瑕疵，修正之后结论更扎实了。林小卷说这是她做得最认真的一件事。',
+            narrative: '你叫上叶知秋一起检查，发现了两处细节——一处是符号定义不够严格，一处是引理引用缺了个条件。修正之后，证明更加无懈可击了。林小卷说这是她做过最认真的一件事，叶知秋说"能挑出毛病才是真的读懂了"，两人对视了一眼，达成了某种默契。',
             effects: [
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 5 },
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
@@ -249,7 +191,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '验证发现有一个假设条件没有严格证明，还需要补充工作。林小卷有点沮丧，但方向是对的。',
+            narrative: '验证过程中发现有一个假设条件没有严格证明，整个推导悬在半空中。林小卷盯着那个地方看了很久，拿起笔在空白处写了几行，划掉，又写，又划掉，然后重新拿出了一张白纸。方向是对的，只是还差最后一步。',
             effects: [
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -5 },
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
@@ -267,8 +209,8 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     id: 'gu_engineering_milestone',
     title: '顾眠眠：系统真的跑起来了',
     description: [
-      '顾眠眠把你拉到她的工位，打开了一个终端窗口。',
-      '她的分布式训练框架第一次完整地跑通了，四张卡全部满负荷。她努力保持镇定，但嘴角已经压不住了。',
+      '顾眠眠把你拉到她的工位，打开了一个终端窗口，然后退后了半步，像在给你展示一件作品。',
+      '她的分布式训练框架第一次完整地跑通了，四张卡全部满负荷运转，日志刷得飞快，全是绿色的字。她努力保持镇定，但嘴角已经压不住了——嘴角赢了，脸的其他部分还在抵抗。',
     ],
     prompt: '顾眠眠的工程成果完成了，你打算怎么用？',
     triggerConditions: [
@@ -280,7 +222,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '开源出去，积累声望',
         outcomes: [{
           weight: 1,
-          narrative: '你们把代码整理了一下发到了GitHub。两周内拿到了200个star，顾眠眠的名字出现在了一些讨论帖里。她说这是她第一次感觉自己做的东西被世界看见了。',
+          narrative: '你们整理了代码、写了README、录了一个三分钟的demo视频，发到了GitHub。两周内拿到了200个star，有人在讨论区说"这个实现比我见过的同类项目都干净"。顾眠眠把那条评论截了图，设成了屏保——她否认了，但你亲眼看见的。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 6 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 12 },
@@ -293,7 +235,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '先内部推广，全组用起来',
         outcomes: [{
           weight: 1,
-          narrative: '你把框架推给了全组，效率提升明显。顾眠眠当起了"技术支持"，意外发现自己还挺擅长讲解代码。',
+          narrative: '你把框架推给了全组，组里训练速度明显提升。顾眠眠被动成为了技术支持，每天被人拉着问配置问题，一开始有点烦，后来发现自己解释起来越来越流畅——她无意间发现了自己有讲明白复杂事物的天赋，这件事让她在心里偷乐了好几天，表面上还是一副"这不是常识吗"的神情。',
           effects: [
             { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'skills.social', delta: 6 },
@@ -307,7 +249,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你们把系统设计、实验对比写成了一篇系统文章。审稿人说"工程贡献清晰，实验充分"。顾眠眠拿到了第一篇一作。',
+            narrative: '你们把系统设计思路、工程挑战、对比实验写成了一篇系统文章。审稿人说"工程贡献清晰，实验充分，工作扎实"。顾眠眠拿到了她的第一篇一作，消息出来的时候，她在终端里默默多敲了几行空命令，掩盖手抖。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 10 },
@@ -316,7 +258,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '写成论文投出去，被拒了，理由是"缺乏理论贡献"。顾眠眠有点气，但坚持要改完再投。',
+            narrative: '论文被拒了，理由是"缺乏理论贡献"。顾眠眠把审稿意见打印出来贴在显示器旁边，旁边写了一行字："等着看。" 她没有解释这句话的意思，但从那之后开始看理论文章了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: -8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: -3 },

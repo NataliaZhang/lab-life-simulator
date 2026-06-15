@@ -28,7 +28,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     title: '实验室的第一天',
     description: [
       '钥匙在锁孔里轻轻转动了一下。门开了。这就是你的实验室。',
-      '未来六年，你将在这里申请经费、指导学生、熬夜改论文、和 Reviewer 斗智斗勇——也可能在某个凌晨三点怀疑自己为什么没有去卖奶茶。',
+      '未来六年，你将在这里申请经费、指导学生、熬夜改论文、和 Reviewer 斗智斗勇，也可能在某个凌晨三点怀疑自己为什么没有去卖奶茶。',
       '房间并不大。一块空白的白板。几张还没拆封的办公桌。一扇能看到校园的窗户。除此之外，什么都没有。',
       '没有成果。没有学生。没有声望。甚至连实验室官网都是默认模板。',
       '你站在门口看了很久。然后忽然意识到一件事。',
@@ -65,7 +65,11 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '你花了20万元订购服务器。采购流程复杂得像在申请签证。但当确认邮件发来的那一刻，你忽然有了一种真正拥有实验室的感觉。剩余经费：30万元。',
-          effects: [{ type: 'lab', stat: 'funding', delta: 30 }],
+          effects: [
+            { type: 'lab', stat: 'funding', delta: 30 },
+            { type: 'lab', stat: 'reputation', delta: 5 },
+          ],
+          nextEventIds: ['recruit_campaign'],
         }],
       },
       {
@@ -75,6 +79,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你决定暂时不动这笔钱。科研史上有无数项目死于缺钱，而你打算至少先活过第一个学期。看着账户里的数字，你获得了一种短暂而脆弱的安全感。',
           effects: [{ type: 'lab', stat: 'funding', delta: 50 }],
+          nextEventIds: ['recruit_campaign'],
         }],
       },
       {
@@ -85,8 +90,59 @@ export const mainlineEvents: Record<string, GameEvent> = {
           narrative: '你购置了一批办公家具、显示器和咖啡机。虽然科研水平没有任何提升，但实验室终于从"闲置房间"升级成了"看起来像能发论文的地方"。剩余经费：40万元。',
           effects: [
             { type: 'lab', stat: 'funding', delta: 40 },
-            { type: 'lab', stat: 'reputation', delta: 1 },
+            { type: 'lab', stat: 'reputation', delta: 2 },
           ],
+          nextEventIds: ['recruit_campaign'],
+        }],
+      },
+    ],
+    tags: ['opening'],
+  },
+
+  recruit_campaign: {
+    id: 'recruit_campaign',
+    title: '光杆司令',
+    description: [
+      '你环顾四周。实验室是有了——白板、桌子、也许还有一台轰轰作响的服务器——但整个房间里就只有你一个人。严格来说，你现在是一位"没有学生的导师"，这个职位的另一个名字叫做"闲人"。',
+      '某处有一批准博士生正在滚动浏览各个实验室的网页，手边备着一份"可以发邮件的导师名单"。他们会给十位教授发邮件，其中九位不会回复。你需要成为那个回复的人。但首先，你得让他们知道你存在。',
+      '你打开电脑，新建了一个文档，标题是《招生宣传方案》。然后盯着空白页面看了整整三分钟。',
+    ],
+    prompt: '你准备怎么宣传自己的实验室？',
+    options: [
+      {
+        id: 'poster_blast',
+        text: '做一张海报，发到所有考研群',
+        outcomes: [{
+          weight: 1,
+          narrative: '你在凌晨十一点用 PowerPoint 设计了一张招生海报，裁切比例错了三次，字体换了五种，最终选了"微软雅黑加粗"。发出去之后，第二天早上醒来，邮箱里已经有十七封询问邮件。其中两封是问实验室有没有班车的。',
+          effects: [{ type: 'lab', stat: 'reputation', delta: 2 }],
+        }],
+      },
+      {
+        id: 'crash_class',
+        text: '直接去隔壁教授的研究生课上宣讲',
+        outcomes: [{
+          weight: 1,
+          narrative: '"就占用大家三十秒。" 你在张教授讲课途中举手示意。三十秒变成了五分钟。张教授全程保持着一个礼貌但含义明确的微笑。但课后有三位同学过来加了你微信，其中一个说"老师你讲得比张老师好玩"。',
+          effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
+        }],
+      },
+      {
+        id: 'build_website',
+        text: '肝一个高大上的实验室官网',
+        outcomes: [{
+          weight: 1,
+          narrative: '你用开源模板搭了一个官网，个人照片用的是三年前参会时拍的，西装是借的。Publications 页面目前只有两篇，但排版非常漂亮。一周后，有人发邮件说"我是通过谷歌搜到您实验室的"。你感到了一种奇特的骄傲。',
+          effects: [{ type: 'lab', stat: 'reputation', delta: 4 }],
+        }],
+      },
+      {
+        id: 'honest_pitch',
+        text: '实话实说：来我组，有独立 GPU 用',
+        outcomes: [{
+          weight: 1,
+          narrative: '你在群里发了一条消息："本人新晋助理教授，方向 XXX，实验室刚采购了服务器，学生可独立使用，欢迎联系。" 没有废话，没有修饰。这条消息被转发了九次。事实证明，在 CS 领域，"有 GPU"的吸引力远大于任何学术愿景。',
+          effects: [{ type: 'lab', stat: 'reputation', delta: 5 }],
         }],
       },
     ],
@@ -99,8 +155,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'suspicious_results',
     title: '数据有点……可疑',
     description: [
-      '{studentName}发来实验结果，各项指标好得出奇——比SOTA高了整整10个点。',
-      '你盯着数字看了三分钟，心里有点虚。这个世界线里，哪有这么好的事？',
+      '{studentName}发来实验结果，各项指标好得出奇——比SOTA高了整整10个点。用红色加粗标注了，后面跟着三个感叹号。',
+      '你盯着数字看了三分钟。科研生涯里你还没见过好到这种程度的结果——通常这意味着要么诺贝尔奖，要么有什么地方不对劲。',
     ],
     prompt: '结果好得离谱，你选择：',
     triggerConditions: BIND_ANY_STUDENT,
@@ -110,7 +166,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '让{studentName}仔细复查',
         outcomes: [{
           weight: 1,
-          narrative: '{studentName}查了一遍，发现是测试集泄漏了。改正后真实提升只有3个点，仍然不错。一场学术危机被悄悄避免了。',
+          narrative: '{studentName}翻了一遍，发现了问题：测试集泄漏了，模型悄悄见过它不该见的数据。修正之后真实提升只有3个点——仍然不错，但那三个感叹号已经收回去了。一场学术危机就这样在悄悄发生、又悄悄被消解。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 2 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
@@ -123,7 +179,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '相信数据，直接写论文',
         outcomes: [{
           weight: 1,
-          narrative: '你和{studentName}花了两周写完投出去了。然后审稿人二号来了："请在附录中说明评估协议。" 你盯着邮件沉默了三秒。',
+          narrative: '你和{studentName}兴奋地花了两周写完论文，信心满满地投出去。审稿意见回来了，审稿人二号：第一条——"请在附录中详细说明评估协议及数据划分方式。" 你盯着这句话看了三秒，内心经历了一套完整的情绪——从"这是什么意思"到"哦"到"哦不"——然后把截图转发给了{studentName}。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: -3 },
             { type: 'randomStudent', stat: 'happiness', delta: -10 },
@@ -139,8 +195,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'investigation_result',
     title: '调查结果出来了',
     description: [
-      '{studentName}把所有代码重新梳理了一遍，写了一份三页的检查报告。',
-      '结论：确实有数据处理问题，但核心方法是对的，结果有效只是被高估了。',
+      '{studentName}把所有代码重新梳理了一遍，每个模块都过了一遍，写了一份三页的检查报告，格式比大多数论文还工整。',
+      '结论是：确实有数据处理问题，但核心方法是对的。结果是有效的，只是被高估了——就像一个真实成绩85分的人，因为算错了满分，误以为自己考了110。',
     ],
     prompt: '复查完毕，你怎么收尾？',
     // 链式事件：bound student 继承自 suspicious_results
@@ -150,7 +206,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '用真实结果老老实实写',
         outcomes: [{
           weight: 1,
-          narrative: '最终论文数据真实，审稿人觉得实验完整，给了好评。{studentName}也松了口气——这是她参与的第一篇正式论文。',
+          narrative: '最终论文用了真实数据，该是多少就是多少，一个数字都没有美化。审稿人说"实验设计完整，结果可信"——这是比夸结果漂亮更值得高兴的评价。{studentName}发来一条消息说"还好我们查了"，后面跟了一个捂脸表情，大概是在为差点做了什么捏一把汗。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 4 },
             { type: 'randomStudent', stat: 'favor', delta: 5 },
@@ -162,7 +218,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '在组内通报，引以为戒',
         outcomes: [{
           weight: 1,
-          narrative: '你在组会上把这件事完整讲了出来。{studentName}有点不好意思，但整理完之后说"理解了很多之前没想清楚的东西"。以后数据复查习惯好了很多。',
+          narrative: '你在组会上把整件事完整讲了一遍：哪里出了问题、为什么没有更早发现、下次该怎么防范。{studentName}有点不自在，但在别人开始提问的时候，解释得比你还清楚——讲一遍，学一遍，通报一遍，彻底学会了。',
           effects: [
             { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
             { type: 'randomStudent', stat: 'favor', delta: 3 },
@@ -243,7 +299,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '这次不投了，改下次',
         outcomes: [{
           weight: 1,
-          narrative: '你发消息告诉{studentName}这次先撤。对方沉默了十秒，然后回了"好的，那我把代码整理一下"。你感觉到对方松了口气，尽管什么都没说。',
+          narrative: '你发消息告诉{studentName}这次先撤。过了十秒，回了"好的，那我把代码整理一下"。这句话在你意料之外——你本来以为会有一段艰难的说服过程——但{studentName}好像真的松了口气，"整理代码"在这里大概是一种说法，意思是终于可以睡觉了。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
             { type: 'randomStudent', stat: 'favor', delta: 3 },
@@ -280,7 +336,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: 'Rejected。你把审稿意见整理好发给{studentName}。{studentName}看完说"没关系，我们改"——语气比你预想的要平静，让你心里好受了一些。',
+            narrative: 'Rejected。你把审稿意见整理好发给{studentName}。{studentName}看完说"没关系，我们改"——语气出奇地稳，稳到你忍不住多看了一眼，想确认这不是某种已经麻木的迹象，但眼神对上去，对方在认真地打开文档。好，那就改。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -8 },
               { type: 'lab', stat: 'reputation', delta: -1 },
@@ -310,8 +366,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'grant_deadline',
     title: '国自然截止日将至',
     description: [
-      '国自然青年基金申请书截止日还有一周。',
-      '这是你入职后第一次申请，五万字还差得远。整个过程只能靠你一个人扛。',
+      '国自然青年基金申请书截止日还有一周。这是一份需要写五万字来证明你未来三年打算做什么的文件——用一种没有人真正喜欢写、但所有人都必须写的格式。',
+      '你坐在电脑前，进度条还在第一章。这就是一位助理教授孤独面对的国家级任务：没有学生可以帮，没有师兄师姐可以问，只有截止日期以每秒一秒的速度逼近。',
     ],
     prompt: '距截止一周，你怎么应对？',
     options: [
@@ -322,13 +378,13 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '熬了六天六夜，总算在截止前提交了。申请书质量还不错，导师看了觉得有希望。精力耗尽，但值得。',
+            narrative: '熬了六天。你喝了多少咖啡你不记得了，你记得的是最后一天凌晨四点点击"提交"按钮时的那种虚脱感，像是刚跑完一场没有人围观的马拉松。申请书质量说得过去，精力耗尽，但至少交上去了。',
             effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
             nextEventIds: ['grant_result'],
           },
           {
             weight: 1,
-            narrative: '写了七天，越写越乱，最后申请书逻辑有点混乱。提交了，但没什么信心。下次要早点开始。',
+            narrative: '写了七天，越写越乱——第三章推翻了第一章的前提，第四章引用了一篇你还没读完的文献。最后凌晨硬提交了，但你自己都知道逻辑链是断的。下次一定要早两个月开始，这句话你已经说了三年了。',
             effects: [],
             nextEventIds: ['grant_result'],
           },
@@ -340,7 +396,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         fundingCost: 3,
         outcomes: [{
           weight: 1,
-          narrative: '找了个科研助理帮整理材料、润色文字。最终提交的申请书整洁专业，你省下了不少精力。',
+          narrative: '你找了一个有丰富申请书经验的科研助理。对方收到你的草稿，停顿了大约三秒——那种停顿里包含着专业人士对初稿的全部评估——然后回复说"我来整理"。五天后，一份结构清晰、措辞规范、格式完美的申请书出现在你邮箱里。你省了大概四十个小时，花了三万，感觉是一笔值得的交易。',
           effects: [{ type: 'lab', stat: 'energy', delta: 15 }],
           nextEventIds: ['grant_result'],
         }],
@@ -350,7 +406,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '今年先不投了',
         outcomes: [{
           weight: 1,
-          narrative: '今年先放弃，安心做科研。消息传出去，有些同事觉得可惜，但也有人理解。明年再战，手里先把成果积累好。',
+          narrative: '你关掉了申请书文档，长呼一口气。有同事问"今年投国自然吗"，你说"今年先缓一年"，对方点了点头，说了一句"有时候也好"。你把省下来的精力用来做实验，感觉自己第一次在截止日期前不焦虑了。',
           effects: [{ type: 'lab', stat: 'energy', delta: 30 }],
         }],
       },
@@ -362,8 +418,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'grant_result',
     title: '国自然基金结果公布',
     description: [
-      '项目管理平台有了新消息。',
-      '你双手微微有点抖地点开。',
+      '项目管理平台多了一条未读消息。你看到那个红点的时候，停顿了大约三秒，才点开。',
+      '这是那种你花了几个月准备、等了将近一年结果、却要在两秒钟之内接受的通知——体制之美，有时候就在于这种信息密度的反差。',
     ],
     prompt: '基金结果出来了，接下来？',
     // 经费事件：无学生绑定，用 allStudents 影响全组
@@ -374,7 +430,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '中了！24万直接打进账户。你把消息发进组里，每个人都发来庆祝。经费保障了，压力小了很多。',
+            narrative: '中了。24万，已立项。你把消息发进组里，群里第一条回复是一个"！！！"，然后大家陆续发来各种庆祝。经费有了，压力小了一个级别，组里接下来两周的气氛都比平时松了不少。',
             effects: [
               { type: 'lab', stat: 'funding', delta: 24 },
               { type: 'lab', stat: 'reputation', delta: 5 },
@@ -383,7 +439,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '没中。你平静地把结果发出去："这次没过，明年继续。" 组里回复都很克制，但你能感觉到大家松了口气——至少老师没有崩溃。',
+            narrative: '没中。你在组会上说了一句"这次国自然没过，明年再来"，然后直接进入下一个议题。有人轻轻把手里的笔换了个方向，然后大家抬起头重新看ppt，动作都很自然——老师没有崩溃，这就是信号，我们继续。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -2 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -396,7 +452,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '默默规划下一步',
         outcomes: [{
           weight: 1,
-          narrative: '不论结果，你开始规划下一步。中了就用好，没中就总结。科研是长跑，心态要稳。',
+          narrative: '你把结果存档，打开了一个新文档，标题是"明年申请计划"。中了就规划怎么用好这笔钱，没中就复盘哪里写得不够有说服力。科研是一场漫长的、不保证回报的投入，而你已经习惯了这种节奏。',
           effects: [{ type: 'lab', stat: 'energy', delta: 10 }],
         }],
       },
@@ -422,7 +478,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         fundingCost: 2,
         outcomes: [{
           weight: 1,
-          narrative: '你们找了一家烤肉店，点了比平时多一倍的菜。{studentName}边吃边说"这一年感觉又长又短"。你说"以后只会更快"。两人都沉默了一会儿，然后继续吃肉。',
+          narrative: '你们找了一家烤肉店，点了比平时多一倍的菜。{studentName}边吃边说"这一年感觉又长又短"。你说"以后只会更快"。两人都停了一下，互看了一眼，大概同时意识到这话有点沉重，然后都低头继续夹肉，默契地把这个话题留给了烤架上的声音。',
           effects: [
             { type: 'randomStudent', stat: 'favor', delta: 15 },
             { type: 'randomStudent', stat: 'happiness', delta: 18 },
@@ -434,7 +490,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '认真聊聊这一年，定下新目标',
         outcomes: [{
           weight: 1,
-          narrative: '你们在白板前站了一个多小时，把这一年做的事写了出来，然后一起圈出了下一年想突破的问题。{studentName}说"写出来才发现做了挺多的"。你笑了笑，没说话。',
+          narrative: '你们在白板前站了一个多小时，把这一年做的事写了出来，然后一起圈出了下一年想突破的问题。{studentName}说"写出来才发现做了挺多的"。你笑了笑，顺手在白板上又加了两个圈——下一年的事，已经开始想了。',
           effects: [
             { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
             { type: 'randomStudent', stat: 'favor', delta: 8 },

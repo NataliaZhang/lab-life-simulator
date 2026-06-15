@@ -74,7 +74,8 @@ export type EventCondition =
   | { type: 'lab'; stat: LabStatKey; op: ConditionOp; value: number }
   | { type: 'student'; studentId: string; stat: StudentStatKey; op: ConditionOp; value: number }
   | { type: 'anyStudent'; stat: StudentStatKey; op: ConditionOp; value: number }
-  | { type: 'minStudentCount'; value: number }; // event only triggers when ≥ N students are active
+  | { type: 'minStudentCount'; value: number }  // event only triggers when ≥ N students are active
+  | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number }; // year/month gate
 
 // ─── Events ────────────────────────────────────────────────────────────────
 

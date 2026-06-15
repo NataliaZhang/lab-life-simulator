@@ -59,6 +59,9 @@ export function checkConditions(conditions: EventCondition[], state: GameState):
     if (cond.type === 'minStudentCount') {
       return state.students.filter(s => s.status === 'active').length >= cond.value;
     }
+    if (cond.type === 'time') {
+      return compare(state.time[cond.field], cond.op, cond.value);
+    }
     return true;
   });
 }

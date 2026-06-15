@@ -42,7 +42,7 @@ export const groupEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '三天没睡，实验结果不理想，勉强投出去了。全组都很疲惫，群里安静了两天，谁都没怎么说话。',
+            narrative: '三天没睡，实验结果不理想，勉强投出去了。全组都很疲惫，群里两天都没什么人说话。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -12 },
             ],
@@ -80,7 +80,7 @@ export const groupEvents: Record<string, GameEvent> = {
         text: '这次不投了，下次再来',
         outcomes: [{
           weight: 1,
-          narrative: '你在群里发通知，决定撤稿。沉默了一会儿，然后有人发"理解，下次一定"，气氛慢慢缓和了。大家都缓了口气。',
+          narrative: '你在群里发通知，决定撤稿。大家先是各自盯着屏幕消化了一下，然后有人发"理解，下次一定"，另一个人加了个点赞，气氛意外地缓和——大家都是读博的，这种事不用多解释。',
           effects: [
             { type: 'allStudents', stat: 'happiness', delta: 15 },
             { type: 'allStudents', stat: 'favor', delta: 5 },
@@ -143,6 +143,68 @@ export const groupEvents: Record<string, GameEvent> = {
     tags: ['chain'],
   },
 
+  // ── arxiv撞车（涉及"大家""组里"，≥3人） ──────────────────────────────────
+
+  arxiv_scooped: {
+    id: 'arxiv_scooped',
+    title: 'arxiv撞车了',
+    description: [
+      '你收到了一条消息："老师，你看这篇……"',
+      '你打开链接：某知名组昨天挂出了一篇arxiv，方法跟你们做的几乎一模一样，比你们早了三个星期。',
+    ],
+    prompt: '被抢先了，怎么办？',
+    triggerConditions: REQUIRE_GROUP,
+    options: [
+      {
+        id: 'differentiate',
+        text: '分析差异，找突破口',
+        outcomes: [
+          {
+            weight: 2,
+            narrative: '仔细对比后，你们发现自己的方法在某个子任务上有独特优势。换个角度投出去，审稿人说"提供了有价值的新视角"。',
+            effects: [
+              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'allStudents', stat: 'skills.theory', delta: 4 },
+            ],
+          },
+          {
+            weight: 1,
+            narrative: '差异点找到了，但要做额外实验，工作量增加不少。大家有点疲惫，但代码质量提高了很多。',
+            effects: [
+              { type: 'allStudents', stat: 'happiness', delta: -8 },
+              { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'concurrent_work',
+        text: '发workshop，标注同期工作',
+        outcomes: [{
+          weight: 1,
+          narrative: '发到workshop，注明同期独立完成。圈内人知道你们的工作，声望没有白白浪费。大家感觉工作被承认了。',
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 2 },
+            { type: 'allStudents', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'pivot',
+        text: '认清现实，换方向',
+        outcomes: [{
+          weight: 1,
+          narrative: '你宣布换方向。有人把茶杯放下来，声音比平时重了一点。停了几秒，然后有人开口问"那之前的代码要删吗"，讨论就这么开始了——大家已经在往前看了，只是手上还拿着上一段路的东西。',
+          effects: [
+            { type: 'allStudents', stat: 'happiness', delta: -10 },
+            { type: 'allStudents', stat: 'favor', delta: -5 },
+          ],
+        }],
+      },
+    ],
+    tags: ['daily'],
+  },
+
   // ── 全组庆典（≥3人） ──────────────────────────────────────────────────────
 
   group_celebration: {
@@ -185,7 +247,7 @@ export const groupEvents: Record<string, GameEvent> = {
         fundingCost: 2,
         outcomes: [{
           weight: 1,
-          narrative: '三个小时的火锅，从论文聊到未来，从学术界聊到人生规划。有人说了不少平时不会说的话。回来的路上，大家都有点安静，是那种吃饱了满足的安静。',
+          narrative: '三个小时的火锅，从论文聊到未来，从学术界聊到人生规划。有人说了不少平时不会说的话。吃饱喝足，大家都很尽兴。',
           effects: [
             { type: 'allStudents', stat: 'favor', delta: 12 },
             { type: 'allStudents', stat: 'happiness', delta: 15 },
