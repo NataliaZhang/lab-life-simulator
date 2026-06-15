@@ -7,8 +7,7 @@
 
 import type { GameEvent } from '../../types';
 
-// 绑定任意在读学生的通用触发条件
-const BIND_ANY_STUDENT = [{ type: 'anyStudent' as const, stat: 'projectProgress' as const, op: '>=' as const, value: 0 }];
+
 
 export const bureaucracyEvents: Record<string, GameEvent> = {
 

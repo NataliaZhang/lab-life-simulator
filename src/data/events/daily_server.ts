@@ -7,7 +7,7 @@
 
 import type { GameEvent } from '../../types';
 
-const BIND_ANY_STUDENT = [{ type: 'anyStudent' as const, stat: 'projectProgress' as const, op: '>=' as const, value: 0 }];
+
 
 export const serverEvents: Record<string, GameEvent> = {
 
