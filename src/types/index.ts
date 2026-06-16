@@ -99,9 +99,9 @@ export interface EventOption {
 export interface GameEvent {
   id: string;
   title: string;
-  prompt: string;            // One-sentence popup (e.g. "…你选择：")
+  prompt?: string;           // One-sentence popup — omit for passive (idle/news) events
   description: string[];     // Paragraphs revealed one per click before the choice modal
-  options: EventOption[];
+  options?: EventOption[];   // Omit for passive events; engine auto-dismisses when empty
   tags?: string[];
   triggerConditions?: EventCondition[]; // event enters queue only if ALL conditions met
 }
@@ -177,6 +177,7 @@ export type GameAction =
   | { type: 'PRESENT_EVENT' }
   | { type: 'NEXT_PARAGRAPH' }
   | { type: 'CHOOSE_OPTION'; eventId: string; optionId: string }
+  | { type: 'DISMISS_PASSIVE_EVENT' }  // for idle/news events with no options
   | { type: 'ADVANCE_MONTH' }
   | { type: 'ADMIT_STUDENT'; candidateId: string }
   | { type: 'PASS_ADMISSION' }

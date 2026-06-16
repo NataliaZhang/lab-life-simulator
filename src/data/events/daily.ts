@@ -213,7 +213,7 @@ export const dailyEvents: Record<string, GameEvent> = {
     ],
     prompt: '组会现场尴尬了，你怎么处理？',
     triggerConditions: [
-      { type: 'minStudentCount', value: 2 },
+      { type: 'minStudentCount', value: 3 },
       ...BIND_ANY_STUDENT,
     ],
     options: [
@@ -353,6 +353,59 @@ export const dailyEvents: Record<string, GameEvent> = {
       },
     ],
     tags: ['daily'],
+  },
+
+  advisor_left_on_read: {
+    id: 'advisor_left_on_read',
+    title: '导师已读不回研究',
+    description: [
+      '{studentName}神秘兮兮地发来一篇论文截图。',
+      '标题是：《导师已读不回行为动力学模型：一项基于156名研究生的荒诞实证研究》。',
+      '摘要写得极其正式，甚至包含 r=0.87, p<0.001。',
+      '你越看越觉得不对劲，因为其中几条行为特征似乎和你本人高度相关。',
+    ],
+    prompt: '{studentName}问："老师，这个模型是不是很有解释力？"',
+    triggerConditions: BIND_ANY_STUDENT,
+    options: [
+      {
+        id: 'laugh_it_off',
+        text: '假装没看懂',
+        outcomes: [{
+          weight: 1,
+          narrative: '你回复："这个选题很有趣，但理论贡献还需要再凝练。"\n\n{studentName}盯着这条消息看了三分钟，回了一个"收到"。\n\n你意识到自己刚刚可能完美复现了论文中的"情绪规避型回应"。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: -2 },
+            { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'serious_discussion',
+        text: '认真讨论模型',
+        outcomes: [{
+          weight: 1,
+          narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: 8 },
+            { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
+            { type: 'lab', stat: 'reputation', delta: 1 },
+          ],
+        }],
+      },
+      {
+        id: 'promise_reply_faster',
+        text: '承诺以后尽快回复消息',
+        outcomes: [{
+          weight: 1,
+          narrative: '你郑重承诺以后会尽快回复消息。\n\n当天晚上，{studentName}发来三个问题。第二个问题有17行。第三个问题以"我有一个简单想法"开头。\n\n你盯着聊天框看了很久，终于理解了沉默作为一种社交策略的复杂性。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
+            { type: 'lab', stat: 'energy', delta: -10 },
+          ],
+        }],
+      },
+    ],
+    tags: ['daily', 'student', 'academic_joke'],
   },
 
 };

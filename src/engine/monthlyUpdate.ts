@@ -1,6 +1,6 @@
 import type { GameState, LogEntry, Student, AdmissionState, QueuedEvent } from '../types';
 import { formatTime } from '../types';
-import { monthlyEventPool, specialEndingIds, timeEndingIds } from '../data/events';
+import { monthlyEventPool, idleEventIds, specialEndingIds, timeEndingIds } from '../data/events';
 import { filterUnseen, filterTriggerable, pickRandomQueuedEvent } from './eventQueue';
 import { initialPoolIds } from '../data/studentPool';
 
@@ -40,11 +40,12 @@ function incrementTime(state: GameState): GameState {
   return { ...state, time: { year: year + 1, month: 1 } };
 }
 
-function buildMonthlySummary(state: GameState): LogEntry {
+function buildMonthlySummary(state: GameState, energyGain: number): LogEntry {
   const activeStudents = state.students.filter(s => s.status === 'active');
   const justGraduated = state.students.filter(s => s.status === 'graduated');
 
-  let narrative = `资金 ${state.lab.funding}万 · 声望 ${state.lab.reputation} · 精力 ${state.lab.energy}。`;
+  const energyTag = energyGain > 0 ? `（+${energyGain}）` : '';
+  let narrative = `资金 ${state.lab.funding}万 · 声望 ${state.lab.reputation} · 精力 ${state.lab.energy}${energyTag}。`;
 
   if (activeStudents.length > 0) {
     const lines = activeStudents
@@ -165,8 +166,11 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // ── Normal monthly path ──────────────────────────────────────────────────
 
-  // Reset energy at month start
-  next = { ...next, lab: { ...next.lab, energy: 100 } };
+  // Recover energy each month (+10, capped at 100)
+  const energyBefore = next.lab.energy;
+  const energyAfter = Math.min(100, energyBefore + 10);
+  const energyGain = energyAfter - energyBefore;
+  next = { ...next, lab: { ...next.lab, energy: energyAfter } };
 
   // September: increment active student years + trigger admission
   let admissionState: AdmissionState | null = next.admissionState;
@@ -196,7 +200,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   const graduatedStudents = students.map(checkGraduation);
-  const summaryEntry = buildMonthlySummary({ ...next, students: graduatedStudents });
+  const summaryEntry = buildMonthlySummary({ ...next, students: graduatedStudents }, energyGain);
 
   // Build the seen-event set (used for both daily pool and ending checks)
   const seenEventIds = new Set(
@@ -221,11 +225,37 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     };
   }
 
+  // ── Tutorial fixed events（第1年9–11月，及人数达标时）────────────────────
+  // 新手期前三个月不抽随机事件，只投放固定教程事件，让玩家循序渐进进入节奏。
+  const isEarlyGame =
+    next.time.year === 1 &&
+    (next.time.month === 9 || next.time.month === 10 || next.time.month === 11);
+
+  const tutorialEvents: QueuedEvent[] = [];
+
+  if (next.time.year === 1 && next.time.month === 9 && !seenEventIds.has('joint_meeting_proposal')) {
+    tutorialEvents.push({ id: 'joint_meeting_proposal' });
+  }
+  if (next.time.year === 1 && next.time.month === 10 && !seenEventIds.has('first_semester_reality')) {
+    tutorialEvents.push({ id: 'first_semester_reality' });
+  }
+  if (next.time.year === 1 && next.time.month === 11 && !seenEventIds.has('semester_one_checkpoint')) {
+    tutorialEvents.push({ id: 'semester_one_checkpoint' });
+  }
+
+  // independent_meeting: 当在读人数首次达到3人时触发（任何时间）
+  const activeCount = graduatedStudents.filter(s => s.status === 'active').length;
+  if (activeCount >= 3 && !seenEventIds.has('independent_meeting')) {
+    tutorialEvents.push({ id: 'independent_meeting' });
+  }
+
   // ── Daily event pool ─────────────────────────────────────────────────────
+  // 新手期（第1年9–11月）不抽随机事件；有教程事件时也无需补随机
+  const skipRandom = isEarlyGame || tutorialEvents.length > 0;
   const unseenPool = filterUnseen(monthlyEventPool, seenEventIds);
   const triggerablePool = filterTriggerable(unseenPool, { ...next, students: graduatedStudents });
   const newQueued: QueuedEvent | null =
-    Math.random() < 0.7 && triggerablePool.length > 0
+    !skipRandom && Math.random() < 0.7 && triggerablePool.length > 0
       ? pickRandomQueuedEvent(triggerablePool)
       : null;
 
@@ -255,11 +285,19 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
+  // Tutorial events come before random pool events (but after any carry-over queue items)
   const newQueue: QueuedEvent[] = [
     ...next.eventQueue,
+    ...tutorialEvents,
     ...(newQueued ? [newQueued] : []),
     ...forcedEvents,
   ];
+
+  // If nothing was queued this month, show a random idle event
+  if (newQueue.length === 0) {
+    const idleId = idleEventIds[Math.floor(Math.random() * idleEventIds.length)];
+    newQueue.push({ id: idleId });
+  }
 
   return {
     ...next,

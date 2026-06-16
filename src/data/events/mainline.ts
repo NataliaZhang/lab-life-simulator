@@ -149,6 +149,165 @@ export const mainlineEvents: Record<string, GameEvent> = {
     tags: ['opening'],
   },
 
+  // ── 新手期固定事件（由 monthlyUpdate 按月强制注入，不放入 monthlyEventPool）─────
+  // 时序：year 1 month 9 → joint_meeting_proposal
+  //       year 1 month 10 → first_semester_reality
+  //       year 1 month 11 → semester_one_checkpoint
+  //       students >= 3（任何时间）→ independent_meeting
+
+  joint_meeting_proposal: {
+    id: 'joint_meeting_proposal',
+    title: '两个人的组会',
+    description: [
+      '你在白板上郑重地写下"研究进展"三个字，转过身——对面坐着你唯一的学生，两人大眼瞪小眼。大概过了七秒钟，你们同时意识到都在等对方先开口。',
+      '这就是你建组以来的第一次"组会"。参与人数：二。多余的椅子：六。整间会议室正在以一种沉默但坚定的方式暗示你，"会议"这个词需要一定的规模才能成立。',
+      '门被敲了三下。是隔壁办公室的张嘉明老师，端着一杯茶，脸上带着一种"我来得正是时候"的神情。他说："听说你刚建组？我们每周四下午开联合组会，几个组拼在一起，人多热闹，学生互相也有个参照，要不要来凑一凑？"',
+    ],
+    prompt: '张老师的提议，你怎么回应？',
+    options: [
+      {
+        id: 'join_joint',
+        text: '加入，人多力量大',
+        outcomes: [{
+          weight: 1,
+          narrative: '就这么定了。从那以后每周四下午，你带着学生出现在张老师那间更大的会议室里，和他的三个学生一起汇报进展、互相挑剔实验设计，顺手拼桌叫外卖。"组里大家"从此真的有了实际人数——只是其中大部分人是借来的。',
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'lab', stat: 'energy', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'solo_meeting',
+        text: '谢了，我们自己开',
+        outcomes: [{
+          weight: 1,
+          narrative: '你婉拒了张老师，决定保持独立。之后每周四，你和学生准时坐在会议室里，开一个小时，中间有几次陷入过于专注的沉默，分不清是深度思考还是无话可说。效率倒也不低——只是会议室的六把空椅子，你始终没找到好理由搬走。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: -5 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
+  first_semester_reality: {
+    id: 'first_semester_reality',
+    title: '教授的秘密',
+    description: [
+      '你翻开这周的日历：三个委员会会议、两份审阅请求、一份"关于差旅报销流程优化的意见征集"——附件57页，请在本周五前反馈意见。与此同时，学生群里出现了三条带图带数据的实验进展更新，看起来比你忙碌多了。',
+      '你发现了一个没有人明说的真相：成为教授，并不意味着你终于可以一心做研究。它意味着你需要在做研究的同时，处理所有妨碍你做研究的事情，并让两边都觉得你全力以赴。',
+    ],
+    prompt: '这份塞满的日历，你的对策是：',
+    options: [
+      {
+        id: 'clear_admin',
+        text: '先把行政清完，再专心科研',
+        outcomes: [{
+          weight: 1,
+          narrative: '你花了整整一个下午处理邮件、填表、回复"已阅"。清完之后终于可以打开代码库了——然后看了一眼时钟，六点整。明天再说。至少邮件读数归零了，这也是一种成就。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: -10 },
+            { type: 'lab', stat: 'reputation', delta: 1 },
+          ],
+        }],
+      },
+      {
+        id: 'delegate_meeting',
+        text: '拉一个学生去开会，我有正事',
+        outcomes: [{
+          weight: 1,
+          narrative: '你把一个委员会会议转给了学生，说"帮我去听一下，回来汇报重点"。对方回了个"收到"，语气里有一种微妙的新鲜感——大概是第一次意识到，导师也需要被人替下场。半小时后，你多推进了三个实验步骤。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'randomStudent', stat: 'skills.social', delta: 3 },
+            { type: 'randomStudent', stat: 'favor', delta: 4 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
+  semester_one_checkpoint: {
+    id: 'semester_one_checkpoint',
+    title: '十一月',
+    description: [
+      '十一月。窗外的银杏叶掉得差不多了，走廊里有人在推车搬外卖箱——期末季的前奏。你算了一下：建组刚好三个月。',
+      '成果清单：一篇在写的论文、几组跑完的实验、三次被推迟的截止日期，以及若干条消息记录里的深夜时间戳。进度比计划的慢，但比最坏的预期好。这大概就是科研的正常节奏——比期待慢，比噩梦好，日复一日地往前走。',
+      '你坐在窗边，想给学生发条消息。',
+    ],
+    prompt: '发什么？',
+    options: [
+      {
+        id: 'encourage',
+        text: '辛苦了，这学期干得不错',
+        outcomes: [{
+          weight: 1,
+          narrative: '你发了一句"辛苦了，这学期大家表现得很好"。五秒后收到回复——不是文字，是一张当天刚跑完的实验截图，日志全绿。你猜这不完全是巧合。',
+          effects: [
+            { type: 'allStudents', stat: 'happiness', delta: 8 },
+            { type: 'allStudents', stat: 'favor', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'give_break',
+        text: '放一天假，你我都需要',
+        outcomes: [{
+          weight: 1,
+          narrative: '你发了一句"明天不用来实验室"。对方愣了大概两秒，回了个"真的？"。真的。学生快乐有时候就这么简单；而你自己那天买了杯奶茶，在校园里溜达了一圈，重新感受了一下这个地方——原来除了实验室走廊，学校还挺大的。',
+          effects: [
+            { type: 'allStudents', stat: 'happiness', delta: 12 },
+            { type: 'lab', stat: 'energy', delta: 8 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
+  independent_meeting: {
+    id: 'independent_meeting',
+    title: '终于单飞了',
+    description: [
+      '你数了一下：三个。实验室里现在有三名在读学生，三个包、三套作息、三种对"按时汇报"的不同理解。',
+      '你想起了那个最早的周四——你和一个学生坐在会议室里，两人大眼瞪小眼，然后张老师敲门进来，把你们带进了更大的会议室。这一年多，你在那里见识了他的学生、他的项目，也旁观了他批改稿子时的措辞——有时候严格，有时候准确，偶尔两者兼有。',
+      '但三个人了。可以有自己的会议室了。你去张老师办公室，轻轻敲了两下门。',
+    ],
+    prompt: '告别要怎么说？',
+    options: [
+      {
+        id: 'graceful_exit',
+        text: '谢谢这段时间，我们下周单飞',
+        outcomes: [{
+          weight: 1,
+          narrative: '张老师看了你一眼，点点头，说"应该的，早就该独立了"，然后顺手把他们组的会议室档期往前挪了一小时。你回来，在白板上写了"独立组会——每周五下午"，三个学生抬起头，没说什么，但你觉得空气里有什么东西悄悄变了——实验室有了自己的节奏。',
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'allStudents', stat: 'happiness', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'confident_exit',
+        text: '我们组大了，来打架的',
+        outcomes: [{
+          weight: 1,
+          narrative: '张老师愣了一秒，然后笑出来，说"等你们发了顶会再来说这话"。但该说的都说了，该感谢的也感谢了。下周五下午，你们第一次在自己的会议室里坐下来，白板是新的，人是自己的，组会也终于是真正意义上的"组"的会了。',
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 2 },
+            { type: 'allStudents', stat: 'happiness', delta: 8 },
+            { type: 'allStudents', stat: 'favor', delta: 3 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
   // ── 科研推进链：可疑实验结果（单学生视角）─────────────────────────────────
 
   suspicious_results: {
@@ -234,9 +393,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
 
   conference_ddl: {
     id: 'conference_ddl',
-    title: '顶会截止日前三天',
+    title: 'GRF截止日前三天',
     description: [
-      '距ICML截止还有72小时。',
+      '距GRF截止还有72小时。',
       '{studentName}盯着进度条，实验还没跑完，论文写了一半，红眼睛里全是咖啡因。',
       '接下来怎么冲，取决于你。',
     ],
@@ -274,7 +433,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}没有等你，自己通宵把实验跑完，还顺手润色了abstract。你收到草稿时意外地惊喜——这篇她基本独立完成了。',
+            narrative: '{studentName}没有等你，自己通宵把实验跑完，还顺手润色了abstract。你收到草稿时意外地惊喜——这篇基本是{studentName}独立完成的。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -5 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 8 },

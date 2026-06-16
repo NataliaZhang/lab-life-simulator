@@ -371,7 +371,10 @@ export const hypeEvents: Record<string, GameEvent> = {
       '消息在组里一公开，实验室发生了一场不动声色的转变。有人昨天还穿着印有猫表情包的帽衫，今天换上了有领子的衣服。有人开始在白板上写"Impact"和"Scalability"，用的是粗麦克笔。有人问你："老师，PPT要不要我来做？" 这是这位同学在实验室的第十八个月里第一次主动提出帮助。',
     ],
     prompt: '企业参访，你的应对策略是',
-    triggerConditions: [{ type: 'lab', stat: 'reputation', op: '>=', value: 20 }],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 20 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'professional_presentation',
@@ -636,7 +639,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       '组会已经变成了一场辩论赛，白板上写满了对比数据，有人把对方的论文摊开在桌上用以反驳，有人的声音明显比平时高了半个音阶。你坐在会议桌的一端，意识到如果你不做什么，这可能会持续到天黑。',
     ],
     prompt: '实验室内战，你的应对方式是',
-    triggerConditions: [{ type: 'minStudentCount', value: 2 }],
+    triggerConditions: [{ type: 'minStudentCount', value: 3 }],
     options: [
       {
         id: 'declare_position',

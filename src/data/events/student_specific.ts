@@ -155,8 +155,8 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     id: 'lin_theory_breakthrough',
     title: '林小卷：理论突破了',
     description: [
-      '林小卷发来一份推导笔记，密密麻麻三十页，每一行都是手写，字迹比平时工整，像是在誊正。她在最后一行写了一个"QED"，旁边还画了个小星星。',
-      '结论是她卡了将近两个月的收敛性证明——推出来了。你往前翻了翻，第八页有一处她用红笔圈出来的关键步骤，旁边写着三个感叹号。',
+      '林小卷发来一份推导笔记，密密麻麻三十页，每一行都是手写，字迹比平时工整，像是在誊正。他在最后一行写了一个"QED"，旁边还画了个小星星。',
+      '结论是他卡了将近两个月的收敛性证明——推出来了。你往前翻了翻，第八页有一处他用红笔圈出来的关键步骤，旁边写着三个感叹号。',
     ],
     prompt: '林小卷拿下了关键理论证明，你怎么回应？',
     triggerConditions: [
@@ -168,7 +168,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '整理成论文，赶快投出去',
         outcomes: [{
           weight: 1,
-          narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。她愣了两秒，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
+          narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。他愣了两秒，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 15 },
@@ -182,7 +182,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你叫上叶知秋一起检查，发现了两处细节——一处是符号定义不够严格，一处是引理引用缺了个条件。修正之后，证明更加无懈可击了。林小卷说这是她做过最认真的一件事，叶知秋说"能挑出毛病才是真的读懂了"，两人对视了一眼，达成了某种默契。',
+            narrative: '你叫上叶知秋一起检查，发现了两处细节——一处是符号定义不够严格，一处是引理引用缺了个条件。修正之后，证明更加无懈可击了。林小卷说这是他做过最认真的一件事，叶知秋说"能挑出毛病才是真的读懂了"，两人对视了一眼，达成了某种默契。',
             effects: [
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 5 },
               { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
@@ -215,6 +215,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     prompt: '顾眠眠的工程成果完成了，你打算怎么用？',
     triggerConditions: [
       { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', op: '>=', value: 85 },
+      { type: 'minStudentCount' as const, value: 3 },
     ],
     options: [
       {

@@ -65,6 +65,9 @@ export function useGameEngine(): GameEngine {
       if (state.activeParagraphIndex < event.description.length - 1) {
         // More paragraphs to reveal
         dispatch({ type: 'NEXT_PARAGRAPH' });
+      } else if (!event.options?.length) {
+        // Passive event (idle/news): no choice popup — auto-dismiss
+        dispatch({ type: 'DISMISS_PASSIVE_EVENT' });
       } else {
         // All paragraphs shown; open the choice popup
         setModalVisible(true);

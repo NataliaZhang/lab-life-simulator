@@ -12,7 +12,6 @@ import type {
   GameTime,
 } from '../types';
 import { initialPoolIds, allCandidates } from '../data/studentPool';
-import { traitDefs } from '../data/traits';
 import { openingEventIds } from '../data/events';
 import { getEvent, pickOutcome } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
@@ -40,35 +39,18 @@ function buildStudent(candidateId: string, time: GameTime): Student | null {
   const candidate = allCandidates.find(c => c.id === candidateId);
   if (!candidate) return null;
 
-  // Apply trait bonuses on top of base skills
-  let theory = candidate.baseSkills.theory;
-  let engineering = candidate.baseSkills.engineering;
-  let social = candidate.baseSkills.social;
-  let favor = candidate.baseFavor;
-  let happiness = candidate.baseHappiness;
-
-  for (const traitId of candidate.traitIds) {
-    const trait = traitDefs[traitId];
-    if (!trait) continue;
-    theory += trait.bonuses.theory ?? 0;
-    engineering += trait.bonuses.engineering ?? 0;
-    social += trait.bonuses.social ?? 0;
-    favor += trait.bonuses.favor ?? 0;
-    happiness += trait.bonuses.happiness ?? 0;
-  }
-
   return {
     id: candidate.id,
     name: candidate.name,
     year: 1,
     enrolledAt: time.year,
     skills: {
-      theory: clamp100(theory),
-      engineering: clamp100(engineering),
-      social: clamp100(social),
+      theory: clamp100(candidate.baseSkills.theory),
+      engineering: clamp100(candidate.baseSkills.engineering),
+      social: clamp100(candidate.baseSkills.social),
     },
-    favor: clampPos(favor),
-    happiness: clampPos(happiness),
+    favor: clampPos(candidate.baseFavor),
+    happiness: clampPos(candidate.baseHappiness),
     projectProgress: 0,
     status: 'active',
     traitIds: candidate.traitIds,
@@ -327,10 +309,22 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case 'DISMISS_PASSIVE_EVENT': {
+      // Auto-dismiss idle/news events that have no options — no choice modal, no outcome
+      if (!state.activeEventId) return state;
+      return {
+        ...state,
+        activeEventId: null,
+        activeBoundStudentId: null,
+        activeBoundStudent2Id: null,
+        activeParagraphIndex: 0,
+      };
+    }
+
     case 'CHOOSE_OPTION': {
       if (!state.activeEventId || state.activeEventId !== action.eventId) return state;
       const event = getEvent(action.eventId);
-      const option = event.options.find(o => o.id === action.optionId);
+      const option = (event.options ?? []).find(o => o.id === action.optionId);
       if (!option) return state;
 
       const fundingCost = option.fundingCost ?? 0;
@@ -429,6 +423,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         statChanges: [{ label: '资金', delta: -ADMISSION_COST }],
       };
 
+      // Immediately queue the student's first-meeting event, bound to this student
+      const firstMeetingQueue = candidate.firstMeetingEventId
+        ? [{ id: candidate.firstMeetingEventId, studentId: candidateId }]
+        : [];
+
       return {
         ...state,
         students: [...state.students, newStudent],
@@ -438,6 +437,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         admissionState: canOfferMore
           ? { candidates: null, round: currentRound }
           : null,
+        eventQueue: [...firstMeetingQueue, ...state.eventQueue],
         storyLog: [...state.storyLog, logEntry],
       };
     }

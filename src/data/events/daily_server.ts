@@ -19,6 +19,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '你打开监控面板盯着那个进程看了三分钟。它仍在稳定运行，GPU利用率98%，像是丝毫不知道自己正在引发外交风波。组里其他人的训练任务已经被挤到排队，最短的等待队列是四个小时。',
     ],
     prompt: '神秘进程已运行72小时，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'investigate',
@@ -173,6 +174,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '"正常应该没事吧"这七个字在群里静静燃烧，像一根引信。Linux内核从5.4.0跳到了6.8.12，NVIDIA驱动版本差了整整三个大版本，CUDA toolkit自动更新了，而这台服务器上跑着十一个人的实验环境。1127天的纪录，结束于一个下午的无知者无畏。',
     ],
     prompt: '更新已经跑完，服务器正在重启，你选择',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'pray',
@@ -254,7 +256,10 @@ export const serverEvents: Record<string, GameEvent> = {
       'df -h显示，最大的目录是/data/checkpoints，里面住着来自过去三年的模型权重文件，总计1.2TB，大部分都是"先留着以后可能会用到"的逻辑遗产。没有人愿意第一个动手。',
     ],
     prompt: '磁盘即将撑爆，组里互相指认进行中，你决定',
-    triggerConditions: [{ type: 'time', field: 'year', op: '>=', value: 2 }],
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'enforce_quota',
@@ -339,6 +344,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '到了下午，组里陆续开始收到import错误。有人的torch找不到CUDA，有人的numpy报了API变更警告，有人的整个pipeline在最开始的import阶段就崩掉了。群里的消息内容逐渐从"有人知道这是怎么回事吗"演变为"我现在什么都跑不了"。',
     ],
     prompt: '全组pip环境被团灭，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'rebuild_all',
@@ -413,6 +419,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '但组里有两个人的训练任务正在跑，分别处于第41小时和第43小时，目标都是48小时完成。上一个checkpoint是12小时前存的。群里的第一条回复是一个持续了约四秒的空白，然后是一连串的消息，内容各不相同，但情绪方向完全一致。',
     ],
     prompt: '距离IT重启还有三小时，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'beg_it',
@@ -561,6 +568,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '你问了问大家用的是哪个，得到了三种不同的答案。更糟糕的是，没有人能说清楚这三个环境之间的差异是什么，唯一可以确定的是，它们各自装了不同版本的transformers，而且至少有一个环境里有一个叫做fix_cuda_bug的奇怪包，来源不明，卸了就崩。',
     ],
     prompt: '服务器上三个conda环境各自为政，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'nuclear_option',
@@ -634,6 +642,7 @@ export const serverEvents: Record<string, GameEvent> = {
       'IT的回复在四十分钟后到达："正在进行权限系统更新，预计本周内恢复，建议使用期间切换到/tmp工作。" 今天是周一。',
     ],
     prompt: 'home目录只读，IT说本周内恢复，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'work_from_tmp',
@@ -791,6 +800,7 @@ export const serverEvents: Record<string, GameEvent> = {
       '实验室的主服务器正在进行一次48小时的训练run，此刻处于第47小时12分。上一次checkpoint保存在第12小时。损失了35小时的训练进度——以8张A100的算力计算，这相当于消失了约¥14,000的云计算成本。停电还附带带走了组里另外两个正在运行的调试任务，但那些相对次要。',
     ],
     prompt: '35小时的训练进度在第47小时归零，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'laugh_about_it',
@@ -873,7 +883,10 @@ export const serverEvents: Record<string, GameEvent> = {
       '排查之后发现：/data在六天前悄悄写满了，写入返回了ENOSPC错误，但所有训练脚本都没有对这个错误做任何处理，只是默默继续运行，一切看起来"正常"，训练loss照样在降，进度条照样在走，日志照样在滚动，唯独输出文件里没有任何内容。六天，11个实验，所有结果写入了/dev/null的等价物——磁盘满了，就像什么都没发生一样。',
     ],
     prompt: '六天的实验结果从未被保存过，你决定',
-    triggerConditions: [{ type: 'time', field: 'year', op: '>=', value: 2 }],
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'try_recovery',

@@ -76,10 +76,9 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
                     const trait = traitDefs[tid];
                     if (!trait) return null;
                     return (
-                      <div key={tid} className="trait-chip">
-                        <span className="trait-chip__name">{trait.name}</span>
-                        <span className="trait-chip__desc">{trait.description}</span>
-                      </div>
+                      <span key={tid} className="trait-tag">
+                        {trait.name}
+                      </span>
                     );
                   })}
                 </div>

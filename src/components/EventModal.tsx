@@ -20,9 +20,9 @@ export function EventModal({ event, lab, boundStudentName, boundStudent2Name, on
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
       <div className="modal">
         <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
-        <div className="modal__prompt">{resolve(event.prompt, boundStudentName, boundStudent2Name)}</div>
+        <div className="modal__prompt">{resolve(event.prompt ?? '', boundStudentName, boundStudent2Name)}</div>
         <div className="modal__options">
-          {event.options.map(option => {
+          {(event.options ?? []).map(option => {
             const fundingOk = !option.fundingCost || lab.funding >= option.fundingCost;
             const energyOk = !option.energyCost || lab.energy >= option.energyCost;
             const disabled = !fundingOk || !energyOk;

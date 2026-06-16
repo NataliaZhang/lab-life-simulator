@@ -132,7 +132,7 @@ function findTriggeringStudents(
 // Events that explicitly target a student by ID should only fire when that student is enrolled.
 function getRequiredStudentIds(event: GameEvent): string[] {
   const ids = new Set<string>();
-  for (const option of event.options) {
+  for (const option of event.options ?? []) {
     for (const outcome of option.outcomes) {
       for (const effect of outcome.effects ?? []) {
         if (effect.type === 'student') ids.add(effect.studentId);

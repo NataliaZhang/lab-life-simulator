@@ -22,6 +22,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '今天是星期一，上午九点。实验室里的气氛像是一个人憋着打喷嚏，不是生产力的问题——那不是重点——重点是，咖啡作为一种仪式感已经停转了整整九十六小时。有人开始用热水泡速溶，另一个人看了看那杯速溶，轻轻皱了一下眉，戴上了耳机。',
     ],
     prompt: '咖啡机停摆第四天，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'buy_new_machine',
@@ -108,7 +109,10 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '谁都不知道它重不重要。谁都不知道它是谁写的。但谁也没有动它。它就这么活着，安静地占据着一块大约A4纸大小的白板领土，变得越来越黄。',
     ],
     prompt: '那个无主方程还在白板上，你决定',
-    triggerConditions: [{ type: 'time', field: 'year', op: '>=', value: 2 }],
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'declare_heritage',
@@ -182,6 +186,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '有人前几天在实验室群发了一条消息："有人知道冰箱里那个东西是谁的吗？"消息发出去之后得到了零个回复，只有三个表情包——分别是一个问号、一个眼睛往旁边看的猫、以及一个"我不知道你在说什么"的熊。',
     ],
     prompt: '冰箱谜团已经持续了整整一个学期，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'handle_it_yourself',
@@ -323,7 +328,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '上周五的组会上，有人说了一句"有点冷"，有人说了一句"还好"，然后整个话题在全组的默契中被悄然放弃了。但事情显然还没结束。这两台电器的共存已经从"临时应对"演变成了"阵地声明"。',
     ],
     prompt: '空调派系矛盾已经公开化，你决定',
-    triggerConditions: [{ type: 'minStudentCount', value: 2 }],
+    triggerConditions: [{ type: 'minStudentCount', value: 3 }],
     options: [
       {
         id: 'impose_24',
@@ -398,7 +403,10 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '有人在午休，趴在键盘上，耳机还挂着。一台显示器上面放着一盒吃了一半的外卖，盒盖歪开，露出红油。白板上密密麻麻写满了公式，其中有一行被圈起来，旁边写了"???错的???"。线缆在地板上形成了一种复杂的拓扑结构。还剩二十分钟。',
     ],
     prompt: '贵客即将到访，实验室现状堪忧，你决定',
-    triggerConditions: [{ type: 'lab', stat: 'reputation', op: '>=', value: 15 }],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'emergency_cleanup',
@@ -473,7 +481,10 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '日期距今超过两年。当年写下这行注释的人已经毕业了，或者换了方向，或者就是你，你已经不确定了。让这件事变得复杂的是：这个"fix this properly later"所在的函数，现在是整个推理流程的核心调用链。没有人知道当年"properly"指的是什么，也没有人敢轻易动它，因为它现在确实在跑，而且看起来……还行。',
     ],
     prompt: '两年前的TODO已经成为核心基础设施，你决定',
-    triggerConditions: [{ type: 'time', field: 'year', op: '>=', value: 3 }],
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 3 },
+      { type: 'minStudentCount' as const, value: 3 },
+    ],
     options: [
       {
         id: 'attempt_the_fix',
@@ -687,6 +698,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       '更糟的是：每个人都需要打印同一套50页的表格——那种学校坚持要求纸质版的表格，填完签字再扫描提交，整个流程的荒诞性超越了任何理性解释，但这不是现在可以讨论的问题。',
     ],
     prompt: '打印机在最糟糕的时刻宣告死亡，你决定',
+    triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
     options: [
       {
         id: 'find_workaround',

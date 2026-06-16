@@ -458,7 +458,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     title: '第一个学生出息了',
     description: [
       '你的手机屏幕亮了，是{studentName}发来的消息。你还记得{studentName}——那个把学习率调到1.0、看着loss曲线飞上天际然后若无其事问"老师这正常吗"的{studentName}。',
-      '消息是这样写的："老师！！！我中了NeurIPS best paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你数了一遍感叹号，然后又数了一遍，确认自己没有眼花。你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外，偶尔把水杯转一圈，再转回来。',
+      '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你数了一遍感叹号，然后又数了一遍，确认自己没有眼花。你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外，偶尔把水杯转一圈，再转回来。',
     ],
     prompt: '{studentName}拿了最佳论文奖，你想：',
     triggerConditions: [
@@ -472,7 +472,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在组群发了一条消息，说{studentName}拿了NeurIPS best paper，让大家向学长/学姐祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜——语气里混合着真诚的高兴和一种无声的压力。有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
+            narrative: '你在组群发了一条消息，说{studentName}拿了ICOP最佳论文，让大家向学长/学姐祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜——语气里混合着真诚的高兴和一种无声的压力。有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },

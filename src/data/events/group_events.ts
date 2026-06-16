@@ -16,9 +16,9 @@ export const groupEvents: Record<string, GameEvent> = {
 
   group_conference_ddl: {
     id: 'group_conference_ddl',
-    title: '顶会截止日前三天',
+    title: 'GRF截止日前三天',
     description: [
-      '距ICML截止还有72小时。',
+      '距GRF截止还有72小时。',
       '整个组都进入了备战状态：有人在跑实验，有人在写论文，有人在盯着loss曲线发呆。',
       '接下来怎么冲，取决于你。',
     ],
