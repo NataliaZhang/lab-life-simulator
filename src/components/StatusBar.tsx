@@ -5,6 +5,8 @@ interface Props {
   state: GameState;
   studentPanelOpen: boolean;
   onToggleStudentPanel: () => void;
+  projectPanelOpen: boolean;
+  onToggleProjectPanel: () => void;
 }
 
 function reputationDesc(rep: number): string {
@@ -16,7 +18,7 @@ function reputationDesc(rep: number): string {
   return '学术大牛，门生满天下';
 }
 
-export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel }: Props) {
+export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, projectPanelOpen, onToggleProjectPanel }: Props) {
   const { lab, time, phase } = state;
 
   return (
@@ -41,6 +43,15 @@ export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel }: Pro
           <span className="stat-label">精力</span>
           <span className="stat-value">{lab.energy}</span>
         </span>
+        <button
+          className={`panel-toggle-btn${projectPanelOpen ? ' panel-toggle-btn--active' : ''}`}
+          onClick={onToggleProjectPanel}
+          title={projectPanelOpen ? '关闭项目面板' : '查看项目'}
+        >
+          项目{state.projectIdeas.length > 0 && !projectPanelOpen
+            ? ` (${state.projectIdeas.length})`
+            : (projectPanelOpen ? ' ✕' : ' ▸')}
+        </button>
         <button
           className={`panel-toggle-btn${studentPanelOpen ? ' panel-toggle-btn--active' : ''}`}
           onClick={onToggleStudentPanel}

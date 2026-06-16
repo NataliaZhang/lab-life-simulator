@@ -1,11 +1,12 @@
 import { useReducer, useEffect, useCallback, useState } from 'react';
-import type { GameState, GameEvent } from '../types';
+import type { GameState, GameEvent, GameAction } from '../types';
 import { gameReducer, createInitialState } from '../engine/gameState';
 import { getEvent } from '../engine/eventQueue';
 import { saveGame, loadGame } from '../engine/saveLoad';
 
 export interface GameEngine {
   state: GameState;
+  dispatch: (action: GameAction) => void;
   activeEvent: GameEvent | null;
   boundStudentName: string | undefined;
   boundStudent2Name: string | undefined;
@@ -115,6 +116,7 @@ export function useGameEngine(): GameEngine {
 
   return {
     state,
+    dispatch,
     activeEvent,
     boundStudentName,
     boundStudent2Name,

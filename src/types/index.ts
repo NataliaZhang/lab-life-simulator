@@ -1,3 +1,6 @@
+import type { ActiveProject, CompletedProject } from './project';
+export type { ActiveProject, CompletedProject } from './project';
+
 // ─── Time ──────────────────────────────────────────────────────────────────
 
 export interface GameTime {
@@ -64,7 +67,8 @@ export type StateEffect =
   | { type: 'randomStudent2'; stat: StudentStatKey; delta: number } // targets the second bound student
   | { type: 'graduateStudent' }   // marks the bound student as graduated
   | { type: 'extendGraduation' }  // records one extension for bound student (handled in reducer)
-  | { type: 'leaveStudent' };     // marks the bound student as left
+  | { type: 'leaveStudent' }      // marks the bound student as left
+  | { type: 'unlockIdea'; projectId: string }; // adds a project idea (ignored if already owned)
 
 // ─── Conditions ────────────────────────────────────────────────────────────
 
@@ -99,6 +103,7 @@ export interface EventOption {
 export interface GameEvent {
   id: string;
   title: string;
+  tagline?: string;          // One-line signature shown in the ending modal (ending events only)
   prompt?: string;           // One-sentence popup — omit for passive (idle/news) events
   description: string[];     // Paragraphs revealed one per click before the choice modal
   options?: EventOption[];   // Omit for passive events; engine auto-dismisses when empty
@@ -156,6 +161,7 @@ export type GamePhase = 'playing' | 'won' | 'gameover';
 
 export interface GameState {
   phase: GamePhase;
+  endingEventId: string | null;  // ID of the event that triggered the phase change (for ending modal)
   time: GameTime;
   students: Student[];
   studentPool: string[];             // IDs of candidates not yet admitted
@@ -169,6 +175,9 @@ export interface GameState {
   graduationExtensions: Record<string, number>; // studentId → times延毕 chosen
   storyLog: LogEntry[];
   lab: LabStats;
+  projectIdeas: string[];              // project IDs of unlocked but not-yet-started ideas
+  activeProjects: ActiveProject[];
+  completedProjects: CompletedProject[];
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────
@@ -183,4 +192,7 @@ export type GameAction =
   | { type: 'PASS_ADMISSION' }
   | { type: 'CONTINUE_RECRUITING' }
   | { type: 'LOAD_SAVE'; state: GameState }
-  | { type: 'NEW_GAME' };
+  | { type: 'NEW_GAME' }
+  | { type: 'START_PROJECT'; projectId: string }
+  | { type: 'ASSIGN_PROJECT_LEADER'; projectId: string; leaderId: string }
+  | { type: 'REMOVE_PROJECT_LEADER'; projectId: string };

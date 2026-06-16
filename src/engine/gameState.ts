@@ -10,11 +10,13 @@ import type {
   StatChange,
   QueuedEvent,
   GameTime,
+  ActiveProject,
 } from '../types';
 import { initialPoolIds, allCandidates } from '../data/studentPool';
 import { openingEventIds } from '../data/events';
 import { getEvent, pickOutcome } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
+import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
 
 const ADMISSION_COST = 10;       // 万元 per student
 const CONTINUE_ENERGY_COST = 20; // energy cost to get a second round of candidates
@@ -62,6 +64,7 @@ function buildStudent(candidateId: string, time: GameTime): Student | null {
 export function createInitialState(): GameState {
   return {
     phase: 'playing',
+    endingEventId: null,
     time: { year: 1, month: 8 }, // Game starts in August
     students: [],                 // Students enter via admission, not pre-loaded
     studentPool: [...initialPoolIds],
@@ -79,6 +82,9 @@ export function createInitialState(): GameState {
       reputation: 0,
       energy: 100,
     },
+    projectIdeas: [],
+    activeProjects: [],
+    completedProjects: [],
   };
 }
 
@@ -97,7 +103,7 @@ function studentStatLabel(stat: StudentStatKey): string {
   const map: Record<StudentStatKey, string> = {
     favor: '好感',
     happiness: '心情',
-    projectProgress: '进度',
+    projectProgress: '项目进度',
     'skills.theory': '理论',
     'skills.engineering': '工程',
     'skills.social': '社交',
@@ -151,7 +157,26 @@ function applyStudentStat(student: Student, stat: StudentStatKey, delta: number)
 interface ApplyEffectsResult {
   lab: LabStats;
   students: Student[];
+  activeProjects: ActiveProject[];
   statChanges: StatChange[];
+  newProjectIdeas: string[];
+}
+
+// Applies a projectProgress delta to the project the student is currently leading.
+// Returns the updated activeProjects array, and pushes a stat change entry if applicable.
+function applyProjectProgressEffect(
+  studentId: string,
+  studentName: string,
+  delta: number,
+  activeProjects: ActiveProject[],
+  statChanges: StatChange[],
+): ActiveProject[] {
+  const projectIdx = activeProjects.findIndex(ap => ap.leaderId === studentId);
+  if (projectIdx === -1) return activeProjects; // student not leading any project — skip
+  const ap = activeProjects[projectIdx]!;
+  const newProgress = Math.min(100, Math.max(0, ap.progress + delta));
+  statChanges.push({ label: `${studentName}·项目进度`, delta });
+  return activeProjects.map((p, i) => i === projectIdx ? { ...p, progress: newProgress } : p);
 }
 
 function applyEffects(
@@ -162,39 +187,60 @@ function applyEffects(
 ): ApplyEffectsResult {
   let lab = { ...state.lab };
   let students = [...state.students];
+  let activeProjects = [...state.activeProjects];
   const statChanges: StatChange[] = [];
+  let newProjectIdeas = [...state.projectIdeas];
 
   for (const effect of effects) {
     if (effect.type === 'lab') {
       lab = applyLabEffect(lab, effect.stat, effect.delta);
       statChanges.push({ label: labStatLabel(effect.stat), delta: effect.delta });
     } else if (effect.type === 'student') {
-      students = students.map(s =>
-        s.id === effect.studentId ? applyStudentStat(s, effect.stat, effect.delta) : s,
-      );
-      const target = state.students.find(s => s.id === effect.studentId);
-      if (target) {
-        statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+      if (effect.stat === 'projectProgress') {
+        // Redirect to the student's active project progress
+        const target = state.students.find(s => s.id === effect.studentId);
+        if (target) {
+          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+        }
+      } else {
+        students = students.map(s =>
+          s.id === effect.studentId ? applyStudentStat(s, effect.stat, effect.delta) : s,
+        );
+        const target = state.students.find(s => s.id === effect.studentId);
+        if (target) {
+          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+        }
       }
     } else if (effect.type === 'allStudents') {
       const activeStudents = students.filter(s => s.status === 'active');
-      students = students.map(s =>
-        s.status === 'active' ? applyStudentStat(s, effect.stat, effect.delta) : s,
-      );
-      const allLabel = activeStudents.length === 1 && activeStudents[0]
-        ? `${activeStudents[0].name}·${studentStatLabel(effect.stat)}`
-        : `全体·${studentStatLabel(effect.stat)}`;
-      statChanges.push({ label: allLabel, delta: effect.delta });
+      if (effect.stat === 'projectProgress') {
+        // Apply progress to each student's active project individually
+        for (const s of activeStudents) {
+          activeProjects = applyProjectProgressEffect(s.id, s.name, effect.delta, activeProjects, statChanges);
+        }
+      } else {
+        students = students.map(s =>
+          s.status === 'active' ? applyStudentStat(s, effect.stat, effect.delta) : s,
+        );
+        const allLabel = activeStudents.length === 1 && activeStudents[0]
+          ? `${activeStudents[0].name}·${studentStatLabel(effect.stat)}`
+          : `全体·${studentStatLabel(effect.stat)}`;
+        statChanges.push({ label: allLabel, delta: effect.delta });
+      }
     } else if (effect.type === 'randomStudent') {
       const active = students.filter(s => s.status === 'active');
       const target = boundStudentId
         ? (students.find(s => s.id === boundStudentId && s.status === 'active') ?? active[Math.floor(Math.random() * active.length)])
         : active[Math.floor(Math.random() * active.length)];
       if (target) {
-        students = students.map(s =>
-          s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
-        );
-        statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+        if (effect.stat === 'projectProgress') {
+          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+        } else {
+          students = students.map(s =>
+            s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
+          );
+          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+        }
       }
     } else if (effect.type === 'randomStudent2') {
       const active = students.filter(s => s.status === 'active');
@@ -202,10 +248,14 @@ function applyEffects(
         ? (students.find(s => s.id === boundStudent2Id && s.status === 'active') ?? active[Math.floor(Math.random() * active.length)])
         : active[Math.floor(Math.random() * active.length)];
       if (target) {
-        students = students.map(s =>
-          s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
-        );
-        statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+        if (effect.stat === 'projectProgress') {
+          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+        } else {
+          students = students.map(s =>
+            s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
+          );
+          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+        }
       }
     } else if (effect.type === 'graduateStudent') {
       const target = boundStudentId
@@ -227,11 +277,20 @@ function applyEffects(
         );
         statChanges.push({ label: `${target.name}·离组`, delta: -1 });
       }
+    } else if (effect.type === 'unlockIdea') {
+      // Add the project idea only if not already owned or active/completed
+      const alreadyHas =
+        newProjectIdeas.includes(effect.projectId) ||
+        state.activeProjects.some(p => p.projectId === effect.projectId) ||
+        state.completedProjects.some(p => p.projectId === effect.projectId);
+      if (!alreadyHas) {
+        newProjectIdeas = [...newProjectIdeas, effect.projectId];
+      }
     }
     // extendGraduation is a state-level side-effect handled in CHOOSE_OPTION, not here
   }
 
-  return { lab, students, statChanges };
+  return { lab, students, activeProjects, statChanges, newProjectIdeas };
 }
 
 // ─── Reducer ───────────────────────────────────────────────────────────────
@@ -341,7 +400,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const boundStudentId = state.activeBoundStudentId ?? undefined;
       const boundStudent2Id = state.activeBoundStudent2Id ?? undefined;
 
-      const { lab, students, statChanges } = applyEffects(state, [
+      const { lab, students, activeProjects: effectProjects, statChanges, newProjectIdeas } = applyEffects(state, [
         ...costEffects,
         ...(outcome.effects ?? []),
       ], boundStudentId, boundStudent2Id);
@@ -376,11 +435,25 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           }
         : state.graduationExtensions;
 
+      // Stall any project whose leader just graduated or left via this outcome's effects
+      const allEffects = [...costEffects, ...(outcome.effects ?? [])];
+      const hasGraduate = allEffects.some(e => e.type === 'graduateStudent');
+      const hasLeave = allEffects.some(e => e.type === 'leaveStudent');
+      let activeProjects = effectProjects;
+      if ((hasGraduate || hasLeave) && boundStudentId) {
+        // Build a temporary minimal state-like object to call removeLeaderOnStudentLeave
+        const tempState = { ...state, students, activeProjects };
+        activeProjects = removeLeaderOnStudentLeave(tempState, boundStudentId).activeProjects;
+      }
+
       return {
         ...state,
         phase: outcome.phaseChange ?? state.phase,
+        endingEventId: outcome.phaseChange ? (state.activeEventId ?? state.endingEventId) : state.endingEventId,
         lab,
         students,
+        projectIdeas: newProjectIdeas,
+        activeProjects,
         eventQueue: nextQueue,
         activeEventId: null,
         activeBoundStudentId: null,
@@ -408,9 +481,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const newPool = state.studentPool.filter(id => id !== candidateId);
       const newFunding = state.lab.funding - ADMISSION_COST;
 
-      // After admission: if year 4+ and energy enough and pool has candidates, offer another round
+      // After admission: offer a second round only (round 1 → round 2, no further)
       const currentRound = state.admissionState.round;
-      const canOfferMore = state.time.year >= 4
+      const canOfferMore = currentRound < 2
+        && state.time.year >= 4
         && state.lab.energy >= CONTINUE_ENERGY_COST
         && newPool.length >= 2;
 
@@ -444,6 +518,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'CONTINUE_RECRUITING': {
       if (!state.admissionState) return state;
+      if (state.admissionState.round >= 2) return state; // max two rounds per year
       if (state.lab.energy < CONTINUE_ENERGY_COST) return state;
       if (state.studentPool.length < 2) return state;
 
@@ -470,6 +545,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'NEW_GAME': {
       return createInitialState();
+    }
+
+    case 'START_PROJECT': {
+      return startProject(state, action.projectId);
+    }
+
+    case 'ASSIGN_PROJECT_LEADER': {
+      return assignLeader(state, action.projectId, action.leaderId);
+    }
+
+    case 'REMOVE_PROJECT_LEADER': {
+      return removeLeader(state, action.projectId);
     }
   }
 }

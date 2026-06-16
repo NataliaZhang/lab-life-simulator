@@ -28,6 +28,8 @@ import { heShixuEvents } from './students/he_shixu';
 import { tangKuolieEvents } from './students/tang_kuolie';
 import { moWenxuanEvents } from './students/mo_wenxuan';
 import { xieZhiweiEvents } from './students/xie_zhiwei';
+import { projectIdeaEvents } from './project_ideas';
+import { projectCompletionEvents } from './project_completions';
 
 import type { GameEvent } from '../../types';
 
@@ -58,6 +60,8 @@ export const events: Record<string, GameEvent> = {
   ...tangKuolieEvents,
   ...moWenxuanEvents,
   ...xieZhiweiEvents,
+  ...projectIdeaEvents,
+  ...projectCompletionEvents,
 };
 
 // ── 开局序列（固定顺序，不随机）─────────────────────────────────────────────
@@ -148,6 +152,39 @@ export const monthlyEventPool: string[] = [
   'bureau_meeting_email',
   'bureau_reimbursement_quest',
   'bureau_room_booking_fail',
+
+  // 灵感事件（触发后在项目面板解锁对应 idea）
+  'idea_advisor_reply',
+  'idea_auto_rebuttal',
+  'idea_code_archaeology',
+  'idea_campus_agent',
+  'idea_ddl_reinforcement',
+  'idea_dolphin_llm',
+  'idea_lucky_shirt',
+  'idea_procrastination',
+  'idea_meeting_translator',
+  'idea_email_politeness',
+  'idea_night_code',
+  'idea_reviewer_alignment',
+  'idea_coffee_social',
+  'idea_meme_propagation',
+  'idea_ai_paper_detection',
+  'idea_graduation_delay',
+  'idea_citation_network',
+  'idea_hyperparameter_divination',
+  'idea_whiteboard_erasure',
+  'idea_server_oracle',
+  'idea_conference_social',
+  'idea_meeting_game_theory',
+  'idea_acknowledgment_network',
+  'idea_abstract_compression',
+  'idea_prompt_archaeology',
+  'idea_mediocre_detector',
+  'idea_citation_bomb',
+  'idea_defense_breakdown',
+  'idea_six_degrees',
+  'idea_ai_review_alignment',
+  'idea_late_submission',
 
   // 新闻快讯（被动事件，无弹窗，看完自动跳过）
   'news_blank_paper_accepted',

@@ -3,12 +3,16 @@ import { useGameEngine } from './hooks/useGameEngine';
 import { StatusBar } from './components/StatusBar';
 import { StoryLog } from './components/StoryLog';
 import { EventModal } from './components/EventModal';
+import { EndingModal } from './components/EndingModal';
 import { AdmissionModal } from './components/AdmissionModal';
 import { StudentList } from './components/StudentList';
+import { ProjectsPanel } from './components/ProjectsPanel';
+import { events } from './data/events';
 
 export function App() {
   const {
     state,
+    dispatch,
     activeEvent,
     boundStudentName,
     boundStudent2Name,
@@ -24,6 +28,7 @@ export function App() {
   } = useGameEngine();
 
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
+  const [projectPanelOpen, setProjectPanelOpen] = useState(false);
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
@@ -42,13 +47,22 @@ export function App() {
   };
 
   const isGameOver = state.phase !== 'playing';
+  const endingEvent = state.endingEventId ? events[state.endingEventId] : null;
 
   return (
     <div className="app">
       <StatusBar
         state={state}
         studentPanelOpen={studentPanelOpen}
-        onToggleStudentPanel={() => setStudentPanelOpen(o => !o)}
+        onToggleStudentPanel={() => {
+          setStudentPanelOpen(o => !o);
+          setProjectPanelOpen(false);
+        }}
+        projectPanelOpen={projectPanelOpen}
+        onToggleProjectPanel={() => {
+          setProjectPanelOpen(o => !o);
+          setStudentPanelOpen(false);
+        }}
       />
 
       <div className={`app__body${studentPanelOpen ? ' app__body--panel-open' : ''}`}>
@@ -59,31 +73,44 @@ export function App() {
         {studentPanelOpen && (
           <StudentList
             students={state.students}
+            activeProjects={state.activeProjects}
             onAdvanceMonth={handleContinue}
             canAdvanceMonth={canContinue}
-            onNewGame={newGame}
             isGameOver={isGameOver}
           />
         )}
       </div>
 
-      {!studentPanelOpen && (
+      {!studentPanelOpen && !isGameOver && (
         <div className="bottom-bar">
-          {isGameOver ? (
-            <button className="btn btn--primary btn--bottom" onClick={newGame}>
-              重新开始
-            </button>
-          ) : (
-            <button
-              className="btn btn--primary btn--bottom"
-              onClick={handleContinue}
-              disabled={!canContinue}
-              title={canContinue ? '' : '请先做出选择'}
-            >
-              继续
-            </button>
-          )}
+          <button
+            className="btn btn--primary btn--bottom"
+            onClick={handleContinue}
+            disabled={!canContinue}
+            title={canContinue ? '' : '请先做出选择'}
+          >
+            继续
+          </button>
         </div>
+      )}
+
+      {projectPanelOpen && (
+        <ProjectsPanel
+          state={state}
+          dispatch={dispatch}
+          onClose={() => setProjectPanelOpen(false)}
+        />
+      )}
+
+      {isGameOver && endingEvent && (
+        <EndingModal
+          endingTitle={endingEvent.title}
+          tagline={endingEvent.tagline ?? ''}
+          phase={state.phase}
+          lab={state.lab}
+          students={state.students}
+          onNewGame={newGame}
+        />
       )}
 
       {activeEvent && modalVisible && !isGameOver && (

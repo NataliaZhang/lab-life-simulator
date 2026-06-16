@@ -27,6 +27,7 @@ export const endingEvents: Record<string, GameEvent> = {
   ending_funding_crisis: {
     id: 'ending_funding_crisis',
     title: '经费耗尽',
+    tagline: '若干年后，有人的致谢里还会提到这里。',
     description: [
       '账户余额归零。不是比喻——银行账户上真的是0.00万元。',
       '学院财务办公室发来了一封措辞客气但含义明确的邮件，询问实验室"后续运营规划"。你盯着这行字看了很久。',
@@ -75,6 +76,7 @@ export const endingEvents: Record<string, GameEvent> = {
   ending_all_students_left: {
     id: 'ending_all_students_left',
     title: '实验室空了',
+    tagline: '组会还没结束。只是今天没有人来。',
     description: [
       '最后一位学生也走了。',
       '实验室里只剩下你。白板上还留着上次组会的板书，没有人擦掉它——因为没有下次组会了。',
@@ -116,6 +118,7 @@ export const endingEvents: Record<string, GameEvent> = {
   ending_time_great: {
     id: 'ending_time_great',
     title: '终身教职评审',
+    tagline: '你的学生，已经开始指导他们自己的学生了。',
     description: [
       '第六年七月，tenure评审周到来。你整理好六年的材料——学生的毕业名单、论文列表、合作记录、声誉积累的每一条痕迹——装进一个文件夹，穿上那件只在面试和答辩时穿过的正装，走进系馆四楼的会议室。',
       '四十分钟的陈述，你没有冷场一次。委员会七位成员，有人频频点头，有人认真做笔记，坐在左侧角落的王教授翻你的发表记录翻了整整三遍，但全程没有提出任何质疑——你知道这是好兆头。有人问起你带过的学生现在在哪里，你一一说出了他们的去向，说到其中一位正在另一所学校建自己的实验室，王教授抬起头来，第一次看了你一眼，嘴角动了动。',
@@ -136,7 +139,7 @@ export const endingEvents: Record<string, GameEvent> = {
       },
       {
         id: 'reflect_humble',
-        text: '"还差得远，但方向对了。"',
+        text: '"六年，才把问题想清楚了一点。"',
         outcomes: [{
           weight: 1,
           narrative: '你翻了翻六年前的笔记本，发现当时提出的问题，一半还没有答案。但你不再觉得这是焦虑的来源了——而是觉得，还有很多可以做。',
@@ -150,6 +153,7 @@ export const endingEvents: Record<string, GameEvent> = {
   ending_time_steady: {
     id: 'ending_time_steady',
     title: '终身教职评审',
+    tagline: '那两票投了什么，永远不会知道了。但通过了。',
     description: [
       '第六年七月，tenure评审周到来。你把材料整理好，第三次检查了幻灯片，发现第七页有个错别字，改掉，深呼吸，走进会议室。',
       '陈述进行到一半，那位以提问严苛著称的王教授举手打断："你的毕业生就业去向能具体说说吗？" 你说了，他点了点头，表情没有变化。另一位委员翻到你的发表记录的某一页，用铅笔在旁边画了什么——你看不清，只能继续往下讲。结束时有人问："学生规模为什么没有扩大？" 你如实回答了，说了经费、说了对质量的取舍。没有人追问，但你也说不清这是不是好事。',
@@ -184,6 +188,7 @@ export const endingEvents: Record<string, GameEvent> = {
   ending_time_struggle: {
     id: 'ending_time_struggle',
     title: '终身教职评审',
+    tagline: '该怕的都想过了。然后通过了。',
     description: [
       '第六年七月，tenure评审周到来。你把材料整理好，盯着幻灯片看了很久，发现第一页的学生毕业数量在那里，经费曲线在那里，声誉积累的折线图在那里——不算好看，但都是真实发生过的事。你把正装从衣柜里翻出来，发现袖口有道折痕，熨了半小时，走进了会议室。',
       '气氛比你想象的更沉。委员会的问题一个接一个：发表数量为什么不够？学生流失是什么原因？经费这么紧张，后续怎么规划？你答了能答的，有两个问题你只说了"这方面确实做得不足"，然后停下来，等着，没有补充。王教授把你的发表记录翻了又翻，没有画问号，也没有点头，只是看。你不知道这代表什么。陈述结束时没有掌声，只有人在本子上写了什么。',
@@ -204,7 +209,7 @@ export const endingEvents: Record<string, GameEvent> = {
       },
       {
         id: 'reflect_lessons',
-        text: '"至少知道了什么是真正重要的。"',
+        text: '"学到的最重要的事，一条都不在论文里。"',
         outcomes: [{
           weight: 1,
           narrative: '六年里你学到的，不全是科研。你学到了什么样的压力会摧毁人，什么样的关系值得守护，什么样的工作让你不后悔花时间。这些课，不在任何论文里。',

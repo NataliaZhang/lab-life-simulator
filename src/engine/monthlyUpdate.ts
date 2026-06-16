@@ -3,6 +3,7 @@ import { formatTime } from '../types';
 import { monthlyEventPool, idleEventIds, specialEndingIds, timeEndingIds } from '../data/events';
 import { filterUnseen, filterTriggerable, pickRandomQueuedEvent } from './eventQueue';
 import { initialPoolIds } from '../data/studentPool';
+import { processMonthlyProjects, removeLeaderOnStudentLeave } from './projectEngine';
 
 const ADMISSION_COST = 10; // 万元 — must match gameState.ts constant
 
@@ -49,7 +50,7 @@ function buildMonthlySummary(state: GameState, energyGain: number): LogEntry {
 
   if (activeStudents.length > 0) {
     const lines = activeStudents
-      .map(s => `${s.name}（进度 ${Math.round(s.projectProgress)}%，好感 ${Math.round(s.favor)}，心情 ${Math.round(s.happiness)}）`)
+      .map(s => `${s.name}（好感 ${Math.round(s.favor)}，心情 ${Math.round(s.happiness)}）`)
       .join('；');
     narrative += `\n在读成员：${lines}。`;
   }
@@ -90,7 +91,7 @@ function buildEndingSummary(state: GameState): LogEntry {
 
   if (active.length > 0) {
     const lines = active
-      .map(s => `${s.name}（在读第${s.year}年，进度 ${Math.round(s.projectProgress)}%）`)
+      .map(s => `${s.name}（在读第${s.year}年）`)
       .join('\n');
     narrative += `尚在读的学生（${active.length}人）：\n${lines}\n\n`;
   }
@@ -200,7 +201,20 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   const graduatedStudents = students.map(checkGraduation);
-  const summaryEntry = buildMonthlySummary({ ...next, students: graduatedStudents }, energyGain);
+
+  // Stall projects for students who automatically graduated this month
+  const prevActiveIds = new Set(state.students.filter(s => s.status === 'active').map(s => s.id));
+  const newlyGone = graduatedStudents.filter(s => s.status !== 'active' && prevActiveIds.has(s.id));
+  let stateForProjects: GameState = { ...next, students: graduatedStudents };
+  for (const gone of newlyGone) {
+    stateForProjects = removeLeaderOnStudentLeave(stateForProjects, gone.id);
+  }
+
+  // Process monthly project progression (may modify lab, activeProjects, completedProjects)
+  const { newState: afterProjects, logEntries: projectLogEntries, completionEvents } =
+    processMonthlyProjects(stateForProjects);
+
+  const summaryEntry = buildMonthlySummary(afterProjects, energyGain);
 
   // Build the seen-event set (used for both daily pool and ending checks)
   const seenEventIds = new Set(
@@ -210,18 +224,14 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   );
 
   // ── Special ending check ─────────────────────────────────────────────────
-  const specialEndingId = checkSpecialEnding(
-    { ...next, students: graduatedStudents },
-    seenEventIds,
-  );
+  const specialEndingId = checkSpecialEnding(afterProjects, seenEventIds);
   if (specialEndingId) {
     // Skip daily events; prepend ending to queue (clear existing queue so it fires first)
     return {
-      ...next,
+      ...afterProjects,
       admissionState,
-      students: graduatedStudents,
       eventQueue: [{ id: specialEndingId }],
-      storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries],
+      storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
     };
   }
 
@@ -239,12 +249,16 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   if (next.time.year === 1 && next.time.month === 10 && !seenEventIds.has('first_semester_reality')) {
     tutorialEvents.push({ id: 'first_semester_reality' });
   }
+  // Project system tutorial: show a low-bar idea event so new players discover the project panel
+  if (next.time.year === 1 && next.time.month === 10 && !seenEventIds.has('idea_meeting_minutes_assistant')) {
+    tutorialEvents.push({ id: 'idea_meeting_minutes_assistant' });
+  }
   if (next.time.year === 1 && next.time.month === 11 && !seenEventIds.has('semester_one_checkpoint')) {
     tutorialEvents.push({ id: 'semester_one_checkpoint' });
   }
 
   // independent_meeting: 当在读人数首次达到3人时触发（任何时间）
-  const activeCount = graduatedStudents.filter(s => s.status === 'active').length;
+  const activeCount = afterProjects.students.filter(s => s.status === 'active').length;
   if (activeCount >= 3 && !seenEventIds.has('independent_meeting')) {
     tutorialEvents.push({ id: 'independent_meeting' });
   }
@@ -253,7 +267,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   // 新手期（第1年9–11月）不抽随机事件；有教程事件时也无需补随机
   const skipRandom = isEarlyGame || tutorialEvents.length > 0;
   const unseenPool = filterUnseen(monthlyEventPool, seenEventIds);
-  const triggerablePool = filterTriggerable(unseenPool, { ...next, students: graduatedStudents });
+  const triggerablePool = filterTriggerable(unseenPool, afterProjects);
   const newQueued: QueuedEvent | null =
     !skipRandom && Math.random() < 0.7 && triggerablePool.length > 0
       ? pickRandomQueuedEvent(triggerablePool)
@@ -264,7 +278,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // lab_birthday: Year 2 Month 8
   if (next.time.year === 2 && next.time.month === 8 && !seenEventIds.has('lab_birthday')) {
-    const firstStudent = graduatedStudents.find(s => s.status === 'active');
+    const firstStudent = afterProjects.students.find(s => s.status === 'active');
     if (firstStudent) {
       forcedEvents.push({ id: 'lab_birthday', studentId: firstStudent.id });
     }
@@ -272,7 +286,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // graduation_check series: injected in June based on enrolledAt + 3/4/5
   if (next.time.month === 6) {
-    for (const student of graduatedStudents.filter(s => s.status === 'active')) {
+    for (const student of afterProjects.students.filter(s => s.status === 'active')) {
       const ext = next.graduationExtensions[student.id] ?? 0;
       const base = student.enrolledAt + 3;
       if (ext === 0 && next.time.year === base && !next.graduationChecksSeen.includes(student.id)) {
@@ -287,6 +301,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // Tutorial events come before random pool events (but after any carry-over queue items)
   const newQueue: QueuedEvent[] = [
+    ...completionEvents,       // project completions fire first each month
     ...next.eventQueue,
     ...tutorialEvents,
     ...(newQueued ? [newQueued] : []),
@@ -300,11 +315,10 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   return {
-    ...next,
+    ...afterProjects,
     admissionState,
-    students: graduatedStudents,
     eventQueue: newQueue,
-    storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries],
+    storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
   };
 }
 
