@@ -2,8 +2,11 @@ import type { AdmissionState, LabStats } from '../types';
 import { allCandidates } from '../data/studentPool';
 import { traitDefs } from '../data/traits';
 
-const ADMISSION_COST = 10;
 const CONTINUE_ENERGY_COST = 20;
+
+function getAdmissionCost(year: number): number {
+  return year >= 3 ? 20 : 10;
+}
 
 interface Props {
   admissionState: AdmissionState;
@@ -50,14 +53,15 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
   }
 
   const candidateData = candidates.map(id => allCandidates.find(c => c.id === id)).filter(Boolean);
-  const canAfford = lab.funding >= ADMISSION_COST;
+  const admissionCost = getAdmissionCost(gameYear);
+  const canAfford = lab.funding >= admissionCost;
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true">
       <div className="modal admission-modal">
         <h2 className="modal__title">
           {round === 1 ? `第 ${gameYear} 年招生季` : `第 ${round} 轮招募`}
-          <span className="admission-modal__cost-hint">录取费：{ADMISSION_COST}万/人</span>
+          <span className="admission-modal__cost-hint">录取费：{admissionCost}万/人</span>
         </h2>
         <p className="modal__prompt">两份申请材料摆在面前，选一位加入实验室：</p>
 
@@ -87,7 +91,7 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
                   onClick={() => onAdmit(candidate.id)}
                   disabled={!canAfford}
                 >
-                  {canAfford ? `录取 ${candidate.name}` : '资金不足'}
+                  {canAfford ? `录取 ${candidate.name}` : `资金不足（需${admissionCost}万）`}
                 </button>
               </div>
             );

@@ -79,7 +79,8 @@ export type EventCondition =
   | { type: 'student'; studentId: string; stat: StudentStatKey; op: ConditionOp; value: number }
   | { type: 'anyStudent'; stat: StudentStatKey; op: ConditionOp; value: number }
   | { type: 'minStudentCount'; value: number }  // event only triggers when ≥ N students are active
-  | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number }; // year/month gate
+  | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number } // year/month gate
+  | { type: 'seenEvent'; eventId: string };     // event only triggers after this event has appeared in the log
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
@@ -95,8 +96,10 @@ export interface WeightedOutcome {
 export interface EventOption {
   id: string;
   text: string;
-  fundingCost?: number; // 万元; option disabled if lab.funding < fundingCost
-  energyCost?: number;  // option disabled if lab.energy < energyCost
+  fundingCost?: number;          // 万元; option disabled if lab.funding < fundingCost
+  energyCost?: number;           // option disabled if lab.energy < energyCost
+  requiredChoiceId?: string;     // option locked unless this option ID was chosen in a prior event
+  requireStudentActive?: string; // option hidden if this student ID is not currently active in the lab
   outcomes: WeightedOutcome[];
 }
 
@@ -162,6 +165,7 @@ export type GamePhase = 'playing' | 'won' | 'gameover';
 export interface GameState {
   phase: GamePhase;
   endingEventId: string | null;  // ID of the event that triggered the phase change (for ending modal)
+  chosenOptionIds: string[];     // all option IDs the player has ever selected (for requiredChoiceId gates)
   time: GameTime;
   students: Student[];
   studentPool: string[];             // IDs of candidates not yet admitted
@@ -178,6 +182,9 @@ export interface GameState {
   projectIdeas: string[];              // project IDs of unlocked but not-yet-started ideas
   activeProjects: ActiveProject[];
   completedProjects: CompletedProject[];
+  // Per-student record of which conditional happiness-events have fired and when.
+  // Enforces one-time-per-student rule and 2-month cooldown between events.
+  studentConditionalLog: Record<string, Array<{ eventId: string; year: number; month: number }>>;
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────

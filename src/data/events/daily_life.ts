@@ -33,7 +33,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '新咖啡机当天下午到货，还自带磨豆功能。有人第一时间拆箱，拍了张照发到群里，配文"重生"。整个实验室的气氛在第一杯咖啡倒出来的那一刻，可见地松动了——甚至有人开始哼歌。旧机器上的"维修中"纸条，没有人去揭。它在那里又待了两个星期，像一座纪念碑。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: 12 },
+              { type: 'allStudents', stat: 'happiness', delta: 10 },
               { type: 'lab', stat: 'funding', delta: -1 },
               { type: 'allStudents', stat: 'favor', delta: 4 },
             ],
@@ -78,7 +78,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你宣布本周远程，原因在群里写的是"设备调整期"，没有人追问。大家在家工作，进度不减，有人甚至说"在家反而写代码更快"。你决定不去深究这句话的含义。咖啡机的维修纸条在空荡的实验室里独自贴了五天，等大家回来的时候还在，像什么都没发生。',
+            narrative: '你宣布本周远程，原因在群里写的是"设备调整期"。大家在家工作，进度不减，有人甚至说"在家反而写代码更快"。你决定不去深究这句话的含义。咖啡机的维修纸条在空荡的实验室里独自贴了五天，等大家回来的时候还在，像什么都没发生。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -638,8 +638,8 @@ export const labLifeEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你批准了这只猫的"驻组"申请，买了猫粮、猫砂盆和一个小猫厕所。{studentName}为它建了一个档案，包含照片、到来日期，以及那条"vbbbbbbbbnnn"作为第一份学术贡献。这只猫成为了实验室迄今为止唯一一个不需要写年度总结的成员，实验室群的活跃度提升了一个量级，日常话题终于有了非科研的补充选项。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: 15 },
-              { type: 'allStudents', stat: 'favor', delta: 5 },
+              { type: 'allStudents', stat: 'happiness', delta: 10 },
+              { type: 'allStudents', stat: 'favor', delta: 4 },
               { type: 'lab', stat: 'funding', delta: -1 },
             ],
           },
@@ -663,8 +663,8 @@ export const labLifeEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你没有明确表态，{studentName}也没有再申请什么。这只猫每天来，每天走，有时候在角落睡到傍晚。它的那条Slack消息被截图，贴在了白板上，标注了"实验室最高互动量发言"。有人出去买咖啡的时候会顺手带猫罐头，没有人统计过花了多少钱，也没有人问。这种状态维持了整整一个学期，所有人都满意，包括那只猫。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: 10 },
-              { type: 'randomStudent', stat: 'favor', delta: 6 },
+              { type: 'allStudents', stat: 'happiness', delta: 8 },
+              { type: 'randomStudent', stat: 'favor', delta: 4 },
             ],
           },
         ],
@@ -756,9 +756,9 @@ export const labLifeEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你给系主任写了一封邮件，措辞礼貌但含义清晰：打印机故障，时间紧迫，请问数字化提交是否可行。系主任回复说"可以，这次例外"。你把这条回复截图，发到了群里。有人说"还能这样"，有人说"这是今年最意外的收获"，有人说"为什么我们不一开始就这么做"。表格全部电子填写，签名用了PDF电子签，一个下午完成，效率比历年高了三倍。这件事让你重新评估了所有"必须纸质"的流程。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: 12 },
-              { type: 'allStudents', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'energy', delta: 8 },
+              { type: 'allStudents', stat: 'happiness', delta: 6 },
+              { type: 'allStudents', stat: 'favor', delta: 3 },
+              { type: 'lab', stat: 'energy', delta: 5 },
             ],
           },
           {

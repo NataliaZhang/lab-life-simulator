@@ -170,8 +170,8 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。他愣了两秒，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
           effects: [
-            { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
-            { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 15 },
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 10 },
             { type: 'lab', stat: 'reputation', delta: 4 },
           ],
         }],
@@ -223,11 +223,12 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '开源出去，积累声望',
         outcomes: [{
           weight: 1,
-          narrative: '你们整理了代码、写了README、录了一个三分钟的demo视频，发到了GitHub。两周内拿到了200个star，有人在讨论区说"这个实现比我见过的同类项目都干净"。顾眠眠把那条评论截了图，设成了屏保——她否认了，但你亲眼看见的。',
+          narrative: '你们整理了代码、写了README、录了一个三分钟的demo视频，发到了GitHub。两周内拿到了200个star，有人在讨论区说"这个实现比我见过的同类项目都干净"。顾眠眠把那条评论截了图，设成了屏保——她否认了，但你亲眼看见的。随后一家企业发邮件问能否商业授权，最后谈成了一笔小额技术许可费。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 6 },
-            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 12 },
-            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 10 },
+            { type: 'lab', stat: 'reputation', delta: 5 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 10 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 8 },
+            { type: 'lab', stat: 'funding', delta: 2 },
           ],
         }],
       },
@@ -239,8 +240,8 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
           narrative: '你把框架推给了全组，组里训练速度明显提升。顾眠眠被动成为了技术支持，每天被人拉着问配置问题，一开始有点烦，后来发现自己解释起来越来越流畅——她无意间发现了自己有讲明白复杂事物的天赋，这件事让她在心里偷乐了好几天，表面上还是一副"这不是常识吗"的神情。',
           effects: [
             { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
-            { type: 'student', studentId: 'gu_mianmian', stat: 'skills.social', delta: 6 },
-            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 8 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'skills.social', delta: 4 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 6 },
           ],
         }],
       },

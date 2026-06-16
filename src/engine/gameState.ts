@@ -18,7 +18,10 @@ import { getEvent, pickOutcome } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
 
-const ADMISSION_COST = 10;       // 万元 per student
+// Admission cost rises in year 3+ when PhD stipends doubled.
+function getAdmissionCost(year: number): number {
+  return year >= 3 ? 20 : 10;
+}
 const CONTINUE_ENERGY_COST = 20; // energy cost to get a second round of candidates
 
 // ─── Admission helpers ─────────────────────────────────────────────────────
@@ -85,6 +88,8 @@ export function createInitialState(): GameState {
     projectIdeas: [],
     activeProjects: [],
     completedProjects: [],
+    chosenOptionIds: [],
+    studentConditionalLog: {},
   };
 }
 
@@ -138,7 +143,7 @@ function applyLabEffect(lab: LabStats, stat: LabStatKey, delta: number): LabStat
 function applyStudentStat(student: Student, stat: StudentStatKey, delta: number): Student {
   switch (stat) {
     case 'favor':
-      return { ...student, favor: clampPos(student.favor + delta) };
+      return { ...student, favor: clamp100(student.favor + delta) };
     case 'happiness':
       return { ...student, happiness: clampPos(student.happiness + delta) };
     case 'projectProgress':
@@ -459,6 +464,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeBoundStudentId: null,
         activeBoundStudent2Id: null,
         graduationExtensions,
+        chosenOptionIds: [...state.chosenOptionIds, action.optionId],
         storyLog: [...state.storyLog, logEntry],
       };
     }
@@ -472,14 +478,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'ADMIT_STUDENT': {
       const { candidateId } = action;
       if (!state.admissionState?.candidates) return state;
-      if (state.lab.funding < ADMISSION_COST) return state;
+      const admissionCost = getAdmissionCost(state.time.year);
+      if (state.lab.funding < admissionCost) return state;
 
       const newStudent = buildStudent(candidateId, state.time);
       if (!newStudent) return state;
 
       const candidate = allCandidates.find(c => c.id === candidateId)!;
       const newPool = state.studentPool.filter(id => id !== candidateId);
-      const newFunding = state.lab.funding - ADMISSION_COST;
+      const newFunding = state.lab.funding - admissionCost;
 
       // After admission: offer a second round only (round 1 → round 2, no further)
       const currentRound = state.admissionState.round;
@@ -488,13 +495,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         && state.lab.energy >= CONTINUE_ENERGY_COST
         && newPool.length >= 2;
 
+      const isFirstStudent = state.students.filter(s => s.status === 'active').length === 0;
+      const admitNarrative = isFirstStudent
+        ? `${candidate.name}正式入组。${candidate.tagline}\n\n💡 点击右上角的"成员"可以随时查看实验室所有成员的状态。`
+        : `${candidate.name}正式入组。${candidate.tagline}`;
+
       const logEntry: LogEntry = {
         id: `admit_${candidateId}_${Date.now()}`,
         time: { ...state.time },
         type: 'system',
         title: `${candidate.name} 加入实验室`,
-        narrative: `${candidate.name}正式入组。${candidate.tagline}`,
-        statChanges: [{ label: '资金', delta: -ADMISSION_COST }],
+        narrative: admitNarrative,
+        statChanges: [{ label: '资金', delta: -admissionCost }],
       };
 
       // Immediately queue the student's first-meeting event, bound to this student
@@ -540,7 +552,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'LOAD_SAVE': {
-      return action.state;
+      // Migrate older saves that lack newer GameState fields.
+      return {
+        ...action.state,
+        studentConditionalLog: action.state.studentConditionalLog ?? {},
+      };
     }
 
     case 'NEW_GAME': {

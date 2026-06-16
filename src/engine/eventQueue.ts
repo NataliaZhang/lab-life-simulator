@@ -41,29 +41,51 @@ function getStudentStatValue(
   }
 }
 
+// Extract anyStudent conditions from a condition list.
+function getAnyStudentConds(
+  conditions: EventCondition[],
+): Extract<EventCondition, { type: 'anyStudent' }>[] {
+  return conditions.filter(
+    (c): c is Extract<EventCondition, { type: 'anyStudent' }> => c.type === 'anyStudent',
+  );
+}
+
 export function checkConditions(conditions: EventCondition[], state: GameState): boolean {
-  return conditions.every(cond => {
-    if (cond.type === 'lab') {
-      return compare(state.lab[cond.stat], cond.op, cond.value);
-    }
-    if (cond.type === 'student') {
-      const s = state.students.find(st => st.id === cond.studentId && st.status === 'active');
-      if (!s) return false;
-      return compare(getStudentStatValue(s, cond.stat), cond.op, cond.value);
-    }
-    if (cond.type === 'anyStudent') {
-      return state.students.some(
-        s => s.status === 'active' && compare(getStudentStatValue(s, cond.stat), cond.op, cond.value),
-      );
-    }
-    if (cond.type === 'minStudentCount') {
-      return state.students.filter(s => s.status === 'active').length >= cond.value;
-    }
-    if (cond.type === 'time') {
-      return compare(state.time[cond.field], cond.op, cond.value);
-    }
-    return true;
-  });
+  // Multiple anyStudent conditions must ALL be satisfied by the SAME active student.
+  const anyStudentConds = getAnyStudentConds(conditions);
+  if (anyStudentConds.length > 0) {
+    const active = state.students.filter(s => s.status === 'active');
+    const hasMatch = active.some(s =>
+      anyStudentConds.every(c => compare(getStudentStatValue(s, c.stat), c.op, c.value)),
+    );
+    if (!hasMatch) return false;
+  }
+
+  // Check all non-anyStudent conditions individually.
+  return conditions
+    .filter(c => c.type !== 'anyStudent')
+    .every(cond => {
+      if (cond.type === 'lab') {
+        return compare(state.lab[cond.stat], cond.op, cond.value);
+      }
+      if (cond.type === 'student') {
+        const s = state.students.find(st => st.id === cond.studentId && st.status === 'active');
+        if (!s) return false;
+        return compare(getStudentStatValue(s, cond.stat), cond.op, cond.value);
+      }
+      if (cond.type === 'minStudentCount') {
+        return state.students.filter(s => s.status === 'active').length >= cond.value;
+      }
+      if (cond.type === 'time') {
+        return compare(state.time[cond.field], cond.op, cond.value);
+      }
+      if (cond.type === 'seenEvent') {
+        return state.storyLog.some(
+          e => (e.type === 'event' || e.type === 'event-intro') && e.eventId === cond.eventId,
+        );
+      }
+      return true;
+    });
 }
 
 // ─── Outcome picking ───────────────────────────────────────────────────────
@@ -104,14 +126,16 @@ function findTriggeringStudents(
 
   let studentId: string | undefined;
 
-  // Find primary student from anyStudent conditions
-  for (const cond of conditions) {
-    if (cond.type !== 'anyStudent') continue;
-    const eligible = active.filter(s => compare(getStudentStatValue(s, cond.stat), cond.op, cond.value));
-    if (eligible.length === 0) continue;
-    const shuffled = [...eligible].sort(() => Math.random() - 0.5);
-    studentId = shuffled[0]?.id;
-    break;
+  // Find a student satisfying ALL anyStudent conditions simultaneously.
+  const anyStudentConds = getAnyStudentConds(conditions);
+  if (anyStudentConds.length > 0) {
+    const eligible = active.filter(s =>
+      anyStudentConds.every(c => compare(getStudentStatValue(s, c.stat), c.op, c.value)),
+    );
+    if (eligible.length > 0) {
+      const shuffled = [...eligible].sort(() => Math.random() - 0.5);
+      studentId = shuffled[0]?.id;
+    }
   }
 
   // If no anyStudent condition but we need a primary, pick at random

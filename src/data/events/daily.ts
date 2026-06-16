@@ -93,7 +93,7 @@ export const dailyEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'randomStudent', stat: 'favor', delta: 12 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
-            { type: 'randomStudent', stat: 'happiness', delta: 10 },
+            { type: 'randomStudent', stat: 'happiness', delta: 8 },
           ],
         }],
       },
@@ -127,8 +127,8 @@ export const dailyEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你问了一下timeline，发现下个节点还有三周。{studentName}愣了一秒，然后发来一个"……"，随后是："那我去睡了"。你不知道对方是解脱还是尴尬，但第二天效率确实高了很多。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 12 },
-            { type: 'randomStudent', stat: 'favor', delta: 5 },
+            { type: 'randomStudent', stat: 'happiness', delta: 6 },
+            { type: 'randomStudent', stat: 'favor', delta: 2 },
           ],
         }],
       },
@@ -345,9 +345,9 @@ export const dailyEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '果然——有几条样本含有无穷大的值，安静地藏在数据集里，一直等着这个时机发挥作用。清洗之后，{studentName}的训练曲线优雅得像教科书示例。这种bug最难找，但每次找到都有一种侦探破案的满足感。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'happiness', delta: 6 },
             { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
-            { type: 'randomStudent', stat: 'projectProgress', delta: 4 },
+            { type: 'randomStudent', stat: 'projectProgress', delta: 2 },
           ],
         }],
       },
@@ -386,8 +386,8 @@ export const dailyEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。',
           effects: [
-            { type: 'randomStudent', stat: 'favor', delta: 8 },
-            { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
+            { type: 'randomStudent', stat: 'favor', delta: 5 },
+            { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
             { type: 'lab', stat: 'reputation', delta: 1 },
           ],
         }],

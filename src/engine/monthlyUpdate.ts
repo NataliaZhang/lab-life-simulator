@@ -1,11 +1,52 @@
-import type { GameState, LogEntry, Student, AdmissionState, QueuedEvent } from '../types';
+import type { GameState, LogEntry, Student, AdmissionState, QueuedEvent, EventCondition, ConditionOp, StudentStatKey } from '../types';
 import { formatTime } from '../types';
-import { monthlyEventPool, idleEventIds, specialEndingIds, timeEndingIds } from '../data/events';
+import { events, monthlyEventPool, conditionalStudentEventPool, idleEventIds, specialEndingIds, timeEndingIds } from '../data/events';
 import { filterUnseen, filterTriggerable, pickRandomQueuedEvent } from './eventQueue';
 import { initialPoolIds } from '../data/studentPool';
 import { processMonthlyProjects, removeLeaderOnStudentLeave } from './projectEngine';
 
-const ADMISSION_COST = 10; // 万元 — must match gameState.ts constant
+// Admission cost rises to 20万 in year 3+ when PhD stipends doubled.
+function getAdmissionCost(year: number): number {
+  return year >= 3 ? 20 : 10;
+}
+
+// ── Conditional event helpers ─────────────────────────────────────────────
+
+function compareOp(val: number, op: ConditionOp, threshold: number): boolean {
+  switch (op) {
+    case '>=': return val >= threshold;
+    case '<=': return val <= threshold;
+    case '>':  return val > threshold;
+    case '<':  return val < threshold;
+    case '==': return val === threshold;
+  }
+}
+
+function getStudentStat(student: Student, stat: StudentStatKey): number {
+  switch (stat) {
+    case 'favor':               return student.favor;
+    case 'happiness':           return student.happiness;
+    case 'projectProgress':     return student.projectProgress;
+    case 'skills.theory':       return student.skills.theory;
+    case 'skills.engineering':  return student.skills.engineering;
+    case 'skills.social':       return student.skills.social;
+  }
+}
+
+// Returns true if this student satisfies ALL anyStudent conditions in the list.
+function studentMatchesConditions(student: Student, conditions: EventCondition[]): boolean {
+  return conditions
+    .filter((c): c is Extract<EventCondition, { type: 'anyStudent' }> => c.type === 'anyStudent')
+    .every(c => compareOp(getStudentStat(student, c.stat), c.op, c.value));
+}
+
+// Calendar distance in whole months from `from` to `to` (can be negative).
+function monthsElapsed(
+  from: { year: number; month: number },
+  to: { year: number; month: number },
+): number {
+  return (to.year - from.year) * 12 + (to.month - from.month);
+}
 
 const GAME_END_YEAR = 6;
 const GAME_END_MONTH = 6;
@@ -113,11 +154,19 @@ function buildEndingSummary(state: GameState): LogEntry {
 }
 
 // Selects which time-exhausted ending to trigger based on final state.
+// Priority order matches the comment in endings.ts.
 function pickTimeEnding(state: GameState): string {
   const graduated = state.students.filter(s => s.status === 'graduated').length;
   const rep = state.lab.reputation;
-  if (rep >= 50 && graduated >= 1) return 'ending_time_great';
-  if (rep >= 25 || graduated >= 1) return 'ending_time_steady';
+  const funding = state.lab.funding;
+  const completed = state.completedProjects.length;
+
+  if (rep > 150 && graduated > 1)  return 'ending_time_famous';
+  if (funding > 100 && rep < 100)  return 'ending_time_wealthy';
+  if (rep > 100 && graduated > 1)  return 'ending_time_great';
+  if (rep > 75 && graduated >= 1)  return 'ending_time_steady';
+  if (rep < 50)                    return 'ending_be_rep_low';
+  if (completed < 3)               return 'ending_be_proj_insufficient';
   return 'ending_time_struggle';
 }
 
@@ -185,8 +234,9 @@ export function applyMonthlyUpdate(state: GameState): GameState {
       ? next.studentPool
       : [...initialPoolIds].filter(id => !next.students.some(s => s.id === id));
     const candidates = drawTwoFromPool(availablePool);
+    const admissionCost = getAdmissionCost(next.time.year);
     if (candidates) {
-      if (next.lab.funding >= ADMISSION_COST) {
+      if (next.lab.funding >= admissionCost) {
         admissionState = { candidates, round: 1 };
       } else {
         extraLogEntries.push({
@@ -194,7 +244,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
           time: { ...next.time },
           type: 'system',
           title: '招生季',
-          narrative: '九月招生季到来，但实验室账面资金不足10万，今年无法招募新生了。等经费充裕了再说吧。',
+          narrative: `九月招生季到来，但实验室账面资金不足${admissionCost}万，今年无法招募新生了。等经费充裕了再说吧。`,
         });
       }
     }
@@ -276,6 +326,42 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   // ── Timed mainline events ────────────────────────────────────────────────
   const forcedEvents: QueuedEvent[] = [];
 
+  // gpu_envy: Year 2 Month 1 — only if player never bought a server in startup_grant
+  if (next.time.year === 2 && next.time.month === 1 && !seenEventIds.has('gpu_envy')
+      && !next.chosenOptionIds.includes('buy_server')) {
+    const anyStudent = afterProjects.students.find(s => s.status === 'active');
+    if (anyStudent) {
+      forcedEvents.push({ id: 'gpu_envy', studentId: anyStudent.id });
+    }
+  }
+
+  // news_phd_salary_double: Year 3 Month 6 — PhD stipend doubling notice (also triggers cost rise)
+  if (next.time.year === 3 && next.time.month === 6 && !seenEventIds.has('news_phd_salary_double')) {
+    forcedEvents.push({ id: 'news_phd_salary_double' });
+  }
+
+  // new_year_gift: every January from year 2 onward, fires once per calendar year
+  if (next.time.year >= 2 && next.time.month === 1) {
+    const seenThisYear = state.storyLog.some(
+      e => e.eventId === 'new_year_gift' && e.time.year === next.time.year,
+    );
+    const alreadyQueued = next.eventQueue.some(e => e.id === 'new_year_gift');
+    if (!seenThisYear && !alreadyQueued) {
+      forcedEvents.push({ id: 'new_year_gift' });
+    }
+  }
+
+  // funding_crisis_grant: when lab funding < 5万, year >= 2, at most once every 6 months
+  if (next.time.year >= 2 && next.lab.funding < 5) {
+    const grantLogs = state.storyLog.filter(e => e.eventId === 'funding_crisis_grant');
+    const lastGrant = grantLogs[grantLogs.length - 1];
+    const monthsSince = lastGrant ? monthsElapsed(lastGrant.time, next.time) : 999;
+    const alreadyQueued = next.eventQueue.some(e => e.id === 'funding_crisis_grant');
+    if (monthsSince >= 6 && !alreadyQueued) {
+      forcedEvents.push({ id: 'funding_crisis_grant' });
+    }
+  }
+
   // lab_birthday: Year 2 Month 8
   if (next.time.year === 2 && next.time.month === 8 && !seenEventIds.has('lab_birthday')) {
     const firstStudent = afterProjects.students.find(s => s.status === 'active');
@@ -299,6 +385,93 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
+  // Half-favor special events: one per student, triggers when favor first reaches 50
+  for (const student of afterProjects.students.filter(s => s.status === 'active')) {
+    if (student.favor >= 50) {
+      const eventId = `half_favor_${student.id}`;
+      const alreadyQueued = next.eventQueue.some(e => e.id === eventId);
+      if (!seenEventIds.has(eventId) && !alreadyQueued && events[eventId]) {
+        forcedEvents.push({ id: eventId, studentId: student.id });
+      }
+    }
+  }
+
+  // Max-favor special events: one per student, triggers when favor first reaches 100
+  for (const student of afterProjects.students.filter(s => s.status === 'active')) {
+    if (student.favor >= 100) {
+      const eventId = `max_favor_${student.id}`;
+      const alreadyQueued = next.eventQueue.some(e => e.id === eventId);
+      if (!seenEventIds.has(eventId) && !alreadyQueued && events[eventId]) {
+        forcedEvents.push({ id: eventId, studentId: student.id });
+      }
+    }
+  }
+
+  // ── Per-student conditional events (happiness-triggered) ─────────────────
+  // Rules:
+  //   1. If happiness <= 0 → forced departure, skip all other conditional events.
+  //   2. Each event in conditionalStudentEventPool fires at most once per student.
+  //   3. At least 2 months must pass between any two conditional events for the same student.
+  //   4. At most one conditional event queued per month across all students.
+
+  const CONDITIONAL_COOLDOWN = 2; // months
+  let updatedConditionalLog = { ...next.studentConditionalLog };
+
+  // Pass 1: happiness = 0 → immediate forced departure (highest priority).
+  const crisisStudentIds = new Set<string>();
+  for (const student of afterProjects.students.filter(s => s.status === 'active')) {
+    if (student.happiness <= 0) {
+      crisisStudentIds.add(student.id);
+      const alreadyQueued = next.eventQueue.some(
+        e => e.id === 'student_crisis_departure' && e.studentId === student.id,
+      );
+      if (!alreadyQueued) {
+        forcedEvents.push({ id: 'student_crisis_departure', studentId: student.id });
+      }
+    }
+  }
+
+  // Pass 2: pick at most one conditional event for one non-crisis student.
+  const eligibleStudents = afterProjects.students
+    .filter(s => s.status === 'active' && !crisisStudentIds.has(s.id))
+    .sort(() => Math.random() - 0.5); // randomise priority
+
+  for (const student of eligibleStudents) {
+    const history = updatedConditionalLog[student.id] ?? [];
+
+    // Cooldown: skip if the last conditional event for this student was < 2 months ago.
+    if (history.length > 0) {
+      const last = history[history.length - 1]!;
+      if (monthsElapsed(last, next.time) < CONDITIONAL_COOLDOWN) continue;
+    }
+
+    // Find events this student hasn't seen yet and currently qualifies for.
+    const firedIds = new Set(history.map(h => h.eventId));
+    const eligible = conditionalStudentEventPool.filter(eventId => {
+      if (firedIds.has(eventId)) return false;
+      const event = events[eventId];
+      if (!event?.triggerConditions) return false;
+      return studentMatchesConditions(student, event.triggerConditions);
+    });
+
+    if (eligible.length === 0) continue;
+
+    // Pick one event at random.
+    const chosen = eligible[Math.floor(Math.random() * eligible.length)]!;
+    forcedEvents.push({ id: chosen, studentId: student.id });
+
+    // Record so we can enforce the one-time + cooldown rules in future months.
+    updatedConditionalLog = {
+      ...updatedConditionalLog,
+      [student.id]: [
+        ...history,
+        { eventId: chosen, year: next.time.year, month: next.time.month },
+      ],
+    };
+
+    break; // one conditional event per month is enough
+  }
+
   // Tutorial events come before random pool events (but after any carry-over queue items)
   const newQueue: QueuedEvent[] = [
     ...completionEvents,       // project completions fire first each month
@@ -318,6 +491,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     ...afterProjects,
     admissionState,
     eventQueue: newQueue,
+    studentConditionalLog: updatedConditionalLog,
     storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
   };
 }

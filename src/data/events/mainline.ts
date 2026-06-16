@@ -115,7 +115,10 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '你在凌晨十一点用 PowerPoint 设计了一张招生海报，裁切比例错了三次，字体换了五种，最终选了"微软雅黑加粗"。发出去之后，第二天早上醒来，邮箱里已经有十七封询问邮件。其中两封是问实验室有没有班车的。',
-          effects: [{ type: 'lab', stat: 'reputation', delta: 2 }],
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 2 },
+            { type: 'lab', stat: 'energy', delta: -10 },
+          ],
         }],
       },
       {
@@ -124,7 +127,10 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '"就占用大家三十秒。" 你在张教授讲课途中举手示意。三十秒变成了五分钟。张教授全程保持着一个礼貌但含义明确的微笑。但课后有三位同学过来加了你微信，其中一个说"老师你讲得比张老师好玩"。',
-          effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'lab', stat: 'energy', delta: -5 },
+          ],
         }],
       },
       {
@@ -133,20 +139,80 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '你用开源模板搭了一个官网，个人照片用的是三年前参会时拍的，西装是借的。Publications 页面目前只有两篇，但排版非常漂亮。一周后，有人发邮件说"我是通过谷歌搜到您实验室的"。你感到了一种奇特的骄傲。',
-          effects: [{ type: 'lab', stat: 'reputation', delta: 4 }],
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 4 },
+            { type: 'lab', stat: 'energy', delta: -15 },
+          ],
         }],
       },
       {
         id: 'honest_pitch',
         text: '实话实说：来我组，有独立 GPU 用',
+        requiredChoiceId: 'buy_server',
         outcomes: [{
           weight: 1,
           narrative: '你在群里发了一条消息："本人新晋助理教授，方向 XXX，实验室刚采购了服务器，学生可独立使用，欢迎联系。" 没有废话，没有修饰。这条消息被转发了九次。事实证明，在 CS 领域，"有 GPU"的吸引力远大于任何学术愿景。',
-          effects: [{ type: 'lab', stat: 'reputation', delta: 5 }],
+          effects: [{ type: 'lab', stat: 'reputation', delta: 6 }],
         }],
       },
     ],
     tags: ['opening'],
+  },
+
+  // ── 第2年1月固定事件（仅限未买服务器的路线，monthlyUpdate 强制注入）─────────────
+
+  // 安全：由 monthlyUpdate 注入时绑定了 studentId，{studentName} 可安全使用
+  gpu_envy: {
+    id: 'gpu_envy',
+    title: '隔壁的 GPU',
+    description: [
+      '{studentName}进来的时候表情有点复杂——像是有话想说，又觉得不好意思说的那种。',
+      '"老师，我问你个事……" 停顿了三秒。"张老师组最近买了一批新服务器，八张A100，他们的同学昨天在朋友圈发了个跑实验的截图。"\n\n你意识到这不是一个汇报，是一个前情提要。',
+      '"我之前跑一个实验要等三天，他们两个小时就出结果了。"\n\n又是一段沉默。然后是那句你其实已经预感到的话：\n\n"老师，我们组能买台服务器吗？"',
+    ],
+    prompt: '你准备怎么回答？',
+    options: [
+      {
+        id: 'buy_server_late',
+        text: '大手一挥：买！',
+        fundingCost: 20,
+        outcomes: [{
+          weight: 1,
+          narrative: '你批了采购申请。看见入库确认单的{studentName}大喜过望，抬起头说"谢谢老师"。服务器到货的那天，{studentName}中午都没出去吃饭，一直在机房调环境。你偷偷看了一眼实验室的GPU使用率：满载。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: 2 },
+            { type: 'randomStudent', stat: 'happiness', delta: 8 },
+            { type: 'randomStudent', stat: 'skills.engineering', delta: 4 },
+          ],
+        }],
+      },
+      {
+        id: 'rent_server_instead',
+        text: '先租云服务器凑合用',
+        fundingCost: 5,
+        outcomes: [{
+          weight: 1,
+          narrative: '你给{studentName}开通了一个云服务器账号，月度额度够用。{studentName}认真道了谢，但不知为何你从对方的语气里听出一丝失望——毕竟账号和机器不是一回事，就像"可以用"和"自己有"不是一回事。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: -2 },
+            { type: 'randomStudent', stat: 'happiness', delta: -2 },
+          ],
+        }],
+      },
+      {
+        id: 'refuse_gpu',
+        text: '现在经费紧张，暂时不行',
+        outcomes: [{
+          weight: 1,
+          narrative: '你解释了经费状况。{studentName}点头，说"好的老师我知道了"，然后回去了。你说不清楚那个"知道了"里面有多少理解，有多少失望，以及有多少已经开始悄悄浏览其他组动态的成分。',
+          effects: [
+            { type: 'randomStudent', stat: 'favor', delta: -5 },
+            { type: 'randomStudent', stat: 'happiness', delta: -10 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
   },
 
   // ── 新手期固定事件（由 monthlyUpdate 按月强制注入，不放入 monthlyEventPool）─────
@@ -173,7 +239,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           narrative: '就这么定了。从那以后每周四下午，你带着学生出现在张老师那间更大的会议室里，和他的三个学生一起汇报进展、互相挑剔实验设计，顺手拼桌叫外卖。"组里大家"从此真的有了实际人数——只是其中大部分人是借来的。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
-            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: 10 },
           ],
         }],
       },
@@ -182,9 +248,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '谢了，我们自己开',
         outcomes: [{
           weight: 1,
-          narrative: '你婉拒了张老师，决定保持独立。接下来两周的周四下午，你和学生准时坐进会议室，开足一小时，中间有几次陷入难以定性的沉默——分不清是深度思考还是实在没话讲。\n\n第三周，学生侧着脑袋问："张老师那边的同学说可以带我们过去旁听，要去看看吗？"你想了大概三秒钟，说好。\n\n从那以后你们就这么并入了联合组会。张老师在门口看见你，只说了一句："早来就好了。"然后递给你一杯茶，头也不回地走进去了。',
+          narrative: '你婉拒了张老师，决定保持独立。接下来两周的周四下午，你和学生准时坐进会议室，开足一小时，中间有几次陷入难以定性的沉默——分不清是深度思考还是实在没话讲。\n\n第三周，学生侧着脑袋问："张老师那边的同学说可以带我们过去旁听，要去看看吗？"你说好。\n\n从那以后你们就这么并入了联合组会。张老师在门口看见你，只说了一句："早来就好了。"然后递给你一杯茶，头也不回地走进去了。',
           effects: [
-            { type: 'lab', stat: 'energy', delta: -5 },
+            { type: 'lab', stat: 'energy', delta: -10 },
             { type: 'lab', stat: 'reputation', delta: 1 },
           ],
         }],
@@ -207,7 +273,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '先把行政清完，再专心科研',
         outcomes: [{
           weight: 1,
-          narrative: '你花了整整一个下午处理邮件、填表、回复"已阅"。清完之后终于可以打开代码库了——然后看了一眼时钟，六点整。明天再说。至少邮件读数归零了，这也是一种成就。',
+          narrative: '你花了整整一个下午处理邮件、填表、回复"已阅"。清完之后终于可以打开代码库了——然后看了一眼时钟，六点整。明天再说。至少把邮箱里那个烦人的小红点清掉了。',
           effects: [
             { type: 'lab', stat: 'energy', delta: -10 },
             { type: 'lab', stat: 'reputation', delta: 1 },
@@ -222,8 +288,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
           narrative: '你把一个委员会会议转给了学生，说"帮我去听一下，回来汇报重点"。对方回了个"收到"，语气里有一种微妙的新鲜感——大概是第一次意识到，导师也需要被人替下场。半小时后，你多推进了三个实验步骤。',
           effects: [
             { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'lab', stat: 'reputation', delta: -2 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
-            { type: 'randomStudent', stat: 'favor', delta: 4 },
+            { type: 'randomStudent', stat: 'favor', delta: -2 },
           ],
         }],
       },
@@ -248,8 +315,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你发了一句"辛苦了，这学期大家表现得很好"。五秒后收到回复——不是文字，是一张当天刚跑完的实验截图，日志全绿。你猜这不完全是巧合。',
           effects: [
-            { type: 'allStudents', stat: 'happiness', delta: 8 },
-            { type: 'allStudents', stat: 'favor', delta: 5 },
+            { type: 'allStudents', stat: 'happiness', delta: 5 },
+            { type: 'allStudents', stat: 'favor', delta: 3 },
           ],
         }],
       },
@@ -260,8 +327,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你发了一句"明天不用来实验室"。对方愣了大概两秒，回了个"真的？"。真的。学生快乐有时候就这么简单；而你自己那天买了杯奶茶，在校园里溜达了一圈，重新感受了一下这个地方——原来除了实验室走廊，学校还挺大的。',
           effects: [
-            { type: 'allStudents', stat: 'happiness', delta: 12 },
-            { type: 'lab', stat: 'energy', delta: 8 },
+            { type: 'allStudents', stat: 'happiness', delta: 8 },
+            { type: 'lab', stat: 'energy', delta: 5 },
           ],
         }],
       },
@@ -461,9 +528,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你发消息告诉{studentName}这次先撤。过了十秒，回了"好的，那我把代码整理一下"。这句话在你意料之外——你本来以为会有一段艰难的说服过程——但{studentName}好像真的松了口气，"整理代码"在这里大概是一种说法，意思是终于可以睡觉了。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 15 },
-            { type: 'randomStudent', stat: 'favor', delta: 3 },
-            { type: 'lab', stat: 'reputation', delta: -1 },
+            { type: 'randomStudent', stat: 'happiness', delta: 8 },
+            { type: 'randomStudent', stat: 'favor', delta: 2 },
+            { type: 'lab', stat: 'reputation', delta: -2 },
           ],
         }],
       },
@@ -490,8 +557,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
             narrative: '中了！{studentName}第一时间截图发朋友圈，还发了一串烟花表情包给你。你请{studentName}吃了顿好的，两人聊到很晚。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
-              { type: 'randomStudent', stat: 'happiness', delta: 18 },
-              { type: 'randomStudent', stat: 'favor', delta: 8 },
+              { type: 'randomStudent', stat: 'happiness', delta: 12 },
+              { type: 'randomStudent', stat: 'favor', delta: 6 },
             ],
           },
           {

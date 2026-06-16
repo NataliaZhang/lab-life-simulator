@@ -30,6 +30,10 @@ import { moWenxuanEvents } from './students/mo_wenxuan';
 import { xieZhiweiEvents } from './students/xie_zhiwei';
 import { projectIdeaEvents } from './project_ideas';
 import { projectCompletionEvents } from './project_completions';
+import { maxFavorEvents } from './max_favor';
+import { halfFavorEvents } from './half_favor';
+import { newYearEvents } from './new_year';
+import { fundingEvents } from './funding';
 
 import type { GameEvent } from '../../types';
 
@@ -62,6 +66,10 @@ export const events: Record<string, GameEvent> = {
   ...xieZhiweiEvents,
   ...projectIdeaEvents,
   ...projectCompletionEvents,
+  ...maxFavorEvents,
+  ...halfFavorEvents,
+  ...newYearEvents,
+  ...fundingEvents,
 };
 
 // ── 开局序列（固定顺序，不随机）─────────────────────────────────────────────
@@ -107,10 +115,8 @@ export const monthlyEventPool: string[] = [
   'lin_theory_breakthrough',
   'gu_engineering_milestone',
 
-  // 属性触发（triggerConditions 控制时机）
-  'student_sick',
-  'favor_complaint',
-  'transfer_risk',
+  // 属性触发（实验室属性，triggerConditions 控制时机）
+  // 注：学生心情低落的六档事件已移至 conditionalStudentEventPool，由 monthlyUpdate 单独处理
   'collaboration_offer',
 
   // 服务器灾难事件（GPU/存储/环境）
@@ -317,4 +323,17 @@ export const monthlyEventPool: string[] = [
   'xzw_version_control',
   'xzw_accidental_discovery',
   'xzw_alumni_visit',
+];
+
+// ── 学生心情低落条件事件池 ───────────────────────────────────────────────────
+// 这些事件由 monthlyUpdate 单独处理，不走 monthlyEventPool 的随机抽取流程。
+// 每个事件对每个学生只触发一次，且同一学生两次触发之间至少间隔两个月。
+// 心情归零时直接触发 student_crisis_departure，不再抽取此池。
+export const conditionalStudentEventPool: string[] = [
+  'transfer_risk',     // favor < 10
+  'favor_complaint',   // favor 10–30
+  'student_sick',      // favor 30–50
+  'research_block',    // favor 50–70
+  'peer_left',         // favor 70–90
+  'late_night_doubt',  // favor > 90
 ];

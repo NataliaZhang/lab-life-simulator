@@ -31,7 +31,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['ddl_warrior', 'last_minute_genius'],
     firstMeetingEventId: 'lxj_first_meeting',
     baseSkills: { theory: 58, engineering: 48, social: 51 },
-    baseFavor: 50,
+    baseFavor: 0,
     baseHappiness: 62,
   },
   // 【林小卷 隐藏人设】
@@ -51,7 +51,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['sleep_learning', 'dream_debugger'],
     firstMeetingEventId: 'gmm_first_meeting',
     baseSkills: { theory: 42, engineering: 78, social: 28 },
-    baseFavor: 44,
+    baseFavor: 0,
     baseHappiness: 65,
   },
   // 【顾眠眠 隐藏人设】
@@ -71,7 +71,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['proof_addict', 'reliable_senior'],
     firstMeetingEventId: 'yzq_first_meeting',
     baseSkills: { theory: 89, engineering: 22, social: 44 },
-    baseFavor: 38,
+    baseFavor: 0,
     baseHappiness: 48,
   },
   // 【叶知秋 隐藏人设】
@@ -91,7 +91,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['optimistic_heart', 'morale_sunshine'],
     firstMeetingEventId: 'bxm_first_meeting',
     baseSkills: { theory: 36, engineering: 42, social: 82 },
-    baseFavor: 62,
+    baseFavor: 0,
     baseHappiness: 84,
   },
   // 【白小满 隐藏人设】
@@ -111,7 +111,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['weird_paper_collector', 'research_brainstormer'],
     firstMeetingEventId: 'bxt_first_meeting',
     baseSkills: { theory: 64, engineering: 34, social: 70 },
-    baseFavor: 38,
+    baseFavor: 0,
     baseHappiness: 66,
   },
   // 【毕小天 隐藏人设】
@@ -129,7 +129,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['startup_saint', 'product_mindset'],
     firstMeetingEventId: 'qdd_first_meeting',
     baseSkills: { theory: 34, engineering: 58, social: 76 },
-    baseFavor: 45,
+    baseFavor: 0,
     baseHappiness: 40,
   },
   // 【钱多多 隐藏人设】
@@ -158,7 +158,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['time_manager'],
     firstMeetingEventId: 'hsx_first_meeting',
     baseSkills: { theory: 52, engineering: 66, social: 46 },
-    baseFavor: 35,
+    baseFavor: 0,
     baseHappiness: 42,
   },
 
@@ -180,7 +180,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['social_terrorist', 'network_magnet'],
     firstMeetingEventId: 'tkl_first_meeting',
     baseSkills: { theory: 36, engineering: 30, social: 92 },
-    baseFavor: 60,
+    baseFavor: 0,
     baseHappiness: 62,
   },
 
@@ -204,7 +204,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['research_mysticism', 'fortune_engineer'],
     firstMeetingEventId: 'mwx_first_meeting',
     baseSkills: { theory: 58, engineering: 44, social: 63 },
-    baseFavor: 45,
+    baseFavor: 0,
     baseHappiness: 58,
   },
 
@@ -229,7 +229,7 @@ export const allCandidates: StudentCandidate[] = [
     traitIds: ['curiosity_overload', 'optimization_addict'],
     firstMeetingEventId: 'xzw_first_meeting',
     baseSkills: { theory: 38, engineering: 86, social: 44 },
-    baseFavor: 48,
+    baseFavor: 0,
     baseHappiness: 54,
   },
 

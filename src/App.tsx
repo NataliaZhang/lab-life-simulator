@@ -109,6 +109,9 @@ export function App() {
           phase={state.phase}
           lab={state.lab}
           students={state.students}
+          ideasCollected={state.projectIdeas.length + state.activeProjects.length + state.completedProjects.length}
+          projectsStarted={state.activeProjects.length + state.completedProjects.length}
+          projectsCompleted={state.completedProjects.length}
           onNewGame={newGame}
         />
       )}
@@ -117,6 +120,8 @@ export function App() {
         <EventModal
           event={activeEvent}
           lab={state.lab}
+          chosenOptionIds={state.chosenOptionIds}
+          activeStudentIds={state.students.filter(s => s.status === 'active').map(s => s.id)}
           boundStudentName={boundStudentName}
           boundStudent2Name={boundStudent2Name}
           onChoose={chooseOption}

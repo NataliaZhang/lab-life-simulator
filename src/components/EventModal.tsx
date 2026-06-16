@@ -3,6 +3,8 @@ import type { GameEvent, LabStats } from '../types';
 interface Props {
   event: GameEvent;
   lab: LabStats;
+  chosenOptionIds: string[];
+  activeStudentIds: string[];
   boundStudentName?: string;
   boundStudent2Name?: string;
   onChoose: (eventId: string, optionId: string) => void;
@@ -15,17 +17,20 @@ function resolve(text: string, name?: string, name2?: string): string {
   return result;
 }
 
-export function EventModal({ event, lab, boundStudentName, boundStudent2Name, onChoose }: Props) {
+export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boundStudentName, boundStudent2Name, onChoose }: Props) {
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
       <div className="modal">
         <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
         <div className="modal__prompt">{resolve(event.prompt ?? '', boundStudentName, boundStudent2Name)}</div>
         <div className="modal__options">
-          {(event.options ?? []).map(option => {
+          {(event.options ?? []).filter(option =>
+            !option.requireStudentActive || activeStudentIds.includes(option.requireStudentActive)
+          ).map(option => {
             const fundingOk = !option.fundingCost || lab.funding >= option.fundingCost;
             const energyOk = !option.energyCost || lab.energy >= option.energyCost;
-            const disabled = !fundingOk || !energyOk;
+            const choiceOk = !option.requiredChoiceId || chosenOptionIds.includes(option.requiredChoiceId);
+            const disabled = !fundingOk || !energyOk || !choiceOk;
             return (
               <button
                 key={option.id}
@@ -43,6 +48,11 @@ export function EventModal({ event, lab, boundStudentName, boundStudent2Name, on
                   {option.energyCost != null && (
                     <span className={`option-cost${!energyOk ? ' option-cost--unaffordable' : ''}`}>
                       ⚡ {option.energyCost}
+                    </span>
+                  )}
+                  {!choiceOk && (
+                    <span className="option-cost option-cost--unaffordable">
+                      🔒 需先购买服务器
                     </span>
                   )}
                 </span>

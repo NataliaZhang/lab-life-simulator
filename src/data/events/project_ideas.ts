@@ -95,12 +95,13 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
     title: 'Reviewer #2 又来了',
     prompt: '论文审稿结果回来了，Reviewer #2 的意见长达两页，充满了哲学质疑。',
     description: [
-      'Reviewer #2 给出了一个令人叹为观止的审稿意见：第一条质疑你的动机，第二条质疑实验室的存在意义，第三条建议你去读一篇1983年的冷门论文。',
+      'Reviewer #2 给出了一个令人叹为观止的审稿意见：第一条质疑你的动机，第二条质疑实验室的存在意义，第三条建议你去读一条2003年的冷门论文。',
       '你不是第一次面对这种意见了。你打开三年前的 Rebuttal，发现格式几乎可以完全复用。',
       '这个模式太强了。审稿意见的结构是可重复的，历史 Rebuttal 库加上大模型，完全可以自动化这个痛苦过程。',
     ],
     triggerConditions: [
       { type: 'lab', stat: 'reputation', op: '>=', value: 3 },
+      { type: 'seenEvent', eventId: 'reviewer_two' },
     ],
     options: [
       {

@@ -6,6 +6,9 @@ interface Props {
   phase: GamePhase;
   lab: LabStats;
   students: Student[];
+  ideasCollected: number;
+  projectsStarted: number;
+  projectsCompleted: number;
   onNewGame: () => void;
 }
 
@@ -15,7 +18,7 @@ const STATUS_LABEL: Record<Student['status'], string> = {
   active: '在读',
 };
 
-export function EndingModal({ endingTitle, tagline, phase, lab, students, onNewGame }: Props) {
+export function EndingModal({ endingTitle, tagline, phase, lab, students, ideasCollected, projectsStarted, projectsCompleted, onNewGame }: Props) {
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ending-title">
       <div className="ending-modal">
@@ -32,6 +35,16 @@ export function EndingModal({ endingTitle, tagline, phase, lab, students, onNewG
           <span className="ending-modal__dot">·</span>
           <span>资金 {lab.funding}万</span>
         </div>
+
+        {ideasCollected > 0 && (
+          <div className="ending-modal__stats">
+            <span>灵感 {ideasCollected}</span>
+            <span className="ending-modal__dot">·</span>
+            <span>立项 {projectsStarted}</span>
+            <span className="ending-modal__dot">·</span>
+            <span>完成 {projectsCompleted}</span>
+          </div>
+        )}
 
         {students.length > 0 && (
           <div className="ending-modal__students">
