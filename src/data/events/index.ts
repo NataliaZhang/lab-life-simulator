@@ -90,7 +90,6 @@ export const monthlyEventPool: string[] = [
   // 日常随机
   'gpu_oom',
   'student_allnighter',
-  'reviewer_two',
   'lab_meeting_drama',
   'nan_loss',
   'advisor_left_on_read',
@@ -311,6 +310,7 @@ export const monthlyEventPool: string[] = [
   'mwx_statistics',
   'mwx_skeptic_debate',
   'mwx_paper_title_omen',
+  'mwx_industry_poach',
   'mwx_alumni_visit',
 
   // 学生专属事件 — 谢知微（xzw_first_meeting 由录取时直接注入）

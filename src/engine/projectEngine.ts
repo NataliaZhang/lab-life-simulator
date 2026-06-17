@@ -14,29 +14,35 @@ function clamp(val: number, min: number, max: number): number {
 
 // ─── Efficiency ────────────────────────────────────────────────────────────
 
+// Efficiency formula: average ratio-surplus across required dimensions (required > 0).
+// multiplier = clamp(1 + 0.75 × avg(skill/required − 1), 1, 1.75)
+// A student at exactly 2× the requirement on all required dims hits the cap.
 export function calcEfficiencyMultiplier(
   student: { skills: { theory: number; engineering: number; social: number } },
   project: ProjectDefinition,
 ): number {
   const { theory, engineering, social } = student.skills;
-  const surplus =
-    (theory - project.theoryRequired) *
-    (engineering - project.engineeringRequired) *
-    (social - project.socialRequired);
-  return clamp(1 + surplus / 200, 1, MAX_EFFICIENCY);
+  const ratios: number[] = [];
+  if (project.theoryRequired > 0)      ratios.push(theory      / project.theoryRequired      - 1);
+  if (project.engineeringRequired > 0) ratios.push(engineering / project.engineeringRequired - 1);
+  if (project.socialRequired > 0)      ratios.push(social      / project.socialRequired      - 1);
+  if (ratios.length === 0) return 1;
+  const avgRatio = ratios.reduce((a, b) => a + b, 0) / ratios.length;
+  return clamp(1 + 0.75 * avgRatio, 1, MAX_EFFICIENCY);
 }
 
 // ─── Eligibility ───────────────────────────────────────────────────────────
 
-// Returns true if the student meets all three skill requirements for the project.
+// Returns true if the student meets every required dimension (required > 0).
+// Dimensions set to 0 are not required.
 export function canAssignStudent(
   student: { skills: { theory: number; engineering: number; social: number } },
   project: ProjectDefinition,
 ): boolean {
   return (
-    student.skills.theory >= project.theoryRequired &&
-    student.skills.engineering >= project.engineeringRequired &&
-    student.skills.social >= project.socialRequired
+    (project.theoryRequired === 0      || student.skills.theory      >= project.theoryRequired) &&
+    (project.engineeringRequired === 0 || student.skills.engineering >= project.engineeringRequired) &&
+    (project.socialRequired === 0      || student.skills.social      >= project.socialRequired)
   );
 }
 
@@ -158,6 +164,19 @@ export function removeLeaderOnStudentLeave(
   };
 }
 
+// ─── Dominant skill for project completion reward ─────────────────────────
+
+// Returns the skill key with the highest required value. Ties broken randomly.
+export function getDominantSkill(project: ProjectDefinition): 'theory' | 'engineering' | 'social' {
+  const { theoryRequired: t, engineeringRequired: e, socialRequired: s } = project;
+  const max = Math.max(t, e, s);
+  const tied: Array<'theory' | 'engineering' | 'social'> = [];
+  if (t === max) tied.push('theory');
+  if (e === max) tied.push('engineering');
+  if (s === max) tied.push('social');
+  return tied[Math.floor(Math.random() * tied.length)]!;
+}
+
 // ─── Monthly project progression ───────────────────────────────────────────
 
 interface MonthlyProjectResult {
@@ -226,10 +245,16 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
     const newProgress = Math.min(100, ap.progress + monthlyGain);
 
     if (newProgress >= 100) {
-      // Project complete — rewards are applied via the completion event, not here
+      // Project complete — lab rewards applied via the completion event
       completedProjectIds.push(ap.projectId);
       completed.push({ projectId: ap.projectId, leaderId: ap.leaderId, completedAt: { ...state.time } });
-      completionEvents.push({ id: `project_complete_${ap.projectId}` });
+
+      // Skill boost and favor reward are applied via the completion event's randomStudent effects.
+      if (ap.leaderId && ap.leaderId !== 'pi') {
+        completionEvents.push({ id: `project_complete_${ap.projectId}`, studentId: ap.leaderId });
+      } else {
+        completionEvents.push({ id: `project_complete_${ap.projectId}` });
+      }
     } else {
       updatedActives.push({ ...ap, progress: newProgress });
     }

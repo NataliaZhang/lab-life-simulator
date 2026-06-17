@@ -18,7 +18,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_first_meeting',
     title: '白小满：第一次见面',
     description: [
-      '新生报到那天，白小满进门时两只手都满着——左手一杯奶茶，右手一杯奶茶，用手肘顶开了你办公室的门，表情堪比送外卖的职业选手。',
+      '新生报到那天，白小满进门时两只手都满着，左手一杯奶茶，右手一杯奶茶，用手肘顶开了你办公室的门，表情堪比送外卖的职业选手。',
       '她把其中一杯推到你面前，神情一本正经："老师，我做了个小调研——第一次见面给导师带奶茶，录取成功率会提高百分之二十三。这个数据是我编的，但奶茶是真的，全糖少冰，希望你喜欢。"',
       '你还没想好表情该摆哪一种，她已经坐下来打开了笔记本，问："老师，咱们组现在主攻哪个方向？" 那杯奶茶还冒着热气。',
     ],
@@ -67,7 +67,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_crisis_mediator',
     title: '白小满：危机调解',
     description: [
-      '实验室最近气氛有点微妙——任务分配引发了一些情绪，组会开始出现"我说完了"之后三秒的真空，走廊里的问候也变得比往常简洁了一截。',
+      '实验室最近气氛有点微妙，任务分配引发了一些情绪，组会开始出现"我说完了"之后片刻的真空，走廊里的问候也变得比往常简洁了一截。',
       '白小满敲门进来，关上门，坐下来先把问题的症结说了一遍，分析得比你想象中清楚，然后不急不忙地总结："我觉得我们现在需要外卖。好的外卖。大家坐一块，不谈工作，让情绪先流通二十分钟。"',
       '她顿了顿，补了一句："根源我也想好怎么解了，等大家心情上来之后我来聊。" 你意识到她已经把危机处理分成了两个阶段，而且阶段一是奶茶外卖。',
     ],
@@ -89,6 +89,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 8 },
+              { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', delta: 3 },
             ],
           },
         ],
@@ -118,7 +119,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_failure_reframe',
     title: '白小满：失败重构',
     description: [
-      '上周白小满的实验全线崩了——三组对照全部跑崩，数据不收敛，模型在测试集上约等于随机猜测。你已经准备好了一份措辞温和的反馈，打算今天找她谈。',
+      '上周白小满的实验全线崩了，三组对照全部跑崩，数据不收敛，模型在测试集上约等于随机猜测。你已经准备好了一份措辞温和的反馈，打算今天找她谈。',
       '她的汇报邮件先到了你的收件箱，标题是：「重大进展：我们成功排除了十八种可能性（附：第十九种正在验证中）」。',
       '邮件正文格式规范，附了一张手绘的"失败图谱"，每一条走不通的路都标注了原因和坑的位置，最后一段写道："以上信息等价于十八份阴性结果，可以整理成论文附录。" 你盯着这封邮件看了一会儿，感觉你们对失败这件事的定义可能不在同一个频道上，但她的频道听起来更有意思。',
     ],
@@ -130,7 +131,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_fr_embrace',
-        text: '感觉还能抢救一下——回邮件鼓励，让她继续',
+        text: '感觉还能抢救一下，回邮件鼓励，让她继续',
         outcomes: [
           {
             weight: 1,
@@ -139,6 +140,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 7 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'projectProgress', delta: 3 },
+              { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.theory', delta: 2 },
             ],
           },
         ],
@@ -168,9 +170,9 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_morale_boost',
     title: '白小满：主动打气',
     description: [
-      '实验室最近整体状态下滑——声望遭到质疑，几个项目进展缓慢，组会开始出现"我说完了"之后无人接话的三秒真空。你还没想好怎么处理这个气氛，白小满已经自己动了。',
+      '实验室最近整体状态下滑，声望遭到质疑，几个项目进展缓慢，组会开始出现"我说完了"之后无人接话的片刻真空。你还没想好怎么处理这个气氛，白小满已经自己动了。',
       '组群里出现了一条消息："本周五晚上有个非强制性但强烈建议参加的饭局，楼下火锅店，我来订位，AA制（保底两人成行），主题是：不谈工作。"',
-      '那顿饭全组八个人去了七个。你事后问白小满用了什么方法，她想了想说："就是让大家先记起来——我们是认识的，不只是同一个组里的。" 你意识到这一句话里装了不少东西。',
+      '那顿饭全组八个人去了七个。你事后问白小满用了什么方法，她想了想说："就是让大家先记起来，我们是认识的，不只是同一个组里的。" 你意识到这一句话里装了不少东西。',
     ],
     prompt: '她的行动力让你刮目相看，你怎么回应？',
     triggerConditions: [
@@ -184,7 +186,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '白小满听完点了点头，说："我知道，所以才去做。" 不谦虚，也没有过度的高兴，就是平静地确认了这件事的重量。你意识到她对自己在实验室里的位置心知肚明——她知道自己是什么，也知道这有多重要，只是从来不说出来。',
+            narrative: '白小满听完点了点头，说："我知道，所以才去做。" 不谦虚，也没有过度的高兴，就是平静地确认了这件事的重量。你意识到她对自己在实验室里的位置心知肚明，知道自己是什么，也知道这有多重要，只是从来不说出来。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 5 },
@@ -218,8 +220,8 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_tea_strategy',
     title: '白小满：奶茶战略',
     description: [
-      '你正在为一个棘手的决定发愁——经费分配、人员调整，或者某个项目的走向，总之是那种盯着屏幕半小时屏幕还是那个屏幕的类型。',
-      '白小满推开门，把一杯奶茶放在你桌上，神情严肃："老师，我观察了一段时间——你做困难决定的时候手边有奶茶，通过率会高百分之三十一。"',
+      '你正在为一个棘手的决定发愁，经费分配、人员调整，或者某个项目的走向，总之是那种盯着屏幕半小时屏幕还是那个屏幕的类型。',
+      '白小满推开门，把一杯奶茶放在你桌上，神情严肃："老师，我观察了一段时间。你做困难决定的时候手边有奶茶，通过率会高百分之三十一。"',
       '她停了停，补了一句："这个数据也是我编的，但我觉得有一定的科学依据。" 然后转身要走，走到门口又回头："不用谢，等你想通了发我一条消息就行。"',
     ],
     prompt: '你怎么对待这杯奶茶？',
@@ -266,9 +268,9 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_social_talent',
     title: '白小满：社交天才',
     description: [
-      '系里有位老师，向来难以接近——审经费严，推荐信惜字如金，跨院合作项目一律保持距离。你有过念头，估计了一下成功率，搁置了。',
+      '系里有位老师，向来难以接近，审经费严，推荐信惜字如金，跨院合作项目一律保持距离。你有过念头，估计了一下成功率，搁置了。',
       '上周五，白小满代表实验室去参加了一个跨院系学生交流活动。昨天汇报时顺带提了一句："对了老师，王老师说他那边有个经费来源，想问问我们合不合适——是他主动问的。"',
-      '你让她细说。她想了想："我带了奶茶去分享，然后我们聊了一下双方的方向，他说有交叉点就问了。" 停了一下，"具体聊了挺多的，总之气氛不错。" 你盯着她看了三秒，发现她本人对这件事的惊人程度毫无感知。',
+      '你让她细说。她想了想："我带了奶茶去分享，然后我们聊了一下双方的方向，他说有交叉点就问了。" 停了一下，"具体聊了挺多的，总之气氛不错。" 你愣了一下，发现她本人对这件事的惊人程度毫无感知。',
     ],
     prompt: '这个意外的合作机会怎么处理？',
     triggerConditions: [
@@ -281,7 +283,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '白小满回忆了一下，说她主要在听——让王老师讲他的研究，认真提问，把我们的方向自然地带进去，没有主动推销过。"我发现他其实挺想聊的，只是平时没人问。" 你把这句话默默存档，感觉这是一条可以复制的方法论，下次开跨院合作会议前发给全组。',
+            narrative: '白小满回忆了一下，说她主要在听，让王老师讲他的研究，认真提问，把我们的方向自然地带进去，没有主动推销过。"我发现他其实挺想聊的，只是平时没人问。" 你把这句话默默存档，感觉这是一条可以复制的方法论，下次开跨院合作会议前发给全组。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', delta: 3 },
@@ -296,7 +298,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你让她帮忙约时间，三方坐下来谈了两个小时，合作框架基本成型，经费申请在走流程。白小满会议结束后说了句："我就知道带奶茶没错。" 你回想了一下整个过程，没有找到任何可以反驳的角度。',
+            narrative: '你让她帮忙约时间，三方坐下来谈了好一阵，合作框架基本成型，经费申请在走流程。白小满会议结束后说了句："我就知道带奶茶没错。" 你回想了一下整个过程，没有找到任何可以反驳的角度。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
               { type: 'lab', stat: 'funding', delta: 6 },
@@ -315,9 +317,9 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_genuine_struggle',
     title: '白小满：真正的瓶颈',
     description: [
-      '白小满来找你，破天荒地两手空空进来——没有奶茶，没有笔记本，连平时那种随手拿着支笔的习惯都消失了。',
+      '白小满来找你，破天荒地两手空空进来，没有奶茶，没有笔记本，连平时那种随手拿着支笔的习惯都消失了。',
       '她在椅子上坐直，直接开口："老师，我遇到一个问题，想了两周，真的不知道怎么做。"',
-      '没有"还能救"，没有把困难包装成"排除了一种可能性"。她平铺直叙地说自己不知道，然后把问题完整讲了一遍，逻辑清晰，卡住的地方说得很准——你知道她在来之前已经独自撑了很久了。',
+      '没有"还能救"，没有把困难包装成"排除了一种可能性"。她平铺直叙地说自己不知道，然后把问题完整讲了一遍，逻辑清晰，卡住的地方说得很准，你知道她在来之前已经独自撑了很久了。',
     ],
     prompt: '她愿意说出来——你怎么回应？',
     triggerConditions: [
@@ -331,7 +333,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你们坐下来讨论了将近两个小时，你画图，她补充她试过的方案，来回几轮之后找到了一条路——答案是她自己在过程中想到的，你只是没有打断她。她站起来说了声"谢谢老师"，走到门口停了一下，回头说："我下次还是会带奶茶的。" 你点了点头，说好。',
+            narrative: '你们坐下来讨论了很久，你画图，她补充她试过的方案，来回几轮之后找到了一条路——答案是她自己在过程中想到的，你只是没有打断她。她站起来说了声"谢谢老师"，走到门口停了一下，回头说："我下次还是会带奶茶的。" 你点了点头，说好。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.theory', delta: 8 },
@@ -354,11 +356,12 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说了一句"能想清楚自己在哪里卡住了，这一步本身就很重要"，她盯着桌面看了一秒，点了点头。然后你们进入技术讨论，她明显说得比刚才直接——卸下了什么，开始在讨论里真正安心了。两个小时后有了方向。',
+            narrative: '你说了一句"能想清楚自己在哪里卡住了，这一步本身就很重要"，她盯着桌面愣了一下，点了点头。然后你们进入技术讨论，她明显说得比刚才直接，卸下了什么，开始在讨论里真正安心了。过了好一会儿有了方向。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 5 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'projectProgress', delta: 5 },
+              { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.theory', delta: 3 },
             ],
           },
         ],
@@ -373,9 +376,9 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_encourage_others',
     title: '白小满：帮你安慰学生',
     description: [
-      '组里有个学生陷进了瓶颈——项目推不动，状态越来越内耗，你找他谈过一次，效果有限，那种沉默带着防御，像堵墙，硬撞只会把自己撞疼。',
+      '组里有个学生陷进了瓶颈，项目推不动，状态越来越内耗，你找他谈过一次，效果有限，那种沉默带着防御，像堵墙，硬撞只会把自己撞疼。',
       '你正在想怎么谈第二次，白小满路过你办公室，探头进来问了一句："你是在想某某的事吗？"',
-      '"我去聊聊，我跟他平时比较熟。" 说完不等你回答就走了。大概四十分钟后，你路过公共区域，看见那个学生坐在白板前写了满满一黑板——状态和四十分钟前是两个人。',
+      '"我去聊聊，我跟他平时比较熟。" 说完不等你回答就走了。过了一会儿，你路过公共区域，看见那个学生坐在白板前写了满满一黑板——状态和刚才完全是两个人。',
     ],
     prompt: '你怎么回应白小满的行动？',
     triggerConditions: [
@@ -410,6 +413,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 6 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', delta: 3 },
             ],
           },
         ],
@@ -424,8 +428,8 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     id: 'bxm_optimism_tested',
     title: '白小满：乐观的边界',
     description: [
-      '最近白小满碰了好几个壁——投稿被拒，合作谈崩，一个做了两个月的方向在讨论中被整体推翻。她来找你，这次没有带奶茶，也没有把困难先包装成"排除了若干可能性"。',
-      '她坐下来，沉默了大概三秒，说："老师，我跟你说一个事——我其实不是真的完全不担心的。"',
+      '最近白小满碰了好几个壁，投稿被拒，合作谈崩，一个做了两个月的方向在讨论中被整体推翻。她来找你，这次没有带奶茶，也没有把困难先包装成"排除了若干可能性"。',
+      '她坐下来，沉默了一下，说："老师，我跟你说一个事——我其实不是真的完全不担心的。"',
       '"我只是觉得，担心本身没有用，所以我选择不做这个动作。但感受得到是感受得到的。最近压力确实挺大。" 她说完抬头看了你一眼，在等你的反应。',
     ],
     prompt: '她卸下了一部分乐观的盔甲，你怎么回应？',
@@ -436,11 +440,11 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_ot_worry_valid',
-        text: '说担心有时候有用——它能推动你做准备',
+        text: '说担心有时候有用，它能推动你做准备',
         outcomes: [
           {
             weight: 1,
-            narrative: '白小满想了一会儿，说："那我得先想清楚担心什么，不然担心会乱跑，没有用。" 你们把她现在最担心的几件事列出来，每一条都讨论了能不能提前做什么。她走的时候状态比来时好，担心还在，但被放进了格子里，有名字有位置——这让它变成了可以处理的东西。',
+            narrative: '白小满想了一会儿，说："那我得先想清楚担心什么，不然担心会乱跑，没有用。" 你们把她现在最担心的几件事列出来，每一条都讨论了能不能提前做什么。她走的时候状态比来时好，担心还在，但被放进了格子里，有名字有位置，变成了可以处理的东西。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 7 },
@@ -455,7 +459,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '白小满听完，慢慢点了点头，说："那好，我继续不担心。" 但语气和平时不一样——多了几分清醒，是想清楚了再往前走的那种平静，而不是心大。走之前她说："老师，下次还是带奶茶来，但我知道奶茶不是万能的了。" 你点点头，说还是带吧，你喜欢喝。她笑了。',
+            narrative: '白小满听完，慢慢点了点头，说："那好，我继续不担心。" 但语气和平时不一样，多了几分清醒，是想清楚了再往前走的那种平静，而不是心大。走之前她说："老师，下次还是带奶茶来，但我知道奶茶不是万能的了。" 你点点头，说还是带吧，你喜欢喝。她笑了。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 5 },
@@ -475,7 +479,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     description: [
       // 🎓 毕业后回访 — 建议引擎在 graduation 后约6个月注入
       '毕业大概半年后，你收到了白小满的邮件。',
-      '她去了一家公益科技机构，邮件里说她在那里"主要负责让整个团队不崩溃，顺便做一些技术工作"——听起来和在实验室时职责差不多，但语气里多了一种找到位置的笃定，像一个人终于住进了为自己量身做的房间。',
+      '她去了一家公益科技机构，邮件里说她在那里"主要负责让整个团队不崩溃，顺便做一些技术工作"，听起来和在实验室时职责差不多，但语气里多了一种找到位置的笃定，像一个人终于住进了为自己量身做的房间。',
       '邮件最后，她说她帮忙介绍了机构的负责人，想和实验室探讨合作。"她是很好的人，我们一起喝奶茶的时候聊起了你们的研究，她当场就有兴趣了。" 括号里她补了一句："（奶茶是我带的，这次的数据不是编的：奶茶有用，经过反复验证，p<0.05。）"',
     ],
     prompt: '这封邮件从头到尾都是白小满风格，你怎么回应？',

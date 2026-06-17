@@ -19,7 +19,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     title: '咖啡机停摆的第四天',
     description: [
       '实验室的咖啡机坏了。那台从创组第一年就存在的银色咖啡机，安静地停在角落里，上面贴着一张A4纸，写着"维修中，请勿触碰"，签名是四天前。没有人知道维修进度，没有人敢揭那张纸，没有人知道谁贴的。',
-      '今天是星期一，上午九点。实验室里的气氛像是一个人憋着打喷嚏，不是生产力的问题——那不是重点——重点是，咖啡作为一种仪式感已经停转了整整九十六小时。有人开始用热水泡速溶，另一个人看了看那杯速溶，轻轻皱了一下眉，戴上了耳机。',
+      '今天是星期一，上午九点。实验室里的气氛像是一个人憋着打喷嚏，不是生产力的问题，那不是重点，重点是，咖啡作为一种仪式感已经停转了整整九十六小时。有人开始用热水泡速溶，另一个人看了看那杯速溶，轻轻皱了一下眉，戴上了耳机。',
     ],
     prompt: '咖啡机停摆第四天，你决定',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
@@ -55,7 +55,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在群里发了一条消息，建议大家近期自行解决咖啡需求，等维修进度。群里挂着已读双勾大约四分钟，然后有人回了个"好的"。这两个字的信息量，需要结合对方平时的聊天风格才能解码——你大概解码出来了，但选择不去细想。两周后，实验室角落出现了三个不同品牌的便携咖啡杯，各自形成了一个独立的咖啡生态圈，互不干涉。',
+            narrative: '你在群里发了一条消息，建议大家近期自行解决咖啡需求，等维修进度。群里挂着已读双勾一会儿，然后有人回了个"好的"。这两个字的信息量，需要结合对方平时的聊天风格才能解码——你大概解码出来了，但选择不去细想。两周后，实验室角落出现了三个不同品牌的便携咖啡杯，各自形成了一个独立的咖啡生态圈，互不干涉。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -8 },
               { type: 'allStudents', stat: 'favor', delta: -3 },
@@ -63,7 +63,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你建议大家自行解决，但顺手把实验室咖啡预算砍掉了，理由是"临时性政策"。这条消息发出去二十分钟后，有人在楼道里和你热情地打了个招呼，回来问你咖啡机什么时候修。你说不确定。对方"哦"了一声，转身走了。门带上的一瞬间，你隐约听到走廊里有人用力呼了口气。',
+            narrative: '你建议大家自行解决，但顺手把实验室咖啡预算砍掉了，理由是"临时性政策"。这条消息发出去没多久，有人在楼道里和你热情地打了个招呼，回来问你咖啡机什么时候修。你说不确定。对方"哦"了一声，转身走了。门带上的那一刻，你隐约听到走廊里有人用力呼了口气。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'favor', delta: -6 },
@@ -134,7 +134,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在周五下午人少的时候，拿起板擦，三秒内把那组方程清除干净了。旁边没有人，很顺利。第二天，有学生回来，在白板面前站了将近一分钟，最后只是把帽子往下拽了一下，转身回了工位。白板从此空着那一块，大概两个月内没有人在那里写过任何东西。',
+            narrative: '你在周五下午人少的时候，拿起板擦，把那组方程清除干净了。旁边没有人，很顺利。第二天，有学生回来，在白板面前站了好一会儿，最后只是把帽子往下拽了一下，转身回了工位。白板从此空着那一块，大概两个月内没有人在那里写过任何东西。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'lab', stat: 'energy', delta: 8 },
@@ -156,7 +156,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你把方程拍了照，发到了一个学术群里问了一圈。四十分钟后有人认出来了：是某篇2018年论文里的一个中间推导步骤，那篇论文后来被引用了九次。你把链接转发给实验室，大家各自点进去看了一会儿，然后有人说："那不是我们组做的方向。"方程不属于任何人，也不特别重要。但它终于有了一个身份——这已经算某种意义上的安慰。',
+            narrative: '你把方程拍了照，发到了一个学术群里问了一圈。过了一阵有人认出来了：是某篇2018年论文里的一个中间推导步骤，那篇论文后来被引用了九次。你把链接转发给实验室，大家各自点进去看了一会儿，然后有人说："那不是我们组做的方向。"方程不属于任何人，也不特别重要。但它终于有了一个身份——这已经算某种意义上的安慰。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 2 },
@@ -165,7 +165,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你研究了两个小时，查了十几篇论文，没有找到任何匹配。那组方程很可能是某个人在某次推导中途放弃的草稿，既没有结论，也没有意义，只是碰巧没被擦掉。你把这个调查结果汇报给了任何一个问你的人，方式是说"先不去管它了"，语气里带着一种努力掩盖的虚无感。',
+            narrative: '你研究了好一阵，查了十几篇论文，没有找到任何匹配。那组方程很可能是某个人在某次推导中途放弃的草稿，既没有结论，也没有意义，只是碰巧没被擦掉。你把这个调查结果汇报给了任何一个问你的人，方式是说"先不去管它了"，语气里带着一种努力掩盖的虚无感。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
             ],
@@ -203,7 +203,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你打开了那个保鲜盒。里面的内容物的性状已经很难描述，你花了三秒辨认它原本的食物身份，没有成功。你把它扔了，但余波在你后脑勺某个区域留存了一整天，导致你午饭没怎么吃。这个代价比你预期的高。',
+            narrative: '你打开了那个保鲜盒。里面的内容物的性状已经很难描述，你辨认了一下它原本的食物身份，没有成功。你把它扔了，但余波在你后脑勺某个区域留存了一整天，导致你午饭没怎么吃。这个代价比你预期的高。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -242,6 +242,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 4 },
               { type: 'allStudents', stat: 'favor', delta: 2 },
+              { type: 'allStudents', stat: 'skills.social', delta: 2 },
             ],
             nextEventIds: ['mystery_fridge_truth'],
           },
@@ -282,11 +283,12 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你用一种不带任何火气的语气聊了大概十分钟，内容是关于公共空间的使用原则，态度是理解的，同时举了两个匿名案例说明类似情况在其他实验室的后果。对方全程认真听完，说了"老师您说得对"，补充了一句"我会注意的"。你相信这句话的真诚程度大约在百分之七十左右，对这个数字表示满意。',
+            narrative: '你用一种不带任何火气的语气聊了大概十分钟，内容是关于公共空间的使用原则，态度是理解的，同时举了两个匿名案例说明类似情况在其他实验室的后果。对方全程认真听完，说了"老师您说得对"，补充了一句"我会注意的"。你相信这句话的真诚程度大约在七成左右，对这个数字表示满意。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 2 },
               { type: 'randomStudent', stat: 'happiness', delta: 3 },
               { type: 'allStudents', stat: 'favor', delta: 1 },
+              { type: 'randomStudent', stat: 'skills.social', delta: 3 },
             ],
           },
           {
@@ -324,7 +326,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     id: 'ac_warfare',
     title: '空调温度战争',
     description: [
-      '实验室内部形成了两个非正式派系：22度派和26度派。据不完全统计，过去两周内有人秘密调整了空调温度三次，没有人承认，但空调遥控器上的指纹密度可以证明一切。靠窗的桌子上出现了一台便携暖风机，靠门的桌子上出现了一台USB小风扇。它们相距三张桌子，各自运转，互不干涉。',
+      '实验室内部形成了两个非正式派系：22度派和26度派。据不完全统计，过去两周内有人秘密调整了空调温度不止一次，没有人承认，但空调遥控器上的指纹密度可以证明一切。靠窗的桌子上出现了一台便携暖风机，靠门的桌子上出现了一台USB小风扇。它们相距三张桌子，各自运转，互不干涉。',
       '上周五的组会上，有人说了一句"有点冷"，有人说了一句"还好"，然后整个话题在全组的默契中被悄然放弃了。但事情显然还没结束。这两台电器的共存已经从"临时应对"演变成了"阵地声明"。',
     ],
     prompt: '空调派系矛盾已经公开化，你决定',
@@ -344,7 +346,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你裁定了24度，把遥控器锁进了抽屉。这个方案在实施后的前三天运行良好。第四天，你回来发现暖风机复活了，理由是"只是吹风，不是加热"。你决定不再纠缠定义问题，抽屉重新上锁，但解释了：吹风也不行。对方表示理解，拔了插头，但每次路过那台暖风机的时候，眼神都要在上面停留一秒半。',
+            narrative: '你裁定了24度，把遥控器锁进了抽屉。这个方案在实施后的前三天运行良好。第四天，你回来发现暖风机复活了，理由是"只是吹风，不是加热"。你决定不再纠缠定义问题，抽屉重新上锁，但解释了：吹风也不行。对方表示理解，拔了插头，但每次路过那台暖风机的时候，眼神都要在上面多停留一下。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: -4 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -362,6 +364,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 6 },
               { type: 'allStudents', stat: 'favor', delta: 3 },
+              { type: 'allStudents', stat: 'skills.social', delta: 2 },
             ],
           },
           {
@@ -569,7 +572,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你把U盘插上了。它被识别为只读设备，里面的文件系统报错，无法访问。你换了三台电脑，结果都一样。那个U盘可能已经死了，或者它内部有某种奇异的文件系统，亦或者它从来就没有过重要内容，"IMPORTANT - DO NOT DELETE"只是某种程度上的心理建设。你把它放回了桌上，决定晚点再想。然后忘记了。',
+            narrative: '你把U盘插上了。它被识别为只读设备，里面的文件系统报错，无法访问。你换了好几台电脑，结果都一样。那个U盘可能已经死了，或者它内部有某种奇异的文件系统，亦或者它从来就没有过重要内容，"IMPORTANT - DO NOT DELETE"只是某种程度上的心理建设。你把它放回了桌上，决定晚点再想。然后忘记了。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -8 },
             ],
@@ -605,7 +608,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你把所有东西扔了，干净利落。两天后，一个已经毕业的师兄发消息过来，问实验室大扫除有没有动某张桌子，因为他有一个U盘当年忘在那里了，里面有毕设的原始数据，虽然已经毕业了，但出于情感因素还是想要回来。你看着消息，看了很久。最后回了一个"在的"，然后去楼下翻了垃圾桶。',
+            narrative: '你把所有东西扔了，干净利落。两天后，一个已经毕业的师兄发消息过来，问实验室大扫除有没有动某张桌子，因为他有一个U盘当年忘在那里了，里面有毕设的原始数据，虽然已经毕业了，但出于情感因素还是想要回来。你盯着消息看了很久，最后回了一个"在的"，然后去楼下翻了垃圾桶。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'lab', stat: 'reputation', delta: 1 },
@@ -706,7 +709,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你发了一条朋友圈，附带了一段用词克制但含义清晰的求助文字。二十分钟内，隔壁楼的另一个组回复说他们的打印机还能用，欢迎来用。全组分批过去，用了一个下午，人情账上记了一笔，可以用一次联合审稿作为等值偿还。文件打印完了，截止日前三十小时提交成功，全程有惊无险。',
+            narrative: '你发了一条朋友圈，附带了一段用词克制但含义清晰的求助文字。没多久，隔壁楼的另一个组回复说他们的打印机还能用，欢迎来用。全组分批过去，用了一个下午，人情账上记了一笔，可以用一次联合审稿作为等值偿还。文件打印完了，截止日前提交成功，全程有惊无险。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'allStudents', stat: 'favor', delta: 3 },

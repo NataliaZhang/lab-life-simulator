@@ -182,6 +182,7 @@ export interface GameState {
   projectIdeas: string[];              // project IDs of unlocked but not-yet-started ideas
   activeProjects: ActiveProject[];
   completedProjects: CompletedProject[];
+  noStudentMonths: number;             // consecutive months with zero active students (for grace-period ending)
   // Per-student record of which conditional happiness-events have fired and when.
   // Enforces one-time-per-student rule and 2-month cooldown between events.
   studentConditionalLog: Record<string, Array<{ eventId: string; year: number; month: number }>>;

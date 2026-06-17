@@ -15,8 +15,8 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'mystery_process',
     title: '47%的显卡在跑什么？',
     description: [
-      '三天了。服务器上有一个进程静悄悄地占着47%的GPU，连名字都没有——进程名是一串随机字符，像是刻意匿名的。组里没有任何人承认。群里发了两次"有人知道这是谁的进程吗"，石沉大海，只有两个"已读"气泡和两条悬在空气里再也没有人接的消息。',
-      '你打开监控面板盯着那个进程看了三分钟。它仍在稳定运行，GPU利用率98%，像是丝毫不知道自己正在引发外交风波。组里其他人的训练任务已经被挤到排队，最短的等待队列是四个小时。',
+      '三天了。服务器上有一个进程静悄悄地占着47%的GPU，连名字都没有，进程名是一串随机字符，像是刻意匿名的。组里没有任何人承认。群里发了两次"有人知道这是谁的进程吗"，石沉大海，只有两个"已读"气泡和两条悬在空气里再也没有人接的消息。',
+      '你打开监控面板盯着那个进程看了好一会儿。它仍在稳定运行，GPU利用率98%，像是丝毫不知道自己正在引发外交风波。组里其他人的训练任务已经被挤到排队，最短的等待队列是四个小时。',
     ],
     prompt: '神秘进程已运行72小时，你决定',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
@@ -36,7 +36,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你查了一圈，发现那个进程是用nohup跑的，启动用户被设成了一个三年前已经毕业的同学。你盯着那个用户名，把笔盖拧了拧又拧回去，拧了两圈——要么有人借了他的账号，要么这台服务器上有游魂。最终进程自己跑完退出了，神秘到底，不留任何解释。',
+            narrative: '你查了一圈，发现那个进程是用nohup跑的，启动用户被设成了一个三年前已经毕业的同学。你盯着那个用户名，把笔盖拧了拧又拧回去，要么有人借了他的账号，要么这台服务器上有游魂。最终进程自己跑完退出了，神秘到底，不留任何解释。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -57,7 +57,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '进程还没跑完，又多了一个新的神秘进程，这次占了61%。群里出现了第一条情绪崩溃的消息："???????????????????"——发消息的人随后立刻撤回了，但每个人都看见了。',
+            narrative: '进程还没跑完，又多了一个新的神秘进程，这次占了61%。群里出现了第一条情绪崩溃的消息："???????????????????"，发消息的人随后立刻撤回了，但每个人都看见了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -8 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -71,7 +71,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你用另一个账号发了条消息："服务器上有个进程占着47%的GPU，PID 23847，进程名 xvfb_worker_7734，请主人认领。" 等了四分钟，群里飘来一条"哦哦马上"，然后进程消失了。全程没有人承认自己就是那个"有人"，群里也没有人追问，这件事以一种相当默契的方式画上了句号。',
+            narrative: '你用另一个账号发了条消息："服务器上有个进程占着47%的GPU，PID 23847，进程名 xvfb_worker_7734，请主人认领。" 等了一会儿，群里飘来一条"哦哦马上"，然后进程消失了。全程没有人承认自己就是那个"有人"，群里也没有人追问，这件事以一种相当默契的方式画上了句号。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -94,7 +94,7 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'mystery_process_resolved',
     title: '真相大白',
     description: [
-      '调查结果出来了。那个进程的主人浮出水面，你站在他们面前，对方的表情是一种复杂的混合体——有一点点愧疚，有一点点"被发现了"，还有一点点令人费解的技术性自豪感。',
+      '调查结果出来了。那个进程的主人浮出水面，你站在他们面前，对方的表情是一种复杂的混合体：有一点点愧疚，有一点点"被发现了"，还有一点点令人费解的技术性自豪感。',
       '原来那个进程在训练一个Minecraft智能体——"只是个小实验，很快就好"——已经运行了144小时，正在尝试教一个AI从零开始学习挖钻石。GPU利用率从未低于95%。这不是"小实验"，这是一个有完整课题经费逻辑漏洞的独立项目。',
     ],
     prompt: 'Minecraft训练任务已跑满6天，你决定',
@@ -114,7 +114,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你好言好语地说完了，对方表示理解，点头如捣蒜。然而你隐约察觉，对方真正记住的部分是你说的"我自己读博的时候也绕过路"——这句话在他脑海里被截取成了"老师默许了"。三周后，Minecraft智能体已经学会了种小麦。',
+            narrative: '你好言好语地说完了，对方表示理解，点头如捣蒜。然而你隐约察觉，对方真正记住的部分是你说的"我自己读博的时候也绕过路"，这句话在他脑海里被截取成了"老师默许了"。三周后，Minecraft智能体已经学会了种小麦。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 5 },
             ],
@@ -127,7 +127,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你花了十五分钟阐明：共享服务器是公共资源，未通知占用等同于堵塞所有人的工作流，这不是技术问题而是职业素养问题。当事人脸色经历了三个阶段：白→红→重新白。整个组后来一个星期都在群里非常礼貌地申请每一次GPU使用，格式严谨得像在填报道德审查表。',
+            narrative: '你阐明了：共享服务器是公共资源，未通知占用等同于堵塞所有人的工作流，这不是技术问题而是职业素养问题。当事人脸色经历了三个阶段：白→红→重新白。整个组后来一个星期都在群里非常礼貌地申请每一次GPU使用，格式严谨得像在填报道德审查表。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: -8 },
               { type: 'randomStudent', stat: 'happiness', delta: -12 },
@@ -137,7 +137,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你严肃批评了整整二十分钟，逻辑严密，有理有据。当事人认真听了，诚恳道了歉，然后回去写了一篇两千字的深刻检讨发到群里——附带一份AI自动生成的GPU使用排班表，精确到分钟。这份过度反应让你盯着那份排班表发了很久的呆，不知道该夸还是该担心。',
+            narrative: '你严肃批评了一通，逻辑严密，有理有据。当事人认真听了，诚恳道了歉，然后回去写了一篇两千字的深刻检讨发到群里，附带一份AI自动生成的GPU使用排班表，精确到分钟。这份过度反应让你盯着那份排班表发了很久的呆，不知道该夸还是该担心。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -10 },
               { type: 'randomStudent', stat: 'favor', delta: -5 },
@@ -152,7 +152,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在深夜默默kill了进程，第二天若无其事地发了一条群消息说"神秘进程已消失，来源不明，大家注意以后贴上进程标签"。当事人在群里简洁地回了个"好的"。你们心照不宣，从此对视时都带着一种复杂的君子协定。Minecraft智能体永远停在了第144小时，那个AI从来没有学会挖钻石。',
+            narrative: '你在深夜默默kill了进程，第二天若无其事地发了一条群消息说"神秘进程已消失，来源不明，大家注意以后贴上进程标签"。当事人在群里简洁地回了个"好的"。你们心照不宣，从此对视时都带着一种复杂的君子协定。Minecraft智能体永远停在了那个时间点，那个AI从来没有学会挖钻石。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'randomStudent', stat: 'favor', delta: 3 },
@@ -170,7 +170,7 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'server_day_1000',
     title: '有人跑了apt upgrade',
     description: [
-      '实验室的主力服务器已经连续运行了1127天，从未重启。这是一项非官方的荣誉——没有人明说，但大家都知道这个数字，偶尔在slack里提起时会带着一种保持了世界纪录的语气。今天有人在群里发了一条消息："需要更新一个依赖，我sudo apt-get upgrade了一下，正常应该没事吧"。',
+      '实验室的主力服务器已经连续运行了1127天，从未重启。这是一项非官方的荣誉，没有人明说，但大家都知道这个数字，偶尔在slack里提起时会带着一种保持了世界纪录的语气。今天有人在群里发了一条消息："需要更新一个依赖，我sudo apt-get upgrade了一下，正常应该没事吧"。',
       '"正常应该没事吧"这七个字在群里静静燃烧，像一根引信。Linux内核从5.4.0跳到了6.8.12，NVIDIA驱动版本差了整整三个大版本，CUDA toolkit自动更新了，而这台服务器上跑着十一个人的实验环境。1127天的纪录，结束于一个下午的无知者无畏。',
     ],
     prompt: '更新已经跑完，服务器正在重启，你选择',
@@ -182,7 +182,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '服务器重启了。CUDA驱动花了七分钟重新加载，nvidia-smi输出了一行你从未见过的警告，然后奇迹般地显示出了所有GPU。所有的conda环境都活着，loss曲线可以重新运行。你发了一条"重启成功"，群里响起了四个感叹号的欢呼。整个过程你攥着咖啡杯没有放手，现在发现杯子里的咖啡已经凉了。',
+            narrative: '服务器重启了。CUDA驱动花了好一阵才重新加载，nvidia-smi输出了一行你从未见过的警告，然后奇迹般地显示出了所有GPU。所有的conda环境都活着，loss曲线可以重新运行。你发了一条"重启成功"，群里响起了四个感叹号的欢呼。整个过程你攥着咖啡杯没有放手，现在发现杯子里的咖啡已经凉了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 10 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -190,7 +190,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '服务器重启了，然后停在了initramfs提示符。这是一种Unix的死亡形态，意味着它启动到一半，然后忘记了怎么继续活下去。你花了四个小时从rescue模式里把它拉回来，期间驱动崩了一次、文件系统只读了一次、有一个挂载点彻底消失了。最终活了，但你的uptime清零了，神话就此落幕。',
+            narrative: '服务器重启了，然后停在了initramfs提示符。这是一种Unix的死亡形态，意味着它启动到一半，然后忘记了怎么继续活下去。你花了大半天从rescue模式里把它拉回来，期间驱动崩了一次、文件系统只读了一次、有一个挂载点彻底消失了。最终活了，但你的uptime清零了，神话就此落幕。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -15 },
               { type: 'lab', stat: 'energy', delta: -25 },
@@ -205,7 +205,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在grub里手动选择了旧内核，屏住呼吸回车。服务器以它熟悉的方式起来了，nvidia-smi输出了那行令人心安的GPU列表，一切如旧。你用了接下来三个小时把apt的自动更新彻底锁死，然后在wiki上写了一条加粗的警告："严禁在生产服务器上运行apt upgrade。违者后果自负。" 跑了upgrade的那个人负责请全组喝奶茶。',
+            narrative: '你在grub里手动选择了旧内核，屏住呼吸回车。服务器以它熟悉的方式起来了，nvidia-smi输出了那行令人心安的GPU列表，一切如旧。你把apt的自动更新彻底锁死，然后在wiki上写了一条加粗的警告："严禁在生产服务器上运行apt upgrade。违者后果自负。" 跑了upgrade的那个人负责请全组喝奶茶。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -213,7 +213,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '回滚失败了——旧内核的grub入口已经被新版本的更新脚本覆盖掉了。你面对着一台运行着崭新内核却完全不认识自己驱动的服务器，开始了漫长的手动修复。1127天的传说以这种方式终结，你在深夜给所有学生发消息说"明天可能不能用服务器"，群里挂着三个灰色双勾，将近三分钟没有人说话。',
+            narrative: '回滚失败了，旧内核的grub入口已经被新版本的更新脚本覆盖掉了。你面对着一台运行着崭新内核却完全不认识自己驱动的服务器，开始了漫长的手动修复。1127天的传说以这种方式终结，你在深夜给所有学生发消息说"明天可能不能用服务器"，群里挂着三个灰色双勾，好半天没有人说话。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -20 },
               { type: 'lab', stat: 'energy', delta: -30 },
@@ -316,7 +316,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你宣布"checkpoint大赦令"：48小时内自愿删除的文件不追究来源，超时后开始逐账户审计。这个措辞设计精妙——用"不追究"暗示了"本来我是要追的"。48小时内磁盘释放了430GB，全组出现了一种奇特的轻松感，像是一次集体断舍离。使用率降到了63%，算是及格。',
+            narrative: '你宣布"checkpoint大赦令"：48小时内自愿删除的文件不追究来源，超时后开始逐账户审计。这个措辞设计精妙，用"不追究"暗示了"本来我是要追的"。48小时内磁盘释放了430GB，全组出现了一种奇特的轻松感，像是一次集体断舍离。使用率降到了63%，算是及格。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: -5 },
@@ -340,7 +340,7 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'pip_nuclear',
     title: 'pip install惨案',
     description: [
-      '今天早上，有人在服务器上直接跑了pip install transformers==4.42.0，没有激活任何虚拟环境。pip愉快地把包装进了/usr/local/lib/python3.10，顺带更新了numpy、scipy、torch，解决了一批"版本冲突"——它的解决方式是把所有不兼容的包一起升级。',
+      '今天早上，有人在服务器上直接跑了pip install transformers==4.42.0，没有激活任何虚拟环境。pip愉快地把包装进了/usr/local/lib/python3.10，顺带更新了numpy、scipy、torch，解决了一批"版本冲突"，它的解决方式是把所有不兼容的包一起升级。',
       '到了下午，组里陆续开始收到import错误。有人的torch找不到CUDA，有人的numpy报了API变更警告，有人的整个pipeline在最开始的import阶段就崩掉了。群里的消息内容逐渐从"有人知道这是怎么回事吗"演变为"我现在什么都跑不了"。',
     ],
     prompt: '全组pip环境被团灭，你决定',
@@ -352,7 +352,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了一个下午写了一份完整的environment.yml，锁定了所有关键包的版本，然后通知全组重建conda环境。重建过程中，你发现原来大家用的"同一个环境"其实版本差异达到了惊人的程度——有人用的torch是1.13，有人是2.3，这些人以为他们在做相同的实验。新环境建完，版本统一了，history上的一个小黑点换来了未来的一致性。',
+            narrative: '你花了一个下午写了一份完整的environment.yml，锁定了所有关键包的版本，然后通知全组重建conda环境。重建过程中，你发现原来大家用的"同一个环境"其实版本差异达到了惊人的程度：有人用的torch是1.13，有人是2.3，这些人以为他们在做相同的实验。新环境建完，版本统一了，history上的一个小黑点换来了未来的一致性。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
@@ -376,7 +376,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你翻了pip的安装日志，找到了时间戳和用户名。当事人收到消息时正在上课，回来之后发了一条"我以为那个环境是自己的"——这句话在技术上正确，在逻辑上是本次事故的完整根因分析。你没有继续追究，转而在服务器上装了pipenv并写了一份两页纸的"共享服务器使用规范"，以此作为这次事故的遗产。',
+            narrative: '你翻了pip的安装日志，找到了时间戳和用户名。当事人收到消息时正在上课，回来之后发了一条"我以为那个环境是自己的"，这句话在技术上正确，在逻辑上是本次事故的完整根因分析。你没有继续追究，转而在服务器上装了pipenv并写了一份两页纸的"共享服务器使用规范"，以此作为这次事故的遗产。',
             effects: [
               { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -385,7 +385,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你查了日志，发现时间戳对应的账号是你自己的——你上周帮人调试的时候，在那个session里装了个包，忘记退出venv了。你静静地关上了调查窗口，转身宣布"原因不明，大家重建环境吧"。这件事你在心里压了很久。',
+            narrative: '你查了日志，发现时间戳对应的账号是你自己的，你上周帮人调试的时候，在那个session里装了个包，忘记退出venv了。你静静地关上了调查窗口，转身宣布"原因不明，大家重建环境吧"。这件事你在心里压了很久。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -20 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
@@ -415,8 +415,8 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'midnight_maintenance',
     title: 'IT今晚两点重启服务器',
     description: [
-      '晚上11:02，IT发来了一封邮件，主题是"【通知】计划内维护 — 今夜02:00重启"。正文三行，语气轻快，像是在通知一件完全正常的事情。确实，在人类的正常作息里，凌晨两点是睡觉的时间，服务器重启不影响任何人。',
-      '但组里有两个人的训练任务正在跑，分别处于第41小时和第43小时，目标都是48小时完成。上一个checkpoint是12小时前存的。群里的第一条回复是一个持续了约四秒的空白，然后是一连串的消息，内容各不相同，但情绪方向完全一致。',
+      '晚上11:02，IT发来了一封邮件，主题是"【通知】计划内维护，今夜02:00重启"。正文三行，语气轻快，像是在通知一件完全正常的事情。确实，在人类的正常作息里，凌晨两点是睡觉的时间，服务器重启不影响任何人。',
+      '但组里有两个人的训练任务正在跑，分别处于第41小时和第43小时，目标都是48小时完成。上一个checkpoint是12小时前存的。群里的第一条回复是短暂的空白，然后是一连串的消息，内容各不相同，但情绪方向完全一致。',
     ],
     prompt: '距离IT重启还有三小时，你决定',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
@@ -427,9 +427,9 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在11:15发了邮件，标题用了"紧急"二字，正文解释了两个任务的具体情况——小时数、进度、checkpoint状态——写得像一份技术事故报告。IT在11:51回复了：可以推迟到明天下午四点。你把这条消息截图发到群里，群里传来一片"谢谢老师！！！"。这种格外有用的感谢，是做导师偶尔能收到的礼物之一。',
+            narrative: '你在11:15发了邮件，标题用了"紧急"二字，正文解释了两个任务的具体情况，小时数、进度、checkpoint状态，写得像一份技术事故报告。IT在11:51回复了：可以推迟到明天下午四点。你把这条消息截图发到群里，群里传来一片"谢谢老师！！！"。这种格外有用的感谢，是做导师偶尔能收到的礼物之一。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: 15 },
+              { type: 'allStudents', stat: 'happiness', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 8 },
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
@@ -438,7 +438,7 @@ export const serverEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你发了邮件，没有收到回复。凌晨1:58，服务器还是重启了，进程全部中断。第二天IT回邮件说"抱歉，已经开始了，无法中途停止"，然后问"有什么其他可以帮到你的吗"。你回复了一个"没有了谢谢"，语气经过了精心克制。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: -12 },
+              { type: 'allStudents', stat: 'happiness', delta: -10 },
               { type: 'allStudents', stat: 'projectProgress', delta: -5 },
             ],
           },
@@ -458,7 +458,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你通知大家抢存checkpoint，但训练任务所在的脚本写得相当硬核——存checkpoint的逻辑只在epoch结束时触发，而当前epoch要到凌晨四点才结束。大家眼睁睁看着进度条走到了1:59:50，然后连接断开。第二天早上有人发消息说"重新跑了"，后面跟了个句号，就这样，再没有别的字。',
+            narrative: '你通知大家抢存checkpoint，但训练任务所在的脚本写得相当硬核，存checkpoint的逻辑只在epoch结束时触发，而当前epoch要到凌晨四点才结束。大家眼睁睁看着进度条走到了1:59:50，然后连接断开。第二天早上有人发消息说"重新跑了"，后面跟了个句号，就这样，再没有别的字。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -10 },
               { type: 'allStudents', stat: 'projectProgress', delta: -3 },
@@ -490,7 +490,7 @@ export const serverEvents: Record<string, GameEvent> = {
     title: '服务器白住了两个月的租客',
     description: [
       'IT安全发来了一份报告，标题是"异常计算资源使用警报"。内容显示：过去61天里，实验室服务器持续向一个位于东欧的IP发送加密连接，计算行为特征高度吻合加密货币挖矿程序，估算占用了实验室GPU资源的12%。',
-      '你慢慢回想起过去两个月里，确实有几次觉得训练速度比预期慢了一些，当时的结论是"可能是batch size没调好"或者"服务器最近有点负载"。现在这些"可能"有了一个统一的解释。61天，12%的算力，你迅速做了个心算，然后再做了一次确认，因为第一次的结果让你感觉有点脱离现实。',
+      '你慢慢回想起过去两个月里，确实有几次觉得训练速度比预期慢了一些，当时的结论是"可能是batch size没调好"或者"服务器最近有点负载"。现在这些"可能"有了一个统一的解释。61天，12%的算力，你迅速做了个心算，又确认了一遍，因为第一次的结果让你感觉有点脱离现实。',
     ],
     prompt: '矿机在你的服务器上挖了两个月，你决定',
     triggerConditions: [{ type: 'time', field: 'year', op: '>=', value: 2 }],
@@ -501,7 +501,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你提交了安全事件报告，附上了IT的分析材料。校方安全部门启动了标准流程：服务器离线检查、漏洞扫描、日志取证，历时五个工作日。期间实验室完全无法使用服务器。修复完成后，IT给你发了一封感谢信说"感谢及时上报，您帮助我们发现了一个已知CVE的未修补漏洞"——这个漏洞已经在补丁列表里挂了四个月了。',
+            narrative: '你提交了安全事件报告，附上了IT的分析材料。校方安全部门启动了标准流程：服务器离线检查、漏洞扫描、日志取证，历时五个工作日。期间实验室完全无法使用服务器。修复完成后，IT给你发了一封感谢信说"感谢及时上报，您帮助我们发现了一个已知CVE的未修补漏洞"，这个漏洞已经在补丁列表里挂了四个月了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'allStudents', stat: 'happiness', delta: -15 },
@@ -510,7 +510,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '报告提交了，流程启动了，然后在某个部门的待办清单里睡着了。两周后你发邮件问进展，对方回复"正在跟进"。服务器继续运行，矿机进程已经消失了——可能是对方发现被发现了，自己撤退了。校方最终给你发了一封"已处理，感谢配合"的结案邮件，没有任何细节。',
+            narrative: '报告提交了，流程启动了，然后在某个部门的待办清单里睡着了。两周后你发邮件问进展，对方回复"正在跟进"。服务器继续运行，矿机进程已经消失了，可能是对方发现被发现了，自己撤退了。校方最终给你发了一封"已处理，感谢配合"的结案邮件，没有任何细节。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -524,7 +524,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你和IT一起花了半天时间关闭了漏洞端口、清除了挖矿进程、更新了所有安全补丁，然后重启服务器。第二天GPU利用率如同被减负的孩子一样跳了上去，大家都说"服务器今天跑得好快啊"，你说"刚维护了一下"，没有进一步解释。',
+            narrative: '你和IT一起关闭了漏洞端口、清除了挖矿进程、更新了所有安全补丁，然后重启服务器。第二天GPU利用率如同被减负的孩子一样跳了上去，大家都说"服务器今天跑得好快啊"，你说"刚维护了一下"，没有进一步解释。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -547,7 +547,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你用了二十分钟做了一份完整的损失计算：61天×12%算力×8张A100×按时租价格$2.1/GPU-hour = 约¥88,000。你把这个数字发给了组里，将近一分钟没有任何回应，然后有人发了一条消息："老师，这相当于我一年的补贴。" 你随后上报了校方，用这个数字作为事件严重性的注脚。安全部门看到这个数字之后，响应速度明显加快了。',
+            narrative: '你做了一份完整的损失计算：61天×12%算力×8张A100×按时租价格$2.1/GPU-hour = 约¥88,000。你把这个数字发给了组里，好一会儿没有任何回应，然后有人发了一条消息："老师，这相当于我一年的补贴。" 你随后上报了校方，用这个数字作为事件严重性的注脚。安全部门看到这个数字之后，响应速度明显加快了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'happiness', delta: -10 },
@@ -608,7 +608,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你开始考古，发现三个环境之间的差异比想象中要深得多——其中一个环境有一个叫作fix_cuda_compat_v3的本地包，是某个已经毕业的学生两年前为了解决一个特定bug手写的补丁，没有任何文档。这个包是三个环境中唯一能让某个老实验正常跑起来的关键。你盯着那个包名看了半分钟，默默地把它单独备份，然后决定还是继续用那三个混乱的环境，至少它们是稳定的。',
+            narrative: '你开始考古，发现三个环境之间的差异比想象中要深得多：其中一个环境有一个叫作fix_cuda_compat_v3的本地包，是某个已经毕业的学生两年前为了解决一个特定bug手写的补丁，没有任何文档。这个包是三个环境中唯一能让某个老实验正常跑起来的关键。你盯着那个包名看了好一会儿，默默地把它单独备份，然后决定还是继续用那三个混乱的环境，至少它们是稳定的。',
             effects: [
               { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -713,7 +713,7 @@ export const serverEvents: Record<string, GameEvent> = {
     title: 'rm -rf跑错目录了',
     description: [
       '{studentName}来敲你的门。门开着，但对方还是敲了——这个细节本身就说明了一些事情。进来之后站着没有坐下，表情是那种人在准备说一件自己知道很严重的事情时会有的特定表情：嘴角微微抿着，眼神有一点飘，说话前先清了一下嗓子，像是把话在口腔里过了一遍筛再放出来。',
-      '"老师，我……rm -rf跑错目录了。" 停顿了一秒，补充说："是/data/results/{studentName}_experiments这个目录。" 这个目录里是三个月的实验结果：47次完整的训练run、配套的log文件、baseline的对比数据，以及两周前你们在组会上讨论过说"这批数据很重要"的那些文件。',
+      '"老师，我……rm -rf跑错目录了。" 停顿了一下，补充说："是/data/results/{studentName}_experiments这个目录。" 这个目录里是三个月的实验结果：47次完整的训练run、配套的log文件、baseline的对比数据，以及两周前你们在组会上讨论过说"这批数据很重要"的那些文件。',
     ],
     prompt: '{studentName}三个月的数据被误删，你决定',
     triggerConditions: [
@@ -727,7 +727,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你让{studentName}立刻停止对那块磁盘的任何写操作，然后开始用extundelete扫描inode残留。扫了三个小时，找回了约60%的文件——大部分log完整，部分checkpoint文件损坏，但最关键的baseline对比数据几乎全部找到了。{studentName}盯着找回来的文件列表，把屏幕上下滚了好几遍，约四十秒后抬起头，说了一句"谢谢老师"，声音有点哑。你没说什么，但这条消息后来存在了你的收件箱里很久没有归档。',
+            narrative: '你让{studentName}立刻停止对那块磁盘的任何写操作，然后开始用extundelete扫描inode残留。扫了三个小时，找回了约60%的文件，大部分log完整，部分checkpoint文件损坏，但最关键的baseline对比数据几乎全部找到了。{studentName}盯着找回来的文件列表，把屏幕上下滚了好几遍，约四十秒后抬起头，说了一句"谢谢老师"，声音有点哑。你没说什么，但这条消息后来存在了你的收件箱里很久没有归档。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 20 },
               { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -737,7 +737,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你们尝试了数据恢复，磁盘扫了四个小时，extundelete返回了一批文件，但大部分已经被系统覆写了——那块分区是热写盘，三个月来每天都有新数据写入。最终只找回了7个完整文件，里面没有最关键的那几次run。{studentName}的表情在"找到一些"和"但不够用"之间经历了一个完整的弧度，最终落在了"我需要重新跑"这个结论上——说这话的时候语气已经很轻了，轻得像是把那三个月的重量都压着说出来的。',
+            narrative: '你们尝试了数据恢复，磁盘扫了四个小时，extundelete返回了一批文件，但大部分已经被系统覆写了，那块分区是热写盘，三个月来每天都有新数据写入。最终只找回了7个完整文件，里面没有最关键的那几次run。{studentName}的表情在"找到一些"和"但不够用"之间经历了一个完整的弧度，最终落在了"我需要重新跑"这个结论上，说这话的时候语气已经很轻了，轻得像是把那三个月的重量都压着说出来的。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 8 },
               { type: 'randomStudent', stat: 'happiness', delta: -15 },
@@ -753,7 +753,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你让{studentName}坐下，说："数据可以重跑，方法没有失，这三个月学到的东西还在。" 停顿了一下，加了一句："而且，重跑的时候你会比第一次快得多，因为你现在知道哪条路不通了。" {studentName}没有立刻回答，看了你几秒，然后点了点头。不是释然，但是一种可以继续往下走的状态，有时候这已经足够了。',
+            narrative: '你让{studentName}坐下，说："数据可以重跑，方法没有失，这三个月学到的东西还在。" 停顿了一下，加了一句："而且，重跑的时候你会比第一次快得多，因为你现在知道哪条路不通了。" {studentName}没有立刻回答，沉默了片刻，然后点了点头。不是释然，但是一种可以继续往下走的状态，有时候这已经足够了。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 15 },
               { type: 'randomStudent', stat: 'happiness', delta: 10 },
@@ -797,7 +797,7 @@ export const serverEvents: Record<string, GameEvent> = {
     title: '第47小时停电了',
     description: [
       '今天下午三点二十七分，楼里停电了。原因据说是旁边在施工，挖断了一根线，具体情况后续通报。不具体通报了。',
-      '实验室的主服务器正在进行一次48小时的训练run，此刻处于第47小时12分。上一次checkpoint保存在第12小时。损失了35小时的训练进度——以8张A100的算力计算，这相当于消失了约¥14,000的云计算成本。停电还附带带走了组里另外两个正在运行的调试任务，但那些相对次要。',
+      '实验室的主服务器正在进行一次48小时的训练run，此刻处于第47小时12分。上一次checkpoint保存在第12小时。损失了35小时的训练进度，以8张A100的算力计算，这相当于消失了约¥14,000的云计算成本。停电还附带带走了组里另外两个正在运行的调试任务，但那些相对次要。',
     ],
     prompt: '35小时的训练进度在第47小时归零，你决定',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],
@@ -808,7 +808,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在群里发了一条消息："停电了，训练run丢了35小时，重新跑吧，这次记得加checkpoint。下午有空的来讨论一下怎么改脚本。" 句子里没有一个感叹号，措辞干净得像在发通知——因为你确实见过很多次了，激动的词语早就被磨光了。下午组里来了五个人，写了一个通用的checkpoint wrapper，顺便把training pipeline重构了，反而比原来干净了一半。有时候灾难是重构的借口。',
+            narrative: '你在群里发了一条消息："停电了，训练run丢了35小时，重新跑吧，这次记得加checkpoint。下午有空的来讨论一下怎么改脚本。" 句子里没有一个感叹号，措辞干净得像在发通知，因为你确实见过很多次了，激动的词语早就被磨光了。下午组里来了五个人，写了一个通用的checkpoint wrapper，顺便把training pipeline重构了，反而比原来干净了一半。有时候灾难是重构的借口。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 8 },
@@ -817,7 +817,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你发了一条"哈哈"，群里有人回了三个"哈哈哈"，然后消息气泡消失了，将近两分钟没有新的动静。从那以后，组里有一种不成文的共识：当有人在群里发"哈哈"而不带任何解释时，说明事情没有那么好。这个语义共识是从今天开始建立的。',
+            narrative: '你发了一条"哈哈"，群里有人回了三个"哈哈哈"，然后消息气泡消失了，好一会儿没有新的动静。从那以后，组里有一种不成文的共识：当有人在群里发"哈哈"而不带任何解释时，说明事情没有那么好。这个语义共识是从今天开始建立的。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
             ],
@@ -863,7 +863,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你宣布了checkpoint规定，提供了wrapper模板。大家都说好，都表示会用。两周后，有人提交了一个新的训练脚本，里面包含了checkpoint逻辑——保存频率是每24小时一次。你决定不计较"2小时"和"24小时"之间这22小时的差距，毕竟有总比没有强，而且这人的磁盘可能也装不下太多checkpoint。',
+            narrative: '你宣布了checkpoint规定，提供了wrapper模板。大家都说好，都表示会用。两周后，有人提交了一个新的训练脚本，里面包含了checkpoint逻辑，保存频率是每24小时一次。你决定不计较"2小时"和"24小时"之间这22小时的差距，毕竟有总比没有强，而且这人的磁盘可能也装不下太多checkpoint。',
             effects: [
               { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -5 },
@@ -894,7 +894,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你让所有人检查各自的tensorboard日志——那些实时写到独立日志服务器的监控数据没有受到影响，因为日志服务器挂载的是不同分区。从tensorboard里，可以读出训练曲线、关键指标和部分超参数记录。不是完整的结果，但足够重建80%的数据点。有一个学生说"原来tensorboard不是装饰用的"，这句话让你意识到推广监控工具的方式或许需要改进。',
+            narrative: '你让所有人检查各自的tensorboard日志，那些实时写到独立日志服务器的监控数据没有受到影响，因为日志服务器挂载的是不同分区。从tensorboard里，可以读出训练曲线、关键指标和部分超参数记录。不是完整的结果，但足够重建80%的数据点。有一个学生说"原来tensorboard不是装饰用的"，这句话让你意识到推广监控工具的方式或许需要改进。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'allStudents', stat: 'projectProgress', delta: -5 },
@@ -903,7 +903,7 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你尝试了各种恢复手段：检查tensorboard、翻stdout日志、看训练脚本的print输出。零散数据找回了一些，但实验的完整结论无法重建——有三个关键的对照实验什么记录都没有留下。这六天在科研史上就像是被人用橡皮擦掉的部分，可以重写，但永远不知道原来写的是什么。',
+            narrative: '你尝试了各种恢复手段：检查tensorboard、翻stdout日志、看训练脚本的print输出。零散数据找回了一些，但实验的完整结论无法重建，有三个关键的对照实验什么记录都没有留下。这六天在科研史上就像是被人用橡皮擦掉的部分，可以重写，但永远不知道原来写的是什么。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -10 },
               { type: 'allStudents', stat: 'projectProgress', delta: -10 },
@@ -934,7 +934,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你用了一个下午配置了Prometheus + Alertmanager，设置了三级磁盘报警：80%警告、90%橙色告警、95%发短信。同时在所有训练脚本模板里加入了写入前磁盘空间检查，写入失败时抛出明确异常而不是静默继续。最后一步：给ENOSPC写了一行注释说明，加到了实验室的onboarding文档里。这些工作花了四小时，但它改变的是所有未来实验的可靠性下界。',
+            narrative: '你配置了Prometheus + Alertmanager，设置了三级磁盘报警：80%警告、90%橙色告警、95%发短信。同时在所有训练脚本模板里加入了写入前磁盘空间检查，写入失败时抛出明确异常而不是静默继续。最后一步：给ENOSPC写了一行注释说明，加到了实验室的onboarding文档里。这些工作花了一个下午，但它改变的是所有未来实验的可靠性下界。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 8 },

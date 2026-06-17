@@ -16,7 +16,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     title: '顾眠眠的第一印象',
     description: [
       '你去找顾眠眠谈入组计划。她趴在工位上，帽衫帽子盖着整个脑袋，一只手搭在键盘上，显示器亮着，没有任何人类在此存活的迹象。',
-      '你轻咳一声。她抬起头——眼神清醒程度让你当场怀疑人生——然后开口第一句话就是："老师是来问框架选型的吧，我觉得 JAX 这里有个坑，你看——" 她翻开自己的笔记本，翻到某页，直接开讲。',
+      '你轻咳一声。她抬起头，眼神清醒程度让你当场怀疑人生，然后开口第一句话就是："老师是来问框架选型的吧，我觉得 JAX 这里有个坑，你看——" 她翻开自己的笔记本，翻到某页，直接开讲。',
       '你还没开口。你连椅子都没坐下。',
     ],
     prompt: '你选择：',
@@ -31,10 +31,11 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你们聊了二十分钟，她对框架的每一个判断都精准得令人发毛。聊完她打了个哈欠，把帽子重新盖回脑袋。"那老师没别的事我继续了。" 你离开的时候还是搞不清楚"继续"是继续工作还是继续睡——或者两件事在她那儿根本是同一件事。',
+            narrative: '你们聊了好一会儿，她对框架的每一个判断都精准得令人发毛。聊完她打了个哈欠，把帽子重新盖回脑袋。"那老师没别的事我继续了。" 你离开的时候还是搞不清楚"继续"是继续工作还是继续睡，或者两件事在她那儿根本是同一件事。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 2 },
             ],
           },
         ],
@@ -45,7 +46,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你问她刚才到底睡着了没有。她认真地想了三秒，回答："不确定。" 停顿一下，补充："但结论应该是对的。" 然后把帽衫重新盖上，进入下一轮"不确定的状态"。你站在那里，意识到自己连跟进问题都想不出来。',
+            narrative: '你问她刚才到底睡着了没有。她认真地想了想，回答："不确定。" 停顿一下，补充："但结论应该是对的。" 然后把帽衫重新盖上，进入下一轮"不确定的状态"。你站在那里，意识到自己连跟进问题都想不出来。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 3 },
@@ -62,9 +63,9 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_group_meeting_nap',
     title: '组会里的后台进程',
     description: [
-      '周五组会，汇报到第三十分钟。你扫了一眼顾眠眠——她靠在椅背上，眼睛闭着，下巴低了一个危险的角度，笔记本屏幕已经熄屏。周围三个人默契地没有叫她。',
+      '周五组会，汇报到一半。你扫了一眼顾眠眠，她靠在椅背上，眼睛闭着，下巴低了一个危险的角度，笔记本屏幕已经熄屏。周围三个人默契地没有叫她。',
       '汇报结束，全场准备散会。顾眠眠睁开眼，打了个哈欠，抬手说："第十七页那个消融实验，random seed 没 fix，图里的误差棒和正文对不上。"',
-      '汇报人翻回第十七页。对不上。全场沉默了大约五秒，沉默到有点超自然。',
+      '汇报人翻回第十七页。对不上。全场沉默了一下，沉默到有点超自然。',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -79,7 +80,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '走廊里有人小声问你："顾眠眠刚才是睡着了还是……" 你说不知道。对方点了点头，表情跟你一模一样——那种见鬼了又无法举证的表情。顾眠眠已经背包消失了，走得比所有人都快。',
+            narrative: '走廊里有人小声问你："顾眠眠刚才是睡着了还是……" 你说不知道。对方点了点头，表情跟你一模一样，那种见鬼了又无法举证的表情。顾眠眠已经背包消失了，走得比所有人都快。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
             ],
@@ -97,6 +98,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 3 },
               { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 2 },
             ],
           },
         ],
@@ -110,7 +112,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_gossip_oracle',
     title: '她已经知道了',
     description: [
-      '你今天早上刚听说一件敏感八卦——某位老师的项目快撑不住了，经费告急。消息是早上才传开的，知情人用手指头数得过来。',
+      '你今天早上刚听说一件敏感八卦，某位老师的项目快撑不住了，经费告急。消息是早上才传开的，知情人用手指头数得过来。',
       '下午你碰到顾眠眠，随口问了句"最近有什么动静没"，她打了个哈欠，说："那个项目啊，三个月前经费就有问题了。上个月他们还想来借服务器配额，你知道吧？"',
       '你不知道。你完全不知道。你知道的比她少了至少九十天。',
     ],
@@ -144,6 +146,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 3 },
               { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'skills.social', delta: 2 },
             ],
           },
         ],
@@ -157,7 +160,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_dream_solution',
     title: '凌晨三点的绿色日志',
     description: [
-      '早上九点，你看到顾眠眠的消息："老师那个 dataloader 死锁，昨晚做梦想到原因了——是 num_workers 和 shared memory 的竞争，我改了一下，你看看。"',
+      '早上九点，你看到顾眠眠的消息："老师那个 dataloader 死锁，昨晚做梦想到原因了，是 num_workers 和 shared memory 的竞争，我改了一下，你看看。"',
       '附件是终端截图，全绿，loss 曲线正常下降，时间戳凌晨三点二十分。',
       '你看了一眼这个 bug。这玩意儿卡了你们将近两周。',
     ],
@@ -172,7 +175,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"对，" 她回复，"梦里在跑实验，看到 worker 的 handle 没有正确释放，醒来就改了。" 你盯着这条消息看了很久，最后回了个"……好的谢谢"。她没有继续回复——大概又睡了，把改好的代码留在现实里，人已经回去后台了。',
+            narrative: '"对，" 她回复，"梦里在跑实验，看到 worker 的 handle 没有正确释放，醒来就改了。" 你盯着这条消息看了好一会儿，最后回了个"……好的谢谢"。她没有继续回复，大概又睡了，把改好的代码留在现实里，人已经回去后台了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 5 },
@@ -205,9 +208,9 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_mystery_nap',
     title: '两小时空白',
     description: [
-      '下午两点到四点，顾眠眠人间蒸发。工位空着，外套还挂在椅背上，手机没带走，杯子里的水是热的——一切迹象表明她五分钟前还存在过。',
+      '下午两点到四点，顾眠眠人间蒸发。工位空着，外套还挂在椅背上，手机没带走，杯子里的水是热的，一切迹象表明她不久前还存在过。',
       '四点整她推门进来，脸上有一道枕痕，头发乱了一个方向，手里夹着一叠 A4 纸，径直走回工位坐下。',
-      '你凑过去看——完整的实验方案分析，有数据，有图，有结论，打印时间戳：15:47。她睡着的时候比你醒着的时候产出多。',
+      '你凑过去看，完整的实验方案分析，有数据，有图，有结论，打印时间戳：15:47。她睡着的时候比你醒着的时候产出多。',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -220,7 +223,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"睡了一下，" 她说，然后拿笔改一个字。"在哪睡的？" "走廊尽头有个沙发。" 你想了想——走廊尽头确实有个沙发，你工作两年了，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
+            narrative: '"睡了一下，" 她说，然后拿笔改一个字。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -253,7 +256,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     title: '那份没有注释的代码',
     description: [
       '顾眠眠提交了一个 PR。你打开一看：三百行，注释栏只有七个字："功能见变量名。"',
-      '但变量名确实见功能。`stale_grad_accumulator`、`fence_before_sync`、`shadow_buffer_offset`——每个名字都精确到不需要解释，函数拆分干净，边界条件处理完整，逻辑一眼读到底，像一本没有页码也能翻的书。',
+      '但变量名确实见功能。`stale_grad_accumulator`、`fence_before_sync`、`shadow_buffer_offset`，每个名字都精确到不需要解释，函数拆分干净，边界条件处理完整，逻辑一眼读到底，像一本没有页码也能翻的书。',
       '提交时间戳：昨天凌晨一点半。昨天上午组会她一直闭着眼睛，你以为她不在状态。',
     ],
     prompt: '你选择：',
@@ -299,9 +302,9 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_debug_assist',
     title: '五秒看图，一分钟出答案',
     description: [
-      '一个 bug 卡了三天。日志翻了几十遍，堆栈打印了，复现路径试了七种，没有任何进展。你拿着电脑去找顾眠眠。',
-      '她接过电脑，扫了一眼报错，大约五秒。然后把电脑还给你，闭上眼睛，下巴低了下去，像是切换进了某种内部检索模式。',
-      '一分钟零七秒后，她睁眼，说出了一个你从未想到的根本原因，精确到具体的调用路径和触发条件，比你自己的理解清楚了三个数量级。',
+      '一个 bug 卡了三天。日志翻了很多遍，堆栈打印了，复现路径试了好几种，没有任何进展。你拿着电脑去找顾眠眠。',
+      '她接过电脑，扫了一眼报错，不过几秒。然后把电脑还给你，闭上眼睛，下巴低了下去，像是切换进了某种内部检索模式。',
+      '片刻之后，她睁眼，说出了一个你从未想到的根本原因，精确到具体的调用路径和触发条件，比你自己的理解清楚了三个数量级。',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -330,7 +333,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她歪头认真想了想："调用路径里有个 lock 没有 release，这种模式我见过——可能在某个梦里见过。" 你盯着她看了一会儿，然后决定今晚认真睡一觉，把它当作一种学习方法来试试。',
+            narrative: '她歪头认真想了想："调用路径里有个 lock 没有 release，这种模式我见过，可能在某个梦里见过。" 你盯着她看了一会儿，然后决定今晚认真睡一觉，把它当作一种学习方法来试试。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 5 },
@@ -348,7 +351,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_missing_at_deadline',
     title: 'DDL前一天找不到人',
     description: [
-      '截止日前一天，顾眠眠人间蒸发。工位空，帽衫不在，手机不在桌上，消息已送达没有回复。你问了一圈，有人说早上见过她，也有人说可能没来过——目击证词无法形成共识。',
+      '截止日前一天，顾眠眠人间蒸发。工位空，帽衫不在，手机不在桌上，消息已送达没有回复。你问了一圈，有人说早上见过她，也有人说可能没来过，目击证词无法形成共识。',
       '实验室里弥漫着一种奇特的量子叠加状态：她既可能在实验室，也可能没在，在有人观察之前没有定论。',
       '提交截止前两小时，她推门进来，插上电脑，上传了一个数据包：全组最完整的实验结果，标注整齐，baseline 对比齐全，附一页总结，格式甚至比模板还规范。',
     ],
@@ -412,7 +415,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你若无其事地转移了话题，她也没有追问，继续打哈欠。你回到工位后坐了五分钟，在脑子里把那间会议室复盘了一遍——窗帘是拉着的，门是关着的，手机全程没有响过。最终你决定不再深想。有些事情，知道答案比不知道更让人不安。',
+            narrative: '你若无其事地转移了话题，她也没有追问，继续打哈欠。你回到工位后坐了一会儿，在脑子里把那间会议室复盘了一遍，窗帘是拉着的，门是关着的，手机全程没有响过。最终你决定不再深想。有些事情，知道答案比不知道更让人不安。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
             ],
@@ -425,7 +428,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她愣了一下，歪头认真想了想，然后说："我不知道……可能上周在哪儿睡着的时候听到了什么，不确定。" 她自己也搞不清楚信息的来源。你盯着她看了一会儿，决定接受这个答案——因为另一个可能的解释，你不太敢想到底。',
+            narrative: '她愣了一下，歪头认真想了想，然后说："我不知道……可能上周在哪儿睡着的时候听到了什么，不确定。" 她自己也搞不清楚信息的来源。你盯着她看了一会儿，决定接受这个答案，因为另一个可能的解释，你不太敢想到底。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -444,8 +447,8 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_alumni_visit',
     title: '凌晨四点的合作邀请',
     description: [
-      '毕业过去半年了。你偶尔在期刊上看到顾眠眠的名字，频率比你预期高，都是第一作者。有人跟你说，她在那个研究院同样以睡觉闻名，组里没有人确定她什么时候是醒的——原来这不是实验室的特色，是她自带的属性。',
-      '今天早上你打开邮件，看到她发来的一封信，主题是"合作邀请——仪器共享与联合建模方案"。邮件写得完整，有具体方案，有时间节点，有预期产出，CC了三个恰好合适的人，一个字都不多余。',
+      '毕业过去半年了。你偶尔在期刊上看到顾眠眠的名字，频率比你预期高，都是第一作者。有人跟你说，她在那个研究院同样以睡觉闻名，组里没有人确定她什么时候是醒的，原来这不是实验室的特色，是她自带的属性。',
+      '今天早上你打开邮件，看到她发来的一封信，主题是"合作邀请：仪器共享与联合建模方案"。邮件写得完整，有具体方案，有时间节点，有预期产出，CC了三个恰好合适的人，一个字都不多余。',
       '时间戳是今天凌晨四点零三分。正文最后一句话是："老师，如果方便的话回一下，我不急，我现在可能在睡。"',
     ],
     prompt: '你选择：',
@@ -475,7 +478,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封比较随意的回信，问她近况。她六小时后回复："挺好的，发了三篇。那边的沙发比咱们走廊那个软多了。老师，你们那个沙发换了没？" 你去走廊看了一眼——没换，还是那张，落了薄薄一层灰。你站在那儿待了一会儿，没有说什么，回去了。',
+            narrative: '你写了一封比较随意的回信，问她近况。她过了好几个小时才回复："挺好的，发了三篇。那边的沙发比咱们走廊那个软多了。老师，你们那个沙发换了没？" 你去走廊看了一眼，没换，还是那张，落了薄薄一层灰。你站在那儿待了一会儿，没有说什么，回去了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 8 },

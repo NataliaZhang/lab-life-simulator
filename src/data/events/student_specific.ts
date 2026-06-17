@@ -29,11 +29,11 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}先是愣了一秒，然后用力点了点头，把论文抱得紧了一些，仿佛怕你反悔。接下来几个月进展顺利。答辩那天，你收到一条消息："通过了！谢谢老师！" 后面跟了七个感叹号，创下本组新高。',
+            narrative: '{studentName}先是愣了一下，然后用力点了点头，把论文抱得紧了一些，仿佛怕你反悔。接下来几个月进展顺利。\n\n答辩那天，你收到一条消息："通过了！谢谢老师！！" 全组一同庆祝，大家都很高兴。',
             effects: [
               { type: 'graduateStudent' },
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'randomStudent', stat: 'favor', delta: 10 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'allStudents', stat: 'happiness', delta: 5}
             ],
           },
         ],
@@ -44,7 +44,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}盯着那本论文看了大约五秒，然后若无其事地把它塞回背包，动作缓慢而精确，像在拆弹。"好的老师，那我明年再来。" 语气稳得有点不对劲——稳到让你想打开那本论文重新看一遍。',
+            narrative: '{studentName}盯着那本论文看了一会儿，然后若无其事地把它塞回背包，动作缓慢而精确，像在拆弹。"好的老师，那我明年再来。" 语气镇定得有点不对劲，让你心虚地想打开那本论文重新看一遍。',
             effects: [
               { type: 'extendGraduation' },
               { type: 'randomStudent', stat: 'favor', delta: -5 },
@@ -77,7 +77,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'graduateStudent' },
               { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'randomStudent', stat: 'favor', delta: 8 },
+              { type: 'allStudents', stat: 'happiness', delta: 8 },
             ],
           },
         ],
@@ -108,7 +108,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     description: [
       '又是六月。这次{studentName}没有发消息预约——早上九点直接出现在你门口，背着个双肩包，表情很复杂，像是做好了某种准备。',
       '桌上放下的论文比之前厚了整整一倍。封面写着《博士学位论文（终稿·第三版·正式版·这次是真的）》。你翻了翻——大概四百页，后三分之一是附录，附录 F 是附录 C 的补充说明，附录 G 是对附录 F 的修订。',
-      '{studentName}深吸一口气，开口前停顿了整整三秒。"老师……我最近收到了一个创业 offer。"',
+      '{studentName}深吸一口气，开口前停顿了一下。"老师……我最近收到了一个创业 offer。"',
     ],
     prompt: '第三次了。这次你怎么回应？',
     options: [
@@ -136,7 +136,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
             narrative: '话还没说完，{studentName}已经站起来了。"老师，我想清楚了。" 他们把那本四百页的论文留在你桌上，双肩包往肩上一甩，鞠了个躬，转身走了。三周后你收到邮件："{studentName}已正式离组，感谢导师三年培养。" 附了一个公司官网链接，用的就是他论文里的那个模型。',
             effects: [
               { type: 'leaveStudent' },
-              { type: 'lab', stat: 'reputation', delta: -3 },
+              { type: 'lab', stat: 'reputation', delta: -10 },
             ],
           },
         ],
@@ -168,7 +168,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '整理成论文，赶快投出去',
         outcomes: [{
           weight: 1,
-          narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。他愣了两秒，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
+          narrative: '你把笔记整理成了一篇理论文章的骨架，发给组里讨论。林小卷有点茫然地盯着自己名字出现在论文标题下方，说："老师，这个真的可以投吗？" 你说可以。他愣了一下，然后发出了一种只有推完三十页证明的人才能发出的、非常轻的笑声。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 10 },
@@ -237,7 +237,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         text: '先内部推广，全组用起来',
         outcomes: [{
           weight: 1,
-          narrative: '你把框架推给了全组，组里训练速度明显提升。顾眠眠被动成为了技术支持，每天被人拉着问配置问题，一开始有点烦，后来发现自己解释起来越来越流畅——她无意间发现了自己有讲明白复杂事物的天赋，这件事让她在心里偷乐了好几天，表面上还是一副"这不是常识吗"的神情。',
+          narrative: '你把框架推给了全组，组里训练速度明显提升。顾眠眠被动成为了技术支持，每天被人拉着问配置问题，一开始有点烦，后来发现自己解释起来越来越流畅。她无意间发现了自己有讲明白复杂事物的天赋，这件事让她在心里偷乐了好几天，表面上还是一副"这不是常识吗"的神情。',
           effects: [
             { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'skills.social', delta: 4 },

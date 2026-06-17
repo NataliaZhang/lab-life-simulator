@@ -54,8 +54,8 @@ function buildStudent(candidateId: string, time: GameTime): Student | null {
       engineering: clamp100(candidate.baseSkills.engineering),
       social: clamp100(candidate.baseSkills.social),
     },
-    favor: clampPos(candidate.baseFavor),
-    happiness: clampPos(candidate.baseHappiness),
+    favor: clamp100(candidate.baseFavor),
+    happiness: clamp100(candidate.baseHappiness),
     projectProgress: 0,
     status: 'active',
     traitIds: candidate.traitIds,
@@ -88,6 +88,7 @@ export function createInitialState(): GameState {
     projectIdeas: [],
     activeProjects: [],
     completedProjects: [],
+    noStudentMonths: 0,
     chosenOptionIds: [],
     studentConditionalLog: {},
   };
@@ -145,7 +146,7 @@ function applyStudentStat(student: Student, stat: StudentStatKey, delta: number)
     case 'favor':
       return { ...student, favor: clamp100(student.favor + delta) };
     case 'happiness':
-      return { ...student, happiness: clampPos(student.happiness + delta) };
+      return { ...student, happiness: clamp100(student.happiness + delta) };
     case 'projectProgress':
       return { ...student, projectProgress: clamp100(student.projectProgress + delta) };
     case 'skills.theory':
@@ -451,6 +452,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeProjects = removeLeaderOnStudentLeave(tempState, boundStudentId).activeProjects;
       }
 
+      // First-idea onboarding hint: fires once when the very first project idea is unlocked
+      const isFirstIdea = state.projectIdeas.length === 0 && newProjectIdeas.length > 0;
+      const ideaHintEntry: LogEntry | null = isFirstIdea ? {
+        id: `hint_first_idea_${action.eventId}`,
+        time: { ...state.time },
+        type: 'system',
+        title: '',
+        narrative: '💡 点击右上角的"项目"可以查看灵感，并安排学生推进研究项目。',
+      } : null;
+
       return {
         ...state,
         phase: outcome.phaseChange ?? state.phase,
@@ -465,7 +476,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeBoundStudent2Id: null,
         graduationExtensions,
         chosenOptionIds: [...state.chosenOptionIds, action.optionId],
-        storyLog: [...state.storyLog, logEntry],
+        storyLog: [...state.storyLog, logEntry, ...(ideaHintEntry ? [ideaHintEntry] : [])],
       };
     }
 

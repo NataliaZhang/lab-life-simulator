@@ -45,7 +45,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '他立刻拉了群，三秒后王教授回了条"幸会"。他满意地收起手机，抬起头说："老师你说，我认真听。" 你意识到，刚才那一切对他来说根本不叫分心——只是举手之劳，顺手的事。',
+            narrative: '他立刻拉了群，王教授很快回了条"幸会"。他满意地收起手机，抬起头说："老师你说，我认真听。" 你意识到，刚才那一切对他来说根本不叫分心，只是举手之劳，顺手的事。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'skills.social', delta: 3 },
@@ -79,7 +79,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '第二天他发来一份文档——按方向、机构、合作价值分了三类，每人后面附有聊天内容摘要。你看着这份整理有点发愣，问他什么时候做的。他说："昨晚，顺手。"',
+            narrative: '第二天他发来一份文档，按方向、机构、合作价值分了三类，每人后面附有聊天内容摘要。你看着这份整理有点发愣，问他什么时候做的。他说："昨晚，顺手。"',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'skills.social', delta: 3 },
@@ -127,7 +127,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '他摆了摆手，说："来都来了，举手之劳。" 你意识到这是他的口头禅，也是他行事的底层逻辑——认识人不是目的，帮上忙才叫数。他的通讯录是随时能激活的网络，不是名单。',
+            narrative: '他摆了摆手，说："来都来了，举手之劳。" 你意识到这是他的口头禅，也是他行事的底层逻辑，认识人不是目的，帮上忙才叫数。他的通讯录是随时能激活的网络，不是名单。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
@@ -142,7 +142,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '他想了想，说："不知道，没数过。" 然后认真补充："但我记得每个人聊了什么，这个比较重要。" 你突然明白了他和普通社交达人的区别——他收集的不是联系方式，是对话。',
+            narrative: '他想了想，说："不知道，没数过。" 然后认真补充："但我记得每个人聊了什么，这个比较重要。" 你突然明白了他和普通社交达人的区别，他收集的不是联系方式，是对话。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 6 },
@@ -210,7 +210,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     id: 'tkl_academic_neglect',
     title: '算我的道歉',
     description: [
-      '最近两个月唐扩列参加了好几个活动——会议、饭局、校友聚会，你给他定的进度节点一个没完成，一直说"快了快了"。',
+      '最近两个月唐扩列参加了好几个活动，会议、饭局、校友聚会，你给他定的进度节点一个没完成，一直说"快了快了"。',
       '这天他主动来敲门，站在那里说："老师，我知道进度拖了，这是我的问题，最近太分散了。"',
       '他把一份文件推过来：合作机会清单，按优先级分类，每个联系人附有背景和可跟进方向，还有两封已经起草好的合作意向邮件草稿。"这个算我的道歉，" 他说，"你看看有没有用得上的。"',
     ],
@@ -231,6 +231,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'projectProgress', delta: 8 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'skills.engineering', delta: 3 },
             ],
           },
         ],
@@ -259,8 +260,8 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     id: 'tkl_knows_everyone',
     title: '他我认识',
     description: [
-      '你和唐扩列聊接下来的研究方向，提到了一位你一直想联系但找不到渠道的学者——在某个交叉领域做得很前沿，你们没有共同熟人。',
-      '唐扩列想了大概三秒，掏出手机翻了翻，把屏幕转过来："他我认识，去年一个论坛加的，你看，这是他微信。上次他还发过他们组的预印本过来。"',
+      '你和唐扩列聊接下来的研究方向，提到了一位你一直想联系但找不到渠道的学者，在某个交叉领域做得很前沿，你们没有共同熟人。',
+      '唐扩列想了想，掏出手机翻了翻，把屏幕转过来："他我认识，去年一个论坛加的，你看，这是他微信。上次他还发过他们组的预印本过来。"',
       '你看了眼头像，确认就是那个人。沉默了一秒。',
     ],
     prompt: '你选择：',
@@ -275,11 +276,12 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '唐扩列当场发出消息，双方背景介绍得恰到好处，不过分也不客套。对方当天下午就回了，说可以安排线上交流。你想，自己原本估计至少要找三个中间人、绕两个月——他用一条消息搞定了。',
+            narrative: '唐扩列当场发出消息，双方背景介绍得恰到好处，不过分也不客套。对方当天下午就回了，说可以安排线上交流。你想，自己原本估计至少要找三个中间人、绕两个月，他用一条消息搞定了。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'skills.social', delta: 2 },
             ],
           },
         ],
@@ -323,7 +325,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"没什么，" 他说，"就是觉得大家认识认识挺好的，没想到还顺带帮上忙了。" 服务器一周后到，他负责协调了整个交接。你发现他做这些事时没有半点功利感——他真的只是喜欢让人和人之间产生连接，其他的都是副产品。',
+            narrative: '"没什么，" 他说，"就是觉得大家认识认识挺好的，没想到还顺带帮上忙了。" 服务器一周后到，他负责协调了整个交接。你发现他做这些事时没有半点功利感，他真的只是喜欢让人和人之间产生连接，其他的都是副产品。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 10 },
@@ -340,7 +342,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"好的老师，下次提前说。" 他记下来了，而且真做到了——每次活动前发一条简短预告。你后来发现，加了这个习惯之后他反而组织得更频繁了，因为你偶尔会帮他推一推，来的人质量也更高了。',
+            narrative: '"好的老师，下次提前说。" 他记下来了，而且真做到了，每次活动前发一条简短预告。你后来发现，加了这个习惯之后他反而组织得更频繁了，因为你偶尔会帮他推一推，来的人质量也更高了。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
@@ -358,7 +360,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     id: 'tkl_wrong_priority',
     title: '那次聚会其实也没那么重要',
     description: [
-      '上周有次重要的项目中期汇报，唐扩列的表现比平时差了一截——思路不流畅，几个关键数据搅混了，问答环节也没发挥好。',
+      '上周有次重要的项目中期汇报，唐扩列的表现比平时差了一截，思路不流畅，几个关键数据搅混了，问答环节也没发挥好。',
       '汇报结束，你把他留下来问情况。他低着头说："前一天参加了个聚会，到比较晚，没睡好。"',
       '他顿了一下，说："那次聚会其实也不是很重要，当时觉得会有用，结果没什么收获。我不应该去的。"',
     ],
@@ -389,11 +391,12 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"谢谢老师。" 他抬起头，表情恢复了正常。"我把汇报的数据重新整理了一遍发你，你看哪里有问题。" 你打开文件，发现他已经把混淆的那几个对比图全部重做了，附了一段说明。他的反应速度一直不慢——只是这次能量用错了方向。',
+            narrative: '"谢谢老师。" 他抬起头，表情恢复了正常。"我把汇报的数据重新整理了一遍发你，你看哪里有问题。" 你打开文件，发现他已经把混淆的那几个对比图全部重做了，附了一段说明。他的反应速度一直不慢，只是这次能量用错了方向。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'projectProgress', delta: 4 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'skills.engineering', delta: 3 },
             ],
           },
         ],
@@ -409,7 +412,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     description: [
       '你正在准备一个重要的经费申请，时间紧，竞争大，心里没底。',
       '这天唐扩列打电话过来，语气一如既往地平静："老师，我有个朋友好像是这次基金的评委之一，论坛上认识的，聊得挺好的。你要不要我帮你引荐一下，见面聊聊？"',
-      '他补了一句："就是纯认识一下，我不是说走后门——我就是觉得，多认识一个人总是好的。"',
+      '他补了一句："就是纯认识一下，我不是说走后门，就是觉得多认识一个人总是好的。"',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -423,7 +426,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '唐扩列安排了一次简短的线下见面，介绍时只说了双方背景，什么都没多说。对方是个很正直的学者，聊了二十分钟，全是关于研究本身的话题。几个月后申请通过了，你不知道那次见面有没有起作用，也许没有。但那个领域里多了一个真正了解你在做什么的人，这本身已经够了。',
+            narrative: '唐扩列安排了一次简短的线下见面，介绍时只说了双方背景，什么都没多说。对方是个很正直的学者，聊了一会儿，全是关于研究本身的话题。几个月后申请通过了，你不知道那次见面有没有起作用，也许没有。但那个领域里多了一个真正了解你在做什么的人，这本身已经够了。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 8 },
@@ -458,7 +461,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     title: '那家公司CEO跟你是校友',
     description: [
       '唐扩列毕业后去了一家科技公司做生态合作。据说入职三个月，整栋楼所有人都认识他，连门口的保安大叔都知道他名字。',
-      '今天你收到他发来的邮件，主题是"合作项目邀请——实验室联合研究机会"。内容很正式：项目框架、时间线、预期产出、双方分工，显然是认真写的。',
+      '今天你收到他发来的邮件，主题是"合作项目邀请：实验室联合研究机会"。内容很正式：项目框架、时间线、预期产出、双方分工，显然是认真写的。',
       '正文最后一行是："老师，对了，那家公司的CEO查了一下，好像是您校友，我帮您引荐一下？来都来了嘛。"',
     ],
     prompt: '你选择：',
@@ -473,7 +476,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回了邮件，说两件事都可以推进。他当天下午发来引荐消息，介绍语写得很好，把你们实验室的方向和CEO的背景都自然地串在一起，读完感觉像他们已经认识很久了。CEO回复得很快，说"久仰，改天见"。你放下手机，想到这个学生——出去了这么久，还是第一时间想着实验室，还是那句"来都来了"。有些人天生就是这样，走到哪里都在把人和人连起来，这不是策略，就是他。',
+            narrative: '你回了邮件，说两件事都可以推进。他当天下午发来引荐消息，介绍语写得很好，把你们实验室的方向和CEO的背景都自然地串在一起，读完感觉像他们已经认识很久了。CEO回复得很快，说"久仰，改天见"。你放下手机，想到这个学生，出去了这么久，还是第一时间想着实验室，还是那句"来都来了"。有些人天生就是这样，走到哪里都在把人和人连起来，这不是策略，就是他。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -488,7 +491,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"好的老师，" 他回复，然后附了一句，"那个校友引荐我帮您备着，您说一声随时可以。" 合作项目推进顺利，他在里面做联络协调，效率极高。有一次开会他顺口提到CEO，你才发现他早已私下认识对方了，但他一次都没有再提引荐的事——只是说"那个人挺有意思的，我们聊过几次"。他记得你说过算了，所以就真的算了。这个孩子，心里有数。',
+            narrative: '"好的老师，" 他回复，然后附了一句，"那个校友引荐我帮您备着，您说一声随时可以。" 合作项目推进顺利，他在里面做联络协调，效率极高。有一次开会他顺口提到CEO，你才发现他早已私下认识对方了，但他一次都没有再提引荐的事，只是说"那个人挺有意思的，我们聊过几次"。他记得你说过算了，所以就真的算了。这个孩子，心里有数。',
             effects: [
               { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'lab', stat: 'reputation', delta: 3 },

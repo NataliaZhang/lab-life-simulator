@@ -18,7 +18,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     description: [
       '毕小天进门的第一件事不是自我介绍，而是把手机屏幕直接怼到你脸前。"老师，您先看这个。"',
       '论文截图，标题是《基于薛定谔猫的分布式系统容错模型》，来自某不知名会议论文集。他用食指点着屏幕，神情比你参加博士答辩时还要严肃："量子态叠加和系统容错之间有一个类比关系，没人仔细挖过，我们可以做。"',
-      '你盯着他眼睛看了整整三秒。他完全不像在开玩笑。他手机备忘录里已经写了两页笔记。两页。',
+      '你盯着他眼睛看了一会儿。他完全不像在开玩笑。他手机备忘录里已经写了两页笔记。两页。',
     ],
     prompt: '新生第一次见面，你怎么回应？',
     triggerConditions: [
@@ -47,7 +47,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '毕小天立刻把手机切换到PPT模式——他已经准备了十八页幻灯片。你听了整整四十分钟，中途有两处你悄悄在心里承认逻辑上居然是对的。散会后你在笔记本上画了一个问号，盯着看了很久。',
+            narrative: '毕小天立刻把手机切换到PPT模式，他已经准备了十八页幻灯片。你听了好一阵，中途有两处你悄悄在心里承认逻辑上居然是对的。散会后你在笔记本上画了一个问号，盯着看了很久。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 10 },
@@ -66,7 +66,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     id: 'bxt_arxiv_discovery',
     title: '每日奇文（第十八天）',
     description: [
-      '毕小天已经连续十八天在组内群里分享冷门论文了。前三天大家还认真看，第六天开始有人把他设成免打扰，第十天陈雪婷专门建了个"奇文频道"把他踢进去，单独归档。',
+      '毕小天已经连续十八天在组内群里分享冷门论文了。头几天大家还认真看，没多久有人把他设成免打扰，第十天陈雪婷专门建了个"奇文频道"把他踢进去，单独归档。',
       '今天这篇的标题是《从鸽巢原理看大学食堂打菜的最优策略》，来自某985高校CS系，发表在"运筹学与生活决策"专栏。摘要写得极其正经，引理和推论一个不少。',
       '毕小天在消息下附言："这篇跟咱们调度模块有个结构上的联系，我梳理了一下发在共享文档里了，师兄师姐有空可以看看。" 没有一点玩笑的意思。',
     ],
@@ -83,7 +83,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"好的老师，我会筛选的。" 他停了两天，然后恢复分享，频率变成每周一篇。但那一篇的质量肉眼可见地变高了——你意识到他在把真正离谱的论文留着自己看，只把"相对正常的"拿出来分享。',
+            narrative: '"好的老师，我会筛选的。" 他停了两天，然后恢复分享，频率变成每周一篇。但那一篇的质量肉眼可见地变高了，你意识到他在把真正离谱的论文留着自己看，只把"相对正常的"拿出来分享。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: -5 },
@@ -119,7 +119,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     description: [
       '毕小天来找你的时候手里拿着一张A4纸，上面打印着一个Workshop的官网截图："第四届AI与中医经络融合研讨会——探索传统医学与深度学习的交叉前沿"。',
       '他把截图放在你桌上，脸上的表情比你写基金申请书的时候还要认真。"老师，我觉得我们可以投一篇，我昨晚已经起草了摘要，您看一下。"',
-      '第二张纸推过来了。摘要整整一页，引用了三篇相关文献——其中两篇经你确认确实存在于这个宇宙中。',
+      '第二张纸推过来了。摘要整整一页，引用了三篇相关文献，其中两篇经你确认确实存在于这个宇宙中。',
     ],
     prompt: '面对这个Workshop投稿请求，你怎么决定？',
     triggerConditions: [
@@ -132,7 +132,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"毕小天，这个和咱们课题相关性太远了。但你主动找投稿机会这个意识很好——去查一下咱们领域的主要venue，做个表格。" 他点头，第二天交来七页的会议列表。每个venue的附注栏里都写了投稿理由，最长的一条写了三行。',
+            narrative: '"毕小天，这个和咱们课题相关性太远了。但你主动找投稿机会这个意识很好，去查一下咱们领域的主要venue，做个表格。" 他点头，第二天交来七页的会议列表。每个venue的附注栏里都写了投稿理由，最长的一条写了好几行。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: -5 },
@@ -147,7 +147,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你花了五分钟在Workshop官网上找审稿委员会名单。其中一位委员是某985正教授，研究方向：非线性经络电信号建模。你沉默了十秒，决定还是不投。毕小天表示理解，把摘要存档，标注"待时机成熟"——他真的这么写的。',
+            narrative: '你在Workshop官网上找了审稿委员会名单，其中一位委员是某985正教授，研究方向：非线性经络电信号建模。你沉默了一下，决定还是不投。毕小天表示理解，把摘要存档，标注"待时机成熟"。他真的这么写的。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 5 },
@@ -167,8 +167,8 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     title: '跨学科Related Work',
     description: [
       '毕小天发来一个共享文档链接："老师，Related Work初稿整理出来了，您看一下。"',
-      '你打开文档，第一反应是眼睛有点花——文献来源跨越了生物信息学、行为经济学和材料科学，用来支撑一个纯CS问题。你深吸一口气，准备打一段措辞温和的"引用范围需要收窄"。',
-      '然后你读到第三段，停住了。他用材料科学里的微观结构相变类比了系统状态迁移的不可逆性——那个类比不只是好听，逻辑上居然是严格的。你往回翻了两次，确认自己没看错。',
+      '你打开文档，第一反应是眼睛有点花，文献来源跨越了生物信息学、行为经济学和材料科学，用来支撑一个纯CS问题。你深吸一口气，准备打一段措辞温和的"引用范围需要收窄"。',
+      '然后你读到第三段，停住了。他用材料科学里的微观结构相变类比了系统状态迁移的不可逆性，那个类比不只是好听，逻辑上居然是严格的。你往回翻了两次，确认自己没看错。',
     ],
     prompt: '这份跨学科Related Work出乎意料地有点东西，你怎么处理？',
     triggerConditions: [
@@ -182,7 +182,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"这部分写得不错，我们留着——但要加一段解释这个类比为什么成立，不能只凭直觉。" 毕小天点头如捣蒜，三天后交来补充说明，附了一个形式化证明草稿。你把它发给合作者，对方回复了一个问号和三个感叹号。',
+            narrative: '"这部分写得不错，我们留着，但要加一段解释这个类比为什么成立，不能只凭直觉。" 毕小天点头如捣蒜，几天后交来补充说明，附了一个形式化证明草稿。你把它发给合作者，对方回复了一个问号和三个感叹号。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 6 },
@@ -220,7 +220,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     description: [
       '上周组会结束，毕小天在门口等你，夹在一堆闲聊里随口丢了一句话，语气像在说天气："老师，你有没有想过，如果把反馈延迟本身当成一个可学习的参数，系统稳定性边界会不会有不一样的形状？"',
       '你当时回了个"嗯等一下我接个电话"，然后就过去了。',
-      '昨晚写方案写到一半，那句话突然在脑子里弹出来。你认真推导了一下——停不下来了。这里头有一个可以独立成文的核心观察，而且可能是一个相当漂亮的小结果。他随口说的。随口。',
+      '昨晚写方案写到一半，那句话突然在脑子里弹出来。你认真推导了一下，停不下来了。这里头有一个可以独立成文的核心观察，而且可能是一个相当漂亮的小结果。他随口说的。随口。',
     ],
     prompt: '这个脑洞比你以为的有价值，你怎么处理？',
     triggerConditions: [
@@ -234,7 +234,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '毕小天愣了整整三秒，随后出现了一种少见的、货真价实的惊讶表情——他大概也没想到那句话被记住了。"老师，那我……可以写个方案？" "写吧。" 方案两天后到了。二十页，附代码框架。',
+            narrative: '毕小天愣了一下，随后出现了一种少见的、货真价实的惊讶表情，他大概也没想到那句话被记住了。"老师，那我……可以写个方案？" "写吧。" 方案两天后到了。二十页，附代码框架。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
@@ -250,7 +250,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你用两周把这个想法系统化，写成初步方案，然后约毕小天谈话，把方案摊开："你上周那个问题，我认真推了一下，你来看看。" 毕小天研究了十分钟，平静地抬起头："所以我是对的。" 他说得如此笃定，以至于你忘了反驳。',
+            narrative: '你用两周把这个想法系统化，写成初步方案，然后约毕小天谈话，把方案摊开："你上周那个问题，我认真推了一下，你来看看。" 毕小天研究了一会儿，平静地抬起头："所以我是对的。" 他说得如此笃定，以至于你忘了反驳。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
@@ -270,7 +270,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     id: 'bxt_thesis_crisis',
     title: '毕设方向被打回',
     description: [
-      '毕小天发来一条消息："老师，我有个事跟您说一下，不急，您有空的时候。"——凡是说"不急"的都很急。',
+      '毕小天发来一条消息："老师，我有个事跟您说一下，不急，您有空的时候。"凡是说"不急"的都很急。',
       '见面后他告诉你：系里审核委员会把他的毕设开题打回了，理由是"研究方向不在本学科规范范围内"。评审意见三条：第一，"跨学科程度超出学位论文边界"；第二，"理论基础借鉴来源存疑"；第三，"选题独特性过强"。最后那条你读了两遍才确认这是批评。',
       '毕小天讲完，往椅子背上一靠，补了一句，语气出奇地平静："老师，我早就备了一个B计划。"',
     ],
@@ -286,7 +286,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: 'B计划是一个更"规范"的选题框架，但里面嵌套了一个和原方向几乎等价的核心问题——换了个表述方式，穿上了一件正经学科的外衣。你盯着他看了很久。"你早就知道会被打回？" "有预期，" 他说，"所以提前写了。" 他说这话的时候没有任何得意，只是陈述事实。',
+            narrative: 'B计划是一个更"规范"的选题框架，但里面嵌套了一个和原方向几乎等价的核心问题，换了个表述方式，穿上了一件正经学科的外衣。你盯着他看了很久。"你早就知道会被打回？" "有预期，" 他说，"所以提前写了。" 他说这话的时候没有任何得意，只是陈述事实。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
@@ -353,11 +353,12 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"组会进度不能掉，你自己把握时间。" 毕小天认真点头。此后他保持每两周一个视频的频率，奇怪的是，每次发完视频的第二天，他的论文推进速度反而比平时快——可能是把表达欲清空了，反而静下来了。',
+            narrative: '"组会进度不能掉，你自己把握时间。" 毕小天认真点头。此后他保持每两周一个视频的频率，奇怪的是，每次发完视频的第二天，他的论文推进速度反而比平时快，可能是把表达欲清空了，反而静下来了。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', delta: 5 },
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.social', delta: 2 },
             ],
           },
         ],
@@ -373,8 +374,8 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     title: '从巴赫赋格曲里挖出来的图神经网络',
     description: [
       '毕小天来找你，手里拿着三张手写纸，每张都密密麻麻画满了图和公式，字迹工整，排列紧凑，像某种精心维护的秘典。',
-      '"老师，我在读一篇分析巴赫赋格曲声部结构的音乐理论论文——里面描述声部关系的那个数学结构，我觉得和我们用的图卷积存在一个同构。"',
-      '他把三张纸依次铺开，讲了大约二十分钟。你认真跟了全程——那个同构不是牵强的类比，是有数学意义的结构对应。更离谱的是，把音乐理论的约束条件引入之后，可以自然推出他们一直在手动调的那个正则化项。他是从巴赫那里推出来的。',
+      '"老师，我在读一篇分析巴赫赋格曲声部结构的音乐理论论文，里面描述声部关系的那个数学结构，我觉得和我们用的图卷积存在一个同构。"',
+      '他把三张纸依次铺开，讲了好一阵。你认真跟了全程，那个同构不是牵强的类比，是有数学意义的结构对应。更离谱的是，把音乐理论的约束条件引入之后，可以自然推出他们一直在手动调的那个正则化项。他是从巴赫那里推出来的。',
     ],
     prompt: '这个跨学科发现有实际价值，你怎么处理？',
     triggerConditions: [
@@ -426,7 +427,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     description: [
       '答辩持续了两个半小时。你在外面等。',
       '门打开的时候，毕小天走出来，表情平静，步伐稳健，和进去之前没有明显区别。他在你旁边坐下，说："委员会让修改，主要意见是研究方向过于边缘化，建议向主流问题靠拢。"',
-      '沉默了三秒，他补了一句，语气平稳得像在报天气："老师，我觉得这说明我们的方向太超前了。"',
+      '他努力保持冷静，但语气里还是透着一股不愿承认的委屈："老师，我觉得这说明我们的方向太超前了。"',
     ],
     prompt: '答辩被打回，他认为是因为"太超前"，你怎么应对？',
     triggerConditions: [
@@ -446,6 +447,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: -8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', delta: 8 },
               { type: 'extendGraduation' },
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.theory', delta: 3 },
             ],
           },
         ],
@@ -456,7 +458,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"你说的不是没有道理。但委员会的意见是客观存在的，咱们先完成答辩——你的原版本我帮你投出去。" 毕小天点头，认真地说："好，那修改版就当翻译项目。" 他开始改，效率出人意料地高。可能是觉得只是在翻译，心理上就不在乎了。',
+            narrative: '"你说的不是没有道理。但委员会的意见是客观存在的，咱们先完成答辩，你的原版本我帮你投出去。" 毕小天点头，认真地说："好，那修改版就当翻译项目。" 他开始改，效率出人意料地高。可能是觉得只是在翻译，心理上就不在乎了。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 5 },
@@ -507,7 +509,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '毕小天发来访谈问题列表和答案草稿，你检查了一遍，没有问题。访谈播出，实验室的名字出现了大概三秒，附在一句话之后——"在这里学到了认真对待奇怪问题的方法。" 你把那一段截图发给了自己，没有说什么，也没有删。',
+            narrative: '毕小天发来访谈问题列表和答案草稿，你检查了一遍，没有问题。访谈播出，实验室的名字一闪而过，附在一句话之后："在这里学到了认真对待奇怪问题的方法。" 你把那一段截图发给了自己，没有说什么，也没有删。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 10 },

@@ -80,7 +80,7 @@ export const groupEvents: Record<string, GameEvent> = {
         text: '这次不投了，下次再来',
         outcomes: [{
           weight: 1,
-          narrative: '你在群里发通知，决定撤稿。大家先是各自盯着屏幕消化了一下，然后有人发"理解，下次一定"，另一个人加了个点赞，气氛意外地缓和——大家都是读博的，这种事不用多解释。',
+          narrative: '你在群里发通知，决定撤稿。大家先是各自盯着屏幕消化了一下，然后有人发"理解，下次一定"，另一个人加了个点赞，气氛意外地缓和，大家都是读博的，这种事不用多解释。',
           effects: [
             { type: 'allStudents', stat: 'happiness', delta: 6 },
             { type: 'allStudents', stat: 'favor', delta: 2 },
@@ -132,7 +132,7 @@ export const groupEvents: Record<string, GameEvent> = {
         text: '不管结果，先全组分析审稿意见',
         outcomes: [{
           weight: 1,
-          narrative: '你组织全组认真读每条意见，各自讲理解，各自提改进方向。有两个人激烈讨论了起来——这正是你想要的。',
+          narrative: '你组织全组认真读每条意见，各自讲理解，各自提改进方向。有两个人激烈讨论了起来，这正是你想要的。',
           effects: [
             { type: 'allStudents', stat: 'skills.theory', delta: 4 },
             { type: 'allStudents', stat: 'favor', delta: 4 },
@@ -194,7 +194,7 @@ export const groupEvents: Record<string, GameEvent> = {
         text: '认清现实，换方向',
         outcomes: [{
           weight: 1,
-          narrative: '你宣布换方向。有人把茶杯放下来，声音比平时重了一点。停了几秒，然后有人开口问"那之前的代码要删吗"，讨论就这么开始了——大家已经在往前看了，只是手上还拿着上一段路的东西。',
+          narrative: '你宣布换方向。有人把茶杯放下来，声音比平时重了一点。停了几秒，然后有人开口问"那之前的代码要删吗"，讨论就这么开始了，大家已经在往前看了，只是手上还拿着上一段路的东西。',
           effects: [
             { type: 'allStudents', stat: 'happiness', delta: -10 },
             { type: 'allStudents', stat: 'favor', delta: -5 },
@@ -224,7 +224,7 @@ export const groupEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '密室里每个人的性格暴露无遗——有人冲在最前面，有人盯着细节，有人在角落独自推理。最后一分钟逃出来，大家都笑得很开心。',
+            narrative: '密室里每个人的性格暴露无遗：有人冲在最前面，有人盯着细节，有人在角落独自推理。最后一分钟逃出来，大家都笑得很开心。',
             effects: [
               { type: 'allStudents', stat: 'favor', delta: 8 },
               { type: 'allStudents', stat: 'happiness', delta: 10 },
@@ -233,7 +233,7 @@ export const groupEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '密室没逃出来，但大家笑话彼此笑到最后。你发现你的学生在压力下的思路跟科研时完全一致——有人是你以为的那样，有人出乎意料。',
+            narrative: '密室没逃出来，但大家笑话彼此笑到最后。你发现你的学生在压力下的思路跟科研时完全一致，有人是你以为的那样，有人出乎意料。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'allStudents', stat: 'favor', delta: 4 },

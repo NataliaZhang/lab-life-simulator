@@ -46,7 +46,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一秒，翻了翻本子，语气依然平静："老师，我理解科研有不确定性，所以每个节点都预留了两周缓冲，如果需要还可以再加一周。" 她把文件翻到附录。详细的缓冲说明早就在那里了。你的抵抗，她已经预见并提前化解。',
+            narrative: '她停顿了一下，翻了翻本子，语气依然平静："老师，我理解科研有不确定性，所以每个节点都预留了两周缓冲，如果需要还可以再加一周。" 她把文件翻到附录。详细的缓冲说明早就在那里了。你的抵抗，她已经预见并提前化解。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 4 },
@@ -86,6 +86,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'student', studentId: 'he_shixu', stat: 'projectProgress', delta: 3 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.theory', delta: 2 },
             ],
           },
         ],
@@ -96,7 +97,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你解释说最近有事，下周给。她回复："好的，我在下周一日历上标注了一下，方便的话那天给我就行。" 你打开共享日历——下周一的格子里已经多了一条"导师修改稿反馈"，标注是她加的。你默默把那天的其他事情挪了一下。',
+            narrative: '你解释说最近有事，下周给。她回复："好的，我在下周一日历上标注了一下，方便的话那天给我就行。" 你打开共享日历，下周一的格子里已经多了一条"导师修改稿反馈"，标注是她加的。你默默把那天的其他事情挪了一下。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 2 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: -3 },
@@ -115,7 +116,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     description: [
       '你在组会后随口问贺时序最近进度怎么样，她说"我发给您看一下"。',
       '你以为会收到一段文字。你收到了一张图：时间轴精确到天，颜色分区标注任务类型，完成部分实心色块，待完成虚线框，每个任务条末端标注交付物。',
-      '图里有一个专门的色块，标注文字："导师审阅窗口"——定期出现，每次两到三天。她为你的反馈时间，建了一个专属任务条。',
+      '图里有一个专门的色块，标注文字："导师审阅窗口"，定期出现，每次两到三天。她为你的反馈时间，建了一个专属任务条。',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -135,6 +136,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'projectProgress', delta: 4 },
               { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.social', delta: 2 },
             ],
           },
         ],
@@ -145,7 +147,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一秒，回答："老师，这个图主要是方便我自己——任务堆积时可以快速判断哪个能延、哪个不能延。" 她翻了翻本子，补了一句："您的窗口期我可以标得宽松一点，不影响您。" 你没再说什么。这个理由，无法反驳。',
+            narrative: '她停顿了一下，回答："老师，这个图主要是方便我自己，任务堆积时可以快速判断哪个能延、哪个不能延。" 她翻了翻本子，补了一句："您的窗口期我可以标得宽松一点，不影响您。" 你没再说什么。这个理由，无法反驳。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'he_shixu', stat: 'skills.theory', delta: 3 },
@@ -162,8 +164,8 @@ export const heShixuEvents: Record<string, GameEvent> = {
     id: 'hsx_takes_over',
     title: '实验室共享日历',
     description: [
-      '你打开实验室共享日历，发现这个月多了很多条目——每个学生的组会汇报时间，每周仪器预约窗口，还有一条每月固定的"实验室例行维护日"。',
-      '你点开一条查看编辑者：贺时序。再点一条：贺时序。包括你的"导师批改窗口"——每周固定两次，每次三小时，备注："如有其他安排请提前告知，我会调整。"',
+      '你打开实验室共享日历，发现这个月多了很多条目：每个学生的组会汇报时间，每周仪器预约窗口，还有一条每月固定的"实验室例行维护日"。',
+      '你点开一条查看编辑者：贺时序。再点一条：贺时序。包括你的"导师批改窗口"，每周固定两次，每次三小时，备注："如有其他安排请提前告知，我会调整。"',
       '你没有设置这些。她设置的。实验室日程，就这样在你不知情的情况下被整顿了。',
     ],
     prompt: '你选择：',
@@ -184,6 +186,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 7 },
               { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.social', delta: 3 },
             ],
           },
         ],
@@ -228,7 +231,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一秒，翻了翻本子，抬头说："谢谢老师，如果有我可以协调的地方请告诉我。" 语气和平时没有任何区别。但你注意到她低头做记录时多写了一行，字很小，你没能看清楚写的是什么。',
+            narrative: '她停顿了一下，翻了翻本子，抬头说："谢谢老师，如果有我可以协调的地方请告诉我。" 语气和平时没有任何区别。但你注意到她低头做记录时多写了一行，字很小，你没能看清楚写的是什么。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 7 },
@@ -292,7 +295,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一秒，说："好的，我把材料整理好发您，需要框架随时说。" 第二天她发来一份非常完整的材料包：项目列表、发表记录、自述提纲，全部带引用格式。你照着写了一封，写完发现结构和她的框架大差不差。她只是换了一种方式让你得到了同样的结果。',
+            narrative: '她停顿了一下，说："好的，我把材料整理好发您，需要框架随时说。" 第二天她发来一份非常完整的材料包：项目列表、发表记录、自述提纲，全部带引用格式。你照着写了一封，写完发现结构和她的框架大差不差。她只是换了一种方式让你得到了同样的结果。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
@@ -309,7 +312,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     id: 'hsx_chaos_intolerance',
     title: '实验室运营问题清单',
     description: [
-      '最近实验室状态不太好——有人在等数据，有人在等反馈，有人不知道自己的任务优先级是什么。你也一直在处理各种临时情况，能量已经透支。',
+      '最近实验室状态不太好，有人在等数据，有人在等反馈，有人不知道自己的任务优先级是什么。你也一直在处理各种临时情况，能量已经透支。',
       '贺时序来找你谈，坐下来，把一份文件放在桌上："老师，我整理了一份当前实验室运营的问题清单，您有时间看一下吗？"',
       '你翻开第一页，第一条："导师能量值可能不足（建议：减少临时事务，固定深度工作时间）"。后面还有六条。你是清单的第一项。',
     ],
@@ -325,11 +328,12 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '七条，条条说到点上，每条后面附了建议措施。你和她讨论了二十分钟，定了三件可以马上改的事。她一边记笔记一边说："我这周帮您盯着，下周看看有没有改善。" 你点头，然后意识到：有人帮你把问题列成清单，本身就已经是最省力的帮助。',
+            narrative: '七条，条条说到点上，每条后面附了建议措施。你和她讨论了一会儿，定了三件可以马上改的事。她一边记笔记一边说："我这周帮您盯着，下周看看有没有改善。" 你点头，然后意识到：有人帮你把问题列成清单，本身就已经是最省力的帮助。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 10 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.theory', delta: 3 },
             ],
           },
         ],
@@ -340,7 +344,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一秒，平静地说："老师，我整理这个主要是想让自己的工作推进更顺畅，不是要给您加负担。如果觉得不合适，我可以只保留跟我直接相关的部分。" 她把文件收了回去。你坐在那里，慢慢回想她刚才说的那几条——其中两条你其实应该早点处理。',
+            narrative: '她停顿了一下，平静地说："老师，我整理这个主要是想让自己的工作推进更顺畅，不是要给您加负担。如果觉得不合适，我可以只保留跟我直接相关的部分。" 她把文件收了回去。你坐在那里，慢慢回想她刚才说的那几条——其中两条你其实应该早点处理。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 2 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: -4 },
@@ -378,6 +382,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 7 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.social', delta: 2 },
             ],
           },
         ],
@@ -428,6 +433,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'projectProgress', delta: 1 },
+              { type: 'student', studentId: 'he_shixu', stat: 'skills.engineering', delta: 3 },
             ],
           },
         ],
@@ -474,7 +480,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说很感兴趣，让她发详细信息。她当天就回了，合作项目说明文件格式完整，联系方式、时间节点、预期产出一清二楚。你看着这份文件，想起她在实验室那几年——她到哪里，好像都在做同样的事：让她周围的人不得不有条理。合作后来真的推进了。',
+            narrative: '你说很感兴趣，让她发详细信息。她当天就回了，合作项目说明文件格式完整，联系方式、时间节点、预期产出一清二楚。你看着这份文件，想起她在实验室那几年，想起她到哪里，好像都在做同样的事：让她周围的人不得不有条理。合作后来真的推进了。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -489,7 +495,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发了封轻松的回信，恭喜她交付顺利，问她适应得怎么样。她回复："还行，主要是开会比较多，需要额外维护一张会议效率追踪表。" 然后附了一句："实验室那个共享日历系统还在用吗？新同学不会用可以让他们联系我。" 你看了看日历——那套系统现在还在运行，好好的。你有点想告诉她，但又觉得她其实早就知道了。',
+            narrative: '你发了封轻松的回信，恭喜她交付顺利，问她适应得怎么样。她回复："还行，主要是开会比较多，需要额外维护一张会议效率追踪表。" 然后附了一句："实验室那个共享日历系统还在用吗？新同学不会用可以让他们联系我。" 你看了看日历，那套系统现在还在运行，好好的。你有点想告诉她，但又觉得她其实早就知道了。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 6 },

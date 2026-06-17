@@ -104,6 +104,65 @@ html, body {
   min-width: 140px;
 }
 
+/* ─── Audio Controls ────────────────────────────────────────────────────────── */
+
+.audio-controls {
+  position: relative;
+}
+
+.audio-controls__icon {
+  font-size: 16px;
+  padding: 2px 6px;
+}
+
+.audio-controls__panel {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 180px;
+  z-index: 200;
+}
+
+.audio-controls__mute-btn {
+  width: 100%;
+  text-align: center;
+}
+
+.audio-controls__mute-btn--active {
+  background: var(--color-warn-bg);
+  color: var(--color-warn);
+  border: 1px solid var(--color-warn);
+}
+
+.audio-controls__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.audio-controls__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.audio-controls__slider {
+  flex: 1;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
 /* ─── Status Bar ───────────────────────────────────────────────────────────── */
 
 .status-bar {

@@ -6,7 +6,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     id: 'mwx_first_meeting',
     title: '先调一下气场',
     description: [
-      '他进门，先没急着坐，而是以一种职业性的眼神扫了一圈你的办公室——书架、窗、桌面，像在做系统诊断，缺的不是数据，是风水数据。',
+      '他进门，先没急着坐，而是以一种职业性的眼神扫了一圈你的办公室：书架、窗、桌面，像在做系统诊断，缺的不是数据，是风水数据。',
       '然后他走过来，把你桌上的文具架轻轻转了二十度，拍拍手，说："老师，这个方向气场会顺很多——不用介意，小优化，不收费的。"',
       '然后他坐下，从包里掏出一份打印的研究计划，开始以另一个完全不同的人格讲科研：方向清晰，假设有出处，每一句话都能追溯。你坐在那里，静静意识到：这个人的玄学和科研，分属两个不同的严谨体系。',
     ],
@@ -52,7 +52,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     id: 'mwx_tarot_before_submit',
     title: '今天宜投稿',
     description: [
-      '论文改到位了，你们约好今天提交。他准时出现在走廊，但没有立刻进来——隔着玻璃，你看见他从书包侧袋摸出一副牌，在走廊灯光下认真地抽了一张，对着灯举起来看了大约二十秒，表情严肃得像在读PCR结果。',
+      '论文改到位了，你们约好今天提交。他准时出现在走廊，但没有立刻进来，隔着玻璃，你看见他从书包侧袋摸出一副牌，在走廊灯光下认真地抽了一张，对着灯举起来看了好一会儿，表情严肃得像在读PCR结果。',
       '然后他推门进来，把那张牌平放在桌上，说："老师，今天宜投稿，我们可以提交了。"牌面是"星星"，他指着图案解释："星星代表希望与长程目标对齐，适合将长期积累的成果推送出去。"',
       '说完他打开电脑，走投稿系统流程，操作熟练，每个字段检查了两遍，比大多数人提交论文都认真。',
     ],
@@ -72,6 +72,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 6 },
+              { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.theory', delta: 4 },
             ],
           },
         ],
@@ -101,7 +102,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     description: [
       '上次投稿，他通过占卜选了一个"宜提交"的日子，比截止日期早了整整四天。你当时只是让他不要拖就好，没有特别在意那个日子的玄学属性。',
       '结果审稿系统的回信比预期早了三周，而且Reviewer A在评审意见里专门点名说框架"思路清晰"。',
-      '他发来一条消息，语气平稳但掩不住得意："老师，玄学成功率本月更新：68%。统计表见附件。"你打开附件：一份标准表格，事件名称、决策类型、预期结果、实际结果，每行都填得整整齐齐，还有"可能的混淆变量"一列。',
+      '他发来一条消息，语气平淡但掩不住得意："老师，玄学成功率本月更新：68%。统计表见附件。"你打开附件：一份标准表格，事件名称、决策类型、预期结果、实际结果，每行都填得整整齐齐，还有"可能的混淆变量"一列。',
     ],
     prompt: '你怎么回应这份68%的战报？',
     triggerConditions: [
@@ -115,7 +116,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回"恭喜，成功率还挺高的"，他回了一个长消息，说68%比随机基准高出约18个百分点，他有在控制"论文本身质量"这一变量。你意识到他在用实验思维研究他自己的迷信——这件事本身有一种让人不知道该笑还是该服气的严谨性。他最后问你要不要加入他的统计，说"样本量多一个是一个"。',
+            narrative: '你回"恭喜，成功率还挺高的"，他回了一个长消息，说68%比随机基准高出约18个百分点，他有在控制"论文本身质量"这一变量。你意识到他在用实验思维研究他自己的迷信，这件事本身有一种让人不知道该笑还是该服气的严谨性。他最后问你要不要加入他的统计，说"样本量多一个是一个"。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 6 },
@@ -162,11 +163,12 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说"散热的解释说得通"，他点头，"对，我提方案的时候也用的是这个理由。"他在记录表备注里写：风水干预/散热优化（双重解释，均有效）。成功率那栏打了个勾。你意识到他在玄学和现实之间找接口的能力，某种意义上也是一种工程技能——一种你在教材里没有见过分类的技能。',
+            narrative: '你说"散热的解释说得通"，他点头，"对，我提方案的时候也用的是这个理由。"他在记录表备注里写：风水干预/散热优化（双重解释，均有效）。成功率那栏打了个勾。你意识到他在玄学和现实之间找接口的能力，某种意义上也是一种工程技能，一种你在教材里没有见过分类的技能。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 5 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'projectProgress', delta: 4 },
+              { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.engineering', delta: 2 },
             ],
           },
         ],
@@ -196,7 +198,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     title: '幸运蓝T恤出战',
     description: [
       '他去某大厂实习面试，出发前给你发了一条消息，语气轻快："老师，今天大吉，运势：事业宫旺，利于面试，忌犹豫。准备完毕，出发。"',
-      '消息附了一张自拍——蓝色T恤，表情自信，手机壳被他翻开拍给你看，里面夹着一枚铜钱，说这个是标配，已陪他过了七次重要考试，胜率100%。',
+      '消息附了一张自拍，蓝色T恤，表情自信，手机壳被他翻开拍给你看，里面夹着一枚铜钱，说这个是标配，已陪他过了七次重要考试，胜率100%。',
       '下午四点多，消息来了："老师，通过了，进技术二面。"最后一句是："星星牌预判+幸运蓝：成功。样本量+1。"',
     ],
     prompt: '你怎么回应这个好消息？',
@@ -211,7 +213,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说"恭喜，推荐信应该也有帮到你"，他回："老师的推荐信是硬实力支撑，幸运蓝负责把我调到最佳状态，两者缺一不可，形成互补闭环。"你看着这句话想了三秒，发现……好像也不是完全没有道理。他后来顺利拿到实习offer，发来消息说玄学成功率再次更新，并感谢了T恤和推荐信。顺序是T恤在前。',
+            narrative: '你说"恭喜，推荐信应该也有帮到你"，他回："老师的推荐信是硬实力支撑，幸运蓝负责把我调到最佳状态，两者缺一不可，形成互补闭环。"你看着这句话想了一下，发现……好像也不是完全没有道理。他后来顺利拿到实习offer，发来消息说玄学成功率再次更新，并感谢了T恤和推荐信。顺序是T恤在前。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 6 },
@@ -226,7 +228,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"实力当然够，"他语气平静，"我准备了三周，把常见题型过了两遍，项目经历整理了三个版本。幸运蓝的作用是走进面试间那一秒不紧张。"他发来他的面试准备清单，密密麻麻，一点都不像靠运气的人。他最后说："玄学不是实力的替代品，是催化剂——让实力以最大效率释放。"你读完这句话，觉得这个学生将来大概会去写自我效能感的商业咨询报告。',
+            narrative: '"实力当然够，"他语气平静，"我准备了三周，把常见题型过了两遍，项目经历整理了三个版本。幸运蓝的作用是走进面试间那一秒不紧张。"他发来他的面试准备清单，密密麻麻，一点都不像靠运气的人。他最后说："玄学不是实力的替代品，是催化剂，让实力以最大效率释放。"你读完这句话，觉得这个学生将来大概会去写自我效能感的商业咨询报告。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 5 },
@@ -308,7 +310,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你把报告从头到尾读了一遍。分析框架是认真的，效应量估计也合理。你提了几个问题：成功的定义是否一致？评定是否盲的？他把每条都记下来，说下一版会改进。你坐在那里，突然意识到这份报告和他做的课题用的是同一套逻辑——只是研究对象从系统变成了他自己的迷信。你想了一下，不知道这算不算一种自我意识。',
+            narrative: '你把报告从头到尾读了一遍。分析框架是认真的，效应量估计也合理。你提了几个问题：成功的定义是否一致？评定是否盲的？他把每条都记下来，说下一版会改进。你坐在那里，突然意识到这份报告和他做的课题用的是同一套逻辑，只是研究对象从系统变成了他自己的迷信。你想了一下，不知道这算不算一种自我意识。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 8 },
@@ -323,7 +325,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"我在附注里写了，"他翻到最后一页，指给你看，局限性第一条，字体和正文一样大，一点都没有想低调处理的意思。他合上报告，说："我做这份统计，目的不是证明玄学成立，是量化它的实际影响规模，同时找到更好的控制变量。第二年度我会把样本量推到80以上。"你意识到他说的是"第二年度"——言下之意，这件事他打算做成一个长期项目。',
+            narrative: '"我在附注里写了，"他翻到最后一页，指给你看，局限性第一条，字体和正文一样大，一点都没有想低调处理的意思。他合上报告，说："我做这份统计，目的不是证明玄学成立，是量化它的实际影响规模，同时找到更好的控制变量。第二年度我会把样本量推到80以上。"你意识到他说的是"第二年度"，言下之意，这件事他打算做成一个长期项目。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 6 },
@@ -341,8 +343,8 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     title: '影响的是心理状态',
     description: [
       '实验室来了一位访学研究员，性格直接，在组会茶歇听说了塔罗投稿的事，当场发问："你是认真相信这个的吗？这不是典型的确认偏误？"',
-      '气氛安静了一秒。他把茶杯放下，没有表现出任何被冒犯的迹象，开口，语气平静到像在组会上讲方法论：',
-      '"我不认为玄学能直接影响物理规律，所以它不改变论文的实际质量。但我认为它影响了我做决策时的心理状态——比如投稿前的焦虑水平，面试时的紧张程度。心理状态影响执行质量，执行质量影响结果。"他停了一下，"所以我优化的，是结果贡献函数里的一个中间变量。"',
+      '气氛安静了片刻。他把茶杯放下，没有表现出任何被冒犯的迹象，开口，语气平静到像在组会上讲方法论：',
+      '"我不认为玄学能直接影响物理规律，所以它不改变论文的实际质量。但我认为它影响了我做决策时的心理状态，比如投稿前的焦虑水平，面试时的紧张程度。心理状态影响执行质量，执行质量影响结果。"他停了一下，"所以我优化的，是结果贡献函数里的一个中间变量。"',
       '访学研究员思考了几秒，说："……这个说法我没办法直接驳倒。"',
     ],
     prompt: '你怎么回应这场意外的辩论？',
@@ -357,10 +359,11 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你没有插话，看他把整个逻辑链讲完。访学研究员最后说"好，算你自洽"，两人转去聊别的，气氛恢复正常。事后他来找你，问你觉得他的论述有没有漏洞——他说他在考虑把这个框架写进玄学年度报告的理论部分。你说"目前没发现明显问题"，他认认真真记下来，和引用一篇peer review过的文献一样郑重。',
+            narrative: '你没有插话，看他把整个逻辑链讲完。访学研究员最后说"好，算你自洽"，两人转去聊别的，气氛恢复正常。事后他来找你，问你觉得他的论述有没有漏洞，说他在考虑把这个框架写进玄学年度报告的理论部分。你说"目前没发现明显问题"，他认认真真记下来，和引用一篇peer review过的文献一样郑重。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 10 },
+              { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.theory', delta: 3 },
             ],
           },
         ],
@@ -405,7 +408,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说"这个版本更简洁，改吧"，他更新了文档，说"好"，若无其事地继续讨论摘要。你注意到他没再提笔画数的事——像是在一张内部清单上打完了勾，可以继续下一项。论文投出去后，一个审稿人在评语里专门写标题"精确而简洁"。他看到这条，给你发了一条消息，只有五个字：笔画数：有效。',
+            narrative: '你说"这个版本更简洁，改吧"，他更新了文档，说"好"，若无其事地继续讨论摘要。你注意到他没再提笔画数的事，像是在一张内部清单上打完了勾，可以继续下一项。论文投出去后，一个审稿人在评语里专门写标题"精确而简洁"。他看到这条，给你发了一条消息，只有五个字：笔画数：有效。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 8 },
@@ -439,7 +442,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     description: [
       // 🎓 毕业后回访 — 建议引擎在graduation后约6个月注入
       '毕业之后他去了一家AI公司。入职没多久，他在团队里推动了一套"发布前玄学评估流程"：每次重大版本上线前，有一个非强制性的环节，让有意愿的同事抽一张塔罗牌，记录感受，然后继续正常的技术评审。',
-      '没有人真的相信它能预测上线质量。但这个环节留了下来——因为大家觉得有趣，而且它奇特地把发布前剑拔弩张的气氛缓和了一些。后来有个工程师说，抽到"愚者"那次他们反而查出了一个潜伏了三个版本的bug。这件事他在内部分享会上讲了，ppt第一页是：样本量n=1，但方向值得关注。',
+      '没有人真的相信它能预测上线质量。但这个环节留了下来，因为大家觉得有趣，而且它奇特地把发布前剑拔弩张的气氛缓和了一些。后来有个工程师说，抽到"愚者"那次他们反而查出了一个潜伏了三个版本的bug。这件事他在内部分享会上讲了，ppt第一页是：样本量n=1，但方向值得关注。',
       '他发来一封邮件，标题简洁：近况更新。正文说玄学成功率已更新至71%，第三年度报告见附件，方法论做了改进，加入了双盲评定。另外，他在公司认识了一个对学术合作感兴趣的工程师，问你有没有意向，可以牵线。',
     ],
     prompt: '你怎么回复这封邮件？',
@@ -454,7 +457,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回了封邮件，说很高兴听到他的近况，工程师合作的事可以进一步了解。他很快回复，把那位工程师的背景和他们讨论过的方向简单介绍了一下，说他可以帮忙安排视频会议。邮件最后他加了一行：老师当时气场调整后的办公室，据说现在依然运作良好。他没有解释这句话，但你知道他说的是第一次见面时那个二十度——那天你让他随便调，他大概记到现在了。',
+            narrative: '你回了封邮件，说很高兴听到他的近况，工程师合作的事可以进一步了解。他很快回复，把那位工程师的背景和他们讨论过的方向简单介绍了一下，说他可以帮忙安排视频会议。邮件最后他加了一行：老师当时气场调整后的办公室，据说现在依然运作良好。他没有解释这句话，但你知道他说的是第一次见面时那个二十度，那天你让他随便调，他大概记到现在了。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -475,6 +478,50 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
             ],
           },
         ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  // ── 大厂挖角 ─────────────────────────────────────────────────────────────
+
+  mwx_industry_poach: {
+    id: 'mwx_industry_poach',
+    title: '有大厂找上了莫问玄',
+    description: [
+      '莫问玄来找你，神情比平时冷静，手里拿着一封打印出来的邮件，放在你桌上，说："老师，我收到了一个offer。"',
+      '是一家头部AI公司，做基础模型的，职级不低，薪资几乎是学术界的数倍。邮件写得很正式，但你注意到对方还在末尾专门提了一句：他们了解过他的研究方向，觉得他的直觉和判断力"非常独特"。',
+      '莫问玄停顿了一下，说："我昨晚占了一卦……结果是「旅」。动而不失位，行而有所归。" 他自己加了一句："模糊的好兆头，我也没完全想清楚。"',
+    ],
+    prompt: '你怎么回应？',
+    triggerConditions: [
+      { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', op: '>=', value: 0 },
+      { type: 'time', field: 'year', op: '>=', value: 5 },
+    ],
+    options: [
+      {
+        id: 'mwx_poach_encourage',
+        text: '"去吧，做学术不是唯一的路。"',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说："去吧，这是一个好机会，你值得。" 莫问玄愣了一下，大概没预料到你这么干脆。临走前说了句"老师，谢谢你这几年"，说得很认真，不是客套话，你听出来了。莫问玄走后，实验室少了一个人，多了一段你之后在学生面前会讲的故事。某次会议上，你偶尔看到莫问玄的名字出现在一篇高引论文的致谢里，排在第一位。',
+          effects: [
+            { type: 'leaveStudent' },
+            { type: 'lab', stat: 'reputation', delta: 2 },
+          ],
+        }],
+      },
+      {
+        id: 'mwx_poach_stay',
+        text: '"先别急，再想想，我们这边还有很多事。"',
+        outcomes: [{
+          weight: 1,
+          narrative: '莫问玄看了你一眼，把那封邮件折好收起来，说："那就再等等，等天时。" 他留下来了。但有时候你在他的眼神里会看到一种你说不清楚的东西——不是后悔，更像是一扇没有完全关上的门，随时有可能再开。',
+          effects: [
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: -8 },
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: -10 },
+          ],
+        }],
       },
     ],
     tags: ['student_specific'],

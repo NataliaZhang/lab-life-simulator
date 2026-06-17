@@ -16,7 +16,7 @@ export const newYearEvents: Record<string, GameEvent> = {
     id: 'new_year_gift',
     title: '新年礼物',
     description: [
-      '元旦快到了。你在某购物平台的"新年礼物推荐"里逛了二十分钟，把十七件东西加进购物车，又删到了一件。',
+      '元旦快到了。你在某购物平台的"新年礼物推荐"里逛了二十分钟，把一堆时尚小垃圾加进购物车，又删到了一件。',
       '实验室里每个人这一年都不容易。如果只能挑一个，你准备送给谁？',
     ],
     prompt: '把礼物送给……',
@@ -106,14 +106,14 @@ export const newYearEvents: Record<string, GameEvent> = {
     id: 'new_year_gift_result_lin_xiaojuan',
     title: '林小卷的反应',
     description: ['林小卷发现了礼盒，拿起来看了看。'],
-    prompt: '（TA的反应是……）',
+    prompt: '林小卷的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '他捧着礼盒看了很久，说了句"谢谢老师"，声音有点小。你以为就这样结束了——结果他接下来二十分钟都在跟你讲一个和礼物完全没有关系的定理。你后来想，这大概是他兴奋的方式。',
+          narrative: '林小卷拆开礼盒后，忽然掏出手机开始打字。你问他在干什么。他头也不抬：「立遗嘱。」你愣住了。他继续敲键盘：「如果今天晚上被车撞了，这就是我人生最后一个新年礼物。」你刚准备骂人，他自己先绷不住笑出了声。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 10 },
@@ -121,7 +121,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '林小卷礼貌地道了谢，把礼盒放在桌边，重新低下头盯住笔记本。礼物和他之间好像隔着一层玻璃，不近也不远。',
+          narrative: '林小卷礼貌地道了谢，把礼盒放在桌边，重新低下头盯住笔记本，不知道是不是又在赶哪个DDL。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 3 },
@@ -138,14 +138,14 @@ export const newYearEvents: Record<string, GameEvent> = {
     id: 'new_year_gift_result_gu_mianmian',
     title: '顾眠眠的反应',
     description: ['顾眠眠趴在桌上，睡眼惺忪地抬头，看见了礼盒。'],
-    prompt: '（TA的反应是……）',
+    prompt: '顾眠眠的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她接过礼盒，愣了三秒，然后轻轻抱了一下——是真的抱了一下——随即若无其事地放开，说"谢谢老师，我去跑实验了"，耳根稍微红了一点。',
+          narrative: '顾眠眠盯着礼盒看了好几秒，像是刚睡醒还没加载完。她拆开包装，把礼盒抱进怀里。\n\n你正想说话，她忽然站起来，小声说：「老师，我先回宿舍一下。」你问怎么了，她抱着盒子往外走，声音轻飘飘的：「有点开心。」\n\n第二天你路过她工位时发现包装纸被叠得整整齐齐收在抽屉里，礼物摆在最显眼的位置。',
           effects: [
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 10 },
@@ -169,15 +169,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_ye_zhiqiu: {
     id: 'new_year_gift_result_ye_zhiqiu',
     title: '叶知秋的反应',
-    description: ['叶知秋看见礼盒，第一反应是皱了下眉。'],
-    prompt: '（TA的反应是……）',
+    description: ['叶知秋的目光落到礼盒上。'],
+    prompt: '叶知秋的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她先说了句"老师这不合适"——但礼盒已经在她手里了。她翻来覆去检查了包装三分钟，正式说了声谢谢，然后问你是哪天买的，那天黄历上写的什么。',
+          narrative: '叶知秋第一反应是：「老师，这属于非必要支出。」第二反应是问价格。第三反应才是说谢谢。\n\n她抱着礼盒研究了十几分钟，从包装结构分析到材料选择。\n\n晚上你收到一份PDF，标题是《关于导师送礼行为的可行性分析》。前面五页全是论证，最后一页是一句话结论：我很喜欢。谢谢老师。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 10 },
@@ -185,10 +185,11 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '叶知秋郑重地道谢，把礼盒摆在桌上靠右的固定位置——她的桌子每件东西都有固定位置——然后继续工作了，像什么都没发生一样。',
+          narrative: '叶知秋郑重地道谢，把礼盒摆在桌上靠右的固定位置。她的桌子每件东西都有固定位置。然后她继续工作了，效率也一点儿没被耽误。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 3 },
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5}
           ],
         },
       ],
@@ -202,14 +203,14 @@ export const newYearEvents: Record<string, GameEvent> = {
     id: 'new_year_gift_result_bai_xiaoman',
     title: '白小满的反应',
     description: ['白小满看见礼盒，先是愣了一下。'],
-    prompt: '（TA的反应是……）',
+    prompt: '白小满的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她眼眶有点红，说了句"老师你还记得啊"，然后很快恢复表情，转过来问你最近有没有好好休息。你买了礼物送她，结果被她顺手关心了一圈。',
+          narrative: '她抱着礼盒开心得转了一圈，接着开始追问你什么时候买的、怎么挑的、是不是路过的时候看到的。\n\n后来整整一个月，你总能在桌上发现莫名其妙出现的小东西：喜欢的饮料、新出的零食、下雨天多出来的一把伞。每次问是谁放的，她都歪着脑袋：「不知道呀，可能是小精灵哦。」',
           effects: [
             { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 10 },
@@ -217,7 +218,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '白小满温温地道了谢，第二天你发现桌上多了一包你上周随口提过的零食，旁边一张便条："路过买的，没啥。"',
+          narrative: '白小满甜甜地道了谢，第二天你发现桌上多了一包你上周随口提过的零食，旁边一张可爱的感谢便条。',
           effects: [
             { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 3 },
@@ -233,15 +234,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_bi_xiaotian: {
     id: 'new_year_gift_result_bi_xiaotian',
     title: '毕小天的反应',
-    description: ['毕小天接过礼盒，立刻把它翻过来看了看底部。'],
-    prompt: '（TA的反应是……）',
+    description: ['毕小天接过礼盒，立刻把它翻过来看了看。'],
+    prompt: '毕小天的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她开始讲新年礼物在不同文化中的演变，从汉代讲到现代商业化逻辑，讲了整整十五分钟，最后才想起来说"谢谢老师"。你觉得这应该算高兴。',
+          narrative: '毕小天眼睛一亮，开始滔滔不绝地讲礼物背后的历史渊源、文化演变和设计逻辑，讲了二十分钟才突然想起来：「啊对，谢谢老师。其实我本来准备自己买的，嗯……但老师送的比较好。」',
           effects: [
             { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 10 },
@@ -249,7 +250,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '毕小天道了谢，礼盒在手里转了两圈，视线随即飘向旁边书架上一本无关的书，整个人的注意力悄悄跑掉了。',
+          narrative: '毕小天道了谢，礼盒在手里转了两圈，视线随即飘向旁边书架上一本无关的书，注意力悄悄跑掉了。',
           effects: [
             { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 3 },
@@ -265,15 +266,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_qian_duoduo: {
     id: 'new_year_gift_result_qian_duoduo',
     title: '钱多多的反应',
-    description: ['钱多多接过礼盒，先看了一眼包装，快速估了个价。'],
-    prompt: '（TA的反应是……）',
+    description: ['钱多多接过礼盒。'],
+    prompt: '钱多多的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她立刻分析起导师送礼的人际资本逻辑，结论是"情绪价值高、成本可控，ROI极佳"——但她眼睛亮着，手握得很紧。你觉得她是真的很高兴。',
+          narrative: '钱多多拆开礼盒之后第一反应是：「老师，这个预算从哪来的？」第二反应是研究包装，第三反应才是意识到这是送给自己的。\n\n然后他忽然掏出手机开始发发朋友圈。你说至于吗。他笑嘻嘻抬头：「老师，这种事情不发朋友圈，以后老了靠什么回忆青春？」\n\n当天晚上，你刷到他的动态：九宫格。礼物占八张，你只占一张。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 10 },
@@ -281,7 +282,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '钱多多专业地道了谢，顺手提了句她认识一个礼品批发渠道，下次可以帮你"优化采购成本"。你不确定这算不算一种回馈。',
+          narrative: '钱多多拆开礼盒时迅速估了个价，居然相差无几。他专业熟练地道了谢，顺手提了句他认识一个礼品批发渠道，下次可以帮你"优化采购成本"。你不确定这算不算一种回馈。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 3 },
@@ -297,15 +298,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_he_shixu: {
     id: 'new_year_gift_result_he_shixu',
     title: '贺时序的反应',
-    description: ['贺时序看见礼盒，先是确认了一下它的位置是否妨碍工作流。'],
-    prompt: '（TA的反应是……）',
+    description: ['贺时序看见礼盒的时候，正在整理新学期计划表。'],
+    prompt: '贺时序的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她接过礼盒，掏出手机，找到了某个清单里的"导师新年礼物——待确认"，打了个√。原来她已经预留了这件事。你不知道该被感动还是被震惊。',
+          narrative: '贺时序接过礼盒，惊喜地道谢，然后埋头在本子上勾勾画画。你管不住好奇地凑过去看，本子上写着《实验室成员新年计划》，你的名字赫然在第一页。\n\n她发现被你看见了，索性直接翻开，说：「本来准备过几天实施的。」里面密密麻麻列着给不同人的新年安排。\n\n她把文件夹合上，轻咳一声：「现在需要重新规划一下优先级。」',
           effects: [
             { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 10 },
@@ -313,7 +314,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '贺时序正式道谢，记进了一条log，顺口说了句"这会计入本年度导师关怀指标"。你问那是她自己设的指标吗。她说是的。',
+          narrative: '贺时序正式道谢，随手记进了一条log，顺口说了句"这会计入本年度导师关怀指标"，并且问你上周答应看的论文读了没。',
           effects: [
             { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 3 },
@@ -329,18 +330,19 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_tang_kuolie: {
     id: 'new_year_gift_result_tang_kuolie',
     title: '唐扩列的反应',
-    description: ['唐扩列接过礼盒，立刻举起来展示给旁边的人看。'],
-    prompt: '（TA的反应是……）',
+    description: ['唐扩列接过礼盒。'],
+    prompt: '唐扩列的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '他开心地说他有个朋友专做礼品进口，下次可以帮你拿更好的货——他是真的很高兴，只是表达方式永远绕着人脉走。',
+          narrative: '唐扩列拆开礼盒后迅速拍照发了一堆聊天群。晚上你收到一打条消息，全是「听说你给学生送礼物了」。\n\n你去找罪魁祸首，对方理直气壮：「老师你不懂，这是品牌建设。而且，我真的特别想炫耀一下。」’',
           effects: [
             { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 10 },
+            { type: 'lab', stat: 'reputation', delta: 5}
           ],
         },
         {
@@ -361,15 +363,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_mo_wenxuan: {
     id: 'new_year_gift_result_mo_wenxuan',
     title: '莫问玄的反应',
-    description: ['莫问玄接过礼盒，闭眼感受了大概两秒。'],
-    prompt: '（TA的反应是……）',
+    description: ['莫问玄接过礼盒，闭眼感受了一会儿。'],
+    prompt: '莫问玄的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她说"今年运势很好，我之前占卜过"。然后认真道谢，把礼盒摆在她认为是旺位的桌角。你到现在也分不清她是因为礼物开心，还是因为印证了预言开心。',
+          narrative: '莫问玄抱着礼盒闭眼感受了一会儿，然后忽然掏出塔罗牌抽了一张。「我就知道。」他一脸自信地把牌展示给你：「今天抽到的是圣杯九，愿望实现的意思。」\n\n你问愿望是什么，他难得有点不好意思：「不能说，说出来就不灵了。但大概已经实现一部分了。」',
           effects: [
             { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 10 },
@@ -377,7 +379,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '莫问玄礼貌地道了谢，问你买礼物那天是不是宜馈赠的日子。你说不知道。她若有所思地点了点头。',
+          narrative: '莫问玄礼貌地道了谢，问你买礼物那天是不是宜馈赠的日子。你被问住了。',
           effects: [
             { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 3 },
@@ -393,15 +395,15 @@ export const newYearEvents: Record<string, GameEvent> = {
   new_year_gift_result_xie_zhiwei: {
     id: 'new_year_gift_result_xie_zhiwei',
     title: '谢知微的反应',
-    description: ['谢知微抬起头，看见礼盒，沉默了三秒。'],
-    prompt: '（TA的反应是……）',
+    description: ['谢知微看见礼盒的时候，正在拆一台不知道哪里搬来的主机。'],
+    prompt: '谢知微的反应是……',
     options: [{
       id: 'ack',
-      text: '（继续）',
+      text: '观察',
       outcomes: [
         {
           weight: 1,
-          narrative: '她用很轻的声音说了"谢谢老师"，然后转回工位，把礼盒放在离手边最近的地方。对她来说，这已经是很明显的表态了。',
+          narrative: '她把螺丝刀放下，擦干净手，小心拆开礼盒包装，然后把包装纸也整整齐齐叠好收起来。\n\n你本来以为这件事到此结束，结果第二天早上，你办公室电脑的启动速度快了一倍，总是松动的插线板都被固定好了。你问是不是她干的，她只朝你眨了眨眼，笑得像只小猫。',
           effects: [
             { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 10 },
@@ -409,10 +411,10 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '谢知微点头道谢，把礼盒放到桌上，继续工作了。两天后，实验室里那个一直松动的门把手被修好了，签名栏空着。',
+          narrative: '谢知微点了点头，把礼盒放到桌上，继续工作了——但特意把礼盒挪到了她视线最好的地方。\n\n两天后，实验室那个一直松动的门把手被修好了。走廊换气扇的异响消失了。你不记得什么时候开始有那个响声，但它确实不见了。\n\n她没有提这件事。',
           effects: [
-            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 3 },
-            { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 3 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },
           ],
         },
       ],

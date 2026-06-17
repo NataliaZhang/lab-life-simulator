@@ -8,6 +8,7 @@ import {
   getLeaderDisplayName,
   calcEfficiencyMultiplier,
 } from '../engine/projectEngine';
+import { audioManager } from '../engine/audioManager';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -112,7 +113,10 @@ function IdeaCard({
           className="btn btn--secondary btn--sm"
           disabled={!canAfford}
           title={disabledReason}
-          onClick={() => dispatch({ type: 'START_PROJECT', projectId })}
+          onClick={() => {
+            audioManager.playSfx('click');
+            dispatch({ type: 'START_PROJECT', projectId });
+          }}
         >
           立项（{startupCostLabel(def)}）
         </button>
@@ -139,6 +143,7 @@ function LeaderSelector({
   const activeStudents = state.students.filter(s => s.status === 'active');
 
   const assign = (leaderId: string) => {
+    audioManager.playSfx('click');
     dispatch({ type: 'ASSIGN_PROJECT_LEADER', projectId: ap.projectId, leaderId });
     onClose();
   };
@@ -156,7 +161,7 @@ function LeaderSelector({
         onClick={() => assign('pi')}
       >
         <div className="leader-option__name">PI（自己负责）</div>
-        <div className="leader-option__detail">每月消耗精力 15，无效率加成</div>
+        <div className="leader-option__detail">每月消耗精力 15，效率 ×1.00，月推进 {def.baseMonthlyProgress.toFixed(1)}%</div>
         {ap.leaderId === 'pi' && <span className="leader-option__badge">当前</span>}
       </div>
 
@@ -252,7 +257,7 @@ function ActiveProjectCard({
       <div className="proj-card__actions">
         <button
           className="btn btn--secondary btn--sm"
-          onClick={() => setShowSelector(v => !v)}
+          onClick={() => { audioManager.playSfx('click'); setShowSelector(v => !v); }}
         >
           {showSelector ? '收起' : (ap.leaderId ? (isSwap ? '换人（-30%进度）' : '管理负责人') : '分配负责人')}
         </button>

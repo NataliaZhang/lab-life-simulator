@@ -33,7 +33,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你写了一份四页的rebuttal，逻辑严密，有理有据，附带对"通用人工智能"定义的文献梳理，并温和指出该标准适用于全部AI论文。审稿人二号没有回应。论文被以"审稿人分歧较大"为由送到了第四位审稿人那里。第四位审稿人写了两条意见，第一条是"为什么不考虑扩散模型"，第二条是"格式有问题"。',
+            narrative: '你写了一份篇幅不短的rebuttal，逻辑严密，有理有据，附带对"通用人工智能"定义的文献梳理，并温和指出该标准适用于全部AI论文。审稿人二号没有回应。论文被以"审稿人分歧较大"为由送到了第四位审稿人那里。第四位审稿人写了两条意见，第一条是"为什么不考虑扩散模型"，第二条是"格式有问题"。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -55,7 +55,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你换了个会投。新会的审稿人三号写道："本文方法有效，但缺乏对更广泛场景的泛化能力的讨论——在极端情况下，是否需要更强的推理能力？"你盯着这条意见看了很久，感觉审稿人二号换了一个马甲回来了。',
+            narrative: '你换了个会投。新会的审稿人三号写道："本文方法有效，但缺乏对更广泛场景的泛化能力的讨论，在极端情况下，是否需要更强的推理能力？"你盯着这条意见看了很久，感觉审稿人二号换了一个马甲回来了。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -8 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -70,7 +70,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你查阅了三周的文献，认真梳理了AGI的定义、主流路径、代表性论文，写了一份十二页的附录，在里面提出了一个"轻量级通用性框架"，逻辑自洽，措辞严谨。你把它加进rebuttal，提交。审稿人二号回复："这部分内容超出了本次审稿的评估范围。"论文被拒。你的附录另外投了一篇论文，过了。',
+            narrative: '你查阅了整整三周的文献，认真梳理了AGI的定义、主流路径、代表性论文，写了一份颇长的附录，在里面提出了一个"轻量级通用性框架"，逻辑自洽，措辞严谨。你把它加进rebuttal，提交。审稿人二号回复："这部分内容超出了本次审稿的评估范围。"论文被拒。你的附录另外投了一篇论文，过了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'lab', stat: 'energy', delta: -30 },
@@ -88,7 +88,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     title: '文献综述不够——附名单',
     description: [
       '审稿意见里，审稿人三号写道："本文的文献综述不够充分，严重忽视了该领域的重要工作。"随后附上了一份参考文献清单，共14篇。',
-      '你逐条检索，发现其中11篇出自同一位作者——T. R. Blankenship。你查了一下审稿系统里的AC机构信息，发现本次会议设在Blankenshire大学。这也许是巧合。',
+      '你逐条检索，发现其中11篇出自同一位作者——T. R. Blankenship。你查了一下审稿系统里的AC机构信息，发现本次会议设在Blankenshire大学。或许只是巧合。',
     ],
     prompt: '审稿人要求引用一份高度可疑的文献清单，你选择',
     options: [
@@ -180,7 +180,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封两百字的邮件，主题明确，措辞精准，抄送了会议主席。三天后，你收到了一封来自投稿系统的自动回复："您的咨询已收到，我们将尽快处理。"然后又是三个星期的已读不回，之后来了一封人工邮件，说"经查，您的稿件已在系统更新中丢失，建议重新提交"。你盯着这行字读了两遍，感到人类的文明在某个节点出了问题。',
+            narrative: '你写了一封两百字的邮件，主题明确，措辞精准，抄送了会议主席。三天后，你收到了一封来自投稿系统的自动回复："您的咨询已收到，我们将尽快处理。"然后又是三个星期的已读不回，之后来了一封人工邮件，说"经查，您的稿件已在系统更新中丢失，建议重新提交"。你盯着这行字反复读了几遍，感到人类的文明在某个节点出了问题。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -398,7 +398,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了三分钟把摘要字号改为10pt，导出PDF，确认格式无误，重新提交。这一次进入了正常审稿流程。两个月后，论文以条件接受收场，审稿人的意见里没有一条涉及格式。你偶尔想起那三分钟，觉得那是你整个科研生涯性价比最高的一次修改。',
+            narrative: '你把摘要字号改为10pt，导出PDF，确认格式无误，重新提交。这一次进入了正常审稿流程。两个月后，论文以条件接受收场，审稿人的意见里没有一条涉及格式。你偶尔想起那三分钟，觉得那是你整个科研生涯性价比最高的一次修改。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -436,7 +436,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你关掉了投稿系统，打开了一部纪录片，看了两个小时，然后去散了个步。第二天，你用十分钟改完了格式，重新提交，没有任何心理负担。论文最终通过了，审稿意见里有一条表扬摘要写得简洁。',
+            narrative: '你关掉了投稿系统，打开了一部纪录片，看了好一阵，然后去散了个步。第二天，你改完了格式，重新提交，没有任何心理负担。论文最终通过了，审稿意见里有一条表扬摘要写得简洁。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 15 },
               { type: 'allStudents', stat: 'happiness', delta: 8 },
@@ -454,7 +454,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     description: [
       '审稿意见里，审稿人二号写道："本文的核心贡献已被[Chen et al., 2026]的工作覆盖，建议拒稿并请作者参阅相关工作。"',
       '你去查了那篇引用。它是昨天下午三点整上传到arxiv的。你六个月前投的稿。',
-      '你盯着时间戳看了很久，开始思考人类对"优先权"这个概念的理解是否存在某种根本性的哲学错误。',
+      '你盯着时间戳看了好一会儿，开始思考人类对"优先权"这个概念的理解是否存在某种根本性的哲学错误。',
     ],
     prompt: '被一篇昨天才上传的论文判定为"已被超越"，你决定',
     options: [

@@ -15,7 +15,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     id: 'llm_everything',
     title: 'LLM万能论',
     description: [
-      '{studentName}拿着一张A3打印的系统设计图走进你的办公室，展开来铺在桌上。这是{studentName}第十七次提出"用LLM替换一切"这个观点，但这是第一次拿出了完整的架构图：数据预处理模块换成GPT-4 API调用，模型主体换成GPT-4 API调用，评测指标换成GPT-4 API调用，图表说明文字生成器也换成GPT-4 API调用。整张图纸上，每个方框里都写着同一个词。',
+      '{studentName}拿着一张A3打印的系统设计图走进你的办公室，展开来铺在桌上。这已经不是{studentName}第一次提出"用LLM替换一切"这个观点了，但这是第一次拿出了完整的架构图：数据预处理模块换成GPT-4 API调用，模型主体换成GPT-4 API调用，评测指标换成GPT-4 API调用，图表说明文字生成器也换成GPT-4 API调用。整张图纸上，每个方框里都写着同一个词。',
       '"{studentName}认为LLM可以处理一切。" {studentName}神情严肃，像是在陈述一条物理定律。你看着那张图，数了一下API调用的方框：十一个。你想到的第一件事是每月账单。',
     ],
     prompt: '面对这份LLM全家桶方案，你选择',
@@ -53,7 +53,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你指出了三个核心问题：可复现性、成本、以及"用语言模型评测语言模型的输出"这个循环论证的逻辑漏洞。{studentName}皱着眉头盯着架构图看了七八秒，然后说"……但理论上可以用不同的模型"。你说"可以，这是你的下一个实验方向"。{studentName}走了，架构图留在了你桌上，作为一个已解决问题的纪念碑。',
+            narrative: '你指出了三个核心问题：可复现性、成本、以及"用语言模型评测语言模型的输出"这个循环论证的逻辑漏洞。{studentName}皱着眉头盯着架构图看了一会儿，然后说"……但理论上可以用不同的模型"。你说"可以，这是你的下一个实验方向"。{studentName}走了，架构图留在了你桌上，作为一个已解决问题的纪念碑。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 4 },
               { type: 'randomStudent', stat: 'favor', delta: 3 },
@@ -117,7 +117,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你问了一个问题："你当前数据集里最难处理的那类样本，加一个agent能解决哪个具体子问题？" {studentName}思考了整整三分钟，然后说："……可能加个数据增强的agent？"你说"很好，这个具体，去做"。三天后{studentName}来跟你说，发现核心问题根本不是数据的问题。信仰稍微冷却了一些，但技术判断力提升了。',
+            narrative: '你问了一个问题："你当前数据集里最难处理的那类样本，加一个agent能解决哪个具体子问题？" {studentName}认真想了想，然后说："……可能加个数据增强的agent？"你说"很好，这个具体，去做"。三天后{studentName}来跟你说，发现核心问题根本不是数据的问题。信仰稍微冷却了一些，但技术判断力提升了。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 7 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 4 },
@@ -141,7 +141,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}实现了一个有十二个agent的系统。系统运行时，token消耗量是单模型方案的四十倍，延迟高达八秒，效果比baseline差了两个百分点。{studentName}盯着评测结果，把椅子往后推了一下，两手捂着脸坐了很久，然后打开文档，把"完全自主"改成了"半自主"，把三千字的愿景声明删到了八百字。你觉得这比任何说教都有效。',
+            narrative: '{studentName}实现了一个有十二个agent的系统。系统运行时，token消耗量是单模型方案的四十倍，延迟高达八秒，效果比baseline差了两个百分点。{studentName}盯着评测结果，把椅子往后推了一下，两手捂着脸坐了很久，然后打开文档，把"完全自主"改成了"半自主"，把洋洋洒洒的愿景声明删去了大半。你觉得这比任何说教都有效。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 10 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 8 },
@@ -151,7 +151,7 @@ export const hypeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '{studentName}的多智能体系统在一个特定子任务上意外地跑出了不错的结果。{studentName}立刻发来消息，语气里压抑不住激动："老师！我觉得我发现了什么！" 你打开实验结果，看了三分钟，发现确实有一点东西。信仰有时候是有道理的，你不得不承认。',
+            narrative: '{studentName}的多智能体系统在一个特定子任务上意外地跑出了不错的结果。{studentName}立刻发来消息，语气里压抑不住激动："老师！我觉得我发现了什么！" 你打开实验结果仔细看了看，发现确实有一点东西。信仰有时候是有道理的，你不得不承认。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 15 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 8 },
@@ -168,7 +168,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你读完了那份文档。里面有七十%是热情有余、论据不足的宏观叙事，但有一段对"工具调用失败时的恢复策略"的描述出乎意料地具体，甚至有点创新性。你把那段单独截出来，发给{studentName}说"这个值得深挖"。{studentName}愣了一秒，然后明显振作了起来——被认真对待，是最好的燃料。',
+            narrative: '你读完了那份文档。里面大部分是热情有余、论据不足的宏观叙事，但有一段对"工具调用失败时的恢复策略"的描述出乎意料地具体，甚至有点创新性。你把那段单独截出来，发给{studentName}说"这个值得深挖"。{studentName}愣了一下，然后明显振作了起来——被认真对待，是最好的燃料。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 12 },
               { type: 'randomStudent', stat: 'happiness', delta: 10 },
@@ -194,7 +194,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     id: 'hot_arxiv_nuke',
     title: '顶级实验室发核弹了',
     description: [
-      '昨晚十一点，一篇arxiv出现了。今早七点，你的手机已经因为消息轰炸而震动了二十三次。某顶级实验室发布了一项工作，做的事情跟你们组过去八个月的方向几乎完全重合——但更快、更便宜、效果更好。论文现在有五百个转推，评论里有人说"这个问题彻底解决了"。',
+      '昨晚十一点，一篇arxiv出现了。今早七点，你的手机已经因为消息轰炸震了个不停。某顶级实验室发布了一项工作，做的事情跟你们组过去八个月的方向几乎完全重合——但更快、更便宜、效果更好。论文现在有五百个转推，评论里有人说"这个问题彻底解决了"。',
       '你们的代码仓库里，上周还在跑的实验此刻正在服务器上安静地运行着，不知道自己已经成了一段历史。',
     ],
     prompt: '被顶级实验室正面碾压，你的应对策略是',
@@ -206,7 +206,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你把那篇论文读了三遍，在每一节都做了标注。精读到第四部分时，你发现了一个裂缝：他们的方法在低资源场景下会严重退化，而这正是你们一直在研究的设置。你打开会议群发消息："今晚组会，有好消息。" 危机，是另一个方向的入口。',
+            narrative: '你把那篇论文仔细读了好几遍，在每一节都做了标注。读到第四部分时，你发现了一个裂缝：他们的方法在低资源场景下会严重退化，而这正是你们一直在研究的设置。你打开会议群发消息："今晚组会，有好消息。" 危机，是另一个方向的入口。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
@@ -256,7 +256,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在群里发消息：方向调整，今晚讨论新目标。群里挂着灰色双勾整整三分钟，然后先冒出来一个"……"，消失了，然后有人发了"了解"，另一个人发了"好的"，第三个人发了"老师我这边实验还有结果没跑完，要不要等等"。你说等等。两周后，新方向开始了，之前的代码没有删——有些工作注定是积累。',
+            narrative: '你在群里发消息：方向调整，今晚讨论新目标。群里挂着灰色双勾半天，然后先冒出来一个"……"，消失了，然后有人发了"了解"，另一个人发了"好的"，第三个人发了"老师我这边实验还有结果没跑完，要不要等等"。你说等等。两周后，新方向开始了，之前的代码没有删——有些工作注定是积累。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'allStudents', stat: 'favor', delta: 3 },
@@ -294,7 +294,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你说"结果很好，但咱们先算一下置信区间"。{studentName}打开Python，一分钟后算出来，置信区间横跨正负两个百分点，p值约等于0.4。大家都低头盯着那个数字，有人开始用笔在纸边上画小方块。你说"数据收集方向对了，下一步扩大测试集规模，这是正确的路"。{studentName}把"State of the Art"那一节改成了"Preliminary Results"，字号调回正常大小了。',
+            narrative: '你说"结果很好，但咱们先算一下置信区间"。{studentName}打开Python算了一下，置信区间横跨正负两个百分点，p值约等于0.4。大家都低头盯着那个数字，有人开始用笔在纸边上画小方块。你说"数据收集方向对了，下一步扩大测试集规模，这是正确的路"。{studentName}把"State of the Art"那一节改成了"Preliminary Results"，字号调回正常大小了。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 8 },
               { type: 'randomStudent', stat: 'favor', delta: 5 },
@@ -317,7 +317,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在白板上写了置信区间公式，从头讲了一遍。{studentName}认真听完，转头看了看窗外，手指在桌上轻轻敲了两下，然后问："老师，那我们这个结果……"你说"是preliminary finding，但是扩大测试集这件事本身就是下一步的工作贡献"。{studentName}点了点头，把论文草稿关掉，打开了数据集构建的代码。',
+            narrative: '你在白板上写了置信区间公式，从头讲了一遍。{studentName}认真听完，转头看了看窗外，手指在桌上轻轻敲了几下，然后问："老师，那我们这个结果……"你说"是preliminary finding，但是扩大测试集这件事本身就是下一步的工作贡献"。{studentName}点了点头，把论文草稿关掉，打开了数据集构建的代码。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 10 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 3 },
@@ -326,7 +326,7 @@ export const hypeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你讲完之后，{studentName}点了点头，问了个问题："老师，那17条样本的benchmark是谁发布的，他们当时是怎么通过审稿的？" 你停顿了一秒，发现这是个很好的问题，然后你们花了二十分钟讨论学术发表的历史问题，偏题偏得非常愉快。',
+            narrative: '你讲完之后，{studentName}点了点头，问了个问题："老师，那17条样本的benchmark是谁发布的，他们当时是怎么通过审稿的？" 你停顿了一下，发现这是个很好的问题，然后你们花了好一阵讨论学术发表的历史问题，偏题偏得非常愉快。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
@@ -368,7 +368,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     title: '企业来访日',
     description: [
       '某大型科技公司联系了实验室，说要来进行"一次非正式的探索性交流，了解前沿研究方向，探讨潜在合作可能性"。联系人的签名有六行，职级名称里有三个大写字母缩写。',
-      '消息在组里一公开，实验室发生了一场不动声色的转变。有人昨天还穿着印有猫表情包的帽衫，今天换上了有领子的衣服。有人开始在白板上写"Impact"和"Scalability"，用的是粗麦克笔。有人问你："老师，PPT要不要我来做？" 这是这位同学在实验室的第十八个月里第一次主动提出帮助。',
+      '消息在组里一公开，实验室发生了一场不动声色的转变。有人昨天还穿着印有猫表情包的帽衫，今天换上了有领子的衣服。有人开始在白板上写"Impact"和"Scalability"，用的是粗麦克笔。有人问你："老师，PPT要不要我来做？" 这是这位同学进组以来第一次主动提出帮助。',
     ],
     prompt: '企业参访，你的应对策略是',
     triggerConditions: [
@@ -519,7 +519,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你和{studentName}一起，用两天时间把三千行代码过了一遍，单元测试、边界case、数值稳定性全部检查了一遍。发现了两处潜在问题，一处无关紧要，一处如果数据量再大十倍会导致内存溢出。结论：代码质量出乎意料地好，但那个内存问题早发现早好。{studentName}说："AI写代码比我写的还规范。" 你没有接话。',
+            narrative: '你和{studentName}一起，用两天时间把三千行代码过了一遍，单元测试、边界case、数值稳定性全部检查了一遍。发现了两处潜在问题，一处无关紧要，一处如果数据量再大十倍会导致内存溢出。结论：代码质量出乎意料地好，但那个内存问题早发现早好。{studentName}说："AI写代码比我写的还规范。"你没有接话。',
             effects: [
               { type: 'randomStudent', stat: 'skills.engineering', delta: 10 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 5 },

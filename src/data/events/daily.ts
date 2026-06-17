@@ -136,80 +136,12 @@ export const dailyEvents: Record<string, GameEvent> = {
     tags: ['daily'],
   },
 
-  reviewer_two: {
-    id: 'reviewer_two',
-    title: '审稿人二号来了',
-    description: [
-      '审稿意见回来了。审稿人一号好评，三号中性。',
-      '但审稿人二号写了整整一页，其中一条是："这篇论文的核心假设存在根本性缺陷，作者似乎对该领域最近的工作一无所知。"',
-    ],
-    prompt: '面对审稿人二号的炮火，你选择：',
-    triggerConditions: [{ type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 }],
-    options: [
-      {
-        id: 'rebuttal_gracious',
-        text: '光速滑跪，逐条回应',
-        outcomes: [
-          {
-            weight: 2,
-            narrative: '你写了一份措辞礼貌到近乎卑微的rebuttal，每条意见都认真回应，每个误解都耐心解释，甚至感谢了审稿人的"宝贵意见"。审稿人二号最终说"作者的回应解释了大部分问题"，给了个弱接受。你和{studentName}在群里发了个熟练工式的庆祝表情，然后继续改论文。',
-            effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'allStudents', stat: 'skills.theory', delta: 3 },
-            ],
-          },
-          {
-            weight: 1,
-            narrative: '你写了rebuttal，逐条回应，有理有据，态度诚恳。审稿人二号看都没看，维持原分，直接拒了。这种事在学术界有个公认的解释，叫"运气不好"。改完换个会吧，换个运气。',
-            effects: [
-              { type: 'allStudents', stat: 'happiness', delta: -5 },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'rebuttal_strong',
-        text: '重拳出击，指出误解',
-        outcomes: [
-          {
-            weight: 1,
-            narrative: '你引用了六篇文献，用两页纸条理清晰地证明审稿人的理解是错的。对方沉默了——大概是去查了文献，确认自己看错了。论文最终过了。组里有人说你"打架很厉害"，你没有否认。',
-            effects: [
-              { type: 'lab', stat: 'reputation', delta: 4 },
-            ],
-          },
-          {
-            weight: 2,
-            narrative: '你的rebuttal语气稍微硬了一点。审稿人二号把它理解为"挑衅"，随即补充了三条新意见，每一条都比上一条更刁钻，像是在进行一场个人恩怨的延续。论文被拒。{studentName}发来消息问"老师，我们是不是认识了什么仇人？"',
-            effects: [
-              { type: 'lab', stat: 'reputation', delta: -2 },
-              { type: 'allStudents', stat: 'happiness', delta: -8 },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'ignore_and_resubmit',
-        text: '不想争，改完换个会投',
-        outcomes: [{
-          weight: 1,
-          narrative: '你决定不在这个人身上浪费情感资源。有用的意见吸收，剩下的归入你硬盘里那个名叫"审稿人问题"的文件夹——这个文件夹已经有七个子文件夹了。改完换个会，换个心情，换个运气。',
-          effects: [
-            { type: 'lab', stat: 'energy', delta: 10 },
-            { type: 'allStudents', stat: 'happiness', delta: 3 },
-          ],
-        }],
-      },
-    ],
-    tags: ['daily'],
-  },
-
   lab_meeting_drama: {
     id: 'lab_meeting_drama',
     title: '组会气氛有点微妙',
     description: [
       '{studentName}在组会上汇报到一半，{student2Name}插了一句，指出实验设计可能有问题。',
-      '{studentName}停顿了一下，回了句"我觉得没问题"，语气有点冷。整个会议室的空气凝固了大概三秒，所有人都开始专心盯着自己的笔记本屏幕。',
+      '{studentName}停顿了一下，回了句"我觉得没问题"，语气有点冷。整个会议室的空气凝固了一瞬，所有人都开始专心盯着自己的笔记本屏幕。',
     ],
     prompt: '组会现场尴尬了，你怎么处理？',
     triggerConditions: [
@@ -229,6 +161,8 @@ export const dailyEvents: Record<string, GameEvent> = {
               { type: 'randomStudent', stat: 'favor', delta: 3 },
               { type: 'randomStudent2', stat: 'happiness', delta: 5 },
               { type: 'randomStudent2', stat: 'favor', delta: 3 },
+              { type: 'randomStudent', stat: 'skills.social', delta: 2 },
+              { type: 'randomStudent2', stat: 'skills.social', delta: 2 },
             ],
           },
           {
@@ -290,7 +224,7 @@ export const dailyEvents: Record<string, GameEvent> = {
     title: 'NaN loss了',
     description: [
       '{studentName}来敲你的门，表情空洞，像一个人在凌晨重启了三遍路由器之后发现是欠费停网的那种神情："老师，loss变NaN了。"',
-      '日志翻了，堆栈看了，学习率检查了，数据随机看了两条，找不到原因。你深吸一口气，开始觉得这个问题拥有某种形而上的邪恶。',
+      '日志翻了，堆栈看了，学习率检查了，数据随机扫了几条，找不到原因。你深吸一口气，开始觉得这个问题拥有某种形而上的邪恶。',
     ],
     prompt: 'NaN loss，你的第一反应是：',
     triggerConditions: BIND_ANY_STUDENT,
@@ -301,7 +235,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '讲到第三段，{studentName}自己停下来了，对着空气发出了一种介于"啊"和"哦"之间的声音："……学习率太大了。" 橡皮鸭调试法又一次拯救了人类。你没说一句话，问题解决了。这是你今天最高效的一个小时。',
+            narrative: '讲到第三段，{studentName}自己停下来了，对着空气发出了一种介于"啊"和"哦"之间的声音："……学习率太大了。" 橡皮鸭调试法又一次拯救了人类。你没说一句话，问题解决了。这是你今天最省力的一次答疑。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 10 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
@@ -309,7 +243,7 @@ export const dailyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '讲完了，你们也没找到。又联合debug了整整两个小时，翻遍了所有你能想到的地方，最后发现是数值溢出——藏在一个谁都没注意的数据预处理步骤里。{studentName}盯着那行代码看了很久，说："它一直都在这里。"',
+            narrative: '讲完了，你们也没找到。又联合debug了好一阵，翻遍了所有你能想到的地方，最后发现是数值溢出——藏在一个谁都没注意的数据预处理步骤里。{studentName}盯着那行代码看了很久，说："它一直都在这里。"',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -3 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
@@ -327,11 +261,12 @@ export const dailyEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 3 },
+              { type: 'randomStudent', stat: 'skills.engineering', delta: 2 },
             ],
           },
           {
             weight: 1,
-            narrative: '加了裁剪，NaN消失了，但loss从此变成一条直线，纹丝不动，像是在用另一种方式表达绝望。{studentName}盯着那条曲线看了很久，问："老师，这是不是更糟了？" 你说："是的。"',
+            narrative: '加了裁剪，NaN消失了，但loss从此变成一条直线，纹丝不动，像是在用另一种方式表达绝望。{studentName}盯着那条曲线发了好一会儿呆，问："老师，这是不是更糟了？" 你说："是的。"',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -8 },
             ],
@@ -384,11 +319,13 @@ export const dailyEvents: Record<string, GameEvent> = {
         text: '认真讨论模型',
         outcomes: [{
           weight: 1,
-          narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。',
+          narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。\n\n💡 获得灵感：**PI邮件响应延迟的多智能体博弈模型** —— 已记录到项目面板。',
           effects: [
             { type: 'randomStudent', stat: 'favor', delta: 5 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
             { type: 'lab', stat: 'reputation', delta: 1 },
+            { type: 'lab', stat: 'energy', delta: -5 },
+            { type: 'unlockIdea', projectId: 'pi_email_delay_game_theory' },
           ],
         }],
       },

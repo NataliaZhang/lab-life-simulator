@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
+import { useAudioTriggers } from './hooks/useAudioTriggers';
+import { audioManager } from './engine/audioManager';
 import { StatusBar } from './components/StatusBar';
 import { StoryLog } from './components/StoryLog';
 import { EventModal } from './components/EventModal';
@@ -8,6 +10,80 @@ import { AdmissionModal } from './components/AdmissionModal';
 import { StudentList } from './components/StudentList';
 import { ProjectsPanel } from './components/ProjectsPanel';
 import { events } from './data/events';
+
+// ─── Audio controls panel ─────────────────────────────────────────────────────
+
+function AudioControls() {
+  const [expanded, setExpanded] = useState(false);
+  const [muted,    setMuted]    = useState(() => audioManager.isMuted());
+  const [bgmVol,   setBgmVol]   = useState(() => audioManager.getBgmVolume());
+  const [sfxVol,   setSfxVol]   = useState(() => audioManager.getSfxVolume());
+
+  const handleMuteToggle = () => {
+    const next = !muted;
+    setMuted(next);
+    audioManager.setMuted(next);
+  };
+
+  const handleBgmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = parseFloat(e.target.value);
+    setBgmVol(v);
+    audioManager.setBgmVolume(v);
+  };
+
+  const handleSfxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = parseFloat(e.target.value);
+    setSfxVol(v);
+    audioManager.setSfxVolume(v);
+  };
+
+  const icon = muted ? '🔇' : bgmVol < 0.3 ? '🔈' : '🔉';
+
+  return (
+    <div className="audio-controls">
+      <button
+        className="btn btn--ghost btn--sm audio-controls__icon"
+        onClick={() => setExpanded(o => !o)}
+        title="音频设置"
+        aria-label="音频设置"
+      >
+        {icon}
+      </button>
+      {expanded && (
+        <div className="audio-controls__panel">
+          <button
+            className={`btn btn--sm audio-controls__mute-btn${muted ? ' audio-controls__mute-btn--active' : ' btn--ghost'}`}
+            onClick={handleMuteToggle}
+          >
+            {muted ? '取消静音' : '静音'}
+          </button>
+          <label className="audio-controls__row">
+            <span className="audio-controls__label">BGM</span>
+            <input
+              className="audio-controls__slider"
+              type="range"
+              min="0" max="1" step="0.05"
+              value={bgmVol}
+              onChange={handleBgmChange}
+              disabled={muted}
+            />
+          </label>
+          <label className="audio-controls__row">
+            <span className="audio-controls__label">音效</span>
+            <input
+              className="audio-controls__slider"
+              type="range"
+              min="0" max="1" step="0.05"
+              value={sfxVol}
+              onChange={handleSfxChange}
+              disabled={muted}
+            />
+          </label>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function App() {
   const {
@@ -46,8 +122,17 @@ export function App() {
     });
   };
 
+  // Fire BGM and SFX based on state changes.
+  useAudioTriggers(state);
+
   const isGameOver = state.phase !== 'playing';
   const endingEvent = state.endingEventId ? events[state.endingEventId] : null;
+
+  // Wrap chooseOption to play click SFX before dispatching.
+  const handleChoose = (eventId: string, optionId: string) => {
+    audioManager.playSfx('make_choice');
+    chooseOption(eventId, optionId);
+  };
 
   return (
     <div className="app">
@@ -124,7 +209,7 @@ export function App() {
           activeStudentIds={state.students.filter(s => s.status === 'active').map(s => s.id)}
           boundStudentName={boundStudentName}
           boundStudent2Name={boundStudent2Name}
-          onChoose={chooseOption}
+          onChoose={handleChoose}
         />
       )}
 
@@ -160,6 +245,7 @@ export function App() {
             A+
           </button>
         </div>
+        <AudioControls />
         <button className="btn btn--ghost btn--sm" onClick={deleteSaveAndRestart}>
           重置游戏
         </button>

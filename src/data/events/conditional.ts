@@ -274,7 +274,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你说卡住很正常，让{studentName}再坚持一下。对方确实继续推了，文件夹名也确实稳定了下来——现在叫 suffer_but_continue。不能说完全健康，但至少努力的方向没错。',
+            narrative: '你说卡住很正常，让{studentName}再坚持一下。对方确实继续推了，文件夹名也确实稳定了下来，现在叫 suffer_but_continue。不能说完全健康，但至少努力的方向没错。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 5 },
             ],
@@ -377,7 +377,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
         text: '回复："没睡。"',
         outcomes: [{
           weight: 1,
-          narrative: '其实你刚刚睡得很香。但导师有时候需要说谎。你陪{studentName}把二十七条消息逐条捡回来，最后只剩下三个问题：睡觉、吃饭、明天再看。十分钟后，对方发来："谢谢老师，我去睡了。"第二天中午十二点，{studentName}终于出现在实验室，像一台重启成功但还有点发热的机器。',
+          narrative: '其实你刚刚睡得很香。但导师有时候需要说谎。你陪{studentName}把二十七条消息逐条捡回来，最后只剩下三个问题：睡觉、吃饭、明天再看。不久后，对方发来："谢谢老师，我去睡了。"第二天中午，{studentName}终于出现在实验室，像一台重启成功但还有点发热的机器。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 10 },
             { type: 'randomStudent', stat: 'favor', delta: 5 },
@@ -430,7 +430,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     description: [
       '那天早上实验室开门，{studentName}的工位已经空了。椅子规规矩矩地推进去，桌面干净得像从来没有人坐过。',
       '你打了电话，没有接。发了消息，已读不回。后来辗转听说对方已经离开了这座城市。',
-      '你后来想，也许早就应该看到一些迹象的——那些夜里没回的消息、越来越简短的汇报、某次组会结束后独自站在走廊很久。但那些迹象和太多别的事混在一起，实在不好分辨。',
+      '你后来想，也许早就应该看到一些迹象的：那些夜里没回的消息、越来越简短的汇报、某次组会结束后独自站在走廊很久。但那些迹象和太多别的事混在一起，实在不好分辨。',
     ],
     options: [
       {
@@ -471,7 +471,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '合作协议签了。有一位学生被选为联合培养，去对方实验室待了半年，回来的时候眼界宽了一圈，技能涨了不止一圈。你的名字开始和一个比你更响的名字出现在同一篇论文里——这种搭便车，心安理得。',
+            narrative: '合作协议签了。有一位学生被选为联合培养，去对方实验室待了半年，回来的时候眼界宽了一圈，技能涨了不止一圈。你的名字开始和一个比你更响的名字出现在同一篇论文里，这种搭便车，心安理得。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 8 },
@@ -480,7 +480,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '合作协议签了，执行起来才发现两边的研究风格差异相当大——对方喜欢高度结构化，你们习惯灵活迭代。光协调这件事就消耗了大量精力。声望涨了一点，但你连续两周失眠，觉得自己在用健康换履历。',
+            narrative: '合作协议签了，执行起来才发现两边的研究风格差异相当大，对方喜欢高度结构化，你们习惯灵活迭代。光协调这件事就消耗了大量精力。声望涨了一点，但你连续两周失眠，觉得自己在用健康换履历。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 4 },
               { type: 'lab', stat: 'energy', delta: -15 },

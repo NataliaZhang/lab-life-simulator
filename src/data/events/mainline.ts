@@ -225,8 +225,8 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'joint_meeting_proposal',
     title: '两个人的组会',
     description: [
-      '你在白板上郑重地写下"研究进展"三个字，转过身——对面坐着你唯一的学生，两人大眼瞪小眼。大概过了七秒钟，你们同时意识到都在等对方先开口。',
-      '这就是你建组以来的第一次"组会"。参与人数：二。多余的椅子：六。整间会议室正在以一种沉默但坚定的方式暗示你，"会议"这个词需要一定的规模才能成立。',
+      '你在白板上郑重地写下"研究进展"四个字，转过身——对面坐着你唯一的学生，两人大眼瞪小眼。大概过了七秒钟，你们同时意识到都在等对方先开口。',
+      '这就是你建组以来的第一次"组会"。参与人数：2。多余的椅子：6。整间会议室正在以一种沉默但坚定的方式暗示你，"会议"这个词需要一定的规模才能成立。',
       '门被敲了三下。是隔壁办公室的张嘉明老师，端着一杯茶，脸上带着一种"我来得正是时候"的神情。他说："听说你刚建组？我们每周四下午开联合组会，几个组拼在一起，人多热闹，学生互相也有个参照，要不要来凑一凑？"',
     ],
     prompt: '张老师的提议，你怎么回应？',
@@ -240,6 +240,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'lab', stat: 'energy', delta: 10 },
+            { type: 'allStudents', stat: 'skills.social', delta: 2 },
           ],
         }],
       },
@@ -356,6 +357,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'allStudents', stat: 'happiness', delta: 5 },
             { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'allStudents', stat: 'skills.social', delta: 2 },
           ],
         }],
       },
@@ -369,6 +371,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
             { type: 'lab', stat: 'reputation', delta: 2 },
             { type: 'allStudents', stat: 'happiness', delta: 8 },
             { type: 'allStudents', stat: 'favor', delta: 3 },
+            { type: 'allStudents', stat: 'skills.social', delta: 3 },
           ],
         }],
       },
@@ -437,6 +440,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 4 },
             { type: 'randomStudent', stat: 'favor', delta: 5 },
+            { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
       },
@@ -563,7 +567,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: 'Rejected。你把审稿意见整理好发给{studentName}。{studentName}看完说"没关系，我们改"——语气出奇地稳，稳到你忍不住多看了一眼，想确认这不是某种已经麻木的迹象，但眼神对上去，对方在认真地打开文档。好，那就改。',
+            narrative: 'Rejected。你把审稿意见整理好拿给{studentName}。{studentName}看完说"没关系，我们改"话语间透露着一股镇定。你忍不住多看了一眼，想确认这不是某种已经麻木的迹象，但眼神对上去，对方在认真地打开文档。好，那就改。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -8 },
               { type: 'lab', stat: 'reputation', delta: -1 },
@@ -600,7 +604,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'write_hard',
-        text: '全力以赴亲自写（消耗精力）',
+        text: '全力以赴亲自写',
         energyCost: 40,
         outcomes: [
           {
@@ -619,7 +623,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hire_help',
-        text: '找专业助理润色（花3万）',
+        text: '找专业助理润色',
         fundingCost: 3,
         outcomes: [{
           weight: 1,
@@ -687,15 +691,149 @@ export const mainlineEvents: Record<string, GameEvent> = {
     tags: ['chain'],
   },
 
+  // ── 时间锚定：第1年12月投稿 + 第2年2月审稿意见，由 monthlyUpdate 强制注入 ────
+  // 安全：注入时绑定了 studentId，{studentName} 可安全使用
+
+  first_paper_submission: {
+    id: 'first_paper_submission',
+    title: '点击最终提交',
+    description: [
+      '距离OWRC截止还剩四十分钟。论文上传成功，格式检测通过，作者列表确认，伦理声明勾选，利益冲突一栏填了"无"。屏幕上只剩最后那个橙色按钮：「最终提交」。',
+      '{studentName}坐在旁边，盯着那个按钮，眼神像是在审视一枚即将引爆的装置。',
+      '"老师，你觉得我们能中吗？"\n\n你想了三秒。OWRC是出了名的神秘——官方介绍只有一句"欢迎横跨领域的创新性工作"，实际上没有人能说清楚它到底收什么，但每届都有人中，就像摸奖，区别在于写论文比买彩票长了整整六个月。',
+      '"理论上，任何人都有可能中。"你说。',
+      '{studentName}认真点了点头，停顿了两秒，然后补了一句："那理论上，我们也有可能不中。"\n\n这句话逻辑无懈可击，你找不到反驳的角度。',
+    ],
+    prompt: '鼠标悬停在"最终提交"上——',
+    options: [
+      {
+        id: 'submit_clean',
+        text: '闭眼点下去，不再回头',
+        outcomes: [{
+          weight: 1,
+          narrative: '咔哒。系统弹出确认框，你再点一次。「稿件已成功提交，编号 OWRC-3817。」屏幕继续亮着，什么都不会立刻改变——但这篇论文此刻正在向某个服务器飞去，里面装着你们半年的心血，以及一位素未谋面的审稿人对它命运的最终决定权。{studentName}发来一条消息：「投出去了，有点空。」你回了一个「嗯」，然后关掉电脑，假装淡定地去倒了杯水。',
+          effects: [
+            { type: 'randomStudent', stat: 'happiness', delta: 5 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
+            { type: 'lab', stat: 'reputation', delta: 2 },
+          ],
+        }],
+      },
+      {
+        id: 'final_check',
+        text: '最后通读一遍（消耗精力）',
+        energyCost: 15,
+        outcomes: [{
+          weight: 1,
+          narrative: '你花了三十八分钟把全文读了一遍。发现了一处漏掉的引用、两个前后不一致的符号，以及一个让你沉默了整整五秒的标题用词——然后改掉了。最终版在截止前两分钟提交。OWRC服务器大概正在处理三百多份稿件，其中一份是你们的，悄悄夹在一堆"已解决AGI对齐"的投稿中间，等待命运。{studentName}说："老师你真的检查了吗，还是只是走了一遍流程？"你没有回答，但内心是踏实的。',
+          effects: [
+            { type: 'randomStudent', stat: 'happiness', delta: 8 },
+            { type: 'randomStudent', stat: 'favor', delta: 5 },
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'randomStudent', stat: 'skills.theory', delta: 2 },
+          ],
+        }],
+      },
+      {
+        id: 'submit_celebrate',
+        text: '投完立刻出去吃顿好的',
+        fundingCost: 2,
+        outcomes: [{
+          weight: 1,
+          narrative: '你点下去，然后直接站起来拿了外套。"走，吃饭。" {studentName}愣了一秒，然后抓起手机跟上来了，脸上那种"到底该不该高兴"的神情在门口终于变成了真正的笑。你们去了附近一家川菜馆，点了明显超过两个人饭量的菜。聊到一半，{studentName}说："老师，如果中了我们再来吃一次。"你说好。这算是一个以两顿饭为赌注的学术宣言。',
+          effects: [
+            { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 8 },
+            { type: 'lab', stat: 'reputation', delta: 2 },
+            { type: 'randomStudent', stat: 'skills.social', delta: 2 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
+  reviewer_two: {
+    id: 'reviewer_two',
+    title: '审稿人二号来了',
+    description: [
+      '两个月过去了。OWRC的审稿意见到了。',
+      '审稿人一号好评，措辞友好，建议小修。三号中性，提了三个可选修改方向，语气像个没睡醒的人，但没有恶意。',
+      '然后是审稿人二号。整整一页，第一条："这篇论文的核心假设存在根本性缺陷，作者似乎对该领域最近的工作一无所知。"',
+      '你重新看了一眼作者列表，确认上面有你的名字。',
+    ],
+    prompt: '面对审稿人二号的炮火，你选择：',
+    options: [
+      {
+        id: 'rebuttal_gracious',
+        text: '光速滑跪，逐条回应',
+        outcomes: [
+          {
+            weight: 2,
+            narrative: '你写了一份措辞礼貌到近乎卑微的rebuttal，每条意见都认真回应，每个误解都耐心解释，甚至感谢了审稿人的"宝贵意见"。审稿人二号最终说"作者的回应解释了大部分问题"，给了个弱接受。你和{studentName}在群里发了个熟练工式的庆祝表情，然后继续改论文。',
+            effects: [
+              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'allStudents', stat: 'skills.theory', delta: 3 },
+            ],
+          },
+          {
+            weight: 1,
+            narrative: '你写了rebuttal，逐条回应，有理有据，态度诚恳。审稿人二号看都没看，维持原分，直接拒了。这种事在学术界有个公认的解释，叫"运气不好"。改完换个会吧，换个运气。',
+            effects: [
+              { type: 'allStudents', stat: 'happiness', delta: -5 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'rebuttal_strong',
+        text: '重拳出击，指出误解',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你引用了六篇文献，用两页纸条理清晰地证明审稿人的理解是错的。对方沉默了——大概是去查了文献，确认自己看错了。论文最终过了。组里有人说你"打架很厉害"，你没有否认。',
+            effects: [
+              { type: 'lab', stat: 'reputation', delta: 4 },
+              { type: 'allStudents', stat: 'skills.theory', delta: 3 },
+            ],
+          },
+          {
+            weight: 2,
+            narrative: '你的rebuttal语气稍微硬了一点。审稿人二号把它理解为"挑衅"，随即补充了三条新意见，每一条都比上一条更刁钻，像是在进行一场个人恩怨的延续。论文被拒。{studentName}发来消息问"老师，我们是不是认识了什么仇人？"',
+            effects: [
+              { type: 'lab', stat: 'reputation', delta: -2 },
+              { type: 'allStudents', stat: 'happiness', delta: -8 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'ignore_and_resubmit',
+        text: '不想争，改完换个会投',
+        outcomes: [{
+          weight: 1,
+          narrative: '你决定不在这个人身上浪费情感资源。有用的意见吸收，剩下的归入你硬盘里那个名叫"审稿人问题"的文件夹——这个文件夹已经有七个子文件夹了。改完换个会，换个心情，换个运气。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 10 },
+            { type: 'allStudents', stat: 'happiness', delta: 3 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
   // ── 时间锚定：第2年8月，由 monthlyUpdate 强制注入 ─────────────────────────
 
   lab_birthday: {
     id: 'lab_birthday',
     title: '实验室成立一周年',
     description: [
-      '你翻了一下日历，才意识到——整整一年了。',
-      '去年八月，这间办公室还是一块空白的白板加几张没拆封的桌子。现在，{studentName}坐在角落里盯着屏幕，桌上放着泡面、论文草稿和一杯凉透了的茶。',
-      '你没有刻意庆祝，但你注意到{studentName}今天来得比平时早，似乎也意识到了什么。',
+      '早上打开实验室门的时候，你发现白板角落多了一行字：「实验室一周年快乐。」字写得不大，旁边还画了一个歪歪扭扭的小蛋糕。没有彩带，没有气球，没有热闹的合照——毕竟实验室现在只有你和{studentName}。',
+      '你站在门口看了一会儿，才意识到真的已经一年了。去年八月，这里还是几张没拆封的桌子、一块空白白板和一个看起来像临时仓库的办公室。现在桌上有论文草稿、项目计划、没洗的杯子、贴歪的便利贴，还有{studentName}留下的各种生活痕迹。',
+      '{studentName}今天来得比平时早，正在假装认真看屏幕，但你注意到对方已经往白板那里看了三次。你问是不是写了什么。{studentName}立刻移开目光，说：「没有啊，可能是白板自己长出来的。」',
+      '中午的时候，你们翻出了实验室第一天的照片。照片里的房间空得离谱，白板干净得像从未经历过Reviewer二号。{studentName}看了半天，忽然说：「这一年居然真的把这里填满了。」',
+      '房间里还是只有两个人，但不知道为什么，看起来已经不像刚开始那么空了。',
     ],
     prompt: '一周年，你打算：',
     options: [
@@ -705,23 +843,25 @@ export const mainlineEvents: Record<string, GameEvent> = {
         fundingCost: 2,
         outcomes: [{
           weight: 1,
-          narrative: '你们找了一家烤肉店，点了比平时多一倍的菜。{studentName}边吃边说"这一年感觉又长又短"。你说"以后只会更快"。两人都停了一下，互看了一眼，大概同时意识到这话有点沉重，然后都低头继续夹肉，默契地把这个话题留给了烤架上的声音。',
+          narrative: '你们找了家小店，点了明显超过两个人饭量的菜。{studentName}一开始说吃不完，后来吃得很认真。聊到这一年最离谱的瞬间，你们各自提名了三个，最后一致同意：能活到现在本身就值得庆祝。',
           effects: [
-            { type: 'randomStudent', stat: 'favor', delta: 15 },
-            { type: 'randomStudent', stat: 'happiness', delta: 18 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
+            { type: 'randomStudent', stat: 'happiness', delta: 10 },
+            { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
       },
       {
         id: 'milestone_review',
         text: '认真聊聊这一年，定下新目标',
+        energyCost: 10,
         outcomes: [{
           weight: 1,
-          narrative: '你们在白板前站了一个多小时，把这一年做的事写了出来，然后一起圈出了下一年想突破的问题。{studentName}说"写出来才发现做了挺多的"。你笑了笑，顺手在白板上又加了两个圈——下一年的事，已经开始想了。',
+          narrative: '你们在白板前逐字写下这一年做过的事。起初只有几条，后来越写越多，连失败项目和离谱事故都被算了进去。{studentName}看着写满的白板，感慨说：「原来我们真的做了挺多。」你在旁边又画了一个圈，写下：第二年。',
           effects: [
             { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
-            { type: 'randomStudent', stat: 'favor', delta: 8 },
-            { type: 'randomStudent', stat: 'happiness', delta: 8 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
+            { type: 'randomStudent', stat: 'happiness', delta: 5 },
           ],
         }],
       },
@@ -730,16 +870,22 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '该干嘛干嘛，科研不等人',
         outcomes: [{
           weight: 1,
-          narrative: '{studentName}中午发来一条消息："老师，今天是不是咱们实验室一周年？" 你回了个"嗯"，然后继续改论文。对方回了个表情，没再说话。这种事，以后还有很多年。',
+          narrative: '你决定继续工作。下午实验室很安静，只有键盘声和空调声。快走的时候，你发现白板上的小蛋糕旁边多了一行字：「实验室一岁了，但导师好像没空。」下面还画了一个很小的叹气表情。',
           effects: [
-            { type: 'randomStudent', stat: 'favor', delta: -5 },
-            { type: 'randomStudent', stat: 'happiness', delta: -3 },
-            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'randomStudent', stat: 'favor', delta: -3 },
+            { type: 'randomStudent', stat: 'happiness', delta: -8 },
+            { type: 'lab', stat: 'energy', delta: 10 },
+
           ],
+
         }],
+
       },
+
     ],
+
     tags: ['mainline'],
+
   },
 
 };
