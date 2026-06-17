@@ -33,7 +33,6 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你打开Overleaf，灌了两杯咖啡，开始逐张调图。到凌晨四点，23张图全部处理完毕，论文精确落在9.97页，在要求的10页内，格式完全合规，页边距误差在0.01mm以内。提交成功。你把电脑关上，心想：学术界有一种苦是专门为排版设计的。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
@@ -41,7 +40,6 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你通宵排版，图表调了一遍又一遍，到第18张的时候不小心把参考文献的字号改成了8pt，提交前五分钟才发现。临时改回来，格式崩了，重新编译，倒计时归零。截稿超出了四十秒。系统不接受。你盯着那个错误页面，脑子里有什么东西悄悄断开了——然后你非常冷静地开始找AC的邮箱地址，逻辑完整，手没抖。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
             ],
@@ -185,14 +183,12 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             narrative: '你花了两周写完3000字伦理说明，措辞严谨，逻辑无懈可击，每一段都引用了相关政策条文。两封推荐信请到了，伦理委员会批了——只用了五周，快于预期。论文顺利进入投稿流程。你把这份3000字的声明存档，心想也许将来还会用到，但希望永远不会。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
           {
             weight: 1,
             narrative: '六周后，伦理委员会反馈：说明材料中"潜在社会影响"一节不够详尽，需要补充"对就业市场的具体量化分析"。这是一篇关于梯度下降收敛速度的论文。你补充了这一节，又等了三周。会议截稿已经过了。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -20 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
             ],
           },
@@ -292,9 +288,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           {
             weight: 1,
             narrative: '你认真参加了全程两个半小时，其中有效信息密度约等于一封五分钟可以读完的邮件。散会时你站起来，感到一种无从辩驳的疲倦，那种疲倦不是因为做了很多事，而是因为什么都没做、却又不能做任何事。',
-            effects: [
-              { type: 'lab', stat: 'energy', delta: -15 },
-            ],
+            effects: [],
           },
         ],
       },

@@ -272,7 +272,6 @@ export const serverEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -10 },
               { type: 'allStudents', stat: 'favor', delta: -5 },
-              { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
           {
@@ -280,7 +279,6 @@ export const serverEvents: Record<string, GameEvent> = {
             narrative: '你宣布了限额政策。有人立刻开始清理，有人在三天截止日期前一小时把自己的目录打了个tar包存到了别人不常去的角落，技术上遵守了规定。磁盘使用率降到了74%，勉强活着，问题被推迟了三个月。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
-              { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },
         ],
@@ -295,7 +293,6 @@ export const serverEvents: Record<string, GameEvent> = {
             narrative: '你花了3万买了一块8TB的NAS挂载上去，df -h里的百分比当场跌到了12%。群里传来一片欢呼。没有人清理了任何东西，没有人建立了任何规范，checkpoint文件继续以每周50GB的速度增长，下一次危机已经在日历上预约了位置：大约在十一个月后。但那是未来的事。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 15 },
-              { type: 'lab', stat: 'funding', delta: -3 },
               { type: 'lab', stat: 'reputation', delta: 1 },
             ],
           },
@@ -305,7 +302,6 @@ export const serverEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'projectProgress', delta: -3 },
-              { type: 'lab', stat: 'funding', delta: -3 },
             ],
           },
         ],
@@ -834,7 +830,6 @@ export const serverEvents: Record<string, GameEvent> = {
             narrative: '你当天下午就联系了设备供应商，三天后，一台APC SUA3000RMi2U额定功率3000VA的UPS安装在了服务器机柜下方。接入测试：模拟断电，服务器平稳切换，继续运行，电池续航约20分钟。两个月后，楼里又停了一次电，这次持续了七分钟，训练run毫发无伤。你在群里发了一条"UPS投资回报了"。¥20,000换来了长期的内心平静，这是个划算的买卖。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 12 },
-              { type: 'lab', stat: 'funding', delta: -2 },
               { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
@@ -843,7 +838,6 @@ export const serverEvents: Record<string, GameEvent> = {
             narrative: '你采购了UPS，安装完成，测试通过，心满意足。两周后，UPS在一次正常使用中突然发出了一声令人不安的哔声，然后进入了自检模式，检了四个小时，其间服务器在UPS的"正在检查"状态下保持了惊人的稳定。说明书说这是正常的校准流程，每三个月一次，每次持续2-6小时，建议在此期间保持"外部电源可用"。这与"防止断电"的购买初衷略有矛盾。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
-              { type: 'lab', stat: 'funding', delta: -2 },
             ],
           },
         ],
@@ -939,7 +933,6 @@ export const serverEvents: Record<string, GameEvent> = {
               { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 8 },
               { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
           {
@@ -948,7 +941,6 @@ export const serverEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
-              { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },
         ],

@@ -34,7 +34,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '新咖啡机当天下午到货，还自带磨豆功能。有人第一时间拆箱，拍了张照发到群里，配文"重生"。整个实验室的气氛在第一杯咖啡倒出来的那一刻，可见地松动了——甚至有人开始哼歌。旧机器上的"维修中"纸条，没有人去揭。它在那里又待了两个星期，像一座纪念碑。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 10 },
-              { type: 'lab', stat: 'funding', delta: -1 },
               { type: 'allStudents', stat: 'favor', delta: 4 },
             ],
           },
@@ -43,7 +42,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '新机器到了，拆箱，插电，发现插头规格不对。你花了一个下午找转接头，找到了，咖啡机运转正常了。过程消耗了你本来用来写经费申请的两个小时。申请推迟了三天。后来拨款少了十万。你不确定这两件事之间有没有因果关系，但你偶尔会想。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
-              { type: 'lab', stat: 'funding', delta: -1 },
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
@@ -81,7 +79,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '你宣布本周远程，原因在群里写的是"设备调整期"。大家在家工作，进度不减，有人甚至说"在家反而写代码更快"。你决定不去深究这句话的含义。咖啡机的维修纸条在空荡的实验室里独自贴了五天，等大家回来的时候还在，像什么都没发生。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 8 },
-              { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },
           {
@@ -89,7 +86,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '远程的第三天，你发现组会效率骤降——有人连麦时背景音是在外卖店，有人摄像头一直关着，有人回复消息的速度从"即时"变成了"人在，但是"。周五统计了一下本周产出，你决定这件事就此翻篇。咖啡机修好了，是维修师傅趁周四来学校顺手弄好的。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
-              { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'projectProgress', delta: -3 },
             ],
           },
@@ -643,7 +639,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 4 },
-              { type: 'lab', stat: 'funding', delta: -1 },
             ],
           },
           {
@@ -652,7 +647,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
-              { type: 'lab', stat: 'funding', delta: -1 },
               { type: 'lab', stat: 'energy', delta: -8 },
             ],
           },
@@ -737,7 +731,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 10 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: -1 },
             ],
           },
           {
@@ -745,7 +738,6 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '配件到了，工程系学生拆机，换完重装，打印机启动，走了三页，停了，报了一个之前从没见过的错误代码。你查了半小时找到解释：原来还有一个零件也坏了，但不在最初的故障报告里，属于连带损耗。重新下单，再等一天，在截止日前四小时装完，打完，提交。成本超过预算两倍。但确实搞定了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: -1 },
               { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },

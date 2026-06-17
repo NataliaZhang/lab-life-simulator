@@ -1,5 +1,54 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { LogEntry, StatChange } from '../types';
+
+const FEEDBACK_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor';
+
+function FeedbackModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'rgba(0,0,0,0.35)',
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{
+          background: 'var(--color-surface)',
+          borderRadius: 'var(--radius-lg)',
+          boxShadow: 'var(--shadow-lg)',
+          padding: '1.75rem 2rem',
+          maxWidth: '340px',
+          width: '90%',
+          textAlign: 'center',
+        }}
+        onClick={e => e.stopPropagation()}
+      >
+        <p style={{ margin: '0 0 0.5rem', fontWeight: 700, fontSize: '1rem' }}>感谢你玩这个游戏</p>
+        <p style={{
+          margin: '0 0 1.5rem',
+          fontSize: '0.875rem',
+          lineHeight: 1.7,
+          color: 'var(--color-text-muted)',
+        }}>
+          如果你愿意，可以花两分钟填写一份简短的反馈问卷，帮助我们改进游戏。
+        </p>
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+          <button
+            className="btn btn--primary btn--sm"
+            onClick={() => { window.open(FEEDBACK_URL, '_blank', 'noopener,noreferrer'); onClose(); }}
+          >
+            去填写
+          </button>
+          <button className="btn btn--ghost btn--sm" onClick={onClose}>
+            下次再说
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface Props {
   log: LogEntry[];
@@ -49,6 +98,7 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
 
 export function StoryLog({ log }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -63,6 +113,7 @@ export function StoryLog({ log }: Props) {
     ] as const;
 
     return (
+      <>
       <section
         className="story-log story-log--empty"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -165,8 +216,22 @@ export function StoryLog({ log }: Props) {
             <p style={{ margin: 0, fontSize: '0.8rem' }}>祝你好运！</p>
           </div>
 
+          {/* 反馈按钮 */}
+          <div style={{ textAlign: 'center', marginTop: '1.75rem' }}>
+            <button
+              className="btn btn--ghost btn--sm"
+              style={{ fontSize: '0.75rem', opacity: 0.5 }}
+              onClick={() => setFeedbackOpen(true)}
+            >
+              反馈
+            </button>
+          </div>
+
         </div>
       </section>
+
+      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
+      </>
     );
   }
 

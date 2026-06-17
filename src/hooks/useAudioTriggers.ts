@@ -67,6 +67,13 @@ export function useAudioTriggers(state: GameState): void {
       audioManager.fadeToBgm(dailyBgm());
     }
 
+    // ── Recovery: restart daily BGM if it stopped unexpectedly ───────────────
+    // Fires on any state update when in playing phase with no ending active.
+    // playBgm() is idempotent — it no-ops if the same track is already running.
+    if (state.phase === 'playing' && !state.endingEventId && !audioManager.isBgmActive()) {
+      audioManager.playBgm(dailyBgm());
+    }
+
     // ── Idea unlocked ────────────────────────────────────────────────────────
     if (state.projectIdeas.length > prev.projectIdeas.length) {
       audioManager.playSfx('idea');

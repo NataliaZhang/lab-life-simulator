@@ -73,7 +73,6 @@ export const reviewerEvents: Record<string, GameEvent> = {
             narrative: '你查阅了整整三周的文献，认真梳理了AGI的定义、主流路径、代表性论文，写了一份颇长的附录，在里面提出了一个"轻量级通用性框架"，逻辑自洽，措辞严谨。你把它加进rebuttal，提交。审稿人二号回复："这部分内容超出了本次审稿的评估范围。"论文被拒。你的附录另外投了一篇论文，过了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
-              { type: 'lab', stat: 'energy', delta: -30 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
             ],
           },
@@ -423,7 +422,6 @@ export const reviewerEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你写了一封两页的邮件，从学术评审的意义谈起，引用了三篇关于peer review制度的meta研究，委婉地指出字号差一号对审稿质量的影响可能接近于零。程序委员会主席回复说："感谢您的意见，我们会将此纳入下届会议的规则讨论。本届不作例外处理。"你把这封邮件打印出来，放进了一个物理文件夹。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -20 },
               { type: 'lab', stat: 'reputation', delta: 1 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
             ],

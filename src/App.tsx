@@ -114,6 +114,7 @@ export function App() {
   });
 
   const changeFontSize = (delta: number) => {
+    audioManager.playSfx('click');
     setFontSize(prev => {
       const next = Math.max(11, Math.min(20, prev + delta));
       localStorage.setItem('lab-font-size', String(next));
@@ -140,11 +141,13 @@ export function App() {
         state={state}
         studentPanelOpen={studentPanelOpen}
         onToggleStudentPanel={() => {
+          audioManager.playSfx('click');
           setStudentPanelOpen(o => !o);
           setProjectPanelOpen(false);
         }}
         projectPanelOpen={projectPanelOpen}
         onToggleProjectPanel={() => {
+          audioManager.playSfx('click');
           setProjectPanelOpen(o => !o);
           setStudentPanelOpen(false);
         }}

@@ -140,10 +140,22 @@ class AudioManager {
     el.loop = true;
     el.volume = this._effectiveBgmVol();
     el.src = src;
-    el.onerror = () => console.warn(`[AudioManager] Could not load BGM: ${src}`);
+    el.onerror = () => {
+      console.warn(`[AudioManager] Could not load BGM: ${src}`);
+      if (this.bgmEl === el) { this.bgmEl = null; this.currentBgmId = null; }
+    };
     this.bgmEl = el;
     this.currentBgmId = trackId;
-    el.play().catch(e => console.warn('[AudioManager] BGM play() rejected:', e));
+    el.play().catch(e => {
+      console.warn('[AudioManager] BGM play() rejected:', e);
+      // Clear state so the next playBgm call can retry instead of short-circuiting.
+      if (this.bgmEl === el) { this.bgmEl = null; this.currentBgmId = null; }
+    });
+  }
+
+  // Returns true only when a BGM element exists and is actually playing.
+  isBgmActive(): boolean {
+    return this.bgmEl !== null && !this.bgmEl.paused;
   }
 
   private _clearFade(): void {
