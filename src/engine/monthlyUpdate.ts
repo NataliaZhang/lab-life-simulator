@@ -487,7 +487,12 @@ export function applyMonthlyUpdate(state: GameState): GameState {
       ...acc,
       students: acc.students.map(s =>
         s.id === ap.leaderId
-          ? { ...s, skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 1) } }
+          ? {
+              ...s,
+              skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 1) },
+              // Leading a project costs mental energy each month.
+              happiness: clamp100(s.happiness - 2),
+            }
           : s,
       ),
     };
@@ -682,12 +687,13 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
-  // Alumni visits: inject once for every graduated student.
-  // filterTriggerable cannot handle this because it requires students to be active;
-  // we inject directly so the event fires after graduation regardless of stats.
+  // Alumni visits: inject exactly 3 months after graduation.
+  // filterTriggerable cannot handle this (requires active status), so we inject directly.
   for (const student of stateAfterTraits.students.filter(s => s.status === 'graduated')) {
     const eventId = STUDENT_ALUMNI_EVENT_IDS[student.id];
     if (!eventId || !events[eventId]) continue;
+    if (!student.graduatedAt) continue;
+    if (monthsElapsed(student.graduatedAt, next.time) < 3) continue;
     const alreadyQueued = next.eventQueue.some(e => e.id === eventId);
     if (!seenEventIds.has(eventId) && !alreadyQueued) {
       forcedEvents.push({ id: eventId, studentId: student.id });

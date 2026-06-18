@@ -337,7 +337,8 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
         }
         completionEvents.push({ id: `project_complete_${ap.projectId}`, studentId: ap.leaderId });
       } else {
-        completionEvents.push({ id: `project_complete_${ap.projectId}` });
+        // PI-led: use the separate PI variant so {studentName} placeholders are never rendered.
+        completionEvents.push({ id: `project_complete_${ap.projectId}_pi` });
       }
     } else {
       updatedActives.push({ ...ap, progress: newProgress });

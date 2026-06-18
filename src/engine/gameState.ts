@@ -285,7 +285,9 @@ function applyEffects(
         : undefined;
       if (target) {
         students = students.map(s =>
-          s.id === target.id ? { ...s, status: 'graduated' as const } : s,
+          s.id === target.id
+            ? { ...s, status: 'graduated' as const, graduatedAt: { ...state.time } }
+            : s,
         );
         statChanges.push({ label: `${target.name}·毕业`, delta: 1 });
       }

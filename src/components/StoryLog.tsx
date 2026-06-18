@@ -102,7 +102,7 @@ export function StoryLog({ log }: Props) {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [log.length]);
+  }, [log]);
 
   if (log.length === 0) {
     const features = [

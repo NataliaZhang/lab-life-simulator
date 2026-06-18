@@ -36,6 +36,7 @@ export interface Student {
   happiness: number;       // 0+; <30 complaints, <15 high stress, 0 crisis event
   projectProgress: number; // 0–100
   status: StudentStatus;
+  graduatedAt?: { year: number; month: number }; // set when status becomes 'graduated'
   traitIds: string[];      // trait IDs applied on admission
 }
 

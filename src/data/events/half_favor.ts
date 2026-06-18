@@ -34,6 +34,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}回头，瞬间切换成正常人脸。「哦老师你回来了。」语气非常正经，仿佛刚才什么都没发生。你也假装什么都没看见，各干各的。但他转回去的时候，你听见他压低声音对屏幕说了一句：「待会再跟你算账。」',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
           ],
         }],
       },
@@ -45,6 +46,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}转过来，对视一秒，然后认命地点了点头，「谈不拢，它不讲理。」他把椅子推开，「老师你来评理——我就改了一行代码，梯度从正常变成无穷大，这是我的问题吗？」你说大概不是你的问题。他郑重地转向屏幕：「听见了吧，不是我的问题，是你的。」',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 13 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -74,6 +76,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 12 },
           ],
         }],
       },
@@ -85,6 +88,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}醒来时，你们已经往后走了两个问题。你告诉她那个思路确实有效，她「嗯」了一声，想了想，说：「我梦里好像也想到了，但我忘了我梦里想到的版本了。」你没有追问，但总觉得她的梦可能比清醒状态更有生产力。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 10 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -113,6 +117,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}立刻拿回菜单，开始重新规划布局，说了很久，逻辑严密没有废话，最后给出「用户体验最优解」。你发现她在这件事上消耗的精力，可能比点餐本身多二十倍。但她讲完之后，表情是满足的。饭点到了，她看了一眼手机，「我们应该先点餐了。」',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 13 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -125,6 +130,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}认真想了一下，「理论上，我可以提供菜单设计咨询，但他们可能不会付钱。」你说大概真的不会，她点头，「那算了。」然后继续翻菜单。过了一会儿，她又开口：「这里的蛋白质和碳水配比也不太合理。」你放弃了继续反应。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -152,6 +158,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}的肩膀明显抖了一下，然后慢慢转过来，表情相当坚定：「什么谢谢，我不知道你说什么。」你说你看到她抽屉里有同款便利贴了，她低头看了一眼，耳朵悄悄红了一圈，「那是……巧合。」停了一下，正色补充：「但不管是谁写的，反正是真心话。」',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 12 },
           ],
         }],
       },
@@ -163,6 +170,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '你在便利贴下面加了一行：「老师也谢谢你们，这周大家都很拼。」放回桌上。下午，你发现旁边又多了一张，浅黄色的，写着：「嗯！！！」圆乎乎的字，还是没有署名。你数了数笔迹，决定不再假装不知道是谁写的了。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 15 },
             { type: 'allStudents', stat: 'happiness', delta: 3 },
           ],
         }],
@@ -191,6 +199,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}整个人肉眼可见地高兴起来，「真的吗！」他把那篇论文存进一个文件夹，命名为「可能相关/相关性待验证」，还加了问号。你问他这个文件夹里有多少篇了，他想了想，「一百三十七篇，但大概三十篇是真相关的。」你问怎么区分，他说：「靠感觉。」然后用一副这是显然答案的表情看着你。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -204,6 +213,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 13 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -233,6 +243,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 11 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -245,6 +256,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}深吸一口气，点了点头，「好。」打开外卖app，选了三家，截图发群里，附一句「大家投票」。你以为这就结束了。五分钟后他发来一条：「以及，从数据看，我们应该每三周吃一次，间隔不规律会导致期待值下降。」后面跟了个括号：（仅供参考，非强制）。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 12 },
           ],
         }],
       },
@@ -272,6 +284,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 13 },
           ],
         }],
       },
@@ -283,6 +296,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}停了一下，然后平静地点头，「每天一条，执行了快两年了。」她把平板收起来，「研究发现，及时的正向反馈可以显著提升团队效率。」她又补了一句，声音比刚才小了一点：「而且，很多人做了很多事，但没有人告诉他们。」你想接话，她已经站起来去拿文件了。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 11 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -312,6 +326,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'randomStudent', stat: 'happiness', delta: 10 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -324,6 +339,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}想了想，「我就说这个豆浆不如昨天的好喝，他说是，我问他是哪个实验室的，他说计算机系，我说我老师也在计算机系做研究，然后就聊起来了。」他笑笑说：「我觉得，只要你愿意开口，身边的人都挺好聊的。」你和陈老师对视了一眼，发现对方好像也还在消化这个逻辑。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 11 },
             { type: 'randomStudent', stat: 'skills.social', delta: 5 },
           ],
         }],
@@ -351,6 +367,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}认真地想了一会儿，「建议收到，但椅子目前效率最高。」他转回去打开代码，升了一下椅子，按运行。「而且，」他回头说，「我记录了一下，用这个仪式跑出来的实验成功率比不用时高，但样本量太小，p值不显著，我还在收集数据。」你不太确定该说什么，他已经转回去盯终端了。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 10 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -364,6 +381,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 13 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
           ],
         }],
@@ -393,6 +411,7 @@ half_favor_xie_zhiwei: {
         narrative: '{studentName}若无其事地回答：「前两个月不会修，后一个月比较忙。」说完继续低头拧螺丝。你差点笑出声，翻译一下就是，她其实惦记这台打印机惦记了整整三个月。',
         effects: [
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
+          { type: 'randomStudent', stat: 'favor', delta: 12 },
           { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
         ],
       }],
@@ -406,6 +425,7 @@ half_favor_xie_zhiwei: {
         effects: [
           { type: 'lab', stat: 'reputation', delta: 1 },
           { type: 'randomStudent', stat: 'happiness', delta: 18 },
+          { type: 'randomStudent', stat: 'favor', delta: 15 },
           { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
         ],
       }],
