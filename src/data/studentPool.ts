@@ -155,7 +155,7 @@ export const allCandidates: StudentCandidate[] = [
     pronoun: '她',
     tagline: '老师，您答应我的部分写完了吗？',
     bio: '别人做科研靠灵感，她做科研靠计划。桌面上永远有最新版本的进度表，精确到分钟，而进度表里甚至包含导师本人。',
-    traitIds: ['time_manager'],
+    traitIds: ['time_manager', 'schedule_is_justice'],
     firstMeetingEventId: 'hsx_first_meeting',
     baseSkills: { theory: 52, engineering: 66, social: 46 },
     baseFavor: 0,
@@ -246,3 +246,7 @@ export const allCandidates: StudentCandidate[] = [
 
 
 export const initialPoolIds: string[] = allCandidates.map(c => c.id);
+
+// These students are more "experienced" archetypes; exclude them from year-1 admission
+// so the player encounters them only after the lab has some history.
+export const year1RestrictedIds = new Set(['he_shixu', 'tang_kuolie', 'mo_wenxuan']);

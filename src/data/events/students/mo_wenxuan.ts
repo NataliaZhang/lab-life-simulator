@@ -446,10 +446,6 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       '他发来一封邮件，标题简洁：近况更新。正文说玄学成功率已更新至71%，第三年度报告见附件，方法论做了改进，加入了双盲评定。另外，他在公司认识了一个对学术合作感兴趣的工程师，问你有没有意向，可以牵线。',
     ],
     prompt: '你怎么回复这封邮件？',
-    triggerConditions: [
-      { type: 'student', studentId: 'mo_wenxuan', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'mwx_alumni_visit_connect',

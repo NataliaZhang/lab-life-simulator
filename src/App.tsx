@@ -101,6 +101,7 @@ export function App() {
     continueRecruiting,
     newGame,
     deleteSaveAndRestart,
+    closeModal,
   } = useGameEngine();
 
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
@@ -135,23 +136,27 @@ export function App() {
     chooseOption(eventId, optionId);
   };
 
+  const isInitialScreen = state.storyLog.length === 0;
+
   return (
     <div className="app">
-      <StatusBar
-        state={state}
-        studentPanelOpen={studentPanelOpen}
-        onToggleStudentPanel={() => {
-          audioManager.playSfx('click');
-          setStudentPanelOpen(o => !o);
-          setProjectPanelOpen(false);
-        }}
-        projectPanelOpen={projectPanelOpen}
-        onToggleProjectPanel={() => {
-          audioManager.playSfx('click');
-          setProjectPanelOpen(o => !o);
-          setStudentPanelOpen(false);
-        }}
-      />
+      {!isInitialScreen && (
+        <StatusBar
+          state={state}
+          studentPanelOpen={studentPanelOpen}
+          onToggleStudentPanel={() => {
+            audioManager.playSfx('click');
+            setStudentPanelOpen(o => !o);
+            setProjectPanelOpen(false);
+          }}
+          projectPanelOpen={projectPanelOpen}
+          onToggleProjectPanel={() => {
+            audioManager.playSfx('click');
+            setProjectPanelOpen(o => !o);
+            setStudentPanelOpen(false);
+          }}
+        />
+      )}
 
       <div className={`app__body${studentPanelOpen ? ' app__body--panel-open' : ''}`}>
         <main className="main-pane">
@@ -213,6 +218,7 @@ export function App() {
           boundStudentName={boundStudentName}
           boundStudent2Name={boundStudent2Name}
           onChoose={handleChoose}
+          onClose={closeModal}
         />
       )}
 

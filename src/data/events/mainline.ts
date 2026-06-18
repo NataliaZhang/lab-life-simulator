@@ -304,20 +304,21 @@ export const mainlineEvents: Record<string, GameEvent> = {
     title: '十一月',
     description: [
       '十一月。窗外的银杏叶掉得差不多了，走廊里有人在推车搬外卖箱——期末季的前奏。你算了一下：建组刚好三个月。',
-      '成果清单：一篇在写的论文、几组跑完的实验、三次被推迟的截止日期，以及若干条消息记录里的深夜时间戳。进度比计划的慢，但比最坏的预期好。这大概就是科研的正常节奏——比期待慢，比噩梦好，日复一日地往前走。',
-      '你坐在窗边，想给学生发条消息。',
+      '成果清单：一篇在写的论文、几组跑完的实验、三次被推迟的截止日期，以及若干条消息记录里的深夜时间戳。进度比计划的慢，但比最坏的预期好。这大概就是科研的正常节奏：比期待慢，比噩梦好，日复一日地往前走。',
+      '你坐在窗边，忽然想给{studentName}发条消息。',
     ],
     prompt: '发什么？',
+    triggerConditions: BIND_ANY_STUDENT,
     options: [
       {
         id: 'encourage',
         text: '辛苦了，这学期干得不错',
         outcomes: [{
           weight: 1,
-          narrative: '你发了一句"辛苦了，这学期大家表现得很好"。五秒后收到回复——不是文字，是一张当天刚跑完的实验截图，日志全绿。你猜这不完全是巧合。',
+          narrative: '你发了一句"辛苦了，这学期表现得很好"。{studentName}的回复不是文字，而是一张当天刚跑完的实验截图，日志是一片通畅的绿色。你猜这不完全是巧合。',
           effects: [
-            { type: 'allStudents', stat: 'happiness', delta: 5 },
-            { type: 'allStudents', stat: 'favor', delta: 3 },
+            { type: 'randomStudent', stat: 'happiness', delta: 5 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
           ],
         }],
       },
@@ -326,9 +327,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '放一天假，你我都需要',
         outcomes: [{
           weight: 1,
-          narrative: '你发了一句"明天不用来实验室"。对方愣了大概两秒，回了个"真的？"。真的。学生快乐有时候就这么简单；而你自己那天买了杯奶茶，在校园里溜达了一圈，重新感受了一下这个地方——原来除了实验室走廊，学校还挺大的。',
+          narrative: '你发了一句"明天不用来实验室"。{studentName}秒回了个"真的吗？"。真的。学生的快乐有时候就这么简单。\n\n而你自己那天买了杯奶茶，在校园里溜达了一圈，重新感受了一下这个地方。原来除了实验室走廊，学校还挺大的。',
           effects: [
-            { type: 'allStudents', stat: 'happiness', delta: 8 },
+            { type: 'randomStudent', stat: 'happiness', delta: 8 },
             { type: 'lab', stat: 'energy', delta: 5 },
           ],
         }],
@@ -341,9 +342,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
     id: 'independent_meeting',
     title: '终于单飞了',
     description: [
-      '你数了一下：三个。实验室里现在有三名在读学生，三个包、三套作息、三种对"按时汇报"的不同理解。',
+      '你数了一下：三个。实验室里现在有三名在读学生，三个包、三套作息、三种对按时汇报的不同理解。',
       '你想起了那个最早的周四——你和一个学生坐在会议室里，两人大眼瞪小眼，然后张老师敲门进来，把你们带进了更大的会议室。这一年多，你在那里见识了他的学生、他的项目，也旁观了他批改稿子时的措辞——有时候严格，有时候准确，偶尔两者兼有。',
-      '但三个人了。可以有自己的会议室了。你去张老师办公室，轻轻敲了两下门。',
+      '但三个人了，可以有自己的会议室了。你去张老师办公室，轻轻敲了两下门。',
     ],
     prompt: '告别要怎么说？',
     options: [
@@ -352,7 +353,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '谢谢这段时间，我们下周单飞',
         outcomes: [{
           weight: 1,
-          narrative: '张老师看了你一眼，点点头，说"应该的，早就该独立了"，然后顺手把他们组的会议室档期往前挪了一小时。你回来，在白板上写了"独立组会——每周五下午"，三个学生抬起头，没说什么，但你觉得空气里有什么东西悄悄变了——实验室有了自己的节奏。',
+          narrative: '张老师看了你一眼，点点头，然后顺手把他们组的会议室档期往前挪了一小时。你回来后在白板上写了"独立组会：每周五下午"，三个学生抬起头看着。你觉得空气里有什么东西悄悄变了——你的实验室有了自己的节奏。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -700,35 +701,32 @@ export const mainlineEvents: Record<string, GameEvent> = {
     description: [
       '距离OWRC截止还剩四十分钟。论文上传成功，格式检测通过，作者列表确认，伦理声明勾选，利益冲突一栏填了"无"。屏幕上只剩最后那个橙色按钮：「最终提交」。',
       '{studentName}坐在旁边，盯着那个按钮，眼神像是在审视一枚即将引爆的装置。',
-      '"老师，你觉得我们能中吗？"\n\n你想了三秒。OWRC是出了名的神秘——官方介绍只有一句"欢迎横跨领域的创新性工作"，实际上没有人能说清楚它到底收什么，但每届都有人中，就像摸奖，区别在于写论文比买彩票长了整整六个月。',
+      '"老师，你觉得我们能中吗？"\n\n你想了三秒。OWRC是出了名的神秘，官方介绍只有一句"欢迎横跨领域的创新性工作"，实际上没有人能说清楚它到底收什么，但每届都有人中，就像摸奖，区别在于写论文比买彩票长了整整六个月。',
       '"理论上，任何人都有可能中。"你说。',
       '{studentName}认真点了点头，停顿了两秒，然后补了一句："那理论上，我们也有可能不中。"\n\n这句话逻辑无懈可击，你找不到反驳的角度。',
     ],
-    prompt: '鼠标悬停在"最终提交"上——',
+    prompt: '鼠标悬停在"最终提交"上',
     options: [
       {
         id: 'submit_clean',
         text: '闭眼点下去，不再回头',
         outcomes: [{
           weight: 1,
-          narrative: '咔哒。系统弹出确认框，你再点一次。「稿件已成功提交，编号 OWRC-3817。」屏幕继续亮着，什么都不会立刻改变——但这篇论文此刻正在向某个服务器飞去，里面装着你们半年的心血，以及一位素未谋面的审稿人对它命运的最终决定权。{studentName}发来一条消息：「投出去了，有点空。」你回了一个「嗯」，然后关掉电脑，假装淡定地去倒了杯水。',
+          narrative: '咔哒。系统弹出确认框，你再点一次。「稿件已成功提交OWRC。」屏幕继续亮着，什么都不会立刻改变，但这篇论文此刻正在向某个服务器飞去，里面装着你们半年的心血，以及一位素未谋面的审稿人对它命运的最终决定权。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 5 },
-            { type: 'randomStudent', stat: 'favor', delta: 3 },
-            { type: 'lab', stat: 'reputation', delta: 2 },
+            { type: 'randomStudent', stat: 'happiness', delta: 2 },
           ],
         }],
       },
       {
         id: 'final_check',
-        text: '最后通读一遍（消耗精力）',
+        text: '最后通读一遍',
         energyCost: 15,
         outcomes: [{
           weight: 1,
-          narrative: '你花了三十八分钟把全文读了一遍。发现了一处漏掉的引用、两个前后不一致的符号，以及一个让你沉默了整整五秒的标题用词——然后改掉了。最终版在截止前两分钟提交。OWRC服务器大概正在处理三百多份稿件，其中一份是你们的，悄悄夹在一堆"已解决AGI对齐"的投稿中间，等待命运。{studentName}说："老师你真的检查了吗，还是只是走了一遍流程？"你没有回答，但内心是踏实的。',
+          narrative: '你花了半小时把全文读了一遍。发现了一处漏掉的引用、几个前后不一致的符号，然后改掉了。最终版在截止前两分钟提交。OWRC服务器大概正在处理几百份稿件，其中一份是你们的，悄悄夹在一堆"已解决AGI对齐"的投稿中间，等待命运。\n\n{studentName}说："老师你真的检查了吗，还是只是走了一遍流程？"你回以他一个踏实的眼神。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 8 },
-            { type: 'randomStudent', stat: 'favor', delta: 5 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 2 },
           ],
@@ -740,11 +738,10 @@ export const mainlineEvents: Record<string, GameEvent> = {
         fundingCost: 2,
         outcomes: [{
           weight: 1,
-          narrative: '你点下去，然后直接站起来拿了外套。"走，吃饭。" {studentName}愣了一秒，然后抓起手机跟上来了，脸上那种"到底该不该高兴"的神情在门口终于变成了真正的笑。你们去了附近一家川菜馆，点了明显超过两个人饭量的菜。聊到一半，{studentName}说："老师，如果中了我们再来吃一次。"你说好。这算是一个以两顿饭为赌注的学术宣言。',
+          narrative: '你点下去，然后直接站起来拿了外套。"走，咱们吃饭去。" {studentName}抓起手机跟上来，脸上那种"到底该不该高兴"的神情在门口终于变成了真正的笑。你们去了附近一家川菜馆，点了明显超过两个人饭量的菜。\n\n聊到一半，{studentName}说："老师，如果中了我们再来吃一次吧。"你说好。这算是一个以两顿饭为赌注的学术宣言。',
           effects: [
-            { type: 'randomStudent', stat: 'happiness', delta: 12 },
+            { type: 'randomStudent', stat: 'happiness', delta: 5 },
             { type: 'randomStudent', stat: 'favor', delta: 8 },
-            { type: 'lab', stat: 'reputation', delta: 2 },
             { type: 'randomStudent', stat: 'skills.social', delta: 2 },
           ],
         }],

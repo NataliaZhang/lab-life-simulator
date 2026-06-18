@@ -8,6 +8,7 @@ interface Props {
   boundStudentName?: string;
   boundStudent2Name?: string;
   onChoose: (eventId: string, optionId: string) => void;
+  onClose: () => void;
 }
 
 function resolve(text: string, name?: string, name2?: string): string {
@@ -17,11 +18,14 @@ function resolve(text: string, name?: string, name2?: string): string {
   return result;
 }
 
-export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boundStudentName, boundStudent2Name, onChoose }: Props) {
+export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boundStudentName, boundStudent2Name, onChoose, onClose }: Props) {
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
       <div className="modal">
-        <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
+        <div className="modal__header">
+          <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
+          <button className="modal__close" onClick={onClose} aria-label="暂时关闭">✕</button>
+        </div>
         <div className="modal__prompt">{resolve(event.prompt ?? '', boundStudentName, boundStudent2Name)}</div>
         <div className="modal__options">
           {(event.options ?? []).filter(option =>

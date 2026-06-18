@@ -452,10 +452,6 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       '时间戳是今天凌晨四点零三分。正文最后一句话是："老师，如果方便的话回一下，我不急，我现在可能在睡。"',
     ],
     prompt: '你选择：',
-    triggerConditions: [
-      { type: 'student', studentId: 'gu_mianmian', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'gmm_alumni_accept',

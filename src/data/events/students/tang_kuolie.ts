@@ -465,10 +465,6 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       '正文最后一行是："老师，对了，那家公司的CEO查了一下，好像是您校友，我帮您引荐一下？来都来了嘛。"',
     ],
     prompt: '你选择：',
-    triggerConditions: [
-      { type: 'student', studentId: 'tang_kuolie', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'tkl_alumni_visit_accept',

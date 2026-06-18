@@ -725,17 +725,17 @@ export const serverEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你让{studentName}立刻停止对那块磁盘的任何写操作，然后开始用extundelete扫描inode残留。扫了三个小时，找回了约60%的文件，大部分log完整，部分checkpoint文件损坏，但最关键的baseline对比数据几乎全部找到了。{studentName}盯着找回来的文件列表，把屏幕上下滚了好几遍，约四十秒后抬起头，说了一句"谢谢老师"，声音有点哑。你没说什么，但这条消息后来存在了你的收件箱里很久没有归档。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 20 },
-              { type: 'randomStudent', stat: 'happiness', delta: 15 },
+              { type: 'randomStudent', stat: 'favor', delta: 10 },
+              { type: 'randomStudent', stat: 'happiness', delta: 10 },
               { type: 'randomStudent', stat: 'projectProgress', delta: -5 },
               { type: 'lab', stat: 'energy', delta: -20 },
             ],
           },
           {
             weight: 1,
-            narrative: '你们尝试了数据恢复，磁盘扫了四个小时，extundelete返回了一批文件，但大部分已经被系统覆写了，那块分区是热写盘，三个月来每天都有新数据写入。最终只找回了7个完整文件，里面没有最关键的那几次run。{studentName}的表情在"找到一些"和"但不够用"之间经历了一个完整的弧度，最终落在了"我需要重新跑"这个结论上，说这话的时候语气已经很轻了，轻得像是把那三个月的重量都压着说出来的。',
+            narrative: '你们尝试了数据恢复，磁盘扫了四个小时，extundelete返回了一批文件，但大部分已经被系统覆写了，那块分区是热写盘，三个月来每天都有新数据写入。最终只找回了7个完整文件，里面没有最关键的那几次run。\n\n{studentName}的表情在"找到一些"和"但不够用"之间经历了一个完整的弧度，最终落在了"我需要重新跑"这个结论上，说这话的时像是把那三个月的重量都吐出来了。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 8 },
+              { type: 'randomStudent', stat: 'favor', delta: -5 },
               { type: 'randomStudent', stat: 'happiness', delta: -15 },
               { type: 'randomStudent', stat: 'projectProgress', delta: -15 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -749,10 +749,10 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你让{studentName}坐下，说："数据可以重跑，方法没有失，这三个月学到的东西还在。" 停顿了一下，加了一句："而且，重跑的时候你会比第一次快得多，因为你现在知道哪条路不通了。" {studentName}没有立刻回答，沉默了片刻，然后点了点头。不是释然，但是一种可以继续往下走的状态，有时候这已经足够了。',
+            narrative: '你让{studentName}坐下，说："数据可以重跑，方法没有失，这三个月学到的东西还在。" 停顿了一下，加了一句："而且，重跑的时候你会比第一次快得多，因为你现在知道哪条路不通了。" {studentName}点了点头，还是显得失落，但至少是一种可以继续往下走的状态，有时候这已经足够了。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 15 },
-              { type: 'randomStudent', stat: 'happiness', delta: 10 },
+              { type: 'randomStudent', stat: 'favor', delta: 8 },
+              { type: 'randomStudent', stat: 'happiness', delta: -5 },
               { type: 'randomStudent', stat: 'projectProgress', delta: -10 },
             ],
           },
@@ -764,20 +764,19 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你当天晚上写了一份实验室备份规范：所有/data/results目录每周自动rsync到NAS，训练脚本模板里加入results路径白名单校验，rm前强制confirm。{studentName}的数据找不回来了，但这份规范从那天起保护了实验室所有后续的实验数据。半年后，当另一个人差点犯了同样的错误时，系统弹出了那行校验提示，那一刻每个人都默默想起了这件事。',
+            narrative: '你当天晚上写了一份实验室备份规范：所有results目录每周自动同步到NAS，训练脚本模板里加入results路径白名单校验，rm前强制confirm。\n\n{studentName}的数据找不回来了，但这份规范从那天起保护了实验室所有后续的实验数据。\n\n半年后，当另一个人差点犯了同样的错误时，系统弹出了那行校验提示，那一刻每个人都默默想起了这件事。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 10 },
               { type: 'randomStudent', stat: 'happiness', delta: -5 },
-              { type: 'randomStudent', stat: 'projectProgress', delta: -15 },
+              { type: 'randomStudent', stat: 'projectProgress', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
           {
             weight: 1,
-            narrative: '你建立了备份规范，自动rsync脚本当天就写好了，跑了第一次同步，成功。然后你发现：/data/results里有一个叫做test_dont_backup_this的目录，里面存着四个人共约300GB的"临时文件"，其中有一个单文件大小是127GB，文件名是final_final_FINAL_v3_use_this.pt。备份规范执行了，但你对着这个目录的命名盯了好一会儿，在心里把这群人骂了个遍，然后若无其事地关上了终端。',
+            narrative: '你建立了备份规范，自动同步脚本当天就写好了，跑了第一次同步，成功。\n\n然后你发现：/data/results里有一个叫做test_dont_backup_this的目录，里面存着四个人共约300GB的"临时文件"，其中有一个单文件大小是127GB，文件名是final_final_FINAL_v3_use_this.pt。\n\n备份规范执行了，但你对着这个目录的命名盯了好一会儿，在心里把这群人骂了个遍，然后若无其事地关上了终端。',
             effects: [
-              { type: 'randomStudent', stat: 'projectProgress', delta: -15 },
+              { type: 'randomStudent', stat: 'projectProgress', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -15 },
             ],
@@ -792,8 +791,8 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'training_power_outage',
     title: '第47小时停电了',
     description: [
-      '今天下午三点二十七分，楼里停电了。原因据说是旁边在施工，挖断了一根线，具体情况后续通报。不具体通报了。',
-      '实验室的主服务器正在进行一次48小时的训练run，此刻处于第47小时12分。上一次checkpoint保存在第12小时。损失了35小时的训练进度，以8张A100的算力计算，这相当于消失了约¥14,000的云计算成本。停电还附带带走了组里另外两个正在运行的调试任务，但那些相对次要。',
+      '今天下午楼里停电了。原因据说是旁边在施工，挖断了一根线，具体情况后续通报。不具体通报了。',
+      '实验室的主服务器正在进行一次48小时的训练run，此刻处于第47小时12分。上一次checkpoint保存在第12小时。损失了35小时的训练进度，以8张A100的算力计算，这相当于消失了约¥14,000的云计算成本。停电还附带着带走了组里另外两个正在运行的调试任务，但那些相对次要。',
     ],
     prompt: '35小时的训练进度在第47小时归零，你决定',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],

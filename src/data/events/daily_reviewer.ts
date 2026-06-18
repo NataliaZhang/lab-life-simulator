@@ -201,7 +201,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你点了撤稿。投稿系统需要三个工作日确认。你在等待期间把论文的格式转换成了新目标会议的模板，排版改了两处，参考文献按新格式对齐，一切就绪。新投了一个会，两个月后拿到了接受通知。原来那个会议的系统后来给你发了一封邮件，说"您的论文已撤回，感谢您的参与"。',
+            narrative: '你点了撤稿。投稿系统需要三个工作日确认。你在等待期间把论文的格式转换成了新目标会议的模板，排版改了几处，参考文献按新格式对齐，一切就绪。新投了一个会，两个月后拿到了接受通知。原来那个会议的系统后来给你发了一封邮件，说"您的论文已撤回，感谢您的参与"。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'projectProgress', delta: 5 },
@@ -296,11 +296,10 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你把论文挂到了arxiv，写了一段简洁的摘要，附上了完整实验。三个月后，有人在推特上引用了它，说"这篇没发表的工作比XX会的好几篇正式论文都扎实"。你没有转发，但你保存了那条推文。',
+            narrative: '你把论文挂到了arxiv，写了一段简洁的摘要，附上了完整实验。三个月后，有人在推特上引用了它，说"这篇没发表的工作比XX会的好几篇正式论文都扎实"。你没有转发，但收藏了那条推文。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
-              { type: 'lab', stat: 'energy', delta: 15 },
-              { type: 'allStudents', stat: 'happiness', delta: 5 },
+              { type: 'lab', stat: 'energy', delta: 5 },
             ],
           },
         ],
@@ -329,14 +328,13 @@ export const reviewerEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'lab', stat: 'reputation', delta: 4 },
               { type: 'lab', stat: 'energy', delta: -15 },
-              { type: 'allStudents', stat: 'happiness', delta: 5 },
             ],
           },
           {
             weight: 1,
             narrative: '你向AC报告了。AC回复说"将认真对待您的反馈"，随后两周没有消息，之后来了一封审稿结论邮件，维持原有三位审稿人的意见，结论是拒稿。你搞不清楚那封报告邮件有没有被人看过。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -20 },
+              { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
             ],
           },
@@ -356,7 +354,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你写了一份非常有针对性的rebuttal，直接回应了那个消融实验的问题，仿佛你预判了对方的预判。审稿人二号回复："作者的回应有些异常精准，令人生疑。"论文被拒，理由是"存在某些程序性疑虑"。没有人解释这意味着什么。',
+            narrative: '你写了一份非常有针对性的rebuttal，直接回应了那个消融实验的问题，仿佛你预判了对方的预判。审稿人二号回复："作者的回应有些异常精准，令人生疑。"论文被拒，理由是"存在某些程序性疑虑"。也没有人解释这意味着什么。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -4 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -387,7 +385,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     title: '摘要字号差了一号',
     description: [
       'Desk rejection。理由："根据本会议投稿要求，摘要部分应使用10pt字体，作者提交版本使用了11pt字体，不符合格式规定，故不予送审。"',
-      '摘要一共四行，约六十个词。字号差了一号。',
+      '摘要一共只有四行。字号差了一号。',
     ],
     prompt: '因为摘要字号多了一号被拒，你决定',
     options: [
@@ -399,13 +397,14 @@ export const reviewerEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你把摘要字号改为10pt，导出PDF，确认格式无误，重新提交。这一次进入了正常审稿流程。两个月后，论文以条件接受收场，审稿人的意见里没有一条涉及格式。你偶尔想起那三分钟，觉得那是你整个科研生涯性价比最高的一次修改。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '你改了字号重投。系统在确认页面提示："请注意，重复提交可能被视为同一论文的第二次投稿，请确认符合会议规定。"你读了这段话三遍，查了会议官网，没有找到"同一论文重投"的相关规定。最终鼓起勇气提交了，进入正常流程。这个心理代价，按理不应该存在。',
+            narrative: '你改了字号重投。系统在确认页面提示："请注意，重复提交可能被视为同一论文的第二次投稿，请确认符合会议规定。"你感到两眼一黑，查了会议官网，没有找到"同一论文重投"的相关规定。最终鼓起勇气提交了，好在最终论文进入了正常流程。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'allStudents', stat: 'happiness', delta: 3 },
@@ -420,9 +419,10 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封两页的邮件，从学术评审的意义谈起，引用了三篇关于peer review制度的meta研究，委婉地指出字号差一号对审稿质量的影响可能接近于零。程序委员会主席回复说："感谢您的意见，我们会将此纳入下届会议的规则讨论。本届不作例外处理。"你把这封邮件打印出来，放进了一个物理文件夹。',
+            narrative: '你写了一封两页的邮件，从学术评审的意义谈起，引用了三篇关于peer review制度的meta研究，委婉地指出字号差一号对审稿质量的影响可能接近于零。程序委员会主席回复说："感谢您的意见，我们会将此纳入下届会议的规则讨论。本届不作例外处理。"',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 1 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
             ],
           },
@@ -434,10 +434,10 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你关掉了投稿系统，打开了一部纪录片，看了好一阵，然后去散了个步。第二天，你改完了格式，重新提交，没有任何心理负担。论文最终通过了，审稿意见里有一条表扬摘要写得简洁。',
+            narrative: '你关掉了投稿系统，打开了一部纪录片，看了好一阵，然后去散了个步。第二天，你改完了格式，重新提交，没有任何心理负担。论文最终通过了，审稿意见里有一条表扬是：摘要写得简洁。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 15 },
-              { type: 'allStudents', stat: 'happiness', delta: 8 },
+              { type: 'allStudents', stat: 'happiness', delta: 5 },
             ],
           },
         ],
@@ -451,7 +451,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     title: '昨天下午三点上传的论文',
     description: [
       '审稿意见里，审稿人二号写道："本文的核心贡献已被[Chen et al., 2026]的工作覆盖，建议拒稿并请作者参阅相关工作。"',
-      '你去查了那篇引用。它是昨天下午三点整上传到arxiv的。你六个月前投的稿。',
+      '你去查了那篇引用。它是昨天下午三点整才上传到arxiv的。而这是你六个月前投的稿。',
       '你盯着时间戳看了好一会儿，开始思考人类对"优先权"这个概念的理解是否存在某种根本性的哲学错误。',
     ],
     prompt: '被一篇昨天才上传的论文判定为"已被超越"，你决定',
@@ -465,13 +465,14 @@ export const reviewerEvents: Record<string, GameEvent> = {
             narrative: '你在rebuttal里附上了投稿系统的时间戳截图，把两篇论文的提交时间并排呈现，用一句话指出："本文提交时间早于引用工作上传时间整整六个月，在时间顺序上，本文工作应当具有独立性和优先性。"AC大概觉得这个逻辑无从反驳，换了一位审稿人，论文过了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
-              { type: 'allStudents', stat: 'happiness', delta: 10 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
             ],
           },
           {
             weight: 1,
             narrative: '你提交了清晰的时间线证明。审稿人二号回复说："尽管如此，鉴于该工作已公开，本文需要更明确地说明与之的差异化贡献。"你更新了相关章节，把差异写清楚，花了两周时间。论文最终接受，新增的那一段把论文变得更完整了——代价只是你脑子里那段无声的抗议。',
             effects: [
+              { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
             ],
@@ -484,15 +485,15 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你加上了那篇引用，写了半页说明两篇论文的具体差异——你发现差异比你想象的大，这让你好受了一些。论文通过了。你在最终版的acknowledgments里保留了原来的写作时间记录，算是一种没人会注意到的自我声明。',
+            narrative: '你加上了那篇引用，写了半页说明两篇论文的具体差异——你发现差异比你想象的大，这让你好受了一些。论文通过了。你在最终版的致谢里保留了原来的写作时间记录，算是一种没人会注意到的自我声明。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
-              { type: 'lab', stat: 'energy', delta: 5 },
+              { type: 'lab', stat: 'energy', delta: -1 },
             ],
           },
           {
             weight: 1,
-            narrative: '你加了引用，写了差异说明，重新提交。审稿人一号看完更新的版本，说"本文与引用工作过于相似，差异化贡献仍然不够清晰"。你把两篇论文重新对比读了一遍，差异其实相当明显，只是被你写得太学术了，让人看不出来。你改写了引言，换了一组词汇。第三次审稿通过了。',
+            narrative: '你加了引用，写了差异说明，重新提交。审稿人一号看完更新的版本，说"本文与引用工作过于相似，差异化贡献仍然不够清晰"。你把两篇论文重新对比读了一遍，差异其实相当明显，只是被你写得太学术了，让人看不出来。你改写了引言，换了组词汇，审稿终于通过了。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'skills.social', delta: 3 },
@@ -502,14 +503,15 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'review_their_paper',
-        text: '查一下那篇论文有没有投到什么地方，看能不能争取审稿机会',
+        text: '查一下那篇论文投到哪里了',
         outcomes: [
           {
             weight: 1,
-            narrative: '你发现Chen et al.的论文投到了另一个你也在PC list上的会议。你没有主动去要那篇稿，但当分配系统把它推到你的审稿列表上时，你接受了，写了一份认真、客观、相当严格的审稿意见，每一条都有文献支撑，逻辑无懈可击。论文接受了。你感觉某种平衡在宇宙层面被恢复了。',
+            narrative: '你发现Chen et al.的论文投到了另一个你也在PC list上的会议。你没有主动去要那篇稿，但当分配系统把它推到你的审稿列表上时，你接受了，写了一份认真、客观、相当严格的审稿意见，每一条都有文献支撑，逻辑无懈可击。不出意料，你的论文同时被接受了。你感觉某种平衡在宇宙层面被恢复了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -10 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
             ],
           },
         ],
@@ -522,14 +524,14 @@ export const reviewerEvents: Record<string, GameEvent> = {
     id: 'desk_reject_48h',
     title: '周三早上，拒稿了',
     description: [
-      '周一投的稿。周三早上，投稿系统发来邮件："我们遗憾地通知您，经过编辑初审，您的论文与本刊的发表范围不够契合，因此无法进入同行评审流程。"',
-      '没有具体理由。你在这个会议上发过两篇论文，其中一篇还是口头报告。',
+      '周一投了一篇稿。周三早上，投稿系统发来邮件："我们遗憾地通知您，经过编辑初审，您的论文与本刊的发表范围不够契合，因此无法进入同行评审流程。"',
+      '没有任何理由。你曾在这个会议上发过两篇论文——其中一篇，是口头报告。',
     ],
-    prompt: '48小时desk reject，你决定',
+    prompt: '你在这里做过oral presentation，现在被48小时desk reject，你决定',
     options: [
       {
         id: 'email_clarification',
-        text: '发邮件询问具体原因',
+        text: '发邮件讨个说法',
         outcomes: [
           {
             weight: 1,
@@ -545,13 +547,14 @@ export const reviewerEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
             ],
           },
         ],
       },
       {
         id: 'pivot_next_venue',
-        text: '立刻打开备选列表，今天就锁定下一个目标',
+        text: '不能破防，换个会投',
         outcomes: [
           {
             weight: 2,
@@ -559,12 +562,12 @@ export const reviewerEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
-              { type: 'allStudents', stat: 'projectProgress', delta: 3 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 8 },
             ],
           },
           {
             weight: 1,
-            narrative: '你立刻打开备选列表，选了第二名，当天晚上改完格式提交了。凌晨一点，在确认提交之前，你发现这个会议的ddl是昨天。你把标签页关掉，打开第三名，检查了三遍ddl，第二天重新提交。',
+            narrative: '你立刻打开备选列表，选了第二名，当天晚上改完格式提交了。凌晨一点，在确认提交之前，你发现这个会议的ddl是昨天。你只能把标签页关掉，转而打开第三名，反复检查确认了ddl，第二天重新提交。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'allStudents', stat: 'happiness', delta: 3 },
@@ -574,11 +577,11 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'professional_email',
-        text: '写一封你非常满意的专业邮件，然后关掉，不发',
+        text: '写讨伐邮件，但不发出去',
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封两百字的邮件，陈述了这篇论文与会议主题的契合度，列举了你此前在该会议的发表记录，措辞专业、克制、完全无懈可击。你读了三遍，觉得它很好。然后你把它保存到草稿箱，关掉了邮件客户端，打开了新的投稿目标。草稿箱里现在有七封这样的邮件。没有一封发出去过。这大概是正确的选择。',
+            narrative: '你写了一封两百字的邮件，陈述了这篇论文与会议主题的契合度，列举了你此前在该会议的发表记录，措辞专业、无懈可击。你读了三遍，觉得它很好。然后你把它保存到草稿箱，关掉了邮件客户端，打开了新的投稿目标。\n\n草稿箱里现在有七封类似这样的邮件，没有一封发出去过。这大概是正确的选择。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: 1 },

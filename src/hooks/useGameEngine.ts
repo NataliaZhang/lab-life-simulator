@@ -20,6 +20,7 @@ export interface GameEngine {
   newGame: () => void;
   loadSave: () => boolean;
   deleteSaveAndRestart: () => void;
+  closeModal: () => void;
 }
 
 export function useGameEngine(): GameEngine {
@@ -130,5 +131,6 @@ export function useGameEngine(): GameEngine {
     newGame,
     loadSave,
     deleteSaveAndRestart,
+    closeModal: () => setModalVisible(false),
   };
 }

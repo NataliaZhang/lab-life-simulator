@@ -546,12 +546,12 @@ export const hypeEvents: Record<string, GameEvent> = {
     title: '复现危机',
     description: [
       '另一个实验室发来邮件，措辞客气，但内容令人有点不舒服：他们在尝试复现你们发表的结果，已经试了三个月，始终无法在15%误差范围内接近你们的数字。他们想要你的完整训练细节。',
-      '你打开当年跑那组实验的目录。文件夹里有七个名字不同但内容很像的Jupyter notebook，分别叫做：final.ipynb、final_v2.ipynb、final_FINAL.ipynb、final_FINAL_v2.ipynb、final_FINAL_v3.ipynb、final_FINAL_v3_USE_THIS.ipynb，以及一个叫做use_this_one_actually.ipynb的文件。你点开final_FINAL_v3_USE_THIS.ipynb，第一个cell的注释写着"记得改这里的seed"。',
+      '你打开当年跑那组实验的目录。文件夹里有七个名字不同但内容很像的文件，分别叫做：final.ipynb、final_v2.ipynb、final_FINAL.ipynb、final_FINAL_v2.ipynb、final_FINAL_v3.ipynb、final_FINAL_v3_USE_THIS.ipynb，以及一个叫做use_this_one_actually.ipynb的文件。\n\n你点开final_FINAL_v3_USE_THIS.ipynb，第一个cell的注释写着"记得改这里的seed"。',
     ],
     prompt: '面对复现危机，你选择',
     triggerConditions: [
       { type: 'time', field: 'year', op: '>=', value: 2 },
-      { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 50 },
     ],
     options: [
       {
@@ -561,41 +561,18 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了两天整理了完整的复现指南，包括随机种子、数据预处理的每一步、硬件配置，以及那个notebook里那句"记得改这里的seed"到底是什么意思。对方成功复现了，发来感谢邮件，说"你们是我们联系过的最透明的实验室之一"，并在他们的论文里多致谢了你们一段。这种合作，不是所有人都愿意做的。',
+            narrative: '你花了两天整理了完整的复现指南，包括随机种子、数据预处理的每一步、硬件配置，以及那个notebook里那句"记得改这里的seed"到底是什么意思。\n\n对方成功复现了，发来感谢邮件，说"你们是我们联系过的最透明的实验室之一"，并在他们的论文里多致谢了你们一段。这种合作，不是所有人都愿意做的。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 4 },
-              { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
           {
             weight: 1,
-            narrative: '你全力配合，逐步排查。复现过程中你们发现一个超参数在原始论文里描述有歧义，不同解读会导致不同结果，两种结果都是合理的，但差距大概在12%左右。对方把这个发现也写进了他们的论文，以"实验设置的歧义性讨论"的形式。你不确定这算不算好事，但确实推动了领域里的一个小问题被明确化了。',
+            narrative: '你全力配合，逐步排查。复现过程中你们发现一个超参数在原始论文里描述有歧义，不同解读会导致不同结果，两种结果都是合理的，但差距大概在12%左右。\n\n对方把这个发现也写进了他们的论文，以"实验设置的歧义性讨论"的形式。你叹了口气，至少这确实推动了领域里的一个小问题。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'allStudents', stat: 'skills.theory', delta: 5 },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'send_what_you_have',
-        text: '把现有的notebook发过去，附上说明',
-        outcomes: [
-          {
-            weight: 2,
-            narrative: '你把final_FINAL_v3_USE_THIS.ipynb打了个zip，附上一份三页的说明文档发了过去，诚实地注明"部分细节可能需要进一步确认"。对方回邮件说谢谢，随后三周没有任何动静，你的邮件客户端每天都显示"已读"，就是没有回复，然后某个周一早上突然来了一封新邮件：他们找到了差异所在，是数据预处理步骤的顺序问题，你们的描述和代码不完全一致。你回邮件说感谢发现了这个问题，内心在思考当年是怎么写的方法节。',
-            effects: [
-              { type: 'lab', stat: 'reputation', delta: 1 },
-              { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
-            ],
-          },
-          {
-            weight: 1,
-            narrative: '你把notebook发了过去。三天后对方回邮件说notebook里有两个cell输出了不同的结果，问哪个是对的。你打开notebook，发现这是两次不同实验的残留，都还在，但标注不清楚。你花了一个小时才搞清楚哪个是正确版本。写实验记录这件事，每次都觉得下次会做得更好。',
-            effects: [
-              { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
-              { type: 'lab', stat: 'energy', delta: -5 },
+              { type: 'lab', stat: 'reputation', delta: -3 },
+              { type: 'allStudents', stat: 'skills.theory', delta: 4 },
             ],
           },
         ],
@@ -603,7 +580,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       {
         id: 'investigate_yourself',
         text: '先自己复现一遍，确认结果是否可靠',
-        energyCost: 25,
+        energyCost: 15,
         outcomes: [
           {
             weight: 2,
@@ -611,16 +588,34 @@ export const hypeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'lab', stat: 'reputation', delta: 6 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 6 },
-              { type: 'lab', stat: 'energy', delta: -20 },
             ],
           },
           {
             weight: 1,
-            narrative: '你自己尝试复现，跑了三天，数字和论文里差了18%。超出误差范围了。你仔细检查，发现是当时的测试集和现在版本的数据集有一个处理差异，但差异发生的那次commit没有详细说明。结论：你们的结论是正确的，但复现环境更难搭建。你给对方的回信写了一个小时，语气非常诚恳，并附上了详细的环境配置要求。此后你们组的每个实验都开始记录完整的dependency版本。',
+            narrative: '你自己尝试复现，跑了三天，数字和论文的差距高达18%，也超出误差范围了。\n\n你仔细检查，发现是当时的测试集和现在版本的数据集有一个差异，但差异发生的那次commit没有详细说明。\n\n你给对方的回信写了一个小时，语气非常诚恳，并附上了详细的环境配置要求。\n\n此后你们组的每个实验都开始记录完整的dependency版本。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 8 },
-              { type: 'lab', stat: 'energy', delta: -22 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'send_what_you_have',
+        text: '把现有的代码文件发过去，附上说明',
+        outcomes: [
+          {
+            weight: 2,
+            narrative: '你把final_FINAL_v3_USE_THIS.ipynb发了过去，诚实地注明"部分细节可能需要进一步确认"。\n\n对方回邮件说谢谢，随后三周没有任何动静，你的邮件客户端每天都显示"已读"，就是没有额外回复。\n\n某个周一早上突然来了一封新邮件：他们找到了差异所在，是数据预处理步骤的顺序问题，你们的描述和代码不完全一致。',
+            effects: [
+              { type: 'lab', stat: 'reputation', delta: -2 },
+            ],
+          },
+          {
+            weight: 1,
+            narrative: '你把代码文件发了过去。三天后对方回邮件说里面有两个cell输出了不同的结果，问哪个是对的。\n\n你打开代码文件，发现这是两次不同实验的残留，都还在，但标注不清楚。你花了一个小时才重新搞清楚哪个是正确版本。',
+            effects: [
+              { type: 'allStudents', stat: 'skills.engineering', delta: 5 },
+              { type: 'lab', stat: 'energy', delta: -5 },
             ],
           },
         ],
@@ -645,7 +640,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说你倾向于基础模型路线，原因是数据规模和通用迁移能力。支持你立场的那组人立刻安静下来露出了胜利者的神情；另一组人安静下来，脸上有一种努力维持学术中立的表情。组会结束了，方向明确了，但你感觉到其中一半人是带着一口没咽下去的气离开的，这口气会在下一个实验结果出来时找到出口。',
+            narrative: '你说你倾向于基础模型路线，原因是数据规模和通用迁移能力。支持你立场的那组人立刻安静下来露出了胜利者的神情；另一组人安静下来，脸上有一种努力维持学术中立的表情。\n\n组会结束了，方向明确了，但你感觉到其中一半人是带着一口没咽下去的气离开的，这口气或许会在下一个实验结果出来时找到出口。',
             effects: [
               { type: 'allStudents', stat: 'projectProgress', delta: 5 },
               { type: 'randomStudent', stat: 'favor', delta: -8 },
@@ -654,9 +649,9 @@ export const hypeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你说你认为领域预训练在当前资源下更可行，给出了三点理由。另一派的人提出了反驳，你点头说"这个问题下周再讨论"，结束了会议。三天后你收到一封邮件，是一篇新发布的论文，正好支持了你的立场，发邮件的是持反对意见的学生。附言写着："老师，供参考。" 这是一种迂回的接受。',
+            narrative: '你说你认为领域预训练在当前资源下更可行，给出了三点理由。另一派的人提出了反驳，你点头说"这个问题下周再讨论"，结束了会议。\n\n三天后你收到一封邮件，是一篇新发布的论文，正好支持了你的立场，发邮件的是当时持反对意见的学生。这应该算是一种迂回的接受。',
             effects: [
-              { type: 'allStudents', stat: 'projectProgress', delta: 3 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
             ],
           },
@@ -668,16 +663,16 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你说"这是个好问题，大家继续"，然后靠在椅背上，让他们辩了另外四十分钟。白板写满了，引用了十八篇论文，争到最后两派都承认对方有一些说法是对的，争执点缩小到了一个具体的子问题：在特定数据规模下，哪种预训练策略的迁移效率更高。你在白板角上写下这个问题，说："这是下个季度的实验"。方向从吵架里诞生了。',
+            narrative: '你说"这是个好问题，大家继续"，然后靠在椅背上，让他们辩了另外四十分钟。\n\n白板写满了，争到最后两派都承认对方有一些说法是对的。\n\n你在白板角上写下这个问题，说："这是下个季度的实验"。方向从吵架里诞生了。',
             effects: [
               { type: 'allStudents', stat: 'skills.theory', delta: 6 },
-              { type: 'allStudents', stat: 'happiness', delta: -3 },
               { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5},
             ],
           },
           {
             weight: 1,
-            narrative: '你保持中立，让他们辩。辩论进行了一个小时，结论没有出现，但双方情绪都上来了。组会在一种不太舒服的气氛中结束，有人走的时候步伐比平时快了一点。门带上的一瞬间，你隐约听到走廊里有人用力呼了口气。中立不等于和平，有时候只是把问题推后了。',
+            narrative: '你保持中立，让他们辩。辩论进行了一个小时，结论没有出现，但双方情绪都上来了。组会在一种不太舒服的气氛中结束，门带上的一瞬间，你隐约听到走廊里有人用力呼了口气。\n\n中立不等于和平，有时候只是把问题推后了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -8 },
               { type: 'allStudents', stat: 'favor', delta: -3 },
@@ -694,7 +689,6 @@ export const hypeEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你打断了辩论，在白板上写下实验设计的框架：相同数据、相同任务、两种预训练策略，评测三个指标。你说："六周后，数据说话。" 两派人同时停止了辩论，转而开始讨论实验设计的合理性——这次他们在一起讨论，而不是互相对立。六周后，结果出来了，有意思，但不简单，足够写一篇论文了。',
             effects: [
-              { type: 'allStudents', stat: 'skills.theory', delta: 5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 4 },
               { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'reputation', delta: 4 },

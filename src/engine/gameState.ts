@@ -12,11 +12,12 @@ import type {
   GameTime,
   ActiveProject,
 } from '../types';
-import { initialPoolIds, allCandidates } from '../data/studentPool';
+import { initialPoolIds, allCandidates, year1RestrictedIds } from '../data/studentPool';
 import { openingEventIds } from '../data/events';
 import { getEvent, pickOutcome } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
+import { projectById } from '../data/projects';
 
 // Admission cost rises in year 3+ when PhD stipends doubled.
 function getAdmissionCost(year: number): number {
@@ -91,6 +92,7 @@ export function createInitialState(): GameState {
     noStudentMonths: 0,
     chosenOptionIds: [],
     studentConditionalLog: {},
+    moodChangesThisMonth: {},
   };
 }
 
@@ -166,6 +168,8 @@ interface ApplyEffectsResult {
   activeProjects: ActiveProject[];
   statChanges: StatChange[];
   newProjectIdeas: string[];
+  // studentId → number of happiness deltas applied this call (for fortune_engineer tracking)
+  moodChanges: Record<string, number>;
 }
 
 // Applies a projectProgress delta to the project the student is currently leading.
@@ -196,6 +200,12 @@ function applyEffects(
   let activeProjects = [...state.activeProjects];
   const statChanges: StatChange[] = [];
   let newProjectIdeas = [...state.projectIdeas];
+  const moodChanges: Record<string, number> = {};
+
+  // Track a happiness delta for fortune_engineer counting.
+  const trackMood = (studentId: string, delta: number) => {
+    if (delta !== 0) moodChanges[studentId] = (moodChanges[studentId] ?? 0) + 1;
+  };
 
   for (const effect of effects) {
     if (effect.type === 'lab') {
@@ -209,6 +219,7 @@ function applyEffects(
           activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
         }
       } else {
+        if (effect.stat === 'happiness') trackMood(effect.studentId, effect.delta);
         students = students.map(s =>
           s.id === effect.studentId ? applyStudentStat(s, effect.stat, effect.delta) : s,
         );
@@ -225,6 +236,9 @@ function applyEffects(
           activeProjects = applyProjectProgressEffect(s.id, s.name, effect.delta, activeProjects, statChanges);
         }
       } else {
+        if (effect.stat === 'happiness') {
+          for (const s of activeStudents) trackMood(s.id, effect.delta);
+        }
         students = students.map(s =>
           s.status === 'active' ? applyStudentStat(s, effect.stat, effect.delta) : s,
         );
@@ -242,6 +256,7 @@ function applyEffects(
         if (effect.stat === 'projectProgress') {
           activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
         } else {
+          if (effect.stat === 'happiness') trackMood(target.id, effect.delta);
           students = students.map(s =>
             s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
           );
@@ -257,6 +272,7 @@ function applyEffects(
         if (effect.stat === 'projectProgress') {
           activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
         } else {
+          if (effect.stat === 'happiness') trackMood(target.id, effect.delta);
           students = students.map(s =>
             s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
           );
@@ -296,7 +312,7 @@ function applyEffects(
     // extendGraduation is a state-level side-effect handled in CHOOSE_OPTION, not here
   }
 
-  return { lab, students, activeProjects, statChanges, newProjectIdeas };
+  return { lab, students, activeProjects, statChanges, newProjectIdeas, moodChanges };
 }
 
 // ─── Reducer ───────────────────────────────────────────────────────────────
@@ -406,10 +422,26 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const boundStudentId = state.activeBoundStudentId ?? undefined;
       const boundStudent2Id = state.activeBoundStudent2Id ?? undefined;
 
-      const { lab, students, activeProjects: effectProjects, statChanges, newProjectIdeas } = applyEffects(state, [
+      const { lab, students: effectStudents, activeProjects: effectProjects, statChanges, newProjectIdeas, moodChanges } = applyEffects(state, [
         ...costEffects,
         ...(outcome.effects ?? []),
       ], boundStudentId, boundStudent2Id);
+
+      // schedule_is_justice: when energy is spent on a choice, the bound student gains +1 engineering
+      let students = effectStudents;
+      if (energyCost > 0 && boundStudentId) {
+        students = students.map(s =>
+          s.id === boundStudentId && s.status === 'active' && s.traitIds.includes('schedule_is_justice')
+            ? { ...s, skills: { ...s.skills, engineering: Math.min(100, s.skills.engineering + 1) } }
+            : s,
+        );
+      }
+
+      // Merge mood changes from this event into the monthly tracker (for fortune_engineer)
+      const newMoodChangesThisMonth: Record<string, number> = { ...state.moodChangesThisMonth };
+      for (const [sid, count] of Object.entries(moodChanges)) {
+        newMoodChangesThisMonth[sid] = (newMoodChangesThisMonth[sid] ?? 0) + count;
+      }
 
       const logEntry: LogEntry = {
         id: `${action.eventId}_${Date.now()}`,
@@ -476,6 +508,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeBoundStudent2Id: null,
         graduationExtensions,
         chosenOptionIds: [...state.chosenOptionIds, action.optionId],
+        moodChangesThisMonth: newMoodChangesThisMonth,
         storyLog: [...state.storyLog, logEntry, ...(ideaHintEntry ? [ideaHintEntry] : [])],
       };
     }
@@ -545,7 +578,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.lab.energy < CONTINUE_ENERGY_COST) return state;
       if (state.studentPool.length < 2) return state;
 
-      const candidates = drawTwoCandidates(state.studentPool);
+      const continuePool = state.time.year === 1
+        ? state.studentPool.filter(id => !year1RestrictedIds.has(id))
+        : state.studentPool;
+      const candidates = drawTwoCandidates(continuePool);
       if (!candidates) return state;
 
       return {
@@ -567,6 +603,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...action.state,
         studentConditionalLog: action.state.studentConditionalLog ?? {},
+        moodChangesThisMonth: action.state.moodChangesThisMonth ?? {},
       };
     }
 
@@ -575,7 +612,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'START_PROJECT': {
-      return startProject(state, action.projectId);
+      const newState = startProject(state, action.projectId);
+      // schedule_is_justice: each active student with this trait gains +1 engineering
+      // when energy is spent to start a project
+      const proj = projectById[action.projectId];
+      if (proj && proj.startupEnergyCost > 0) {
+        return {
+          ...newState,
+          students: newState.students.map(s =>
+            s.status === 'active' && s.traitIds.includes('schedule_is_justice')
+              ? { ...s, skills: { ...s.skills, engineering: Math.min(100, s.skills.engineering + 1) } }
+              : s,
+          ),
+        };
+      }
+      return newState;
     }
 
     case 'ASSIGN_PROJECT_LEADER': {

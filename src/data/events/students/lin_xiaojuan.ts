@@ -416,10 +416,6 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       '邮件最后，他问你有没有兴趣合作一个行业项目，预算到位，方向也契合。他附上了初步方案的文档链接。文档创建时间：昨晚接近午夜，也就是今天发这封邮件之前几分钟写完的。有些人，真的永远不会变。',
     ],
     prompt: '林小卷毕业之后带来了合作机会，你选择：',
-    triggerConditions: [
-      { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'lxj_alumni_collaborate',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Student } from '../types';
 import type { ActiveProject } from '../types/project';
-import { traitDefs } from '../data/traits';
+import { TraitTag } from './TraitTag';
 import { projectById } from '../data/projects';
 
 const PI_BIOS = [
@@ -85,7 +85,7 @@ function StudentCard({ student, activeProjects }: { student: Student; activeProj
       </div>
       <div className="student-card__traits">
         {student.traitIds.map(id => (
-          <span key={id} className="trait-tag">{traitDefs[id]?.name ?? id}</span>
+          <TraitTag key={id} traitId={id} />
         ))}
       </div>
       <div className="student-card__project">

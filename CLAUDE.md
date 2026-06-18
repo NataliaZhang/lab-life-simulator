@@ -14,6 +14,46 @@ The game is event-driven. The main gameplay loop is:
 6. When the queue is empty, allow the player to advance to the next month.
 7. Run monthly updates: project progress, student changes, achievements, and new event triggers.
 
+## Project System
+
+Projects are a long-term progression layer running in parallel with the event system.
+
+**Lifecycle:** `unlockIdea` effect (from event outcomes) → `GameState.projectIdeas[]` → player
+clicks "立项" in ProjectsPanel (`START_PROJECT` action, costs energy or funding) →
+`activeProjects[]` → monthly progress via `processMonthlyProjects()` → at 100% moves to
+`completedProjects[]` and queues a `project_complete_{id}` completion event.
+
+**Key files:**
+- `src/types/project.ts` — `ProjectDefinition`, `ActiveProject`, `CompletedProject` types
+- `src/data/projects.ts` — 12 handcrafted project definitions; `projectById` lookup map
+- `src/data/events/project_ideas.ts` — events that grant `unlockIdea` effects
+- `src/data/events/project_completions.ts` — completion events (one per project) with rewards
+- `src/engine/projectEngine.ts` — all pure project logic: `startProject`, `assignLeader`,
+  `removeLeader`, `canAssignStudent`, `calcEfficiencyMultiplier`, `processMonthlyProjects`
+- `src/components/ProjectsPanel.tsx` — full-screen overlay: Ideas / 进行中 / 已完成 sections
+
+**Leader assignment** (`ASSIGN_PROJECT_LEADER` → `assignLeader()`):
+- Leader is a student ID or `'pi'`. No leader → project stalls (no monthly progress).
+- Forced swap deducts 10 progress points, unless the outgoing leader has `optimistic_heart`.
+- On student graduation/leave, `removeLeaderOnStudentLeave()` stalls the project (same penalty,
+  waived for `optimistic_heart`).
+
+**Efficiency formula** (student leaders only):
+`multiplier = clamp(1 + 0.75 × avg(skill/required − 1), 1.0, 1.75)` across required dimensions.
+`monthlyGain = baseMonthlyProgress × multiplier` (before trait modifiers).
+`proof_addict` reduces effective engineering requirement by 30 inside this formula and in
+`canAssignStudent`.
+
+**PI self-management:** PI costs 15 energy/month per project. If energy is insufficient the project
+stalls and the leader is cleared. `time_manager` trait raises cost to 24 energy but gives ×1.5
+monthly progress.
+
+**Trait modifiers** (applied in `processMonthlyProjects` and completion handler):
+- Progress: `ddl_warrior` (×2 when >80%), `dream_debugger` (±% by project type),
+  `research_mysticism` (×1.2/×0.8 by mood), `network_magnet` (−1% per month)
+- Completion bonuses: `startup_saint` (+3 funding), `product_mindset` (+2 rep),
+  `network_magnet` (+4 rep)
+
 ## Implementation Rules
 
 - Keep game logic out of React components.

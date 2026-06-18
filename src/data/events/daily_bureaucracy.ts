@@ -452,7 +452,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     title: '第一个学生出息了',
     description: [
       '你的手机屏幕亮了，是{studentName}发来的消息。你还记得{studentName}，那个把学习率调到1.0、看着loss曲线飞上天际然后若无其事问"老师这正常吗"的{studentName}。',
-      '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你数了一遍感叹号，然后又数了一遍，确认自己没有眼花。你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外，偶尔把水杯转一圈再转回来。',
+      '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外，偶尔把水杯转一圈再转回来。',
     ],
     prompt: '{studentName}拿了最佳论文奖，你想：',
     triggerConditions: [
@@ -466,11 +466,12 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在组群发了一条消息，说{studentName}拿了ICOP最佳论文，让大家向学长/学姐祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜，语气里混合着真诚的高兴和一种无声的压力。有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
+            narrative: '你在组群发了一条消息，说{studentName}拿了ICOP最佳论文，让大家都来祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜，语气里混合着真诚的高兴和一种无声的压力。有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
+              { type: 'randomStudent', stat: 'favor', delta: 3 },
             ],
           },
         ],
@@ -481,9 +482,9 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回复说："恭喜，这是你应得的。我记得你第三次被拒的那天下午。"过了大概五分钟，{studentName}回了一条："老师，我当时以为你不知道我在想什么。原来你知道。" 你看着这句话，没有立刻回复，窗外有什么东西刚好过了一阵风。',
+            narrative: '你回复："恭喜。"想了想，又手比嘴快地发了一句："你知道吗，你第一篇代码，其实我偷偷改过。"\n\n"{studentName}：？"\n\n"第二篇也是。"\n\n"{studentName}：？？？"\n\n你一击得胜，立马关掉聊天框。再多的秘密，就只适合毕业之后再说了。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'randomStudent', stat: 'favor', delta: 10 },
             ],
           },
@@ -495,10 +496,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发了一个"🎉"，然后放下手机，坐了一会儿。你想起{studentName}第一次进实验室的样子，想起你当时讲loss收敛的时候对方一脸"我懂了"但明显没懂的表情。现在{studentName}去rethink了整个方向，你还在这里讲loss收敛。你把手机再拿起来，发了一条消息："请全组吃饭，你请。"',
+            narrative: '你发了一个"🎉"，然后放下手机，坐了一会儿。你想起{studentName}第一次进实验室的样子，想起你当时讲loss收敛的时候对方一脸"我懂了"但明显没懂的表情。现在{studentName}去rethink了整个方向，你还在这里讲loss收敛。你把手机再拿起来，发了一条消息："记得请全组吃饭，你请。"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 6 },
-              { type: 'allStudents', stat: 'happiness', delta: 10 },
+              { type: 'allStudents', stat: 'happiness', delta: 5 },
             ],
           },
         ],
@@ -511,12 +512,12 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     id: 'late_invited_talk',
     title: 'Keynote邀请',
     description: [
-      '邮件的主题是："Keynote Invitation — [Conference Name] 2026"。你把这句话读了两遍，然后向后靠在椅背上，想起八年前你在这个会议投的第一篇论文，被拒了，审稿人二号用了"superficial"这个词，你至今记得。',
-      '邮件说："您的研究组在过去几年产生了持续的影响力，我们诚挚邀请您在今年的会议上做45分钟keynote报告，题目由您自行拟定。" 四十五分钟。你上一次做45分钟报告是在某次院系内部汇报，中间有人睡着了。这次性质不同。',
+      '邮件的主题是："Keynote Invitation — ICOP 2026"。你念着这句话，想起曾经你在ICOP投的第一篇论文，被拒了，审稿人二号用了"superficial"这个词，你至今记得。',
+      '邮件说："您的研究组在过去几年产生了持续的影响力，我们诚挚邀请您在今年的会议上做45分钟keynote报告，题目由您自行拟定。" \n\n四十五分钟。你上一次做那么长时间的报告是在某次院系内部汇报，中间有人睡着了。但这次性质不同。',
     ],
     prompt: '你被邀请做Keynote了，你打算讲什么',
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 40 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 100 },
       { type: 'time', field: 'year', op: '>=', value: 3 },
     ],
     options: [
@@ -526,17 +527,18 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了三周准备，PPT每一页都有充分的实验支撑，结论保守但确凿，演讲节奏精确到分钟。报告结束后，有人评价说"这是今年会议上最扎实的报告"，随后补充了一句"也是最dense的"。问答环节持续了二十五分钟，你回答了七个问题，没有一个能难住你。声誉稳步上升，方式是正确的。',
+            narrative: '你花了三周准备，PPT每一页都有充分的实验支撑，结论保守但确凿，演讲节奏精确到分钟。报告结束后，有人评价说"这是今年会议上最扎实的报告"，随后补充了一句"也是最dense的"。\n\n问答环节持续了半个小时，没有一个问题能难住你。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
+              { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '报告很扎实，问题也很扎实，最后一个问题你没有立刻答上来，停顿了一下，现场非常安静。你最终给出了一个部分答案。有几个人在记笔记，这让你感到一种复杂的满足感。',
+            narrative: '报告很扎实，问题也很扎实，最后一个问题你没有答上来，支吾了片刻，现场布满了令人脚趾抠地的安静气氛。幸好你最终给出了一个部分答案。还是有几个人在记笔记的，你安慰自己。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: -5 },
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
@@ -548,40 +550,39 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满open problem和provocative question的报告。台下有人频繁点头，有人频繁皱眉，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。你的名字在接下来两周里被引用的频率上升了一个可见的幅度。',
+            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满开发问题的报告。台下有人频繁点头，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。你的名字在接下来两周里，被引用的频率上升了一个可见的幅度。',
             effects: [
+              { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '报告很宏大，宏大到有几个具体预测在三天后的讨论环节被另一位大佬当场指出"存在逻辑漏洞"。你做了回应，大佬表示"可以接受"，但Twitter上已经有人截图了。声誉±0，但话题度+∞。',
+            narrative: '报告很宏大，宏大到有几个具体预测在三天后的讨论环节被另一位大佬当场指出"存在逻辑漏洞"。你迅速做了回应，大佬表示"可以接受"，但已经有人截图发在网上了。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'allStudents', stat: 'happiness', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: -5 },
             ],
           },
         ],
       },
       {
         id: 'tell_rejection_story',
-        text: '讲一个包含你最惨被拒故事的报告（有风险，但可能成为名场面）',
+        text: '讲一个包含你最惨被拒故事的报告',
         outcomes: [
           {
             weight: 1,
-            narrative: '你在PPT第三页放了一张截图，就是那封拒信，审稿人二号用了"superficial"。你花了四分钟讲那次被拒，台下的年轻研究者们开始笑，不是嘲笑，是那种"原来大佬也被这样对待过"的释怀式笑声。接下来四十分钟讲了什么、结论是什么，有人之后没记住，但那张拒信截图被转发了三百次，每一条转发都附了不同版本的"我也有一封这样的邮件"。',
+            narrative: '你在PPT第三页放了一张截图，就是那封拒信，审稿人二号用了"superficial"。你花了四分钟讲那次被拒，台下的年轻研究者们露出善意的笑，原来大佬也曾被这样对待过。\n\n后来那张拒信截图被转发了三百次，每一条转发都附了不同版本的"我也有一封这样的邮件"。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 12 },
-              { type: 'allStudents', stat: 'happiness', delta: 12 },
+              { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 8 },
             ],
           },
           {
             weight: 1,
-            narrative: '你讲了那次被拒，台下笑了，然后你过渡到正式内容——但时间控制出了问题，那个故事讲了八分钟，剩下的研究内容被压缩到了三十七分钟，最后两个实验没来得及展示。有人会后说"报告很有意思，但感觉结尾有点仓促"，这句话准确地描述了发生的事。',
+            narrative: '你讲了那次被拒，台下笑了，然后你过渡到正式内容。糟糕的是，时间控制出了问题，那个故事讲了太久，剩下的研究内容只能被狠狠压缩，最后两个实验完全没来得及展示。有人会后说："报告挺有意思，但感觉结尾有点仓促。"',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'lab', stat: 'energy', delta: -8 },
             ],
           },

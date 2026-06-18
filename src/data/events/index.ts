@@ -104,6 +104,8 @@ export const monthlyEventPool: string[] = [
   'desk_archaeology',
   'lab_stray_cat',
   'printing_apocalypse',
+  'goose_leg_midnight',    // chain events goose_leg_investigation / goose_leg_apologize 不进池
+  'paper_to_public',
 
   // 全组事件（triggerConditions: minStudentCount: 3，含"大家""组里"等集体语言）
   'group_conference_ddl',

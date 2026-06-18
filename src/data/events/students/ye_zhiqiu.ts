@@ -444,10 +444,6 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       '正文：她在新组帮忙审了一篇合作论文，发现了三处证明漏洞，想写审稿意见，但她不确定措辞是否太直接，附件是她的详细审查报告，每处漏洞附完整反例和修复建议。她在最后一行加了一句："如果语气有不妥的地方，请老师帮我调整。"',
     ],
     prompt: '你怎么回复叶知秋？',
-    triggerConditions: [
-      { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'yzq_alumni_visit_affirm',

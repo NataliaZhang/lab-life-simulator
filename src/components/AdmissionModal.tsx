@@ -1,6 +1,6 @@
 import type { AdmissionState, LabStats } from '../types';
 import { allCandidates } from '../data/studentPool';
-import { traitDefs } from '../data/traits';
+import { TraitTag } from './TraitTag';
 
 const CONTINUE_ENERGY_COST = 20;
 
@@ -76,15 +76,9 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
                 </div>
                 <p className="candidate-card__bio">{candidate.bio}</p>
                 <div className="candidate-card__traits">
-                  {candidate.traitIds.map(tid => {
-                    const trait = traitDefs[tid];
-                    if (!trait) return null;
-                    return (
-                      <span key={tid} className="trait-tag">
-                        {trait.name}
-                      </span>
-                    );
-                  })}
+                  {candidate.traitIds.map(tid => (
+                    <TraitTag key={tid} traitId={tid} />
+                  ))}
                 </div>
                 <button
                   className={`btn btn--primary candidate-card__admit-btn${!canAfford ? ' modal__option-btn--disabled' : ''}`}

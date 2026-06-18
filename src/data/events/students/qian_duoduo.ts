@@ -423,10 +423,6 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       '"不是为了名字出现在网站上，"他在邮件最后写道，"是因为这件事如果没有实验室做的基础，做不出来。我觉得应该有个正式的说法。"你读到这里，停了一下。你想起他当年问的那个第一个问题——"用户是谁"。他找到答案了，然后把答案做成了一个真实的产品，交到了真实的人手里。',
     ],
     prompt: '钱多多带着创业成果回来了，你选择：',
-    triggerConditions: [
-      { type: 'student', studentId: 'qian_duoduo', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'qdd_alumni_cooperate',

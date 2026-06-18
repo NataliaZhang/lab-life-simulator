@@ -469,10 +469,6 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       '邮件末尾说：她整理了一套开源工具，想以实验室名义一起发布。她说这些工具有一部分是在这里做研究时攒下来的，想还给这里。',
     ],
     prompt: '你怎么回复她？',
-    triggerConditions: [
-      { type: 'student', studentId: 'xie_zhiwei', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'xzw_alumni_visit_agree',

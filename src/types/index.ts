@@ -186,6 +186,9 @@ export interface GameState {
   // Per-student record of which conditional happiness-events have fired and when.
   // Enforces one-time-per-student rule and 2-month cooldown between events.
   studentConditionalLog: Record<string, Array<{ eventId: string; year: number; month: number }>>;
+  // Counts how many times each student's happiness changed during the current month.
+  // Used by fortune_engineer (fires +2 engineering after the 3rd change). Reset each month-end.
+  moodChangesThisMonth: Record<string, number>;
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────

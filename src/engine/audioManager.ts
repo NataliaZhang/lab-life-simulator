@@ -51,6 +51,8 @@ class AudioManager {
   private unlocked = false;
   private pendingBgmId: string | null = null;
   private fadeTimer: ReturnType<typeof setInterval> | null = null;
+  // Element currently fading out; tracked so _clearFade() can stop it if the fade is interrupted.
+  private fadingOutEl: HTMLAudioElement | null = null;
 
   constructor() {
     this.bgmVolume = parseFloat(localStorage.getItem(KEY_BGM_VOL) ?? '0.5');
@@ -104,27 +106,31 @@ class AudioManager {
       return;
     }
     if (this.currentBgmId === trackId) return;
+
+    // Always cancel any in-progress fade before starting a new transition.
+    this._clearFade();
+
     if (!this.bgmEl) {
       this._startBgm(trackId);
       return;
     }
 
-    this._clearFade();
     const outgoing = this.bgmEl;
     const startVol = outgoing.volume;
     const interval = FADE_DURATION_MS / FADE_STEPS;
     let step = 0;
 
-    // Detach so _startBgm doesn't touch the outgoing element
+    // Detach from bgmEl so _startBgm doesn't touch the outgoing element.
+    // fadingOutEl keeps a reference so _clearFade() can stop it if interrupted.
     this.bgmEl = null;
     this.currentBgmId = null;
+    this.fadingOutEl = outgoing;
 
     this.fadeTimer = setInterval(() => {
       step++;
       outgoing.volume = Math.max(0, startVol * (1 - step / FADE_STEPS));
       if (step >= FADE_STEPS) {
-        this._clearFade();
-        outgoing.pause();
+        this._clearFade();  // pauses fadingOutEl (= outgoing) and clears timer
         this._startBgm(trackId);
       }
     }, interval);
@@ -153,15 +159,22 @@ class AudioManager {
     });
   }
 
-  // Returns true only when a BGM element exists and is actually playing.
+  // Returns true when a track is playing, starting, or a cross-fade is in progress.
+  // This prevents the recovery check in useAudioTriggers from firing mid-fade and
+  // creating a second audio element that overlaps the outgoing track.
   isBgmActive(): boolean {
-    return this.bgmEl !== null && !this.bgmEl.paused;
+    return this.currentBgmId !== null || this.fadeTimer !== null;
   }
 
   private _clearFade(): void {
     if (this.fadeTimer !== null) {
       clearInterval(this.fadeTimer);
       this.fadeTimer = null;
+    }
+    // Stop the outgoing track so it doesn't play on as an orphaned element.
+    if (this.fadingOutEl !== null) {
+      this.fadingOutEl.pause();
+      this.fadingOutEl = null;
     }
   }
 

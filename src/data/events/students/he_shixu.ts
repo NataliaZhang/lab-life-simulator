@@ -469,10 +469,6 @@ export const heShixuEvents: Record<string, GameEvent> = {
       '你翻到最后：她对比了实验室和工业界的项目管理，结论是"工业界的系统性混乱程度大约是实验室的1.7倍，但干预手段基本可以复用"。最后一行："顺便，我们公司有一个和高校合作的项目，联系方式在附件，您感兴趣的话看一下。"',
     ],
     prompt: '你选择：',
-    triggerConditions: [
-      { type: 'student', studentId: 'he_shixu', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'hsx_alumni_collaborate',

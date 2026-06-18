@@ -483,10 +483,6 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       '邮件最后，她说她帮忙介绍了机构的负责人，想和实验室探讨合作。"她是很好的人，我们一起喝奶茶的时候聊起了你们的研究，她当场就有兴趣了。" 括号里她补了一句："（奶茶是我带的，这次的数据不是编的：奶茶有用，经过反复验证，p<0.05。）"',
     ],
     prompt: '这封邮件从头到尾都是白小满风格，你怎么回应？',
-    triggerConditions: [
-      { type: 'student', studentId: 'bai_xiaoman', stat: 'projectProgress', op: '>=', value: 95 },
-      { type: 'time', field: 'year', op: '>=', value: 3 },
-    ],
     options: [
       {
         id: 'bxm_av_embrace_collab',
