@@ -174,8 +174,8 @@ function buildEndingSummary(state: GameState): LogEntry {
 
   if (graduated.length > 0) {
     const lines = graduated
-      .map(s => `${s.name}（毕业，理论 ${Math.round(s.skills.theory)}，工程 ${Math.round(s.skills.engineering)}）`)
-      .join('\n');
+      .map(s => s.name)
+      .join('、');
     narrative += `已毕业的学生（${graduated.length}人）：\n${lines}\n\n`;
   } else {
     narrative += `这六年里没有学生完成毕业——留下了一些遗憾。\n\n`;
@@ -191,6 +191,30 @@ function buildEndingSummary(state: GameState): LogEntry {
   if (left.length > 0) {
     const names = left.map(s => s.name).join('、');
     narrative += `中途离组的学生：${names}。\n\n`;
+  }
+
+  // Project summary
+  const totalStarted = state.activeProjects.length + state.completedProjects.length;
+  if (totalStarted > 0) {
+    const conversionRate = totalStarted > 0
+      ? Math.round((state.completedProjects.length / totalStarted) * 100)
+      : 0;
+    // Count completed projects by grade
+    const gradeCounts: Partial<Record<string, number>> = {};
+    for (const cp of state.completedProjects) {
+      const def = projectById[cp.projectId];
+      if (!def) continue;
+      gradeCounts[def.grade] = (gradeCounts[def.grade] ?? 0) + 1;
+    }
+    const gradeOrder = ['S', 'A', 'B', 'C'] as const;
+    const gradeParts = gradeOrder
+      .filter(g => (gradeCounts[g] ?? 0) > 0)
+      .map(g => `${gradeCounts[g]}个${g}级`);
+    if (gradeParts.length > 0) {
+      narrative += `项目：共完成${gradeParts.join('、')}。立项${totalStarted}个，成果转化率${conversionRate}%。\n\n`;
+    } else {
+      narrative += `项目：立项${totalStarted}个，暂无完成项目。\n\n`;
+    }
   }
 
   narrative += `以上是你的六年。`;

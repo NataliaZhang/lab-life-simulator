@@ -886,140 +886,151 @@ export const mainlineEvents: Record<string, GameEvent> = {
   },
 
   // ── 时间锚定：第3年10月，由 monthlyUpdate 按条件注入序列 ─────────────────
-  // 按条件注入的事件 ID：
-  //   midterm_review_open       — 必出，开场
-  //   midterm_review_no_projects  — 0个已完成项目
-  //   midterm_review_few_projects — 1-2个已完成项目
-  //   midterm_review_low_students — 在读学生≤1
-  //   midterm_review_low_rep      — 声望<40
-  //   midterm_review_low_funding  — 经费<10
-  //   midterm_review_positive     — 以上均无问题时
-  //   midterm_review_close      — 必出，收尾
+// 按条件注入的事件 ID：
+//   midterm_review_open       — 必出，开场
+//   midterm_review_no_projects  — 0个已完成项目
+//   midterm_review_few_projects — 1-2个已完成项目
+//   midterm_review_low_students — 在读学生≤1
+//   midterm_review_low_rep      — 声望<40
+//   midterm_review_low_funding  — 经费<10
+//   midterm_review_positive     — 以上均无问题时
+//   midterm_review_close      — 必出，收尾
 
-  midterm_review_open: {
-    id: 'midterm_review_open',
-    title: '中期评估',
-    description: [
-      '第三年十月。系主任约你面谈，是有关中期评估的事。地点是他的办公室——你来过几次，但每次都不太一样。这次桌上的文件整齐，百叶窗半开，他已经坐在那里等你了。',
-      '他把一份简单的材料推到你面前。"来，我们聊聊。"',
-    ],
-    prompt: '你坐下，等他说。',
-    options: [{
-      id: 'listen',
-      text: '好，我在听',
-      outcomes: [{ weight: 1, narrative: '你点头，示意他继续。' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_open: {
+  id: 'midterm_review_open',
+  title: '中期评估',
+  description: [
+    '第三年十月。你收到系主任邮件的时候，心里咯噔了一下。主题只有几个字：中期评估。',
+    '你早知道会有这一天，但真正走到他办公室门口时，还是忍不住开始回忆过去三年自己到底干了些什么。这个问题平时不想还好，一想就很具体。',
+    '系主任看见你，抬手招了招。"进来吧。别紧张。"他看了一眼桌上的材料，又补了一句，"当然，我知道这句话一般没什么用。"',
+  ],
+  prompt: '你坐下，等他说。',
+  options: [{
+    id: 'listen',
+    text: '好，我在听',
+    outcomes: [{ weight: 1, narrative: '你坐下，把手放到膝盖上，努力摆出一个看起来很适合中期评估的表情。' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_no_projects: {
-    id: 'midterm_review_no_projects',
-    title: '中期评估·项目',
-    description: [
-      '"目前你还没有完成任何研究项目。"他直接说，语气里没有指责，只是陈述，"我理解前期需要积累，但项目是声望、经费和可发表成果的重要来源。灵感停留在想法阶段，是没有办法兑现的。"',
-      '💡 提示：点击右上角"项目"可以查看已解锁的灵感，立项并安排负责人推进。',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '我会着手推进',
-      outcomes: [{ weight: 1, narrative: '他点点头。"好。"' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_no_projects: {
+  id: 'midterm_review_no_projects',
+  title: '中期评估·项目',
+  description: [
+    '系主任翻了两页材料，笔尖在纸上点了点。"我先说最明显的：你目前还没有完成任何研究项目。"',
+    '"我不是说你没在工作。"系主任抬头看你，"看得出来，你想法不少，也做了很多准备。但研究这东西，准备太久就会变成另一种拖延。项目得先跑起来，声望、经费、论文，都是从真正做完的东西里长出来的。"',
+    '💡 提示：点击右上角"项目"可以查看已解锁的灵感，立项并安排负责人推进。',
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '我会立刻着手推进',
+    outcomes: [{ weight: 1, narrative: '"好。"系主任把那页材料翻过去，像是给你留了一个台阶，也留了一个期限。' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_few_projects: {
-    id: 'midterm_review_few_projects',
-    title: '中期评估·项目',
-    description: [
-      '"你完成了一两个项目，这是实质性的推进，"他说，"但节奏需要持续。灵感来了要抓住，让实验室的研究始终在进展。项目的惰性很强，停下来再启动要难得多。"',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '明白，保持节奏',
-      outcomes: [{ weight: 1, narrative: '"嗯。"他在材料上简短地记了一笔。' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_few_projects: {
+  id: 'midterm_review_few_projects',
+  title: '中期评估·项目',
+  description: [
+    '"项目方面，有东西做出来了，这是好事。"系主任用笔圈了几处记录，"但现在还不能松懈。"',
+    '"前几年最怕的不是慢，而是停断。一个方向断了，学生散了，代码放凉了，再想重新热乎起来，可比你想象中费劲。灵感来了就得抓住，能立项就得推进，别让实验室进入那种大家都在忙、但没人知道忙什么的状态。"',
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '明白，保持节奏',
+    outcomes: [{ weight: 1, narrative: '"对，节奏很重要。"系主任在材料边上写了几个字，字迹很潦草，好在但看起来不像坏话。' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_low_students: {
-    id: 'midterm_review_low_students',
-    title: '中期评估·团队',
-    description: [
-      '"实验室规模偏小，"他说，"Tenure的评估指标里，培养学生的数量和质量是显性的一项。学院看的不只是你做了什么，也看你带出了什么——没有团队，稳定的产出就只是理论上的事。"',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '我会重视招生',
-      outcomes: [{ weight: 1, narrative: '"好。你有三年时间。"' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_low_students: {
+  id: 'midterm_review_low_students',
+  title: '中期评估·团队',
+  description: [
+    '系主任翻到学生那一页，眉毛动了一下。"这里我得提醒你。实验室规模偏小。"',
+    '"Tenure评估不会因为你一个人特别能干，就假装学生不存在。"他说，"博士生只需要把自己养活。教授不一样，教授得把一群博士生养活，还要让他们相信自己不是被随机数生成出来的。"',
+    '"招生、培养、带出成果，这些都是指标。没有团队，稳定产出就很难稳定。"'
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '我会重视招生的',
+    outcomes: [{ weight: 1, narrative: '"嗯。"系主任把学生名单推回材料里，"后半程要把这个补起来。"' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_low_rep: {
-    id: 'midterm_review_low_rep',
-    title: '中期评估·影响力',
-    description: [
-      '"目前学术影响力还有上升空间，"他措辞谨慎，"这不是虚荣心的问题——能见度决定合作找不找得上你，优秀学生想不想来，以及评委第一眼看到你名字时作何反应。学院对你的期待不止于此。"',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '我明白',
-      outcomes: [{ weight: 1, narrative: '他看了你一眼，继续往下说。' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_low_rep: {
+  id: 'midterm_review_low_rep',
+  title: '中期评估·影响力',
+  description: [
+    '"影响力这块，还得往外打。"系主任看着你，语重心长地说。',
+    '"前两天开会的时候提到你。好消息是，大家对你的印象不差。坏消息是，有几个人都没立刻想起来你是谁。"',
+    '他说完自己也笑了一下，把话放轻放缓了些。"别急，这事很多人都经历过。但后三年你得让更多人记住你的名字，学院对你的期待不止是安安静静把活干完。"',
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '明白了',
+    outcomes: [{ weight: 1, narrative: '你把系主任这句话记了下来。记下来之后，它看起来比听起来还扎心一点。' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_low_funding: {
-    id: 'midterm_review_low_funding',
-    title: '中期评估·经费',
-    description: [
-      '"经费方面值得注意，"他说，"目前压力还在可控范围，但要有意识地维持健康的资金链条。项目结项是稳定的经费来源——推进项目不只是声望的问题，也是实验室能不能正常运转的问题。"',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '记下了',
-      outcomes: [{ weight: 1, narrative: '他翻到下一页。' }],
-    }],
-    tags: ['mainline'],
-  },
+midterm_review_low_funding: {
+  id: 'midterm_review_low_funding',
+  title: '中期评估·经费',
+  description: [
+    '他翻到经费那一页，手指在数字旁边敲了敲。"这个数字现在还没到危险线，但已经值得你多看两眼了。"',
+    '"实验室不是靠热爱交电费的。"他说，"项目结项、后续合作、稳定资金链，这些听起来很行政，但最后都会变成一个很朴素的问题：学生下个月还能不能安心干活。"',
+    '"所以推进项目不只是为了学术声望，也是为了让实验室的资金能继续正常转。"',
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '记下了',
+    outcomes: [{ weight: 1, narrative: '你点头。经费这件事平时像影响学术纯洁性的背景噪音，今天忽然变成了主旋律。' }],
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_positive: {
-    id: 'midterm_review_positive',
-    title: '中期评估·整体',
-    description: [
-      '"总体来看，前三年推进得不错，"他说，"有产出，有团队，资源也稳健。这说明你建立起了一套能跑的东西。"',
-      '"但我要提醒你，后半程的竞争会更激烈。前三年很多人表现相近，真正拉开差距的是接下来的判断——往哪里集中资源，哪些方向先放弃，跟谁深度合作。现在的优势不会自动延续到结尾。"',
-    ],
-    options: [{
-      id: 'acknowledge',
-      text: '我会想清楚',
-      outcomes: [{
-        weight: 1,
-        narrative: '"我相信你会。"他说，语气平稳，不像夸奖，更像是陈述一个期待。',
-        effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
-      }],
+midterm_review_positive: {
+  id: 'midterm_review_positive',
+  title: '中期评估·整体',
+  description: [
+    '系主任把材料翻到最后，表情比你进门时轻松了一点。"说实话，我本来准备了不少话。"',
+    '"结果发现好像用不上太多。"他笑了一下，"项目有，学生有，经费也没出什么大问题。挺好。"',
+    '你忽然觉得"挺好"两个字比一长串表扬更让人松一口气。',
+    '"不过后半程才是真正拉开差距的时候。"他把笔放下，"接下来要判断往哪里集中资源，哪些方向先放弃，跟谁深度合作。前三年的优势不会自己走到终点，你得推它一把。"',
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '我会想清楚',
+    outcomes: [{
+      weight: 1,
+      narrative: '"我知道。"他说，"你现在有这个底子了，别浪费自己的才华。"',
+      effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
     }],
-    tags: ['mainline'],
-  },
+  }],
+  tags: ['mainline'],
+},
 
-  midterm_review_close: {
-    id: 'midterm_review_close',
-    title: '中期评估·尾声',
-    description: [
-      '系主任把材料合上，停顿了一下。"剩下三年。"',
-      '"不多，也不少。够你做一件真正重要的事，也够你把前三年的积累兑现——前提是不要分散。"',
-      '他站起来，伸出手，会谈就这么结束了。干净利落，和他一贯的风格一样。你走出去，走廊里的灯光和平时没有任何不同。但你的脑子里，有一件事比进门之前清晰了很多：三年。',
-    ],
-    options: [{
-      id: 'go_back_to_work',
-      text: '回去，继续工作',
-      outcomes: [{
-        weight: 1,
-        narrative: '你走回实验室，坐下，打开电脑。屏幕亮起来的那一瞬间，你想了想，把待办清单打开，从第一行开始重新看了一遍。',
-        effects: [{ type: 'lab', stat: 'energy', delta: -8 }],
-      }],
+midterm_review_close: {
+  id: 'midterm_review_close',
+  title: '中期评估·尾声',
+  description: [
+    '系主任把材料合上。"行，今天就这些。"他把椅子往后推了推，又看了你一眼。"还有三年。"',
+    '你走出办公室的时候，走廊和平时没什么区别。邮箱里还是那些邮件，项目还是那些项目，学生还是那些学生。',
+    '但有件事忽然变得很具体：Tenure好像并不是那么遥遥无期了。它就在三年后。',
+  ],
+  options: [{
+    id: 'go_back_to_work',
+    text: '继续工作吧',
+    outcomes: [{
+      weight: 1,
+      narrative: '你回到实验室，坐下，打开电脑。屏幕亮起来后，你没有立刻点开邮件，而是先打开待办清单，从第一行重新温习一遍。',
+      effects: [{ type: 'lab', stat: 'energy', delta: -8 }],
     }],
-    tags: ['mainline'],
-  },
+  }],
+  tags: ['mainline'],
+},
 
 };
