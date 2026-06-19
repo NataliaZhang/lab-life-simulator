@@ -5,8 +5,12 @@ import { projectById } from '../data/projects';
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
 const PI_ENERGY_COST_PER_PROJECT = 15; // energy per month per PI-managed project
-const LEADER_SWAP_PENALTY = 10;        // progress deducted on forced leader removal
 const MAX_EFFICIENCY = 1.75;
+
+// Applies the leader-swap penalty: retain 70% of current progress (round down).
+function applySwapPenalty(progress: number): number {
+  return Math.round(progress * 0.7);
+}
 
 function clamp(val: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, val));
@@ -152,7 +156,7 @@ export function assignLeader(
   const swapIsFree = currentLeader?.traitIds.includes('optimistic_heart') ?? false;
 
   const updatedProgress = isSwap && !swapIsFree
-    ? Math.max(0, project.progress - LEADER_SWAP_PENALTY)
+    ? applySwapPenalty(project.progress)
     : project.progress;
 
   const updatedProject: ActiveProject = {
@@ -168,25 +172,32 @@ export function assignLeader(
   return { ...state, activeProjects: newActiveProjects };
 }
 
-// Clears a project's leader (stalls the project). No penalty.
+// Clears a project's leader (stalls the project). Applies the 30% swap penalty
+// unless the current leader has optimistic_heart.
 export function removeLeader(state: GameState, projectId: string): GameState {
   return {
     ...state,
-    activeProjects: state.activeProjects.map(p =>
-      p.projectId === projectId ? { ...p, leaderId: null } : p,
-    ),
+    activeProjects: state.activeProjects.map(p => {
+      if (p.projectId !== projectId) return p;
+      const currentLeader = p.leaderId
+        ? state.students.find(s => s.id === p.leaderId)
+        : null;
+      const swapIsFree = currentLeader?.traitIds.includes('optimistic_heart') ?? false;
+      return {
+        ...p,
+        leaderId: null,
+        progress: swapIsFree ? p.progress : applySwapPenalty(p.progress),
+      };
+    }),
   };
 }
 
 // Called when a student graduates or leaves. Stalls any project they were leading.
-// optimistic_heart: no progress penalty on the departing leader's projects.
+// No progress penalty — the student departing is outside the PI's control.
 export function removeLeaderOnStudentLeave(
   state: GameState,
   studentId: string,
 ): GameState {
-  const student = state.students.find(s => s.id === studentId);
-  const swapIsFree = student?.traitIds.includes('optimistic_heart') ?? false;
-
   return {
     ...state,
     activeProjects: state.activeProjects.map(p => {
@@ -194,7 +205,7 @@ export function removeLeaderOnStudentLeave(
       return {
         ...p,
         leaderId: null,
-        progress: swapIsFree ? p.progress : Math.max(0, p.progress - LEADER_SWAP_PENALTY),
+        // progress unchanged: graduation/leave is not a voluntary swap
       };
     }),
   };
@@ -259,14 +270,19 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
         : PI_ENERGY_COST_PER_PROJECT;
 
       if (lab.energy < energyCost) {
-        // Not enough energy → project stalls, remove leader
-        updatedActives.push({ ...ap, leaderId: null });
+        // Energy runs out mid-month: still make progress this month, drain energy to 0,
+        // then apply the 30% swap penalty and remove PI as leader.
+        const gainBeforePenalty = projectDef.baseMonthlyProgress * (hasTimeManager ? 1.5 : 1);
+        const progressAfterGain = Math.min(100, ap.progress + gainBeforePenalty);
+        const progressAfterPenalty = applySwapPenalty(progressAfterGain);
+        lab = { ...lab, energy: 0 };
+        updatedActives.push({ ...ap, leaderId: null, progress: progressAfterPenalty });
         logEntries.push({
           id: `project_pi_stall_${ap.projectId}_${state.time.year}_${state.time.month}`,
           time: { ...state.time },
           type: 'system',
-          title: `「${projectDef.name}」进度停滞`,
-          narrative: `PI 精力不足，「${projectDef.name}」本月无法推进，项目负责人解除。请重新分配负责人。`,
+          title: `「${projectDef.name}」PI精力耗尽`,
+          narrative: `PI 精力耗尽，「${projectDef.name}」本月完成推进后，项目负责人自动解除，进度回退至 ${progressAfterPenalty}%。请重新分配负责人。`,
         });
         continue;
       }

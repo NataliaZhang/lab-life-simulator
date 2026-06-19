@@ -3,10 +3,13 @@ import type { GameTime } from './index';
 // ─── Project Definition ────────────────────────────────────────────────────
 // Static project data defined in src/data/projects.ts.
 
+export type ProjectGrade = 'C' | 'B' | 'A' | 'S';
+
 export interface ProjectDefinition {
   id: string;
   name: string;
   description: string;
+  grade: ProjectGrade;           // C = tutorial, B = short, A = normal, S = long
   ideaSources: string[];         // Human-readable sources (e.g. "Reviewer #2 事件")
 
   startupEnergyCost: number;     // Option A: PI writes proposal, costs energy

@@ -31,7 +31,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你填上时间节点，她立刻在旁边做了标注，合上文件，抬头说："谢谢老师，我会在每个里程碑前三天提醒您。" 你点了点头——然后慢慢意识到，你刚刚在没仔细看细节的情况下，签署了一份包含自己截止日期的合同。',
+            narrative: '你填上时间节点，贺时序立刻在旁边做了标注，合上文件，抬头说："谢谢老师，我会在每个里程碑前三天提醒您。" 你点了点头——然后慢慢意识到，你刚刚在没仔细看细节的情况下，签署了一份包含自己截止日期的合同。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
@@ -42,11 +42,11 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_first_meeting_flexible',
-        text: '方向可以，但不用死扣节点（尝试抵抗）',
+        text: '不用死扣节点（尝试抵抗）',
         outcomes: [
           {
             weight: 1,
-            narrative: '她停顿了一下，翻了翻本子，语气依然平静："老师，我理解科研有不确定性，所以每个节点都预留了两周缓冲，如果需要还可以再加一周。" 她把文件翻到附录。详细的缓冲说明早就在那里了。你的抵抗，她已经预见并提前化解。',
+            narrative: '贺时序停顿了一下，翻了翻本子，语气依然平静："老师，我理解科研有不确定性，所以每个节点都预留了两周缓冲，如果需要还可以再加一周。" 她把文件翻到附录。详细的缓冲说明早就在那里了。你的抵抗，她已经预见并提前化解。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 4 },
@@ -77,11 +77,11 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_ddl_read_now',
-        text: '立刻放下一切，今天就回',
+        text: '立刻放下手头，今天就回',
         outcomes: [
           {
             weight: 1,
-            narrative: '你把稿子翻出来，两小时后发去了详细意见。她回复三个字："收到，谢谢。" 第二天早上修改版到了，改动清单整理得一目了然，每条意见后面附有对应位置。你给她发了催稿，结果是你帮她完成了她自己的节点。精准。',
+            narrative: '你把稿子翻出来，两小时后发去了详细意见。她回复："收到，谢谢。" 第二天早上修改版到了，改动清单整理得一目了然，每条意见后面附有对应位置。你给她发了催稿，结果是你帮她完成了她自己的节点。精准。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
@@ -93,13 +93,13 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_ddl_delay',
-        text: '说下周给（协商延期）',
+        text: '协商延期',
         outcomes: [
           {
             weight: 1,
             narrative: '你解释说最近有事，下周给。她回复："好的，我在下周一日历上标注了一下，方便的话那天给我就行。" 你打开共享日历，下周一的格子里已经多了一条"导师修改稿反馈"，标注是她加的。你默默把那天的其他事情挪了一下。',
             effects: [
-              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 2 },
+              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: -2 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: -3 },
             ],
           },
@@ -126,11 +126,11 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_gantt_accept',
-        text: '承认：这玩意儿确实好用',
+        text: '承认这玩意儿确实好用',
         outcomes: [
           {
             weight: 1,
-            narrative: '你回复说图做得很清楚。她翻了翻本子说："那下次我把您的窗口期固定成时间段，比较容易规划。" 你想说不用这么正式——但盯着那张图，你说了"好"。就这样，你的反馈时间被正式写进了她的项目管理系统。',
+            narrative: '你回复夸赞说图做得很清楚。她翻了翻本子说："那下次我把您的窗口期固定成时间段，比较容易规划。" 你想说不用这么正式，但话到嘴边说了"好"。就这样，你的反馈时间被正式写进了她的项目管理系统。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 7 },
@@ -143,13 +143,13 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_gantt_too_detailed',
-        text: '大方向对就行，不用搞这么细（图样图森破）',
+        text: '不用搞这么细',
         outcomes: [
           {
             weight: 1,
             narrative: '她停顿了一下，回答："老师，这个图主要是方便我自己，任务堆积时可以快速判断哪个能延、哪个不能延。" 她翻了翻本子，补了一句："您的窗口期我可以标得宽松一点，不影响您。" 你没再说什么。这个理由，无法反驳。',
             effects: [
-              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 5 },
+              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: -5 },
               { type: 'student', studentId: 'he_shixu', stat: 'skills.theory', delta: 3 },
             ],
           },
@@ -176,16 +176,14 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_takes_over_accept',
-        text: '承认：实验室需要她',
+        text: '实验室需要你这样的人才',
         outcomes: [
           {
             weight: 1,
             narrative: '你给她发消息说这个很有用，让她继续维护。她回复："好的，我每月初更新一次，有特殊情况随时告诉我。" 此后实验室时间安排效率明显上升。没有人问过"谁负责组会安排"，因为根本不需要问。',
             effects: [
               { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
-              { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 7 },
-              { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'student', studentId: 'he_shixu', stat: 'skills.social', delta: 3 },
             ],
           },
@@ -199,9 +197,8 @@ export const heShixuEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '她翻了翻本子，点头说："好，我来组织一个十分钟的说明会，下周三组会之前。" 你还没说可以，日历里已经多了一条"日程管理说明（10分钟）"，所有人都收到了邀请。那次会后，全组一致通过，还有两人提出了补充建议，贺时序认真记下来，第二天更新完毕。',
             effects: [
-              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
-              { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
             ],
           },
         ],
@@ -463,6 +460,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
   hsx_alumni_visit: {
     id: 'hsx_alumni_visit',
     title: '工业界混乱程度：1.7倍',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'he_shixu', status: 'graduated' }],
     description: [
       '毕业半年后，贺时序发来一封邮件，主题："第一个项目收尾报告（参考用）"。',
       '她去了一家科技公司做项目管理，第一个项目刚刚顺利交付，团队交付周期比部门平均值缩短了40%。邮件附了一份简化版复盘报告，说最后一段有参考价值。',
@@ -472,30 +470,28 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_alumni_collaborate',
-        text: '回邮件，合作机会我感兴趣',
+        text: '回邮件，合作我感兴趣',
         outcomes: [
           {
             weight: 1,
             narrative: '你说很感兴趣，让她发详细信息。她当天就回了，合作项目说明文件格式完整，联系方式、时间节点、预期产出一清二楚。你看着这份文件，想起她在实验室那几年，想起她到哪里，好像都在做同样的事：让她周围的人不得不有条理。合作后来真的推进了。',
             effects: [
-              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 10 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 8 },
+              { type: 'lab', stat: 'funding', delta: 12 },
             ],
           },
         ],
       },
       {
         id: 'hsx_alumni_reply_congrats',
-        text: '先恭喜她，顺便问问她过得怎么样',
+        text: '先恭喜她，问问她近况',
         outcomes: [
           {
             weight: 1,
             narrative: '你发了封轻松的回信，恭喜她交付顺利，问她适应得怎么样。她回复："还行，主要是开会比较多，需要额外维护一张会议效率追踪表。" 然后附了一句："实验室那个共享日历系统还在用吗？新同学不会用可以让他们联系我。" 你看了看日历，那套系统现在还在运行，好好的。你有点想告诉她，但又觉得她其实早就知道了。',
             effects: [
-              { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
-              { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 6 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'funding', delta: 5 },
             ],
           },
         ],

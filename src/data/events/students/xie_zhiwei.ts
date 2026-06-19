@@ -70,7 +70,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你深吸一口气，打开了其他目录。构建脚本还在。数据库连接还在。用户鉴权——还在，但注释里有一行新的：这里有个小隐患，可以改但我先忍住了。\n\n你盯着"可以改但我先忍住了"这几个字看了很久。\n\n你去找她，说：以后动任何东西，先发消息。她点头，"好的。那我先报备一下噢，我刚刚又发现一个有意思的问题。',
+            narrative: '你深吸一口气，打开了其他目录。构建脚本还在。数据库连接还在。用户鉴权——还在，但注释里有一行新的：这里有个小隐患，可以改但我先忍住了。\n\n你盯着"可以改但我先忍住了"看了很久。\n\n你去找她，说：以后动任何东西，先发消息。她点头，"好的。那我先报备一下噢，我刚刚又发现一个有意思的问题。',
             effects: [
               { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 3 },
               { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: -3 },
@@ -461,8 +461,9 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
   xzw_alumni_visit: {
     id: 'xzw_alumni_visit',
     title: '第一个月的传说',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'xie_zhiwei', status: 'graduated' }],
     description: [
-      // 建议引擎在graduation后约6个月注入
+      // 引擎在graduation后注入
       '谢知微毕业后去了一家基础设施公司，专门做系统优化。你觉得这个选择很适合她，也替那家公司稍微捏了把汗。',
       '半年后，谢知微发来邮件，开头说："工作很有意思，大家人也很好。"后面轻描淡写地提到：谢知微入职第一个月，把核心服务延迟降了一大截，同时因为"顺手"改了几个她觉得不够优雅的模块，引发了一次小规模线上事故。',
       '"他们现在叫我小拆弹专家，"她写道，"但我觉得不完全准确，因为有时候炸弹是我自己做出来的。"',
@@ -472,29 +473,26 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_alumni_visit_agree',
-        text: '同意，问她需要什么支持',
+        text: '同意，让她主导就好',
         outcomes: [
           {
             weight: 1,
             narrative: '谢知微很快回复："谢谢老师，我先自己整理，弄好给你看。"过了一段时间，仓库地址发来：工具干净，文档清楚，示例也贴心得像给后来者铺了一排小石头。实验室名字出现在作者列表里。你看着那个署名，想起她第一次蹲在设备柜前说"我就看看"，觉得她好像一直没变，只是拆的东西越来越大，也越来越有用。',
             effects: [
-              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 4 },
-              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.social', delta: 2 },
+              { type: 'lab', stat: 'reputation', delta: 12 },
             ],
           },
         ],
       },
       {
         id: 'xzw_alumni_visit_ask_detail',
-        text: '先看看工具内容，没问题再说',
+        text: '先看看内容，没问题再发布',
         outcomes: [
           {
             weight: 1,
             narrative: '谢知微发来工具列表和说明，连哪些代码来自实验室、哪些是毕业后重写的都标得清清楚楚。你看完确认没有问题，回复同意。谢知微回："好！我把README里的实验室链接也检查过了。"你打开草稿，链接正确，格式整齐，甚至还有贡献指南。你笑了一下：她果然还是会顺手多做一点。',
             effects: [
-              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 4 },
+              { type: 'lab', stat: 'reputation', delta: 8 },
             ],
           },
         ],

@@ -98,6 +98,7 @@ export const newYearEvents: Record<string, GameEvent> = {
       },
     ],
     tags: ['new_year'],
+    prioritizeNext: true,
   },
 
   // ── 链式反应：林小卷 ──────────────────────────────────────────────────────

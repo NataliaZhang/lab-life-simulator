@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { GameState, GameAction, Student } from '../types';
-import type { ActiveProject, ProjectDefinition } from '../types/project';
+import type { ActiveProject, ProjectDefinition, ProjectGrade } from '../types/project';
 import { projectById } from '../data/projects';
 import {
   canAssignStudent,
@@ -58,6 +58,16 @@ function RequirementBadge({
   );
 }
 
+// ─── Grade Badge ───────────────────────────────────────────────────────────
+
+function GradeBadge({ grade }: { grade: ProjectGrade }) {
+  return (
+    <span className={`proj-grade proj-grade--${grade.toLowerCase()}`} aria-label={`${grade}级项目`}>
+      {grade}
+    </span>
+  );
+}
+
 // ─── Idea Card ─────────────────────────────────────────────────────────────
 
 function startupCostLabel(def: ProjectDefinition): string {
@@ -93,6 +103,7 @@ function IdeaCard({
     <div className="proj-card proj-card--idea">
       <div className="proj-card__header">
         <span className="proj-card__name">💡 {def.name}</span>
+        <GradeBadge grade={def.grade} />
       </div>
       <p className="proj-card__desc">{def.description}</p>
       <div className="proj-card__sources">
@@ -104,9 +115,6 @@ function IdeaCard({
         <RequirementBadge label="理论" required={def.theoryRequired} />
         <RequirementBadge label="工程" required={def.engineeringRequired} />
         <RequirementBadge label="社交" required={def.socialRequired} />
-      </div>
-      <div className="proj-card__footer">
-        <span className="proj-card__reward">完成奖励：资金 +{def.fundingReward}万，声望 +{def.reputationReward}</span>
       </div>
       <div className="proj-card__actions">
         <button
@@ -131,22 +139,16 @@ function LeaderSelector({
   ap,
   def,
   state,
-  dispatch,
+  onSelect,
   onClose,
 }: {
   ap: ActiveProject;
   def: ProjectDefinition;
   state: GameState;
-  dispatch: (a: GameAction) => void;
+  onSelect: (leaderId: string) => void;
   onClose: () => void;
 }) {
   const activeStudents = state.students.filter(s => s.status === 'active');
-
-  const assign = (leaderId: string) => {
-    audioManager.playSfx('click');
-    dispatch({ type: 'ASSIGN_PROJECT_LEADER', projectId: ap.projectId, leaderId });
-    onClose();
-  };
 
   return (
     <div className="leader-selector">
@@ -158,7 +160,7 @@ function LeaderSelector({
       {/* PI option */}
       <div
         className={`leader-option${ap.leaderId === 'pi' ? ' leader-option--current' : ''}`}
-        onClick={() => assign('pi')}
+        onClick={() => onSelect('pi')}
       >
         <div className="leader-option__name">PI（自己负责）</div>
         <div className="leader-option__detail">每月消耗精力 15，效率 ×1.00，月推进 {def.baseMonthlyProgress.toFixed(1)}%</div>
@@ -178,7 +180,7 @@ function LeaderSelector({
             className={`leader-option${isCurrent ? ' leader-option--current' : ''}${!eligible || busy ? ' leader-option--disabled' : ''}`}
             onClick={() => {
               if (!eligible || busy) return;
-              assign(s.id);
+              onSelect(s.id);
             }}
           >
             <div className="leader-option__name">
@@ -206,6 +208,40 @@ function LeaderSelector({
 
 // ─── Active Project Card ────────────────────────────────────────────────────
 
+type PendingAction =
+  | { type: 'assign'; leaderId: string }
+  | { type: 'remove' };
+
+function SwapConfirmModal({
+  currentProgress,
+  swapIsFree,
+  onConfirm,
+  onCancel,
+}: {
+  currentProgress: number;
+  swapIsFree: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const after = Math.round(currentProgress * 0.7);
+  return (
+    <div className="swap-confirm-overlay" onClick={onCancel}>
+      <div className="swap-confirm-modal" onClick={e => e.stopPropagation()}>
+        <p className="swap-confirm-modal__msg">
+          {swapIsFree
+            ? '白小满的天赋「乐观心大」，进度不会回退。'
+            : <>当前进度 <strong>{Math.round(currentProgress)}%</strong> 将回退至 <strong>{after}%</strong>（-30%）。</>
+          }
+        </p>
+        <div className="swap-confirm-modal__actions">
+          <button className="btn btn--primary btn--sm" onClick={onConfirm}>确认</button>
+          <button className="btn btn--ghost btn--sm" onClick={onCancel}>取消</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ActiveProjectCard({
   ap,
   state,
@@ -216,22 +252,47 @@ function ActiveProjectCard({
   dispatch: (a: GameAction) => void;
 }) {
   const [showSelector, setShowSelector] = useState(false);
+  const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
   const def = projectById[ap.projectId];
   if (!def) return null;
 
   const leaderName = getLeaderDisplayName(ap.leaderId, state.students);
   const monthlyGain = calcMonthlyProgress(ap, def, state.students);
-  const isSwap = ap.leaderId !== null;
+  const currentLeader = ap.leaderId ? state.students.find(s => s.id === ap.leaderId) : null;
+  const swapIsFree = currentLeader?.traitIds.includes('optimistic_heart') ?? false;
 
-  const handleRemove = () => {
-    dispatch({ type: 'REMOVE_PROJECT_LEADER', projectId: ap.projectId });
+  // Called when the user picks a leader from the selector.
+  const handleSelectLeader = (leaderId: string) => {
+    const isSwap = ap.leaderId !== null && ap.leaderId !== leaderId;
+    if (isSwap) {
+      setPendingAction({ type: 'assign', leaderId });
+    } else {
+      audioManager.playSfx('click');
+      dispatch({ type: 'ASSIGN_PROJECT_LEADER', projectId: ap.projectId, leaderId });
+      setShowSelector(false);
+    }
+  };
+
+  const handleConfirm = () => {
+    if (!pendingAction) return;
+    audioManager.playSfx('click');
+    if (pendingAction.type === 'assign') {
+      dispatch({ type: 'ASSIGN_PROJECT_LEADER', projectId: ap.projectId, leaderId: pendingAction.leaderId });
+      setShowSelector(false);
+    } else {
+      dispatch({ type: 'REMOVE_PROJECT_LEADER', projectId: ap.projectId });
+    }
+    setPendingAction(null);
   };
 
   return (
     <div className="proj-card proj-card--active">
       <div className="proj-card__header">
         <span className="proj-card__name">{def.name}</span>
-        <span className="proj-card__progress-num">{Math.round(ap.progress)}%</span>
+        <div className="proj-card__header-right">
+          <GradeBadge grade={def.grade} />
+          <span className="proj-card__progress-num">{Math.round(ap.progress)}%</span>
+        </div>
       </div>
       <p className="proj-card__desc">{def.description}</p>
       <ProgressBar value={ap.progress} />
@@ -259,12 +320,12 @@ function ActiveProjectCard({
           className="btn btn--secondary btn--sm"
           onClick={() => { audioManager.playSfx('click'); setShowSelector(v => !v); }}
         >
-          {showSelector ? '收起' : (ap.leaderId ? (isSwap ? '换人（-30%进度）' : '管理负责人') : '分配负责人')}
+          {showSelector ? '收起' : (ap.leaderId ? '换人' : '分配负责人')}
         </button>
         {ap.leaderId && (
           <button
             className="btn btn--ghost btn--sm"
-            onClick={handleRemove}
+            onClick={() => setPendingAction({ type: 'remove' })}
             title="解除负责人，项目停滞"
           >
             解除
@@ -276,8 +337,16 @@ function ActiveProjectCard({
           ap={ap}
           def={def}
           state={state}
-          dispatch={dispatch}
+          onSelect={handleSelectLeader}
           onClose={() => setShowSelector(false)}
+        />
+      )}
+      {pendingAction && (
+        <SwapConfirmModal
+          currentProgress={ap.progress}
+          swapIsFree={swapIsFree}
+          onConfirm={handleConfirm}
+          onCancel={() => setPendingAction(null)}
         />
       )}
     </div>
@@ -304,7 +373,10 @@ function CompletedProjectCard({
     <div className="proj-card proj-card--completed">
       <div className="proj-card__header">
         <span className="proj-card__name">✓ {def.name}</span>
-        <span className="proj-card__done-time">{formatTime(completedAt)}</span>
+        <div className="proj-card__header-right">
+          <GradeBadge grade={def.grade} />
+          <span className="proj-card__done-time">{formatTime(completedAt)}</span>
+        </div>
       </div>
       <p className="proj-card__desc">{def.description}</p>
       <div className="proj-card__done-meta">

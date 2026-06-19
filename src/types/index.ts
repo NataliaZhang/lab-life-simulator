@@ -42,12 +42,13 @@ export interface Student {
 
 // ─── Lab ───────────────────────────────────────────────────────────────────
 
-export type LabStatKey = 'funding' | 'reputation' | 'energy';
+export type LabStatKey = 'funding' | 'reputation' | 'energy' | 'energyDepletedCount';
 
 export interface LabStats {
   funding: number;    // 万元, 0+, no upper cap
   reputation: number; // 0+, no upper cap
   energy: number;     // 0–100, resets to 100 each month
+  energyDepletedCount: number; // cumulative times energy dropped to 0 this run
 }
 
 // ─── Effects ───────────────────────────────────────────────────────────────
@@ -81,7 +82,8 @@ export type EventCondition =
   | { type: 'anyStudent'; stat: StudentStatKey; op: ConditionOp; value: number }
   | { type: 'minStudentCount'; value: number }  // event only triggers when ≥ N students are active
   | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number } // year/month gate
-  | { type: 'seenEvent'; eventId: string };     // event only triggers after this event has appeared in the log
+  | { type: 'seenEvent'; eventId: string }      // event only triggers after this event has appeared in the log
+  | { type: 'studentStatus'; studentId: string; status: StudentStatus }; // gate on a specific student's status
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
@@ -113,6 +115,7 @@ export interface GameEvent {
   options?: EventOption[];   // Omit for passive events; engine auto-dismisses when empty
   tags?: string[];
   triggerConditions?: EventCondition[]; // event enters queue only if ALL conditions met
+  prioritizeNext?: boolean;             // when true, nextEventIds are prepended to queue front instead of appended
 }
 
 // ─── Story Log ─────────────────────────────────────────────────────────────
@@ -124,6 +127,7 @@ export type LogEntryType = 'event-intro' | 'event' | 'monthly' | 'system';
 export interface StatChange {
   label: string;
   delta: number;
+  suffix?: string; // optional unit appended to delta, e.g. '%'
 }
 
 export interface LogEntry {
@@ -140,11 +144,14 @@ export interface LogEntry {
 // ─── Admission ─────────────────────────────────────────────────────────────
 
 // Tracks the state of an in-progress admission session.
-// candidates = null  → "offer continue" state: player can recruit another round or stop.
+// candidates = null  → "offer continue" state: player just admitted someone, can recruit again or stop.
 // candidates = [a,b] → two candidates are displayed for the player to choose from.
 export interface AdmissionState {
   candidates: [string, string] | null;
-  round: number; // 1 = first round of the year, 2+ = extended (year 4+)
+  round: number;           // increments on each new batch shown (refresh or continue)
+  shownIds: string[];      // all candidate IDs shown this session — excluded from future draws
+  recruitedCount: number;  // how many students admitted so far this session (max 2)
+  hasRefreshed: boolean;   // whether the one-time batch-swap (换一批) has been used
 }
 
 // ─── Event Queue ───────────────────────────────────────────────────────────
@@ -203,6 +210,7 @@ export type GameAction =
   | { type: 'ADMIT_STUDENT'; candidateId: string }
   | { type: 'PASS_ADMISSION' }
   | { type: 'CONTINUE_RECRUITING' }
+  | { type: 'REFRESH_CANDIDATES' }
   | { type: 'LOAD_SAVE'; state: GameState }
   | { type: 'NEW_GAME' }
   | { type: 'START_PROJECT'; projectId: string }

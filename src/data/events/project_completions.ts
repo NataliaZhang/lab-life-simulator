@@ -16,7 +16,7 @@ function makeCompletionEvent(p: ProjectDefinition): GameEvent {
 
   return {
     id: `project_complete_${p.id}`,
-    title: `项目结项：${p.name}`,
+    title: `[${p.grade}] 项目结项：${p.name}`,
     prompt: `「${p.name}」的研究工作已全部完成，可以正式结项了。`,
     description: [
       `历经数月推进，「${p.name}」的研究工作宣告完成。{studentName}主导了这个项目并亲自汇报进展。\n\n${p.description}`,
@@ -50,7 +50,7 @@ function makePICompletionEvent(p: ProjectDefinition): GameEvent {
 
   return {
     id: `project_complete_${p.id}_pi`,
-    title: `项目结项：${p.name}`,
+    title: `[${p.grade}] 项目结项：${p.name}`,
     prompt: `「${p.name}」的研究工作已全部完成，可以正式结项了。`,
     description: [
       `历经数月推进，「${p.name}」的研究工作宣告完成。这个项目由你亲自主导，你完成了所有阶段的推进并在组会上做了最终汇报。\n\n${p.description}`,

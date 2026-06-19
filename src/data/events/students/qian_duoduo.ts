@@ -21,7 +21,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
         text: '学术第一，产品的事等毕业再说',
         outcomes: [{
           weight: 1,
-          narrative: '你告诉他，博士阶段的核心任务是把科学问题做扎实，落地是后面的事。钱多多听完，把小本本合上，说"老师说得对，我先把研究弄明白"。他收起了草图，但你注意到他在本本封面上标了一行字，写着"备用：等论文出来再看"。那个"备用"两个字，让你有说不清的感受，仿佛他在自己的任务栏里给这个想法挂了个"挂起"状态，随时可以恢复。',
+          narrative: '你告诉他，博士阶段的核心任务是把科学问题做扎实，落地是后面的事。钱多多听完，把小本本合上，说"老师说得对，我先把研究弄明白"。他收起了草图，但你注意到他在本本封面上标了一行字，写着"备用：等论文出来再看"。那个"备用"，让你有说不清的感受，仿佛他在自己的任务栏里给这个想法挂了个"挂起"状态，随时可以恢复。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: -3 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: -5 },
@@ -263,7 +263,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
         text: '礼貌送客，改天约正式交流',
         outcomes: [{
           weight: 1,
-          narrative: '你说今天下午组里有内部讨论，不太方便长时间接待，可以约改天正式交流。对方理解地点头，留了名片，和钱多多出门了。钱多多当晚发来一条消息："对不起老师，下次提前跟你说"，发完又补了一句"我不是故意的，只是有点冲动了"。你回了三个字"下次注意"，然后把那张名片压在了桌角，暂时用不上，但也没扔。',
+          narrative: '你说今天下午组里有内部讨论，不太方便长时间接待，可以约改天正式交流。对方理解地点头，留了名片，和钱多多出门了。钱多多当晚发来一条消息："对不起老师，下次提前跟你说"，发完又补了一句"我不是故意的，只是有点冲动了"。你回了"下次注意"，然后把那张名片压在了桌角，暂时用不上，但也没扔。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: -3 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: -3 },
@@ -417,6 +417,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
   qdd_alumni_visit: {
     id: 'qdd_alumni_visit',
     title: '钱多多：融完天使回来了',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'qian_duoduo', status: 'graduated' }],
     description: [
       '毕业半年后，你收到一封邮件，发件人是钱多多。标题是：汇报近况 + 一个提议。',
       '他在信里说，他毕业后做了一家公司，核心产品是把实验室的技术真正落地到一个具体的场景里，最近完成了天使轮融资。他写得很简短，没有列金额，没有讲估值，只说了两件事：一，产品有了第一批付费用户；二，他想和实验室签一份正式的技术合作协议，一部分经费会回馈给实验室，作为这项技术来源的致谢。',
@@ -426,25 +427,24 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_alumni_cooperate',
-        text: '推进合作协议，欢迎他回来',
+        text: '推进协议，欢迎他回来',
         outcomes: [{
           weight: 1,
           narrative: '你回信说愿意推进。一个月后，协议签好，实验室收到了第一笔回馈经费。钱多多来签协议那天，带来了一份产品介绍——不是融资PPT，是一本用户手册，写着真实的人怎么用这个产品、解决了什么具体的问题。第一页有一行字："技术来源：感谢某某大学实验室的长期研究积累。"你把那本手册放在了办公室书架上。他当年问"用户是谁"，现在这本手册里都是答案。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 3 },
-            { type: 'lab', stat: 'funding', delta: 6 },
+            { type: 'lab', stat: 'reputation', delta: 8 },
+            { type: 'lab', stat: 'funding', delta: 15 },
           ],
         }],
       },
       {
         id: 'qdd_alumni_stay_in_touch',
-        text: '协议先缓一缓，但保持联系',
+        text: '协议先缓一缓，保持联系就好',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他协议可以等产品更成熟一些再推进，但很高兴知道他做得不错。他回复说"好的老师，随时"，附带了产品的内测链接，说如果实验室有人感兴趣可以试用，不用给反馈，顺便看看就行。你把链接转发进了组里，三个人当天就注册了账号。其中一个后来发消息说"这个东西还挺有用的"。钱多多没在评论区解释技术原理，他只是做了一个能用的东西，然后等人来用。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 2 },
-            { type: 'lab', stat: 'energy', delta: 3 },
+            { type: 'lab', stat: 'reputation', delta: 4 },
           ],
         }],
       },

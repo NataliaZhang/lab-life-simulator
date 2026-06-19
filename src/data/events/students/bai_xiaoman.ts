@@ -135,7 +135,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回了一封比平时长的邮件，说这张"失败图谱"本身就是有价值的工作，阴性结果是真实数据，不是浪费。白小满两分钟内回复了两个字："知道！" 后面跟着一份更新的实验计划，第十九种可能性已经开始跑了。效率惊人。',
+            narrative: '你回了一封比平时长的邮件，说这张"失败图谱"本身就是有价值的工作，阴性结果是真实数据，不是浪费。白小满两分钟内回复："知道！" 后面跟着一份更新的实验计划，第十九种可能性已经开始跑了。效率惊人。',
             effects: [
               { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 7 },
@@ -476,6 +476,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
   bxm_alumni_visit: {
     id: 'bxm_alumni_visit',
     title: '白小满：毕业回访',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'bai_xiaoman', status: 'graduated' }],
     description: [
       // 🎓 毕业后回访 — 建议引擎在 graduation 后约6个月注入
       '毕业大概半年后，你收到了白小满的邮件。',
@@ -486,29 +487,28 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_av_embrace_collab',
-        text: '积极推进合作，感谢她的牵线',
+        text: '推进合作，感谢她牵线',
         outcomes: [
           {
             weight: 1,
             narrative: '三周后你和那位负责人见了面，谈得顺利，第二次会面合作框架就定了。你把进展告诉白小满，她回了一条消息："我就说嘛，奶茶开路，无往不利。" 你截图发回给她，说想引用在今年的年度总结里。她同意了，条件是你请她回来吃一顿饭。你答应了，心里清楚这顿饭她会把账单默默付一半。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: 4 },
+              { type: 'lab', stat: 'reputation', delta: 8 },
+              { type: 'lab', stat: 'funding', delta: 12 },
             ],
           },
         ],
       },
       {
         id: 'bxm_av_reply_warmly',
-        text: '先好好回邮件，问问她现在怎么样',
+        text: '先好好回邮件，问问她近况',
         outcomes: [
           {
             weight: 1,
             narrative: '你写了一封比平时长的回信，问她在新机构的状态，说很高兴她找到了合适的位置。她回得很快："一切都好，这里也有人容易崩溃，我的技能没有浪费。" 你看着这句话笑了一下，然后想起实验室这边偶尔还是会缺一个人帮大家记起"我们是认识的"。合作后来也推进了，但这封来回的邮件本身，你觉得也值。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 2 },
-              { type: 'lab', stat: 'funding', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'funding', delta: 5 },
             ],
           },
         ],

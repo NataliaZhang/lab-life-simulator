@@ -23,7 +23,8 @@ import { projectById } from '../data/projects';
 function getAdmissionCost(year: number): number {
   return year >= 3 ? 20 : 10;
 }
-const CONTINUE_ENERGY_COST = 20; // energy cost to get a second round of candidates
+const REFRESH_ENERGY_COST = 20;   // one-time batch-swap before any admission
+const CONTINUE_ENERGY_COST = 40;  // recruit second student after admitting one (2× refresh)
 
 // ─── Admission helpers ─────────────────────────────────────────────────────
 
@@ -85,6 +86,7 @@ export function createInitialState(): GameState {
       funding: 0,
       reputation: 0,
       energy: 100,
+      energyDepletedCount: 0,
     },
     projectIdeas: [],
     activeProjects: [],
@@ -103,6 +105,7 @@ function labStatLabel(stat: LabStatKey): string {
     funding: '资金',
     reputation: '声望',
     energy: '精力',
+    energyDepletedCount: '精力耗尽次数',
   };
   return map[stat];
 }
@@ -456,15 +459,17 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         statChanges: statChanges.length > 0 ? statChanges : undefined,
       };
 
-      const nextQueue: typeof state.eventQueue = [
-        ...state.eventQueue,
-        // Chain events inherit the current bound students so {studentName} keeps resolving
-        ...(outcome.nextEventIds ?? []).map(id => ({
-          id,
-          studentId: boundStudentId,
-          student2Id: boundStudent2Id,
-        })),
-      ];
+      const chainEvents = (outcome.nextEventIds ?? []).map(id => ({
+        id,
+        studentId: boundStudentId,
+        student2Id: boundStudent2Id,
+      }));
+      // Chain events inherit the current bound students so {studentName} keeps resolving.
+      // prioritizeNext: prepend so they fire immediately; otherwise append.
+      const currentEvent = getEvent(state.activeEventId!);
+      const nextQueue: typeof state.eventQueue = currentEvent?.prioritizeNext
+        ? [...chainEvents, ...state.eventQueue]
+        : [...state.eventQueue, ...chainEvents];
 
       // extendGraduation increments the per-student extension counter
       const hasExtend = (outcome.effects ?? []).some(e => e.type === 'extendGraduation');
@@ -486,6 +491,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeProjects = removeLeaderOnStudentLeave(tempState, boundStudentId).activeProjects;
       }
 
+      // When a student graduates, purge queued events bound to them.
+      // Alumni-visit events are injected months later by monthlyUpdate and won't be in queue yet.
+      let prunedQueue = nextQueue;
+      if (hasGraduate && boundStudentId) {
+        prunedQueue = nextQueue.filter(
+          qe => qe.studentId !== boundStudentId && qe.student2Id !== boundStudentId,
+        );
+      }
+
       // First-idea onboarding hint: fires once when the very first project idea is unlocked
       const isFirstIdea = state.projectIdeas.length === 0 && newProjectIdeas.length > 0;
       const ideaHintEntry: LogEntry | null = isFirstIdea ? {
@@ -504,7 +518,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         students,
         projectIdeas: newProjectIdeas,
         activeProjects,
-        eventQueue: nextQueue,
+        eventQueue: prunedQueue,
         activeEventId: null,
         activeBoundStudentId: null,
         activeBoundStudent2Id: null,
@@ -533,13 +547,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const candidate = allCandidates.find(c => c.id === candidateId)!;
       const newPool = state.studentPool.filter(id => id !== candidateId);
       const newFunding = state.lab.funding - admissionCost;
+      const { round, shownIds, recruitedCount, hasRefreshed } = state.admissionState;
+      const newRecruitedCount = recruitedCount + 1;
 
-      // After admission: offer a second round only (round 1 → round 2, no further)
-      const currentRound = state.admissionState.round;
-      const canOfferMore = currentRound < 2
-        && state.time.year >= 4
-        && state.lab.energy >= CONTINUE_ENERGY_COST
-        && newPool.length >= 2;
+      // Offer a second student only in year 3+, when max not reached and pool has candidates.
+      const unshownPool = newPool.filter(id => !shownIds.includes(id));
+      const canOfferMore = state.time.year >= 3 && newRecruitedCount < 2 && unshownPool.length >= 2;
 
       const isFirstStudent = state.students.filter(s => s.status === 'active').length === 0;
       const admitNarrative = isFirstStudent
@@ -565,24 +578,57 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         students: [...state.students, newStudent],
         studentPool: newPool,
         lab: { ...state.lab, funding: newFunding },
-        // null candidates = "offer continue" state; or clear if can't continue
+        // null candidates = "offer continue" state; clear admissionState if max reached
         admissionState: canOfferMore
-          ? { candidates: null, round: currentRound }
+          ? { candidates: null, round, shownIds, recruitedCount: newRecruitedCount, hasRefreshed }
           : null,
         eventQueue: [...firstMeetingQueue, ...state.eventQueue],
         storyLog: [...state.storyLog, logEntry],
       };
     }
 
-    case 'CONTINUE_RECRUITING': {
+    case 'REFRESH_CANDIDATES': {
+      // One-time batch swap before any admission. Cannot refresh after admitting. Year 3+ only.
       if (!state.admissionState) return state;
-      if (state.admissionState.round >= 2) return state; // max two rounds per year
-      if (state.lab.energy < CONTINUE_ENERGY_COST) return state;
-      if (state.studentPool.length < 2) return state;
+      if (state.time.year < 3) return state;
+      if (state.admissionState.hasRefreshed) return state;
+      if (state.admissionState.recruitedCount > 0) return state;
+      if (state.lab.energy < REFRESH_ENERGY_COST) return state;
 
+      const shownIds = state.admissionState.shownIds;
+      const basePool = state.studentPool.filter(id => !shownIds.includes(id));
+      const refreshPool = state.time.year === 1
+        ? basePool.filter(id => !year1RestrictedIds.has(id))
+        : basePool;
+      const candidates = drawTwoCandidates(refreshPool);
+      if (!candidates) return state;
+
+      return {
+        ...state,
+        lab: { ...state.lab, energy: clamp100(state.lab.energy - REFRESH_ENERGY_COST) },
+        admissionState: {
+          ...state.admissionState,
+          candidates,
+          round: state.admissionState.round + 1,
+          shownIds: [...shownIds, ...candidates],
+          hasRefreshed: true,
+        },
+      };
+    }
+
+    case 'CONTINUE_RECRUITING': {
+      // Draw a second batch after already admitting one student. Year 3+ only.
+      if (!state.admissionState) return state;
+      if (state.time.year < 3) return state;
+      if (state.admissionState.recruitedCount < 1) return state;
+      if (state.admissionState.recruitedCount >= 2) return state;
+      if (state.lab.energy < CONTINUE_ENERGY_COST) return state;
+
+      const shownIds = state.admissionState.shownIds;
+      const basePool = state.studentPool.filter(id => !shownIds.includes(id));
       const continuePool = state.time.year === 1
-        ? state.studentPool.filter(id => !year1RestrictedIds.has(id))
-        : state.studentPool;
+        ? basePool.filter(id => !year1RestrictedIds.has(id))
+        : basePool;
       const candidates = drawTwoCandidates(continuePool);
       if (!candidates) return state;
 
@@ -590,8 +636,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...state,
         lab: { ...state.lab, energy: clamp100(state.lab.energy - CONTINUE_ENERGY_COST) },
         admissionState: {
+          ...state.admissionState,
           candidates,
-          round: (state.admissionState.round) + 1,
+          round: state.admissionState.round + 1,
+          shownIds: [...shownIds, ...candidates],
         },
       };
     }
@@ -602,10 +650,20 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'LOAD_SAVE': {
       // Migrate older saves that lack newer GameState fields.
+      const savedAdmission = action.state.admissionState;
       return {
         ...action.state,
         studentConditionalLog: action.state.studentConditionalLog ?? {},
         moodChangesThisMonth: action.state.moodChangesThisMonth ?? {},
+        lab: { ...action.state.lab, energyDepletedCount: action.state.lab.energyDepletedCount ?? 0 },
+        admissionState: savedAdmission
+          ? {
+              ...savedAdmission,
+              shownIds: savedAdmission.shownIds ?? (savedAdmission.candidates ? [...savedAdmission.candidates] : []),
+              recruitedCount: savedAdmission.recruitedCount ?? 0,
+              hasRefreshed: savedAdmission.hasRefreshed ?? false,
+            }
+          : null,
       };
     }
 

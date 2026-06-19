@@ -19,6 +19,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'meeting_minutes_assistant',
+    grade: 'C',
     name: '组会纪要小助手',
     description: '训练一个小模型，把组会录音自动整理成有条理的纪要。核心功能：让"大家讨论了很多"变得可以被追责。',
     completionSummary: '工具正式上线。纪要质量显著提升，各项决议一目了然——所有人开始用它证明自己"发言贡献最多"，组会时长因此增加了 20%。',
@@ -37,6 +38,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'pi_email_delay_game_theory',
+    grade: 'B',
     name: 'PI邮件响应延迟的多智能体博弈模型',
     description: '将学术邮件往来建模为不完全信息博弈：PI与学生各有策略集，延迟回复是均衡解而非意外。理论框架+小规模调查数据，目标投一个Workshop。',
     completionSummary: 'Workshop 接收。匿名审稿人 #2 留言："作者是否意识到该研究本身也符合论文中所描述的"延迟确认偏差"？" 该条留言在组会上被反复引用。',
@@ -47,12 +49,13 @@ export const projectDefinitions: ProjectDefinition[] = [
     engineeringRequired: 0,
     socialRequired: 30,       // 行为研究与调查
     baseMonthlyProgress: 8,
-    fundingReward: 18,
+    fundingReward: 15,
     reputationReward: 8,
   },
 
   {
     id: 'advisor_reply_predictor',
+    grade: 'B',
     name: '导师回复预测',
     description: '根据聊天记录预测导师何时回复消息。',
     completionSummary: '实验表明，97.3% 的导师回复延迟符合泊松分布，置信区间内存在显著"周五消失效应"，预测准确率 89%。',
@@ -61,7 +64,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 0,
     engineeringRequired: 30,  // 挖历史聊天数据，建预测模型
-    socialRequired: 40,       // 需要理解导师行为规律
+    socialRequired: 30,       // 需要理解导师行为规律
     baseMonthlyProgress: 10,
     fundingReward: 12,
     reputationReward: 5,
@@ -69,6 +72,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'auto_rebuttal',
+    grade: 'B',
     name: '自动 Rebuttal',
     description: '利用历史审稿数据自动生成高质量 Rebuttal。',
     completionSummary: '我们提出的系统在十个顶会数据集上平均得分超越人类作者 23%，但 Reviewer #3 仍认为"逻辑不够严密"。',
@@ -85,6 +89,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'campus_agent',
+    grade: 'B',
     name: '校园 Agent',
     description: '打造一个能替学生完成日常琐事的校园智能体。',
     completionSummary: '原型系统在九种教务场景下完成自动化操作，但在"盖章申请"流程中遭遇了现实世界的边界：必须本人到场。',
@@ -101,6 +106,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'meeting_translator',
+    grade: 'B',
     name: '组会翻译',
     description: '将组会发言实时翻译为人类可理解的语言。',
     completionSummary: '系统对 200 场组会录音的翻译准确率达 91%，其中最难处理的句型是"就是说……那个……你懂的"。',
@@ -117,6 +123,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'email_politeness_tax',
+    grade: 'B',
     name: '邮件礼貌税',
     description: '分析称呼礼貌程度与邮件回复率之间的因果关系。',
     completionSummary: '每增加一个"辛苦了"可提升回复率 11%，但超过三个后效果递减，并触发收件人的"这人有目的"预警机制。',
@@ -133,6 +140,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'night_code_effect',
+    grade: 'B',
     name: '夜间代码效应',
     description: '对比凌晨两点与上午十点写出代码的质量差异。',
     completionSummary: '夜间代码注释密度低 58%，变量命名创意性高 40%，且 73% 的"天才方案"在次日早晨会失去可读性。',
@@ -151,6 +159,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'code_archaeology',
+    grade: 'A',
     name: '代码考古学',
     description: '从历史提交记录中重建失传系统设计。',
     completionSummary: '从 134 个无文档遗留仓库中成功重建设计意图，准确率 71%，其中 12 个项目的原作者已无法联系确认。',
@@ -167,6 +176,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'reviewer_alignment',
+    grade: 'A',
     name: 'Reviewer 对齐',
     description: '训练模型模拟不同会议审稿人的偏好，提前对齐论文风格。',
     completionSummary: '经 2.3 万条历史审稿记录训练后，模型可以 82% 准确率预测审稿结论，但拒绝透露具体原因。',
@@ -183,6 +193,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'coffee_social_network',
+    grade: 'A',
     name: '茶歇社交网络',
     description: '分析学术茶歇的社交结构，建模非正式合作关系的形成。',
     completionSummary: '分析 6 个月茶歇记录后发现，80% 的跨组合作起源于等咖啡机的 3 分钟，该时段 ROI 显著高于正式组会。',
@@ -199,6 +210,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'ddl_reinforcement',
+    grade: 'A',
     name: 'DDL 强化学习',
     description: '用强化学习策略最大化在 deadline 前完成任务的总收益。',
     completionSummary: '智能体习得了一种被称为"最后两小时爆发"的最优策略，与对照组人类行为的行动序列相似度高达 91%。',
@@ -215,6 +227,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'meme_propagation',
+    grade: 'A',
     name: '学术梗传播',
     description: '建模学术圈内部梗图的扩散机制与群体认同效应。',
     completionSummary: '学术圈内部梗图平均存活周期 18 天，跨越三个子领域后自发变异率达 40%，且变异方向不可预测。',
@@ -231,6 +244,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'ai_paper_detection',
+    grade: 'A',
     name: 'AI 论文鉴定',
     description: '构建分类器检测学术论文是否由 AI 生成。',
     completionSummary: '检测器对 AI 生成论文准确率达 94%，但在检测"人类仿 AI 写作风格"时准确率降至 51%，接近随机猜测。',
@@ -247,6 +261,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'graduation_delay_predictor',
+    grade: 'A',
     name: '毕业进度预警',
     description: '从提交频率和消息回复速度预测学生是否会延期毕业。',
     completionSummary: '基于提交频率、消息回复延迟和签到时间的模型，可在 6 个月前以 79% 准确率预测延期毕业，导师普遍表示"早知道就好了"。',
@@ -263,6 +278,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'citation_network_mining',
+    grade: 'A',
     name: '引用网络挖掘',
     description: '发现隐藏在引用关系中的学术小圈子结构。',
     completionSummary: '在 5000 篇论文构成的引用图中，发现了 17 个高度自洽的"引用帮派"，其中最大的包含 4 位作者，总互引次数超过 300。',
@@ -279,6 +295,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'hyperparameter_divination',
+    grade: 'A',
     name: '超参数玄学',
     description: '将炼丹过程形式化为贝叶斯优化，研究其与直觉调参的差异。',
     completionSummary: '对 1200 次调参记录分析后发现，专家与新手的最终调参结果无显著差异（p=0.07），但前者平均少喝了 2.3 杯咖啡。',
@@ -295,6 +312,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'whiteboard_erasure_theorem',
+    grade: 'A',
     name: '白板消失定理',
     description: '记录那些被擦掉前没来得及拍照的重要推导。',
     completionSummary: '调查显示，47% 的研究人员曾擦掉"非常重要"的内容，其中 23% 已无法复现，定理因此永久消失于学术史。',
@@ -311,6 +329,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'server_downtime_oracle',
+    grade: 'A',
     name: '宕机先知',
     description: '用机器学习预测 GPU 集群何时崩溃。',
     completionSummary: '基于 GPU 利用率曲线、存储增长速率和当日天气的多模态模型，宕机预测提前量可达 4.7 小时，准确率 83%。',
@@ -327,6 +346,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'conference_social_matching',
+    grade: 'A',
     name: '会议社交匹配',
     description: '在学术会议上为与会者智能推荐最值得认识的人。',
     completionSummary: '算法在三次模拟会议中匹配的合作者，后续论文产出比随机匹配高出 2.1 倍，但拒绝承认这是"缘分"。',
@@ -343,6 +363,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'meeting_game_theory',
+    grade: 'A',
     name: '组会博弈论',
     description: '用博弈论分析组会出勤与汇报的最优策略。',
     completionSummary: '纳什均衡分析表明，在组会中最优策略是"前 10 分钟认真听，一旦发现导师走神即切换为刷论文"。',
@@ -359,6 +380,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'acknowledgment_network',
+    grade: 'A',
     name: '致谢关系图谱',
     description: '从论文致谢段落反向还原学术圈人际关系网络。',
     completionSummary: '从 12000 篇论文的致谢段落中，还原出 891 个节点的学术人情网络，其中最核心的节点是一位默默无闻的审稿编辑。',
@@ -375,6 +397,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'abstract_compression',
+    grade: 'A',
     name: '摘要压缩极限',
     description: '在保留核心贡献的前提下，将论文压缩至 100 字。',
     completionSummary: '顶会论文平均可压缩至原长度 18% 而不损失核心贡献，但局限性部分消失率高达 94%。这或许并非巧合。',
@@ -393,6 +416,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'procrastination_model',
+    grade: 'S',
     name: '拖延行为建模',
     description: '对学术人群的拖延决策过程进行因果建模与干预实验。',
     completionSummary: '计算模型将拖延行为分解为七个离散决策节点，其中最关键的一步是"打开文档后切去看了视频"（占比 38%）。',
@@ -409,6 +433,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'lucky_shirt_causality',
+    grade: 'S',
     name: '幸运T恤因果推断',
     description: '通过随机对照实验验证穿幸运衣物是否真的影响科研产出。',
     completionSummary: '双盲实验显示幸运服装对科研产出无显著影响（p=0.34），但 73% 的参与者表示实验结束后仍会继续穿。',
@@ -425,6 +450,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'prompt_archaeology',
+    grade: 'S',
     name: 'Prompt 考古学',
     description: '从大模型的行为反推其训练时期的 Prompt 设计演变史。',
     completionSummary: '通过系统性诱导测试，成功还原了 GPT-3 时代 7 个不同版本系统提示的演变路径，其中最早版本措辞非常礼貌。',
@@ -441,6 +467,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'mediocre_paper_detector',
+    grade: 'S',
     name: '水会检测系统',
     description: '构建自动识别低质量学术论文的分类器。',
     completionSummary: '分类器在测试集上 F1 达 0.87，但当被要求对自身产出的分析报告进行分类时，给出了"存疑"并请求人工复核。',
@@ -457,6 +484,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'citation_bomb_defense',
+    grade: 'S',
     name: '引用炸弹防御',
     description: '检测并阻断学术圈中的组团互引行为。',
     completionSummary: '我们识别并追踪了 53 起引用操控事件，发现参与者的平均 H-index 因此提升 3.2 点，且无一人受到处分。',
@@ -473,6 +501,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'defense_breakdown_predictor',
+    grade: 'S',
     name: '答辩崩溃预测',
     description: '通过体征数据预测答辩现场崩溃概率。',
     completionSummary: '穿戴设备数据显示，心率骤升和声音颤抖在 87% 的情况下发生于委员会提问"那这个消融实验……"之后的 3 秒内。',
@@ -489,6 +518,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'academic_six_degrees',
+    grade: 'S',
     name: '学术六度空间',
     description: '计算任意两位学者之间合作关系的最短路径。',
     completionSummary: '分析 220 万篇论文后，CS 领域任意两位作者平均距离为 4.2，但图灵奖得主之间仅为 1.8——他们彼此都认识。',
@@ -505,6 +535,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'ai_review_alignment',
+    grade: 'S',
     name: 'AI 审稿对齐',
     description: '训练模型使其审稿风格与顶会历史接受偏好精确对齐。',
     completionSummary: 'RLHF 训练后的审稿模型接受率与目标会议历史接受率仅差 2.1%，但对自身所在机构产出的论文给出了满分。',
@@ -521,6 +552,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'late_submission_effect',
+    grade: 'S',
     name: '深夜提交效应',
     description: '研究提交时间戳与论文接受率之间的隐藏关联。',
     completionSummary: '对 8 万条提交记录分析表明，午夜前 5 分钟提交的论文接受率比正常时段高 6%，该效应不受时区影响，机制成谜。',
@@ -537,6 +569,7 @@ export const projectDefinitions: ProjectDefinition[] = [
 
   {
     id: 'dolphin_llm',
+    grade: 'S',
     name: '海豚语言模型',
     description: '构建首个海豚-人类跨物种对话模型。',
     completionSummary: '在 280 小时声纹数据训练后，模型生成的对话内容获得海豚平均评分 3.7/5，实验人员无法区分真假海豚发音。',

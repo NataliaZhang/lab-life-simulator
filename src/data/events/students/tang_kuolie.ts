@@ -17,7 +17,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     description: [
       '唐扩列来实验室报到的第一天。你去走廊迎他，发现他已经靠在门框上，跟隔壁实验室两个同学聊得有声有色，手机来回换着扫码，像是在现场自发开了个接头会。',
       '进了办公室，你刚想聊研究方向，他掏出手机说："老师，你认识王教授吗？刚才楼道里加了他，他说咱们方向有交集，我帮你拉个三人群？"',
-      '他说这话时脸上是百分之百真诚的热情。他完全没意识到，你还没说过一个字关于科研的内容。',
+      '他说这话时脸上是百分之百真诚的热情。他完全没意识到，你还没说过一句关于科研的话。',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -459,6 +459,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
   tkl_alumni_visit: {
     id: 'tkl_alumni_visit',
     title: '那家公司CEO跟你是校友',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'tang_kuolie', status: 'graduated' }],
     description: [
       '唐扩列毕业后去了一家科技公司做生态合作。据说入职三个月，整栋楼所有人都认识他，连门口的保安大叔都知道他名字。',
       '今天你收到他发来的邮件，主题是"合作项目邀请：实验室联合研究机会"。内容很正式：项目框架、时间线、预期产出、双方分工，显然是认真写的。',
@@ -468,30 +469,28 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_alumni_visit_accept',
-        text: '回邮件，合作和引荐都要',
+        text: '都要',
         outcomes: [
           {
             weight: 1,
             narrative: '你回了邮件，说两件事都可以推进。他当天下午发来引荐消息，介绍语写得很好，把你们实验室的方向和CEO的背景都自然地串在一起，读完感觉像他们已经认识很久了。CEO回复得很快，说"久仰，改天见"。你放下手机，想到这个学生，出去了这么久，还是第一时间想着实验室，还是那句"来都来了"。有些人天生就是这样，走到哪里都在把人和人连起来，这不是策略，就是他。',
             effects: [
-              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 10 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 10 },
+              { type: 'lab', stat: 'funding', delta: 10 },
             ],
           },
         ],
       },
       {
         id: 'tkl_alumni_visit_project_only',
-        text: '合作可以谈，校友引荐就算了',
+        text: '合作要，引荐就算了',
         outcomes: [
           {
             weight: 1,
             narrative: '"好的老师，" 他回复，然后附了一句，"那个校友引荐我帮您备着，您说一声随时可以。" 合作项目推进顺利，他在里面做联络协调，效率极高。有一次开会他顺口提到CEO，你才发现他早已私下认识对方了，但他一次都没有再提引荐的事，只是说"那个人挺有意思的，我们聊过几次"。他记得你说过算了，所以就真的算了。这个孩子，心里有数。',
             effects: [
-              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
-              { type: 'lab', stat: 'funding', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: 6 },
+              { type: 'lab', stat: 'funding', delta: 8 },
             ],
           },
         ],

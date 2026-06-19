@@ -29,7 +29,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         fundingCost: 5,
         outcomes: [{
           weight: 1,
-          narrative: '采购流程走了一周，新卡终于到位。当晚{studentName}发来一条消息：loss在降。你盯着这四个字，在心里默默击掌了一下，然后回了一个"好"，假装这是日常——但你嘴角的弧度出卖了你。',
+          narrative: '采购流程走了一周，新卡终于到位。当晚{studentName}发来一条消息：loss在降。你盯着屏幕，在心里默默击掌了一下，然后回了一个"好"，假装这是日常——但你嘴角的弧度出卖了你。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
             { type: 'randomStudent', stat: 'projectProgress', delta: 5 },
@@ -103,7 +103,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发消息说先休息，明天思路更清晰。{studentName}回了个"好的老师！"，三个字，语气里透着真实的如释重负。第二天对方发来消息说，睡醒之后推了十分钟就推出来了。',
+            narrative: '你发消息说先休息，明天思路更清晰。{studentName}回了个"好的老师！"，语气里透着真实的如释重负。第二天对方发来消息说，睡醒之后推了十分钟就推出来了。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'randomStudent', stat: 'favor', delta: 5 },
@@ -112,7 +112,7 @@ export const dailyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你发消息让{studentName}先休息。对方回了个"好的"——两个字，零感叹号，句末连句号都省了，信息量极其丰富。公式最终独自推出来了，但{studentName}的眼神里从此多了一丝你很难描述的东西。',
+            narrative: '你发消息让{studentName}先休息。对方回了个"好的"——零感叹号，句末连句号都省了，信息量极其丰富。公式最终独自推出来了，但{studentName}的眼神里从此多了一丝你很难描述的东西。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 3 },
               { type: 'randomStudent', stat: 'favor', delta: -3 },

@@ -112,10 +112,6 @@ export const monthlyEventPool: string[] = [
   'group_celebration',
   'arxiv_scooped',
 
-  // 学生专属（triggerConditions 控制时机）
-  'lin_theory_breakthrough',
-  'gu_engineering_milestone',
-
   // 属性触发（实验室属性，triggerConditions 控制时机）
   // 注：学生心情低落的六档事件已移至 conditionalStudentEventPool，由 monthlyUpdate 单独处理
   'collaboration_offer',

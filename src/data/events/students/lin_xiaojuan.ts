@@ -21,7 +21,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '当场宣布：迟到文化，到此为止',
         outcomes: [{
           weight: 1,
-          narrative: '你清了清嗓子，正式点名迟到问题。林小卷立刻收起笑容，点头点得极其诚恳，"老师说得对，下次一定"，像背课文一样流畅。组会散场后，他跑来问你组里有没有推荐的奶茶店，你盯着他认真掏手机备注的背影，意识到他那七个字可能全程只走到了耳朵边缘。',
+          narrative: '你清了清嗓子，正式点名迟到问题。林小卷立刻收起笑容，点头点得极其诚恳，"老师说得对，下次一定"，像背课文一样流畅。组会散场后，他跑来问你组里有没有推荐的奶茶店，你盯着他认真掏手机备注的背影，意识到他那几句话可能全程只走到了耳朵边缘。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -5 },
@@ -168,7 +168,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '已读，明天再说，先去睡',
         outcomes: [{
           weight: 1,
-          narrative: '你回了三个字："明天聊。" 第二天林小卷如约而至，把那个想法又讲了一遍，白天版本逻辑清晰了不止一倍，明显是睡醒之后自己又整理了一轮。有些想法就像发酵面团，需要在黑暗里静置一夜才能膨胀成可以烤的形状。',
+          narrative: '你回了消息："明天聊。" 第二天林小卷如约而至，把那个想法又讲了一遍，白天版本逻辑清晰了不止一倍，明显是睡醒之后自己又整理了一轮。有些想法就像发酵面团，需要在黑暗里静置一夜才能膨胀成可以烤的形状。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
@@ -302,7 +302,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '今天先回去睡，明天见',
         outcomes: [{
           weight: 1,
-          narrative: '你告诉他今天先回去，明天再说。林小卷点了点头，把那张白纸叠起来塞进口袋，开始收书包。出门前他停了一下，回头说："老师，谢谢。" 没有解释谢什么。有时候不需要解释，时机对了，两个字就够了。',
+          narrative: '你告诉他今天先回去，明天再说。林小卷点了点头，把那张白纸叠起来塞进口袋，开始收书包。出门前他停了一下，回头说："老师，谢谢。" 没有解释谢什么。有时候不需要解释，时机对了，一句就够了。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 8 },
@@ -332,7 +332,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '直接冲！今天就开始写论文',
         outcomes: [{
           weight: 1,
-          narrative: '你们当天就开始整理，把那个漏洞做成了一篇分析文章。林小卷第一次作为思路核心参与写作，落笔停不下来，连自己都没料到能写得这么顺。文章投出后，审稿人回评里有一句话他截图保存了，发给你看："这个观察非常敏锐。" 截图附带的消息只有三个字："老师看。"',
+          narrative: '你们当天就开始整理，把那个漏洞做成了一篇分析文章。林小卷第一次作为思路核心参与写作，落笔停不下来，连自己都没料到能写得这么顺。文章投出后，审稿人回评里有一句话他截图保存了，发给你看："这个观察非常敏锐。" 截图附带了一条消息："老师看。"',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 12 },
@@ -363,7 +363,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     id: 'lxj_graduation_panic',
     title: '林小卷：毕业论文？我有计划的',
     description: [
-      '距离毕业论文提交整整一个月，你约林小卷谈话，开门见山问他论文写到哪里了。他回答："刚开始。" 你眨了眨眼，确认这三个字不是听错了。',
+      '距离毕业论文提交整整一个月，你约林小卷谈话，开门见山问他论文写到哪里了。他回答："刚开始。" 你眨了眨眼，确认自己没听错。',
       '他接着说："不过老师，我有计划。" 手机屏幕转过来：一张备忘录截图，标题《毕业论文一个月冲刺计划》，分四个阶段，每个阶段有子任务，有颜色标注，连"收集打印装订材料"都列进去了，看起来严密得像军事行动。',
       '你注意到备忘录的创建时间，就在今天下午，距离现在还不到一小时。他一听说你要约谈，立刻跑去写了这份计划。',
     ],
@@ -410,6 +410,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
   lxj_alumni_visit: {
     id: 'lxj_alumni_visit',
     title: '林小卷：毕业后来信',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'lin_xiaojuan', status: 'graduated' }],
     description: [
       '你的收件箱里出现了一个熟悉的名字：林小卷。邮件标题是"老师好，顺便汇报一下近况"。你点开，发现"顺便"后面跟着将近两千字。',
       '他说他进了某大厂，入职前就凭一个项目冲刺拿到了超预期绩效，组里DDL文化让他如鱼得水，他写道"第一次觉得工作节奏是为自己量身定制的"。升职比同批入职的快了整整半年。信的中间，他提到当年毕业答辩前最后那段日子，"其实挺感谢老师没放弃我的"——只有这一句，没有展开，没有煽情，一句话转了个弯，继续聊项目。',
@@ -419,25 +420,24 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_alumni_collaborate',
-        text: '接！老学生的项目，必须支持',
+        text: '接，老学生来了得支持',
         outcomes: [{
           weight: 1,
           narrative: '你回复说可以，问他什么时候方便细聊。没多久他回来了，附上视频会议链接，时间定在明天早上九点，你高度怀疑那个链接在邮件发出之前就已经创建好了。合作正式启动，实验室拿到一笔行业资金。你看着他名字出现在合作协议上，想起那个端着奶茶迟到进组会的新人，觉得时间这件事有时候挺有意思的。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 3 },
-            { type: 'lab', stat: 'funding', delta: 3 },
+            { type: 'lab', stat: 'reputation', delta: 8 },
+            { type: 'lab', stat: 'funding', delta: 12 },
           ],
         }],
       },
       {
         id: 'lxj_alumni_decline',
-        text: '婉拒，最近组里排不开',
+        text: '婉拒，近期排不开',
         outcomes: [{
           weight: 1,
           narrative: '你礼貌地说组里最近任务比较满，暂时接不了新合作。林小卷回复"好的老师，有机会再说"，然后附了一句："组里最近在忙什么方向，我顺便帮你留意一下人。" 你盯着这条消息看了一会儿，他毕业不到一年，已经在给你介绍人了。你把邮件存进"日后跟进"文件夹，想着那个总说"快了快了"的学生，现在确实快了。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 1 },
-            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'lab', stat: 'reputation', delta: 3 },
           ],
         }],
       },

@@ -84,6 +84,9 @@ export function checkConditions(conditions: EventCondition[], state: GameState):
           e => (e.type === 'event' || e.type === 'event-intro') && e.eventId === cond.eventId,
         );
       }
+      if (cond.type === 'studentStatus') {
+        return state.students.some(s => s.id === cond.studentId && s.status === cond.status);
+      }
       return true;
     });
 }

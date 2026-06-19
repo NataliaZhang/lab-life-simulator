@@ -469,6 +469,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
   bxt_alumni_visit: {
     id: 'bxt_alumni_visit',
     title: '科普主播的邮件',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'bi_xiaotian', status: 'graduated' }],
     description: [
       '一个普通的周三下午，你收到一封邮件，发件人：毕小天，主题："一件小事"。',
       '邮件不长。他说他现在专职做科普视频，解释"正经但看起来不正经的研究"，粉丝涨得比预期快。最近有家科技媒体邀请他做访谈，聊"冷门研究方向的价值"。他想在访谈里提实验室的名字，问你介不介意。',

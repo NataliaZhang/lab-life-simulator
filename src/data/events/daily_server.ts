@@ -23,14 +23,14 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'investigate',
-        text: '深入调查，追查进程来源（消耗精力）',
+        text: '深入调查，追查进程来源',
         energyCost: 15,
         outcomes: [
           {
             weight: 2,
             narrative: '你翻了syslog、看了~/.bash_history、核对了所有用户最近的登录记录，终于将IP追溯到一台具体的机器。证据确凿，凶器在手，现在需要做的是开庭审理。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 1 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
             ],
             nextEventIds: ['mystery_process_resolved'],
           },
@@ -60,6 +60,7 @@ export const serverEvents: Record<string, GameEvent> = {
             narrative: '进程还没跑完，又多了一个新的神秘进程，这次占了61%。群里出现了第一条情绪崩溃的消息："???????????????????"，发消息的人随后立刻撤回了，但每个人都看见了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -8 },
+              { type: 'allStudents', stat: 'projectProgress', delta: -4},
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
@@ -71,7 +72,7 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你用另一个账号发了条消息："服务器上有个进程占着47%的GPU，PID 23847，进程名 xvfb_worker_7734，请主人认领。" 等了一会儿，群里飘来一条"哦哦马上"，然后进程消失了。全程没有人承认自己就是那个"有人"，群里也没有人追问，这件事以一种相当默契的方式画上了句号。',
+            narrative: '你用另一个账号发了条消息："服务器上有个进程占着47%的GPU，PID 23847，进程名 xvfb_worker_7734，请主人认领。" 等了一会儿，群里飘来一条"哦哦马上"，然后进程消失了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -94,18 +95,18 @@ export const serverEvents: Record<string, GameEvent> = {
     id: 'mystery_process_resolved',
     title: '真相大白',
     description: [
-      '调查结果出来了。那个进程的主人浮出水面，你站在他们面前，对方的表情是一种复杂的混合体：有一点点愧疚，有一点点"被发现了"，还有一点点令人费解的技术性自豪感。',
-      '原来那个进程在训练一个Minecraft智能体——"只是个小实验，很快就好"——已经运行了144小时，正在尝试教一个AI从零开始学习挖钻石。GPU利用率从未低于95%。这不是"小实验"，这是一个有完整课题经费逻辑漏洞的独立项目。',
+      '调查结果出来了。那个进程的主人浮出水面——是{studentName}。你站在对方面前，{studentName}的表情是一种复杂的混合体：有一点点愧疚，有一点点"被发现了"，还有一点点令人费解的技术性自豪感。',
+      '原来那个进程在训练一个Minecraft智能体——"只是个小实验，很快就好"——已经运行了144小时，正在尝试教一个AI从零开始学习挖钻石。GPU利用率从未低于95%。\n\n这不是"小实验"，这是一个有完整课题、有经费逻辑漏洞的独立项目。',
     ],
     prompt: 'Minecraft训练任务已跑满6天，你决定',
     options: [
       {
         id: 'handle_kindly',
-        text: '好言好语，顺势立规矩',
+        text: '好言好语，轻轻放下',
         outcomes: [
           {
             weight: 2,
-            narrative: '你哑声说了句"行吧，我理解"，说你自己读博的时候也有过类似的"战略性绕路"。但今后使用超过10%显卡资源的任务必须在群里通知，超过48小时要有说明。当事人连连点头，表情从愧疚升级到感激，当天下午就在群里发了一条非常详细的占用通知，详细到让整个组都意识到这个规定是有人付出代价换来的。',
+            narrative: '你哑声说了句"行吧，我理解"，说你自己读博的时候也有过类似的"战略性绕路"。但今后使用超过10%显卡资源的任务必须在群里通知，超过48小时要有说明。\n\n{studentName}连连点头，表情从愧疚升级到感激，当天下午就在群里发了一条非常详细的占用通知，详细到让整个组都意识到这个规定是有人付出代价换来的。',
             effects: [
               { type: 'allStudents', stat: 'favor', delta: 5 },
               { type: 'randomStudent', stat: 'happiness', delta: -3 },
@@ -114,9 +115,10 @@ export const serverEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你好言好语地说完了，对方表示理解，点头如捣蒜。然而你隐约察觉，对方真正记住的部分是你说的"我自己读博的时候也绕过路"，这句话在他脑海里被截取成了"老师默许了"。三周后，Minecraft智能体已经学会了种小麦。',
+            narrative: '你好言好语地表示理解，说你自己读博的时候也有过类似的"战略性绕路"，但今后要注意了。\n\n{studentName}表示理解，点头如捣蒜。然而你隐约察觉，{studentName}真正记住的部分是你说的"我自己读博的时候也绕过路"，这句话被截取成了"老师默许了"。\n\n三周后，Minecraft智能体已经学会了种小麦。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 5 },
+              { type: 'randomStudent', stat: 'projectProgress', delta: -10 },
             ],
           },
         ],
@@ -127,21 +129,20 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你阐明了：共享服务器是公共资源，未通知占用等同于堵塞所有人的工作流，这不是技术问题而是职业素养问题。当事人脸色经历了三个阶段：白→红→重新白。整个组后来一个星期都在群里非常礼貌地申请每一次GPU使用，格式严谨得像在填报道德审查表。',
+            narrative: '你阐明了：共享服务器是公共资源，未通知占用等同于堵塞所有人的工作流，这不是技术问题而是职业素养问题。{studentName}脸色经历了三个阶段：白→红→重新白。整个组后来一个星期都在群里非常礼貌地申请每一次GPU使用，格式严谨得像在填报道德审查表。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: -8 },
               { type: 'randomStudent', stat: 'happiness', delta: -12 },
               { type: 'allStudents', stat: 'favor', delta: -3 },
-              { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
           {
             weight: 1,
-            narrative: '你严肃批评了一通，逻辑严密，有理有据。当事人认真听了，诚恳道了歉，然后回去写了一篇两千字的深刻检讨发到群里，附带一份AI自动生成的GPU使用排班表，精确到分钟。这份过度反应让你盯着那份排班表发了很久的呆，不知道该夸还是该担心。',
+            narrative: '你严肃批评了一通，逻辑严密，有理有据。{studentName}认真听了，诚恳道了歉，然后回去写了一篇两千字的深刻检讨发到群里，附带一份AI自动生成的GPU使用排班表，精确到分钟。这份过度反应让你盯着那份排班表发了很久的呆，不知道该夸还是该担心。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -10 },
               { type: 'randomStudent', stat: 'favor', delta: -5 },
-              { type: 'lab', stat: 'energy', delta: -10 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
             ],
           },
         ],
@@ -152,12 +153,11 @@ export const serverEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在深夜默默kill了进程，第二天若无其事地发了一条群消息说"神秘进程已消失，来源不明，大家注意以后贴上进程标签"。当事人在群里简洁地回了个"好的"。你们心照不宣，从此对视时都带着一种复杂的君子协定。Minecraft智能体永远停在了那个时间点，那个AI从来没有学会挖钻石。',
+            narrative: '你在深夜默默kill了进程，第二天若无其事地发了一条群消息说"神秘进程已消失，来源不明，大家注意以后贴上进程标签"。{studentName}在群里简洁地回了个"好的"。你们心照不宣，从此对视时都带着一种复杂的君子协定。Minecraft智能体永远停在了那个时间点，那个AI从来没有学会挖钻石。',
             effects: [
-              { type: 'randomStudent', stat: 'happiness', delta: 8 },
-              { type: 'randomStudent', stat: 'favor', delta: 3 },
-              { type: 'allStudents', stat: 'happiness', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: 5 },
+              { type: 'randomStudent', stat: 'happiness', delta: -8 },
+              { type: 'randomStudent', stat: 'favor', delta: -3 },
+              { type: 'lab', stat: 'energy', delta: 10 },
             ],
           },
         ],
@@ -171,7 +171,7 @@ export const serverEvents: Record<string, GameEvent> = {
     title: '有人跑了apt upgrade',
     description: [
       '实验室的主力服务器已经连续运行了1127天，从未重启。这是一项非官方的荣誉，没有人明说，但大家都知道这个数字，偶尔在slack里提起时会带着一种保持了世界纪录的语气。今天有人在群里发了一条消息："需要更新一个依赖，我sudo apt-get upgrade了一下，正常应该没事吧"。',
-      '"正常应该没事吧"这七个字在群里静静燃烧，像一根引信。Linux内核从5.4.0跳到了6.8.12，NVIDIA驱动版本差了整整三个大版本，CUDA toolkit自动更新了，而这台服务器上跑着十一个人的实验环境。1127天的纪录，结束于一个下午的无知者无畏。',
+      '"正常应该没事吧"在群里静静燃烧，像一根引信。Linux内核从5.4.0跳到了6.8.12，NVIDIA驱动版本差了整整三个大版本，CUDA toolkit自动更新了，而这台服务器上跑着十一个人的实验环境。1127天的纪录，结束于一个下午的无知者无畏。',
     ],
     prompt: '更新已经跑完，服务器正在重启，你选择',
     triggerConditions: [{ type: 'minStudentCount' as const, value: 3 }],

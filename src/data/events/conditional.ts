@@ -409,7 +409,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你早上才回。聊天框里最后一条停在凌晨4:02："算了，没事。"这四个字非常有事。你盯着屏幕，意识到自己错过了一个重要的时间点。',
+            narrative: '你早上才回。聊天框里最后一条停在凌晨4:02："算了，没事。"这句话非常有事。你盯着屏幕，意识到自己错过了一个重要的时间点。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -8 },
               { type: 'randomStudent', stat: 'favor', delta: -6 },
@@ -505,12 +505,100 @@ export const conditionalEvents: Record<string, GameEvent> = {
         text: '礼貌拒绝，专注自己方向',
         outcomes: [{
           weight: 1,
-          narrative: '你礼貌地回复说时机不对，目前组里有几件重要的事要专注完成。对方回复说"理解，保持联系"，四个字，句号。你把邮件存档，继续自己的节奏。组里的氛围因为少了外部压力而出人意料地放松了一些。',
+          narrative: '你礼貌地回复说时机不对，目前组里有几件重要的事要专注完成。对方回复说"理解，保持联系"。你把邮件存档，继续自己的节奏。组里的氛围因为少了外部压力而出人意料地放松了一些。',
           effects: [
             { type: 'allStudents', stat: 'happiness', delta: 3 },
           ],
         }],
       },
+    ],
+    tags: ['conditional'],
+  },
+
+  pi_third_burnout: {
+    id: 'pi_third_burnout',
+    title: '第三次倒下',
+    description: [
+      '办公室地板在你的视野里旋转，这是你第三次以这个视角欣赏它了。',
+      '你没意识到自己倒下的那一刻——只知道上一秒还在盯着一个跑了三天仍未收敛的实验，下一秒便是天花板。精力：0/100。',
+      '门缝里挤进来一个脑袋。{studentName}先是愣了半秒，然后以一种急救培训录像的标准姿势冲过来，一套拍肩膀、探呼吸、摸脉搏的流程，见你有反应，才把你从地板上扶起来。',
+      '"老师……你、你这已经是第三次了。""哪有。"你虚弱地否认。',
+      '"我数过的。"{studentName}不留情面地把记录截图亮给你看，上面有时间戳。',
+      '{studentName}塞给你一瓶热水，你喝了两口，感觉灵魂渐渐回到了躯壳。',
+    ],
+    options: [
+      {
+        id: 'accept_help',
+        text: '……谢了',
+        outcomes: [{
+          weight: 1,
+          narrative: '你接过热水，把它喝完。{studentName}坐在旁边没敢立刻离开，大概是怕你再次倒地时无人目击。热水确实有点用，你感觉稍微活了回来。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'deny_everything',
+        text: '我只是在思考，不是倒下',
+        outcomes: [{
+          weight: 1,
+          narrative: '"哦。"{studentName}把热水放在你够得到的地方，默默退出去了。你试图用"这是一种创新的卧式思考姿势"来说服自己，成功率约为零。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 10 },
+          ],
+        }],
+      },
+    ],
+    triggerConditions: [
+      { type: 'lab', stat: 'energyDepletedCount', op: '>=', value: 3 },
+      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
+    ],
+    tags: ['conditional'],
+  },
+
+  pi_fifth_burnout: {
+    id: 'pi_fifth_burnout',
+    title: '第五次倒下',
+    description: [
+      '这次你是在走廊里倒下的。{studentName}路过，差点踩到你。',
+      '"老师你怎么又——"{studentName}把话咽了回去，立即颤抖着开始拨打校医室电话。',
+      '校医来了，检查了一遍，语气严肃得像在朗读教科书："长期精力透支、睡眠不足、应激激素水平偏高。建议休养。如不改变，后续可能出现记忆力下降、判断力受损，乃至更严重的后果。"',
+      '"严重是多严重？"你问。校医顿了一顿。"比你想的更严重。"',
+      '这是目前你收到过的最含蓄的警告。你躺着盯着天花板，第一次真正开始害怕：如果自己继续这样下去，这个实验室会发生什么。',
+    ],
+    options: [
+      {
+        id: 'take_it_seriously',
+        text: '认真考虑调整节奏',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说你需要认真想想。{studentName}点头，帮你把办公室的灯调暗了一档。这是{studentName}能做的，剩下的，得靠你自己了。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 15 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
+            { type: 'randomStudent', stat: 'happiness', delta: -10 },
+          ],
+        }],
+      },
+      {
+        id: 'push_through_anyway',
+        text: '项目要紧，等这阵子过了就好',
+        outcomes: [{
+          weight: 1,
+          narrative: '类似的说辞，你已经重复了太多次。{studentName}没有反驳，但离开时顺手把你的咖啡杯拿走了。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'randomStudent', stat: 'happiness', delta: -15 },
+          ],
+        }],
+      },
+    ],
+    triggerConditions: [
+      { type: 'lab', stat: 'energyDepletedCount', op: '>=', value: 5 },
+      { type: 'seenEvent', eventId: 'pi_third_burnout' },
+      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
     ],
     tags: ['conditional'],
   },

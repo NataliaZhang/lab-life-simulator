@@ -15,6 +15,7 @@ const ENDING_BGM: Record<string, string> = {
   ending_time_struggle:        'ending_time_struggle',
   ending_funding_crisis:       'ending_lose',
   ending_all_students_left:    'ending_lose',
+  ending_burnout_tenure:       'ending_lose',
   ending_be_rep_low:           'ending_lose',
   ending_be_proj_insufficient: 'ending_lose',
 };

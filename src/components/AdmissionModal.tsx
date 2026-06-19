@@ -2,7 +2,8 @@ import type { AdmissionState, LabStats } from '../types';
 import { allCandidates } from '../data/studentPool';
 import { TraitTag } from './TraitTag';
 
-const CONTINUE_ENERGY_COST = 20;
+const REFRESH_ENERGY_COST = 20;
+const CONTINUE_ENERGY_COST = 40; // 2× refresh
 
 function getAdmissionCost(year: number): number {
   return year >= 3 ? 20 : 10;
@@ -12,37 +13,55 @@ interface Props {
   admissionState: AdmissionState;
   lab: LabStats;
   gameYear: number;
+  unshownPoolCount: number; // candidates in pool not yet shown this session
   onAdmit: (candidateId: string) => void;
   onPass: () => void;
   onContinue: () => void;
+  onRefresh: () => void;
 }
 
-export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass, onContinue }: Props) {
-  const { candidates, round } = admissionState;
+export function AdmissionModal({
+  admissionState,
+  lab,
+  gameYear,
+  unshownPoolCount,
+  onAdmit,
+  onPass,
+  onContinue,
+  onRefresh,
+}: Props) {
+  const { candidates, round, recruitedCount, hasRefreshed } = admissionState;
 
   if (candidates === null) {
-    // "Offer continue" state: player just admitted someone, can recruit again or stop
-    const canContinue = lab.energy >= CONTINUE_ENERGY_COST;
+    // "Offer continue" state: one student admitted, player can stop or recruit another
+    const hasPoolForContinue = gameYear >= 3 && unshownPoolCount >= 2;
+    const canAffordContinue = lab.energy >= CONTINUE_ENERGY_COST;
+    const canContinue = hasPoolForContinue && canAffordContinue;
+
     return (
       <div className="modal-overlay" role="dialog" aria-modal="true">
         <div className="modal admission-modal">
-          <h2 className="modal__title">招生完成</h2>
+          <h2 className="modal__title">已录取一名新生</h2>
           <p className="modal__prompt">
-            新成员已加入实验室。是否继续招募本年度第二批学生？
+            {hasPoolForContinue
+              ? '是否继续招募本年度第二名学生？'
+              : '候选人已全部看过，无法再招募第二名。'}
           </p>
           <div className="admission-continue-bar">
-            <button
-              className={`modal__option-btn${!canContinue ? ' modal__option-btn--disabled' : ''}`}
-              onClick={onContinue}
-              disabled={!canContinue}
-            >
-              <span className="modal__option-text">继续招募</span>
-              <span className="modal__option-costs">
-                <span className={`option-cost${!canContinue ? ' option-cost--unaffordable' : ''}`}>
-                  ⚡ {CONTINUE_ENERGY_COST}
+            {hasPoolForContinue && (
+              <button
+                className={`modal__option-btn${!canContinue ? ' modal__option-btn--disabled' : ''}`}
+                onClick={onContinue}
+                disabled={!canContinue}
+              >
+                <span className="modal__option-text">继续招募第二名</span>
+                <span className="modal__option-costs">
+                  <span className={`option-cost${!canAffordContinue ? ' option-cost--unaffordable' : ''}`}>
+                    ⚡ {CONTINUE_ENERGY_COST}
+                  </span>
                 </span>
-              </span>
-            </button>
+              </button>
+            )}
             <button className="modal__option-btn" onClick={onPass}>
               结束本年招生
             </button>
@@ -56,11 +75,19 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
   const admissionCost = getAdmissionCost(gameYear);
   const canAfford = lab.funding >= admissionCost;
 
+  // Refresh: year 3+, one-time swap, only before any admission, requires unshown pool & energy
+  const canRefreshPool = unshownPoolCount >= 2;
+  const canAffordRefresh = lab.energy >= REFRESH_ENERGY_COST;
+  const canRefresh = gameYear >= 3 && !hasRefreshed && recruitedCount === 0 && canRefreshPool && canAffordRefresh;
+
+  // Pass: always in year 4+; in years 1–3 only after admitting at least one
+  const canPass = gameYear >= 4 || recruitedCount >= 1;
+
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true">
       <div className="modal admission-modal">
         <h2 className="modal__title">
-          {round === 1 ? `第 ${gameYear} 年招生季` : `第 ${round} 轮招募`}
+          {round === 1 ? `第 ${gameYear} 年招生季` : `第 ${round} 轮候选`}
           <span className="admission-modal__cost-hint">录取费：{admissionCost}万/人</span>
         </h2>
         <p className="modal__prompt">两份申请材料摆在面前，选一位加入实验室：</p>
@@ -92,14 +119,30 @@ export function AdmissionModal({ admissionState, lab, gameYear, onAdmit, onPass,
           })}
         </div>
 
-        {/* In early years (1–3), player must recruit — no skip option */}
-        {(gameYear >= 4 || round > 1) && (
-          <div className="admission-footer">
+        <div className="admission-footer">
+          {/* One-time refresh: year 3+, shows new candidates, costs energy */}
+          {gameYear >= 3 && !hasRefreshed && recruitedCount === 0 && (
+            <button
+              className={`btn btn--ghost${!canRefresh ? ' modal__option-btn--disabled' : ''}`}
+              onClick={onRefresh}
+              disabled={!canRefresh}
+              title={
+                !canRefreshPool
+                  ? '候选人已不足，无法换批'
+                  : !canAffordRefresh
+                    ? `精力不足（需${REFRESH_ENERGY_COST}点）`
+                    : `消耗${REFRESH_ENERGY_COST}点精力，换一批候选人`
+              }
+            >
+              换一批 ⚡{REFRESH_ENERGY_COST}
+            </button>
+          )}
+          {canPass && (
             <button className="btn btn--ghost" onClick={onPass}>
               今年不招了
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

@@ -392,8 +392,8 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     id: 'mwx_paper_title_omen',
     title: '标题笔画数的问题',
     description: [
-      '论文初稿成形，你们在敲定标题。他对着当前版本看了一会儿，翻出手机，算了一下，抬头说："老师，这个标题有几个字的笔画数加起来……不太顺，有点散。我想改一个字。"',
-      '他把那个字指给你看，说出替换方案。你把两个版本都念了一下，发现改完的标题确实更简洁：字数少了一个，节奏更紧凑，读起来更有力。只是他本人的出发点和这些优点没有任何关系。',
+      '论文初稿成形，你们在敲定标题。他对着当前版本看了一会儿，翻出手机，算了一下，抬头说："老师，这个标题有几处笔画数加起来……不太顺，有点散。我想改一下。"',
+      '他把要改的位置指给你看，说出替换方案。你把两个版本都念了一下，发现改完的标题确实更简洁：字数少了一个，节奏更紧凑，读起来更有力。只是他本人的出发点和这些优点没有任何关系。',
       '"笔画数方面，改完之后总画数是个吉数，"他补充道，"工程方面，关键词密度稍微好了一点，这是附带收益。"',
     ],
     prompt: '你怎么回应这个标题修改建议？',
@@ -408,7 +408,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说"这个版本更简洁，改吧"，他更新了文档，说"好"，若无其事地继续讨论摘要。你注意到他没再提笔画数的事，像是在一张内部清单上打完了勾，可以继续下一项。论文投出去后，一个审稿人在评语里专门写标题"精确而简洁"。他看到这条，给你发了一条消息，只有五个字：笔画数：有效。',
+            narrative: '你说"这个版本更简洁，改吧"，他更新了文档，说"好"，若无其事地继续讨论摘要。你注意到他没再提笔画数的事，像是在一张内部清单上打完了勾，可以继续下一项。论文投出去后，一个审稿人在评语里专门写标题"精确而简洁"。他看到这条，给你发了一条消息，只有一句：笔画数：有效。',
             effects: [
               { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 8 },
@@ -439,6 +439,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
   mwx_alumni_visit: {
     id: 'mwx_alumni_visit',
     title: '玄学成功率：71%',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'mo_wenxuan', status: 'graduated' }],
     description: [
       // 🎓 毕业后回访 — 建议引擎在graduation后约6个月注入
       '毕业之后他去了一家AI公司。入职没多久，他在团队里推动了一套"发布前玄学评估流程"：每次重大版本上线前，有一个非强制性的环节，让有意愿的同事抽一张塔罗牌，记录感受，然后继续正常的技术评审。',
@@ -449,28 +450,27 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'mwx_alumni_visit_connect',
-        text: '回复：很高兴听到你的消息，工程师合作可以聊',
+        text: '感兴趣，帮忙安排一下',
         outcomes: [
           {
             weight: 1,
             narrative: '你回了封邮件，说很高兴听到他的近况，工程师合作的事可以进一步了解。他很快回复，把那位工程师的背景和他们讨论过的方向简单介绍了一下，说他可以帮忙安排视频会议。邮件最后他加了一行：老师当时气场调整后的办公室，据说现在依然运作良好。他没有解释这句话，但你知道他说的是第一次见面时那个二十度，那天你让他随便调，他大概记到现在了。',
             effects: [
-              { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'lab', stat: 'reputation', delta: 8 },
+              { type: 'lab', stat: 'funding', delta: 5 },
             ],
           },
         ],
       },
       {
         id: 'mwx_alumni_visit_report',
-        text: '先问报告里双盲评定是怎么做到的',
+        text: '先问问双盲评定是怎么做到的',
         outcomes: [
           {
             weight: 1,
             narrative: '他回复得飞快，洋洋洒洒写了好几段：他找了两个同事做独立评定，给他们事件描述但不告诉他们属于"遵循"还是"忽略"玄学建议的组，让他们独立判断结果好坏。这样可以避免他自己的确认偏误干扰评分。他说改进之后成功率从68%调整到了71%，但置信区间更窄了，他认为这是方法论进步带来的估计更准确，而不是玄学效果真的变强了。最后他问你有没有兴趣在第四年度做共同作者。你看着这封邮件，一时不知道是该笑还是认真考虑一下。',
             effects: [
-              { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'lab', stat: 'reputation', delta: 12 },
             ],
           },
         ],

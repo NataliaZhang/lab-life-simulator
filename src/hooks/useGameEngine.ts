@@ -17,6 +17,7 @@ export interface GameEngine {
   admitStudent: (candidateId: string) => void;
   passAdmission: () => void;
   continueRecruiting: () => void;
+  refreshCandidates: () => void;
   newGame: () => void;
   loadSave: () => boolean;
   deleteSaveAndRestart: () => void;
@@ -96,6 +97,10 @@ export function useGameEngine(): GameEngine {
     dispatch({ type: 'CONTINUE_RECRUITING' });
   }, []);
 
+  const refreshCandidates = useCallback(() => {
+    dispatch({ type: 'REFRESH_CANDIDATES' });
+  }, []);
+
   const newGame = useCallback(() => {
     setModalVisible(false);
     dispatch({ type: 'NEW_GAME' });
@@ -128,6 +133,7 @@ export function useGameEngine(): GameEngine {
     admitStudent,
     passAdmission,
     continueRecruiting,
+    refreshCandidates,
     newGame,
     loadSave,
     deleteSaveAndRestart,

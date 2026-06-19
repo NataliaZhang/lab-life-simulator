@@ -55,7 +55,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     description: [
       '组会进行了一段时间，你说了句"这个方向大概率是对的，我们就按这个推进"，顺手准备翻下一页。',
       '叶知秋礼貌地举起手，像一个永远不会迟到的逻辑警察刚刚拦下一辆闯红灯的概念。"老师，打扰一下——请问「大概率」有量化定义吗？主观贝叶斯置信度，还是频率学派意义下的极限？因为两者对实验设计的影响是不同的……"',
-      '整个讨论从此在"大概率"这三个字里面盘旋了二十分钟。她的问题本身无可挑剔。时机只是……非常精准。',
+      '整个讨论从此在"大概率"里打转了二十分钟。她的问题本身无可挑剔。时机只是……非常精准。',
     ],
     prompt: '你怎么处理这二十分钟？',
     triggerConditions: [
@@ -165,7 +165,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你陪她花了一个下午把环境配好，途中踩了两个闻所未闻的坑。叶知秋全程用笔记本记录每一步操作，最后整理成一份"环境配置备忘录（附排错日志及根因分析）"，末尾加了一条致谢："感谢老师的工程支援。"你盯着"工程支援"四个字，感到一种复杂的情绪在胃里慢慢发酵。',
+            narrative: '你陪她花了一个下午把环境配好，途中踩了两个闻所未闻的坑。叶知秋全程用笔记本记录每一步操作，最后整理成一份"环境配置备忘录（附排错日志及根因分析）"，末尾加了一条致谢："感谢老师的工程支援。"你盯着"工程支援"这个词，感到一种复杂的情绪在胃里慢慢发酵。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 5 },
@@ -306,7 +306,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"理论部分做得很扎实，"你说，"但最终要有能跑出来的数字。"叶知秋点头："我明白。我会请工程方向的同学配合来做这部分。"她把"工程"两个字说得格外清晰，像是在使用一门虽然不流利但态度认真的外语。',
+            narrative: '"理论部分做得很扎实，"你说，"但最终要有能跑出来的数字。"叶知秋点头："我明白。我会请工程方向的同学配合来做这部分。""工程"这个词她说得格外清晰，像是在使用一门虽然不流利但态度认真的外语。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 3 },
@@ -438,6 +438,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
   yzq_alumni_visit: {
     id: 'yzq_alumni_visit',
     title: '措辞是否太直接',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'ye_zhiqiu', status: 'graduated' }],
     description: [
       '叶知秋毕业后去了某理论方向的顶级实验室做博后。走之前说会"保持联络"，你当时以为是客套，后来发现她是认真的，大约每两个月一封邮件，每封都带着具体的问题或者有用的资料，从不发只有"老师好"的消息。',
       '这次邮件的标题是："想请老师帮忙确认一下措辞"。',
@@ -447,28 +448,26 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_alumni_visit_affirm',
-        text: '回复：报告严谨克制，直接发吧',
+        text: '回复：措辞没问题，放心发',
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋回复："好的，谢谢老师确认。我把第二处漏洞的描述稍微软化了一下，加了「建议核实」四个字，其余保持原样。"三天后她发来消息：审稿意见已发，对方作者回复"非常感谢，这些问题确实存在"。你把这封邮件存进了一个专门的文件夹。她还是她，只是从你的组飞去了更远的地方，依然认真，依然精准，依然会在发出每一份批评性文字之前，先问一句"老师，这样是否太直接"。',
+            narrative: '叶知秋回复："好的，谢谢老师确认。我把第二处漏洞的描述稍微软化了一下，加了「建议核实」，其余保持原样。"三天后她发来消息：审稿意见已发，对方作者回复"非常感谢，这些问题确实存在"。你把这封邮件存进了一个专门的文件夹。她还是她，只是从你的组飞去了更远的地方，依然认真，依然精准，依然会在发出每一份批评性文字之前，先问一句"老师，这样是否太直接"。',
             effects: [
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 4 },
+              { type: 'lab', stat: 'reputation', delta: 12 },
             ],
           },
         ],
       },
       {
         id: 'yzq_alumni_visit_soften',
-        text: '建议再软化语气，学术圈要维护关系',
+        text: '建议再委婉一些，学术圈关系要维护',
         outcomes: [
           {
             weight: 1,
             narrative: '"我理解老师的考量，"她回复，"我会在每处漏洞前加「建议进一步核实」。但漏洞本身我还是会完整列出，读者有权知道证明的边界。"你看着这封邮件，想到她毕竟还是来问过你的，想到她在附件最后写的那句"如果语气有不妥请老师帮我调整"。对叶知秋来说，那已经是最大程度的温柔了。',
             effects: [
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 5 },
-              { type: 'lab', stat: 'reputation', delta: 4 },
+              { type: 'lab', stat: 'reputation', delta: 6 },
             ],
           },
         ],

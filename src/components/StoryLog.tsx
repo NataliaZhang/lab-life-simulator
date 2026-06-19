@@ -62,7 +62,7 @@ function StatChangePills({ changes }: { changes: StatChange[] }) {
           key={i}
           className={`stat-change-pill ${c.delta >= 0 ? 'stat-change-pill--pos' : 'stat-change-pill--neg'}`}
         >
-          {c.label} {c.delta >= 0 ? `+${c.delta}` : c.delta}
+          {c.label} {c.delta >= 0 ? `+${c.delta}` : c.delta}{c.suffix ?? ''}
         </span>
       ))}
     </div>

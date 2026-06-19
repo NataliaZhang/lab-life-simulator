@@ -298,7 +298,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了二十分钟写了一封邮件，言辞诚恳，理由是"实验室正在处理一个时间敏感的投稿事项，本人无法脱身，深表歉意，如有重要决议请知悉"。系主任回复了三个字："好的，知道了。" 你用省下来的两小时推进了论文，比预期多写了半节。',
+            narrative: '你花了二十分钟写了一封邮件，言辞诚恳，理由是"实验室正在处理一个时间敏感的投稿事项，本人无法脱身，深表歉意，如有重要决议请知悉"。系主任回复："好的，知道了。" 你用省下来的两小时推进了论文，比预期多写了半节。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: -1 },
@@ -611,10 +611,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说："去吧，这是一个好机会，你值得。" {studentName}愣了一秒，大概是没预料到你这么干脆。临走前说了句"老师，谢谢你这几年"，说得很认真，不是客套话，你听出来了。{studentName}走后，实验室少了一个人，多了一段让你之后在学生面前讲的故事。某次会议上你偶尔看到{studentName}的名字出现在一篇高引论文的致谢里，排在第一位。',
+            narrative: '你说："去吧，这是一个好机会，你值得。" {studentName}愣了一秒，大概是没预料到你这么干脆。虽然没能拿到博士毕业证书，但你也送出去了一个找到方向的人。\n\n{studentName}临走前郑重道谢，你听出了里面真诚的感激。\n\n{studentName}走后，实验室少了一个人，多了一段让你之后在学生面前讲的故事。某次会议上你偶尔看到{studentName}的名字出现在一篇高引论文的致谢里，排在第一位。',
             effects: [
+              { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: 4 },
-              { type: 'randomStudent', stat: 'favor', delta: 15 },
               { type: 'allStudents', stat: 'favor', delta: 5 },
             ],
           },
@@ -699,7 +699,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你做了准备，当天一切顺利，记者满意地离开了。报道发出来时，你的导师——那位你读博期间的导师——发给你一条消息："看到报道了，写得不错。" 这六个字让你愣了一会儿，然后把窗口最小化，继续改论文。',
+            narrative: '你做了准备，当天一切顺利，记者满意地离开了。报道发出来时，你的导师——那位你读博期间的导师——发给你一条消息："看到报道了，写得不错。" 这句话让你愣了一会儿，然后把窗口最小化，继续改论文。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 7 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },

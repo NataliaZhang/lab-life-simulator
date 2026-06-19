@@ -1360,7 +1360,94 @@ html, body {
   font-weight: 600;
 }
 
+/* ─── Project Grade Badge ─────────────────────────────────────────────────── */
+
+.proj-card__header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.proj-grade {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  flex-shrink: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* C — grey, common */
+.proj-grade--c {
+  background: #e0e0e0;
+  color: #666;
+  border: 1px solid #bbb;
+}
+
+/* B — green, uncommon */
+.proj-grade--b {
+  background: #d4edda;
+  color: #2a6e3f;
+  border: 1px solid #7ec89c;
+}
+
+/* A — blue, rare */
+.proj-grade--a {
+  background: #d0e8ff;
+  color: #1a5a9e;
+  border: 1px solid #7ab8f5;
+}
+
+/* S — gold, legendary */
+.proj-grade--s {
+  background: linear-gradient(135deg, #fff3cc 0%, #ffe680 100%);
+  color: #7a4f00;
+  border: 1px solid #d4a800;
+  box-shadow: 0 0 4px rgba(212, 168, 0, 0.35);
+}
+
 /* ─── Leader Selector ─────────────────────────────────────────────────────── */
+
+.swap-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.swap-confirm-modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 1.25rem 1.5rem;
+  max-width: 300px;
+  width: 90%;
+}
+
+.swap-confirm-modal__msg {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.swap-confirm-modal__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
 
 .leader-selector {
   border-top: 1px solid var(--color-border);

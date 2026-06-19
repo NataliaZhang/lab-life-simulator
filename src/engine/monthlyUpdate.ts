@@ -1,4 +1,4 @@
-import type { GameState, LogEntry, Student, AdmissionState, QueuedEvent, EventCondition, ConditionOp, StudentStatKey } from '../types';
+import type { GameState, LogEntry, Student, AdmissionState, QueuedEvent, EventCondition, ConditionOp, StudentStatKey, StatChange } from '../types';
 import { formatTime } from '../types';
 import { events, monthlyEventPool, conditionalStudentEventPool, idleEventIds, specialEndingIds, timeEndingIds } from '../data/events';
 import { filterUnseen, filterTriggerable, pickRandomQueuedEvent } from './eventQueue';
@@ -65,7 +65,7 @@ function monthsElapsed(
   return (to.year - from.year) * 12 + (to.month - from.month);
 }
 
-const GAME_END_YEAR = 6;
+const GAME_END_YEAR = 7;
 const GAME_END_MONTH = 6;
 
 function clamp100(val: number): number {
@@ -110,18 +110,17 @@ function incrementTime(state: GameState): GameState {
   return { ...state, time: { year: year + 1, month: 1 } };
 }
 
-function buildMonthlySummary(state: GameState, energyGain: number, skillGains: SkillGain[], traitGains: string[]): LogEntry {
+function buildMonthlySummary(state: GameState, energyGain: number, skillGains: SkillGain[], traitGains: StatChange[]): LogEntry {
   const activeStudents = state.students.filter(s => s.status === 'active');
   const justGraduated = state.students.filter(s => s.status === 'graduated');
 
   let narrative = `资金 ${state.lab.funding}万 · 声望 ${state.lab.reputation} · 精力 ${state.lab.energy}。`;
 
-  // Gain tags displayed below the stats line, matching event settlement format
-  const gainTags: string[] = [];
-  if (energyGain > 0) gainTags.push(`精力+${energyGain}`);
-  for (const g of skillGains) gainTags.push(`${g.name}·${SKILL_LABELS[g.skill]}+${g.delta}`);
-  for (const t of traitGains) gainTags.push(t);
-  if (gainTags.length > 0) narrative += `\n\n${gainTags.join('  ')}`;
+  // Build StatChange pills (rendered as chips, not inline text)
+  const statChanges: StatChange[] = [];
+  if (energyGain > 0) statChanges.push({ label: '精力', delta: energyGain });
+  for (const g of skillGains) statChanges.push({ label: `${g.name}·${SKILL_LABELS[g.skill]}`, delta: g.delta });
+  statChanges.push(...traitGains);
 
   if (activeStudents.length > 0) {
     const lines = activeStudents
@@ -158,6 +157,7 @@ function buildMonthlySummary(state: GameState, energyGain: number, skillGains: S
     type: 'monthly',
     title: formatTime(state.time),
     narrative,
+    statChanges: statChanges.length > 0 ? statChanges : undefined,
   };
 }
 
@@ -212,11 +212,11 @@ function pickTimeEnding(state: GameState): string {
   const funding = state.lab.funding;
   const completed = state.completedProjects.length;
 
-  if (rep > 150 && graduated > 1)  return 'ending_time_famous';
-  if (funding > 100 && rep < 100)  return 'ending_time_wealthy';
-  if (rep > 100 && graduated > 1)  return 'ending_time_great';
-  if (rep > 75 && graduated >= 1)  return 'ending_time_steady';
-  if (rep < 50)                    return 'ending_be_rep_low';
+  if (rep > 200 && graduated > 2)  return 'ending_time_famous';
+  if (funding > 150 && rep < 150)  return 'ending_time_wealthy';
+  if (rep > 150 && graduated > 1)  return 'ending_time_great';
+  if (rep > 100 && graduated >= 1) return 'ending_time_steady';
+  if (rep < 80)                    return 'ending_be_rep_low';
   if (completed < 3)               return 'ending_be_proj_insufficient';
   return 'ending_time_struggle';
 }
@@ -236,6 +236,11 @@ function checkSpecialEnding(state: GameState, seenIds: Set<string>): string | nu
     return 'ending_all_students_left';
   }
 
+  // Priority 3: PI energy depleted 6+ times — forced medical leave, tenure fails
+  if (state.lab.energyDepletedCount >= 6 && !seenIds.has('ending_burnout_tenure')) {
+    return 'ending_burnout_tenure';
+  }
+
   return null;
 }
 
@@ -248,12 +253,12 @@ function checkSpecialEnding(state: GameState, seenIds: Set<string>): string | nu
 function applyTraitMonthlyEffects(
   state: GameState,
   moodChangesFromEvents: Record<string, number>,
-): { newState: GameState; traitGains: string[] } {
+): { newState: GameState; traitGains: StatChange[] } {
   const activeStudents = state.students.filter(s => s.status === 'active');
   let students = [...state.students];
   let lab = { ...state.lab };
   let activeProjects = [...state.activeProjects];
-  const traitGains: string[] = [];
+  const traitGains: StatChange[] = [];
 
   // Running mood change totals for this month (events + monthly effects)
   const moodChanges = { ...moodChangesFromEvents };
@@ -268,7 +273,7 @@ function applyTraitMonthlyEffects(
     // last_minute_genius: happiness < 50 → favor +2
     if (t.includes('last_minute_genius') && student.happiness < 50) {
       updateStudent(student.id, s => ({ ...s, favor: clamp100(s.favor + 2) }));
-      traitGains.push(`${student.name}·好感+2`);
+      traitGains.push({ label: `${student.name}·好感`, delta: 2 });
     }
 
     // sleep_learning: random skill +1
@@ -279,7 +284,7 @@ function applyTraitMonthlyEffects(
       updateStudent(student.id, s => ({
         ...s, skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 1) },
       }));
-      traitGains.push(`${student.name}·${NAMES[skill]}+1`);
+      traitGains.push({ label: `${student.name}·${NAMES[skill]}`, delta: 1 });
     }
 
     // weird_paper_collector: theory +1
@@ -287,7 +292,7 @@ function applyTraitMonthlyEffects(
       updateStudent(student.id, s => ({
         ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
       }));
-      traitGains.push(`${student.name}·理论+1`);
+      traitGains.push({ label: `${student.name}·理论`, delta: 1 });
     }
 
     // curiosity_overload: engineering +1, lab energy -1
@@ -296,7 +301,7 @@ function applyTraitMonthlyEffects(
         ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 1) },
       }));
       lab = { ...lab, energy: Math.max(0, lab.energy - 1) };
-      traitGains.push(`${student.name}·工程+1`);
+      traitGains.push({ label: `${student.name}·工程`, delta: 1 });
     }
 
     // research_brainstormer: flat -1 energy cost per month for boosted idea draw
@@ -312,7 +317,7 @@ function applyTraitMonthlyEffects(
         updateStudent(target.id, s => ({
           ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
         }));
-        traitGains.push(`${target.name}·理论+1`);
+        traitGains.push({ label: `${target.name}·理论`, delta: 1 });
       }
     }
 
@@ -322,11 +327,12 @@ function applyTraitMonthlyEffects(
       if (others.length > 0) {
         const target = others[Math.floor(Math.random() * others.length)]!;
         updateStudent(target.id, s => ({ ...s, favor: clamp100(s.favor + 1) }));
-        traitGains.push(`${target.name}·好感+1`);
+        traitGains.push({ label: `${target.name}·好感`, delta: 1 });
       }
     }
 
     // optimization_addict: random active project with leader → progress +1%
+    // Only shows if the project has a leader; label includes the leader's name.
     if (t.includes('optimization_addict')) {
       const eligible = activeProjects.filter(p => p.leaderId !== null);
       if (eligible.length > 0) {
@@ -337,7 +343,10 @@ function applyTraitMonthlyEffects(
             : p,
         );
         const projName = projectById[proj.projectId]?.name ?? proj.projectId;
-        traitGains.push(`《${projName}》进度+1%`);
+        const leaderName = proj.leaderId === 'pi'
+          ? 'PI'
+          : (students.find(s => s.id === proj.leaderId)?.name ?? proj.leaderId!);
+        traitGains.push({ label: `${leaderName}·《${projName}》进度`, delta: 1, suffix: '%' });
       }
     }
   }
@@ -349,7 +358,7 @@ function applyTraitMonthlyEffects(
       moodChanges[s.id] = (moodChanges[s.id] ?? 0) + 1;
     }
     const sunshineStudent = activeStudents.find(s => s.traitIds.includes('morale_sunshine'));
-    if (sunshineStudent) traitGains.push(`${sunshineStudent.name}效果·全员心情+1`);
+    if (sunshineStudent) traitGains.push({ label: `${sunshineStudent.name}效果·全员心情`, delta: 1 });
   }
 
   // fortune_engineer: if this student's happiness changed ≥3 times this month → engineering +2
@@ -359,7 +368,7 @@ function applyTraitMonthlyEffects(
         updateStudent(student.id, s => ({
           ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 2) },
         }));
-        traitGains.push(`${student.name}·工程+2`);
+        traitGains.push({ label: `${student.name}·工程`, delta: 2 });
       }
     }
   }
@@ -428,7 +437,13 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     const admissionCost = getAdmissionCost(next.time.year);
     if (candidates) {
       if (next.lab.funding >= admissionCost) {
-        admissionState = { candidates, round: 1 };
+        admissionState = {
+          candidates,
+          round: 1,
+          shownIds: [...candidates],
+          recruitedCount: 0,
+          hasRefreshed: false,
+        };
       } else {
         extraLogEntries.push({
           id: `no_funds_admission_y${next.time.year}`,
@@ -510,7 +525,19 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     stateAfterCounts.moodChangesThisMonth,
   );
 
-  const summaryEntry = buildMonthlySummary(stateAfterTraits, energyGain, skillGains, traitGains);
+  // Track how many times energy has been fully depleted this run.
+  const depletedThisMonth = stateAfterTraits.lab.energy === 0;
+  const stateWithDepletionTracked: GameState = depletedThisMonth
+    ? {
+        ...stateAfterTraits,
+        lab: {
+          ...stateAfterTraits.lab,
+          energyDepletedCount: stateAfterTraits.lab.energyDepletedCount + 1,
+        },
+      }
+    : stateAfterTraits;
+
+  const summaryEntry = buildMonthlySummary(stateWithDepletionTracked, energyGain, skillGains, traitGains);
 
   // Build the seen-event set (used for both daily pool and ending checks)
   const seenEventIds = new Set(
@@ -520,11 +547,11 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   );
 
   // ── Special ending check ─────────────────────────────────────────────────
-  const specialEndingId = checkSpecialEnding(stateAfterTraits, seenEventIds);
+  const specialEndingId = checkSpecialEnding(stateWithDepletionTracked, seenEventIds);
   if (specialEndingId) {
     // Skip daily events; prepend ending to queue (clear existing queue so it fires first)
     return {
-      ...stateAfterTraits,
+      ...stateWithDepletionTracked,
       admissionState,
       eventQueue: [{ id: specialEndingId }],
       storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
@@ -547,7 +574,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
   // Project system tutorial: show a low-bar idea event so new players discover the project panel
   if (next.time.year === 1 && next.time.month === 10 && !seenEventIds.has('idea_meeting_minutes_assistant')) {
-    const tutorialActiveStudents = stateAfterTraits.students.filter(s => s.status === 'active');
+    const tutorialActiveStudents = stateWithDepletionTracked.students.filter(s => s.status === 'active');
     const tutorialStudent = tutorialActiveStudents.length > 0
       ? tutorialActiveStudents[Math.floor(Math.random() * tutorialActiveStudents.length)]
       : null;
@@ -557,11 +584,18 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     });
   }
   if (next.time.year === 1 && next.time.month === 11 && !seenEventIds.has('semester_one_checkpoint')) {
-    tutorialEvents.push({ id: 'semester_one_checkpoint' });
+    const checkpointActiveStudents = stateWithDepletionTracked.students.filter(s => s.status === 'active');
+    const checkpointStudent = checkpointActiveStudents.length > 0
+      ? checkpointActiveStudents[Math.floor(Math.random() * checkpointActiveStudents.length)]
+      : null;
+    tutorialEvents.push({
+      id: 'semester_one_checkpoint',
+      ...(checkpointStudent ? { studentId: checkpointStudent.id } : {}),
+    });
   }
 
   // independent_meeting: 当在读人数首次达到3人时触发（任何时间）
-  const activeCount = stateAfterTraits.students.filter(s => s.status === 'active').length;
+  const activeCount = stateWithDepletionTracked.students.filter(s => s.status === 'active').length;
   if (activeCount >= 3 && !seenEventIds.has('independent_meeting')) {
     tutorialEvents.push({ id: 'independent_meeting' });
   }
@@ -570,10 +604,10 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   // 新手期（第1年9–11月）不抽随机事件；有教程事件时也无需补随机
   const skipRandom = isEarlyGame || tutorialEvents.length > 0;
   const unseenPool = filterUnseen(monthlyEventPool, seenEventIds);
-  const triggerablePool = filterTriggerable(unseenPool, stateAfterTraits);
+  const triggerablePool = filterTriggerable(unseenPool, stateWithDepletionTracked);
   // research_brainstormer: when any active student has this trait, idea events always draw (no filter).
   // Otherwise idea events are down-weighted to ~70% of normal draw rate.
-  const hasResearchBrainstormer = stateAfterTraits.students.some(
+  const hasResearchBrainstormer = stateWithDepletionTracked.students.some(
     s => s.status === 'active' && s.traitIds.includes('research_brainstormer'),
   );
   const IDEA_DRAW_CHANCE = hasResearchBrainstormer ? 1.0 : 0.7;
@@ -591,7 +625,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   // gpu_envy: Year 2 Month 1 — only if player never bought a server in startup_grant
   if (next.time.year === 2 && next.time.month === 1 && !seenEventIds.has('gpu_envy')
       && !next.chosenOptionIds.includes('buy_server')) {
-    const anyStudent = stateAfterTraits.students.find(s => s.status === 'active');
+    const anyStudent = stateWithDepletionTracked.students.find(s => s.status === 'active');
     if (anyStudent) {
       forcedEvents.push({ id: 'gpu_envy', studentId: anyStudent.id });
     }
@@ -624,9 +658,24 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
+  // pi burnout milestone events: inject directly the month the threshold is crossed.
+  // These must fire reliably, so they bypass the random daily pool.
+  if (depletedThisMonth) {
+    const burnoutCount = stateWithDepletionTracked.lab.energyDepletedCount;
+    const anyStudent = stateWithDepletionTracked.students.find(s => s.status === 'active');
+    if (anyStudent) {
+      if (burnoutCount === 3 && !seenEventIds.has('pi_third_burnout')) {
+        forcedEvents.push({ id: 'pi_third_burnout', studentId: anyStudent.id });
+      }
+      if (burnoutCount === 5 && seenEventIds.has('pi_third_burnout') && !seenEventIds.has('pi_fifth_burnout')) {
+        forcedEvents.push({ id: 'pi_fifth_burnout', studentId: anyStudent.id });
+      }
+    }
+  }
+
   // first_paper_submission: Year 1 Month 12 — first OWRC submission
   if (next.time.year === 1 && next.time.month === 12 && !seenEventIds.has('first_paper_submission')) {
-    const anyStudent = stateAfterTraits.students.find(s => s.status === 'active');
+    const anyStudent = stateWithDepletionTracked.students.find(s => s.status === 'active');
     if (anyStudent) {
       forcedEvents.push({ id: 'first_paper_submission', studentId: anyStudent.id });
     }
@@ -634,7 +683,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // reviewer_two: Year 2 Month 2 — OWRC reviews arrive
   if (next.time.year === 2 && next.time.month === 2 && !seenEventIds.has('reviewer_two')) {
-    const anyStudent = stateAfterTraits.students.find(s => s.status === 'active');
+    const anyStudent = stateWithDepletionTracked.students.find(s => s.status === 'active');
     if (anyStudent) {
       forcedEvents.push({ id: 'reviewer_two', studentId: anyStudent.id });
     }
@@ -642,15 +691,36 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // lab_birthday: Year 2 Month 8
   if (next.time.year === 2 && next.time.month === 8 && !seenEventIds.has('lab_birthday')) {
-    const firstStudent = stateAfterTraits.students.find(s => s.status === 'active');
+    const firstStudent = stateWithDepletionTracked.students.find(s => s.status === 'active');
     if (firstStudent) {
       forcedEvents.push({ id: 'lab_birthday', studentId: firstStudent.id });
     }
   }
 
+  // midterm_review: Year 3 October — conditional sequence based on current lab state
+  if (next.time.year === 3 && next.time.month === 10 && !seenEventIds.has('midterm_review_open')) {
+    const activeStudents = stateWithDepletionTracked.students.filter(s => s.status === 'active');
+    const completedCount = stateWithDepletionTracked.completedProjects.length;
+    const { reputation, funding } = stateWithDepletionTracked.lab;
+
+    const sequence: string[] = ['midterm_review_open'];
+    if (completedCount === 0)       sequence.push('midterm_review_no_projects');
+    else if (completedCount <= 2)   sequence.push('midterm_review_few_projects');
+    if (activeStudents.length <= 1) sequence.push('midterm_review_low_students');
+    if (reputation < 40)            sequence.push('midterm_review_low_rep');
+    if (funding < 10)               sequence.push('midterm_review_low_funding');
+    if (completedCount >= 3 && activeStudents.length >= 2 && reputation >= 40 && funding >= 10)
+      sequence.push('midterm_review_positive');
+    sequence.push('midterm_review_close');
+
+    for (const eid of sequence) {
+      if (events[eid]) forcedEvents.push({ id: eid });
+    }
+  }
+
   // graduation_check series: injected in June based on enrolledAt + 3/4/5
   if (next.time.month === 6) {
-    for (const student of stateAfterTraits.students.filter(s => s.status === 'active')) {
+    for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'active')) {
       const ext = next.graduationExtensions[student.id] ?? 0;
       const base = student.enrolledAt + 3;
       if (ext === 0 && next.time.year === base && !next.graduationChecksSeen.includes(student.id)) {
@@ -664,7 +734,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   // Half-favor special events: one per student, triggers when favor first reaches 50
-  for (const student of stateAfterTraits.students.filter(s => s.status === 'active')) {
+  for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'active')) {
     if (student.favor >= 50) {
     // if (student.favor >= 5) { // test mode
       const eventId = `half_favor_${student.id}`;
@@ -676,7 +746,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   // Max-favor special events: one per student, triggers when favor first reaches 100
-  for (const student of stateAfterTraits.students.filter(s => s.status === 'active')) {
+  for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'active')) {
     if (student.favor >= 100) {
     // if (student.favor >= 10) { // test mode
       const eventId = `max_favor_${student.id}`;
@@ -687,13 +757,14 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
-  // Alumni visits: inject exactly 3 months after graduation.
+  // Alumni visits: inject exactly 6 months after graduation, only if favor >= 50.
   // filterTriggerable cannot handle this (requires active status), so we inject directly.
-  for (const student of stateAfterTraits.students.filter(s => s.status === 'graduated')) {
+  for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'graduated')) {
     const eventId = STUDENT_ALUMNI_EVENT_IDS[student.id];
     if (!eventId || !events[eventId]) continue;
     if (!student.graduatedAt) continue;
-    if (monthsElapsed(student.graduatedAt, next.time) < 3) continue;
+    if (monthsElapsed(student.graduatedAt, next.time) < 6) continue;
+    if (student.favor < 50) continue;
     const alreadyQueued = next.eventQueue.some(e => e.id === eventId);
     if (!seenEventIds.has(eventId) && !alreadyQueued) {
       forcedEvents.push({ id: eventId, studentId: student.id });
@@ -712,7 +783,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // Pass 1: happiness = 0 → immediate forced departure (highest priority).
   const crisisStudentIds = new Set<string>();
-  for (const student of stateAfterTraits.students.filter(s => s.status === 'active')) {
+  for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'active')) {
     if (student.happiness <= 0) {
       crisisStudentIds.add(student.id);
       const alreadyQueued = next.eventQueue.some(
@@ -725,7 +796,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   // Pass 2: pick at most one conditional event for one non-crisis student.
-  const eligibleStudents = stateAfterTraits.students
+  const eligibleStudents = stateWithDepletionTracked.students
     .filter(s => s.status === 'active' && !crisisStudentIds.has(s.id))
     .sort(() => Math.random() - 0.5); // randomise priority
 
@@ -781,7 +852,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   return {
-    ...stateAfterTraits,
+    ...stateWithDepletionTracked,
     admissionState,
     eventQueue: newQueue,
     studentConditionalLog: updatedConditionalLog,

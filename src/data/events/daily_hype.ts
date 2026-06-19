@@ -469,33 +469,31 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你问了三个问题：代码里的核心算法逻辑你能不能解释清楚？实验结果你能复现吗？如果审稿人问到实现细节你怎么回答？{studentName}突然开始刷手机，又放下，皱眉看着桌面，说"核心逻辑我理解，但有几个模块确实是黑盒"。你们花了一下午把那几个黑盒打开，有一处有个细微的错误，不影响结论，但值得注意。边界定清楚了：工具可以用，但不能不理解。',
+            narrative: '你问了三个问题：代码里的核心算法逻辑你能不能解释清楚？实验结果你能复现吗？如果审稿人问到实现细节你怎么回答？\n\n{studentName}听着听着开始刷手机，又放下皱眉看着桌面，说"核心逻辑我理解，但有几个模块确实是黑盒"。你们花了一下午把那几个黑盒打开，有一处有个细微的错误，不影响结论，但值得注意。边界定清楚了：工具可以用，但不能不理解。',
             effects: [
-              { type: 'randomStudent', stat: 'skills.engineering', delta: 8 },
+              { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
               { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
               { type: 'randomStudent', stat: 'favor', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '你认真讨论了边界和规范，{studentName}认真听完，表示理解。但你注意到，讨论结束后{studentName}补充说："所以没有违规，对吧？" 你说对。{studentName}立刻打开了Claude，开始描述下一个模块的需求。有些对话的落点，和你预期的不一样。',
+            narrative: '你认真讨论了边界和规范，{studentName}认真听完，表示理解。但你注意到，讨论结束后{studentName}补充说："所以没有违规，对吧？" 你说对。\n\n{studentName}立刻打开了Claude，开始描述下一个模块的需求。有些对话的落点，和你预期的不一样。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 5 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: -8 },
             ],
           },
         ],
       },
       {
         id: 'embrace_productivity',
-        text: '先把结果搞清楚，工具效率高就好',
+        text: '工具效率高就好',
         outcomes: [
           {
             weight: 1,
             narrative: '你说结果不错就先往下走，但要求{studentName}能够解释每个关键模块。{studentName}点头，补充说："我已经全部能讲了，就是写起来太烦，让AI帮我写了"。你意识到你们讨论的根本不是同一个问题——你以为是理解，{studentName}以为是键盘操作。生产力提升了，这个认知差距不知道算不算代价。',
             effects: [
-              { type: 'randomStudent', stat: 'projectProgress', delta: 8 },
               { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 2 },
             ],
@@ -505,7 +503,8 @@ export const hypeEvents: Record<string, GameEvent> = {
             narrative: '你表示工具没问题，先看结果。结果是好的。但三周后在组会上，你让{studentName}解释某个数据增强模块的设计选择，{studentName}愣了一下，迅速拿起手机假装看什么，放下，又拿起来，最后说"……我查一下"。你没说什么，但你在心里记了一笔：下次要提前问。',
             effects: [
               { type: 'randomStudent', stat: 'projectProgress', delta: 8 },
-              { type: 'randomStudent', stat: 'skills.theory', delta: -3 },
+              { type: 'randomStudent', stat: 'favor', delta: -5 },
+              { type: 'randomStudent', stat: 'happiness', delta: -5 },
             ],
           },
         ],
@@ -519,7 +518,7 @@ export const hypeEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你和{studentName}一起，用两天时间把三千行代码过了一遍，单元测试、边界case、数值稳定性全部检查了一遍。发现了两处潜在问题，一处无关紧要，一处如果数据量再大十倍会导致内存溢出。结论：代码质量出乎意料地好，但那个内存问题早发现早好。{studentName}说："AI写代码比我写的还规范。"你没有接话。',
             effects: [
-              { type: 'randomStudent', stat: 'skills.engineering', delta: 10 },
+              { type: 'randomStudent', stat: 'skills.engineering', delta: 8 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 5 },
               { type: 'randomStudent', stat: 'favor', delta: 6 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -529,9 +528,8 @@ export const hypeEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你仔细审查了代码，发现核心逻辑里有一处数学计算用了近似算法，在{studentName}的数据集上恰好表现良好，但换一批数据会系统性地偏差。神秘的好结果有了解释：实验设置和代码缺陷恰好相互掩盖。你把这个发现告诉{studentName}，两个人面对面坐着，一起看着那个数字，想着接下来要重新做的实验。',
             effects: [
-              { type: 'randomStudent', stat: 'skills.engineering', delta: 8 },
+              { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },
               { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
-              { type: 'randomStudent', stat: 'happiness', delta: -10 },
               { type: 'randomStudent', stat: 'projectProgress', delta: -5 },
             ],
           },
@@ -700,7 +698,6 @@ export const hypeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'skills.theory', delta: 7 },
               { type: 'allStudents', stat: 'happiness', delta: 3 },
-              { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },
         ],

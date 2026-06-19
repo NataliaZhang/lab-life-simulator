@@ -223,7 +223,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"睡了一下，" 她说，然后拿笔改一个字。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
+            narrative: '"睡了一下，" 她说，然后拿笔改了一处。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -255,7 +255,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_code_quality',
     title: '那份没有注释的代码',
     description: [
-      '顾眠眠提交了一个 PR。你打开一看：三百行，注释栏只有七个字："功能见变量名。"',
+      '顾眠眠提交了一个 PR。你打开一看：三百行，注释栏只有一行："功能见变量名。"',
       '但变量名确实见功能。`stale_grad_accumulator`、`fence_before_sync`、`shadow_buffer_offset`，每个名字都精确到不需要解释，函数拆分干净，边界条件处理完整，逻辑一眼读到底，像一本没有页码也能翻的书。',
       '提交时间戳：昨天凌晨一点半。昨天上午组会她一直闭着眼睛，你以为她不在状态。',
     ],
@@ -446,9 +446,10 @@ export const guMianmianEvents: Record<string, GameEvent> = {
   gmm_alumni_visit: {
     id: 'gmm_alumni_visit',
     title: '凌晨四点的合作邀请',
+    triggerConditions: [{ type: 'studentStatus', studentId: 'gu_mianmian', status: 'graduated' }],
     description: [
-      '毕业过去半年了。你偶尔在期刊上看到顾眠眠的名字，频率比你预期高，都是第一作者。有人跟你说，她在那个研究院同样以睡觉闻名，组里没有人确定她什么时候是醒的，原来这不是实验室的特色，是她自带的属性。',
-      '今天早上你打开邮件，看到她发来的一封信，主题是"合作邀请：仪器共享与联合建模方案"。邮件写得完整，有具体方案，有时间节点，有预期产出，CC了三个恰好合适的人，一个字都不多余。',
+      '毕业过去半年了。你偶尔在期刊上看到顾眠眠的名字，频率比你预期高，都是第一作者。有人跟你说，她在那个研究院同样以睡觉闻名，组里没有人确定她什么时候是醒的，唯一确定的是，成果会主动出现。',
+      '今天早上你打开邮件，看到她发来的一封信，主题是"合作邀请：仪器共享与联合建模方案"。邮件写得完整，有具体方案，有时间节点，有预期产出，CC了三个恰好合适的人。',
       '时间戳是今天凌晨四点零三分。正文最后一句话是："老师，如果方便的话回一下，我不急，我现在可能在睡。"',
     ],
     prompt: '你选择：',
@@ -459,26 +460,23 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发出回复，抄送相关人员。下午两点，她回了一个字："好。" 然后三小时音讯全无。傍晚七点，一份修订后的合作协议草稿出现在收件箱，格式完整，条款清晰，最后附了一行小字："我睡醒了把方案细化了一下。" 你决定，以后跟她确认合作事项，都等傍晚，等她睡醒。',
+            narrative: '你发出回复，抄送相关人员。结果大半天音讯全无，直到傍晚，一份修订后的合作协议草稿出现在收件箱，格式完整，条款清晰，最后附了一行小字：”我睡醒了把方案细化了一下。” \n\n你决定，以后如果有急事找她，不要发”尽快回复”。直接发”睡醒回我”。',
             effects: [
-              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'lab', stat: 'reputation', delta: 5 },
-              { type: 'lab', stat: 'funding', delta: 5 },
+              { type: 'lab', stat: 'funding', delta: 15 },
             ],
           },
         ],
       },
       {
         id: 'gmm_alumni_reply_friendly',
-        text: '先聊聊，问问她现在怎么样',
+        text: '先问问她近况',
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封比较随意的回信，问她近况。她过了好几个小时才回复："挺好的，发了三篇。那边的沙发比咱们走廊那个软多了。老师，你们那个沙发换了没？" 你去走廊看了一眼，没换，还是那张，落了薄薄一层灰。你站在那儿待了一会儿，没有说什么，回去了。',
+            narrative: '你写了一封比较随意的回信，问她近况。她过了好几个小时才回复：”挺好的，目前发了三篇。那边的沙发比咱们走廊那个软多了。老师，我们那个沙发换了没？”\n\n 你去走廊看了一眼，没换，还是那张，只是那个会趴上去睡觉的女孩走了后，已经落了薄薄一层灰。\n\n你发消息说还在，她就回了一个开心的表情，好像知道这个就足够了。',
             effects: [
-              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
-              { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 8 },
-              { type: 'lab', stat: 'reputation', delta: 4 },
+              { type: 'lab', stat: 'reputation', delta: 8 },
             ],
           },
         ],

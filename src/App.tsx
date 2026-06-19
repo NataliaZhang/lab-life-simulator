@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
 import { useAudioTriggers } from './hooks/useAudioTriggers';
 import { audioManager } from './engine/audioManager';
@@ -99,6 +99,7 @@ export function App() {
     admitStudent,
     passAdmission,
     continueRecruiting,
+    refreshCandidates,
     newGame,
     deleteSaveAndRestart,
     closeModal,
@@ -129,6 +130,18 @@ export function App() {
 
   const isGameOver = state.phase !== 'playing';
   const endingEvent = state.endingEventId ? events[state.endingEventId] : null;
+
+  // Defer EndingModal until the player explicitly clicks through after game-over.
+  // Initialise to true when loading a save that's already finished (so modal shows immediately).
+  const [endingConfirmed, setEndingConfirmed] = useState(() => state.phase !== 'playing');
+  const prevIsGameOver = useRef(state.phase !== 'playing');
+  useEffect(() => {
+    if (isGameOver && !prevIsGameOver.current) {
+      // Just transitioned to game-over this render — let player read narrative first.
+      setEndingConfirmed(false);
+    }
+    prevIsGameOver.current = isGameOver;
+  }, [isGameOver]);
 
   // Wrap chooseOption to play click SFX before dispatching.
   const handleChoose = (eventId: string, optionId: string) => {
@@ -187,6 +200,18 @@ export function App() {
         </div>
       )}
 
+      {/* After game-over: let player read the outcome narrative before EndingModal appears */}
+      {isGameOver && !endingConfirmed && (
+        <div className="bottom-bar">
+          <button
+            className="btn btn--primary btn--bottom"
+            onClick={() => { audioManager.playSfx('click'); setEndingConfirmed(true); }}
+          >
+            继续
+          </button>
+        </div>
+      )}
+
       {projectPanelOpen && (
         <ProjectsPanel
           state={state}
@@ -195,7 +220,7 @@ export function App() {
         />
       )}
 
-      {isGameOver && endingEvent && (
+      {isGameOver && endingEvent && endingConfirmed && (
         <EndingModal
           endingTitle={endingEvent.title}
           tagline={endingEvent.tagline ?? ''}
@@ -227,9 +252,13 @@ export function App() {
           admissionState={state.admissionState}
           lab={state.lab}
           gameYear={state.time.year}
+          unshownPoolCount={state.studentPool.filter(
+            id => !(state.admissionState?.shownIds ?? []).includes(id),
+          ).length}
           onAdmit={admitStudent}
           onPass={passAdmission}
           onContinue={continueRecruiting}
+          onRefresh={refreshCandidates}
         />
       )}
 
