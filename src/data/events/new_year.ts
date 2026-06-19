@@ -86,10 +86,10 @@ export const newYearEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gift_xie_zhiwei',
-        text: '谢知微（花2万）',
+        text: '谢之微（花2万）',
         fundingCost: 2,
         requireStudentActive: 'xie_zhiwei',
-        outcomes: [{ weight: 1, narrative: '礼物包装成红色礼盒，悄悄放在了谢知微的工位上。', nextEventIds: ['new_year_gift_result_xie_zhiwei'] }],
+        outcomes: [{ weight: 1, narrative: '礼物包装成红色礼盒，悄悄放在了谢之微的工位上。', nextEventIds: ['new_year_gift_result_xie_zhiwei'] }],
       },
       {
         id: 'no_gift',
@@ -391,13 +391,13 @@ export const newYearEvents: Record<string, GameEvent> = {
     tags: ['chain'],
   },
 
-  // ── 链式反应：谢知微 ──────────────────────────────────────────────────────
+  // ── 链式反应：谢之微 ──────────────────────────────────────────────────────
 
   new_year_gift_result_xie_zhiwei: {
     id: 'new_year_gift_result_xie_zhiwei',
-    title: '谢知微的反应',
-    description: ['谢知微看见礼盒的时候，正在拆一台不知道哪里搬来的主机。'],
-    prompt: '谢知微的反应是……',
+    title: '谢之微的反应',
+    description: ['谢之微看见礼盒的时候，正在拆一台不知道哪里搬来的主机。'],
+    prompt: '谢之微的反应是……',
     options: [{
       id: 'ack',
       text: '观察',
@@ -412,7 +412,7 @@ export const newYearEvents: Record<string, GameEvent> = {
         },
         {
           weight: 1,
-          narrative: '谢知微点了点头，把礼盒放到桌上，继续工作了——但特意把礼盒挪到了她视线最好的地方。\n\n两天后，实验室那个一直松动的门把手被修好了。走廊换气扇的异响消失了。你不记得什么时候开始有那个响声，但它确实不见了。\n\n她没有提这件事。',
+          narrative: '谢之微点了点头，把礼盒放到桌上，继续工作了——但特意把礼盒挪到了她视线最好的地方。\n\n两天后，实验室那个一直松动的门把手被修好了。走廊换气扇的异响消失了。你不记得什么时候开始有那个响声，但它确实不见了。\n\n她没有提这件事。',
           effects: [
             { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
             { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },

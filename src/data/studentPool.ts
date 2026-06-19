@@ -222,7 +222,7 @@ export const allCandidates: StudentCandidate[] = [
 
   {
     id: 'xie_zhiwei',
-    name: '谢知微',
+    name: '谢之微',
     pronoun: '她',
     tagline: '我就看看，不会动的。',
     bio: '从小拆光了家里所有电器，长大后开始拆代码。总想看看设备是怎么工作的，系统是怎么跑起来的。至于看完之后会不会顺手改点什么，那就是另一回事了。',
@@ -233,7 +233,7 @@ export const allCandidates: StudentCandidate[] = [
     baseHappiness: 54,
   },
 
-  // 【谢知微 隐藏人设】
+  // 【谢之微 隐藏人设】
   // 核心标签：代码体质、优化狂魔、技术事故制造机
   // 性格：好奇、专注、行动力极强，对技术问题有近乎本能的兴趣。
   // 行为模式：看到任何系统都会忍不住研究内部结构。看到低效代码会浑身难受。看到重复代码会想重构。

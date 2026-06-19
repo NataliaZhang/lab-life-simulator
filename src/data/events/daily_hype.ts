@@ -28,7 +28,7 @@ export const hypeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你们花了整整一个下午逐模块分析。讨论到第三个模块时，{studentName}自己开始在图上打叉——"这个不行，延迟太高"，"这个不行，determinism没法保证"，"这个……好像还行"。最后留下了两个合理的LLM接入点，其余模块回归传统方案。{studentName}重新画了一张图，比原来好了很多。你心想：第十七次终于有了点结果。',
+            narrative: '你们花了整整一个下午逐模块分析。讨论到第三个模块时，{studentName}自己开始在图上打叉——"这个不行，延迟太高"，"这个不行，determinism没法保证"，"这个……好像还行"。最后留下了两个合理的LLM接入点，其余模块回归传统方案。\n\n{studentName}重新画了一张图，比原来好了很多。你心想：第十七次终于有了点结果。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 6 },
               { type: 'randomStudent', stat: 'projectProgress', delta: 5 },
@@ -49,7 +49,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'explain_why_not',
-        text: '直接解释为什么不行',
+        text: '科学解释为什么不行',
         outcomes: [
           {
             weight: 2,
@@ -71,7 +71,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'let_them_try',
-        text: '放手让他们跑一个原型（混乱模式）',
+        text: '放手让他们跑一个原型',
         fundingCost: 3,
         outcomes: [
           {

@@ -163,7 +163,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     name: '代码考古学',
     description: '从历史提交记录中重建失传系统设计。',
     completionSummary: '从 134 个无文档遗留仓库中成功重建设计意图，准确率 71%，其中 12 个项目的原作者已无法联系确认。',
-    ideaSources: ['祖传仓库事件', '神秘进程事件', '谢知微事件'],
+    ideaSources: ['祖传仓库事件', '神秘进程事件', '谢之微事件'],
     startupEnergyCost: 15,
     startupFundingCost: 8,
     theoryRequired: 0,

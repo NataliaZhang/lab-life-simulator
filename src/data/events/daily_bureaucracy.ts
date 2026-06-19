@@ -89,7 +89,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     id: 'bureau_submission_portal_dies',
     title: '投稿系统崩了',
     description: [
-      '11:45pm。截稿是午夜。论文已经准备好了，你打开投稿系统，页面转了大概三秒，然后显示了一个HTTP 503。你刷新。503。再刷新。503。官方Twitter上有条三分钟前发的推文："We are aware of the issue and working to resolve it."',
+      '11:45pm。截稿是午夜。论文已经准备好了，你打开投稿系统，页面转了大概三秒，然后显示了一个HTTP 503。你刷新。503。再刷新。503。官方推特上有条三分钟前发的推文："We are aware of the issue and working to resolve it."',
       '你打开学术推特，发现一千四百个人正在经历同样的事，其中有一位大佬用了全大写，还有人在实时更新刷新次数。这是一种奇特的集体行动：所有人同时、单独地、无效地刷新着同一个页面。',
     ],
     prompt: '投稿系统崩了，还有十五分钟，你：',
@@ -108,7 +108,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '系统在午夜前三分钟恢复了，但你因为长时间刷新导致浏览器缓存出问题，上传时文件校验失败，重新上传时超时。截稿。你在Twitter上看到有人成功提交的庆祝，感到了一种深入骨髓的孤独。',
+            narrative: '系统在午夜前三分钟恢复了，但你因为长时间刷新导致浏览器缓存出问题，上传时文件校验失败，重新上传时超时。截稿。你在推特上看到有人成功提交的庆祝，感到了一种深入骨髓的孤独。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -843,9 +843,9 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你站在那个蛋糕前面，看了一眼在场的所有人，说了大概五分钟的话。你讲了第一年的艰难，讲了某次差点没过的中期评审，讲了那个现在已经离开的学生，说他当年把学习率设成1.0，然后后来拿了最佳论文。你说不知道接下来五年会怎样，但你知道这里做的事情是有意义的。{studentName}递给你第一块蛋糕，上面有个糖霜写的"5"，歪的。你吃掉了它。',
+            narrative: '你站在那个蛋糕前面，看了一眼在场的所有人，说了大概五分钟的话。\n\n你讲了第一年的艰难，讲了某次差点没过的中期评审。你说不知道接下来五年会怎样，但你知道这里做的事情是有意义的。\n\n{studentName}递给你第一块蛋糕，上面有个糖霜写的"5"，歪的。你吃掉了它。',
             effects: [
-              { type: 'allStudents', stat: 'favor', delta: 15 },
+              { type: 'allStudents', stat: 'favor', delta: 10 },
               { type: 'allStudents', stat: 'happiness', delta: 15 },
               { type: 'lab', stat: 'reputation', delta: 5 },
             ],
@@ -858,10 +858,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: 'PPT播到第七张，是某次全组第一次有论文被顶会接收的截图，那天组里所有人在群里一起等结果，通知来的时候是凌晨两点，你发了一个平时从不用的大表情包。你看着那个表情包出现在投影上，感到眼眶有点热，然后假装在检查一下手机。{studentName}假装没看见，非常配合地在这个时间点开始切蛋糕，制造出了足够多的声响。门带上的一瞬间，你隐约听到走廊里有人用力呼了口气。',
+            narrative: 'PPT播到第七张，是某次全组第一次有论文被顶会接收的截图，那天组里所有人在群里一起等结果，通知来的时候是凌晨两点，你发了一个平时从不用的大表情包。你看着那个表情包出现在投影上，感到眼眶有点热，然后假装在检查一下手机。\n\n{studentName}假装没看见，非常配合地在这个时间点开始切蛋糕，制造出了足够多的声响。门带上的一瞬间，你隐约听到走廊里有人用力呼了口气。',
             effects: [
-              { type: 'allStudents', stat: 'favor', delta: 20 },
-              { type: 'allStudents', stat: 'happiness', delta: 12 },
+              { type: 'allStudents', stat: 'favor', delta: 10 },
+              { type: 'allStudents', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'reputation', delta: 3 },
             ],
           },
@@ -873,11 +873,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你看了眼蛋糕，看了眼大家，说："谢谢，吃完接着干，截稿还有十天。" 全场愣了一秒，然后{studentName}笑出了声，接着所有人都笑了，那种笑是真实的，不带任何敷衍，因为这句话太像你了，真实到有点好笑，又有点让人安心。蛋糕吃完了，大家回到工位，但那天下午实验室里有一种说不清楚的轻盈。',
+            narrative: '你看了眼蛋糕，说："谢谢大家。吃完继续工作。"实验室里立刻爆发出一小阵欢呼。\n\n你愣了一下，有一瞬间怀疑自己把学生push得精神失常了。后来才知道，他们昨天晚上私下打赌，赌你会不会在庆祝会上立刻提工作。果然，赔率最低的选项赢了。',
             effects: [
-              { type: 'allStudents', stat: 'favor', delta: 12 },
-              { type: 'allStudents', stat: 'happiness', delta: 18 },
-              { type: 'allStudents', stat: 'projectProgress', delta: 3 },
+              { type: 'allStudents', stat: 'happiness', delta: 10 },
+              { type: 'allStudents', stat: 'projectProgress', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 4 },
             ],
           },

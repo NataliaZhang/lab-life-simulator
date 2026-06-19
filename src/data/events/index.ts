@@ -311,7 +311,7 @@ export const monthlyEventPool: string[] = [
   'mwx_industry_poach',
   'mwx_alumni_visit',
 
-  // 学生专属事件 — 谢知微（xzw_first_meeting 由录取时直接注入）
+  // 学生专属事件 — 谢之微（xzw_first_meeting 由录取时直接注入）
   'xzw_just_look',
   'xzw_accidentally_broke',
   'xzw_elegant_solution',

@@ -390,7 +390,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
     tags: ['half_favor'],
   },
 
- // ── 谢知微 ────────────────────────────────────────────────────────────────
+ // ── 谢之微 ────────────────────────────────────────────────────────────────
 half_favor_xie_zhiwei: {
   id: 'half_favor_xie_zhiwei',
   title: '打印机好了',
