@@ -85,7 +85,7 @@ export const dailyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'stay_up_together',
-        text: '陪对方一起推（消耗精力）',
+        text: '陪对方一起推',
         energyCost: 20,
         outcomes: [{
           weight: 1,
@@ -319,7 +319,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         text: '认真讨论模型',
         outcomes: [{
           weight: 1,
-          narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。\n\n💡 获得灵感：**PI邮件响应延迟的多智能体博弈模型** —— 已记录到项目面板。',
+          narrative: '你们花了半小时认真讨论"导师已读不回行为动力学模型"。\n\n讨论到最后，{studentName}提出可以把它扩展成"PI邮件响应延迟的多智能体博弈模型"。\n\n你本能地觉得这很荒谬。但又隐约觉得能投一个Workshop。\n\n💡 获得灵感：「PI邮件响应延迟的多智能体博弈模型」 —— 已记录到项目面板。',
           effects: [
             { type: 'randomStudent', stat: 'favor', delta: 5 },
             { type: 'randomStudent', stat: 'skills.theory', delta: 3 },

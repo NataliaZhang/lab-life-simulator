@@ -239,11 +239,11 @@ export const halfFavorEvents: Record<string, GameEvent> = {
         text: '你刚才说的那个选址方案，细化一下？',
         outcomes: [{
           weight: 1,
-          narrative: '{studentName}面无表情地打开手机，片刻后向你展示了一个表格，列了附近十二家餐厅，标注了人均价格、距离、等位时间和组内已知偏好匹配度。「我有时候会顺手建这个，」他说，语气一本正经，「只是顺手。」你问顺手有多久了，他说大概一年。整个实验室的午饭开销，可能从未如此被认真对待过。',
+          narrative: '{studentName}打开手机，片刻后向你展示了一个表格，列了附近十二家餐厅，标注了人均价格、距离、等位时间和组内已知偏好匹配度。\n\n「我有时候会顺手建这个，」他说，语气轻快，「只是顺手。」你问顺手有多久了，他说大概一年。整个实验室的午饭开销，可能从未如此被认真对待过。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 1 },
             { type: 'randomStudent', stat: 'happiness', delta: 12 },
-            { type: 'randomStudent', stat: 'favor', delta: 11 },
+            { type: 'randomStudent', stat: 'favor', delta: 8 },
             { type: 'randomStudent', stat: 'skills.social', delta: 3 },
           ],
         }],
@@ -256,7 +256,7 @@ export const halfFavorEvents: Record<string, GameEvent> = {
           narrative: '{studentName}深吸一口气，点了点头，「好。」打开外卖app，选了三家，截图发群里，附一句「大家投票」。你以为这就结束了。五分钟后他发来一条：「以及，从数据看，我们应该每三周吃一次，间隔不规律会导致期待值下降。」后面跟了个括号：（仅供参考，非强制）。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
-            { type: 'randomStudent', stat: 'favor', delta: 12 },
+            { type: 'randomStudent', stat: 'favor', delta: 2 },
           ],
         }],
       },

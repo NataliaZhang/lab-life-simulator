@@ -225,7 +225,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '"睡了一下，" 她说，然后拿笔改了一处。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
             effects: [
-              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 2 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
             ],
           },

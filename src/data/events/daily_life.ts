@@ -71,7 +71,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'remote_week',
-        text: '全员远程，眼不见心不烦（消耗精力）',
+        text: '全员远程，眼不见心不烦',
         energyCost: 15,
         outcomes: [
           {
@@ -819,7 +819,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: -10 },
             ],
-            nextEventIds: ['goose_leg_investigation'],
+            nextMonthEventIds: ['goose_leg_investigation'],
           },
         ],
       },
@@ -844,7 +844,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           {
             weight: 1,
             narrative: '检测报告显示，送检样品确认为鹅腿，各项指标均在正常范围内，摊主完全清白，获准即日复业。\n\n论坛随即出现了一个置顶帖：《向寒风中依然坚持营业的鹅腿摊主道歉》，阅读量以肉眼可见的速度往上涨。评论区一边倒地声讨无良举报者，幸好你暂时身份没被曝光。不过这也够把你吓得半天看不进论文了。',
-            nextEventIds: ['goose_leg_apologize'],
+            nextMonthEventIds: ['goose_leg_apologize'],
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
             ],

@@ -885,14 +885,15 @@ export const mainlineEvents: Record<string, GameEvent> = {
 
   },
 
-  // ── 时间锚定：第3年10月，由 monthlyUpdate 按条件注入序列 ─────────────────
+  // ── 时间锚定：第4年10月，由 monthlyUpdate 按条件注入序列 ─────────────────
 // 按条件注入的事件 ID：
 //   midterm_review_open       — 必出，开场
 //   midterm_review_no_projects  — 0个已完成项目
 //   midterm_review_few_projects — 1-2个已完成项目
-//   midterm_review_low_students — 在读学生≤1
-//   midterm_review_low_rep      — 声望<40
-//   midterm_review_low_funding  — 经费<10
+//   midterm_review_low_students — 在读学生≤2
+//   midterm_review_low_rep      — 声望<50
+//   midterm_review_low_funding  — 经费<20
+//   midterm_review_low_energy   - 精力<20
 //   midterm_review_positive     — 以上均无问题时
 //   midterm_review_close      — 必出，收尾
 
@@ -900,7 +901,7 @@ midterm_review_open: {
   id: 'midterm_review_open',
   title: '中期评估',
   description: [
-    '第三年十月。你收到系主任邮件的时候，心里咯噔了一下。主题只有几个字：中期评估。',
+    '第四年十月。你收到系主任邮件的时候，心里咯噔了一下。主题只有几个字：中期评估。',
     '你早知道会有这一天，但真正走到他办公室门口时，还是忍不住开始回忆过去三年自己到底干了些什么。这个问题平时不想还好，一想就很具体。',
     '系主任看见你，抬手招了招。"进来吧。别紧张。"他看了一眼桌上的材料，又补了一句，"当然，我知道这句话一般没什么用。"',
   ],
@@ -988,6 +989,23 @@ midterm_review_low_funding: {
     id: 'acknowledge',
     text: '记下了',
     outcomes: [{ weight: 1, narrative: '你点头。经费这件事平时像影响学术纯洁性的背景噪音，今天忽然变成了主旋律。' }],
+  }],
+  tags: ['mainline'],
+},
+
+midterm_review_low_energy: {
+  id: 'midterm_review_low_energy',
+  title: '中期评估·状态',
+  description: [
+    '系主任翻着材料，忽然抬头看了你一眼。',
+    '"最近挺累吧？精神状态不够好？"',
+    '你刚想开口，他已经摆了摆手。"我从你的脸色就看出来了。"',
+    '"别硬撑。Tenure很重要，但活着拿到Tenure更重要。后面还有三年，别把自己先折腾坏了。"'
+  ],
+  options: [{
+    id: 'acknowledge',
+    text: '我会注意的',
+    outcomes: [{ weight: 1, narrative: '你答应得很快，至于能坚持多久，就是另一个问题了。' }],
   }],
   tags: ['mainline'],
 },

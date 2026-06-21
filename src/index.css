@@ -365,6 +365,28 @@ html, body {
   gap: 6px;
 }
 
+/* Wrapper that places choice+narrative on the left and portrait on the right */
+.log-entry__body-with-portrait {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.log-entry__body-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.log-entry__student-portrait {
+  flex-shrink: 0;
+  width: 80px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
 .log-entry__narrative p {
   font-family: var(--font-serif);
   font-size: var(--content-font-size);

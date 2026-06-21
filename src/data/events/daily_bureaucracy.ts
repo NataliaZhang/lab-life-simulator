@@ -26,7 +26,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'reformat_marathon',
-        text: '通宵重新排版（消耗精力）',
+        text: '通宵重新排版',
         energyCost: 30,
         outcomes: [
           {
@@ -274,7 +274,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'attend_fully',
-        text: '认命全程参与（消耗精力）',
+        text: '认命全程参与',
         energyCost: 20,
         outcomes: [
           {

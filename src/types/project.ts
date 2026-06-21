@@ -33,6 +33,7 @@ export interface ActiveProject {
   progress: number;        // 0–100
   // null = stalled (no leader), 'pi' = PI self-managing, studentId = a student
   leaderId: string | null;
+  startedAt?: GameTime;    // when the project was started (set in startProject)
 }
 
 export interface CompletedProject {

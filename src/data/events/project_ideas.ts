@@ -1370,6 +1370,325 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
     ],
   },
 
+  // ── GPU排队博弈 ───────────────────────────────────────────────────────────
+
+  idea_gpu_queue: {
+    id: 'idea_gpu_queue',
+    title: 'GPU集群里的隐形博弈',
+    description: [
+      '你发现实验室里几乎每个人都在特定时间点提交任务，规律性强得像是提前约好的。',
+      '{studentName}昨晚11点提交了一个要跑36小时的任务，恰好卡在另一个任务结束后15分钟。你问了一句，对方说："就是感觉这个时候提成功率高。"',
+      '你想了想：集群状态可预测，任务时长可估计，所有人都在优化自己的队列位置。这不是随机提交，这是一场从来没有人宣布开始的竞赛。',
+    ],
+    triggerConditions: [
+      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 10 },
+    ],
+    options: [
+      {
+        id: 'set_gpu_rules',
+        text: '制定规范，大家提前申报资源使用计划',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你发了一封邮件，要求每周五提前申报次周的大型任务。第一周执行顺利，第二周有两个人"忘了"，第三周大家找到了申报表的空白字段，开始用它来占位。',
+            effects: [{ type: 'lab', stat: 'energy', delta: -5 }],
+          },
+        ],
+      },
+      {
+        id: 'analyze_submit_log',
+        text: '从日志里把过去几个月的提交时间拉出来，画个分布图',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '时间分布图出来的时候，你盯着看了很久。峰值完全不是随机的，而且每个人的峰值时段几乎不重叠——他们在无意识地避开彼此，同时也在竞争。这是一场从来没有明说的博弈。\n\n💡 获得灵感：「GPU排队博弈」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'gpu_queue_game_theory' },
+              { type: 'lab', stat: 'energy', delta: -5 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 摸鱼检测器 ───────────────────────────────────────────────────────────
+
+  idea_slacking_detector: {
+    id: 'idea_slacking_detector',
+    title: '这是在思考还是在发呆',
+    description: [
+      '{studentName}已经盯着屏幕四十分钟了，光标没有动过一次。',
+      '你走过去问了句"进展怎么样"，{studentName}立刻回过神来说"刚在想一个事情"，然后打了几行字证明这一点。',
+      '你走回自己的位置，发现自己也盯着论文看了二十分钟，一个字没写。这两种状态的表面特征，几乎完全一样。',
+    ],
+    triggerConditions: [
+      { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 8 },
+    ],
+    options: [
+      {
+        id: 'knock_on_door',
+        text: '进去说一声"有进度发一下群"',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '{studentName}发了一段进度更新，思路清晰，看来那四十分钟没有浪费。你也不确定自己那二十分钟算什么，但此刻不适合深究。',
+            effects: [
+              { type: 'randomStudent', stat: 'favor', delta: 2 },
+              { type: 'lab', stat: 'energy', delta: 3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'take_photos',
+        text: '随手拍了几张，对比两种状态下的表情差异',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你把照片并排放：眼睛焦距不一样，肩膀姿态不一样，鼠标手的张弛程度也不一样。区别是客观存在的，而且比你预期的更可测量。\n\n💡 获得灵感：「摸鱼检测器」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'slacking_detector' },
+              { type: 'lab', stat: 'energy', delta: -3 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 分布式甩锅协议 ────────────────────────────────────────────────────────
+
+  idea_blame_propagation: {
+    id: 'idea_blame_propagation',
+    title: '这是谁的锅',
+    description: [
+      '实验室服务器今天宕机，两个正在跑的实验中断，数据库连接全部失败。',
+      '你问了一圈：负责运维的说是磁盘满了，负责磁盘的说是日志没配轮转，负责日志配置的说这原本是运维的职责。每次转移都有理由，每次理由都能找到下一个人来接。',
+      '你站在这场对话中间意识到，这个传播路径有某种奇特的规律——锅不是随机落点的，它沿着某种拓扑结构运动，而且几乎总是找到一个无法反驳的终点。',
+    ],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 12 },
+    ],
+    options: [
+      {
+        id: 'organize_postmortem',
+        text: '组织复盘，把根因分析写成文档',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你写了一份事后复盘，根因明确，改进措施具体。大家认真读完，郑重点头，然后在下次崩溃时忘得一干二净。至少这次的锅有了官方定性。',
+            effects: [
+              { type: 'lab', stat: 'energy', delta: -8 },
+              { type: 'lab', stat: 'reputation', delta: 1 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'trace_blame_path',
+        text: '默默记下每次甩锅的方向，看看这条链终止在哪里',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你在纸上画了一张图：每个节点是一个角色，箭头是甩锅方向。最后，锅稳稳落在了一个已经毕业两年的学生身上——他的 GitHub 账号已经注销了。这个模式太规律，规律到值得认真研究。\n\n💡 获得灵感：「分布式甩锅协议」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'blame_propagation' },
+              { type: 'lab', stat: 'energy', delta: -3 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 命名即命运 ────────────────────────────────────────────────────────────
+
+  idea_variable_naming: {
+    id: 'idea_variable_naming',
+    title: '这个变量叫什么',
+    description: [
+      '{studentName}的代码 review 里，连续三屏都是 `data2`、`result_tmp`、`flag_new_v2`。',
+      '你指着某一行问："这个 `tmp3` 是什么意思？"停顿了五秒，{studentName}说："就是个临时变量。"你再问："那 `tmp4` 呢？"又是停顿。',
+      '你最终数了一下：整个文件有22个以 tmp 开头的变量，没有两个含义完全相同。',
+    ],
+    triggerConditions: [
+      { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+    ],
+    options: [
+      {
+        id: 'send_naming_guide',
+        text: '给{studentName}发一份命名规范，下次 review 前必须改好',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '{studentName}把所有 tmp 都改了，改完后的代码一目了然，review 速度快了将近一倍。你满意地关上标签页，想到了每个月那两次同样的对话。',
+            effects: [
+              { type: 'randomStudent', stat: 'favor', delta: -2 },
+              { type: 'randomStudent', stat: 'happiness', delta: 3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'check_bug_rate',
+        text: '翻一下 git log，看看改名前后 bug 提交频率有没有变化',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你提取了三个月的 commit 记录，把重命名前后的 bug 修复次数对比了一下。结果出乎意料地清晰：语义清晰的命名，与后续更少的 bug 修复高度相关。这个规律可以系统地量化。\n\n💡 获得灵感：「命名即命运」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'variable_naming_law' },
+              { type: 'lab', stat: 'energy', delta: -5 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── TODO完备性理论 ────────────────────────────────────────────────────────
+
+  idea_todo_completeness: {
+    id: 'idea_todo_completeness',
+    title: '这里有多少个TODO',
+    description: [
+      '你搜了一下代码库里的 TODO 注释，返回了287条。',
+      '其中最老的一条写于三年前，内容是"TODO: 之后优化这个循环"。你找到那段代码，循环还在，TODO 也还在。',
+      '最新的一条是昨天{studentName}提交的：`# TODO: 为什么这里work？`——你看了半天，不知道为什么这里 work，但也没办法删掉这行注释。',
+    ],
+    triggerConditions: [
+      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 10 },
+    ],
+    options: [
+      {
+        id: 'todo_cleanup',
+        text: '发起大扫除，两周内必须处理完所有遗留 TODO',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '两周后清掉了73条，与此同时新增了91条。你看着净增的18条沉默了很久，然后在自己的文档里写下："TODO: 想清楚这件事为什么发生。"',
+            effects: [
+              { type: 'lab', stat: 'energy', delta: -10 },
+              { type: 'allStudents', stat: 'happiness', delta: -3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'plot_todo_growth',
+        text: '按时间排个序，看看这些 TODO 的增长曲线长什么样',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你导出了所有 TODO 的首次提交时间，画了一条累积曲线。单调递增，没有例外。斜率随项目规模扩大而加速，更像是物理定律，而不是工程问题。\n\n💡 获得灵感：「TODO完备性理论」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'todo_completeness' },
+              { type: 'lab', stat: 'energy', delta: -3 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 审稿人不可能定理 ──────────────────────────────────────────────────────
+
+  idea_reviewer_impossibility: {
+    id: 'idea_reviewer_impossibility',
+    title: '完美审稿意见',
+    description: [
+      '你收到了一条看起来很建设性的审稿意见：有具体建议，措辞通情达理，读起来确实认真。',
+      '仔细读完，你发现 Reviewer 说"第4节的假设X没有实验支持"——但你在第6节表3里有三个专门验证这一点的实验。',
+      '你翻到第三条意见，那里引用了第4节的公式。但如果 Reviewer 没读到第6节，他又是怎么知道第4节和第3节之间的关联的？你开始在脑子里拼这个矛盾，发现三条意见放在一起，逻辑上根本无法同时成立。',
+    ],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 20 },
+    ],
+    options: [
+      {
+        id: 'rebuttal_politely',
+        text: '按意见修改，在 rebuttal 里礼貌指出"该部分已在第6节论述"',
+        outcomes: [
+          {
+            weight: 3,
+            narrative: '你在 rebuttal 里写道："感谢建设性意见。关于第4节，相关实验已在第6节表3详细列出，请参阅。"对方没有回应，但论文最终被接收了。',
+            effects: [
+              { type: 'lab', stat: 'energy', delta: -8 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
+            ],
+          },
+          {
+            weight: 1,
+            narrative: '你礼貌地指出了矛盾。论文被拒了，但 Reviewer 在二审回复里说"感谢作者的认真回复"，这大概算是一种道义上的胜利。',
+            effects: [{ type: 'lab', stat: 'energy', delta: -10 }],
+          },
+        ],
+      },
+      {
+        id: 'map_contradictions',
+        text: '把三条意见并排列出来，理一下它们之间的逻辑关系',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你把三条意见画成关系图：第一条要求增加实验，第二条说实验太多，第三条的建设性前提是接受了第一条。三个要求不能同时满足。你开始想这是不是一个普遍的结构性矛盾。\n\n💡 获得灵感：「审稿人不可能定理」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'reviewer_impossibility' },
+              { type: 'lab', stat: 'energy', delta: -5 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 智能体社会学 ──────────────────────────────────────────────────────────
+
+  idea_agent_sociology: {
+    id: 'idea_agent_sociology',
+    title: '智能体开始分工了',
+    description: [
+      '你的多智能体实验跑了几百轮后，任务分配模式开始变得不随机了。',
+      '实验设计很简单：100个语言智能体，任务随机分配，观察协作效果。但某些智能体总在接高复杂度任务，另一批稳定接简单任务，分工清晰得像是提前商量好的。',
+      '没有任何明确的分工机制，但分工自发出现了。更奇怪的是，那些被固定承担复杂任务的智能体，响应时间逐渐变长了。',
+    ],
+    triggerConditions: [
+      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 75 },
+    ],
+    options: [
+      {
+        id: 'check_random_seed',
+        text: '重置实验，检查随机数种子是不是出了问题',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你检查了随机数生成器，没有问题。重置后再跑，同样的分化仍然出现，而且这次速度更快。你记了一行日志，决定先观察再说。',
+            effects: [{ type: 'lab', stat: 'energy', delta: -5 }],
+          },
+        ],
+      },
+      {
+        id: 'let_it_run',
+        text: '先不动，让它再跑500轮，把行为日志都存下来',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '到第800轮时，分工已经非常稳定，出现了两个始终回避高复杂度任务的智能体，行为模式类似于在系统性推卸工作。你意识到这不是bug——这是一个值得认真研究的社会现象。\n\n💡 获得灵感：「智能体社会学」——已记录到项目面板。',
+            effects: [
+              { type: 'unlockIdea', projectId: 'agent_sociology' },
+              { type: 'lab', stat: 'energy', delta: -8 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   // ── 拖延行为建模 ──────────────────────────────────────────────────────────
 
   idea_procrastination: {

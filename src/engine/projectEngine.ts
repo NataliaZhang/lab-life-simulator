@@ -124,7 +124,7 @@ export function startProject(
     ? Math.max(0, state.lab.funding - project.startupFundingCost)
     : state.lab.funding;
 
-  const newProject: ActiveProject = { projectId, progress: 0, leaderId: null };
+  const newProject: ActiveProject = { projectId, progress: 0, leaderId: null, startedAt: { ...state.time } };
 
   return {
     ...state,
@@ -342,6 +342,11 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
       completedProjectIds.push(ap.projectId);
       completed.push({ projectId: ap.projectId, leaderId: ap.leaderId, completedAt: { ...state.time } });
 
+      // Months elapsed (inclusive): +1 so a project started and finished in the same month shows 1.
+      const projectMonths = ap.startedAt
+        ? Math.max(1, (state.time.year - ap.startedAt.year) * 12 + (state.time.month - ap.startedAt.month) + 1)
+        : undefined;
+
       // Apply trait-based completion bonuses for student leaders
       if (ap.leaderId && ap.leaderId !== 'pi') {
         const leader = students.find(s => s.id === ap.leaderId);
@@ -354,10 +359,10 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
         if (leader?.traitIds.includes('network_magnet')) {
           lab = { ...lab, reputation: lab.reputation + 4 };
         }
-        completionEvents.push({ id: `project_complete_${ap.projectId}`, studentId: ap.leaderId });
+        completionEvents.push({ id: `project_complete_${ap.projectId}`, studentId: ap.leaderId, projectMonths });
       } else {
         // PI-led: use the separate PI variant so {studentName} placeholders are never rendered.
-        completionEvents.push({ id: `project_complete_${ap.projectId}_pi` });
+        completionEvents.push({ id: `project_complete_${ap.projectId}_pi`, projectMonths });
       }
     } else {
       updatedActives.push({ ...ap, progress: newProgress });

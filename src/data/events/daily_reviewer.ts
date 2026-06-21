@@ -293,7 +293,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'scope_is_construct',
-        text: '"范围"是一种社会建构，挂arxiv，不管了',
+        text: '接受“范围”是一种社会建构，不再较劲',
         outcomes: [
           {
             weight: 1,

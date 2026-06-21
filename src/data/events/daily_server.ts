@@ -263,7 +263,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'enforce_quota',
-        text: '强制限额，每人100GB（消耗精力）',
+        text: '强制限额，每人100GB',
         energyCost: 20,
         outcomes: [
           {
@@ -922,7 +922,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'implement_monitoring',
-        text: '装监控，痛定思痛（消耗精力）',
+        text: '装监控，痛定思痛',
         energyCost: 20,
         outcomes: [
           {

@@ -370,9 +370,9 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     id: 'qdd_real_impact',
     title: '钱多多：真实用户来了',
     description: [
-      '钱多多发来一张截图，没有附任何说明。你打开——是某个垂直社区的帖子，他上传的一个小Demo开始被用户自发转发，评论区里有人说"我等这个东西等了三年"，有人说"这解决了我每天都要手动做的问题"，还有几条留言带着联系方式问能不能进内测。',
+      '钱多多发来一张截图，没有附任何说明。你打开，发现是某个垂直社区的帖子，他上传的一个小Demo开始被用户自发转发，评论区里有人说"我等这个东西等了三年"，有人说"这解决了我每天都要手动做的问题"，还有几条留言带着联系方式问能不能进内测。',
       '过了一分钟，他发来一条消息："老师，这是我读博以来最开心的一天。"',
-      '他没有解释为什么。你打开那个帖子，读了读评论，觉得你大概理解他说的那种高兴是什么，不是因为数据好看，不是因为有人夸，是因为那些评论里的人，真的被帮到了。这对他来说，是比任何指标都要实在的证明。',
+      '他没有解释为什么。你打开那个帖子，读了读评论，觉得你大概理解他说的那种高兴是什么，不是因为数据好看，不是因为有人夸，是因为那些评论里的人，真的被他的工作帮到了。这对他来说，是比任何指标都要实在的证明。',
     ],
     prompt: '钱多多的Demo得到了真实用户的强烈反馈，你选择：',
     triggerConditions: [
@@ -382,27 +382,25 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_real_impact_celebrate',
-        text: '先高兴，这反馈是真的',
+        text: '这些都是对你工作的肯定',
         outcomes: [{
           weight: 1,
-          narrative: '你回了他："看到了，这个反馈很真实，方向是对的。"他立刻回："老师我知道了！需求是真的！不是我自己猜的！"后面跟了一串感叹号，比他平时说话时的措辞活跃得多，像是长期压着的某种确认终于被解开了。你们没有继续聊，但那条对话你没有删。有时候，一件事情被真实的人需要，就已经是一个完整的意义了。没过多久，一家中小型企业发来合作邮件，说看到了demo，问有没有兴趣做一个小型定向合作。',
+          narrative: '你回了他："看到了，这个反馈很真实，你的方向是对的。"他立刻回："老师我知道了！需求是真的！不是我自己猜的！"后面跟了一串感叹号，比他平时说话时的措辞活跃得多，像是长期压着的某种确认终于被解开了。你们没有继续聊，但那条对话你没有删。有时候，一件事情被真实的人需要，就已经是一个完整的意义了。\n\n没过多久，一家中小型企业发来合作邮件，说看到了demo，问有没有兴趣做一个小型定向合作。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 7 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 10 },
-            { type: 'lab', stat: 'reputation', delta: 1 },
-            { type: 'lab', stat: 'funding', delta: 2 },
+            { type: 'lab', stat: 'funding', delta: 4 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'skills.social', delta: 2 },
           ],
         }],
       },
       {
         id: 'qdd_real_impact_paper',
-        text: '把反馈转化为用户验证',
+        text: '还需要把反馈转化为论文里的用户验证',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他，用户的正向反馈是很好的信号，但要转化成论文里能引用的用户研究，这个证据才能正式成立。钱多多停顿了一下，回："老师，我能不能先高兴一会儿？"你看了一眼那条消息，回了个"可以"。他又过了一会儿才发下一条："好，我去设计一个正式的用户研究协议。"情绪和工作，他都会处理，顺序是先情绪，后工作，执行起来一点也不含糊。',
           effects: [
-            { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 5 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 8 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'projectProgress', delta: 5 },
             { type: 'lab', stat: 'reputation', delta: 3 },

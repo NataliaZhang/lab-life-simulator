@@ -37,7 +37,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'retain_with_raise',
-        text: '提高待遇挽留（花2万）',
+        text: '提高待遇挽留',
         fundingCost: 2,
         outcomes: [
           {
@@ -61,7 +61,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'honest_conversation',
-        text: '立刻谈一次（消耗20精力）',
+        text: '立刻促膝长谈',
         energyCost: 20,
         outcomes: [
           {

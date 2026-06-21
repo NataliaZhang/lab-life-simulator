@@ -92,6 +92,7 @@ export interface WeightedOutcome {
   narrative: string;
   effects?: StateEffect[];
   nextEventIds?: string[];
+  nextMonthEventIds?: string[];  // like nextEventIds but deferred to the following month
   conditions?: EventCondition[]; // outcome eligible only if ALL conditions met
   phaseChange?: GamePhase;       // if set, transitions game phase after this outcome resolves
 }
@@ -139,6 +140,8 @@ export interface LogEntry {
   choiceText?: string;
   narrative: string;
   statChanges?: StatChange[];
+  /** Student ID whose smug portrait to show alongside this entry's narrative. */
+  studentPortrait?: string;
 }
 
 // ─── Admission ─────────────────────────────────────────────────────────────
@@ -164,6 +167,7 @@ export interface QueuedEvent {
   id: string;
   studentId?: string;   // primary bound student ({studentName})
   student2Id?: string;  // secondary bound student ({student2Name})
+  projectMonths?: number; // months elapsed since project start (resolves {projectMonths})
 }
 
 // ─── Game State ────────────────────────────────────────────────────────────
@@ -182,6 +186,7 @@ export interface GameState {
   activeEventId: string | null;
   activeBoundStudentId: string | null;  // primary bound student ({studentName})
   activeBoundStudent2Id: string | null; // secondary bound student ({student2Name})
+  activeProjectMonths: number | null;   // months elapsed on active project ({projectMonths})
   activeParagraphIndex: number;         // which description paragraph has been revealed (0-based)
   graduationChecksSeen: string[];       // entries like "studentId", "studentId:2", "studentId:3"
   graduationExtensions: Record<string, number>; // studentId → times延毕 chosen
@@ -201,6 +206,8 @@ export interface GameState {
   // Each click dismisses the first entry and appends it to storyLog.
   // Blocks PRESENT_EVENT and ADVANCE_MONTH until empty.
   pendingSummarySlides: string[];
+  // Events deferred via nextMonthEventIds — injected into the queue at the next ADVANCE_MONTH.
+  deferredEvents: QueuedEvent[];
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────

@@ -78,6 +78,7 @@ export function createInitialState(): GameState {
     activeEventId: null,
     activeBoundStudentId: null,
     activeBoundStudent2Id: null,
+    activeProjectMonths: null,
     activeParagraphIndex: 0,
     graduationChecksSeen: [],
     graduationExtensions: {},
@@ -96,6 +97,7 @@ export function createInitialState(): GameState {
     studentConditionalLog: {},
     moodChangesThisMonth: {},
     pendingSummarySlides: [],
+    deferredEvents: [],
   };
 }
 
@@ -130,12 +132,15 @@ function resolvePlaceholders(
   studentId: string | null,
   students: Student[],
   student2Id?: string | null,
+  projectMonths?: number | null,
 ): string {
   let result = text;
   const s1 = studentId ? students.find(s => s.id === studentId) : null;
   const s2 = student2Id ? students.find(s => s.id === student2Id) : null;
   if (s1) result = result.replace(/\{studentName\}/g, s1.name);
   if (s2) result = result.replace(/\{student2Name\}/g, s2.name);
+  if (projectMonths != null) result = result.replace(/\{projectMonths\}/g, String(projectMonths));
+  else result = result.replace(/\{projectMonths\}/g, '数');
   return result;
 }
 
@@ -333,13 +338,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const boundStudentId = nextQueued.studentId ?? null;
       const boundStudent2Id = nextQueued.student2Id ?? null;
 
+      const qProjectMonths = nextQueued.projectMonths ?? null;
       const introEntry: LogEntry = {
         id: `${nextQueued.id}_p0_${Date.now()}`,
         eventId: nextQueued.id,
         time: { ...state.time },
         type: 'event-intro',
-        title: resolvePlaceholders(event.title, boundStudentId, state.students, boundStudent2Id),
-        narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students, boundStudent2Id),
+        title: resolvePlaceholders(event.title, boundStudentId, state.students, boundStudent2Id, qProjectMonths),
+        narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students, boundStudent2Id, qProjectMonths),
       };
 
       // Track which graduation check stage has been presented for this student
@@ -358,6 +364,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeEventId: nextQueued.id,
         activeBoundStudentId: boundStudentId,
         activeBoundStudent2Id: boundStudent2Id,
+        activeProjectMonths: qProjectMonths,
         activeParagraphIndex: 0,
         graduationChecksSeen,
         storyLog: [...state.storyLog, introEntry],
@@ -375,6 +382,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         state.activeBoundStudentId,
         state.students,
         state.activeBoundStudent2Id,
+        state.activeProjectMonths,
       );
 
       // Append the new paragraph to the existing log entry for this event
@@ -404,6 +412,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeEventId: null,
         activeBoundStudentId: null,
         activeBoundStudent2Id: null,
+        activeProjectMonths: null,
         activeParagraphIndex: 0,
       };
     }
@@ -449,15 +458,23 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         newMoodChangesThisMonth[sid] = (newMoodChangesThisMonth[sid] ?? 0) + count;
       }
 
+      // Show student's smug portrait when archiving a student-led project completion.
+      const isStudentLedProjectComplete =
+        action.eventId.startsWith('project_complete_') &&
+        !action.eventId.endsWith('_pi') &&
+        action.optionId === 'archive' &&
+        state.activeBoundStudentId !== null;
+
       const logEntry: LogEntry = {
         id: `${action.eventId}_${Date.now()}`,
         eventId: action.eventId,
         time: { ...state.time },
         type: 'event',
-        title: resolvePlaceholders(event.title, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
-        choiceText: resolvePlaceholders(option.text, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
-        narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id),
+        title: resolvePlaceholders(event.title, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
+        choiceText: resolvePlaceholders(option.text, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
+        narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
         statChanges: statChanges.length > 0 ? statChanges : undefined,
+        studentPortrait: isStudentLedProjectComplete ? state.activeBoundStudentId ?? undefined : undefined,
       };
 
       const chainEvents = (outcome.nextEventIds ?? []).map(id => ({
@@ -471,6 +488,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const nextQueue: typeof state.eventQueue = currentEvent?.prioritizeNext
         ? [...chainEvents, ...state.eventQueue]
         : [...state.eventQueue, ...chainEvents];
+
+      // nextMonthEventIds: deferred to the following ADVANCE_MONTH cycle.
+      const newDeferredEvents: QueuedEvent[] = [
+        ...(state.deferredEvents ?? []),
+        ...(outcome.nextMonthEventIds ?? []).map(id => ({
+          id,
+          studentId: boundStudentId,
+          student2Id: boundStudent2Id,
+        })),
+      ];
 
       // extendGraduation increments the per-student extension counter
       const hasExtend = (outcome.effects ?? []).some(e => e.type === 'extendGraduation');
@@ -523,9 +550,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeEventId: null,
         activeBoundStudentId: null,
         activeBoundStudent2Id: null,
+        activeProjectMonths: null,
         graduationExtensions,
         chosenOptionIds: [...state.chosenOptionIds, action.optionId],
         moodChangesThisMonth: newMoodChangesThisMonth,
+        deferredEvents: newDeferredEvents,
         storyLog: [...state.storyLog, logEntry, ...(ideaHintEntry ? [ideaHintEntry] : [])],
       };
     }
@@ -669,6 +698,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...action.state,
         studentConditionalLog: action.state.studentConditionalLog ?? {},
         moodChangesThisMonth: action.state.moodChangesThisMonth ?? {},
+        pendingSummarySlides: action.state.pendingSummarySlides ?? [],
+        deferredEvents: action.state.deferredEvents ?? [],
+        activeProjectMonths: action.state.activeProjectMonths ?? null,
         lab: { ...action.state.lab, energyDepletedCount: action.state.lab.energyDepletedCount ?? 0 },
         admissionState: savedAdmission
           ? {

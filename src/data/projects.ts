@@ -155,6 +155,108 @@ export const projectDefinitions: ProjectDefinition[] = [
     reputationReward: 5,
   },
 
+  {
+    id: 'gpu_queue_game_theory',
+    grade: 'B',
+    name: 'GPU排队博弈',
+    description: '对共享GPU集群上的资源竞争行为进行博弈论建模。成员通过提交时机和资源声明策略互相博弈，形成了一套无明文规定却人人遵守的潜规则。',
+    completionSummary: '实验表明，集群均衡策略是在下班前一小时提交大型任务并将预估时间多报50%。论文发表后，全实验室同步调整策略，集群使用率下降了23%——直到所有人再多报一倍。',
+    ideaSources: ['GPU集群排队', 'GPU占用投诉', '组会资源讨论'],
+    startupEnergyCost: 10,
+    startupFundingCost: 0,
+    theoryRequired: 35,       // 博弈论建模
+    engineeringRequired: 0,
+    socialRequired: 25,       // 观察行为规律
+    baseMonthlyProgress: 8,
+    fundingReward: 14,
+    reputationReward: 7,
+  },
+
+  {
+    id: 'slacking_detector',
+    grade: 'B',
+    name: '摸鱼检测器',
+    description: '利用图像识别技术对实验室成员的工作状态进行分类：真在思考科研问题，还是在发呆。核心难点是"盯着屏幕发呆"与"认真工作"的视觉特征高度相似。',
+    completionSummary: '系统区分"思考中"与"发呆"的准确率达到92%，但所有参与被试均坚持认为自己属于误判的8%，且无一人愿意调阅自己的判定录像。',
+    ideaSources: ['组会观察事件', '远程工作效率讨论', '实验室监控升级'],
+    startupEnergyCost: 0,
+    startupFundingCost: 8,
+    theoryRequired: 0,
+    engineeringRequired: 50,  // 计算机视觉，图像分类模型
+    socialRequired: 25,       // 行为标注，招募被试
+    baseMonthlyProgress: 8,
+    fundingReward: 14,
+    reputationReward: 7,
+  },
+
+  {
+    id: 'blame_propagation',
+    grade: 'B',
+    name: '分布式甩锅协议',
+    description: '建模大型系统故障后责任如何在多个组件和团队之间流转与最终归宿。研究发现，责任传播具有类似病毒传播的网络动力学特征。',
+    completionSummary: '复现17起真实系统故障后发现：平均每次事故引发4.3次初级甩锅、2.1次次级甩锅，最终责任落点与初始错误组件的相关性仅为0.31，且终点几乎永远是某位已离职的成员。',
+    ideaSources: ['服务器崩溃事件', '实验室故障复盘', '责任认定争议'],
+    startupEnergyCost: 20,
+    startupFundingCost: 0,
+    theoryRequired: 30,       // 因果推断、网络动力学
+    engineeringRequired: 35,  // 系统日志分析
+    socialRequired: 0,
+    baseMonthlyProgress: 8,
+    fundingReward: 13,
+    reputationReward: 6,
+  },
+
+  {
+    id: 'variable_naming_law',
+    grade: 'B',
+    name: '命名即命运',
+    description: '研究变量命名长度与语义清晰度对程序正确率的影响。假设是名字越清晰、bug越少——但数据拒绝给出期望的答案。',
+    completionSummary: '分析50万行代码发现，变量名长度与bug密度呈倒U形关系：过短（如a、x）和过长（如userInputValidationCheckResultFlagBoolean）都与更高bug率相关，最优区间是8-12个字符，但没有人遵守。',
+    ideaSources: ['代码review事件', '学生命名灾难', '祖传代码库事件'],
+    startupEnergyCost: 15,
+    startupFundingCost: 0,
+    theoryRequired: 0,
+    engineeringRequired: 45,  // 大规模代码分析，特征提取
+    socialRequired: 0,
+    baseMonthlyProgress: 8,
+    fundingReward: 12,
+    reputationReward: 6,
+  },
+
+  {
+    id: 'todo_completeness',
+    grade: 'B',
+    name: 'TODO完备性理论',
+    description: '研究软件项目中TODO注释数量是否随时间收敛，以及开发者的主观预期与实际增长趋势之间的系统性偏差。',
+    completionSummary: '对42个开源项目长达三年的追踪证明：TODO集合在99%的情况下单调递增，不存在统计显著的收敛。唯一的例外是本研究项目本身——因为没有人给它写TODO。',
+    ideaSources: ['代码库TODO大爆炸', '技术债清理讨论', '代码审计事件'],
+    startupEnergyCost: 10,
+    startupFundingCost: 5,
+    theoryRequired: 25,       // 形式化分析框架
+    engineeringRequired: 35,  // 开源仓库挖掘
+    socialRequired: 0,
+    baseMonthlyProgress: 8,
+    fundingReward: 13,
+    reputationReward: 6,
+  },
+
+  {
+    id: 'reviewer_impossibility',
+    grade: 'B',
+    name: '审稿人不可能定理',
+    description: '用社会选择理论证明：不存在同时满足"建设性"、"认真阅读全文"与"容易接收"三个条件的审稿人。该定理与阿罗不可能定理存在结构性相似。',
+    completionSummary: '证明完成，三个条件中任意两个可同时满足，但三者共存导致逻辑矛盾。论文投出后，Reviewer #2给出了一条既建设性、又显然没读完全文的意见，被作者收录为附录A。',
+    ideaSources: ['Reviewer #2事件', '收到矛盾审稿意见', '审稿机制讨论'],
+    startupEnergyCost: 15,
+    startupFundingCost: 0,
+    theoryRequired: 55,       // 社会选择理论，形式化证明
+    engineeringRequired: 0,
+    socialRequired: 20,       // 审稿人行为调查
+    baseMonthlyProgress: 8,
+    fundingReward: 15,
+    reputationReward: 9,
+  },
+
   // ── Normal Projects（5%/月，~20个月可完成）───────────────────────────────
 
   {
@@ -561,6 +663,23 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 0,
     engineeringRequired: 75,  // 8 万条记录的精细统计分析
+    socialRequired: 0,
+    baseMonthlyProgress: 3,
+    fundingReward: 55,
+    reputationReward: 22,
+  },
+
+  {
+    id: 'agent_sociology',
+    grade: 'S',
+    name: '智能体社会学',
+    description: '研究大量语言智能体在长期交互中自发形成的社会分工、权力结构与文化规范。核心问题：没有明确设计的智能体群体，会收敛到什么样的社会秩序？',
+    completionSummary: '200个智能体经2000轮交互后，自发形成明确的分工层级：少数承担协调功能，多数承担执行，约3%陷入循环争论。该模式与人类委员会高度相似，但委员会审稿人拒绝接受这个结论。',
+    ideaSources: ['多智能体实验', 'Agent框架测试', '涌现行为观察'],
+    startupEnergyCost: 0,
+    startupFundingCost: 20,
+    theoryRequired: 55,       // 社会理论建模，涌现机制分析
+    engineeringRequired: 55,  // 大规模 agent 仿真
     socialRequired: 0,
     baseMonthlyProgress: 3,
     fundingReward: 55,

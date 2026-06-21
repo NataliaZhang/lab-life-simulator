@@ -70,6 +70,21 @@ function StatChangePills({ changes }: { changes: StatChange[] }) {
 }
 
 function LogEntryItem({ entry }: { entry: LogEntry }) {
+  const choiceEl = entry.choiceText && (
+    <div className="log-entry__choice">
+      <span className="log-entry__choice-label">选择：</span>
+      {entry.choiceText}
+    </div>
+  );
+
+  const narrativeEl = (
+    <div className="log-entry__narrative">
+      {entry.narrative.split('\n\n').map((para, i) => (
+        <p key={i}>{para}</p>
+      ))}
+    </div>
+  );
+
   return (
     <article className={`log-entry log-entry--${entry.type}`}>
       <header className="log-entry__header">
@@ -78,17 +93,25 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
           第{entry.time.year}年&thinsp;{entry.time.month}月
         </span>
       </header>
-      {entry.choiceText && (
-        <div className="log-entry__choice">
-          <span className="log-entry__choice-label">选择：</span>
-          {entry.choiceText}
+      {entry.studentPortrait ? (
+        <div className="log-entry__body-with-portrait">
+          <div className="log-entry__body-left">
+            {choiceEl}
+            {narrativeEl}
+          </div>
+          <img
+            className="log-entry__student-portrait"
+            src={`/img/students/expressions/${entry.studentPortrait}/smug.jpg`}
+            alt=""
+            aria-hidden="true"
+          />
         </div>
+      ) : (
+        <>
+          {choiceEl}
+          {narrativeEl}
+        </>
       )}
-      <div className="log-entry__narrative">
-        {entry.narrative.split('\n\n').map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </div>
       {entry.statChanges && entry.statChanges.length > 0 && (
         <StatChangePills changes={entry.statChanges} />
       )}

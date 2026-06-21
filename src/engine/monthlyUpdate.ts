@@ -184,7 +184,7 @@ function buildEndingSummary(state: GameState): string[] {
     if (durations.length > 0) {
       const avg = durations.reduce((a, b) => a + b, 0) / durations.length;
       const avgRounded = Math.round(avg * 10) / 10;
-      narrative += `平均毕业时长：${avgRounded} 年。`;
+      narrative += `平均毕业时长：${avgRounded} 年。\n\n`;
       if (avg > 4) {
         narrative += `将近五年才出去——你的学生是在实验室生根发芽了吗？业界流传"进了这个组，出来就是化石"。\n\n`;
       } else if (avg >= 3.5) {
@@ -226,7 +226,7 @@ function buildEndingSummary(state: GameState): string[] {
       .map(g => `${g}级（${gradeNames[g]!.length}）：${gradeNames[g]!.join('、')}`);
     if (gradeParts.length > 0) {
       narrative += `项目：立项${totalStarted}个，完成${state.completedProjects.length}个，成果转化率${conversionRate}%。\n`;
-      narrative += gradeParts.join('；\n') + `。\n\n`;
+      narrative += gradeParts.join('；\n\n') + `。\n\n`;
     } else {
       narrative += `项目：立项${totalStarted}个，暂无完成项目。\n\n`;
     }
@@ -665,6 +665,28 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
+  // B-grade idea spotlight: Year 2 March and Year 2 November — surface one random unseen B-grade idea event
+  if ((next.time.year === 2 && next.time.month === 3) ||
+      (next.time.year === 2 && next.time.month === 11)) {
+    const bGradeIds = new Set(
+      Object.values(projectById).filter(p => p.grade === 'B').map(p => p.id),
+    );
+    const ideaCandidateIds = Object.keys(events).filter(eid => {
+      if (seenEventIds.has(eid)) return false;
+      const ev = events[eid];
+      return ev.options?.some(opt =>
+        opt.outcomes?.some(out =>
+          (out.effects ?? []).some(
+            eff => eff.type === 'unlockIdea' && bGradeIds.has(eff.projectId),
+          ),
+        ),
+      ) ?? false;
+    });
+    const triggerable = filterTriggerable(ideaCandidateIds, stateWithDepletionTracked);
+    const picked = pickRandomQueuedEvent(triggerable);
+    if (picked) forcedEvents.push(picked);
+  }
+
   // news_phd_salary_double: Year 3 Month 6 — PhD stipend doubling notice (also triggers cost rise)
   if (next.time.year === 3 && next.time.month === 6 && !seenEventIds.has('news_phd_salary_double')) {
     forcedEvents.push({ id: 'news_phd_salary_double' });
@@ -731,19 +753,20 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     }
   }
 
-  // midterm_review: Year 3 October — conditional sequence based on current lab state
-  if (next.time.year === 3 && next.time.month === 10 && !seenEventIds.has('midterm_review_open')) {
+  // midterm_review: Year 4 October — conditional sequence based on current lab state
+  if (next.time.year === 4 && next.time.month === 10 && !seenEventIds.has('midterm_review_open')) {
     const activeStudents = stateWithDepletionTracked.students.filter(s => s.status === 'active');
     const completedCount = stateWithDepletionTracked.completedProjects.length;
-    const { reputation, funding } = stateWithDepletionTracked.lab;
+    const { reputation, funding, energy } = stateWithDepletionTracked.lab;
 
     const sequence: string[] = ['midterm_review_open'];
     if (completedCount === 0)       sequence.push('midterm_review_no_projects');
     else if (completedCount <= 2)   sequence.push('midterm_review_few_projects');
-    if (activeStudents.length <= 1) sequence.push('midterm_review_low_students');
-    if (reputation < 40)            sequence.push('midterm_review_low_rep');
-    if (funding < 10)               sequence.push('midterm_review_low_funding');
-    if (completedCount >= 3 && activeStudents.length >= 2 && reputation >= 40 && funding >= 10)
+    if (activeStudents.length <= 2) sequence.push('midterm_review_low_students');
+    if (reputation < 50)            sequence.push('midterm_review_low_rep');
+    if (funding < 20)               sequence.push('midterm_review_low_funding');
+    if (energy < 20)                sequence.push('midterm_review_low_energy');
+    if (completedCount >= 3 && activeStudents.length >= 3 && reputation >= 50 && funding >= 20 && energy >= 20)
       sequence.push('midterm_review_positive');
     sequence.push('midterm_review_close');
 
@@ -884,6 +907,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     ...tutorialEvents,
     ...(newQueued ? [newQueued] : []),
     ...forcedEvents,
+    ...(next.deferredEvents ?? []),  // events delayed by nextMonthEventIds arrive here
   ];
 
   // If nothing was queued this month, show a random idle event
@@ -896,6 +920,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     ...stateWithDepletionTracked,
     admissionState,
     eventQueue: newQueue,
+    deferredEvents: [],        // consumed above; reset for the next month
     studentConditionalLog: updatedConditionalLog,
     storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
   };

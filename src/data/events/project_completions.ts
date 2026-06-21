@@ -16,10 +16,10 @@ function makeCompletionEvent(p: ProjectDefinition): GameEvent {
 
   return {
     id: `project_complete_${p.id}`,
-    title: `[${p.grade}] 项目结项：${p.name}`,
+    title: `${p.grade}级项目结项：${p.name}`,
     prompt: `「${p.name}」的研究工作已全部完成，可以正式结项了。`,
     description: [
-      `历经数月推进，「${p.name}」的研究工作宣告完成。{studentName}主导了这个项目并亲自汇报进展。\n\n${p.description}`,
+      `历经{projectMonths}个月推进，「${p.name}」的研究工作宣告完成。{studentName}主导了这个项目并亲自汇报进展。\n\n${p.description}`,
       `📄 研究结论：${p.completionSummary}`,
     ],
     options: [
@@ -29,12 +29,11 @@ function makeCompletionEvent(p: ProjectDefinition): GameEvent {
         outcomes: [
           {
             weight: 1,
-            narrative: `成果已整理归档，{studentName}功不可没。`,
+            narrative: `成果已整理归档。\n\n{studentName}功不可没。`,
             effects: [
               { type: 'lab', stat: 'funding', delta: p.fundingReward },
               { type: 'lab', stat: 'reputation', delta: p.reputationReward },
               { type: 'randomStudent', stat: skillStat, delta: 10 },
-              { type: 'randomStudent', stat: 'favor', delta: 5 },
             ],
           },
         ],
@@ -45,15 +44,13 @@ function makeCompletionEvent(p: ProjectDefinition): GameEvent {
 
 // PI-led variant: no {studentName} in text; skill bonus goes to a random student.
 function makePICompletionEvent(p: ProjectDefinition): GameEvent {
-  const dominant = getDominantSkill(p);
-  const skillStat = `skills.${dominant}` as 'skills.theory' | 'skills.engineering' | 'skills.social';
 
   return {
     id: `project_complete_${p.id}_pi`,
-    title: `[${p.grade}] 项目结项：${p.name}`,
+    title: `${p.grade}级项目结项：${p.name}`,
     prompt: `「${p.name}」的研究工作已全部完成，可以正式结项了。`,
     description: [
-      `历经数月推进，「${p.name}」的研究工作宣告完成。这个项目由你亲自主导，你完成了所有阶段的推进并在组会上做了最终汇报。\n\n${p.description}`,
+      `历经{projectMonths}个月推进，「${p.name}」的研究工作宣告完成。这个项目由你亲自主导，你完成了所有阶段的推进并在组会上做了最终汇报。\n\n${p.description}`,
       `📄 研究结论：${p.completionSummary}`,
     ],
     options: [
@@ -63,12 +60,10 @@ function makePICompletionEvent(p: ProjectDefinition): GameEvent {
         outcomes: [
           {
             weight: 1,
-            narrative: `成果已整理归档。这项工作是你亲手完成的，组里的学生也从中受益。`,
+            narrative: `成果已整理归档。看着亲手负责的项目圆满完成，你感觉离tenure又近了一小步。`,
             effects: [
               { type: 'lab', stat: 'funding', delta: p.fundingReward },
               { type: 'lab', stat: 'reputation', delta: p.reputationReward },
-              { type: 'randomStudent', stat: skillStat, delta: 10 },
-              { type: 'randomStudent', stat: 'favor', delta: 5 },
             ],
           },
         ],
