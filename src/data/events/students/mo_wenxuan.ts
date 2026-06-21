@@ -126,7 +126,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_lucky_timing_skeptic',
-        text: '科学解释：早投本来就更容易被优先处理',
+        text: '科学解释：早投就是优先被处理',
         outcomes: [
           {
             weight: 1,
@@ -209,7 +209,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'mwx_interview_ritual_congrats',
-        text: '恭喜，顺便提醒一下推荐信也起了作用',
+        text: '恭喜，推荐信也功不可没',
         outcomes: [
           {
             weight: 1,
@@ -224,7 +224,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_interview_ritual_ability',
-        text: '是不是因为实力本来就够了',
+        text: '是不是本来就够了',
         outcomes: [
           {
             weight: 1,
@@ -273,7 +273,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_bad_omen_clarify',
-        text: '时机参考归你，投不投归我——说说学术判断',
+        text: '时机是我的事，投不投是你的',
         outcomes: [
           {
             weight: 1,
@@ -306,7 +306,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'mwx_statistics_read',
-        text: '认真读，和他讨论实验设计',
+        text: '认真读，和他讨论设计',
         outcomes: [
           {
             weight: 1,
@@ -321,7 +321,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_statistics_sample',
-        text: '43条太少了，得不出什么结论',
+        text: '43条太少，结论无从谈起',
         outcomes: [
           {
             weight: 1,
@@ -355,7 +355,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'mwx_skeptic_debate_nod',
-        text: '默默点头，让他自己收场',
+        text: '默默点头，让他自己圆',
         outcomes: [
           {
             weight: 1,
@@ -370,7 +370,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_skeptic_debate_comment',
-        text: '说：这个论述比我想的更严谨',
+        text: '说：比我想的更严谨',
         outcomes: [
           {
             weight: 1,
@@ -404,7 +404,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'mwx_paper_title_omen_agree',
-        text: '同意，标题确实改得更好',
+        text: '同意，标题确实更好',
         outcomes: [
           {
             weight: 1,
@@ -419,7 +419,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_paper_title_omen_content',
-        text: '内容比标题重要，先把摘要对齐再说',
+        text: '内容比标题重要，先对齐摘要',
         outcomes: [
           {
             weight: 1,
@@ -464,7 +464,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'mwx_alumni_visit_report',
-        text: '先问问双盲评定是怎么做到的',
+        text: '先问：双盲怎么做到的',
         outcomes: [
           {
             weight: 1,

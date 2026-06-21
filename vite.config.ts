@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+declare const process: { env: Record<string, string | undefined> };
+
 export default defineConfig({
   plugins: [react()],
-  // Serve the project-root `assets/` folder as static files (audio, etc.)
   publicDir: 'assets',
-  base: '/lab-life-simulator/',
+  base: process.env.VITE_BASE_PATH || '/',
 })
-
-

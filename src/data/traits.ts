@@ -74,7 +74,7 @@ export const traitDefs: Record<string, TraitDef> = {
     id: 'research_brainstormer',
     name: '脑洞制造机',
     description: '对任何研究方向都能立刻生成五个后续方向，质量参差不齐但数量稳定。偶尔会说出真正有价值的想法，但周围人已经无法分辨了。',
-    effect: '灵感事件触发频率+50%，精力额外-1',
+    effect: '灵感事件触发频率+40%，精力额外-1',
   },
 
   startup_saint: {
@@ -95,7 +95,7 @@ export const traitDefs: Record<string, TraitDef> = {
     id: 'time_manager',
     name: '时间管理大师',
     description: '不只管理自己的时间，会顺手把导师的时间一起管理了。您答应我的部分写完了吗？',
-    effect: 'PI负责的项目月推进变为1.5倍，但精力消耗+60%',  //精力消耗仅指PI负责项目造成的每月精力消耗，例如原本是15点，变成24点
+    effect: '导师负责的项目月推进变为1.5倍，但精力消耗+60%',  //精力消耗仅指PI负责项目造成的每月精力消耗，例如原本是15点，变成24点
   },
 
   schedule_is_justice: {

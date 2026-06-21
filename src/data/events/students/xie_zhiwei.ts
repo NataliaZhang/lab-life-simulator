@@ -113,7 +113,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_accidentally_broke_criticize',
-        text: '代码可以重来，四个月的数据重来不了',
+        text: '代码能重来，四个月数据不能',
         outcomes: [
           {
             weight: 3,
@@ -138,7 +138,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_accidentally_broke_solve_together',
-        text: '先捞数据，检讨等结果出来再说',
+        text: '先捞数据，检讨稍后',
         outcomes: [
           {
             weight: 1,
@@ -171,7 +171,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_elegant_solution_code_review',
-        text: '让谢之微给组里开个分享会',
+        text: '让她给组里开个分享会',
         outcomes: [
           {
             weight: 1,
@@ -187,7 +187,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_elegant_solution_main_task',
-        text: '主线任务什么时候做的……',
+        text: '主线任务……什么时候做的',
         outcomes: [
           {
             weight: 1,
@@ -235,7 +235,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_equipment_obsession_later',
-        text: '过了保修期你想怎么研究都行',
+        text: '过了保修期随便研究',
         outcomes: [
           {
             weight: 1,
@@ -267,7 +267,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_optimization_spree_report_first',
-        text: '等等，你这周不是有自己的实验要跑吗',
+        text: '等等，你自己的实验呢',
         outcomes: [
           {
             weight: 1,
@@ -283,7 +283,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_optimization_spree_praise',
-        text: '以后你就负责全组的工程质量',
+        text: '以后你就是工程质量负责人',
         outcomes: [
           {
             weight: 1,
@@ -317,7 +317,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_debug_instinct_trust',
-        text: '直接叫大家都去那个函数找',
+        text: '直接叫大家去那函数找',
         outcomes: [
           {
             weight: 1,
@@ -384,7 +384,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_version_control_warn',
-        text: '以后能不能给别人留点活干',
+        text: '以后给别人留点活',
         outcomes: [
           {
             weight: 1,
@@ -416,7 +416,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_accidental_discovery_evaluate',
-        text: '下周组会讨论，让大家一起看',
+        text: '下周组会，让大家一起看',
         outcomes: [
           {
             weight: 2,
@@ -486,7 +486,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_alumni_visit_ask_detail',
-        text: '先看看内容，没问题再发布',
+        text: '先看内容，没问题再发',
         outcomes: [
           {
             weight: 1,

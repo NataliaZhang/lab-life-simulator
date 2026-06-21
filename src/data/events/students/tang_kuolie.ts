@@ -27,7 +27,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_first_meeting_focus',
-        text: '科研为主，人脉的事之后再说',
+        text: '科研优先，人脉后说',
         outcomes: [
           {
             weight: 1,
@@ -41,7 +41,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_first_meeting_group',
-        text: '可以，但别因为这个分心',
+        text: '可以，但别分心',
         outcomes: [
           {
             weight: 1,
@@ -75,7 +75,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_conference_harvest_use',
-        text: '人脉是生产力，整理起来备用',
+        text: '人脉是生产力，整理备用',
         outcomes: [
           {
             weight: 1,
@@ -172,7 +172,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_tea_break_follow_up',
-        text: '跟进合作，让他继续维系关系',
+        text: '让他继续跟进维系',
         outcomes: [
           {
             weight: 1,
@@ -189,7 +189,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_tea_break_decline',
-        text: '感谢他，但暂时不做横向合作',
+        text: '感谢，但横向合作先搁',
         outcomes: [
           {
             weight: 1,
@@ -222,7 +222,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_academic_neglect_talk',
-        text: '好好谈谈，科研才是主业',
+        text: '好好谈谈，科研是主业',
         outcomes: [
           {
             weight: 1,
@@ -288,7 +288,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_knows_everyone_self',
-        text: '谢谢，这个我自己来联系',
+        text: '谢谢，这个我自己联系',
         outcomes: [
           {
             weight: 1,
@@ -321,7 +321,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_alumni_network_appreciate',
-        text: '干得漂亮，这件事做得很好',
+        text: '干得漂亮',
         outcomes: [
           {
             weight: 1,
@@ -338,7 +338,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_alumni_network_remind',
-        text: '以后这类活动提前跟你说一声',
+        text: '以后这种活动先说一声',
         outcomes: [
           {
             weight: 1,
@@ -372,7 +372,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_wrong_priority_criticize',
-        text: '这次轻重没分清楚，直接说清楚',
+        text: '轻重没分，这次说清楚',
         outcomes: [
           {
             weight: 1,
@@ -387,7 +387,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_wrong_priority_lesson',
-        text: '吸取教训就好，下次注意',
+        text: '吸取教训，下次注意',
         outcomes: [
           {
             weight: 1,
@@ -422,7 +422,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tkl_key_introduction_yes',
-        text: '见一下，认识认识没问题',
+        text: '见一下，认识认识',
         outcomes: [
           {
             weight: 1,
@@ -438,7 +438,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tkl_key_introduction_no',
-        text: '这样不太合适，走正常流程',
+        text: '不太合适，走正规流程',
         outcomes: [
           {
             weight: 1,

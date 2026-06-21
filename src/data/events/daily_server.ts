@@ -344,7 +344,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'rebuild_all',
-        text: '统一重建环境，从requirements.txt重新来过',
+        text: '推倒重建，requirements.txt见',
         outcomes: [
           {
             weight: 2,
@@ -391,7 +391,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'accept_chaos',
-        text: '接受新的混沌状态，能跑就跑',
+        text: '接受混沌，能跑就跑',
         outcomes: [
           {
             weight: 1,
@@ -419,7 +419,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'beg_it',
-        text: '立刻给IT发邮件，请求推迟到明天',
+        text: '飞速求IT：能延到明天吗',
         outcomes: [
           {
             weight: 2,
@@ -442,7 +442,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'save_checkpoints',
-        text: '通知大家立刻存checkpoint，能抢多少是多少',
+        text: '群发动员：能存多少是多少',
         outcomes: [
           {
             weight: 2,
@@ -464,7 +464,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'accept_with_dignity',
-        text: '接受命运，体面承担损失',
+        text: '认命，优雅地接受损失',
         outcomes: [
           {
             weight: 1,
@@ -493,7 +493,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'report_authorities',
-        text: '上报校方，走正式安全流程',
+        text: '上报校方，程序走起',
         outcomes: [
           {
             weight: 2,
@@ -516,7 +516,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'patch_and_move_on',
-        text: '打补丁，清除入侵，低调处理',
+        text: '打补丁消毒，低调处理',
         outcomes: [
           {
             weight: 2,
@@ -568,7 +568,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'nuclear_option',
-        text: '核弹选项：全删，重建一个干净的',
+        text: '核平：全删重来',
         outcomes: [
           {
             weight: 2,
@@ -592,7 +592,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'archaeology',
-        text: '考古挖掘：搞清楚每个环境存在的意义',
+        text: '考古挖掘：这些环境凭什么存在',
         outcomes: [
           {
             weight: 2,
@@ -614,7 +614,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'create_fourth',
-        text: '建第四个，这次是权威版本',
+        text: '另起炉灶，第四个才是真的',
         outcomes: [
           {
             weight: 1,
@@ -687,7 +687,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'write_instead',
-        text: '接受命运，趁机集中写作',
+        text: '服从天命，躺平写作',
         outcomes: [
           {
             weight: 1,
@@ -719,7 +719,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'data_recovery',
-        text: '尝试数据恢复，先别放弃',
+        text: '数据急救，死马当活马医',
         outcomes: [
           {
             weight: 2,
@@ -760,7 +760,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'backup_policy',
-        text: '立刻建立备份制度，亡羊补牢',
+        text: '亡羊补牢，立即建备份',
         outcomes: [
           {
             weight: 2,
@@ -821,7 +821,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'buy_ups',
-        text: '立刻采购UPS不间断电源（花2万）',
+        text: '买UPS，花钱买心安（花2万）',
         fundingCost: 2,
         outcomes: [
           {
@@ -843,7 +843,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'checkpoint_rule',
-        text: '立下规矩：所有训练任务每2小时必须存checkpoint',
+        text: '立法：两小时一存，违者祭天',
         outcomes: [
           {
             weight: 2,
@@ -883,7 +883,7 @@ export const serverEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'try_recovery',
-        text: '尝试从内存或日志中恢复部分结果',
+        text: '日志考古，死中求活',
         outcomes: [
           {
             weight: 2,
@@ -907,7 +907,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'start_over',
-        text: '清磁盘，重新跑，当什么都没发生',
+        text: '认命重跑，当无事发生',
         outcomes: [
           {
             weight: 1,
@@ -922,7 +922,7 @@ export const serverEvents: Record<string, GameEvent> = {
       },
       {
         id: 'implement_monitoring',
-        text: '部署磁盘监控报警，让这种事永不再发生（消耗精力）',
+        text: '装监控，痛定思痛（消耗精力）',
         energyCost: 20,
         outcomes: [
           {

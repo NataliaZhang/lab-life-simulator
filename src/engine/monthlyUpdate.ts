@@ -137,7 +137,7 @@ function buildMonthlySummary(state: GameState, energyGain: number, skillGains: S
         const progress = Math.round(ap.progress);
         const leaderName =
           ap.leaderId === null ? '待分配' :
-          ap.leaderId === 'pi'  ? 'PI' :
+          ap.leaderId === 'pi'  ? '你' :
           (state.students.find(s => s.id === ap.leaderId)?.name ?? '未知');
         return `${def.name}（${progress}%，${leaderName}）`;
       })
@@ -163,8 +163,9 @@ function buildMonthlySummary(state: GameState, energyGain: number, skillGains: S
 
 // ─── Ending helpers ────────────────────────────────────────────────────────
 
-// Builds a rich summary log entry shown before any time-exhausted ending.
-function buildEndingSummary(state: GameState): LogEntry {
+// Builds ending-summary paragraphs for one-at-a-time reveal.
+// Returns an array of strings; each element is one click's worth of content.
+function buildEndingSummary(state: GameState): string[] {
   const graduated = state.students.filter(s => s.status === 'graduated');
   const active = state.students.filter(s => s.status === 'active');
   const left = state.students.filter(s => s.status === 'left');
@@ -173,10 +174,25 @@ function buildEndingSummary(state: GameState): LogEntry {
   narrative += `实验室最终状态：声望 ${state.lab.reputation} · 资金余额 ${state.lab.funding}万。\n\n`;
 
   if (graduated.length > 0) {
-    const lines = graduated
-      .map(s => s.name)
-      .join('、');
+    const lines = graduated.map(s => s.name).join('、');
     narrative += `已毕业的学生（${graduated.length}人）：\n${lines}\n\n`;
+
+    // Average graduation duration: graduatedAt.year - enrolledAt
+    const durations = graduated
+      .filter(s => s.graduatedAt != null)
+      .map(s => s.graduatedAt!.year - s.enrolledAt);
+    if (durations.length > 0) {
+      const avg = durations.reduce((a, b) => a + b, 0) / durations.length;
+      const avgRounded = Math.round(avg * 10) / 10;
+      narrative += `平均毕业时长：${avgRounded} 年。`;
+      if (avg > 4) {
+        narrative += `将近五年才出去——你的学生是在实验室生根发芽了吗？业界流传"进了这个组，出来就是化石"。\n\n`;
+      } else if (avg >= 3.5) {
+        narrative += `平均多修炼了一年。学生私下管这叫"导师炼丹期"，你本人毫不知情。\n\n`;
+      } else {
+        narrative += `三年，教科书式的学制。当然，你的头发也做出了相应的贡献。\n\n`;
+      }
+    }
   } else {
     narrative += `这六年里没有学生完成毕业——留下了一些遗憾。\n\n`;
   }
@@ -193,25 +209,24 @@ function buildEndingSummary(state: GameState): LogEntry {
     narrative += `中途离组的学生：${names}。\n\n`;
   }
 
-  // Project summary
+  // Project summary — list completed projects by grade
   const totalStarted = state.activeProjects.length + state.completedProjects.length;
   if (totalStarted > 0) {
-    const conversionRate = totalStarted > 0
-      ? Math.round((state.completedProjects.length / totalStarted) * 100)
-      : 0;
-    // Count completed projects by grade
-    const gradeCounts: Partial<Record<string, number>> = {};
+    const conversionRate = Math.round((state.completedProjects.length / totalStarted) * 100);
+    const gradeOrder = ['S', 'A', 'B', 'C'] as const;
+    // Group completed project names by grade
+    const gradeNames: Partial<Record<string, string[]>> = {};
     for (const cp of state.completedProjects) {
       const def = projectById[cp.projectId];
       if (!def) continue;
-      gradeCounts[def.grade] = (gradeCounts[def.grade] ?? 0) + 1;
+      (gradeNames[def.grade] ??= []).push(def.name);
     }
-    const gradeOrder = ['S', 'A', 'B', 'C'] as const;
     const gradeParts = gradeOrder
-      .filter(g => (gradeCounts[g] ?? 0) > 0)
-      .map(g => `${gradeCounts[g]}个${g}级`);
+      .filter(g => (gradeNames[g]?.length ?? 0) > 0)
+      .map(g => `${g}级（${gradeNames[g]!.length}）：${gradeNames[g]!.join('、')}`);
     if (gradeParts.length > 0) {
-      narrative += `项目：共完成${gradeParts.join('、')}。立项${totalStarted}个，成果转化率${conversionRate}%。\n\n`;
+      narrative += `项目：立项${totalStarted}个，完成${state.completedProjects.length}个，成果转化率${conversionRate}%。\n`;
+      narrative += gradeParts.join('；\n') + `。\n\n`;
     } else {
       narrative += `项目：立项${totalStarted}个，暂无完成项目。\n\n`;
     }
@@ -219,13 +234,11 @@ function buildEndingSummary(state: GameState): LogEntry {
 
   narrative += `以上是你的六年。`;
 
-  return {
-    id: 'ending_summary',
-    time: { ...state.time },
-    type: 'system',
-    title: '六年总结',
-    narrative,
-  };
+  // Split on double newlines so each logical block becomes one reveal-click.
+  return narrative
+    .split('\n\n')
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
 }
 
 // Selects which time-exhausted ending to trigger based on final state.
@@ -233,11 +246,12 @@ function buildEndingSummary(state: GameState): LogEntry {
 function pickTimeEnding(state: GameState): string {
   const graduated = state.students.filter(s => s.status === 'graduated').length;
   const rep = state.lab.reputation;
-  const funding = state.lab.funding;
   const completed = state.completedProjects.length;
 
+  // Player explicitly chose industry path via industry_invite event
+  if (state.chosenOptionIds.includes('industry_invite_accept')) return 'ending_time_wealthy';
+
   if (rep > 200 && graduated > 2)  return 'ending_time_famous';
-  if (funding > 150 && rep < 150)  return 'ending_time_wealthy';
   if (rep > 150 && graduated > 1)  return 'ending_time_great';
   if (rep > 100 && graduated >= 1) return 'ending_time_steady';
   if (rep < 80)                    return 'ending_be_rep_low';
@@ -297,7 +311,7 @@ function applyTraitMonthlyEffects(
     // last_minute_genius: happiness < 50 → favor +2
     if (t.includes('last_minute_genius') && student.happiness < 50) {
       updateStudent(student.id, s => ({ ...s, favor: clamp100(s.favor + 2) }));
-      traitGains.push({ label: `${student.name}·好感`, delta: 2 });
+      traitGains.push({ label: `${student.name}天赋·好感`, delta: 2 });
     }
 
     // sleep_learning: random skill +1
@@ -308,7 +322,7 @@ function applyTraitMonthlyEffects(
       updateStudent(student.id, s => ({
         ...s, skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 1) },
       }));
-      traitGains.push({ label: `${student.name}·${NAMES[skill]}`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·${NAMES[skill]}`, delta: 1 });
     }
 
     // weird_paper_collector: theory +1
@@ -316,7 +330,7 @@ function applyTraitMonthlyEffects(
       updateStudent(student.id, s => ({
         ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
       }));
-      traitGains.push({ label: `${student.name}·理论`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·理论`, delta: 1 });
     }
 
     // curiosity_overload: engineering +1, lab energy -1
@@ -325,7 +339,7 @@ function applyTraitMonthlyEffects(
         ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 1) },
       }));
       lab = { ...lab, energy: Math.max(0, lab.energy - 1) };
-      traitGains.push({ label: `${student.name}·工程`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·工程`, delta: 1 });
     }
 
     // research_brainstormer: flat -1 energy cost per month for boosted idea draw
@@ -341,7 +355,7 @@ function applyTraitMonthlyEffects(
         updateStudent(target.id, s => ({
           ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
         }));
-        traitGains.push({ label: `${target.name}·理论`, delta: 1 });
+        traitGains.push({ label: `${student.name}天赋·${target.name}理论`, delta: 1 });
       }
     }
 
@@ -351,12 +365,11 @@ function applyTraitMonthlyEffects(
       if (others.length > 0) {
         const target = others[Math.floor(Math.random() * others.length)]!;
         updateStudent(target.id, s => ({ ...s, favor: clamp100(s.favor + 1) }));
-        traitGains.push({ label: `${target.name}·好感`, delta: 1 });
+        traitGains.push({ label: `${student.name}天赋·${target.name}好感`, delta: 1 });
       }
     }
 
     // optimization_addict: random active project with leader → progress +1%
-    // Only shows if the project has a leader; label includes the leader's name.
     if (t.includes('optimization_addict')) {
       const eligible = activeProjects.filter(p => p.leaderId !== null);
       if (eligible.length > 0) {
@@ -366,11 +379,7 @@ function applyTraitMonthlyEffects(
             ? { ...p, progress: Math.min(100, p.progress + 1) }
             : p,
         );
-        const projName = projectById[proj.projectId]?.name ?? proj.projectId;
-        const leaderName = proj.leaderId === 'pi'
-          ? 'PI'
-          : (students.find(s => s.id === proj.leaderId)?.name ?? proj.leaderId!);
-        traitGains.push({ label: `${leaderName}·《${projName}》进度`, delta: 1, suffix: '%' });
+        traitGains.push({ label: `${student.name}天赋·项目进度`, delta: 1, suffix: '%' });
       }
     }
   }
@@ -382,7 +391,7 @@ function applyTraitMonthlyEffects(
       moodChanges[s.id] = (moodChanges[s.id] ?? 0) + 1;
     }
     const sunshineStudent = activeStudents.find(s => s.traitIds.includes('morale_sunshine'));
-    if (sunshineStudent) traitGains.push({ label: `${sunshineStudent.name}效果·全员心情`, delta: 1 });
+    if (sunshineStudent) traitGains.push({ label: `${sunshineStudent.name}天赋·全员心情`, delta: 1 });
   }
 
   // fortune_engineer: if this student's happiness changed ≥3 times this month → engineering +2
@@ -392,7 +401,7 @@ function applyTraitMonthlyEffects(
         updateStudent(student.id, s => ({
           ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 2) },
         }));
-        traitGains.push({ label: `${student.name}·工程`, delta: 2 });
+        traitGains.push({ label: `${student.name}天赋·工程`, delta: 2 });
       }
     }
   }
@@ -425,13 +434,14 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   ) {
     const finalStudents = state.students.map(updateStudent).map(s => checkGraduation(s, next.graduationExtensions));
     const finalState = { ...next, students: finalStudents };
-    const summaryEntry = buildEndingSummary(finalState);
+    const summarySlides = buildEndingSummary(finalState);
     const timeEndingId = pickTimeEnding(finalState);
 
     return {
       ...finalState,
       eventQueue: [{ id: timeEndingId }],
-      storyLog: [...state.storyLog, summaryEntry],
+      pendingSummarySlides: summarySlides,
+      // storyLog is left unchanged; each slide appends itself as the player clicks through
     };
   }
 
@@ -740,6 +750,13 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     for (const eid of sequence) {
       if (events[eid]) forcedEvents.push({ id: eid });
     }
+  }
+
+  // industry_invite: Year 7 Month 5 — one month before the game ends, if funding is high
+  // Accepting this event sets chosenOptionIds 'industry_invite_accept' → pickTimeEnding returns ending_time_wealthy
+  if (next.time.year === 7 && next.time.month === 5 && !seenEventIds.has('industry_invite')
+      && next.lab.funding > 150) {
+    forcedEvents.push({ id: 'industry_invite' });
   }
 
   // graduation_check series: injected in June based on enrolledAt + 3/4/5

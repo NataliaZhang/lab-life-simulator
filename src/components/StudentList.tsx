@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import type { Student } from '../types';
-import type { ActiveProject } from '../types/project';
+import type { ActiveProject, CompletedProject } from '../types/project';
 import { TraitTag } from './TraitTag';
-import { projectById } from '../data/projects';
+import { expressionUrl, pickExpression } from '../data/studentArt';
+import type { StudentExpression } from '../types/studentArt';
+import { StudentDetailModal } from './StudentDetailModal';
 
 const PI_BIOS = [
   '实验室头号保姆',
@@ -37,23 +39,46 @@ function PICard() {
 interface Props {
   students: Student[];
   activeProjects: ActiveProject[];
+  completedProjects: CompletedProject[];
   onAdvanceMonth: () => void;
   canAdvanceMonth: boolean;
   isGameOver: boolean;  // hides the continue button when game is over (ending modal handles restart)
 }
 
-function StatBar({ value, warn, max = 100 }: { value: number; warn?: boolean; max?: number }) {
+/** Q版头像，图片缺失时降级为首字母占位 */
+function ExpressionAvatar({ studentId, expression, name }: {
+  studentId: string;
+  expression: StudentExpression;
+  name: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const url = expressionUrl(studentId, expression);
+
+  if (failed || !url) {
+    return (
+      <div className="student-avatar student-avatar--placeholder" aria-hidden>
+        {name.charAt(0)}
+      </div>
+    );
+  }
   return (
-    <div className="stat-bar">
-      <div
-        className={`stat-bar__fill${warn ? ' stat-bar__fill--warn' : ''}`}
-        style={{ width: `${Math.min(100, (value / max) * 100)}%` }}
-      />
-    </div>
+    <img
+      src={url}
+      alt={`${name} ${expression}`}
+      className="student-avatar"
+      onError={() => setFailed(true)}
+    />
   );
 }
 
-function StudentCard({ student, activeProjects }: { student: Student; activeProjects: ActiveProject[] }) {
+
+function StudentCard({
+  student,
+  onOpenDetail,
+}: {
+  student: Student;
+  onOpenDetail: (s: Student) => void;
+}) {
   if (student.status === 'graduated') {
     return (
       <div className="student-card student-card--graduated">
@@ -72,43 +97,42 @@ function StudentCard({ student, activeProjects }: { student: Student; activeProj
     );
   }
 
-  const assignedProject = activeProjects.find(p => p.leaderId === student.id);
-  const projectName = assignedProject
-    ? (projectById[assignedProject.projectId]?.name ?? assignedProject.projectId)
-    : null;
+  const expression = pickExpression(student.happiness);
 
   return (
     <div className="student-card">
+      {/* Avatar + name + year badge + traits */}
       <div className="student-card__header">
-        <span className="student-card__name">{student.name}</span>
-        <span className="student-card__year">博{student.year}</span>
-      </div>
-      <div className="student-card__traits">
-        {student.traitIds.map(id => (
-          <TraitTag key={id} traitId={id} />
-        ))}
-      </div>
-      <div className="student-card__project">
-        {projectName
-          ? <span className="student-project-tag">📋 {projectName}</span>
-          : <span className="student-project-tag student-project-tag--none">当前没有进行中的项目</span>}
-      </div>
-      <div className="student-card__stats">
-        <div className="student-stat">
-          <span className="student-stat__label">好感</span>
-          <StatBar value={student.favor} warn={student.favor <= 40} max={100} />
-          <span className="student-stat__num">{Math.round(student.favor)}</span>
-        </div>
-        <div className="student-stat">
-          <span className="student-stat__label">心情</span>
-          <StatBar value={student.happiness} warn={student.happiness < 30} max={100} />
-          <span className="student-stat__num">{Math.round(student.happiness)}</span>
+        <button
+          className="student-avatar-btn"
+          onClick={() => onOpenDetail(student)}
+          title="查看角色详情"
+        >
+          <ExpressionAvatar
+            studentId={student.id}
+            expression={expression}
+            name={student.name}
+          />
+        </button>
+        <div className="student-card__header-text">
+          <div className="student-card__name-line">
+            <span className="student-card__name">{student.name}</span>
+            <span className="student-card__year">博{student.year}</span>
+          </div>
+          <div className="student-card__traits">
+            {student.traitIds.map(id => (
+              <TraitTag key={id} traitId={id} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="student-card__skills">
-        <span className="skill" title="理论能力">理论:{student.skills.theory}</span>
-        <span className="skill" title="工程能力">工程:{student.skills.engineering}</span>
-        <span className="skill" title="社交能力">社交:{student.skills.social}</span>
+
+      {/* Mood stats */}
+      <div className="student-card__attrs">
+        <div className="student-card__mood-row">
+          <span className={`skill skill--mood${student.favor <= 40 ? ' skill--warn' : ''}`} title="好感度">好感:{Math.round(student.favor)}</span>
+          <span className={`skill skill--mood${student.happiness < 30 ? ' skill--warn' : ''}`} title="心情">心情:{Math.round(student.happiness)}</span>
+        </div>
       </div>
     </div>
   );
@@ -117,31 +141,49 @@ function StudentCard({ student, activeProjects }: { student: Student; activeProj
 export function StudentList({
   students,
   activeProjects,
+  completedProjects,
   onAdvanceMonth,
   canAdvanceMonth,
   isGameOver,
 }: Props) {
+  const [detailStudent, setDetailStudent] = useState<Student | null>(null);
+
   return (
-    <aside className="student-panel">
-      <h3 className="student-panel__title">实验室成员</h3>
-      <div className="student-panel__list">
-        <PICard />
-        {students.map(s => (
-          <StudentCard key={s.id} student={s} activeProjects={activeProjects} />
-        ))}
-      </div>
-      {!isGameOver && (
-        <div className="student-panel__actions">
-          <button
-            className="btn btn--primary"
-            onClick={onAdvanceMonth}
-            disabled={!canAdvanceMonth}
-            title={canAdvanceMonth ? '' : '请先做出选择'}
-          >
-            继续
-          </button>
+    <>
+      <aside className="student-panel">
+        <h3 className="student-panel__title">实验室成员</h3>
+        <div className="student-panel__list">
+          <PICard />
+          {students.map(s => (
+            <StudentCard
+              key={s.id}
+              student={s}
+              onOpenDetail={setDetailStudent}
+            />
+          ))}
         </div>
+        {!isGameOver && (
+          <div className="student-panel__actions">
+            <button
+              className="btn btn--primary"
+              onClick={onAdvanceMonth}
+              disabled={!canAdvanceMonth}
+              title={canAdvanceMonth ? '' : '请先做出选择'}
+            >
+              继续
+            </button>
+          </div>
+        )}
+      </aside>
+
+      {detailStudent && (
+        <StudentDetailModal
+          student={detailStudent}
+          activeProjects={activeProjects}
+          completedProjects={completedProjects}
+          onClose={() => setDetailStudent(null)}
+        />
       )}
-    </aside>
+    </>
   );
 }

@@ -27,7 +27,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gmm_first_meeting_normal',
-        text: '顺着她讲，假装这很正常',
+        text: '顺着她，假装这很正常',
         outcomes: [
           {
             weight: 1,
@@ -76,7 +76,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gmm_group_meeting_ignore',
-        text: '全当梦里看见的，继续散会',
+        text: '全当做梦，散会',
         outcomes: [
           {
             weight: 1,
@@ -89,7 +89,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_group_meeting_praise',
-        text: '当场官宣她为组会守护神',
+        text: '当场封神：组会守护神',
         outcomes: [
           {
             weight: 1,
@@ -137,7 +137,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_gossip_use_intel',
-        text: '立刻把她注册为实验室首席情报官',
+        text: '立刻封她为首席情报官',
         outcomes: [
           {
             weight: 1,
@@ -171,7 +171,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gmm_dream_shocked',
-        text: '梦境驱动开发？这合法吗？',
+        text: '梦境驱动开发，合法吗',
         outcomes: [
           {
             weight: 1,
@@ -186,7 +186,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_dream_record',
-        text: '立刻当场建立睡眠驱动开发方法论',
+        text: '即刻建立睡眠驱动开发论',
         outcomes: [
           {
             weight: 1,
@@ -219,7 +219,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gmm_mystery_ask_where',
-        text: '问她消失的两小时去哪了',
+        text: '追问：两小时人去哪了',
         outcomes: [
           {
             weight: 1,
@@ -280,7 +280,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_code_merge',
-        text: '变量名即文档，直接合并',
+        text: '变量名即文档，合了',
         outcomes: [
           {
             weight: 1,
@@ -329,7 +329,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_debug_how',
-        text: '追问这套一分钟玄学是怎么运作的',
+        text: '刨根问底：这玄学怎么运作',
         outcomes: [
           {
             weight: 1,
@@ -377,7 +377,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_deadline_praise',
-        text: '去哪了不重要，结果说明一切',
+        text: '去哪不重要，结果说话',
         outcomes: [
           {
             weight: 1,
@@ -411,7 +411,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gmm_knows_ignore',
-        text: '全当梦里看见的，换个话题',
+        text: '全当做梦，换话题',
         outcomes: [
           {
             weight: 1,
@@ -424,7 +424,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_knows_ask',
-        text: '必须当面问清楚她怎么会知道这个',
+        text: '必须当面问：她怎么知道的',
         outcomes: [
           {
             weight: 1,

@@ -78,12 +78,18 @@ export function useGameEngine(): GameEngine {
       return;
     }
 
+    // Ending summary: reveal one paragraph per click before showing the ending event
+    if (state.pendingSummarySlides.length > 0) {
+      dispatch({ type: 'DISMISS_SUMMARY_SLIDE' });
+      return;
+    }
+
     if (state.eventQueue.length > 0) {
       dispatch({ type: 'PRESENT_EVENT' });
     } else {
       dispatch({ type: 'ADVANCE_MONTH' });
     }
-  }, [state.activeEventId, state.activeParagraphIndex, state.eventQueue.length, modalVisible]);
+  }, [state.activeEventId, state.activeParagraphIndex, state.eventQueue.length, state.pendingSummarySlides.length, modalVisible]);
 
   const admitStudent = useCallback((candidateId: string) => {
     dispatch({ type: 'ADMIT_STUDENT', candidateId });

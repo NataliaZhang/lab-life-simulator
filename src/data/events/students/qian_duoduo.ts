@@ -18,7 +18,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_first_meeting_academic',
-        text: '学术第一，产品的事等毕业再说',
+        text: '学术第一，产品毕业再谈',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他，博士阶段的核心任务是把科学问题做扎实，落地是后面的事。钱多多听完，把小本本合上，说"老师说得对，我先把研究弄明白"。他收起了草图，但你注意到他在本本封面上标了一行字，写着"备用：等论文出来再看"。那个"备用"，让你有说不清的感受，仿佛他在自己的任务栏里给这个想法挂了个"挂起"状态，随时可以恢复。',
@@ -31,7 +31,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_first_meeting_curious',
-        text: '……给我看看那个MVP',
+        text: '行，先给我看看MVP',
         outcomes: [{
           weight: 1,
           narrative: '你接过本本翻开，草图画得粗糙，但逻辑清得出奇：用户是谁，他们卡在哪个环节，技术能在哪里介入，体验流画成一条线，末尾还标了个问号，注释写着"最难搞的点"。你抬头看他，说"用户分析这块想得还挺清楚的"。钱多多立刻抢回本本，开始在旁边补充新内容。你们聊了将近一小时，实验室的事一句没讲，他大脑里那个常驻进程跑得全程满载。',
@@ -77,7 +77,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_group_meeting_allow',
-        text: '让他说完，这倒是个新角度',
+        text: '让他说完，角度倒新颖',
         outcomes: [{
           weight: 1,
           narrative: '你示意他继续。钱多多把定价逻辑讲完，话锋一转，指出如果选订阅制，优化目标应该从单次准确率换成用户留存率，而这恰好和对照组那个"异常"数据有关：那个偏差在留存率视角下其实是合理的。组会多花了些时间，但大家对"我们为什么优化这个指标"有了更清楚的共识。有时候跑题是因为大脑在更高的层次上没有跑题。',
@@ -110,7 +110,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_user_interview_praise',
-        text: '这个主动性加分，好好聊聊',
+        text: '主动性加分，好好聊聊',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他，主动去找真实用户的意识很少见，访谈设计也想得比较清楚。钱多多点头，说"我就是想搞清楚我们做的东西有没有人真的需要，不然论文发出去了，落不了地，感觉很浪费"。你一时有些语塞，这个逻辑在学术圈不太流行，但你找不到哪里错了。有些问题就是这样，简单到让人没法反驳。',
@@ -124,7 +124,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_user_interview_redirect',
-        text: '思路不错，但现在先把研究做扎实',
+        text: '思路不错，先把研究做扎实',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他方向是对的，但现阶段最要紧的是把核心方法做扎实，用户验证等技术成熟了再系统推进。钱多多听完，把PPT收起来，说"那我先放这，等技术做出来再拿出来对比"。说完认认真真打开了文献库。你感觉他不是在敷衍你，他只是在内心把这件事挪到了任务队列的稍后位置，标记为"依赖：研究进度"。',
@@ -199,7 +199,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_pitch_help_edit',
-        text: '帮他改，但这一页必须删掉',
+        text: '帮改，但这页必须删',
         outcomes: [{
           weight: 1,
           narrative: '你直接告诉他，未发表的数据不能出现在公开场合——不是规矩问题，是保护实验室和他自己。钱多多皱了下眉，问"那这一页只剩方向描述，没有数据，能撑住吗？"你说可以，技术验证可以用"内测结果"配上定性用户反馈。他想了一下，点头，重新打开PPT开始改。改完之后那页比原来更简洁，逻辑没有削弱，他在压力下的执行力，比你预想的要好。',
@@ -213,7 +213,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_pitch_reject',
-        text: '第六页有问题，重新想清楚再来',
+        text: '第六页有问题，想清楚再来',
         outcomes: [{
           weight: 1,
           narrative: '你说这一页有问题，未发表的数据不能用，让他重新想清楚这页怎么处理再来找你。钱多多没有辩解，直接说"好，我想想"，拿着电脑走了。两天后他再来，第六页已经换成了用户访谈的引用，他在校园里做的那二十份访谈，终于派上了用场，而且比那张实验图更有说服力。他自己也说"这个版本其实更好"。有时候被卡住，才会找到更好的路。',
@@ -245,7 +245,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_investor_improvise',
-        text: '硬撑，临场介绍一下研究方向',
+        text: '硬撑，临场介绍方向',
         outcomes: [{
           weight: 1,
           narrative: '你简单介绍了实验室的研究方向，技术层面讲得清楚，商业化部分用了"探索阶段"一笔带过。投资人听完点头，说"做得很扎实"。参观结束后，你拉着钱多多说了两句：以后带任何外部人来实验室，必须提前告知。他点头，没有解释，说了句"老师，对不起，我考虑不周"，没有多余的话，承认得很干脆，干脆得让你有点无处发力。两周后那位投资人发邮件，说对实验室方向有兴趣，问能否签一份小额技术顾问协议。',
@@ -260,7 +260,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_investor_end_visit',
-        text: '礼貌送客，改天约正式交流',
+        text: '礼貌送客，改天再约',
         outcomes: [{
           weight: 1,
           narrative: '你说今天下午组里有内部讨论，不太方便长时间接待，可以约改天正式交流。对方理解地点头，留了名片，和钱多多出门了。钱多多当晚发来一条消息："对不起老师，下次提前跟你说"，发完又补了一句"我不是故意的，只是有点冲动了"。你回了"下次注意"，然后把那张名片压在了桌角，暂时用不上，但也没扔。',
@@ -292,7 +292,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_product_insight_adopt',
-        text: '采纳这个角度，按他说的来',
+        text: '采纳这个角度，照办',
         outcomes: [{
           weight: 1,
           narrative: '你说"这个分析方式有道理，按这个逻辑来"。钱多多没有太多表情，只是把那张用户流程图拍下来，后来整理进了项目文档里。调整后的方向在后续实验中减少了不少无效尝试。钱多多提起这件事，只说了一句："我觉得搞清楚用户是谁，比什么都重要。"话里没有自我标榜的意思，他只是陈述了一个他认为显而易见的事实。',
@@ -307,7 +307,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_product_insight_praise_only',
-        text: '分析不错，但方向还是按原计划',
+        text: '分析不错，方向不变',
         outcomes: [{
           weight: 1,
           narrative: '你说他这个分析框架很好，但综合考量之后方向维持原判。钱多多点头，说"好的老师，我只是提个参考"，把白板上那张图擦掉了。但你看到他在本子里把那三个摩擦点又抄了一遍，一字不差。他的想法没有消失，只是换了一个地方存档，等下一次有用的时候再调出来。',
@@ -351,7 +351,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_anti_finance_objective',
-        text: '方向选择需要多维评估，不能只凭价值判断过滤',
+        text: '方向选择需多维评估',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他，应用方向的选择需要多维权衡，"有没有用"是一个角度，但可行性、资源匹配、团队能力也都要考虑，不能靠主观判断直接过滤掉一个领域。钱多多听完，沉默了几秒，说"我知道，我只是觉得如果有得选，我会选对真实用户有帮助的那个"。他没有继续争，但你感觉他的标准没有因为你说的话改变，他只是把它放进了自己的权衡表，排在了第一位，然后说好的，继续走他的路。',
@@ -382,7 +382,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_real_impact_celebrate',
-        text: '先高兴，这个反馈是真的',
+        text: '先高兴，这反馈是真的',
         outcomes: [{
           weight: 1,
           narrative: '你回了他："看到了，这个反馈很真实，方向是对的。"他立刻回："老师我知道了！需求是真的！不是我自己猜的！"后面跟了一串感叹号，比他平时说话时的措辞活跃得多，像是长期压着的某种确认终于被解开了。你们没有继续聊，但那条对话你没有删。有时候，一件事情被真实的人需要，就已经是一个完整的意义了。没过多久，一家中小型企业发来合作邮件，说看到了demo，问有没有兴趣做一个小型定向合作。',
@@ -397,7 +397,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_real_impact_paper',
-        text: '把这个反馈转化成论文里的用户验证',
+        text: '把反馈转化为用户验证',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他，用户的正向反馈是很好的信号，但要转化成论文里能引用的用户研究，这个证据才能正式成立。钱多多停顿了一下，回："老师，我能不能先高兴一会儿？"你看了一眼那条消息，回了个"可以"。他又过了一会儿才发下一条："好，我去设计一个正式的用户研究协议。"情绪和工作，他都会处理，顺序是先情绪，后工作，执行起来一点也不含糊。',
@@ -439,7 +439,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_alumni_stay_in_touch',
-        text: '协议先缓一缓，保持联系就好',
+        text: '协议先缓，保持联系',
         outcomes: [{
           weight: 1,
           narrative: '你告诉他协议可以等产品更成熟一些再推进，但很高兴知道他做得不错。他回复说"好的老师，随时"，附带了产品的内测链接，说如果实验室有人感兴趣可以试用，不用给反馈，顺便看看就行。你把链接转发进了组里，三个人当天就注册了账号。其中一个后来发消息说"这个东西还挺有用的"。钱多多没在评论区解释技术原理，他只是做了一个能用的东西，然后等人来用。',

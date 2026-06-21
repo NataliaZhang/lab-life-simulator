@@ -141,7 +141,7 @@ export const dailyEvents: Record<string, GameEvent> = {
     title: '组会气氛有点微妙',
     description: [
       '{studentName}在组会上汇报到一半，{student2Name}插了一句，指出实验设计可能有问题。',
-      '{studentName}停顿了一下，回了句"我觉得没问题"，语气有点冷。整个会议室的空气凝固了一瞬，所有人都开始专心盯着自己的笔记本屏幕。',
+      '{studentName}停顿了一下，回了句"我觉得没问题"，语气有点生硬。整个会议室的空气凝固了一瞬，所有人都开始假装专心盯着自己的笔记本屏幕。',
     ],
     prompt: '组会现场尴尬了，你怎么处理？',
     triggerConditions: [
@@ -155,7 +155,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你接过话题，说{studentName}和{student2Name}的思路都有道理，建议两人会后各自补充实验再讨论。气氛像被人轻轻戳破，慢慢恢复了正常。两人后来在走廊里碰到，私下道了歉——你没有旁观，但听说了。',
+            narrative: '你接过话题，说{studentName}和{student2Name}的思路都有道理，建议两人会后各自补充实验再讨论。气氛像被人轻轻戳破，慢慢恢复了正常。两人后来在走廊里碰到，私下道了歉。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 5 },
               { type: 'randomStudent', stat: 'favor', delta: 3 },
@@ -169,8 +169,8 @@ export const dailyEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你打了个圆场，大家表面上继续往下讲。但你注意到{studentName}和{student2Name}之后的每次交流都比之前客气了零点五倍——那种客气，叫做礼貌性疏远。',
             effects: [
-              { type: 'randomStudent', stat: 'happiness', delta: -3 },
-              { type: 'randomStudent2', stat: 'happiness', delta: -3 },
+              { type: 'randomStudent', stat: 'happiness', delta: -5 },
+              { type: 'randomStudent2', stat: 'happiness', delta: -5 },
             ],
           },
         ],
@@ -185,7 +185,7 @@ export const dailyEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
               { type: 'randomStudent2', stat: 'skills.theory', delta: 3 },
-              { type: 'randomStudent', stat: 'happiness', delta: -3 },
+              { type: 'randomStudent', stat: 'happiness', delta: -5 },
             ],
             conditions: [{ type: 'anyStudent', stat: 'favor', op: '>=', value: 50 }],
           },
@@ -235,7 +235,7 @@ export const dailyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '讲到第三段，{studentName}自己停下来了，对着空气发出了一种介于"啊"和"哦"之间的声音："……学习率太大了。" 橡皮鸭调试法又一次拯救了人类。你没说一句话，问题解决了。这是你今天最省力的一次答疑。',
+            narrative: '讲到第三段，{studentName}自己停下来了，对着空气发出了一种介于"啊"和"哦"之间的声音："我懂了，是学习率太大了。" \n\n橡皮鸭调试法又一次拯救了人类。你没说一句话，问题解决了。这是你今天最省力的一次答疑。',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: 10 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
@@ -243,7 +243,7 @@ export const dailyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '讲完了，你们也没找到。又联合debug了好一阵，翻遍了所有你能想到的地方，最后发现是数值溢出——藏在一个谁都没注意的数据预处理步骤里。{studentName}盯着那行代码看了很久，说："它一直都在这里。"',
+            narrative: '讲完了，你们也没找到。又联合debug了好一阵，翻遍了所有你能想到的地方，最后发现是数值溢出——藏在一个谁都没注意的数据预处理步骤里。\n\n{studentName}盯着那行代码看了很久，说："它一直都在这里。"',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -3 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 3 },

@@ -28,7 +28,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxt_first_meeting_realistic',
-        text: '温柔劝退：咱先做能发出去的',
+        text: '温柔劝退：先做能发出去的',
         outcomes: [
           {
             weight: 1,
@@ -77,7 +77,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxt_arxiv_limit',
-        text: '每周一篇就够，精选一下',
+        text: '每周一篇，精选',
         outcomes: [
           {
             weight: 1,
@@ -139,7 +139,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxt_workshop_review',
-        text: '先查一下审稿委员会再说',
+        text: '先查查审稿委员会',
         outcomes: [
           {
             weight: 1,
@@ -190,7 +190,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxt_related_work_narrow',
-        text: '材料科学的事暂时放一放',
+        text: '材料科学先放一放',
         outcomes: [
           {
             weight: 1,
@@ -225,7 +225,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxt_insight_tell',
-        text: '告诉毕小天，还真有点搞头',
+        text: '告诉他：还真有点搞头',
         outcomes: [
           {
             weight: 1,
@@ -241,7 +241,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxt_insight_later',
-        text: '不说，先偷偷独自整个完整方案',
+        text: '不说，先偷偷憋个方案',
         energyCost: 5,
         outcomes: [
           {
@@ -291,7 +291,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxt_crisis_communicate',
-        text: '先帮他跟系里争取修改机会',
+        text: '先帮他争取修改机会',
         outcomes: [
           {
             weight: 1,
@@ -379,7 +379,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxt_find_evaluate',
-        text: '认真评估，列入课题计划',
+        text: '认真评估，列入计划',
         outcomes: [
           {
             weight: 1,
@@ -446,7 +446,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxt_yanbi_validate',
-        text: '人为刀俎，为了毕业证委屈一下吧',
+        text: '忍辱负重，先毕业',
         outcomes: [
           {
             weight: 1,

@@ -77,7 +77,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_ddl_read_now',
-        text: '立刻放下手头，今天就回',
+        text: '放下手头，今天就回',
         outcomes: [
           {
             weight: 1,
@@ -176,7 +176,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_takes_over_accept',
-        text: '实验室需要你这样的人才',
+        text: '实验室需要你这种人',
         outcomes: [
           {
             weight: 1,
@@ -191,7 +191,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_takes_over_discuss',
-        text: '民主先行，先开个会商量',
+        text: '先开会，走民主程序',
         outcomes: [
           {
             weight: 1,
@@ -224,7 +224,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_execution_tell_her',
-        text: '直说：你是实验室的定海神针',
+        text: '直说：你是定海神针',
         outcomes: [
           {
             weight: 1,
@@ -238,7 +238,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_execution_challenge',
-        text: '加码：给她一个难一倍的任务，测测上限',
+        text: '加码：上限测试，难度翻倍',
         outcomes: [
           {
             weight: 1,
@@ -288,7 +288,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_reverse_push_self_write',
-        text: '自己写，让她把材料发过来就行',
+        text: '自己写，让她发材料',
         outcomes: [
           {
             weight: 1,
@@ -321,7 +321,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_chaos_read',
-        text: '认真看完，一起讨论怎么改',
+        text: '认真看，一起讨论怎么改',
         outcomes: [
           {
             weight: 1,
@@ -337,7 +337,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_chaos_dismiss',
-        text: '谢谢好意，但这是管理层的事',
+        text: '谢谢，但这是管理层的事',
         outcomes: [
           {
             weight: 1,
@@ -370,7 +370,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_overtime_moved',
-        text: '被整破防了，发消息谢谢她',
+        text: '破防了，发消息谢她',
         outcomes: [
           {
             weight: 1,
@@ -386,7 +386,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_overtime_soon_over',
-        text: '解释：特殊情况，再熬两周',
+        text: '解释：特殊情况，再撑两周',
         outcomes: [
           {
             weight: 1,
@@ -420,7 +420,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'hsx_efficiency_share',
-        text: '全组通报表扬，推广这个方案',
+        text: '全组通报表扬，全面推广',
         outcomes: [
           {
             weight: 1,
@@ -437,7 +437,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'hsx_efficiency_doc',
-        text: '让她整理成技术文档，留给后人',
+        text: '让她整理文档，留给后人',
         outcomes: [
           {
             weight: 1,

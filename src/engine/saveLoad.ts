@@ -1,7 +1,7 @@
 import type { GameState } from '../types';
 
 const SAVE_KEY = 'lab-life-simulator-save';
-const SAVE_VERSION = 9; // bumped for noStudentMonths field addition
+const SAVE_VERSION = 10; // bumped for pendingSummarySlides field addition
 
 interface SaveFile {
   version: number;

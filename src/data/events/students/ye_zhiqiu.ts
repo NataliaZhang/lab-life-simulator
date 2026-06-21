@@ -18,7 +18,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_first_meeting_explain',
-        text: '开展术语对齐专项会议：系统设计算工程',
+        text: '召开术语对齐会：设计算工程',
         outcomes: [
           {
             weight: 1,
@@ -33,7 +33,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_first_meeting_defer',
-        text: '悬置定义争议，先聊研究方向',
+        text: '先搁置定义，聊研究方向',
         outcomes: [
           {
             weight: 1,
@@ -80,7 +80,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_definition_battle_redirect',
-        text: '友情提示：我们还有议程',
+        text: '友情提示：还有议程',
         outcomes: [
           {
             weight: 1,
@@ -112,7 +112,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_theory_saves_day_record',
-        text: '立刻存档，把这个条件升格为方法论核心命题',
+        text: '存档，升格为核心方法论',
         outcomes: [
           {
             weight: 1,
@@ -176,7 +176,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_env_crisis_theorize',
-        text: '数学的归数学，环境的……算了',
+        text: '数学归数学，环境的……算了',
         outcomes: [
           {
             weight: 1,
@@ -208,7 +208,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_checklist_follow',
-        text: '逐条过：清单就是用来走的',
+        text: '逐条过，清单就是用来走的',
         outcomes: [
           {
             weight: 1,
@@ -270,7 +270,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_logic_police_defend',
-        text: '捍卫直觉：类比够用就行，不用完全严格',
+        text: '类比够用就行，不必完全严格',
         outcomes: [
           {
             weight: 1,
@@ -302,7 +302,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_cant_code_praise_theory',
-        text: '先肯定理论，然后要求可运行的版本',
+        text: '先肯定理论，再要可运行版本',
         outcomes: [
           {
             weight: 1,
@@ -351,7 +351,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_reliable_delivery_praise',
-        text: '表扬：附录部分非常有价值',
+        text: '表扬：附录非常有价值',
         outcomes: [
           {
             weight: 1,
@@ -368,7 +368,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_reliable_delivery_ask',
-        text: '好奇发问：第十三天，是怎么做到的？',
+        text: '好奇：第十三天怎么做到的',
         outcomes: [
           {
             weight: 1,
@@ -401,7 +401,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_proof_breakthrough_publish',
-        text: '立刻整理发表，这个值得单独一篇',
+        text: '立刻整理，值得单独一篇',
         outcomes: [
           {
             weight: 1,
@@ -417,7 +417,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_proof_breakthrough_verify',
-        text: '先独立验证，确认无误再庆祝',
+        text: '先独立验证，再庆祝',
         outcomes: [
           {
             weight: 1,
@@ -448,7 +448,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'yzq_alumni_visit_affirm',
-        text: '回复：措辞没问题，放心发',
+        text: '回复：没问题，放心发',
         outcomes: [
           {
             weight: 1,
@@ -461,7 +461,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
       },
       {
         id: 'yzq_alumni_visit_soften',
-        text: '建议再委婉一些，学术圈关系要维护',
+        text: '建议委婉点，学术圈关系要维护',
         outcomes: [
           {
             weight: 1,

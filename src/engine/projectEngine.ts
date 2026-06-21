@@ -146,6 +146,9 @@ export function assignLeader(
   const projectIdx = state.activeProjects.findIndex(p => p.projectId === projectId);
   if (projectIdx === -1) return state;
 
+  // PI cannot lead a project when energy is 0
+  if (newLeaderId === 'pi' && state.lab.energy <= 0) return state;
+
   const project = state.activeProjects[projectIdx]!;
   const isSwap = project.leaderId !== null && project.leaderId !== newLeaderId;
 
@@ -281,8 +284,8 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
           id: `project_pi_stall_${ap.projectId}_${state.time.year}_${state.time.month}`,
           time: { ...state.time },
           type: 'system',
-          title: `「${projectDef.name}」PI精力耗尽`,
-          narrative: `PI 精力耗尽，「${projectDef.name}」本月完成推进后，项目负责人自动解除，进度回退至 ${progressAfterPenalty}%。请重新分配负责人。`,
+          title: `「${projectDef.name}」你的精力耗尽`,
+          narrative: `你的精力耗尽，「${projectDef.name}」本月完成推进后，项目负责人自动解除，进度回退至 ${progressAfterPenalty}%。请重新分配负责人。`,
         });
         continue;
       }

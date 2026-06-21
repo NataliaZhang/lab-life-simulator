@@ -175,7 +175,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'complete_process',
-        text: '认真完成全套材料（消耗精力）',
+        text: '苦填全套材料（消耗精力）',
         energyCost: 25,
         outcomes: [
           {
@@ -196,7 +196,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'push_back',
-        text: '向委员会提出申诉，要求解释触发理由',
+        text: '申诉到底：凭什么触发',
         outcomes: [
           {
             weight: 1,
@@ -274,7 +274,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'attend_fully',
-        text: '全程认真参加（消耗精力）',
+        text: '认命全程参与（消耗精力）',
         energyCost: 20,
         outcomes: [
           {
@@ -294,7 +294,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'send_apology',
-        text: '发一封措辞精心的请假邮件',
+        text: '字斟句酌地请假',
         outcomes: [
           {
             weight: 2,
@@ -329,7 +329,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'escalate_to_chair',
-        text: '升级到系主任，请求介入',
+        text: '越级上报，找系主任',
         outcomes: [
           {
             weight: 2,
@@ -350,7 +350,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'abandon_the_35',
-        text: '放弃，就当给体制交了学费',
+        text: '认栽，给体制交学费',
         outcomes: [
           {
             weight: 1,
@@ -363,7 +363,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bureaucracy_speedrun',
-        text: '穷尽一切手段，必须报到',
+        text: '不惜一切，死也要报到',
         outcomes: [
           {
             weight: 1,
@@ -412,7 +412,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'join_wellness',
-        text: '带着学生去参加健康活动',
+        text: '拉全组参加健康活动',
         outcomes: [
           {
             weight: 1,
@@ -449,10 +449,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
 
   late_alumni_success: {
     id: 'late_alumni_success',
-    title: '第一个学生出息了',
+    title: '学生出息了',
     description: [
       '你的手机屏幕亮了，是{studentName}发来的消息。你还记得{studentName}，那个把学习率调到1.0、看着loss曲线飞上天际然后若无其事问"老师这正常吗"的{studentName}。',
-      '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外，偶尔把水杯转一圈再转回来。',
+      '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外发愁。',
     ],
     prompt: '{studentName}拿了最佳论文奖，你想：',
     triggerConditions: [
@@ -462,7 +462,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'celebrate_publicly',
-        text: '发组里通知，公开庆祝',
+        text: '发组里通知，普天同庆',
         outcomes: [
           {
             weight: 1,
@@ -478,7 +478,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'reply_privately',
-        text: '单独回消息，说几句真心话',
+        text: '私信说几句掏心窝的',
         outcomes: [
           {
             weight: 1,
@@ -523,7 +523,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'tight_research_talk',
-        text: '做一个严谨扎实的研究报告',
+        text: '正经做报告，字字有据',
         outcomes: [
           {
             weight: 2,
@@ -546,7 +546,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'visionary_talk',
-        text: '讲一个宏大的愿景报告',
+        text: '画一个宏大的饼',
         outcomes: [
           {
             weight: 2,
@@ -568,7 +568,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'tell_rejection_story',
-        text: '讲一个包含你最惨被拒故事的报告',
+        text: '现身说法：聊聊被拒那些年',
         outcomes: [
           {
             weight: 1,
@@ -607,7 +607,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'encourage_to_go',
-        text: '鼓励{studentName}去，做学术不是唯一的路',
+        text: '放人：学术不是唯一的路',
         outcomes: [
           {
             weight: 1,
@@ -622,7 +622,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'keep_in_academia',
-        text: '劝{studentName}留在学术界，讲讲学术的价值',
+        text: '苦口婆心：学术界很好的',
         outcomes: [
           {
             weight: 2,
@@ -637,6 +637,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你讲了学术的价值，{studentName}认真听了，然后说："老师，我考虑清楚了，我还是想去。" 你点了点头，说好，祝顺利。{studentName}走后，你坐在椅子上想了一会儿，意识到那一个小时讲的，其实也是说给你自己听的。',
             effects: [
+              { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'randomStudent', stat: 'favor', delta: 8 },
             ],
@@ -645,7 +646,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'make_a_deal',
-        text: '提供更好的条件留住{studentName}（花10万）',
+        text: '砸钱留人',
         fundingCost: 10,
         outcomes: [
           {
@@ -662,8 +663,10 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你提高了条件，{studentName}感谢了你的诚意，然后还是去了。大概这件事的结局从那封offer邮件到达的时候就已经定了，你们两个只是把道别仪式拉长了一点。你把那10万额度放回了经费计划里，调整了研究方向，继续往前。',
             effects: [
+              { type: 'leaveStudent' },
               { type: 'randomStudent', stat: 'favor', delta: 10 },
-              { type: 'lab', stat: 'reputation', delta: 1 },
+              { type: 'lab', stat: 'funding', delta: 10 },
+              { type: 'lab', stat: 'reputation', delta: 3 },
             ],
           },
         ],
@@ -681,13 +684,13 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     ],
     prompt: '记者要来实验室写报道，你决定',
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 45 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 145 },
       { type: 'time', field: 'year', op: '>=', value: 3 },
     ],
     options: [
       {
         id: 'agree_and_prepare',
-        text: '同意，提前做一些准备',
+        text: '同意，提前布置准备',
         outcomes: [
           {
             weight: 2,
@@ -699,7 +702,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你做了准备，当天一切顺利，记者满意地离开了。报道发出来时，你的导师——那位你读博期间的导师——发给你一条消息："看到报道了，写得不错。" 这句话让你愣了一会儿，然后把窗口最小化，继续改论文。',
+            narrative: '你做了准备，当天一切顺利，记者满意地离开了。报道发出来时，你的导师——那位你读博期间的导师——发给你一条消息："看到报道了，写得不错。" ',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 7 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -709,11 +712,11 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'agree_no_prep',
-        text: '同意，但不做任何准备，就是日常',
+        text: '答应了，裸奔上阵',
         outcomes: [
           {
             weight: 1,
-            narrative: '记者到了，正好赶上一个学生在演示一个报错，错误信息足足占了半个屏幕，里面有一行"RuntimeError: CUDA out of memory"。记者问"这是什么"，那个学生解释了大约三分钟，越说越兴奋，最后引出了整个研究方向的核心问题。报道里有一整段描写这个场景，标题是"当报错变成了研究问题"，这是编辑加的。阅读量是你实验室有史以来被提及次数最高的一次。',
+            narrative: '记者到了，正好赶上一个学生在演示一个报错，错误信息足足占了半个屏幕，里面有一行"RuntimeError: CUDA out of memory"。\n\n记者问"这是什么"，那个学生解释了大约三分钟，越说越兴奋，最后引出了整个研究方向的核心问题。\n\n报道里有一整段描写这个场景，标题是"当报错变成了研究问题"，这是编辑加的。阅读量是你实验室有史以来被提及次数最高的一次。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 12 },
               { type: 'allStudents', stat: 'favor', delta: 8 },
@@ -724,14 +727,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '记者到了，恰好是组里气氛最安静的一天，所有人都在单独对着屏幕，午饭是各自在工位解决的外卖，下午你处理了三封行政邮件，没有任何激动人心的事情发生。报道发出来，标题是《AI研究室的日常：比想象中安静得多》，评论里有人说"这篇文章劝退了我读博"，也有人说"这才是我想要的生活"。正好各一半。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'reputation', delta: -2 },
             ],
           },
         ],
       },
       {
         id: 'politely_decline',
-        text: '礼貌拒绝，实验室还是低调一点好',
+        text: '礼貌婉拒，低调是福',
         outcomes: [
           {
             weight: 1,
@@ -756,13 +759,13 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     ],
     prompt: '基金续期对照表需要填写，你选择',
     triggerConditions: [
-      { type: 'lab', stat: 'funding', op: '>=', value: 20 },
+      { type: 'lab', stat: 'funding', op: '<=', value: 20 },
       { type: 'time', field: 'year', op: '>=', value: 4 },
     ],
     options: [
       {
         id: 'honest_accounting',
-        text: '如实填写，未完成的逐条说明原因',
+        text: '如实填，未完成的逐条认罪',
         outcomes: [
           {
             weight: 2,
@@ -807,7 +810,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       },
       {
         id: 'colleague_review',
-        text: '先让一个信得过的同事帮你看一遍',
+        text: '找同事把把关',
         outcomes: [
           {
             weight: 1,

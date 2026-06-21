@@ -180,6 +180,7 @@ export function App() {
           <StudentList
             students={state.students}
             activeProjects={state.activeProjects}
+            completedProjects={state.completedProjects}
             onAdvanceMonth={handleContinue}
             canAdvanceMonth={canContinue}
             isGameOver={isGameOver}

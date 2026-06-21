@@ -96,7 +96,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_cm_task_first',
-        text: '先讲根源，奶茶的事回头再说',
+        text: '先讲根源，奶茶待会说',
         outcomes: [
           {
             weight: 1,
@@ -131,7 +131,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_fr_embrace',
-        text: '感觉还能抢救一下，回邮件鼓励，让她继续',
+        text: '感觉还能抢救，鼓励继续',
         outcomes: [
           {
             weight: 1,
@@ -147,7 +147,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_fr_redirect',
-        text: '心态满分，但还是要落地讨论下一步',
+        text: '心态满分，但还是要落地',
         outcomes: [
           {
             weight: 1,
@@ -182,7 +182,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_mb_praise',
-        text: '当面告诉她，她做了一件很重要的事',
+        text: '当面夸：你做了件大事',
         outcomes: [
           {
             weight: 1,
@@ -197,7 +197,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_mb_curious',
-        text: '好奇地问她是怎么想到这个方法的',
+        text: '好奇：这是怎么想到的',
         outcomes: [
           {
             weight: 1,
@@ -279,7 +279,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_st_ask_story',
-        text: '先追问一下她到底说了什么',
+        text: '先追问：她到底说了啥',
         outcomes: [
           {
             weight: 1,
@@ -294,7 +294,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_st_seize_opportunity',
-        text: '直接接住机会，安排跟进',
+        text: '接住机会，安排跟进',
         outcomes: [
           {
             weight: 1,
@@ -329,7 +329,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_gs_guide',
-        text: '直接进入技术讨论，认真指导',
+        text: '直接进入技术，认真指导',
         outcomes: [
           {
             weight: 2,
@@ -352,7 +352,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_gs_affirm_first',
-        text: '先肯定她愿意说出来，再一起讨论',
+        text: '先肯定她敢说，再聊',
         outcomes: [
           {
             weight: 1,
@@ -440,7 +440,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'bxm_ot_worry_valid',
-        text: '说担心有时候有用，它能推动你做准备',
+        text: '担心有时候是动力',
         outcomes: [
           {
             weight: 1,
@@ -455,7 +455,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_ot_affirm_method',
-        text: '说选择不担心，本身就是一种理性',
+        text: '不担心，也是一种理性',
         outcomes: [
           {
             weight: 1,
@@ -501,7 +501,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'bxm_av_reply_warmly',
-        text: '先好好回邮件，问问她近况',
+        text: '先回邮件，问问近况',
         outcomes: [
           {
             weight: 1,

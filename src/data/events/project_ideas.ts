@@ -64,6 +64,9 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '你开始回忆这位教授的历史行为模式：下午三点最活跃，周五沉默，收到截止日期提醒后必有回音……你突然意识到这些规律是可以被建模的。',
       '历史聊天记录加时间序列分析，完全可以训练一个"导师回复预测器"。而且几乎所有人都用得上。',
     ],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+    ],
     options: [
       {
         id: 'model_it',
@@ -158,6 +161,9 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '你花了两个小时，靠 git log 和错误信息，大概猜出了这个系统在做什么。它曾经是一个数据预处理流水线，作者已经毕业，无处可问。',
       '这个逆向过程本身就很有研究价值。给定一个历史代码库，能不能系统性地还原出当时的设计意图？commit 记录是线索，报错是线索，命名习惯也是线索。',
     ],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 18 },
+    ],
     options: [
       {
         id: 'archaeologize',
@@ -198,15 +204,21 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '你想起来学生也在抱怨类似的事情：选课要抢，报销要跑三个部门，借设备要去线下签字。',
       '如果有个 Agent 能帮你处理这些日常琐事就好了。理解页面结构，自动填写，知道什么时候要等、什么时候可以催。',
     ],
+    triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 4 },
+    ],
     options: [
       {
         id: 'build_it',
-        text: 'DevTools 打开，看看这个破页面是什么结构',
+        text: '打开看看这个破页面是什么结构',
         outcomes: [
           {
             weight: 1,
             narrative: '你打开了 DevTools，随手看了眼 network 请求，越看越觉得有意思。这个页面的结构，完全可以被程序理解。\n\n💡 获得灵感：「校园 Agent」——已记录到项目面板。',
-            effects: [{ type: 'unlockIdea', projectId: 'campus_agent' }],
+            effects: [
+              { type: 'unlockIdea', projectId: 'campus_agent' },
+              { type: 'lab', stat: 'energy', delta: -5 },
+          ],
           },
         ],
       },
@@ -236,6 +248,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果把这个"最后时刻决策过程"建模成一个强化学习问题，奖励是提交成功，惩罚是超时或质量太差，会不会是一篇好论文？',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 22 },
       { type: 'lab', stat: 'energy', op: '<=', value: 60 },
     ],
     options: [
@@ -258,7 +271,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你强行进入专注模式，把其他所有窗口全部关掉。论文提交成功，你盯着确认邮件发了一会儿呆。还是做成了。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: -5 },
+              { type: 'lab', stat: 'energy', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 1 },
             ],
           },
@@ -279,12 +292,12 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '你知道这个想法有点荒诞。但"荒诞"曾经是很多顶会论文的第一印象。而且这个数据集在某个海洋研究所开放了。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 8 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 100 },
     ],
     options: [
       {
         id: 'go_wild',
-        text: '海豚数据集在哪，先搜一下',
+        text: '立刻搜一下海豚数据集在哪',
         outcomes: [
           {
             weight: 1,
@@ -303,7 +316,10 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
           {
             weight: 1,
             narrative: '你把那个 tab 存进了书签文件夹，文件夹里还有四十三个"等有空再看"。省下来的注意力正好用在了一个卡了很久的问题上。',
-            effects: [{ type: 'lab', stat: 'energy', delta: 8 }],
+            effects: [
+              { type: 'lab', stat: 'energy', delta: 8 },
+              { type: 'randomStudent', stat: 'projectProgress', delta: 5 },
+            ],
           },
         ],
       },
@@ -322,7 +338,8 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '等等——如果用随机对照实验，真的测一测这些仪式和科研产出的相关性，你会得到什么结论？零假设很容易被拒绝吗？还是说……',
     ],
     triggerConditions: [
-      { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 58 },
+      { type: 'anyStudent', stat: 'favor', op: '>=', value: 40 },
     ],
     options: [
       {
@@ -368,7 +385,8 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果有个系统能把组会发言实时翻译成人类可以理解的语言，消灭废话和术语堆砌，也许每周能省下不少时间。',
     ],
     triggerConditions: [
-      { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+      { type: 'anyStudent', stat: 'favor', op: '>=', value: 50 },
     ],
     options: [
       {
@@ -411,7 +429,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果从历史邮件里把这些变量抽出来，做一个系统性的因果分析……',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 2 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 6 },
     ],
     options: [
       {
@@ -457,7 +475,8 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '这不是第一次了。夜间代码总是有某种奇特的风格：密度高，注释少，创意偶尔爆炸，可读性接近零。如果系统地对比白天和深夜的代码质量，会发现什么？',
     ],
     triggerConditions: [
-      { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+      { type: 'anyStudent', stat: 'favor', op: '>=', value: 30 },
     ],
     options: [
       {
@@ -500,7 +519,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果从公开的接受/拒绝记录和历史审稿意见里训练一个偏好模型，在投稿前就预测审稿结论，也许可以省去很多无谓的拒稿来回。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 35 },
     ],
     options: [
       {
@@ -543,7 +562,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果系统地记录谁在什么时候在哪里喝咖啡，分析非正式接触频率和后续合作关系……',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 4 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 18 },
     ],
     options: [
       {
@@ -586,7 +605,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '这个传播速度和变异过程是可以被建模的。学术圈是个封闭的小世界，文化产品在其中的流动有独特的路径。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 3 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 28 },
     ],
     options: [
       {
@@ -632,7 +651,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果有一个分类器，能从词汇多样性、句子分布、引用风格等维度给出一个量化的"人类撰写概率"，这个工具现在非常需要。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 6 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 20 },
     ],
     options: [
       {
@@ -672,6 +691,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果有个早期预警模型，在问题形成之前就给出提示，也许可以提前干预。',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 20 },
       { type: 'anyStudent', stat: 'happiness', op: '<=', value: 40 },
     ],
     options: [
@@ -715,7 +735,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果把整个领域的引用图建出来，用社区检测算法分析结构，那些"引用帮派"是否会自动浮现？',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 16 },
     ],
     options: [
       {
@@ -758,6 +778,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '这让你开始思考：专家直觉和贝叶斯优化之间的差异到底是什么？两者的搜索路径能否可视化对比？哪些参数是真正重要的，哪些是在安慰自己？',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 25 },
       { type: 'anyStudent', stat: 'skills.engineering', op: '>=', value: 60 },
     ],
     options: [
@@ -778,7 +799,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       },
       {
         id: 'use_the_params',
-        text: '列为实验室默认配置，以后省事',
+        text: '列为实验室默认配置',
         outcomes: [
           {
             weight: 1,
@@ -805,6 +826,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '你问了其他人，没有人记录。这种事在学术界有多常见？那些因为没有拍照、没有记录而永远消失的推导，到底有多少？',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 0 },
     ],
     options: [
@@ -848,7 +870,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果训练一个模型，在崩溃前几小时给出预警，可以让大家提前保存进度。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 4 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
     ],
     options: [
       {
@@ -891,7 +913,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '学术会议有几百人，你只见到了站在同一区域的那二十个。如果有个系统，在会前就推算出谁是你最应该认识的人……',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 7 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 16 },
     ],
     options: [
       {
@@ -934,6 +956,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果把组会出勤和汇报决策形式化为博弈论模型，分析不同激励结构下的均衡策略……',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 22 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 20 },
     ],
     options: [
@@ -977,7 +1000,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '学术圈真实的人情网络，可能比合作网络更能解释一些事情。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 5 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
     ],
     options: [
       {
@@ -1023,7 +1046,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果系统地对比不同长度摘要在引用率和阅读完成率上的差异，可以找到一个信息密度最优点。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 3 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
     ],
     options: [
       {
@@ -1063,7 +1086,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果用系统性的诱导测试，从模型的行为反推它的系统提示和对齐策略，能还原出多少历史版本的决策逻辑？',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 6 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 65 },
     ],
     options: [
       {
@@ -1103,7 +1126,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果训练一个自动质量分类器，用历史论文数据进行有监督学习，能否以高于随机的准确率识别出这类论文？',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 8 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 60 },
     ],
     options: [
       {
@@ -1146,7 +1169,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果构建一个检测系统，识别不正常的引用网络结构，可以帮助期刊和读者更准确地评估学术影响力。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 7 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 65 },
     ],
     options: [
       {
@@ -1189,6 +1212,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果在答辩演练里收集数据，建立一个崩溃预测模型，可以帮助学生提前强化薄弱点。',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 70 },
       { type: 'anyStudent', stat: 'happiness', op: '<=', value: 50 },
     ],
     options: [
@@ -1232,7 +1256,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '小世界现象在学术合作网络里的具体参数，从来没有人认真测过。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 9 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 72 },
     ],
     options: [
       {
@@ -1275,7 +1299,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '训练一个审稿模型，用 RLHF 让它的偏好分布和目标会议历史对齐，然后分析这个模型暴露出什么样的系统性偏差。',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 10 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 65 },
     ],
     options: [
       {
@@ -1315,7 +1339,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果收集大量提交时间戳和最终结果，找找有没有隐藏在里面的时间效应……',
     ],
     triggerConditions: [
-      { type: 'lab', stat: 'reputation', op: '>=', value: 4 },
+      { type: 'lab', stat: 'reputation', op: '>=', value: 60 },
     ],
     options: [
       {
@@ -1358,23 +1382,13 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       '如果装一个后台日志，记录窗口切换、打字节奏、浏览器标签数……把拖延过程的每个微决策都捕捉下来，是不是可以建一个比较靠谱的计算模型？',
     ],
     triggerConditions: [
+      { type: 'lab', stat: 'reputation', op: '>=', value: 58 },
       { type: 'lab', stat: 'energy', op: '<=', value: 70 },
     ],
     options: [
       {
-        id: 'model_procrastination',
-        text: '把这个窗口最小化，新建文档写采集方案',
-        outcomes: [
-          {
-            weight: 1,
-            narrative: '你开了一个新文档，把数据采集方案一口气写完了。这算是工作吗？算。写完之后心情很好，顺手把论文打开，居然写了两段。\n\n💡 获得灵感：「拖延行为建模」——已记录到项目面板。',
-            effects: [{ type: 'unlockIdea', projectId: 'procrastination_model' }],
-          },
-        ],
-      },
-      {
         id: 'actually_write',
-        text: '关掉所有标签，只留论文，强行开始',
+        text: '关掉所有标签，专注论文',
         outcomes: [
           {
             weight: 3,
@@ -1385,11 +1399,23 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你一口气写完了整个章节，效率之高让你自己都吓到了。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 1 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
         ],
       },
+      {
+        id: 'model_procrastination',
+        text: '关掉论文，新建文档写采集方案',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你开了一个新文档，把数据采集方案一口气写完了。这算是工作吗？算。写完之后心情很好，顺手把论文打开，居然写了两段。\n\n💡 获得灵感：「拖延行为建模」——已记录到项目面板。',
+            effects: [{ type: 'unlockIdea', projectId: 'procrastination_model' }],
+          },
+        ],
+      },
+      
     ],
   },
 };

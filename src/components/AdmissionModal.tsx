@@ -1,6 +1,25 @@
+import { useState } from 'react';
 import type { AdmissionState, LabStats } from '../types';
 import { allCandidates } from '../data/studentPool';
 import { TraitTag } from './TraitTag';
+import { portraitUrl } from '../data/studentArt';
+
+/** 立绘装裱框，统一裁切为 2:3 比例。图片缺失时整个框隐藏。 */
+function CandidatePortrait({ studentId, name }: { studentId: string; name: string }) {
+  const [failed, setFailed] = useState(false);
+  const url = portraitUrl(studentId);
+  if (failed || !url) return null;
+  return (
+    <div className="portrait-frame">
+      <img
+        src={url}
+        alt={`${name} 立绘`}
+        className="candidate-portrait"
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+}
 
 const REFRESH_ENERGY_COST = 20;
 const CONTINUE_ENERGY_COST = 40; // 2× refresh
@@ -97,23 +116,26 @@ export function AdmissionModal({
             if (!candidate) return null;
             return (
               <div key={candidate.id} className="candidate-card">
-                <div className="candidate-card__header">
-                  <span className="candidate-card__name">{candidate.name}</span>
-                  <span className="candidate-card__tagline">{candidate.tagline}</span>
+                <CandidatePortrait studentId={candidate.id} name={candidate.name} />
+                <div className="candidate-card__body">
+                  <div className="candidate-card__header">
+                    <span className="candidate-card__name">{candidate.name}</span>
+                    <span className="candidate-card__tagline">{candidate.tagline}</span>
+                  </div>
+                  <p className="candidate-card__bio">{candidate.bio}</p>
+                  <div className="candidate-card__traits">
+                    {candidate.traitIds.map(tid => (
+                      <TraitTag key={tid} traitId={tid} />
+                    ))}
+                  </div>
+                  <button
+                    className={`btn btn--primary candidate-card__admit-btn${!canAfford ? ' modal__option-btn--disabled' : ''}`}
+                    onClick={() => onAdmit(candidate.id)}
+                    disabled={!canAfford}
+                  >
+                    {canAfford ? `录取 ${candidate.name}` : `资金不足（需${admissionCost}万）`}
+                  </button>
                 </div>
-                <p className="candidate-card__bio">{candidate.bio}</p>
-                <div className="candidate-card__traits">
-                  {candidate.traitIds.map(tid => (
-                    <TraitTag key={tid} traitId={tid} />
-                  ))}
-                </div>
-                <button
-                  className={`btn btn--primary candidate-card__admit-btn${!canAfford ? ' modal__option-btn--disabled' : ''}`}
-                  onClick={() => onAdmit(candidate.id)}
-                  disabled={!canAfford}
-                >
-                  {canAfford ? `录取 ${candidate.name}` : `资金不足（需${admissionCost}万）`}
-                </button>
               </div>
             );
           })}

@@ -18,7 +18,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_first_meeting_strict',
-        text: '当场宣布：迟到文化，到此为止',
+        text: '宣布：迟到文化，到此为止',
         outcomes: [{
           weight: 1,
           narrative: '你清了清嗓子，正式点名迟到问题。林小卷立刻收起笑容，点头点得极其诚恳，"老师说得对，下次一定"，像背课文一样流畅。组会散场后，他跑来问你组里有没有推荐的奶茶店，你盯着他认真掏手机备注的背影，意识到他那几句话可能全程只走到了耳朵边缘。',
@@ -31,7 +31,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_first_meeting_easy',
-        text: '随他去，出活比签到重要',
+        text: '随他，出活比签到重要',
         outcomes: [{
           weight: 1,
           narrative: '你挥挥手，示意他坐好接着开会。林小卷立刻把奶茶往旁边一推，翻开一本笔记本，你瞥了一眼，封面密密麻麻写满了想法，字迹凌乱但数量惊人，每一行都像是某个凌晨二点的突发奇想。看来他不是没在思考，只是思考发生的时间一直不太对。',
@@ -62,7 +62,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_progress_check_push',
-        text: '放大招：日更进度汇报，精确到小时',
+        text: '放大招：日更进度，精确到小时',
         outcomes: [{
           weight: 1,
           narrative: '你要求他当场列出详细时间表。林小卷拿出笔，在纸上写了三行，对着天花板沉思了一会儿，又加了两行，然后把纸推过来，时间节点精确到小时，子任务拆得事无巨细。你盯着那张纸愣了一秒：这份计划根本不是现写的，他早就有，只是没打算主动拿出来。',
@@ -106,7 +106,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_ddl_miracle_admire',
-        text: '封神！给他颁发DDL战神勋章',
+        text: '颁发DDL战神勋章',
         outcomes: [{
           weight: 1,
           narrative: '你发消息："这次完成得相当好。" 过了一会儿收到回复：一个大拇指表情，然后是"谢谢老师，我去睡了"。接下来两天他彻底消失，据室友说一觉睡了好久，打破了实验室纪录，那个纪录之前也是他自己创下的。传奇打破传奇，闭环完美。',
@@ -151,7 +151,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_midnight_message_respond',
-        text: '当场召开凌晨紧急研讨会',
+        text: '凌晨召开紧急研讨会',
         outcomes: [{
           weight: 1,
           narrative: '你放下手机，打开电脑，把他那团思绪仔细梳理了一遍，发现核心概念是真的有价值的。你们来回消息到天快亮，把那团混沌一点点捋成了一根看得见方向的线。第二天林小卷顶着两个硬币大的黑眼圈出现，说"老师你也没睡？" 你们对视了一眼，同时伸手按下了咖啡机。',
@@ -165,7 +165,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_midnight_message_later',
-        text: '已读，明天再说，先去睡',
+        text: '已读，睡了，明天说',
         outcomes: [{
           weight: 1,
           narrative: '你回了消息："明天聊。" 第二天林小卷如约而至，把那个想法又讲了一遍，白天版本逻辑清晰了不止一倍，明显是睡醒之后自己又整理了一轮。有些想法就像发酵面团，需要在黑暗里静置一夜才能膨胀成可以烤的形状。',
@@ -209,7 +209,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_abstract_warn',
-        text: '结果好不等于方法对，必须讲清楚',
+        text: '结果好≠方法对，说清楚',
         outcomes: [{
           weight: 1,
           narrative: '你认真告诉他，这次只是运气好，下次万一翻车怎么办。林小卷听完，想了想，说："那我下次提前半小时开始。" 你深吸一口气，慢慢呼出来，决定换个角度看人生。至少摘要是真的写得好，而这个事实已经无法被任何方法论所撤销。',
@@ -240,7 +240,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_fake_progress_ignore',
-        text: '无声暗示：把代码仓库链接甩过去',
+        text: '甩代码仓库链接过去',
         outcomes: [{
           weight: 1,
           narrative: '你什么都没说，只把代码仓库链接发给他，备注"有空看看"。林小卷沉默了一会儿，然后仓库出现了一次新提交：填上了两个 `pass`，把 `TODO_FIXME_URGENT` 悄悄改成了 `TODO_IN_PROGRESS`。进步微小，但至少是真实发生过的。',
@@ -253,7 +253,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_fake_progress_confront',
-        text: '开门见山：这三个pass是什么意思',
+        text: '开门见山：三个pass什么意思',
         outcomes: [{
           weight: 1,
           narrative: '你把代码截图发过去，问"这三个 pass 怎么回事"。沉默了好一会儿，林小卷发来消息："老师，实际上……大概四十五？" 后面跟了一个苦笑表情，然后："我这周搞定两个，你给我一周。" 一周后，仓库出现了两次提交，进度单数字更新，这次是真实的。人在被戳穿之后往往比正常状态跑得更快。',
@@ -285,7 +285,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'lxj_lost_chat',
-        text: '拉把椅子坐下，随便聊聊',
+        text: '拉把椅子，随便聊聊',
         outcomes: [{
           weight: 1,
           narrative: '你拉了把椅子，什么都没问，只是说"最近怎么样"。林小卷沉默了一下，然后开口，说了好一会儿，从项目卡死的地方说到对自己的怀疑，再说到一个他从来没跟人讲过的想法。说完他缓了口气，把那张白纸翻过来推给你——上面写着：我到底适不适合做科研。你们又聊了好一阵。你离开的时候，那杯凉咖啡已经不见了，换成了一杯热的。',
@@ -343,7 +343,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_expert_verify',
-        text: '先构造反例，把漏洞钉死再说',
+        text: '先构造反例，把漏洞钉死',
         outcomes: [{
           weight: 1,
           narrative: '你叫他先跑一套专门设计的测试案例，把边界失效的情况坐实。林小卷花了几天构造了一批反例，漏洞不仅被确认，还比他最初描述的更普遍，覆盖了更多情形。这让文章从"发现问题"升级成"证明问题并给出修复方向"，分量重了不止一个量级。他兴奋地说"老师这比我想的还大"，白板上的字又多了一圈。',
@@ -390,7 +390,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
       },
       {
         id: 'lxj_grad_intervene',
-        text: '不行，必须每天汇报进度',
+        text: '不行，必须日报',
         outcomes: [{
           weight: 1,
           narrative: '你要求他每天下午五点发一份当日进展，字数不少于三百字。前三天他发了规规矩矩的文字报告，第四天发来一段语音，第五天发来一张白板照片。内容是真实的，格式是自由发挥的。高压之下他确实写得更快，只是到最后，汇报形式变成了每天主动来敲你的门，比发报告麻烦，但效率出奇地高。',

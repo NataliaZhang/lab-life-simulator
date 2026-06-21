@@ -111,7 +111,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'gently_redirect',
-        text: '温和地把话题引回实际问题',
+        text: '温柔拔插头，引回正题',
         outcomes: [
           {
             weight: 2,
@@ -135,7 +135,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'let_it_play_out',
-        text: '让信仰自然发展，看它去哪',
+        text: '随它去，信仰自有去处',
         outcomes: [
           {
             weight: 1,
@@ -161,7 +161,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'learn_from_enthusiasm',
-        text: '认真阅读那份三千字愿景文档',
+        text: '认真读那份三千字天书',
         energyCost: 10,
         outcomes: [
           {
@@ -199,7 +199,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'differentiate',
-        text: '精读论文，找他们没做到的地方',
+        text: '精读，专找他们的破绽',
         energyCost: 20,
         outcomes: [
           {
@@ -209,7 +209,6 @@ export const hypeEvents: Record<string, GameEvent> = {
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
               { type: 'allStudents', stat: 'happiness', delta: 8 },
-              { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },
           {
@@ -218,14 +217,13 @@ export const hypeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'allStudents', stat: 'skills.theory', delta: 4 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
-              { type: 'lab', stat: 'energy', delta: -20 },
             ],
           },
         ],
       },
       {
         id: 'race_to_publish',
-        text: '加速，把手头结果先整理发出去',
+        text: '加速冲刺，先发为敬',
         energyCost: 30,
         outcomes: [
           {
@@ -288,7 +286,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'celebrate_carefully',
-        text: '先表扬，再引导思考统计显著性',
+        text: '先夸，再悄悄问p值',
         outcomes: [
           {
             weight: 2,
@@ -311,7 +309,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'explain_significance',
-        text: '直接讲统计显著性和样本量',
+        text: '直接祭出p值和样本量',
         outcomes: [
           {
             weight: 2,
@@ -335,7 +333,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'workshop_it',
-        text: '就这样投个workshop（17条样本也是样本）',
+        text: '就这样投（17条也是样本）',
         outcomes: [
           {
             weight: 1,
@@ -376,7 +374,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'professional_presentation',
-        text: '准备一套正式汇报，展示研究成果',
+        text: '正装汇报，拿出真家伙',
         energyCost: 20,
         outcomes: [
           {
@@ -401,7 +399,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'casual_honest',
-        text: '轻松对话，如实介绍研究进展',
+        text: '轻松聊，如实说进展',
         outcomes: [
           {
             weight: 2,
@@ -425,7 +423,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'panic_clean',
-        text: '早上八点紧急清洁实验室（全员动员）',
+        text: '八点紧急大扫除（全员动员）',
         energyCost: 15,
         outcomes: [
           {
@@ -464,7 +462,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'academic_integrity',
-        text: '认真讨论学术诚信与工具使用边界',
+        text: '正经探讨AI工具的边界',
         energyCost: 10,
         outcomes: [
           {
@@ -511,7 +509,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'run_carefully',
-        text: '先把三千行代码仔细跑一遍，不放心',
+        text: '不放心，跑一遍压压惊',
         energyCost: 20,
         outcomes: [
           {
@@ -554,7 +552,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'help_fully',
-        text: '全力帮助对方复现，开放所有细节',
+        text: '全力帮复现，无保留',
         energyCost: 15,
         outcomes: [
           {
@@ -577,7 +575,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'investigate_yourself',
-        text: '先自己复现一遍，确认结果是否可靠',
+        text: '先自己复现，眼见为实',
         energyCost: 15,
         outcomes: [
           {
@@ -599,7 +597,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'send_what_you_have',
-        text: '把现有的代码文件发过去，附上说明',
+        text: '发代码，附上简单说明',
         outcomes: [
           {
             weight: 2,
@@ -634,7 +632,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'declare_position',
-        text: '表明立场，给出明确方向',
+        text: '亮明立场，钦定方向',
         outcomes: [
           {
             weight: 1,
@@ -657,7 +655,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'stay_neutral',
-        text: '保持中立，让他们充分辩论',
+        text: '中立旁观，让子弹飞',
         outcomes: [
           {
             weight: 2,
@@ -680,7 +678,7 @@ export const hypeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'design_experiment',
-        text: '设计一个实验来解决这个问题',
+        text: '设计实验，让数据说话',
         energyCost: 15,
         outcomes: [
           {

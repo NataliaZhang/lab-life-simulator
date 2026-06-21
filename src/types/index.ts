@@ -197,6 +197,10 @@ export interface GameState {
   // Counts how many times each student's happiness changed during the current month.
   // Used by fortune_engineer (fires +2 engineering after the 3rd change). Reset each month-end.
   moodChangesThisMonth: Record<string, number>;
+  // Ending-summary paragraphs queued for one-at-a-time reveal.
+  // Each click dismisses the first entry and appends it to storyLog.
+  // Blocks PRESENT_EVENT and ADVANCE_MONTH until empty.
+  pendingSummarySlides: string[];
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────
@@ -206,6 +210,7 @@ export type GameAction =
   | { type: 'NEXT_PARAGRAPH' }
   | { type: 'CHOOSE_OPTION'; eventId: string; optionId: string }
   | { type: 'DISMISS_PASSIVE_EVENT' }  // for idle/news events with no options
+  | { type: 'DISMISS_SUMMARY_SLIDE' }  // pop one ending-summary paragraph → storyLog
   | { type: 'ADVANCE_MONTH' }
   | { type: 'ADMIT_STUDENT'; candidateId: string }
   | { type: 'PASS_ADMISSION' }

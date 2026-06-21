@@ -118,7 +118,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'talk_privately',
-        text: '约{studentName}吃饭，假装没看见帖子',
+        text: '约{studentName}吃饭，装没看见',
         outcomes: [
           {
             weight: 2,
@@ -258,7 +258,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'change_angle',
-        text: '临时换个角度，别硬撞墙',
+        text: '换个角度，别硬撞',
         outcomes: [{
           weight: 1,
           narrative: '你建议暂时不要继续撞同一堵墙，先做一个能跑的小版本。{studentName}半信半疑地试了两天，第三天发来截图：baseline终于动了。文件夹被改名成 maybe_alive。你觉得这个名字已经非常乐观。',
@@ -328,7 +328,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'share_your_crisis',
-        text: '分享你自己当年想跑路的经历',
+        text: '分享当年自己想跑的经历',
         outcomes: [{
           weight: 1,
           narrative: '你讲了自己读博时差点跑路的经历。{studentName}听得很专注，尤其是听到你也搜过"转行"的时候，眼睛明显亮了一下。原来导师也不是从出生起就会写proposal。这个发现让对方松了一口气。',
@@ -340,7 +340,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'dismiss_it',
-        text: '说这些只是情绪化搜索，不用当真',
+        text: '这只是情绪化搜索，别当真',
         outcomes: [{
           weight: 1,
           narrative: '{studentName}点点头，关掉了标签页。你以为事情结束了。第二天，浏览器推荐开始推送"低成本开农场"和"读博退路规划"。算法记住了这场危机，比你记得更牢。',
@@ -467,7 +467,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'accept_collaboration',
-        text: '接受合作，推进正式协议',
+        text: '接受合作，推进协议',
         outcomes: [
           {
             weight: 2,
@@ -502,7 +502,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'decline_politely',
-        text: '礼貌拒绝，专注自己方向',
+        text: '礼貌拒绝，专注自己',
         outcomes: [{
           weight: 1,
           narrative: '你礼貌地回复说时机不对，目前组里有几件重要的事要专注完成。对方回复说"理解，保持联系"。你把邮件存档，继续自己的节奏。组里的氛围因为少了外部压力而出人意料地放松了一些。',
@@ -541,7 +541,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'deny_everything',
-        text: '我只是在思考，不是倒下',
+        text: '我只是在思考，没倒',
         outcomes: [{
           weight: 1,
           narrative: '"哦。"{studentName}把热水放在你够得到的地方，默默退出去了。你试图用"这是一种创新的卧式思考姿势"来说服自己，成功率约为零。',
@@ -584,7 +584,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
       },
       {
         id: 'push_through_anyway',
-        text: '项目要紧，等这阵子过了就好',
+        text: '项目要紧，等过了这阵子',
         outcomes: [{
           weight: 1,
           narrative: '类似的说辞，你已经重复了太多次。{studentName}没有反驳，但离开时顺手把你的咖啡杯拿走了。',

@@ -95,6 +95,7 @@ export function createInitialState(): GameState {
     chosenOptionIds: [],
     studentConditionalLog: {},
     moodChangesThisMonth: {},
+    pendingSummarySlides: [],
   };
 }
 
@@ -529,8 +530,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case 'DISMISS_SUMMARY_SLIDE': {
+      const [currentSlide, ...remaining] = state.pendingSummarySlides;
+      if (!currentSlide) return state;
+      const slideEntry: LogEntry = {
+        id: `summary_slide_${remaining.length}_${state.time.year}_${state.time.month}`,
+        time: { ...state.time },
+        type: 'system',
+        title: '六年总结',
+        narrative: currentSlide,
+      };
+      return { ...state, pendingSummarySlides: remaining, storyLog: [...state.storyLog, slideEntry] };
+    }
+
     case 'ADVANCE_MONTH': {
-      if (state.eventQueue.length > 0 || state.activeEventId !== null || state.admissionState !== null) return state;
+      if (state.eventQueue.length > 0 || state.activeEventId !== null || state.admissionState !== null || state.pendingSummarySlides.length > 0) return state;
       const next = applyMonthlyUpdate(state);
       return { ...next, activeEventId: null };
     }

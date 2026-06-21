@@ -157,15 +157,25 @@ function LeaderSelector({
         <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>
       </div>
 
-      {/* PI option */}
-      <div
-        className={`leader-option${ap.leaderId === 'pi' ? ' leader-option--current' : ''}`}
-        onClick={() => onSelect('pi')}
-      >
-        <div className="leader-option__name">PI（自己负责）</div>
-        <div className="leader-option__detail">每月消耗精力 15，效率 ×1.00，月推进 {def.baseMonthlyProgress.toFixed(1)}%</div>
-        {ap.leaderId === 'pi' && <span className="leader-option__badge">当前</span>}
-      </div>
+      {/* PI option — disabled when energy is 0 */}
+      {(() => {
+        const piDisabled = state.lab.energy <= 0 && ap.leaderId !== 'pi';
+        return (
+          <div
+            className={`leader-option${ap.leaderId === 'pi' ? ' leader-option--current' : ''}${piDisabled ? ' leader-option--disabled' : ''}`}
+            onClick={() => { if (!piDisabled) onSelect('pi'); }}
+            title={piDisabled ? '精力为 0，无法亲自负责项目' : undefined}
+          >
+            <div className="leader-option__name">你（亲自负责）</div>
+            <div className="leader-option__detail">
+              {piDisabled
+                ? '精力耗尽，无法接手项目'
+                : `每月消耗精力 15，效率 ×1.00，月推进 ${def.baseMonthlyProgress.toFixed(1)}%`}
+            </div>
+            {ap.leaderId === 'pi' && <span className="leader-option__badge">当前</span>}
+          </div>
+        );
+      })()}
 
       {/* Student options */}
       {activeStudents.map(s => {

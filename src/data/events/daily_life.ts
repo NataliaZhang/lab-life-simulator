@@ -71,7 +71,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'remote_week',
-        text: '宣布本周远程办公（消耗精力）',
+        text: '全员远程，眼不见心不烦（消耗精力）',
         energyCost: 15,
         outcomes: [
           {
@@ -148,7 +148,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'investigate_equation',
-        text: '认真研究一下那到底是什么',
+        text: '盯着看，这到底是啥',
         outcomes: [
           {
             weight: 2,
@@ -210,7 +210,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'post_notice',
-        text: '贴通知，给72小时认领期',
+        text: '贴告示：72小时内无人认领则销毁',
         outcomes: [
           {
             weight: 2,
@@ -230,7 +230,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'democratic_vote',
-        text: '发起投票：民主决定如何处置',
+        text: '民主投票，少数服从多数',
         outcomes: [
           {
             weight: 1,
@@ -297,7 +297,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'install_fridge_policy',
-        text: '建立冰箱使用制度，防患于未然',
+        text: '立法：冰箱公约，即日起生效',
         outcomes: [
           {
             weight: 1,
@@ -328,7 +328,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'impose_24',
-        text: '裁定24度，全组统一执行',
+        text: '钦定24度，统一执法',
         outcomes: [
           {
             weight: 2,
@@ -350,7 +350,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'ac_schedule',
-        text: '制定轮换时间表：上午26度，下午22度',
+        text: '立法：上午26，下午22，不许吵',
         outcomes: [
           {
             weight: 2,
@@ -429,7 +429,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'honest_tour',
-        text: '如实接待，这就是真实的科研现场',
+        text: '如实接待，科研就是这样的',
         outcomes: [
           {
             weight: 1,
@@ -574,7 +574,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'archive_everything',
-        text: '统一归档，贴标签放进储藏室',
+        text: '归档入库，贴好标签',
         outcomes: [
           {
             weight: 1,
@@ -626,7 +626,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'officially_adopt',
-        text: '正式收编，录用它为实验室成员',
+        text: '正式任命，纳入编制',
         fundingCost: 1,
         outcomes: [
           {
@@ -651,7 +651,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'unofficial_mascot',
-        text: '维持现状，默认它是非正式吉祥物',
+        text: '默认它是吉祥物，不做声',
         outcomes: [
           {
             weight: 1,
@@ -696,7 +696,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'find_workaround',
-        text: '发动全组人脉，找到能打印的地方',
+        text: '全组人脉出动，找打印机',
         outcomes: [
           {
             weight: 2,
@@ -719,7 +719,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'buy_cartridge',
-        text: '买新墨盒和滚轮配件，自行修复',
+        text: '买零件，自力更生',
         fundingCost: 1,
         outcomes: [
           {
@@ -742,7 +742,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'go_full_digital',
-        text: '拒绝纸质流程，全部数字化提交',
+        text: '拒绝纸质，一律数字化',
         outcomes: [
           {
             weight: 1,
@@ -874,7 +874,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'goose_leg_apologize_admit',
-        text: '公开承认判断失误，诚恳致歉',
+        text: '公开认错，诚恳道歉',
         outcomes: [
           {
             weight: 1,
@@ -887,7 +887,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'goose_leg_report_justified',
-        text: '食品安全无小事，宁可错杀不可放过',
+        text: '食品安全，宁可错杀',
         outcomes: [
           {
             weight: 1,
@@ -938,6 +938,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
             narrative: '编辑把标题改成了《震惊！被ICOP和GRF同时拒稿的公式，竟然一招解决了困扰AI界的老大难问题》。你和{studentName}都觉得这个标题存在若干问题，但那天傍晚阅读量就过了三万，第二天早上已经破了十万，论文本身的历史下载量在对比之下显得格外寒酸。{studentName}一直盯着后台数据，最后发了条消息："老师，我理解为什么要做科普了。"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 12 },
+              { type: 'randomStudent', stat: 'skills.theory', delta: 3}
             ],
           },
           {

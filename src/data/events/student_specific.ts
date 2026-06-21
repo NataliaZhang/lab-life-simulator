@@ -131,7 +131,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '话还没说完，{studentName}已经站起来了。"老师，我想清楚了。" 他们把那本四百页的论文留在你桌上，双肩包往肩上一甩，鞠了个躬，转身走了。三周后你收到邮件："{studentName}已正式离组，感谢导师三年培养。"\n\n学校论坛上有人把你的组标在了学院地图上，标注：陈年博士生培养区。',
+            narrative: '话还没说完，{studentName}已经站起来了。"老师，我想清楚了。" 他们把那本四百页的论文留在你桌上，双肩包往肩上一甩，鞠了个躬，转身走了。\n\n三周后你收到邮件："{studentName}已正式离组，感谢导师三年培养。"\n\n学校论坛上有人把你的组标在了学院地图上，标注：陈年博士生培养区。',
             effects: [
               { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: -10 },

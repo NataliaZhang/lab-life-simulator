@@ -21,7 +21,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'rebuttal_deadpan',
-        text: '一本正经逐条答辩，奉陪到底',
+        text: '逐条答辩，奉陪到底',
         outcomes: [
           {
             weight: 2,
@@ -70,9 +70,9 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你查阅了大量文献，认真梳理了AGI的定义与主流路径，写了一份附录，提出一个"轻量级通用性框架"，逻辑自洽，措辞严谨，塞进了申辩稿。二号回复："这部分内容超出了本次审稿的评估范围。"论文被拒。附录后来单独投了一篇论文，过了。',
+            narrative: '你查阅了大量文献，认真梳理了AGI的定义与主流路径，写了一份附录，提出一个"轻量级通用性框架"，逻辑自洽，措辞严谨，塞进了申辩稿。\n\n二号回复："这部分内容超出了本次审稿的评估范围。"\n\n论文被拒。附录后来单独投了一篇论文，过了。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 2 },
+              { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
             ],
           },
@@ -94,7 +94,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'cite_all',
-        text: '全引，不问对方叫什么名字',
+        text: '全引，来者不拒',
         outcomes: [
           {
             weight: 2,
@@ -116,7 +116,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'cite_selectively',
-        text: '只引真正相关的，理直气壮',
+        text: '只引相关的，腰杆硬',
         outcomes: [
           {
             weight: 2,
@@ -138,7 +138,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'counter_rebuttal',
-        text: '在申辩里把这个规律点出来',
+        text: '在申辩里把规律戳穿',
         outcomes: [
           {
             weight: 1,
@@ -220,7 +220,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'quantum_acceptance',
-        text: '接受，量子叠加也是一种存在',
+        text: '接受，量子叠加态也是一种存在',
         outcomes: [
           {
             weight: 1,
@@ -249,7 +249,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'find_right_venue',
-        text: '认真调研，找到真正合适的投稿目标',
+        text: '认真调研，找对口的会',
         outcomes: [
           {
             weight: 2,
@@ -271,7 +271,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'pivot_framing',
-        text: '技术不动，重写故事，重新包装',
+        text: '技术不变，故事重写',
         outcomes: [
           {
             weight: 2,
@@ -321,7 +321,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'report_to_ac',
-        text: '举报，反映给大会程序主席',
+        text: '举报，找程序主席',
         outcomes: [
           {
             weight: 1,
@@ -343,7 +343,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'use_strategically',
-        text: '看穿了，但不说破，有针对性地正面回应',
+        text: '心知肚明，正面接招',
         outcomes: [
           {
             weight: 2,
@@ -416,7 +416,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'write_response',
-        text: '写一封申诉，论证形式主义的危害',
+        text: '写申诉，批判形式主义',
         energyCost: 20,
         outcomes: [
           {
@@ -424,7 +424,6 @@ export const reviewerEvents: Record<string, GameEvent> = {
             narrative: '你写了两页申诉，从学术评审的意义讲起，引用了几篇关于同行评审制度本身的研究，委婉指出字号差一号对审稿质量的影响可能接近于零。程序委员会主席回复："感谢您的意见，我们会将此纳入下届会议的规则讨论。本届不作例外处理。"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
-              { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
             ],
           },
@@ -483,7 +482,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'add_citation_carry_on',
-        text: '加上引用，和平地写清楚差异',
+        text: '加引用，和气地划清界限',
         outcomes: [
           {
             weight: 2,
@@ -505,7 +504,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
       },
       {
         id: 'review_their_paper',
-        text: '查一下那篇论文投到哪里了',
+        text: '先查他投到了哪',
         outcomes: [
           {
             weight: 1,

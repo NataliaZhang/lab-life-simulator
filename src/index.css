@@ -489,18 +489,61 @@ html, body {
 
 .student-card__header {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Text block next to the avatar: stacks name-line → traits */
+.student-card__header-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+/* Name + year badge on one line */
+.student-card__name-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Q版表情头像 */
+.student-avatar {
+  width: 73px;
+  height: 73px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-border);
+}
+
+/* 图片缺失时的首字母占位 */
+.student-avatar--placeholder {
+  width: 73px;
+  height: 73px;
+  border-radius: 10px;
+  background: var(--color-border);
+  display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
 }
 
 .student-card__name {
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .student-card__year {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--color-text-muted);
   background: var(--color-border);
   padding: 1px 6px;
@@ -517,7 +560,6 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 8px;
 }
 
 .trait-tag {
@@ -526,6 +568,24 @@ html, body {
   color: var(--color-accent);
   padding: 1px 6px;
   border-radius: 99px;
+}
+
+/* Larger trait tags inside the member panel student card */
+.student-card .trait-tag {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+/* Larger trait tags inside the full character detail modal */
+.detail-modal .trait-tag {
+  font-size: 13px;
+  padding: 3px 10px;
+}
+
+/* Larger trait tags inside the admission candidate cards */
+.candidate-card .trait-tag {
+  font-size: 12px;
+  padding: 2px 8px;
 }
 
 .trait-tag--interactive {
@@ -541,101 +601,95 @@ html, body {
 .trait-card {
   position: fixed;
   z-index: 200;
-  width: 220px;
+  width: 250px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   pointer-events: auto;
 }
 
 .trait-card__name {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--color-accent);
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .trait-card__desc {
-  font-size: 11px;
-  color: var(--color-text);
-  line-height: 1.5;
-  margin: 0 0 8px;
+  font-size: 13px;
+  font-family: var(--font-serif);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 10px;
 }
 
 .trait-card__effect-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .trait-card__effect {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  line-height: 1.5;
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.55;
   margin: 0;
 }
 
-.student-card__stats {
+/* Two-row attribute area at the bottom of the active student card */
+.student-card__attrs {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 6px;
+  gap: 5px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
 }
 
-.student-stat {
-  display: grid;
-  grid-template-columns: 36px 1fr 26px;
-  align-items: center;
-  gap: 6px;
+.student-card__mood-row,
+.student-card__skill-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
-.student-stat__label {
-  font-size: 11px;
-  color: var(--color-text-muted);
-}
-
-.student-stat__num {
-  font-size: 11px;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-muted);
-}
-
-.stat-bar {
-  height: 5px;
-  background: var(--color-border);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.stat-bar__fill {
-  height: 100%;
-  background: var(--color-accent);
-  border-radius: 99px;
-  transition: width 0.3s ease;
-}
-
-.stat-bar__fill--warn {
-  background: var(--color-warn);
-}
-
+/* kept for any legacy references */
 .student-card__skills {
   display: flex;
   gap: 6px;
 }
 
 .skill {
-  font-size: 10px;
+  font-size: 12px;
   font-family: var(--font-mono);
   color: var(--color-text-muted);
   background: var(--color-border);
   padding: 1px 5px;
   border-radius: 3px;
+}
+
+/* Mood chips (好感/心情): warm tint to distinguish from capability row */
+.skill--mood {
+  background: #ece8e0;
+  color: #7a6d5a;
+}
+
+/* Warning override — takes precedence via cascade */
+.skill--warn {
+  color: var(--color-warn);
+  background: var(--color-warn-bg);
+}
+
+/* Highest skill in the trio */
+.skill--peak {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  font-weight: 700;
 }
 
 /* ─── Event Modal ──────────────────────────────────────────────────────────── */
@@ -1005,18 +1059,46 @@ html, body {
 .admission-candidates {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 16px 0;
+  gap: 14px;
+  margin: 12px 0;
+  padding: 0 20px;
+}
+
+/* 立绘装裱框：固定高度，消除侧边留白，圆角随卡片裁切 */
+.portrait-frame {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* Neutral gradient backs any transparent-edge areas */
+  background: linear-gradient(170deg, #f0eee9 0%, #dedad2 100%);
+}
+
+.candidate-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
 .candidate-card {
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;           /* clips portrait to rounded card corners */
+  background: var(--color-surface);
+}
+
+/* text / trait / button area below the portrait */
+.candidate-card__body {
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--color-surface);
+  flex: 1;
 }
 
 .candidate-card__header {
@@ -1539,7 +1621,7 @@ html, body {
 }
 
 .student-project-tag {
-  font-size: 12px;
+  font-size: 13px;
   background: var(--color-accent-light);
   color: var(--color-accent);
   border-radius: 8px;
@@ -1555,5 +1637,305 @@ html, body {
 @media (max-width: 680px) {
   .proj-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Student avatar click button ─────────────────────────────────────────── */
+
+.student-avatar-btn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  border-radius: 8px;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.student-avatar-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+
+.student-avatar-btn:active {
+  transform: scale(0.97);
+}
+
+/* ─── Student Detail Modal ────────────────────────────────────────────────── */
+
+/* Overlay — slightly more opaque than standard for the portrait-heavy layout */
+.detail-overlay {
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* Two-column card */
+.detail-modal {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  background: var(--color-surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  max-width: 760px;
+  width: 100%;
+  height: 500px;
+  max-height: 90vh;
+}
+
+.detail-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.detail-modal__close:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Portrait column — fixed width, stretches to full card height */
+.detail-modal__portrait-col {
+  width: 308px;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.detail-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform: scale(0.9);
+  transform-origin: center bottom;
+}
+
+.detail-portrait--expr {
+  object-fit: contain;
+  object-position: center bottom;
+  background: var(--color-border);
+}
+
+.detail-portrait--placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+}
+
+/* Info column — scrollable */
+.detail-modal__info-col {
+  flex: 1;
+  min-width: 0;
+  padding: 28px 24px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-modal__name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.detail-modal__name {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+.detail-modal__badge {
+  font-size: 13px;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Signature / tagline — styled like a pull quote */
+.detail-modal__tagline {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  border-left: 3px solid var(--color-accent-light);
+  padding-left: 10px;
+  line-height: 1.5;
+}
+
+/* Short bio paragraph */
+.detail-modal__bio {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+/* Section header */
+.detail-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-modal__section-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+/* Trait tags row */
+.detail-modal__traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* 状态 + 能力 two-column layout, vertically centered */
+.detail-modal__stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Stat bars (favor / happiness) */
+.detail-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-stat__label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  width: 40px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.detail-stat__track {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.detail-stat__fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.detail-stat__fill--warn {
+  background: var(--color-warn);
+}
+
+.detail-stat__num {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  width: 26px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Project tags (current / completed) */
+.detail-modal__project {
+  font-size: 14px;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border-radius: 8px;
+  padding: 3px 10px;
+  display: inline-block;
+}
+
+.detail-modal__project--none {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.detail-modal__project--done {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+/* Completed projects list */
+.detail-modal__done-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-modal__done-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-modal__done-time {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Graduation note */
+.detail-modal__grad-note {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* ── Mobile: stack portrait on top ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .detail-modal {
+    flex-direction: column;
+    max-height: 92vh;
+  }
+
+  .detail-modal__portrait-col {
+    width: 100%;
+    height: 220px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail-portrait {
+    height: 220px;
+    object-fit: contain;
+    object-position: top center;
+  }
+
+  .detail-modal__info-col {
+    padding: 18px 16px 16px;
   }
 }

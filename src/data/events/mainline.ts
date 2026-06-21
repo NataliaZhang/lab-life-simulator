@@ -38,7 +38,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'begin',
-        text: '好吧，那就假装我知道。',
+        text: '好吧，假装我知道',
         outcomes: [{
           weight: 1,
           narrative: '你把钥匙揣进口袋，走进实验室。无论如何，故事开始了。',
@@ -111,7 +111,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'poster_blast',
-        text: '做一张海报，发到所有考研群',
+        text: '做海报，刷爆所有考研群',
         outcomes: [{
           weight: 1,
           narrative: '你在凌晨十一点用 PowerPoint 设计了一张招生海报，裁切比例错了三次，字体换了五种，最终选了"微软雅黑加粗"。发出去之后，第二天早上醒来，邮箱里已经有十七封询问邮件。其中两封是问实验室有没有班车的。',
@@ -123,7 +123,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'crash_class',
-        text: '直接去隔壁教授的研究生课上宣讲',
+        text: '直接去隔壁班宣讲',
         outcomes: [{
           weight: 1,
           narrative: '"就占用大家三十秒。" 你在张教授讲课途中举手示意。三十秒变成了五分钟。张教授全程保持着一个礼貌但含义明确的微笑。但课后有三位同学过来加了你微信，其中一个说"老师你讲得比张老师好玩"。',
@@ -135,7 +135,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'build_website',
-        text: '肝一个高大上的实验室官网',
+        text: '肝一个高大上官网',
         outcomes: [{
           weight: 1,
           narrative: '你用开源模板搭了一个官网，个人照片用的是三年前参会时拍的，西装是借的。Publications 页面目前只有两篇，但排版非常漂亮。一周后，有人发邮件说"我是通过谷歌搜到您实验室的"。你感到了一种奇特的骄傲。',
@@ -147,7 +147,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'honest_pitch',
-        text: '实话实说：来我组，有独立 GPU 用',
+        text: '实话实说：来我组，GPU独享',
         requiredChoiceId: 'buy_server',
         outcomes: [{
           weight: 1,
@@ -201,7 +201,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'refuse_gpu',
-        text: '现在经费紧张，暂时不行',
+        text: '经费紧张，暂时不行',
         outcomes: [{
           weight: 1,
           narrative: '你解释了经费状况。{studentName}点头，说"好的老师我知道了"，然后回去了。你说不清楚那个"知道了"里面有多少理解，有多少失望，以及有多少已经开始悄悄浏览其他组动态的成分。',
@@ -227,7 +227,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     description: [
       '你在白板上郑重地写下"研究进展"，转过身——对面坐着你唯一的学生，两人大眼瞪小眼。大概过了七秒钟，你们同时意识到都在等对方先开口。',
       '这就是你建组以来的第一次"组会"。参与人数：2。多余的椅子：6。整间会议室正在以一种沉默但坚定的方式暗示你，"会议"这个词需要一定的规模才能成立。',
-      '门被敲了三下。是隔壁办公室的张嘉明老师，端着一杯茶，脸上带着一种"我来得正是时候"的神情。他说："听说你刚建组？我们每周四下午开联合组会，几个组拼在一起，人多热闹，学生互相也有个参照，要不要来凑一凑？"',
+      '门被敲了三下。是隔壁办公室的张老师，端着一杯茶，脸上带着一种"我来得正是时候"的神情。他说："听说你刚建组？我们每周四下午开联合组会，几个组拼在一起，人多热闹，学生互相也有个参照，要不要来凑一凑？"',
     ],
     prompt: '张老师的提议，你怎么回应？',
     options: [
@@ -271,7 +271,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'clear_admin',
-        text: '先把行政清完，再专心科研',
+        text: '先把行政清了，再科研',
         outcomes: [{
           weight: 1,
           narrative: '你花了整整一个下午处理邮件、填表、回复"已阅"。清完之后终于可以打开代码库了——然后看了一眼时钟，六点整。明天再说。至少把邮箱里那个烦人的小红点清掉了。',
@@ -283,7 +283,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'delegate_meeting',
-        text: '拉一个学生去开会，我有正事',
+        text: '拉个学生去，我有正事',
         outcomes: [{
           weight: 1,
           narrative: '你把一个委员会会议转给了学生，说"帮我去听一下，回来汇报重点"。对方回了个"收到"，语气里有一种微妙的新鲜感——大概是第一次意识到，导师也需要被人替下场。半小时后，你多推进了三个实验步骤。',
@@ -312,7 +312,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'encourage',
-        text: '辛苦了，这学期干得不错',
+        text: '辛苦了，这学期不错',
         outcomes: [{
           weight: 1,
           narrative: '你发了一句"辛苦了，这学期表现得很好"。{studentName}的回复不是文字，而是一张当天刚跑完的实验截图，日志是一片通畅的绿色。你猜这不完全是巧合。',
@@ -350,7 +350,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'graceful_exit',
-        text: '谢谢这段时间，我们下周单飞',
+        text: '谢谢，下周开始单飞',
         outcomes: [{
           weight: 1,
           narrative: '张老师看了你一眼，点点头，然后顺手把他们组的会议室档期往前挪了一小时。你回来后在白板上写了"独立组会：每周五下午"，三个学生抬起头看着。你觉得空气里有什么东西悄悄变了——你的实验室有了自己的节奏。',
@@ -394,7 +394,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'double_check',
-        text: '让{studentName}仔细复查',
+        text: '让{studentName}仔细查一遍',
         outcomes: [{
           weight: 1,
           narrative: '{studentName}翻了一遍，发现了问题：测试集泄漏了，模型悄悄见过它不该见的数据。修正之后真实提升只有3个点——仍然不错，但那三个感叹号已经收回去了。一场学术危机就这样在悄悄发生、又悄悄被消解。',
@@ -502,7 +502,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'delegate',
-        text: '让{studentName}自己主导冲刺',
+        text: '放权给{studentName}冲刺',
         outcomes: [
           {
             weight: 1,
@@ -555,7 +555,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'celebrate_accept',
-        text: '中了就庆祝，没中就分析',
+        text: '中了庆祝，没中复盘',
         outcomes: [
           {
             weight: 2,
@@ -578,7 +578,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'analyze_reviews',
-        text: '不管结果，先逐条分析审稿意见',
+        text: '不管结果，先逐条分析',
         outcomes: [{
           weight: 1,
           narrative: '你和{studentName}认真读了每条审稿意见。接受了就改进，拒绝了就找方向。{studentName}说"我没想到审稿人还有这个顾虑"——这才是最有价值的部分。',
@@ -611,7 +611,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           {
             weight: 2,
             narrative: '熬了六天。你喝了多少咖啡你不记得了，你记得的是最后一天凌晨四点点击"提交"按钮时的那种虚脱感，像是刚跑完一场没有人围观的马拉松。申请书质量说得过去，精力耗尽，但至少交上去了。',
-            effects: [{ type: 'lab', stat: 'reputation', delta: 3 }],
+            effects: [{ type: 'lab', stat: 'reputation', delta: 8 }],
             nextEventIds: ['grant_result'],
           },
           {
@@ -639,7 +639,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '你关掉了申请书文档，长呼一口气。有同事问"今年投国自然吗"，你说"今年先缓一年"，对方点了点头，说了一句"有时候也好"。你把省下来的精力用来做实验，感觉自己第一次在截止日期前不焦虑了。',
-          effects: [{ type: 'lab', stat: 'energy', delta: 30 }],
+          effects: [{ type: 'lab', stat: 'energy', delta: 20 }],
         }],
       },
     ],
@@ -836,7 +836,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'party',
-        text: '出去吃一顿，算老师请客',
+        text: '出去吃，老师请客',
         fundingCost: 2,
         outcomes: [{
           weight: 1,
@@ -850,7 +850,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'milestone_review',
-        text: '认真聊聊这一年，定下新目标',
+        text: '聊聊这一年，定下目标',
         energyCost: 10,
         outcomes: [{
           weight: 1,
@@ -864,7 +864,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       },
       {
         id: 'keep_working',
-        text: '该干嘛干嘛，科研不等人',
+        text: '该干嘛干嘛',
         outcomes: [{
           weight: 1,
           narrative: '你决定继续工作。下午实验室很安静，只有键盘声和空调声。快走的时候，你发现白板上的小蛋糕旁边多了一行字：「实验室一岁了，但导师好像没空。」下面还画了一个很小的叹气表情。',
