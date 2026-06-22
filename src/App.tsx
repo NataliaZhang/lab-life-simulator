@@ -110,7 +110,7 @@ export function App() {
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
-    const size = saved ? parseInt(saved, 10) : 14;
+    const size = saved ? parseInt(saved, 10) : 17;
     document.documentElement.style.setProperty('--content-font-size', `${size}px`);
     return size;
   });

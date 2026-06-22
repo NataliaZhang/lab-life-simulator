@@ -928,6 +928,14 @@ html, body {
     padding: 16px;
   }
 
+  .status-bar {
+    padding: 0 8px;
+  }
+
+  .game-title {
+    display: none;
+  }
+
   .status-right {
     gap: 4px;
   }
