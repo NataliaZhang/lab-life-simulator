@@ -307,14 +307,14 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
 
       // ── Trait-based progress modifiers ──────────────────────────────────
 
-      // ddl_warrior: progress already > 80% → monthly gain ×2
-      if (student.traitIds.includes('ddl_warrior') && ap.progress >= 80) {
+      // ddl_warrior: progress already > 75% → monthly gain ×2
+      if (student.traitIds.includes('ddl_warrior') && ap.progress > 75) {
         monthlyGain *= 2;
       }
 
-      // dream_debugger: engineering-dominant project → +2% absolute, else -1%
+      // dream_debugger: engineering-dominant project → +3% absolute, else -1%
       if (student.traitIds.includes('dream_debugger')) {
-        monthlyGain += isEngineeringProject(projectDef) ? 2 : -1;
+        monthlyGain += isEngineeringProject(projectDef) ? 3 : -1;
       }
 
       // proof_addict: engineering required > 0 → monthly gain -1%
@@ -322,10 +322,10 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
         monthlyGain -= 1;
       }
 
-      // research_mysticism: mood multiplier
+      // research_mysticism: mood multiplier (>50 → ×1.4, <20 → ×0.8)
       if (student.traitIds.includes('research_mysticism')) {
-        if (student.happiness > 60) monthlyGain *= 1.2;
-        else if (student.happiness < 40) monthlyGain *= 0.8;
+        if (student.happiness > 50) monthlyGain *= 1.4;
+        else if (student.happiness < 20) monthlyGain *= 0.8;
       }
 
       // network_magnet: -1% absolute, but +4 reputation on completion (handled below)
@@ -351,13 +351,13 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
       if (ap.leaderId && ap.leaderId !== 'pi') {
         const leader = students.find(s => s.id === ap.leaderId);
         if (leader?.traitIds.includes('startup_saint')) {
-          lab = { ...lab, funding: lab.funding + 3 };
+          lab = { ...lab, funding: lab.funding + 5 };
         }
         if (leader?.traitIds.includes('product_mindset')) {
-          lab = { ...lab, reputation: lab.reputation + 2 };
+          lab = { ...lab, reputation: lab.reputation + 3 };
         }
         if (leader?.traitIds.includes('network_magnet')) {
-          lab = { ...lab, reputation: lab.reputation + 4 };
+          lab = { ...lab, reputation: lab.reputation + 5 };
         }
         completionEvents.push({ id: `project_complete_${ap.projectId}`, studentId: ap.leaderId, projectMonths });
       } else {

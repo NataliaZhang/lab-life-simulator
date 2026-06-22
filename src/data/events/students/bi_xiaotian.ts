@@ -272,7 +272,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     prompt: '开题被打回，他说有B计划，你怎么回应？',
     triggerConditions: [
       { type: 'time', field: 'year', op: '>=', value: 2 },
-      { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', op: '>=', value: 40 },
+      { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', op: '>=', value: 20 },
     ],
     options: [
       {
@@ -321,7 +321,6 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     ],
     prompt: '他在科普上展现出意外的才能，你怎么引导？',
     triggerConditions: [
-      { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.social', op: '>=', value: 55 },
       { type: 'time', field: 'year', op: '>=', value: 2 },
     ],
     options: [

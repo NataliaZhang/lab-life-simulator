@@ -320,6 +320,11 @@ export const monthlyEventPool: string[] = [
   'xzw_debug_instinct',
   'xzw_version_control',
   'xzw_accidental_discovery',
+  'xzw_robot_dog',
+  'xzw_window_rain',
+  'xzw_elevator_study',
+  'xzw_meeting_seats',
+  'xzw_coffee_machine',
   'xzw_alumni_visit',
 ];
 

@@ -225,7 +225,7 @@ function buildEndingSummary(state: GameState): string[] {
       .filter(g => (gradeNames[g]?.length ?? 0) > 0)
       .map(g => `${g}级（${gradeNames[g]!.length}）：${gradeNames[g]!.join('、')}`);
     if (gradeParts.length > 0) {
-      narrative += `项目：立项${totalStarted}个，完成${state.completedProjects.length}个，成果转化率${conversionRate}%。\n`;
+      narrative += `项目：立项${totalStarted}个，完成${state.completedProjects.length}个，成果转化率${conversionRate}%。\n\n`;
       narrative += gradeParts.join('；\n\n') + `。\n\n`;
     } else {
       narrative += `项目：立项${totalStarted}个，暂无完成项目。\n\n`;
@@ -251,11 +251,12 @@ function pickTimeEnding(state: GameState): string {
   // Player explicitly chose industry path via industry_invite event
   if (state.chosenOptionIds.includes('industry_invite_accept')) return 'ending_time_wealthy';
 
-  if (rep > 200 && graduated > 2)  return 'ending_time_famous';
-  if (rep > 150 && graduated > 1)  return 'ending_time_great';
-  if (rep > 100 && graduated >= 1) return 'ending_time_steady';
-  if (rep < 80)                    return 'ending_be_rep_low';
-  if (completed < 3)               return 'ending_be_proj_insufficient';
+  if (rep > 200 && graduated > 2)                   return 'ending_time_famous';
+  if (rep > 150 && graduated > 1)                   return 'ending_time_great';
+  if (rep > 110 && graduated >= 1)                  return 'ending_time_steady';
+  if (rep > 110 && completed >= 4 && graduated === 0) return 'ending_be_no_successor';
+  if (rep < 80)                                     return 'ending_be_rep_low';
+  if (completed < 3)                                return 'ending_be_proj_insufficient';
   return 'ending_time_struggle';
 }
 
@@ -308,38 +309,38 @@ function applyTraitMonthlyEffects(
   for (const student of activeStudents) {
     const t = student.traitIds;
 
-    // last_minute_genius: happiness < 50 → favor +2
-    if (t.includes('last_minute_genius') && student.happiness < 50) {
+    // last_minute_genius: leading any project → favor +2
+    if (t.includes('last_minute_genius') && state.activeProjects.some(p => p.leaderId === student.id)) {
       updateStudent(student.id, s => ({ ...s, favor: clamp100(s.favor + 2) }));
       traitGains.push({ label: `${student.name}天赋·好感`, delta: 2 });
     }
 
-    // sleep_learning: random skill +1
+    // sleep_learning: random skill +2
     if (t.includes('sleep_learning')) {
       const SKILLS = ['theory', 'engineering', 'social'] as const;
       const NAMES = { theory: '理论', engineering: '工程', social: '社交' } as const;
       const skill = SKILLS[Math.floor(Math.random() * 3)]!;
       updateStudent(student.id, s => ({
-        ...s, skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 1) },
+        ...s, skills: { ...s.skills, [skill]: clamp100(s.skills[skill] + 2) },
       }));
-      traitGains.push({ label: `${student.name}天赋·${NAMES[skill]}`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·${NAMES[skill]}`, delta: 2 });
     }
 
-    // weird_paper_collector: theory +1
+    // weird_paper_collector: theory +2
     if (t.includes('weird_paper_collector')) {
       updateStudent(student.id, s => ({
-        ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
+        ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 2) },
       }));
-      traitGains.push({ label: `${student.name}天赋·理论`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·理论`, delta: 2 });
     }
 
-    // curiosity_overload: engineering +1, lab energy -1
+    // curiosity_overload: engineering +2, lab energy -1
     if (t.includes('curiosity_overload')) {
       updateStudent(student.id, s => ({
-        ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 1) },
+        ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 2) },
       }));
       lab = { ...lab, energy: Math.max(0, lab.energy - 1) };
-      traitGains.push({ label: `${student.name}天赋·工程`, delta: 1 });
+      traitGains.push({ label: `${student.name}天赋·工程`, delta: 2 });
     }
 
     // research_brainstormer: flat -1 energy cost per month for boosted idea draw
@@ -347,39 +348,39 @@ function applyTraitMonthlyEffects(
       lab = { ...lab, energy: Math.max(0, lab.energy - 1) };
     }
 
-    // reliable_senior: random other active student theory +1
+    // reliable_senior: random other active student theory +2
     if (t.includes('reliable_senior')) {
       const others = activeStudents.filter(s => s.id !== student.id);
       if (others.length > 0) {
         const target = others[Math.floor(Math.random() * others.length)]!;
         updateStudent(target.id, s => ({
-          ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 1) },
+          ...s, skills: { ...s.skills, theory: clamp100(s.skills.theory + 2) },
         }));
-        traitGains.push({ label: `${student.name}天赋·${target.name}理论`, delta: 1 });
+        traitGains.push({ label: `${student.name}天赋·${target.name}理论`, delta: 2 });
       }
     }
 
-    // social_terrorist: random other active student favor +1
+    // social_terrorist: random other active student favor +2
     if (t.includes('social_terrorist')) {
       const others = activeStudents.filter(s => s.id !== student.id);
       if (others.length > 0) {
         const target = others[Math.floor(Math.random() * others.length)]!;
-        updateStudent(target.id, s => ({ ...s, favor: clamp100(s.favor + 1) }));
-        traitGains.push({ label: `${student.name}天赋·${target.name}好感`, delta: 1 });
+        updateStudent(target.id, s => ({ ...s, favor: clamp100(s.favor + 2) }));
+        traitGains.push({ label: `${student.name}天赋·${target.name}好感`, delta: 2 });
       }
     }
 
-    // optimization_addict: random active project with leader → progress +1%
+    // optimization_addict: random active project with leader → progress +3%
     if (t.includes('optimization_addict')) {
       const eligible = activeProjects.filter(p => p.leaderId !== null);
       if (eligible.length > 0) {
         const proj = eligible[Math.floor(Math.random() * eligible.length)]!;
         activeProjects = activeProjects.map(p =>
           p.projectId === proj.projectId
-            ? { ...p, progress: Math.min(100, p.progress + 1) }
+            ? { ...p, progress: Math.min(100, p.progress + 3) }
             : p,
         );
-        traitGains.push({ label: `${student.name}天赋·项目进度`, delta: 1, suffix: '%' });
+        traitGains.push({ label: `${student.name}天赋·项目进度`, delta: 3, suffix: '%' });
       }
     }
   }
@@ -394,14 +395,14 @@ function applyTraitMonthlyEffects(
     if (sunshineStudent) traitGains.push({ label: `${sunshineStudent.name}天赋·全员心情`, delta: 1 });
   }
 
-  // fortune_engineer: if this student's happiness changed ≥3 times this month → engineering +2
+  // fortune_engineer: if this student's happiness changed ≥2 times this month → engineering +3
   for (const student of activeStudents) {
     if (student.traitIds.includes('fortune_engineer')) {
-      if ((moodChanges[student.id] ?? 0) >= 3) {
+      if ((moodChanges[student.id] ?? 0) >= 2) {
         updateStudent(student.id, s => ({
-          ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 2) },
+          ...s, skills: { ...s.skills, engineering: clamp100(s.skills.engineering + 3) },
         }));
-        traitGains.push({ label: `${student.name}天赋·工程`, delta: 2 });
+        traitGains.push({ label: `${student.name}天赋·工程`, delta: 3 });
       }
     }
   }
@@ -761,12 +762,12 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
     const sequence: string[] = ['midterm_review_open'];
     if (completedCount === 0)       sequence.push('midterm_review_no_projects');
-    else if (completedCount <= 2)   sequence.push('midterm_review_few_projects');
+    else if (completedCount <= 3)   sequence.push('midterm_review_few_projects');
     if (activeStudents.length <= 2) sequence.push('midterm_review_low_students');
-    if (reputation < 50)            sequence.push('midterm_review_low_rep');
+    if (reputation < 60)            sequence.push('midterm_review_low_rep');
     if (funding < 20)               sequence.push('midterm_review_low_funding');
     if (energy < 20)                sequence.push('midterm_review_low_energy');
-    if (completedCount >= 3 && activeStudents.length >= 3 && reputation >= 50 && funding >= 20 && energy >= 20)
+    if (completedCount >= 4 && activeStudents.length >= 3 && reputation >= 60 && funding >= 20 && energy >= 20)
       sequence.push('midterm_review_positive');
     sequence.push('midterm_review_close');
 
@@ -837,26 +838,40 @@ export function applyMonthlyUpdate(state: GameState): GameState {
 
   // ── Per-student conditional events (happiness-triggered) ─────────────────
   // Rules:
-  //   1. If happiness <= 0 → forced departure, skip all other conditional events.
-  //   2. Each event in conditionalStudentEventPool fires at most once per student.
-  //   3. At least 2 months must pass between any two conditional events for the same student.
-  //   4. At most one conditional event queued per month across all students.
+  //   1. If happiness <= 0 for the FIRST month → grace period: student enters happinessWarned,
+  //      Pass 2 still runs so low-mood conditional events can fire. Departure is deferred.
+  //   2. If happiness <= 0 for a SECOND consecutive month → forced departure, skip Pass 2.
+  //   3. Recovery (happiness > 0) removes student from happinessWarned.
+  //   4. Each event in conditionalStudentEventPool fires at most once per student.
+  //   5. At least 2 months must pass between any two conditional events for the same student.
+  //   6. At most one conditional event queued per month across all students.
 
   const CONDITIONAL_COOLDOWN = 2; // months
   let updatedConditionalLog = { ...next.studentConditionalLog };
 
-  // Pass 1: happiness = 0 → immediate forced departure (highest priority).
+  const prevWarned = new Set(stateWithDepletionTracked.happinessWarned ?? []);
+  const newWarned: string[] = [];
+
+  // Pass 1: grace-period logic for happiness = 0.
   const crisisStudentIds = new Set<string>();
   for (const student of stateWithDepletionTracked.students.filter(s => s.status === 'active')) {
     if (student.happiness <= 0) {
-      crisisStudentIds.add(student.id);
-      const alreadyQueued = next.eventQueue.some(
-        e => e.id === 'student_crisis_departure' && e.studentId === student.id,
-      );
-      if (!alreadyQueued) {
-        forcedEvents.push({ id: 'student_crisis_departure', studentId: student.id });
+      if (prevWarned.has(student.id)) {
+        // Second consecutive month at 0 → depart now.
+        crisisStudentIds.add(student.id);
+        const alreadyQueued = next.eventQueue.some(
+          e => e.id === 'student_crisis_departure' && e.studentId === student.id,
+        );
+        if (!alreadyQueued) {
+          forcedEvents.push({ id: 'student_crisis_departure', studentId: student.id });
+        }
+        // Do NOT add back to newWarned; they're leaving.
+      } else {
+        // First month at 0 → grace period: record warning, let Pass 2 fire low-mood events.
+        newWarned.push(student.id);
       }
     }
+    // Students with happiness > 0 are naturally excluded from newWarned (recovery clears warning).
   }
 
   // Pass 2: pick at most one conditional event for one non-crisis student.
@@ -922,6 +937,7 @@ export function applyMonthlyUpdate(state: GameState): GameState {
     eventQueue: newQueue,
     deferredEvents: [],        // consumed above; reset for the next month
     studentConditionalLog: updatedConditionalLog,
+    happinessWarned: newWarned,
     storyLog: [...state.storyLog, summaryEntry, ...extraLogEntries, ...projectLogEntries],
   };
 }

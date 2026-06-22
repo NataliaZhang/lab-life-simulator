@@ -208,6 +208,9 @@ export interface GameState {
   pendingSummarySlides: string[];
   // Events deferred via nextMonthEventIds — injected into the queue at the next ADVANCE_MONTH.
   deferredEvents: QueuedEvent[];
+  // Students whose happiness was ≤ 0 last month. First offence → grace period (low-mood events fire
+  // instead of departure). Second consecutive month → student_crisis_departure triggers.
+  happinessWarned: string[];
 }
 
 // ─── Reducer Actions ───────────────────────────────────────────────────────

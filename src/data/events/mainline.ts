@@ -889,9 +889,9 @@ export const mainlineEvents: Record<string, GameEvent> = {
 // 按条件注入的事件 ID：
 //   midterm_review_open       — 必出，开场
 //   midterm_review_no_projects  — 0个已完成项目
-//   midterm_review_few_projects — 1-2个已完成项目
+//   midterm_review_few_projects — 1-3个已完成项目
 //   midterm_review_low_students — 在读学生≤2
-//   midterm_review_low_rep      — 声望<50
+//   midterm_review_low_rep      — 声望<60
 //   midterm_review_low_funding  — 经费<20
 //   midterm_review_low_energy   - 精力<20
 //   midterm_review_positive     — 以上均无问题时

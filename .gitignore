@@ -3,3 +3,4 @@ CLAUDE.md
 design_notes.md
 .claude/
 .venv-imgproc/
+.DS_Store

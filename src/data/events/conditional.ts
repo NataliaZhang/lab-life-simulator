@@ -31,7 +31,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '坏了。你准备怎么把人拉回来？',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '<', value: 10 },
     ],
     options: [
@@ -111,7 +111,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '这场舆情危机正在离谱扩散，你选择：',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 10 },
       { type: 'anyStudent', stat: 'favor', op: '<=', value: 30 },
     ],
@@ -178,7 +178,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '{studentName}已经被身体强制关机，你怎么处理？',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 30 },
       { type: 'anyStudent', stat: 'favor', op: '<=', value: 50 },
     ],
@@ -237,7 +237,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '{studentName}的研究状态明显不对，你选择：',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 50 },
       { type: 'anyStudent', stat: 'favor', op: '<=', value: 70 },
     ],
@@ -309,7 +309,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '{studentName}明显在重新评估人生路线，你怎么救？',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>=', value: 70 },
       { type: 'anyStudent', stat: 'favor', op: '<=', value: 90 },
     ],
@@ -368,7 +368,7 @@ export const conditionalEvents: Record<string, GameEvent> = {
     ],
     prompt: '你看着二十七条消息，决定：',
     triggerConditions: [
-      { type: 'anyStudent', stat: 'happiness', op: '<', value: 10 },
+      { type: 'anyStudent', stat: 'happiness', op: '<', value: 16 },
       { type: 'anyStudent', stat: 'favor', op: '>', value: 90 },
     ],
     options: [

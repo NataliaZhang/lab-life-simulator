@@ -23,8 +23,9 @@ import { projectById } from '../data/projects';
 function getAdmissionCost(year: number): number {
   return year >= 3 ? 20 : 10;
 }
-const REFRESH_ENERGY_COST = 20;   // one-time batch-swap before any admission
-const CONTINUE_ENERGY_COST = 40;  // recruit second student after admitting one (2× refresh)
+const REFRESH_ENERGY_COST = 10;   // one-time batch-swap before any admission
+const CONTINUE_ENERGY_COST = 20;  // recruit second student after admitting one
+const CONTINUE_FUNDING_MIN = 40;  // minimum funding to start a second recruitment batch
 
 // ─── Admission helpers ─────────────────────────────────────────────────────
 
@@ -98,6 +99,7 @@ export function createInitialState(): GameState {
     moodChangesThisMonth: {},
     pendingSummarySlides: [],
     deferredEvents: [],
+    happinessWarned: [],
   };
 }
 
@@ -666,6 +668,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.admissionState.recruitedCount < 1) return state;
       if (state.admissionState.recruitedCount >= 2) return state;
       if (state.lab.energy < CONTINUE_ENERGY_COST) return state;
+      if (state.lab.funding < CONTINUE_FUNDING_MIN) return state;
 
       const shownIds = state.admissionState.shownIds;
       const basePool = state.studentPool.filter(id => !shownIds.includes(id));
@@ -701,6 +704,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         pendingSummarySlides: action.state.pendingSummarySlides ?? [],
         deferredEvents: action.state.deferredEvents ?? [],
         activeProjectMonths: action.state.activeProjectMonths ?? null,
+        happinessWarned: action.state.happinessWarned ?? [],
         lab: { ...action.state.lab, energyDepletedCount: action.state.lab.energyDepletedCount ?? 0 },
         admissionState: savedAdmission
           ? {

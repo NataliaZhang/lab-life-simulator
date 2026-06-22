@@ -416,7 +416,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'xzw_accidental_discovery_evaluate',
-        text: '下周组会，让大家一起看',
+        text: '下周组会，分享给大家',
         outcomes: [
           {
             weight: 2,
@@ -442,14 +442,318 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
       },
       {
         id: 'xzw_accidental_discovery_defer',
-        text: '先把自己的研究做完，这个以后再看',
+        text: '先把自己的研究做完',
         outcomes: [
           {
             weight: 1,
             narrative: '"好，那我先存起来。"谢之微给备忘录加上"待评估"标签，还贴心地写了摘要，方便以后捡回来。后来事情一件接一件，那份文档一直躺在角落。等你在别人的论文里看到类似思路时，脑子里冒出的第一句话是：谢之微当时好像真的捡到过这块石头。',
             effects: [
               { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 2 },
-              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: -2 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 2 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_robot_dog: {
+    id: 'xzw_robot_dog',
+    title: '顺便做一点机器人研究',
+    description: [
+      '谢之微抱着电脑来找你。"老师，我想申请一个机器狗。"',
+      '你问为什么，她脱口而出："我想知道它遇到楼梯会怎么想。"',
+      '她停了一下，补了一句："顺便做一点机器人研究。"',
+      '你总觉得后半句是临时加上的。',
+    ],
+    prompt: '你怎么回应？',
+    triggerConditions: [
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', op: '>=', value: 20 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'xzw_robot_dog_approve',
+        fundingCost: 3,
+        text: '批准采购',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '机器狗到货了。第一周它学会了上楼梯。第二周开始在冰箱附近定点巡逻。第三周你发现谢之微把一面小镜子架在了走廊里，正在记录它是否会在镜子前停下来。\n\n你问研究进展。"正在跑实验。"她说。你看了一眼实验日志，标题写着：机器狗自我认知初探。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 10 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 10 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_robot_dog_borrow',
+        text: '隔壁不是有一个吗，先去借',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微真的借来了，答应了注意轻放的交代。两周后，隔壁张老师过来，语气克制：“请问……你们为什么给它装了一条机械臂？”',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 6 },
+              { type: 'lab', stat: 'reputation', delta: -1 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_robot_dog_duck',
+        text: '为什么不是机器鸭',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微认真地思考了三秒钟。"机器鸭……浮力好处理，但羽毛展开机构会很复杂，而且鸭叫声的资料比较少。"她没有在开玩笑。\n\n你们在这个问题上一起待了十五分钟，最后谢之微说："我去查一下有没有现成的。"没有。但她整理了一份《机器鸭设计难点备忘》，以备不时之需。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 5 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_window_rain: {
+    id: 'xzw_window_rain',
+    title: '我在等实验跑完',
+    description: [
+      '实验在跑，谢之微应该在旁边守着。',
+      '你过去找她，发现她盯着窗户，似乎不是在发呆。仔细看，她其实是在观察的雨滴怎么流。',
+      '"你看，"她指着两条水痕，"它们明明往同一个方向，但从来不合并。"',
+    ],
+    prompt: '你怎么回应？',
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 1 },
+      { type: 'time', field: 'month', op: '>=', value: 3 },
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', op: '>=', value: 25 },
+    ],
+    options: [
+      {
+        id: 'xzw_window_rain_engage',
+        text: '我刚好也想知道',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微眼睛一下亮起来，开始讲她的各种猜测：水流轨迹、液面张力、接触角。\n\n她讲完，神情变得很满足，像把一个盘旋了很久的问题从脑子里放出去了。实验日志还在好好跑，什么都没耽误。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_window_rain_back_to_work',
+        text: '有实验要盯，别分心',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '"好。"谢之微合上备忘录，把注意力拉回屏幕。沉默了一会儿，她轻声说："但如果它们是在绕开什么……"她反应过来，用力闭嘴，把视线钉在日志上。\n\n下班时，备忘录又多了两条记录。她用等待间隙估算了表面张力的数值范围，末尾附注：非工作时间观察，不占用研究资源。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: -2 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: -3 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 3 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_window_rain_official',
+        text: '这算实验观察吗',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '"对对，这算。"她把备忘录重命名成"非正式实验记录 vol.3"，在最上面加了一行：研究问题：雨滴为什么不合并。\n\n然后她低头把格式整了整，抬起头说："这样就合规了。"你看着她给自己的发呆行为补了一份实验设计，忍住没有提醒她这是一个计算机系而非物理系的实验室。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 1 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_elevator_study: {
+    id: 'xzw_elevator_study',
+    title: '我只是顺手记了一下',
+    description: [
+      '谢之微迟到了七分钟，进来时神情还有些思绪没收回来。',
+      '"老师，"她放下包，"楼里有六部电梯，但所有人都只等最左边三部。右边三部经常空着来，没有人进。"',
+      '她打开手机，共十四天、每天上班高峰期，约两百条进出记录。你问她什么时候记的。"等左边的电梯的时候，"她说，"正好有空。"',
+    ],
+    prompt: '你怎么回应谢之微的电梯研究？',
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', op: '>=', value: 40 },
+    ],
+    options: [
+      {
+        id: 'xzw_elevator_study_model',
+        text: '问她打算用这个数据做什么',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '"还不知道，"她想了想，"但可以建一个排队博弈模型，分析大家怎么在没有人提议的情况下形成这个共识的。"她已经打开文档开始写研究问题。\n\n你后来在组会上提到，这种无组织的群体协调很像分布式系统里的某类问题。谢之微抬起头，眼神一下亮了，把电脑往前推了推："对对对，这就是我想说的。"\n\n💡 获得灵感：无声协调机制 —— 已记录到项目面板。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 2 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.social', delta: 1 },
+              { type: 'unlockIdea', projectId: 'spontaneous_coordination' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_elevator_study_optimal',
+        text: '问她有没有找到最优等法',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微把手机往前推了推，翻到最后一页。"第四部，"她说，"用的独立调度系统，响应快三到五秒，大部分人不知道。"\n\n她停了一下，补了一句："但如果大家都去等第四部，它就又慢了。"你看着她把一个等电梯问题讲出了博弈论的味道，发现这是她真正算过的。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 7 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 7 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 3 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_meeting_seats: {
+    id: 'xzw_meeting_seats',
+    title: '没人规定但大家都这样',
+    description: [
+      '组会结束，谢之微收东西收得很慢，最后一个出门。',
+      '在走廊等你时，她说："老师，你有没有发现，我们组会三个月了，每次每个人坐的位置都一样。"',
+      '她打开手机，给你看了一张示意图——每次组会的座位用最简单的圆圈和名字标注，几乎没有变动过一次。"没有人说过这个规定，"她说，"但大家都在维持它。我想知道为什么。"',
+    ],
+    prompt: '你怎么回应？',
+    triggerConditions: [
+      { type: 'time', field: 'month', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'xzw_meeting_seats_experiment',
+        text: '那你下次故意坐别的位置试试',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微眼睛亮了，随即恢复平静："好，但我要先想清楚变量控制。"\n\n下次组会，她提前来，坐到了另一个位置。大家陆续进来，有人愣了一下，有人侧身换了方向，最后整个座位格局微妙地整体旋转了大约九十度。\n\n谢之微在备忘录里写：系统具有鲁棒性，单一扰动不足以破坏结构。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 7 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.social', delta: 2 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 1 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_meeting_seats_inside',
+        text: '你也在里面',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微低头翻开图，认真对照了一下。"对，我也是。"她抬起头，像发现了什么了不得的事，"我原来以为我在观察，但我也是被观察的数据。"\n\n她把这条写进备忘录，标题改成：观察者也是数据。你看着这个标题，想起好几篇量子力学的论文，决定不继续想了。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 7 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 2 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_meeting_seats_social',
+        text: '这是社会学课题吗',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '"不是，"她说，"但感觉可以是。"她把手机收起来，往前走了两步，"如果把座位换成任何可以被占据的位置——地铁、食堂、停车场——这个问题就可以推广到很多地方。"\n\n她没有继续说下去，但脑子显然还在转。也许今晚她会把这个想法写成三页笔记，也许睡过去了明天什么都不记得。你觉得这两种可能性概率相当。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 4 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 4 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 1 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_coffee_machine: {
+    id: 'xzw_coffee_machine',
+    title: '我就想知道那个声音从哪来',
+    description: [
+      '实验室的咖啡机有一段时间会发出奇怪声音。有人说是气泡，有人说是磨损，最后大家都习惯了。',
+      '"我只把盖子打开看一眼，"谢之微事先向你报告，手里拿着说明书，"不动零件。"你点了头。',
+      '四十分钟后，她发来消息：声音来源找到了，顺便修好了。后面附了一张A4纸的拆解图，每个零件都有标注，画风认真得像实验报告封面。',
+    ],
+    prompt: '你怎么回应？',
+    triggerConditions: [
+      { type: 'time', field: 'year', op: '>=', value: 1 },
+      { type: 'time', field: 'month', op: '>=', value: 4 },
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', op: '>=', value: 30 },
+    ],
+    options: [
+      {
+        id: 'xzw_coffee_machine_how',
+        text: '问她怎么修的',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微走过来，把A4纸摊开，指着一个气路密封："声音来自这里，用时间久了会有微小间隙。我用棉签沾了一点食用硅脂填了一下。"她补了一句："说明书第37页有这个维护步骤，大家一般不读第37页。"\n\n你看着她，想不出该说什么，最后只说了一个字："好。"她把A4纸折起来，推进了笔记本夹层。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.engineering', delta: 2 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_coffee_machine_list',
+        text: '问她还有什么感兴趣的',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '谢之微把A4纸翻过去，背面还有内容。"微波炉，"她说，"我想知道转盘转速和功率有没有关系。还有投影仪焦距，官方参数写的范围比实际小，我试过了。"\n\n你数了一下，背面共七条，三条已经画了勾。谢之微补了一句："我只是路过的时候会看一眼。"你决定相信这句话，因为咖啡机确实不响了，而且没有任何损失。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 8 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 7 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.engineering', delta: 2 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'xzw_coffee_machine_approval',
+        text: '以后动东西先申请',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '"好的。"谢之微立刻掏出手机，发来一条消息，主题：申请修理咖啡机（已完成）。你把这条申请通过了，加了一句"以后先申请再动"。她截图存档，回复："下次我会按顺序来。"\n\n之后你一直没有收到任何新的申请。但咖啡机彻底好了，微波炉有一天也安静了，投影仪的调焦不知道什么时候变顺了。没有任何申请记录。',
+            effects: [
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 3 },
+              { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 2 },
             ],
           },
         ],

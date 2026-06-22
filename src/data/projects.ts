@@ -47,7 +47,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 45,       // 博弈论建模
     engineeringRequired: 0,
-    socialRequired: 30,       // 行为研究与调查
+    socialRequired: 20,       // 行为研究与调查
     baseMonthlyProgress: 8,
     fundingReward: 15,
     reputationReward: 8,
@@ -114,7 +114,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 10,
     startupFundingCost: 5,
     theoryRequired: 0,
-    engineeringRequired: 40,  // 语音识别 + 语义处理
+    engineeringRequired: 20,  // 语音识别 + 语义处理
     socialRequired: 40,       // 理解学术语境和发言习惯
     baseMonthlyProgress: 8,
     fundingReward: 13,
@@ -132,7 +132,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 0,
     engineeringRequired: 0,
-    socialRequired: 60,       // 纯行为研究，理解人际沟通规律
+    socialRequired: 50,       // 纯行为研究，理解人际沟通规律
     baseMonthlyProgress: 10,
     fundingReward: 11,
     reputationReward: 5,
@@ -148,7 +148,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 15,
     startupFundingCost: 0,
     theoryRequired: 0,
-    engineeringRequired: 40,  // 分析 git 日志与代码质量指标
+    engineeringRequired: 45,  // 分析 git 日志与代码质量指标
     socialRequired: 0,
     baseMonthlyProgress: 8,
     fundingReward: 12,
@@ -182,7 +182,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 0,
     startupFundingCost: 8,
     theoryRequired: 0,
-    engineeringRequired: 50,  // 计算机视觉，图像分类模型
+    engineeringRequired: 45,  // 计算机视觉，图像分类模型
     socialRequired: 25,       // 行为标注，招募被试
     baseMonthlyProgress: 8,
     fundingReward: 14,
@@ -251,7 +251,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 55,       // 社会选择理论，形式化证明
     engineeringRequired: 0,
-    socialRequired: 20,       // 审稿人行为调查
+    socialRequired: 15,       // 审稿人行为调查
     baseMonthlyProgress: 8,
     fundingReward: 15,
     reputationReward: 9,
@@ -286,7 +286,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 0,
     startupFundingCost: 10,
     theoryRequired: 40,       // 理解审稿逻辑，设计对齐方法
-    engineeringRequired: 60,  // 训练审稿偏好模型
+    engineeringRequired: 45,  // 训练审稿偏好模型
     socialRequired: 0,
     baseMonthlyProgress: 5,
     fundingReward: 28,
@@ -320,7 +320,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 0,
     startupFundingCost: 15,
     theoryRequired: 50,       // RL 算法设计与分析
-    engineeringRequired: 60,  // 环境模拟与大量实验
+    engineeringRequired: 40,  // 环境模拟与大量实验
     socialRequired: 0,
     baseMonthlyProgress: 5,
     fundingReward: 30,
@@ -372,7 +372,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 0,
     engineeringRequired: 35,  // 行为日志分析，预测模型
-    socialRequired: 0,
+    socialRequired: 50,
     baseMonthlyProgress: 5,
     fundingReward: 24,
     reputationReward: 12,
@@ -387,8 +387,8 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['文献调研事件', '论文引用争议', '数据集下载事件'],
     startupEnergyCost: 0,
     startupFundingCost: 15,
-    theoryRequired: 38,       // 图论与社区发现方法
-    engineeringRequired: 40,  // 大规模图计算
+    theoryRequired: 40,       // 图论与社区发现方法
+    engineeringRequired: 35,  // 大规模图计算
     socialRequired: 0,
     baseMonthlyProgress: 5,
     fundingReward: 27,
@@ -404,8 +404,8 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['GPU 跑实验事件', '炼丹失败事件', '莫问玄玄学事件'],
     startupEnergyCost: 15,
     startupFundingCost: 8,
-    theoryRequired: 60,       // 贝叶斯优化理论
-    engineeringRequired: 42,  // 大量实验与调参记录分析
+    theoryRequired: 55,       // 贝叶斯优化理论
+    engineeringRequired: 25,  // 大量实验与调参记录分析
     socialRequired: 0,
     baseMonthlyProgress: 5,
     fundingReward: 26,
@@ -438,8 +438,8 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['服务器崩溃事件', 'GPU 爆内存事件', '深夜宕机抢救事件'],
     startupEnergyCost: 20,
     startupFundingCost: 0,
-    theoryRequired: 0,
-    engineeringRequired: 40,  // 监控数据分析，异常检测
+    theoryRequired: 20,
+    engineeringRequired: 50,  // 监控数据分析，异常检测
     socialRequired: 0,
     baseMonthlyProgress: 5,
     fundingReward: 26,
@@ -456,8 +456,8 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 15,
     startupFundingCost: 8,
     theoryRequired: 0,
-    engineeringRequired: 50,  // 推荐系统
-    socialRequired: 60,       // 理解学术人脉形成逻辑
+    engineeringRequired: 30,  // 推荐系统
+    socialRequired: 55,       // 理解学术人脉形成逻辑
     baseMonthlyProgress: 5,
     fundingReward: 24,
     reputationReward: 15,
@@ -474,7 +474,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 0,
     theoryRequired: 50,       // 博弈论建模与均衡分析
     engineeringRequired: 0,
-    socialRequired: 30,       // 组会行为观察与调查
+    socialRequired: 35,       // 组会行为观察与调查
     baseMonthlyProgress: 5,
     fundingReward: 22,
     reputationReward: 10,
@@ -506,7 +506,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['写摘要太难事件', '论文太长审稿人不看', '字数限制抓狂'],
     startupEnergyCost: 0,
     startupFundingCost: 12,
-    theoryRequired: 70,       // 论文结构理解，信息论
+    theoryRequired: 65,       // 论文结构理解，信息论
     engineeringRequired: 0,
     socialRequired: 0,
     baseMonthlyProgress: 5,
@@ -525,7 +525,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['学生拖延事件', '组会拖更事件', '毕业季焦虑事件'],
     startupEnergyCost: 20,
     startupFundingCost: 12,
-    theoryRequired: 60,       // 决策模型与因果推断
+    theoryRequired: 65,       // 决策模型与因果推断
     engineeringRequired: 0,
     socialRequired: 40,       // 行为追踪与用户研究
     baseMonthlyProgress: 3,
@@ -577,7 +577,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupEnergyCost: 20,
     startupFundingCost: 10,
     theoryRequired: 40,       // 质量评估方法论
-    engineeringRequired: 60,  // 大量人工标注 + 模型训练
+    engineeringRequired: 65,  // 大量人工标注 + 模型训练
     socialRequired: 0,
     baseMonthlyProgress: 3,
     fundingReward: 46,
@@ -612,7 +612,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     startupFundingCost: 10,
     theoryRequired: 0,
     engineeringRequired: 30,  // 穿戴设备数据处理与预测模型
-    socialRequired: 60,       // 招募被试，理解答辩情绪场景
+    socialRequired: 65,       // 招募被试，理解答辩情绪场景
     baseMonthlyProgress: 3,
     fundingReward: 45,
     reputationReward: 18,
@@ -678,8 +678,8 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['多智能体实验', 'Agent框架测试', '涌现行为观察'],
     startupEnergyCost: 0,
     startupFundingCost: 20,
-    theoryRequired: 55,       // 社会理论建模，涌现机制分析
-    engineeringRequired: 55,  // 大规模 agent 仿真
+    theoryRequired: 70,       // 社会理论建模，涌现机制分析
+    engineeringRequired: 25,  // 大规模 agent 仿真
     socialRequired: 0,
     baseMonthlyProgress: 3,
     fundingReward: 55,
@@ -695,13 +695,30 @@ export const projectDefinitions: ProjectDefinition[] = [
     ideaSources: ['海豚 Workshop 事件', '毕小天事件', '奇怪论文事件', '跨学科讨论事件'],
     startupEnergyCost: 20,
     startupFundingCost: 20,
-    theoryRequired: 65,       // 跨物种语言模型，最深的理论挑战
+    theoryRequired: 60,       // 跨物种语言模型，最深的理论挑战
     engineeringRequired: 60,  // 声纹处理 + 大模型训练
     socialRequired: 0,
     baseMonthlyProgress: 3,
     fundingReward: 70,
     reputationReward: 25,
   },
+  {
+    id: 'spontaneous_coordination',
+    grade: 'B',
+    name: '无声协调机制',
+    description: '研究人群在没有任何明文规定的情况下，如何自发形成稳定的行为协调规则——电梯左侧优先、组会固定座位、食堂默认路线。没有人发起，但所有人都在遵守。',
+    completionSummary: '对21个校园场景的长期追踪表明，无声规则平均在第7次重复行为后稳定成型，且对单次扰动具有显著鲁棒性——即使引入扰动者，规则通常在两次会议内恢复原状。',
+    ideaSources: ['谢之微的电梯行为记录', '组会座位观察'],
+    startupEnergyCost: 10,
+    startupFundingCost: 0,
+    theoryRequired: 40,       // 博弈论与社会规范建模
+    engineeringRequired: 0,
+    socialRequired: 35,       // 行为观察与数据收集
+    baseMonthlyProgress: 8,
+    fundingReward: 16,
+    reputationReward: 9,
+  },
+
 ];
 
 // Lookup map for fast access by ID

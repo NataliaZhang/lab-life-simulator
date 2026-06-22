@@ -21,8 +21,9 @@ function CandidatePortrait({ studentId, name }: { studentId: string; name: strin
   );
 }
 
-const REFRESH_ENERGY_COST = 20;
-const CONTINUE_ENERGY_COST = 40; // 2× refresh
+const REFRESH_ENERGY_COST = 10;
+const CONTINUE_ENERGY_COST = 20;
+const CONTINUE_FUNDING_MIN = 40;
 
 function getAdmissionCost(year: number): number {
   return year >= 3 ? 20 : 10;
@@ -55,7 +56,8 @@ export function AdmissionModal({
     // "Offer continue" state: one student admitted, player can stop or recruit another
     const hasPoolForContinue = gameYear >= 3 && unshownPoolCount >= 2;
     const canAffordContinue = lab.energy >= CONTINUE_ENERGY_COST;
-    const canContinue = hasPoolForContinue && canAffordContinue;
+    const hasFundingForContinue = lab.funding >= CONTINUE_FUNDING_MIN;
+    const canContinue = hasPoolForContinue && canAffordContinue && hasFundingForContinue;
 
     return (
       <div className="modal-overlay" role="dialog" aria-modal="true">
@@ -73,7 +75,11 @@ export function AdmissionModal({
                 onClick={onContinue}
                 disabled={!canContinue}
               >
-                <span className="modal__option-text">继续招募第二名</span>
+                <span className="modal__option-text">
+                  {!hasFundingForContinue
+                    ? `资金不足（需${CONTINUE_FUNDING_MIN}万）`
+                    : '继续招募第二名'}
+                </span>
                 <span className="modal__option-costs">
                   <span className={`option-cost${!canAffordContinue ? ' option-cost--unaffordable' : ''}`}>
                     ⚡ {CONTINUE_ENERGY_COST}
