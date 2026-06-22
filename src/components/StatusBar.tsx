@@ -33,7 +33,7 @@ export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, proje
       <div className="status-right">
         <span className={`stat-chip${lab.funding < 10 ? ' stat-chip--warn' : ''}`}>
           <span className="stat-label">资金</span>
-          <span className="stat-value">{lab.funding}万</span>
+          <span className="stat-value">{lab.funding}</span>
         </span>
         <span className="stat-chip" title={reputationDesc(lab.reputation)}>
           <span className="stat-label">声望</span>
@@ -48,16 +48,14 @@ export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, proje
           onClick={onToggleProjectPanel}
           title={projectPanelOpen ? '关闭项目面板' : '查看项目'}
         >
-          项目{state.projectIdeas.length > 0 && !projectPanelOpen
-            ? ` (${state.projectIdeas.length})`
-            : (projectPanelOpen ? ' ✕' : ' ▸')}
+          项目{state.projectIdeas.length > 0 && !projectPanelOpen ? ` (${state.projectIdeas.length})` : ''}
         </button>
         <button
           className={`panel-toggle-btn${studentPanelOpen ? ' panel-toggle-btn--active' : ''}`}
           onClick={onToggleStudentPanel}
           title={studentPanelOpen ? '隐藏成员' : '查看成员'}
         >
-          成员{studentPanelOpen ? ' ✕' : ' ▸'}
+          成员
         </button>
       </div>
     </header>

@@ -1521,7 +1521,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'send_naming_guide',
-        text: '给{studentName}发一份命名规范，下次 review 前必须改好',
+        text: '给{studentName}发一份命名规范，必须改好',
         outcomes: [
           {
             weight: 1,
@@ -1535,7 +1535,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       },
       {
         id: 'check_bug_rate',
-        text: '翻一下 git log，看看改名前后 bug 提交频率有没有变化',
+        text: '翻 git log，观察改名前后 bug 频率变化',
         outcomes: [
           {
             weight: 1,

@@ -67,6 +67,19 @@ export const mainlineEvents: Record<string, GameEvent> = {
           narrative: '你花了20万元订购服务器。采购流程复杂得像在申请签证。但当确认邮件发来的那一刻，你忽然有了一种真正拥有实验室的感觉。剩余经费：30万元。',
           effects: [
             { type: 'lab', stat: 'funding', delta: 30 },
+            { type: 'lab', stat: 'reputation', delta: 10 },
+          ],
+          nextEventIds: ['recruit_campaign'],
+        }],
+      },
+      {
+        id: 'renovate_lab',
+        text: '先改善实验室环境',
+        outcomes: [{
+          weight: 1,
+          narrative: '你购置了一批办公家具、显示器和咖啡机。虽然科研水平没有任何提升，但实验室终于从"闲置房间"升级成了"看起来像能发论文的地方"。剩余经费：40万元。',
+          effects: [
+            { type: 'lab', stat: 'funding', delta: 40 },
             { type: 'lab', stat: 'reputation', delta: 5 },
           ],
           nextEventIds: ['recruit_campaign'],
@@ -79,19 +92,6 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你决定暂时不动这笔钱。科研史上有无数项目死于缺钱，而你打算至少先活过第一个学期。看着账户里的数字，你获得了一种短暂而脆弱的安全感。',
           effects: [{ type: 'lab', stat: 'funding', delta: 50 }],
-          nextEventIds: ['recruit_campaign'],
-        }],
-      },
-      {
-        id: 'renovate_lab',
-        text: '先改善实验室环境',
-        outcomes: [{
-          weight: 1,
-          narrative: '你购置了一批办公家具、显示器和咖啡机。虽然科研水平没有任何提升，但实验室终于从"闲置房间"升级成了"看起来像能发论文的地方"。剩余经费：40万元。',
-          effects: [
-            { type: 'lab', stat: 'funding', delta: 40 },
-            { type: 'lab', stat: 'reputation', delta: 2 },
-          ],
           nextEventIds: ['recruit_campaign'],
         }],
       },
@@ -114,7 +114,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '做海报，刷爆所有考研群',
         outcomes: [{
           weight: 1,
-          narrative: '你在凌晨十一点用 PowerPoint 设计了一张招生海报，裁切比例错了三次，字体换了五种，最终选了"微软雅黑加粗"。发出去之后，第二天早上醒来，邮箱里已经有十七封询问邮件。其中两封是问实验室有没有班车的。',
+          narrative: '你在凌晨用PPT设计了一张招生海报，裁切比例错了三次，字体换了五种，最终选了"微软雅黑加粗"。\n\n发出去之后，第二天早上醒来，邮箱里已经有十七封询问邮件。其中两封是问实验室有没有班车的。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 2 },
             { type: 'lab', stat: 'energy', delta: -10 },
@@ -126,7 +126,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '直接去隔壁班宣讲',
         outcomes: [{
           weight: 1,
-          narrative: '"就占用大家三十秒。" 你在张教授讲课途中举手示意。三十秒变成了五分钟。张教授全程保持着一个礼貌但含义明确的微笑。但课后有三位同学过来加了你微信，其中一个说"老师你讲得比张老师好玩"。',
+          narrative: '"就占用大家三十秒。" 你在张教授讲课途中举手示意。三十秒变成了五分钟。张教授全程保持着一个礼貌但含义明确的微笑。\n\n但课后有三位同学过来加了你微信，其中一个说"老师你讲得比张老师好玩"。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
             { type: 'lab', stat: 'energy', delta: -5 },
@@ -138,7 +138,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '肝一个高大上官网',
         outcomes: [{
           weight: 1,
-          narrative: '你用开源模板搭了一个官网，个人照片用的是三年前参会时拍的，西装是借的。Publications 页面目前只有两篇，但排版非常漂亮。一周后，有人发邮件说"我是通过谷歌搜到您实验室的"。你感到了一种奇特的骄傲。',
+          narrative: '你用开源模板搭了一个官网，个人照片用的是三年前参会时拍的，西装是借的。Publications 页面目前只有两篇，但排版非常漂亮。\n\n一周后，有人发邮件说"我是通过谷歌搜到您实验室的"。你感到了一种奇特的骄傲。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 4 },
             { type: 'lab', stat: 'energy', delta: -15 },
@@ -151,7 +151,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         requiredChoiceId: 'buy_server',
         outcomes: [{
           weight: 1,
-          narrative: '你在群里发了一条消息："本人新晋助理教授，方向 XXX，实验室刚采购了服务器，学生可独立使用，欢迎联系。" 没有废话，没有修饰。这条消息被转发了九次。事实证明，在 CS 领域，"有 GPU"的吸引力远大于任何学术愿景。',
+          narrative: '你在群里发了一条消息："本人新晋助理教授，机器学习方向，实验室刚采购了服务器，学生可独立使用，欢迎联系。" 没有废话，没有修饰。这条消息被转发了九次。事实证明，在 CS 领域，"有 GPU"的吸引力远大于任何学术愿景。',
           effects: [{ type: 'lab', stat: 'reputation', delta: 6 }],
         }],
       },

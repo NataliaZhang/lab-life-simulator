@@ -168,8 +168,8 @@ export const hypeEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '你读完了那份文档。里面大部分是热情有余、论据不足的宏观叙事，但有一段对"工具调用失败时的恢复策略"的描述出乎意料地具体，甚至有点创新性。你把那段单独截出来，发给{studentName}说"这个值得深挖"。{studentName}愣了一下，然后明显振作了起来——被认真对待，是最好的燃料。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 12 },
-              { type: 'randomStudent', stat: 'happiness', delta: 10 },
+              { type: 'randomStudent', stat: 'favor', delta: 8 },
+              { type: 'randomStudent', stat: 'happiness', delta: 8 },
               { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
             ],
           },
@@ -177,8 +177,8 @@ export const hypeEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你读完了三千字愿景文档。读完之后你有了两个收获：第一，{studentName}的写作能力很不错；第二，你现在也有点相信multi-agent了。你迅速打开一篇反驳性论文，用力把自己从悬崖边上拉了回来。',
             effects: [
-              { type: 'randomStudent', stat: 'favor', delta: 8 },
-              { type: 'randomStudent', stat: 'happiness', delta: 8 },
+              { type: 'randomStudent', stat: 'favor', delta: 5 },
+              { type: 'randomStudent', stat: 'happiness', delta: 5 },
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
           },

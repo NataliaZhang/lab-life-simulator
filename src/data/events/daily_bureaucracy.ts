@@ -175,7 +175,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'complete_process',
-        text: '苦填全套材料（消耗精力）',
+        text: '苦填全套材料',
         energyCost: 25,
         outcomes: [
           {

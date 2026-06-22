@@ -410,7 +410,7 @@ export function ProjectsPanel({ state, dispatch, onClose }: Props) {
     <div className="projects-panel">
       <div className="projects-panel__header">
         <h2 className="projects-panel__title">项目管理</h2>
-        <button className="btn btn--ghost" onClick={onClose}>✕ 关闭</button>
+        <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>
       </div>
 
       <div className="projects-panel__body">

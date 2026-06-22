@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { LogEntry, StatChange } from '../types';
+import { expressionUrl } from '../data/studentArt';
 
 const FEEDBACK_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor';
 
@@ -101,7 +102,7 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
           </div>
           <img
             className="log-entry__student-portrait"
-            src={`/img/students/expressions/${entry.studentPortrait}/smug.jpg`}
+            src={expressionUrl(entry.studentPortrait, 'smug')}
             alt=""
             aria-hidden="true"
           />
