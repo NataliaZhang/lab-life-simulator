@@ -33,6 +33,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
       outcomes: [{
         weight: 1,
         narrative: '「好耶！」{studentName}差点把饮料晃出来。「老师我就知道！」他立刻开始讲下一个想法，从问题定义一路讲到未来影响，中间逻辑漏洞百出，但本人完全不在意。你试图指出几个问题，他全部承认，然后继续往下讲。讲到最后，他举起杯子和你碰了一下：「反正下篇还有你。」',
+        image: 'img/students/illustration/max_favor/lin_xiaojuan.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -47,6 +48,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
       outcomes: [{
         weight: 1,
         narrative: '「有道理！」{studentName}立刻把手机扣到桌面上。「项目暂停，科研暂停，今天只负责高兴。」接下来一个小时，他从Reviewer吐槽到实验室八卦，又模仿起组里每个人开组会的样子，逗得你差点被饮料呛到。结账的时候他抢着扫码，大手一挥：「没事，今天我觉得自己特别有钱。」',
+        image: 'img/students/illustration/max_favor/lin_xiaojuan.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
@@ -86,6 +88,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '你没有叫醒她，只是静静地坐在旁边看着。过了很久，{studentName}慢慢睁开眼睛，发现你还在，明显愣了一下。她抱着饮料发了会儿呆，然后轻轻笑起来：「老师，我刚刚做了个好梦。」',
+          image: 'img/students/illustration/max_favor/gu_mianmian.PNG',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 5 },
             { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -99,6 +102,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '{studentName}醒来的时候，太阳已经往西边偏了一些。她发现零食被拆开了，也不在意，抱着袋子慢慢吃起来。{studentName}想起什么说什么，东一句西一句，想到组里第一次汇报，想到某次实验卡住，想到那篇改了十几版的论文。她的话断断续续的，没什么调理，但你觉得你已经完全明白她的意思了。',
+          image: 'img/students/illustration/max_favor/gu_mianmian.PNG',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 5 },
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -112,6 +116,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
         outcomes: [{
           weight: 1,
           narrative: '阳光、草地、饮料，还有睡得毫无防备的{studentName}，实在很像校园宣传片。后来她醒来发现照片，耳朵一下红了：「老师，你删掉。」顿了顿又补充：「至少别发群里。」',
+          image: 'img/students/illustration/max_favor/gu_mianmian.PNG',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 10 },
             { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -142,6 +147,7 @@ max_favor_ye_zhiqiu: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}试图阻止，失败了。她一路都在论证AA制度的合理性，你一路驳回。走到校门口时，她忽然把一本小册子塞进你手里：「礼尚往来。」你打开第一页，上面写着：导师常见逻辑漏洞，持续更新版。下面已经有第一条了。',
+        image: 'img/students/illustration/max_favor/ye_zhiqiu.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -155,6 +161,7 @@ max_favor_ye_zhiqiu: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}动作明显停顿了一下。「已经买完了。」「什么时候？」「刚才。」她说得理直气壮：「我不想欠导师人情。」你刚想说什么，低头发现那包便签纸被她偷偷塞进了你的袋子。',
+        image: 'img/students/illustration/max_favor/ye_zhiqiu.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -185,6 +192,7 @@ max_favor_bai_xiaoman: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}立刻打开收藏夹：「我就知道老师会喜欢！」里面密密麻麻全是甜品店备注：「这个适合论文接收，这个适合发工资，这个适合被Reviewer打哭之后恢复心情。」你忽然怀疑，她是不是给人生所有情况都准备好了对应甜品。',
+        image: 'img/students/illustration/max_favor/bai_xiaoman.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -198,6 +206,7 @@ max_favor_bai_xiaoman: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}眨了眨眼，忽然低头喝奶茶。过了一会儿，她才小声说：「那当然啦。」然后又努力装作若无其事地补充：「我挑了很久的。」她把最后那块蛋糕推到你面前：「既然老师这么会说话，那奖励你多吃一块噢。」',
+        image: 'img/students/illustration/max_favor/bai_xiaoman.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
@@ -228,6 +237,7 @@ max_favor_bi_xiaotian: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}先是愣住，然后肉眼可见地开心起来。「我就知道！」他说得太快，暴露了自己其实一直在等这句话。下一秒他已经开始规划投稿计划，从补实验讲到未来工作。你忽然意识到，他不是来求一个许可的，他是来找一个愿意和他一起相信这些奇怪想法的人。',
+        image: 'img/students/illustration/max_favor/bi_xiaotian.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -241,6 +251,7 @@ max_favor_bi_xiaotian: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}低声回答：「因为这个方向太怪了，我怕别人觉得我只是在玩。」事实上那页密密麻麻的推导和文献，实在不像玩笑。你轻轻拍了拍他的肩膀，给了他一个鼓励的微笑。他也笑起来：「不过现在没关系了。至少已经有一个人愿意认真看完。」',
+        image: 'img/students/illustration/max_favor/bi_xiaotian.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -269,7 +280,8 @@ max_favor_qian_duoduo: {
       text: '当场穿上T恤',
       outcomes: [{
         weight: 1,
-        narrative: '你把T恤套在正装外面。{studentName}先是睁大眼睛，随后立刻拿出手机拍照：“这个可以当下一版宣传图。”你警告他不许到处乱发。他点头点得很快：“内部资料，只给创始团队看。”\n\n过了一会儿，他又笑着补充：“不过说真的，老师，你穿这个，还挺像那么回事的。”',
+        narrative: '你把T恤套在正装外面。{studentName}先是睁大眼睛，随后立刻拿出手机拍照：”这个可以当下一版宣传图。”你警告他不许到处乱发。他点头点得很快：”内部资料，只给创始团队看。”\n\n过了一会儿，他又笑着补充：”不过说真的，老师，你穿这个，还挺像那么回事的。”',
+        image: 'img/students/illustration/max_favor/qian_duoduo.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -283,7 +295,8 @@ max_favor_qian_duoduo: {
       fundingCost: 2,
       outcomes: [{
         weight: 1,
-        narrative: '{studentName}立刻把写着“目前尚未获得任何官方授权”的牌子改成“已获得任何官方授权”。\n\n他认真盘点了一下库存：“今天卖得比预期好。下次可以加新品，比如实验室年度盲盒、拒稿纪念徽章、还有你的经典语录杯垫。”\n\n你笑着打趣：“接受了我的投资，可不能半途而废啊。”他抬头看你：“当然继续啊。”他说的是快闪店，你听着却像在说另一件事。',
+        narrative: '{studentName}立刻把写着”目前尚未获得任何官方授权”的牌子改成”已获得任何官方授权”。\n\n他认真盘点了一下库存：”今天卖得比预期好。下次可以加新品，比如实验室年度盲盒、拒稿纪念徽章、还有你的经典语录杯垫。”\n\n你笑着打趣：”接受了我的投资，可不能半途而废啊。”他抬头看你：”当然继续啊。”他说的是快闪店，你听着却像在说另一件事。',
+        image: 'img/students/illustration/max_favor/qian_duoduo.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -314,6 +327,7 @@ options: [
     outcomes: [{
       weight: 1,
       narrative: '{studentName}一字一顿地说：「重要的事情会记得。」你低头继续翻那本编年史，忽然意识到，原来这些年发生过的事情，有人一直认真地替大家保存着。',
+      image: 'img/students/illustration/max_favor/he_shixu.PNG',
       effects: [
         { type: 'lab', stat: 'reputation', delta: 10 },
         { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -327,6 +341,7 @@ options: [
     outcomes: [{
       weight: 1,
       narrative: '「后面是明年的。」{studentName}说得理所当然，「模板已经建好了，目录也排好了，我给它们都留了位置。」你看着那些尚未写下内容的空白页码，一直排到了很远很远的地方，像是藏着谁的无限期许。',
+      image: 'img/students/illustration/max_favor/he_shixu.PNG',
       effects: [
         { type: 'lab', stat: 'reputation', delta: 5 },
         { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -356,6 +371,7 @@ options: [
     outcomes: [{
       weight: 1,
       narrative: '{studentName}抬头瞥了你一眼，理直气壮：「是真话啊，有什么需要练的。」说完又低头备注联系人，像刚才只是陈述了一个常识。走了几步他又忍不住补充：「我在外面提到我们组的时候，是真的会觉得很有面子。」',
+      image: 'img/students/illustration/max_favor/tang_kuolie.PNG',
       effects: [
         { type: 'lab', stat: 'reputation', delta: 5 },
         { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -368,7 +384,8 @@ options: [
     text: '谢谢你把我介绍给这么多人',
     outcomes: [{
       weight: 1,
-      narrative: '{studentName}摆摆手：「这有什么好谢的。」他走了两步，又笑着说：「我只是觉得，认识你的人应该再多一点。」说完，他把你拉进一个新群，群名叫“未来合作机会”。你看着那个群名，忽然觉得今晚的风都轻了一点。',
+      narrative: '{studentName}摆摆手：「这有什么好谢的。」他走了两步，又笑着说：「我只是觉得，认识你的人应该再多一点。」说完，他把你拉进一个新群，群名叫”未来合作机会”。你看着那个群名，忽然觉得今晚的风都轻了一点。',
+      image: 'img/students/illustration/max_favor/tang_kuolie.PNG',
       effects: [
         { type: 'lab', stat: 'reputation', delta: 10 },
         { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -399,6 +416,7 @@ max_favor_mo_wenxuan: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}愣了一下，眼睛亮了，「当然可以。」他把布重新展开，请你再抽，认认真真地解读，这次比第一次还投入，嘴里的框架越说越细，你发现他其实是在认真解释他的推理逻辑，只是用了牌的外壳。解读结束，他收好，说：「两次结果一致，统计意义不高，但象征意义显著。」他抬起头，笑了，「谢谢老师陪我做完了整套。」',
+        image: 'img/students/illustration/max_favor/mo_wenxuan.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
@@ -412,6 +430,7 @@ max_favor_mo_wenxuan: {
       outcomes: [{
         weight: 1,
         narrative: '{studentName}看着你，好像在确认你不是在敷衍他，然后用力点了点头，说：「很多人觉得不科学就等于没用，但不科学不等于没有效果，对吧。」他把布袋拍了拍，放进包里，「我每次做这个，不是要让牌告诉我结果，是要让自己进入可以认真去做事的状态。今年的仪式，有老师见证了，运势加成至少翻倍。」',
+        image: 'img/students/illustration/max_favor/mo_wenxuan.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -429,7 +448,7 @@ max_favor_xie_zhiwei: {
   title: '{studentName}：老师，我带你看个东西',
   description: [
     '周末下午，你的手机忽然震了一下，是{studentName}的消息。老师，今天在学校吗？」\n\n你刚打出一个问号，第二条消息已经跳了出来。\n\n「来理工楼天台噢。」过了两秒又跟来下一条：「快点啦。」',
-    '你到的时候，{studentName}正蹲在天台边上摆弄什么东西。晚风吹得她两条马尾辫都飘起来，脚边放着一个工具箱、一卷电线，还有个长得像自制天线的奇怪装置。\n\n看见你来了，她立刻站起来招呼：「老师你来得正好。」',
+    '你到的时候，{studentName}正蹲在天台边上摆弄什么东西。晚风吹得她两条马尾辫都飘起来，脚边放着一个工具箱、一卷电线，还有个长得像自制天线的奇怪装置。\n\n看见你来了，她开心地招呼：「老师你来得正好。」',
     '{studentName}分出一只耳机，踮起脚为你戴上。\n\n耳机里先是一阵沙沙的电流声，然后忽然传来声音。「——明天谁帮我代一下组会——」\n\n信号断了，下一秒又变成另一段。「我跟你说那个自动售货机真的会吞钱——」\n\n再然后是校园广播、气象站数据，还有不知道从哪里冒出来的杂音。\n\n{studentName}蹲在设备旁边调频率，像发现宝藏一样兴奋。',
     '接下来半个小时，你们坐在天台上，听见了各种莫名其妙的东西。比如某个实验室忘关的对讲机，保安巡逻时抱怨天气太热，还有两个学生讨论作业到底该不该用ChatGPT。\n\n每当捕捉到新信号，{studentName}都会立刻转头看你，像个刚挖到宝贝的小孩。',
     '后来风渐渐大了，近晚的天色也变得橘红，燎起了谁的心绪。\n\n她坐到栏杆旁边，抱着膝盖看远处的校园。天线还在慢慢接收信号，耳机里偶尔传来断断续续的人声。\n\n「我小时候就特别喜欢这些东西。」她悠然开口，「世界上到处都有东西在运转，有人在说话，有人在做自己的事情。」',
@@ -443,6 +462,7 @@ max_favor_xie_zhiwei: {
       outcomes: [{
         weight: 1,
         narrative: '「好啊，一言为定，那老师可别嫌我烦。」{studentName}笑眼弯弯，像是盛了一片晚霞。\n\n天台上的风又吹起来，你却觉得浑身暖洋洋的。',
+        image: 'img/students/illustration/max_favor/xie_zhiwei.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
@@ -456,6 +476,7 @@ max_favor_xie_zhiwei: {
       outcomes: [{
         weight: 1,
         narrative: '「才没有呢！因为……这种东西，普通人看了也不会觉得有意思啦。」{studentName}声音越来越小，把头悄悄埋进膝盖里。\n\n似乎是意识到了自己底气不足，又蹦起来气势汹汹地夺回了耳机，朝你扮了个鬼脸。',
+        image: 'img/students/illustration/max_favor/xie_zhiwei.PNG',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },

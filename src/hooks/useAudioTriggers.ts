@@ -33,6 +33,8 @@ function dailyBgm(): string {
 
 export function useAudioTriggers(state: GameState): void {
   const prevRef = useRef<GameState | null>(null);
+  // True after a max_favor event ends — hold favor BGM until the NEXT event starts.
+  const favorLingerRef = useRef(false);
 
   useEffect(() => {
     const prev = prevRef.current;
@@ -52,6 +54,7 @@ export function useAudioTriggers(state: GameState): void {
 
     // ── Ending triggered → switch BGM ───────────────────────────────────────
     if (state.endingEventId && state.endingEventId !== prev.endingEventId) {
+      favorLingerRef.current = false;
       audioManager.fadeToBgm(bgmForEnding(state.endingEventId));
     }
 
@@ -59,8 +62,24 @@ export function useAudioTriggers(state: GameState): void {
     const wasMaxFavor = prev.activeEventId?.startsWith('max_favor_') ?? false;
     const isMaxFavor  = state.activeEventId?.startsWith('max_favor_') ?? false;
     if (!wasMaxFavor && isMaxFavor && !state.endingEventId) {
+      // Entering a max_favor event → start favor BGM
+      favorLingerRef.current = false;
       audioManager.fadeToBgm('favor');
     } else if (wasMaxFavor && !isMaxFavor && !state.endingEventId) {
+      // max_favor event just ended (choice made) — keep favor BGM lingering
+      // until the next event actually appears on screen.
+      favorLingerRef.current = true;
+    }
+
+    // ── Next event appeared → clear the linger and switch back to daily ──────
+    if (
+      favorLingerRef.current &&
+      state.activeEventId &&
+      state.activeEventId !== prev.activeEventId &&
+      !state.activeEventId.startsWith('max_favor_') &&
+      !state.endingEventId
+    ) {
+      favorLingerRef.current = false;
       audioManager.fadeToBgm(dailyBgm());
     }
 
