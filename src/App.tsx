@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useGameEngine } from './hooks/useGameEngine';
+import { useGallery } from './hooks/useGallery';
 import { useAudioTriggers } from './hooks/useAudioTriggers';
 import { audioManager } from './engine/audioManager';
 import { StatusBar } from './components/StatusBar';
@@ -9,6 +10,7 @@ import { EndingModal } from './components/EndingModal';
 import { AdmissionModal } from './components/AdmissionModal';
 import { StudentList } from './components/StudentList';
 import { ProjectsPanel } from './components/ProjectsPanel';
+import { GalleryPanel } from './components/GalleryPanel';
 import { events } from './data/events';
 
 // ─── Audio controls panel ─────────────────────────────────────────────────────
@@ -105,8 +107,11 @@ export function App() {
     closeModal,
   } = useGameEngine();
 
+  const { gallery, recordEnding, recordStudent, recordMaxFavor, recordProjectStarted, recordProjectCompleted } = useGallery();
+
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
   const [projectPanelOpen, setProjectPanelOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
@@ -143,10 +148,47 @@ export function App() {
     prevIsGameOver.current = isGameOver;
   }, [isGameOver]);
 
+  // Record ending to gallery on transition to game-over (deduplicates by eventId).
+  useEffect(() => {
+    if (isGameOver && state.endingEventId && endingEvent) {
+      recordEnding({
+        eventId: state.endingEventId,
+        title: endingEvent.title,
+        tagline: endingEvent.tagline ?? '',
+      });
+    }
+  // recordEnding is stable (useCallback with no deps); endingEvent is derived from state.endingEventId.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isGameOver, state.endingEventId]);
+
+  // Wrap dispatch to intercept START_PROJECT for gallery tracking.
+  const galleryDispatch: typeof dispatch = useCallback((action) => {
+    if (action.type === 'START_PROJECT') {
+      recordProjectStarted(action.projectId);
+    }
+    dispatch(action);
+  }, [dispatch, recordProjectStarted]);
+
+  // Wrap admitStudent to also record the student in the gallery.
+  const handleAdmitStudent = (candidateId: string) => {
+    admitStudent(candidateId);
+    recordStudent(candidateId);
+  };
+
   // Wrap chooseOption to play click SFX before dispatching.
+  // Also records max_favor events (colored portraits) and project completions in the gallery.
   const handleChoose = (eventId: string, optionId: string) => {
     audioManager.playSfx('make_choice');
     chooseOption(eventId, optionId);
+    if (eventId.startsWith('max_favor_')) {
+      recordMaxFavor(eventId.slice('max_favor_'.length));
+    }
+    if (eventId.startsWith('project_complete_') && optionId === 'archive') {
+      // Extract project ID: strip prefix and optional _pi suffix.
+      const raw = eventId.slice('project_complete_'.length);
+      const projectId = raw.endsWith('_pi') ? raw.slice(0, -3) : raw;
+      recordProjectCompleted(projectId);
+    }
   };
 
   const isInitialScreen = state.storyLog.length === 0;
@@ -192,11 +234,14 @@ export function App() {
         <div className="bottom-bar">
           <button
             className="btn btn--primary btn--bottom"
-            onClick={handleContinue}
+            onClick={() => {
+              if (isInitialScreen) audioManager.playSfx('start');
+              handleContinue();
+            }}
             disabled={!canContinue}
             title={canContinue ? '' : '请先做出选择'}
           >
-            继续
+            {isInitialScreen ? '开始游戏' : '继续'}
           </button>
         </div>
       )}
@@ -216,7 +261,7 @@ export function App() {
       {projectPanelOpen && (
         <ProjectsPanel
           state={state}
-          dispatch={dispatch}
+          dispatch={galleryDispatch}
           onClose={() => setProjectPanelOpen(false)}
         />
       )}
@@ -256,7 +301,7 @@ export function App() {
           unshownPoolCount={state.studentPool.filter(
             id => !(state.admissionState?.shownIds ?? []).includes(id),
           ).length}
-          onAdmit={admitStudent}
+          onAdmit={handleAdmitStudent}
           onPass={passAdmission}
           onContinue={continueRecruiting}
           onRefresh={refreshCandidates}
@@ -284,11 +329,28 @@ export function App() {
             A+
           </button>
         </div>
-        <AudioControls />
+        <div className="footer-center">
+          <button
+            className="btn btn--ghost btn--sm"
+            onClick={() => { audioManager.playSfx('click'); setGalleryOpen(true); }}
+            title="图鉴"
+            aria-label="打开图鉴"
+          >
+            图鉴
+          </button>
+          <AudioControls />
+        </div>
         <button className="btn btn--ghost btn--sm" onClick={deleteSaveAndRestart}>
           重置游戏
         </button>
       </footer>
+
+      {galleryOpen && (
+        <GalleryPanel
+          gallery={gallery}
+          onClose={() => { audioManager.playSfx('click'); setGalleryOpen(false); }}
+        />
+      )}
     </div>
   );
 }

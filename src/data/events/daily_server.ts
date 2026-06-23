@@ -648,7 +648,7 @@ export const serverEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '全组迁移到/tmp。一天之内，/tmp里诞生了七个以用户名命名的子目录，还有三个叫做temp_work、work_backup、work_real的模糊目录，来源归属不明。当天下午有人发现/tmp会被系统定时清理，于是开始定时rsync。第二天IT提前恢复了权限，但/tmp的目录结构已经复杂到没有人愿意整理了，就那样留着，又成了另一种形式的历史遗迹。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: -10 },
+              { type: 'allStudents', stat: 'happiness', delta: -5 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
             ],
           },
@@ -656,7 +656,7 @@ export const serverEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '全组去了/tmp，下午两点，/tmp满了。原来这台服务器的/tmp分区只有20GB，有人在跑实验把数据输出到了/tmp。新的错误："no space left on device"，地点从/data变成了/tmp，其他都一样。这种情况在工程学上叫作"用一个问题交换了另一个问题"。',
             effects: [
-              { type: 'allStudents', stat: 'happiness', delta: -18 },
+              { type: 'allStudents', stat: 'happiness', delta: -10 },
               { type: 'allStudents', stat: 'projectProgress', delta: -5 },
             ],
           },

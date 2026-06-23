@@ -7,6 +7,7 @@ const BGM_TRACKS: Record<string, string> = {
   // Available now:
   daily1:               '/audio/bgm/daily1.mp3',
   daily2:               '/audio/bgm/daily2.mp3',
+  favor:                '/audio/bgm/favor.mp3',
   ending_lose:          '/audio/bgm/ending_lose.mp3',
   ending_time_great:    '/audio/bgm/ending_time_great.mp3',
   ending_time_steady:   '/audio/bgm/ending_time_steady.mp3',
@@ -17,6 +18,8 @@ const SFX_FILES: Record<string, string> = {
   // Available now:
   click:           '/audio/sfx/mouce_click.mp3',  // note: original filename has typo
   make_choice:     '/audio/sfx/make_choice.mp3',
+  cannot_choose:   '/audio/sfx/cannot_choose.mp3',
+  start:           '/audio/sfx/start.mp3',
   continue:        '/audio/sfx/book.mp3',
   new_student:     '/audio/sfx/new_student.mp3',
   star:            '/audio/sfx/star.mp3',
@@ -53,6 +56,8 @@ class AudioManager {
   private fadeTimer: ReturnType<typeof setInterval> | null = null;
   // Element currently fading out; tracked so _clearFade() can stop it if the fade is interrupted.
   private fadingOutEl: HTMLAudioElement | null = null;
+  // True while the page is hidden; used to resume BGM when it becomes visible again.
+  private _hiddenByVisibility = false;
 
   constructor() {
     this.bgmVolume = parseFloat(localStorage.getItem(KEY_BGM_VOL) ?? '0.5');
@@ -73,6 +78,23 @@ class AudioManager {
     };
     document.addEventListener('click',   unlock, true);
     document.addEventListener('keydown', unlock, true);
+
+    // Pause BGM when the page goes to the background (tab switch, home button, etc.)
+    // and resume when it comes back. This also makes audio respect low-power mode on
+    // some mobile browsers.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (this.bgmEl && !this.bgmEl.paused) {
+          this.bgmEl.pause();
+          this._hiddenByVisibility = true;
+        }
+      } else if (this._hiddenByVisibility) {
+        this._hiddenByVisibility = false;
+        if (!this._muted && this.bgmEl && this.currentBgmId) {
+          this.bgmEl.play().catch(e => console.warn('[AudioManager] BGM resume failed:', e));
+        }
+      }
+    });
   }
 
   // ─── BGM ────────────────────────────────────────────────────────────────────
@@ -110,7 +132,8 @@ class AudioManager {
     // Always cancel any in-progress fade before starting a new transition.
     this._clearFade();
 
-    if (!this.bgmEl) {
+    // When muted there's nothing to fade out — switch immediately without playing.
+    if (this._muted || !this.bgmEl) {
       this._startBgm(trackId);
       return;
     }
@@ -144,7 +167,7 @@ class AudioManager {
     }
     const el = new Audio();
     el.loop = true;
-    el.volume = this._effectiveBgmVol();
+    el.volume = this.bgmVolume;
     el.src = src;
     el.onerror = () => {
       console.warn(`[AudioManager] Could not load BGM: ${src}`);
@@ -152,11 +175,16 @@ class AudioManager {
     };
     this.bgmEl = el;
     this.currentBgmId = trackId;
-    el.play().catch(e => {
-      console.warn('[AudioManager] BGM play() rejected:', e);
-      // Clear state so the next playBgm call can retry instead of short-circuiting.
-      if (this.bgmEl === el) { this.bgmEl = null; this.currentBgmId = null; }
-    });
+
+    // Don't start playback if muted or page is hidden — _hiddenByVisibility / setMuted
+    // will resume when appropriate.
+    if (!this._muted && !document.hidden) {
+      el.play().catch(e => {
+        console.warn('[AudioManager] BGM play() rejected:', e);
+        // Clear state so the next playBgm call can retry instead of short-circuiting.
+        if (this.bgmEl === el) { this.bgmEl = null; this.currentBgmId = null; }
+      });
+    }
   }
 
   // Returns true when a track is playing, starting, or a cross-fade is in progress.
@@ -182,14 +210,14 @@ class AudioManager {
 
   // Each call creates a fresh Audio element so sounds can overlap freely.
   playSfx(sfxId: string): void {
-    if (!this.unlocked) return;
+    if (!this.unlocked || this._muted) return;
     const src = SFX_FILES[sfxId];
     if (!src) {
       console.warn(`[AudioManager] Unknown SFX: "${sfxId}"`);
       return;
     }
     const el = new Audio(src);
-    el.volume = this._effectiveSfxVol();
+    el.volume = this.sfxVolume;
     el.onerror = () => console.warn(`[AudioManager] Could not load SFX: ${src}`);
     el.play().catch(e => console.warn('[AudioManager] SFX play() rejected:', e));
   }
@@ -199,7 +227,7 @@ class AudioManager {
   setBgmVolume(value: number): void {
     this.bgmVolume = Math.max(0, Math.min(1, value));
     localStorage.setItem(KEY_BGM_VOL, String(this.bgmVolume));
-    if (this.bgmEl) this.bgmEl.volume = this._effectiveBgmVol();
+    if (this.bgmEl && !this._muted) this.bgmEl.volume = this.bgmVolume;
   }
 
   setSfxVolume(value: number): void {
@@ -210,15 +238,20 @@ class AudioManager {
   setMuted(muted: boolean): void {
     this._muted = muted;
     localStorage.setItem(KEY_MUTED, String(muted));
-    if (this.bgmEl) this.bgmEl.volume = this._effectiveBgmVol();
+    if (this.bgmEl) {
+      if (muted) {
+        // iOS ignores volume changes — pause is the only reliable way to silence audio.
+        this.bgmEl.pause();
+      } else {
+        this.bgmEl.volume = this.bgmVolume;
+        this.bgmEl.play().catch(e => console.warn('[AudioManager] BGM resume failed:', e));
+      }
+    }
   }
 
-  isMuted(): boolean    { return this._muted; }
+  isMuted(): boolean     { return this._muted; }
   getBgmVolume(): number { return this.bgmVolume; }
   getSfxVolume(): number { return this.sfxVolume; }
-
-  private _effectiveBgmVol(): number { return this._muted ? 0 : this.bgmVolume; }
-  private _effectiveSfxVol(): number { return this._muted ? 0 : this.sfxVolume; }
 }
 
 // ─── Singleton export ─────────────────────────────────────────────────────────

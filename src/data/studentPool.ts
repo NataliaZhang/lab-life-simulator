@@ -19,6 +19,7 @@ export interface StudentCandidate {
   baseSkills: { theory: number; engineering: number; social: number };
   baseFavor: number;
   baseHappiness: number;
+  farewell?: string; // 好感度100时解锁，写给老师的心里话
 }
 
 export const allCandidates: StudentCandidate[] = [
@@ -33,6 +34,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 58, engineering: 48, social: 51 },
     baseFavor: 0,
     baseHappiness: 62,
+    farewell: '很多时候，连我自己都不信自己赶得上DDL。\n\n但有个信任我的老师，真棒啊。',
   },
   // 【林小卷 隐藏人设】
   // 核心标签：DDL战神、拖延症晚期、最后一刻奇迹
@@ -53,6 +55,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 42, engineering: 78, social: 28 },
     baseFavor: 0,
     baseHappiness: 65,
+    farewell: '我睡觉的时候，其实也在听。\n\n谢谢你让这里足够安静——安静到我愿意一直待在这里。',
   },
   // 【顾眠眠 隐藏人设】
   // 核心标签：睡眠学习法、梦中Debug、八卦雷达
@@ -73,6 +76,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 89, engineering: 21, social: 44 },
     baseFavor: 0,
     baseHappiness: 48,
+    farewell: '很多问题我都想证明，只有一件事不需要证明。\n\n跟着你做研究，是我最正确的选择。',
   },
   // 【叶知秋 隐藏人设】
   // 核心标签：理论怪物、逻辑警察、天然吐槽役
@@ -93,6 +97,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 36, engineering: 45, social: 82 },
     baseFavor: 0,
     baseHappiness: 84,
+    farewell: '老师你知道吗，其实我也有很怕的时候。\n\n但你在的话，我就觉得也没什么大不了的。',
   },
   // 【白小满 隐藏人设】
   // 核心标签：乐观心大、实验室太阳、危机奶茶学
@@ -113,6 +118,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 64, engineering: 32, social: 70 },
     baseFavor: 0,
     baseHappiness: 66,
+    farewell: '每次有新想法，我第一个想要分享的人，都是你。',
   },
   // 【毕小天 隐藏人设】
   // 核心标签：奇怪论文收藏家、脑洞制造机、Workshop雷达
@@ -131,6 +137,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 34, engineering: 61, social: 77 },
     baseFavor: 0,
     baseHappiness: 40,
+    farewell: '以前我总想着怎么能做出有价值的东西。\n\n后来发现，有些遇见本身就很值。',
   },
   // 【钱多多 隐藏人设】
   // 核心标签：产品经理圣体、创业预备役、需求探测器
@@ -160,6 +167,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 56, engineering: 69, social: 46 },
     baseFavor: 0,
     baseHappiness: 42,
+    farewell: '我喜欢按部就班，跟随着计划表走。\n\n唯独毕业离开你的这一天，我一直不太想排进去。',
   },
 
   // 【贺时序 隐藏人设】
@@ -182,6 +190,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 36, engineering: 30, social: 92 },
     baseFavor: 0,
     baseHappiness: 62,
+    farewell: '我加过很多人的联系方式，但最值得加的，是当初招我进组的那个你。',
   },
 
   // 【唐扩列 隐藏人设】
@@ -206,6 +215,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 58, engineering: 44, social: 63 },
     baseFavor: 0,
     baseHappiness: 58,
+    farewell: '入组前我抽了一张牌，是“贵人”。\n\n没告诉你的是，后来这张牌，一直立在我床头。',
   },
 
   // 【莫问玄 隐藏人设】
@@ -231,6 +241,7 @@ export const allCandidates: StudentCandidate[] = [
     baseSkills: { theory: 38, engineering: 86, social: 44 },
     baseFavor: 0,
     baseHappiness: 54,
+    farewell: '我好像惹过不少麻烦。\n\n但每次回头，都发现你还在那里。',
   },
 
   // 【谢之微 隐藏人设】

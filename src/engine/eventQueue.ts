@@ -141,7 +141,24 @@ function findTriggeringStudents(
     }
   }
 
-  // If no anyStudent condition but we need a primary, pick at random
+  // If no anyStudent condition matched, check for a single explicit studentId across all
+  // { type: 'student' } conditions. Student-specific events (e.g. mwx_industry_poach) list
+  // one hard-coded student — bind to them directly instead of picking at random.
+  if (!studentId) {
+    const explicitIds = new Set(
+      conditions
+        .filter((c): c is Extract<EventCondition, { type: 'student' }> => c.type === 'student')
+        .map(c => c.studentId),
+    );
+    if (explicitIds.size === 1) {
+      const [id] = explicitIds;
+      if (id && active.some(s => s.id === id)) {
+        studentId = id;
+      }
+    }
+  }
+
+  // Final fallback: no deterministic student found — pick a random active student.
   if (!studentId && active.length > 0) {
     const shuffled = [...active].sort(() => Math.random() - 0.5);
     studentId = shuffled[0]?.id;

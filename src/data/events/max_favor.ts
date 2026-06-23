@@ -34,7 +34,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
         weight: 1,
         narrative: '「好耶！」{studentName}差点把饮料晃出来。「老师我就知道！」他立刻开始讲下一个想法，从问题定义一路讲到未来影响，中间逻辑漏洞百出，但本人完全不在意。你试图指出几个问题，他全部承认，然后继续往下讲。讲到最后，他举起杯子和你碰了一下：「反正下篇还有你。」',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 4 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
         ],
@@ -48,7 +48,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
         weight: 1,
         narrative: '「有道理！」{studentName}立刻把手机扣到桌面上。「项目暂停，科研暂停，今天只负责高兴。」接下来一个小时，他从Reviewer吐槽到实验室八卦，又模仿起组里每个人开组会的样子，逗得你差点被饮料呛到。结账的时候他抢着扫码，大手一挥：「没事，今天我觉得自己特别有钱。」',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
           { type: 'randomStudent', stat: 'skills.social', delta: 5 },
         ],
@@ -100,7 +100,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '{studentName}醒来的时候，太阳已经往西边偏了一些。她发现零食被拆开了，也不在意，抱着袋子慢慢吃起来。{studentName}想起什么说什么，东一句西一句，想到组里第一次汇报，想到某次实验卡住，想到那篇改了十几版的论文。她的话断断续续的，没什么调理，但你觉得你已经完全明白她的意思了。',
           effects: [
-            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'lab', stat: 'reputation', delta: 5 },
             { type: 'randomStudent', stat: 'happiness', delta: 15 },
             { type: 'randomStudent', stat: 'skills.social', delta: 8 },
           ],
@@ -113,6 +113,7 @@ export const maxFavorEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '阳光、草地、饮料，还有睡得毫无防备的{studentName}，实在很像校园宣传片。后来她醒来发现照片，耳朵一下红了：「老师，你删掉。」顿了顿又补充：「至少别发群里。」',
           effects: [
+            { type: 'lab', stat: 'reputation', delta: 10 },
             { type: 'randomStudent', stat: 'happiness', delta: 20 },
             { type: 'randomStudent', stat: 'skills.social', delta: 10 },
           ],
@@ -142,7 +143,7 @@ max_favor_ye_zhiqiu: {
         weight: 1,
         narrative: '{studentName}试图阻止，失败了。她一路都在论证AA制度的合理性，你一路驳回。走到校门口时，她忽然把一本小册子塞进你手里：「礼尚往来。」你打开第一页，上面写着：导师常见逻辑漏洞，持续更新版。下面已经有第一条了。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 5 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
         ],
@@ -155,7 +156,7 @@ max_favor_ye_zhiqiu: {
         weight: 1,
         narrative: '{studentName}动作明显停顿了一下。「已经买完了。」「什么时候？」「刚才。」她说得理直气壮：「我不想欠导师人情。」你刚想说什么，低头发现那包便签纸被她偷偷塞进了你的袋子。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
           { type: 'randomStudent', stat: 'skills.social', delta: 5 },
         ],
@@ -185,7 +186,7 @@ max_favor_bai_xiaoman: {
         weight: 1,
         narrative: '{studentName}立刻打开收藏夹：「我就知道老师会喜欢！」里面密密麻麻全是甜品店备注：「这个适合论文接收，这个适合发工资，这个适合被Reviewer打哭之后恢复心情。」你忽然怀疑，她是不是给人生所有情况都准备好了对应甜品。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
           { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
         ],
@@ -198,7 +199,7 @@ max_favor_bai_xiaoman: {
         weight: 1,
         narrative: '{studentName}眨了眨眼，忽然低头喝奶茶。过了一会儿，她才小声说：「那当然啦。」然后又努力装作若无其事地补充：「我挑了很久的。」她把最后那块蛋糕推到你面前：「既然老师这么会说话，那奖励你多吃一块噢。」',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
           { type: 'randomStudent', stat: 'skills.social', delta: 5 },
         ],
@@ -228,7 +229,7 @@ max_favor_bi_xiaotian: {
         weight: 1,
         narrative: '{studentName}先是愣住，然后肉眼可见地开心起来。「我就知道！」他说得太快，暴露了自己其实一直在等这句话。下一秒他已经开始规划投稿计划，从补实验讲到未来工作。你忽然意识到，他不是来求一个许可的，他是来找一个愿意和他一起相信这些奇怪想法的人。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 2 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
         ],
@@ -241,7 +242,7 @@ max_favor_bi_xiaotian: {
         weight: 1,
         narrative: '{studentName}低声回答：「因为这个方向太怪了，我怕别人觉得我只是在玩。」事实上那页密密麻麻的推导和文献，实在不像玩笑。你轻轻拍了拍他的肩膀，给了他一个鼓励的微笑。他也笑起来：「不过现在没关系了。至少已经有一个人愿意认真看完。」',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
           { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
         ],
@@ -251,42 +252,41 @@ max_favor_bi_xiaotian: {
   tags: ['max_favor'],
 },
 
-  max_favor_qian_duoduo: {
+max_favor_qian_duoduo: {
   id: 'max_favor_qian_duoduo',
-  title: '{studentName}：实验室Demo Day（仅限一位投资人）',
+  title: '{studentName}：实验室快闪店',
   description: [
-    '你的手机弹出一条会议邀请。发件人：{studentName}。主题：《实验室Demo Day · 内部专场》。时间：今天下午三点。地点：大会议室。备注只有一句话：「请准时，不准提前进场。」',
-    '整个邀请充满一种不容拒绝的专业感。你甚至怀疑自己是不是被拉进了某个创业项目的融资路演。',
-    '三点整，你推开会议室的门。投影已经打开，桌上摆着饮料和零食，甚至还贴着一张打印出来的日程表。{studentName}站在讲台旁边，衬衫塞得整整齐齐，看见你进来，点了点头：「唯一投资人已到场，会议正式开始。」',
-    '接下来将近一个小时堪称离谱。组里的每个项目都被他包装成了创业产品：研究问题变成用户需求，实验结果变成核心指标，论文投稿变成市场验证。他甚至给每个同学都设计了一页介绍和一句宣传语，而且明显是认真聊过之后才写出来的。这些细节，得花多少时间才能收集齐啊。',
-    '路演进行到最后一页的时候，{studentName}忽然停住了。屏幕上没有图表，没有数据，也没有增长曲线。只有一行小字：最有价值的资产，不在服务器里。',
-    '下面还有第二行：在人身上。',
-    '会议室忽然安静下来。{studentName}轻咳一声，飞快切到下一页：「好的，以上就是全部内容，现在进入Q&A环节。」但你注意到，他的耳朵略微有点红。',
+    '周五下午，你路过校园广场，看见树荫下面支着一张折叠桌。桌上摆满了奇怪商品：印着“Reviewer #2”的马克杯、“Future Best Paper”贴纸、DDL倒计时日历，还有一件写着“实验进行中，请勿打扰（除非有结果）”的T恤。桌牌上写着：《Lab Merchandise Beta v0.3》。下面还有一行小字：目前尚未获得任何官方授权。',
+    '桌子后面站着{studentName}。他正对一个路过的本科生介绍：“这是我们实验室最经典的周边产品，兼具纪念意义和精神伤害——”说到一半，他看见你，立刻抬手招呼：“老师来了，老板来了。”',
+    '你走过去，发现居然真有人在买。一名学生抱着Reviewer #2马克杯心满意足地离开，另一个人正在认真比较两款DDL日历哪个更有压迫感。你低头看商品，发现每件周边后面都夹着一张小卡片，写着对应项目、参与学生和一句介绍。那些平时躺在项目列表里的成果，被他包装得像校园传说。',
+    '有人问你：“你也是这个实验室的吗？”{studentName}一边找零钱，一边抢过话来，很自然地指了指你：“是啊，我可是跟他混的。”他说完继续低头收钱，像这句话没什么特别。倒是你在原地多站了一会儿，忽然觉得那张小小的折叠桌，看起来很像实验室在校园里长出来的一块招牌。',
+    '你注意到桌角有一件没有标价的T恤，叠得很整齐，和其他商品分开放着。你问为什么不卖。{studentName}把零钱盒盖上，语气还装得很专业：“样品，不对外销售。”停了一下，又小声补了一句：“其实是给你留的。”',
   ],
-  prompt: '作为本次Demo Day唯一的投资人，你决定：',
+  prompt: '你拿起那件T恤，看见背后印着一行字：Still Debugging.',
   options: [
     {
-      id: 'max_favor_qdd_invest',
-      text: '宣布追加投资',
+      id: 'max_favor_qdd_wear',
+      text: '当场穿上T恤',
       outcomes: [{
         weight: 1,
-        narrative: '你举起饮料：「我决定继续投资这个团队。」{studentName}迅速一本正经地接上话：「感谢投资人认可，本项目将继续长期运营。」停了一下，他没忍住笑了。「不过说真的，老师，能把这些人聚在一起，本来就是个很厉害的项目了。」',
+        narrative: '你把T恤套在正装外面。{studentName}先是睁大眼睛，随后立刻拿出手机拍照：“这个可以当下一版宣传图。”你警告他不许到处乱发。他点头点得很快：“内部资料，只给创始团队看。”\n\n过了一会儿，他又笑着补充：“不过说真的，老师，你穿这个，还挺像那么回事的。”',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.social', delta: 5 },
         ],
       }],
     },
     {
-      id: 'max_favor_qdd_asset',
-      text: '指着最后那页',
+      id: 'max_favor_qdd_continue',
+      text: '宣布授权并追加投资',
+      fundingCost: 2,
       outcomes: [{
         weight: 1,
-        narrative: '你敲了敲桌子：「最后那页，是整场最好的部分。」{studentName}犹豫了一下，又把那页切了回来。他不好意思地挠挠头：「其实我改了三次。」他说，「前面那几十页都只花了一晚上。」然后他把准备好的零食推到你面前：「老师，这是本次路演赠送给唯一观众的伴手礼。」',
+        narrative: '{studentName}立刻把写着“目前尚未获得任何官方授权”的牌子改成“已获得任何官方授权”。\n\n他认真盘点了一下库存：“今天卖得比预期好。下次可以加新品，比如实验室年度盲盒、拒稿纪念徽章、还有你的经典语录杯垫。”\n\n你笑着打趣：“接受了我的投资，可不能半途而废啊。”他抬头看你：“当然继续啊。”他说的是快闪店，你听着却像在说另一件事。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 5 },
-          { type: 'randomStudent', stat: 'happiness', delta: 15 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
+          { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.social', delta: 5 },
         ],
       }],
@@ -297,78 +297,121 @@ max_favor_bi_xiaotian: {
 
 // ── 贺时序 ────────────────────────────────────────────────────────────────
 max_favor_he_shixu: {
-  id: 'max_favor_he_shixu',
-  title: '{studentName}：归档编号 001',
-  description: [
-    '你的邮箱收到一封会议邀请。发件人：{studentName}。主题：《实验室年度归档整理》。时间精确到分钟，附件五个，备注三条，最后还标注了建议提前五分钟到场。你都不用看名字就知道，这一定是她发的。',
-    '下午到会议室时，里面没有别人。桌上放着一本厚厚的黑色笔记本。{studentName}把它推过来，说：「年度归档汇报。」你翻开第一页，是实验室成立当天。第二页是第一次组会。第三页是第一次被Reviewer二号打爆。每件事都有日期、经过、结果，甚至还有评分和备注。某次组会：效率7/10，老师跑题二十分钟，但意外解决核心问题。某次投稿：流程混乱，但结局良好。你越翻越觉得离谱。',
-    '因为里面有很多事情，你自己都不记得了。某次凌晨一点，你顺手帮学生改完论文后关掉实验室最后一盏灯；某次大雨，你把忘带伞的学生送到楼下；某次组会提前结束，只因为发现大家都累得快睡着了。那些你做完就忘的事情，都被她工工整整写进了本子里。',
-    '翻到后面时，你忽然发现有个单独分类。标题是：《导师观察记录》。里面全是你的口头禅、奇怪习惯和经典语录。甚至还有统计图。比如「下周」实际指代时间分布，「再看看」最终变成新项目的概率，以及「问题不大」之后通常会出多大问题。',
-    '你抬起头看她。{studentName}推了推眼镜，语气平静：「样本积累够了，值得单独建档。」说完又补充一句：「而且很多事情如果没人记，很快就会消失。」她低头看向那本已经快写满的编年史，「我觉得它们不应该消失。」',
-  ],
-  prompt: '你继续往后翻，发现最后几页还是空白的：',
-  options: [
-    {
-      id: 'max_favor_hsx_memory',
-      text: '这些你都记得啊……',
-      outcomes: [{
-        weight: 1,
-        narrative: '{studentName}想了想：「重要的事情会记得。」说完又补充：「而且老师提供了很多样本。」她一本正经得像在汇报实验结果。你低头继续翻那本编年史，忽然意识到，原来这些年发生过的事情，有人一直认真地替大家保存着。',
-        effects: [
-          { type: 'lab', stat: 'reputation', delta: 5 },
-          { type: 'randomStudent', stat: 'happiness', delta: 20 },
-          { type: 'randomStudent', stat: 'skills.social', delta: 5 },
-        ],
-      }],
-    },
-    {
-      id: 'max_favor_hsx_future',
-      text: '指着空白页问：后面的呢？',
-      outcomes: [{
-        weight: 1,
-        narrative: '{studentName}略显疑惑地看了你一眼：「后面是明年的。」她说得理所当然，仿佛这件事根本没有第二种可能。「模板已经建好了，目录也排好了。」说完她打开手机给你看备份文件，连未来几年的卷号都已经编号完成。你看着那些尚未写下内容的空白页，忽然觉得它们一点都不空。',
-        effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
-          { type: 'randomStudent', stat: 'happiness', delta: 15 },
-          { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
-        ],
-      }],
-    },
-  ],
-  tags: ['max_favor'],
+id: 'max_favor_he_shixu',
+title: '{studentName}：归档编号 001',
+description: [
+  '你的邮箱收到一封会议邀请。发件人：{studentName}。主题：《实验室年度归档整理》。时间精确到分钟，附件五个，备注三条，最后还标注了建议提前五分钟到场。你都不用看名字就知道，这一定是她发的。',
+  '下午到会议室时，里面没有别人。桌上放着一本厚厚的黑色笔记本。{studentName}把它推过来，说：「年度归档汇报。」你翻开第一页，是实验室成立当天。第二页是第一次组会。第三页是第一次被Reviewer二号打爆。每件事都有日期、经过、结果，甚至还有评分和备注。某次组会：效率7/10，老师跑题二十分钟，但意外解决核心问题。某次投稿：流程混乱，但结局良好。你越翻越觉得离谱。',
+  '因为里面有很多事情，你自己都不记得了。某次凌晨一点，你顺手帮学生改完论文后关掉实验室最后一盏灯；某次大雨，你把忘带伞的学生送到楼下；某次组会提前结束，只因为发现大家都累得快睡着了。那些你做完就忘的事情，都被她工工整整写进了本子里。',
+  '翻到后面时，你忽然发现有个单独分类。标题是：《导师观察记录》。里面全是你的口头禅、奇怪习惯和经典语录。甚至还有统计图。比如「下周」实际指代时间分布，「再看看」最终变成新项目的概率，以及「问题不大」之后通常会出多大问题。',
+  '你抬起头看她。{studentName}推了推眼镜，语气平静：「样本积累够了，值得单独建档。」说完又补充一句：「而且很多事情如果没人记，很快就会消失。」她低头看向那本已经快写满的编年史，「我觉得它们不应该消失。」',
+],
+prompt: '你继续往后翻，发现最后几页还是空白的：',
+options: [
+  {
+    id: 'max_favor_hsx_memory',
+    text: '这些你都记得啊……',
+    outcomes: [{
+      weight: 1,
+      narrative: '{studentName}一字一顿地说：「重要的事情会记得。」你低头继续翻那本编年史，忽然意识到，原来这些年发生过的事情，有人一直认真地替大家保存着。',
+      effects: [
+        { type: 'lab', stat: 'reputation', delta: 10 },
+        { type: 'randomStudent', stat: 'happiness', delta: 20 },
+        { type: 'randomStudent', stat: 'skills.social', delta: 5 },
+      ],
+    }],
+  },
+  {
+    id: 'max_favor_hsx_future',
+    text: '后面的空白呢？',
+    outcomes: [{
+      weight: 1,
+      narrative: '「后面是明年的。」{studentName}说得理所当然，「模板已经建好了，目录也排好了，我给它们都留了位置。」你看着那些尚未写下内容的空白页码，一直排到了很远很远的地方，像是藏着谁的无限期许。',
+      effects: [
+        { type: 'lab', stat: 'reputation', delta: 5 },
+        { type: 'randomStudent', stat: 'happiness', delta: 15 },
+        { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
+      ],
+    }],
+  },
+],
+tags: ['max_favor'],
 },
 // ── 唐扩列 ────────────────────────────────────────────────────────────────
 max_favor_tang_kuolie: {
-  id: 'max_favor_tang_kuolie',
-  title: '{studentName}：老师，我给你组了个局',
+id: 'max_favor_tang_kuolie',
+title: '{studentName}：老师，我给你组了个局',
+description: [
+  '周五下午，你刚准备下班，{studentName}发来消息：「老师，六点来一下，我组了个小局。」你问是什么局。他秒回：「都是好人，都想认识你。别担心，我控场。」这句话听起来太像主持人开场白，你还没来得及拒绝，地址已经发过来了。',
+  '六点整，你推开包厢门，十几个人同时抬头跟你打招呼。隔壁实验室的学生、企业研究员、毕业校友、行政老师、某个你只在邮件里见过的合作方，全都坐在里面。更离谱的是，他们都知道你的实验室，知道你们最近的项目，甚至有人第一句话就是：「老师，Reviewer二号那个故事是真的吗？」',
+  '{studentName}完全不觉得这有什么问题。他坐在桌边，像一台人脉交换机：「这个做系统，这个做理论，这个以后可以合作，这个有服务器资源，这个特别会写基金。」他把每个人介绍得热热闹闹，又恰到好处，像早就把今晚的路线图在脑子里跑过一遍。',
+  '饭局中途，有人开玩笑问：「你怎么天天安利你老师？」{studentName}一边给大家续饮料，一边自然得不能再自然地说：「因为我老师真的很厉害啊。」他说得太顺口了，顺口到你一时没反应过来，旁边几个人已经开始笑着点头附和。',
+  '散场后，你们一起往回走。夜风有点凉，{studentName}还在低头回消息，把刚才认识的人分进不同群聊。你忽然意识到，他不是单纯喜欢认识人。他是在用自己的方式，把他觉得重要的人，认真介绍给这个世界。',
+],
+prompt: '路灯下，{studentName}还在低头整理联系人。',
+options: [
+  {
+    id: 'max_favor_tkl_proud',
+    text: '夸我夸得那么顺口，是不是练过？',
+    outcomes: [{
+      weight: 1,
+      narrative: '{studentName}抬头瞥了你一眼，理直气壮：「是真话啊，有什么需要练的。」说完又低头备注联系人，像刚才只是陈述了一个常识。走了几步他又忍不住补充：「我在外面提到我们组的时候，是真的会觉得很有面子。」',
+      effects: [
+        { type: 'lab', stat: 'reputation', delta: 5 },
+        { type: 'randomStudent', stat: 'happiness', delta: 15 },
+        { type: 'randomStudent', stat: 'skills.social', delta: 5 },
+      ],
+    }],
+  },
+  {
+    id: 'max_favor_tkl_world',
+    text: '谢谢你把我介绍给这么多人',
+    outcomes: [{
+      weight: 1,
+      narrative: '{studentName}摆摆手：「这有什么好谢的。」他走了两步，又笑着说：「我只是觉得，认识你的人应该再多一点。」说完，他把你拉进一个新群，群名叫“未来合作机会”。你看着那个群名，忽然觉得今晚的风都轻了一点。',
+      effects: [
+        { type: 'lab', stat: 'reputation', delta: 10 },
+        { type: 'randomStudent', stat: 'happiness', delta: 20 },
+        { type: 'randomStudent', stat: 'skills.social', delta: 5 },
+      ],
+    }],
+  },
+],
+tags: ['max_favor'],
+},
+
+// ── 莫问玄 ────────────────────────────────────────────────────────────────
+max_favor_mo_wenxuan: {
+  id: 'max_favor_mo_wenxuan',
+  title: '{studentName}：实验室年度转运仪式（附科学说明）',
   description: [
-    '周五下午，你刚准备下班，{studentName}发来消息：「老师，六点来一下，我组了个小局。」你问是什么局。他秒回：「都是好人，都想认识你。别担心，我控场。」这句话听起来太像主持人开场白，你还没来得及拒绝，地址已经发过来了。',
-    '六点整，你推开包厢门，十几个人同时抬头跟你打招呼。隔壁实验室的学生、企业研究员、毕业校友、行政老师、某个你只在邮件里见过的合作方，全都坐在里面。更离谱的是，他们都知道你的实验室，知道你们最近的项目，甚至有人第一句话就是：「老师，Reviewer二号那个故事是真的吗？」',
-    '{studentName}完全不觉得这有什么问题。他坐在桌边，像一台人脉交换机：「这个做系统，这个做理论，这个以后可以合作，这个有服务器资源，这个特别会写基金。」他把每个人介绍得热热闹闹，又恰到好处，像早就把今晚的路线图在脑子里跑过一遍。',
-    '饭局中途，有人开玩笑问：「你怎么天天安利你老师？」{studentName}一边给大家续饮料，一边自然得不能再自然地说：「因为我老师真的很厉害啊。」他说得太顺口了，顺口到你一时没反应过来，旁边几个人已经开始笑着点头附和。',
-    '散场后，你们一起往回走。夜风有点凉，{studentName}还在低头回消息，把刚才认识的人分进不同群聊。你忽然意识到，他不是单纯喜欢认识人。他是在用自己的方式，把他觉得重要的人，认真介绍给这个世界。',
+    '你办公室门缝里塞进来一张手写请柬，正楷，深蓝色墨水：「敬邀参加实验室年度转运仪式，时间：今日，地点：大会议室，参与者：老师（唯一指定），主持人：莫问玄。着装不限，心诚则灵。」',
+    '你去了。会议室里，他把电池驱动蜡烛（他在蜡烛旁边放了一张便利贴，写着「消防安全第一」）、深蓝色布、一副塔罗牌摆好，仪式感是实打实的。他请你洗牌、切牌、抽牌，全程一丝不苟，嘴里念的是他自己发明的解读框架，能自洽，不能证伪。',
+    '解读结束，他总结：「今年运势整体向好，但需防服务器在关键时刻崩溃，这个有历史数据支撑，不完全是玄学。」你想笑，他说得那么认真，你忍住了。',
+    '收牌的时候，他把布叠好，切换了语气，说：「老师，我知道这不科学。我自己统计过准确率，p值不显著。」他停了一下，「但有时候，人是需要一个仪式，才能给自己发令枪，你明白吗？」',
+    '「做这个，不是因为我真的相信牌，」他把布袋收好，「因为认真对待一件事的那个人，才是真正值得相信的东西。今天请你见证，是因为，你就是我说的那种人。」',
   ],
-  prompt: '路灯下，{studentName}还在低头整理联系人。',
+  prompt: '{studentName}收拾完，等你说点什么：',
   options: [
     {
-      id: 'max_favor_tkl_proud',
-      text: '夸我夸得那么顺口，是不是练过？',
+      id: 'max_favor_mwx_reopen',
+      text: '能不能再抽一张',
       outcomes: [{
         weight: 1,
-        narrative: '{studentName}抬头瞥了你一眼，理直气壮：「是真话啊，有什么需要练的。」说完又低头备注联系人，像刚才只是陈述了一个常识。走了几步他又忍不住补充：「我在外面提到我们组的时候，是真的会觉得很有面子。」',
+        narrative: '{studentName}愣了一下，眼睛亮了，「当然可以。」他把布重新展开，请你再抽，认认真真地解读，这次比第一次还投入，嘴里的框架越说越细，你发现他其实是在认真解释他的推理逻辑，只是用了牌的外壳。解读结束，他收好，说：「两次结果一致，统计意义不高，但象征意义显著。」他抬起头，笑了，「谢谢老师陪我做完了整套。」',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 15 },
-          { type: 'randomStudent', stat: 'skills.social', delta: 5 },
+          { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
         ],
       }],
     },
     {
-      id: 'max_favor_tkl_world',
-      text: '谢谢你把我介绍给这么多人',
+      id: 'max_favor_mwx_ritual',
+      text: '做人确实需要仪式感',
       outcomes: [{
         weight: 1,
-        narrative: '{studentName}摆摆手：「这有什么好谢的。」他走了两步，又笑着说：「我只是觉得，认识你的人应该再多一点。」说完，他把你拉进一个新群，群名叫“未来合作机会”。你看着那个群名，忽然觉得今晚的风都轻了一点。',
+        narrative: '{studentName}看着你，好像在确认你不是在敷衍他，然后用力点了点头，说：「很多人觉得不科学就等于没用，但不科学不等于没有效果，对吧。」他把布袋拍了拍，放进包里，「我每次做这个，不是要让牌告诉我结果，是要让自己进入可以认真去做事的状态。今年的仪式，有老师见证了，运势加成至少翻倍。」',
         effects: [
           { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
@@ -379,49 +422,6 @@ max_favor_tang_kuolie: {
   ],
   tags: ['max_favor'],
 },
-
-  // ── 莫问玄 ────────────────────────────────────────────────────────────────
-  max_favor_mo_wenxuan: {
-    id: 'max_favor_mo_wenxuan',
-    title: '{studentName}：实验室年度转运仪式（附科学说明）',
-    description: [
-      '你办公室门缝里塞进来一张手写请柬，正楷，深蓝色墨水：「敬邀参加实验室年度转运仪式，时间：今日，地点：大会议室，参与者：老师（唯一指定），主持人：莫问玄。着装不限，心诚则灵。」',
-      '你去了。会议室里，他把电池驱动蜡烛（他在蜡烛旁边放了一张便利贴，写着「消防安全第一」）、深蓝色布、一副塔罗牌摆好，仪式感是实打实的。他请你洗牌、切牌、抽牌，全程一丝不苟，嘴里念的是他自己发明的解读框架，能自洽，不能证伪。',
-      '解读结束，他总结：「今年运势整体向好，但需防服务器在关键时刻崩溃，这个有历史数据支撑，不完全是玄学。」你想笑，他说得那么认真，你忍住了。',
-      '收牌的时候，他把布叠好，切换了语气，说：「老师，我知道这不科学。我自己统计过准确率，p值不显著。」他停了一下，「但有时候，人是需要一个仪式，才能给自己发令枪，你明白吗？」',
-      '「做这个，不是因为我真的相信牌，」他把布袋收好，「因为认真对待一件事的那个人，才是真正值得相信的东西。今天请你见证，是因为，你就是我说的那种人。」',
-    ],
-    prompt: '{studentName}收拾完，等你说点什么：',
-    options: [
-      {
-        id: 'max_favor_mwx_reopen',
-        text: '能不能再抽一张',
-        outcomes: [{
-          weight: 1,
-          narrative: '{studentName}愣了一下，眼睛亮了，「当然可以。」他把布重新展开，请你再抽，认认真真地解读，这次比第一次还投入，嘴里的框架越说越细，你发现他其实是在认真解释他的推理逻辑，只是用了牌的外壳。解读结束，他收好，说：「两次结果一致，统计意义不高，但象征意义显著。」他抬起头，笑了，「谢谢老师陪我做完了整套。」',
-          effects: [
-            { type: 'lab', stat: 'reputation', delta: 5 },
-            { type: 'randomStudent', stat: 'happiness', delta: 15 },
-            { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
-          ],
-        }],
-      },
-      {
-        id: 'max_favor_mwx_ritual',
-        text: '做人确实需要仪式感',
-        outcomes: [{
-          weight: 1,
-          narrative: '{studentName}看着你，好像在确认你不是在敷衍他，然后用力点了点头，说：「很多人觉得不科学就等于没用，但不科学不等于没有效果，对吧。」他把布袋拍了拍，放进包里，「我每次做这个，不是要让牌告诉我结果，是要让自己进入可以认真去做事的状态。今年的仪式，有老师见证了，运势加成至少翻倍。」',
-          effects: [
-            { type: 'lab', stat: 'reputation', delta: 3 },
-            { type: 'randomStudent', stat: 'happiness', delta: 20 },
-            { type: 'randomStudent', stat: 'skills.social', delta: 5 },
-          ],
-        }],
-      },
-    ],
-    tags: ['max_favor'],
-  },
 
   // ── 谢之微 ────────────────────────────────────────────────────────────────
 max_favor_xie_zhiwei: {
@@ -443,7 +443,7 @@ max_favor_xie_zhiwei: {
         weight: 1,
         narrative: '{studentName}本来想反驳，张了张嘴，最后却点了点头。「有一点吧。」她承认得很小声。过了一会儿又补充：「不过不是机器的原因。」你还没来得及追问，她已经转身去检查机柜温度了，只剩耳朵有点红。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 3 },
+          { type: 'lab', stat: 'reputation', delta: 5 },
           { type: 'randomStudent', stat: 'happiness', delta: 25 },
           { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
         ],
@@ -456,7 +456,7 @@ max_favor_xie_zhiwei: {
         weight: 1,
         narrative: '{studentName}愣了一下，像是完全没预料到你会这么说。她低头反复摆弄手里的记号笔，才轻声回答：「应该的。」她的声音开始变得细如蚊蝇，「而且有人会发现的话，整理这些就更值了。」机房依旧嗡嗡作响，但你清清楚楚地听到了她的话。',
         effects: [
-          { type: 'lab', stat: 'reputation', delta: 5 },
+          { type: 'lab', stat: 'reputation', delta: 10 },
           { type: 'randomStudent', stat: 'happiness', delta: 20 },
           { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
         ],

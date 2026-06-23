@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { LogEntry, StatChange } from '../types';
 import { expressionUrl } from '../data/studentArt';
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const FEEDBACK_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor';
 
 function FeedbackModal({ onClose }: { onClose: () => void }) {
@@ -115,6 +117,21 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
       )}
       {entry.statChanges && entry.statChanges.length > 0 && (
         <StatChangePills changes={entry.statChanges} />
+      )}
+      {entry.image && entry.imageRevealed && (
+        <img
+          className="log-entry__illustration"
+          src={`${BASE}/${entry.image}`}
+          alt=""
+          aria-hidden="true"
+        />
+      )}
+      {entry.imageRevealed && entry.narrativeAfterImage && (
+        <div className="log-entry__narrative">
+          {entry.narrativeAfterImage.split('\n\n').map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
       )}
     </article>
   );

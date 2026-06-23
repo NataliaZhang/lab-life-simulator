@@ -95,6 +95,8 @@ export interface WeightedOutcome {
   nextMonthEventIds?: string[];  // like nextEventIds but deferred to the following month
   conditions?: EventCondition[]; // outcome eligible only if ALL conditions met
   phaseChange?: GamePhase;       // if set, transitions game phase after this outcome resolves
+  /** Path relative to Vite BASE_URL (e.g. 'img/.../lab_decorated.PNG') to show below the outcome narrative. */
+  image?: string;
 }
 
 export interface EventOption {
@@ -113,6 +115,8 @@ export interface GameEvent {
   tagline?: string;          // One-line signature shown in the ending modal (ending events only)
   prompt?: string;           // One-sentence popup — omit for passive (idle/news) events
   description: string[];     // Paragraphs revealed one per click before the choice modal
+  /** Path relative to Vite BASE_URL shown as an image below the description log entry. */
+  descriptionImage?: string;
   options?: EventOption[];   // Omit for passive events; engine auto-dismisses when empty
   tags?: string[];
   triggerConditions?: EventCondition[]; // event enters queue only if ALL conditions met
@@ -142,6 +146,12 @@ export interface LogEntry {
   statChanges?: StatChange[];
   /** Student ID whose smug portrait to show alongside this entry's narrative. */
   studentPortrait?: string;
+  /** Path relative to Vite BASE_URL. Only visible once imageRevealed is true. */
+  image?: string;
+  /** false = image hasn't been revealed yet (pending a click); true/undefined = visible. */
+  imageRevealed?: boolean;
+  /** Description paragraphs that were revealed after the image; rendered below the image. */
+  narrativeAfterImage?: string;
 }
 
 // ─── Admission ─────────────────────────────────────────────────────────────
@@ -196,6 +206,10 @@ export interface GameState {
   activeProjects: ActiveProject[];
   completedProjects: CompletedProject[];
   noStudentMonths: number;             // consecutive months with zero active students (for grace-period ending)
+  /** Image path pending reveal on the next "继续" click (description or outcome image). */
+  pendingImage: string | null;
+  /** True after a description image has been revealed so NEXT_PARAGRAPH appends to narrativeAfterImage. */
+  activeDescriptionImageRevealed: boolean;
   // Per-student record of which conditional happiness-events have fired and when.
   // Enforces one-time-per-student rule and 2-month cooldown between events.
   studentConditionalLog: Record<string, Array<{ eventId: string; year: number; month: number }>>;
@@ -218,6 +232,7 @@ export interface GameState {
 export type GameAction =
   | { type: 'PRESENT_EVENT' }
   | { type: 'NEXT_PARAGRAPH' }
+  | { type: 'REVEAL_PENDING_IMAGE' }
   | { type: 'CHOOSE_OPTION'; eventId: string; optionId: string }
   | { type: 'DISMISS_PASSIVE_EVENT' }  // for idle/news events with no options
   | { type: 'DISMISS_SUMMARY_SLIDE' }  // pop one ending-summary paragraph → storyLog

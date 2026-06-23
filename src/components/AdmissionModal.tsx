@@ -23,7 +23,7 @@ function CandidatePortrait({ studentId, name }: { studentId: string; name: strin
 
 const REFRESH_ENERGY_COST = 10;
 const CONTINUE_ENERGY_COST = 20;
-const CONTINUE_FUNDING_MIN = 40;
+const CONTINUE_FUNDING_MIN = 20;
 
 function getAdmissionCost(year: number): number {
   return year >= 3 ? 20 : 10;

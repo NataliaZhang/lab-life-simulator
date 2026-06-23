@@ -350,7 +350,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
       },
       {
         id: 'ac_schedule',
-        text: '立法：上午26，下午22，不许吵',
+        text: '上午26度，下午22度',
         outcomes: [
           {
             weight: 2,

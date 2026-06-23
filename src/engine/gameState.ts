@@ -25,7 +25,7 @@ function getAdmissionCost(year: number): number {
 }
 const REFRESH_ENERGY_COST = 10;   // one-time batch-swap before any admission
 const CONTINUE_ENERGY_COST = 20;  // recruit second student after admitting one
-const CONTINUE_FUNDING_MIN = 40;  // minimum funding to start a second recruitment batch
+const CONTINUE_FUNDING_MIN = 20;  // minimum funding to start a second recruitment batch
 
 // ─── Admission helpers ─────────────────────────────────────────────────────
 
@@ -100,6 +100,8 @@ export function createInitialState(): GameState {
     pendingSummarySlides: [],
     deferredEvents: [],
     happinessWarned: [],
+    pendingImage: null,
+    activeDescriptionImageRevealed: false,
   };
 }
 
@@ -348,6 +350,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         type: 'event-intro',
         title: resolvePlaceholders(event.title, boundStudentId, state.students, boundStudent2Id, qProjectMonths),
         narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students, boundStudent2Id, qProjectMonths),
+        // If the event has a description image, attach it now but keep it hidden until clicked.
+        ...(event.descriptionImage
+          ? { image: event.descriptionImage, imageRevealed: false }
+          : {}),
       };
 
       // Track which graduation check stage has been presented for this student
@@ -370,6 +376,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeParagraphIndex: 0,
         graduationChecksSeen,
         storyLog: [...state.storyLog, introEntry],
+        // Queue the image for reveal on next click if this event has a description image.
+        pendingImage: event.descriptionImage ?? null,
+        activeDescriptionImageRevealed: false,
       };
     }
 
@@ -387,15 +396,19 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         state.activeProjectMonths,
       );
 
-      // Append the new paragraph to the existing log entry for this event
-      // (find the last event-intro entry for this event and update it in place)
+      // Append to the last event-intro entry for this event.
+      // After the description image is revealed, paragraphs go into narrativeAfterImage
+      // so they render below the image rather than above it.
       const newLog = state.storyLog.map((e, i) => {
         if (e.eventId !== state.activeEventId || e.type !== 'event-intro') return e;
-        // Only update the last matching entry
         const isLast = !state.storyLog.slice(i + 1).some(
           later => later.eventId === state.activeEventId && later.type === 'event-intro',
         );
         if (!isLast) return e;
+        if (state.activeDescriptionImageRevealed) {
+          const prev = e.narrativeAfterImage ?? '';
+          return { ...e, narrativeAfterImage: prev ? prev + '\n\n' + para : para };
+        }
         return { ...e, narrative: e.narrative + '\n\n' + para };
       });
 
@@ -403,6 +416,28 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...state,
         activeParagraphIndex: nextIdx,
         storyLog: newLog,
+      };
+    }
+
+    case 'REVEAL_PENDING_IMAGE': {
+      if (!state.pendingImage) return state;
+      // Find the last log entry that has this image and is still hidden, reveal it.
+      let found = false;
+      const newLog = [...state.storyLog].reverse().map(e => {
+        if (!found && e.image === state.pendingImage && e.imageRevealed === false) {
+          found = true;
+          return { ...e, imageRevealed: true };
+        }
+        return e;
+      }).reverse();
+      // If the reveal was for a description image (active event still open), mark it so
+      // subsequent NEXT_PARAGRAPH calls append to narrativeAfterImage.
+      const isDescription = state.activeEventId !== null;
+      return {
+        ...state,
+        storyLog: newLog,
+        pendingImage: null,
+        activeDescriptionImageRevealed: isDescription,
       };
     }
 
@@ -477,6 +512,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
         statChanges: statChanges.length > 0 ? statChanges : undefined,
         studentPortrait: isStudentLedProjectComplete ? state.activeBoundStudentId ?? undefined : undefined,
+        // Attach image as hidden; revealed on the next click via REVEAL_PENDING_IMAGE.
+        ...(outcome.image ? { image: outcome.image, imageRevealed: false } : {}),
       };
 
       const chainEvents = (outcome.nextEventIds ?? []).map(id => ({
@@ -558,6 +595,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         moodChangesThisMonth: newMoodChangesThisMonth,
         deferredEvents: newDeferredEvents,
         storyLog: [...state.storyLog, logEntry, ...(ideaHintEntry ? [ideaHintEntry] : [])],
+        pendingImage: outcome.image ?? null,
+        activeDescriptionImageRevealed: false,
       };
     }
 
@@ -705,6 +744,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         deferredEvents: action.state.deferredEvents ?? [],
         activeProjectMonths: action.state.activeProjectMonths ?? null,
         happinessWarned: action.state.happinessWarned ?? [],
+        pendingImage: action.state.pendingImage ?? null,
+        activeDescriptionImageRevealed: action.state.activeDescriptionImageRevealed ?? false,
         lab: { ...action.state.lab, energyDepletedCount: action.state.lab.energyDepletedCount ?? 0 },
         admissionState: savedAdmission
           ? {
@@ -714,6 +755,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
               hasRefreshed: savedAdmission.hasRefreshed ?? false,
             }
           : null,
+        // Old saves have image entries without imageRevealed — treat them as already revealed.
+        storyLog: action.state.storyLog.map(entry =>
+          entry.image !== undefined && entry.imageRevealed === undefined
+            ? { ...entry, imageRevealed: true }
+            : entry,
+        ),
       };
     }
 

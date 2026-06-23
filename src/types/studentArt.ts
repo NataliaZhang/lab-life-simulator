@@ -12,4 +12,6 @@ export interface StudentArt {
   portrait: string;
   /** Directory containing the 8 expression images (e.g. /img/students/expressions/foo) */
   expressionDir: string;
+  /** Colored full illustration unlocked after max_favor event fires (optional). */
+  coloredPortrait?: string;
 }

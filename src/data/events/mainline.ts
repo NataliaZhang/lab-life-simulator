@@ -29,11 +29,12 @@ export const mainlineEvents: Record<string, GameEvent> = {
     description: [
       '钥匙在锁孔里轻轻转动了一下。门开了。这就是你的实验室。',
       '未来六年，你将在这里申请经费、指导学生、熬夜改论文、和 Reviewer 斗智斗勇，也可能在某个凌晨三点怀疑自己为什么没有去卖奶茶。',
-      '房间并不大。一块空白的白板。几张还没拆封的办公桌。一扇能看到校园的窗户。除此之外，什么都没有。',
+      '房间并不大。一块空白的白板、一张空办公桌、几个还没拆封的箱子、一扇能看到校园的窗户。除此之外，什么都没有。',
       '没有成果。没有学生。没有声望。甚至连实验室官网都是默认模板。',
       '你站在门口看了很久。然后忽然意识到一件事。',
       '从今天开始，所有人都会觉得——你应该知道自己在做什么。',
     ],
+    descriptionImage: 'img/students/illustration/lab_empty.PNG',
     prompt: '你决定：',
     options: [
       {
@@ -83,6 +84,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
             { type: 'lab', stat: 'reputation', delta: 5 },
           ],
           nextEventIds: ['recruit_campaign'],
+          image: 'img/students/illustration/lab_decorated.PNG',
         }],
       },
       {

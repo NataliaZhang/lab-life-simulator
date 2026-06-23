@@ -42,6 +42,8 @@ export function useAudioTriggers(state: GameState): void {
     if (!prev) {
       if (state.endingEventId) {
         audioManager.playBgm(bgmForEnding(state.endingEventId));
+      } else if (state.activeEventId?.startsWith('max_favor_')) {
+        audioManager.playBgm('favor');
       } else if (state.phase === 'playing') {
         audioManager.playBgm(dailyBgm());
       }
@@ -51,6 +53,15 @@ export function useAudioTriggers(state: GameState): void {
     // ── Ending triggered → switch BGM ───────────────────────────────────────
     if (state.endingEventId && state.endingEventId !== prev.endingEventId) {
       audioManager.fadeToBgm(bgmForEnding(state.endingEventId));
+    }
+
+    // ── max_favor event: dedicated BGM while the event is on screen ──────────
+    const wasMaxFavor = prev.activeEventId?.startsWith('max_favor_') ?? false;
+    const isMaxFavor  = state.activeEventId?.startsWith('max_favor_') ?? false;
+    if (!wasMaxFavor && isMaxFavor && !state.endingEventId) {
+      audioManager.fadeToBgm('favor');
+    } else if (wasMaxFavor && !isMaxFavor && !state.endingEventId) {
+      audioManager.fadeToBgm(dailyBgm());
     }
 
     // ── New event appeared on screen ─────────────────────────────────────────

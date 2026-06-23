@@ -63,6 +63,12 @@ export function useGameEngine(): GameEngine {
   const handleContinue = useCallback(() => {
     if (modalVisible) return;
 
+    // Reveal a pending image before anything else (description or outcome image).
+    if (state.pendingImage) {
+      dispatch({ type: 'REVEAL_PENDING_IMAGE' });
+      return;
+    }
+
     if (state.activeEventId) {
       const event = getEvent(state.activeEventId);
       if (state.activeParagraphIndex < event.description.length - 1) {
@@ -89,7 +95,7 @@ export function useGameEngine(): GameEngine {
     } else {
       dispatch({ type: 'ADVANCE_MONTH' });
     }
-  }, [state.activeEventId, state.activeParagraphIndex, state.eventQueue.length, state.pendingSummarySlides.length, modalVisible]);
+  }, [state.activeEventId, state.activeParagraphIndex, state.eventQueue.length, state.pendingSummarySlides.length, state.pendingImage, modalVisible]);
 
   const admitStudent = useCallback((candidateId: string) => {
     dispatch({ type: 'ADMIT_STUDENT', candidateId });

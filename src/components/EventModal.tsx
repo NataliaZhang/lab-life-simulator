@@ -1,4 +1,5 @@
 import type { GameEvent, LabStats } from '../types';
+import { audioManager } from '../engine/audioManager';
 
 interface Props {
   event: GameEvent;
@@ -39,8 +40,10 @@ export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boun
               <button
                 key={option.id}
                 className={`modal__option-btn${disabled ? ' modal__option-btn--disabled' : ''}`}
-                onClick={() => onChoose(event.id, option.id)}
-                disabled={disabled}
+                onClick={() => {
+                  if (disabled) { audioManager.playSfx('cannot_choose'); return; }
+                  onChoose(event.id, option.id);
+                }}
               >
                 <span className="modal__option-text">{resolve(option.text, boundStudentName, boundStudent2Name)}</span>
                 <span className="modal__option-costs">

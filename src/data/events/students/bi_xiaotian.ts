@@ -463,7 +463,57 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
-  // ── 10. 毕业回访 ──────────────────────────────────────────────────────────
+  // ── 10. 圣地巡礼 ──────────────────────────────────────────────────────────
+
+  bxt_paper_pilgrimage: {
+    id: 'bxt_paper_pilgrimage',
+    title: '奇怪论文圣地巡礼',
+    description: [
+      '毕小天推门进来，眼神里有一种你见过的、他发现特别好玩的东西时才会出现的光。"老师，我查到了。今天陈教授受邀来我们学校访问，就是那篇《海豚语言建模》的合作者。"',
+      '他停顿了一下，语气十分认真地补充："我想去看看。"',
+      '你问他打算怎么办。他说，就是……去看一眼。感受一下。',
+    ],
+    prompt: '他想去拜访那位教授，你怎么应对？',
+    triggerConditions: [
+      { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', op: '>=', value: 10 },
+      { type: 'time', field: 'year', op: '>=', value: 1 },
+    ],
+    options: [
+      {
+        id: 'bxt_pilgrimage_join',
+        text: '……行，我陪你',
+        energyCost: 5,
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '你们在机械系大楼外徘徊了半个多小时，毕小天手机拿着陈教授的照片，你们不时假装路过、假装看手机、假装研究楼层指示牌。\n\n最终，陈教授出现了，从便利店走出来，手里提着一杯美式咖啡，神情完全正常，步伐完全正常，脸上没有任何"我研究过海豚语言"应有的神秘感。\n\n两人一路无语走回去。快到实验室的时候，毕小天若有所思地说："可能海豚那篇就是他随手写的。" 你点头表示认同，但心知他可能已经在盘算下一篇了。',
+            effects: [
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 8 },
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
+              { type: 'lab', stat: 'energy', delta: -5 },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'bxt_pilgrimage_solo',
+        text: '去吧，下午见',
+        outcomes: [
+          {
+            weight: 1,
+            narrative: '毕小天下午回来，进门直接坐下，没有任何铺垫地说："老师，我看到他了，他在买咖啡。" 他顿了两秒，继续道："普通美式。" 再顿两秒："和我想象的不太一样。"\n\n你抬起头问什么不一样，他支支吾吾地说："我也说不清楚，可能就是，那篇论文写得太有激情了，我以为他是那种……" 他比划了一下，没比出来。',
+            effects: [
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 5 },
+              { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', delta: 5 },
+            ],
+          },
+        ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  // ── 11. 毕业回访 ──────────────────────────────────────────────────────────
 
   bxt_alumni_visit: {
     id: 'bxt_alumni_visit',
