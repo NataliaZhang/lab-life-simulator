@@ -523,4 +523,94 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  mwx_hyperparameter_ritual: {
+    id: 'mwx_hyperparameter_ritual',
+    title: '莫问玄：调参靠直觉，直觉靠天象',
+    description: [
+      '莫问玄的实验跑出来了，结果比组里任何人都好。你让他汇报调参过程。他说："学习率0.000137，batch size 88，dropout 0.23。"',
+      '"为什么这几个值？"',
+      '"感觉上比较对。" 停顿。"而且0.000137的数字相加是十二，今年是我的本命年，十二对应的…… 老师你不用记这个，" 他补充，看到你的表情，"但结果是对的。"',
+      '结果确实是对的。你检查了他的实验日志，他跑了二十七组不同参数，每次选择都附着一段潦草的文字说明，里面既有正经的消融分析逻辑，也夹着一些你不太看得懂的注释，但整体上走出了一条有效的探索路径。',
+    ],
+    prompt: '莫问玄的调参玄学出了结果，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'mo_wenxuan', stat: 'projectProgress', op: '>=', value: 35 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'mwx_hyperparameter_accept',
+        text: '结果对就行，不追问了',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"结果对就行，下次记得把有效参数组记录好。" 莫问玄点头，发来一份非常整齐的参数记录文档，每组实验附上了他的"直觉依据说明"，那一列读起来像一部短篇玄幻小说。你在心里把那一列标注为"可忽略"，保留了数据本身，发现数据确实很有价值。',
+          effects: [
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'projectProgress', delta: 5 },
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'mwx_hyperparameter_analyze',
+        text: '研究一下这套直觉为什么有效',
+        outcomes: [{
+          weight: 1,
+          narrative: '"直觉的底层是什么？" 你说，"你那些选择虽然说不出来，但走出了一条有效的搜索路径——这个本身值得研究。" 莫问玄沉默了一会儿，然后说"我其实一直在想这个。有时候感觉像是在用脑子做蒙特卡洛。" 你当场打开了文档，把"人类先验引导的超参数搜索"写下来，问他有没有兴趣系统做。他说"可以一试，但我可能还是会看一下星座。"',
+          effects: [
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.theory', delta: 4 },
+            { type: 'unlockIdea', projectId: 'hyperparameter_divination' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  mwx_agent_civilization: {
+    id: 'mwx_agent_civilization',
+    title: '莫问玄：他把AI agents写成了文明史',
+    description: [
+      '莫问玄交来了一份相关工作综述，你打开一看，前三页是正常的文献梳理，第四页开始画风一变：他开始用"部族"、"迁徙"、"文明演替"等词描述不同类型agent的发展历史，还有一张配图，画的是agent技术演进图，右下角的时间轴标注是"元年"到"第五纪"。',
+      '你问他为什么这样写。',
+      '"因为如果你把agent当成一个社会学对象来分析，很多涌现现象就很好解释了，" 他说，语气非常认真，"而且这个视角下，很多现有研究其实是在研究同一件事，只是没有意识到。"',
+      '你翻回去重看了第四页，发现这段话……其实说得通。',
+    ],
+    prompt: '莫问玄的agent社会学说得通，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.theory', op: '>=', value: 50 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'mwx_agent_civilization_redirect',
+        text: '综述改成正常学术语气',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"综述还是要用规范的表达，改一下。" 莫问玄点头，发来了修改版，"部族"改成了"类别"，"第五纪"改成了"当前阶段"。逻辑没变，包装换了，审稿人回来说"框架清晰"。那套文明史理论从此成为他自己的内部参考体系，偶尔出现在他的口头表达里，你假装没听见，但你知道他在用那套逻辑思考。',
+          effects: [
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'projectProgress', delta: 5 },
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'happiness', delta: -3 },
+          ],
+        }],
+      },
+      {
+        id: 'mwx_agent_civilization_expand',
+        text: '这个视角本身值得发表',
+        outcomes: [{
+          weight: 1,
+          narrative: '"社会学视角理解agent涌现行为，这个方向本身有独立价值，" 你说，"综述改成标准语气，但把这个框架单独整理成一篇立场文。" 莫问玄的表情一下子亮了，然后立刻收回来，点头说"好的老师"，语气镇定，但你注意到他写备忘录的速度比平时快了整整一倍。立场文投出三周后，某个交叉领域小型工作坊录用了，附上一封邮件说"文章视角独特，本届有一笔小额参会资助"。莫问玄发来消息，附了当时占的卦："此行有财。——我自己也没想到是字面意思。"',
+          effects: [
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'favor', delta: 10 },
+            { type: 'student', studentId: 'mo_wenxuan', stat: 'skills.theory', delta: 5 },
+            { type: 'unlockIdea', projectId: 'agent_sociology' },
+            { type: 'lab', stat: 'funding', delta: 3 },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

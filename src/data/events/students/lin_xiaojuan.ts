@@ -406,6 +406,92 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+  lxj_procrastination_log: {
+    id: 'lxj_procrastination_log',
+    title: '林小卷：这个数据夹在实验记录里面',
+    description: [
+      '周例会，你在翻林小卷的项目笔记本确认进度，翻着翻着翻到了一页夹在实验记录之间的图表——X轴是"距DDL剩余小时数"，Y轴是"代码提交频率"。曲线在倒计时二十四小时处断崖式上扬，后面是一根近乎垂直的峰值线。你抬起头看他。',
+      '"跟踪了三个月，" 他说，语气像在汇报别人的实验，"我是一个对截止压力高度敏感的非线性生产力系统。"',
+      '你想问这张图是在什么时候做出来的，然后判断这个问题的答案无论如何都会让你很难受，决定不问了。',
+    ],
+    prompt: '林小卷在研究自己的拖延规律，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', op: '>=', value: 30 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'lxj_procrastination_log_mock',
+        text: '所以结论是什么，继续摸鱼吗',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"所以结论是，你发现了一个好借口。"林小卷没有反驳，只是把折线图放大，说"老师你看这个峰值，学术上叫——" 你打断他："叫来不及了。" 他愣了一秒，然后哈哈大笑，把手机揣回口袋，然后补了一句："老师，你要我把这个做成真项目我也可以的。"',
+          effects: [
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 5 },
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'lxj_procrastination_log_research',
+        text: '数据不错，你有没有想过做成研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"你有没有想过把这个做成研究？" 林小卷沉默了一下，然后开口：N=1，方法论上有问题，实验者和被试是同一个人还有混淆效应……他越说越快，听起来不像在抱怨障碍，更像是已经思考过很多遍了。停下来之后他想了想，说"如果把自我观察本身也建模成一个变量，好像可以回避掉一部分问题。" 你没有说话。他开始在旁边找笔。',
+          effects: [
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
+            { type: 'unlockIdea', projectId: 'procrastination_model' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  lxj_blame_chain: {
+    id: 'lxj_blame_chain',
+    title: '林小卷：这个bug是谁的责任',
+    description: [
+      '代码review那天，出了一个很深的bug。林小卷看了五分钟，翻出提交历史，说"最原始的错误在这个函数，是两个月前写的"。他看了看提交者。沉默了一秒。"是我。"',
+      '然后他继续往后翻，"但我是接着之前的逻辑写的"，又翻，"之前那个逻辑好像是组里XX的范式——他现在毕业了"。再翻，"这个范式最早来自一篇2019年的论文，这个论文有17个follow-up，没有人发现问题。"',
+      '你们面对一条横跨三年、两届学生、一篇顶会论文的责任链，像站在悬崖边上往下看。林小卷沉默了一会儿，说："这个锅是球形的。" 然后去拿杯奶茶。',
+    ],
+    prompt: '追到了源头，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', op: '>=', value: 40 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'lxj_blame_chain_fix',
+        text: '先修bug，别追溯了',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说别翻了，先把bug修掉。林小卷用了两小时打出一个干净的补丁，提交信息写着"修复某些情况下可能引发的边缘问题（来源不可溯，存疑，建议日后调查）"。这是他今年写得最学术的一行注释。',
+          effects: [
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: -3 },
+          ],
+        }],
+      },
+      {
+        id: 'lxj_blame_chain_document',
+        text: '把这个传播路径记录下来',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"等等，把这个链条整理一下，这个传播路径本身很有意思。" 林小卷神情一振，二十分钟后发来了一张有向图：节点是人，边是"谁继承了谁的代码"，最末端是那篇2019年的论文。图画得非常漂亮，bug本身反而成了次要的事。',
+          effects: [
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 5 },
+            { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
+            { type: 'unlockIdea', projectId: 'blame_propagation' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
   // 🎓 毕业后回访 — 建议引擎在graduation后约6个月注入
   lxj_alumni_visit: {
     id: 'lxj_alumni_visit',

@@ -450,4 +450,97 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  qdd_pi_email_timing: {
+    id: 'qdd_pi_email_timing',
+    title: '钱多多：她知道什么时候发邮件最有效',
+    description: [
+      '钱多多拿着一份回复率统计来找你。她说她发现了一个规律：同样的邮件，周三上午十点发，你的回复平均在两小时内；周五下午发，要等到下周。她问你是不是真的如此。',
+      '你想了想，说"大概？"',
+      '"不是大概，" 她说，"我统计了组里的回复数据，模式很稳定。" 她翻出表格，覆盖了八个月，你的回复时间节律一眼可见，比你自己意识到的还清楚。',
+      '"你在……研究我的邮件回复习惯？"',
+      '"只是好奇，" 她说，看起来毫无愧疚，"顺手记了一下。"',
+    ],
+    prompt: '钱多多悄悄建模了你的沟通节律，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'qian_duoduo', stat: 'skills.social', op: '>=', value: 50 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'qdd_pi_email_timing_shrug',
+        text: '好吧，以后你也帮我选时间',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"行，以后重要邮件问你。" 钱多多点头，表情非常平静，像是接受了一项她早就计划好的委托。接下来两周，组里发出的重要邮件回复率提高了，顺带着你们和其他导师的沟通也顺畅了不少。她没有跟任何人提这件事，只是在每次发邮件前来问你一声时机。',
+          effects: [
+            { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'qdd_pi_email_timing_research',
+        text: '这个模式可以系统研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '"如果回复延迟可以预测，学生的策略就变成了博弈——这是多智能体建模的问题。" 钱多多停了一下，然后指了指表格里那个回复时间均匀分布的人。"这个人，" 她说，"是唯一让我预测失败的。" 再停顿，"均匀分布在博弈论里是最优策略——对方猜不了你。" 然后她突然笑了一下，那种刚发现自己掉进自己坑里的表情，"就是我。" 你意识到她既是研究者又是研究对象，一时不知道是该说恭喜还是道歉。她已经拿出手机开始记方法论备注了。',
+          effects: [
+            { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 10 },
+            { type: 'student', studentId: 'qian_duoduo', stat: 'skills.social', delta: 4 },
+            { type: 'unlockIdea', projectId: 'pi_email_delay_game_theory' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  qdd_mediocre_paper_filter: {
+    id: 'qdd_mediocre_paper_filter',
+    title: '钱多多：她三分钟判断一篇论文值不值得看',
+    description: [
+      '文献调研周，钱多多三天读了三十篇论文，效率异常地高。你问她怎么做到的。',
+      '"过滤机制，" 她说，"大概三分钟可以判断要不要精读。" 她解释了她的判断流程：先看摘要里有没有三个特定位置的hedge词，再看实验部分有没有消融分析，然后扫一遍结论，如果结论比摘要更弱，直接跳过。',
+      '"这个过滤掉的大概有多少？"',
+      '"这批大概六成。" 她说，完全不觉得这个数字有什么问题，"但你要我说，六成其实有点低估了，这个领域水分比较多。"',
+    ],
+    prompt: '钱多多有一套高效的论文初筛系统，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'qian_duoduo', stat: 'skills.theory', op: '>=', value: 45 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'qdd_mediocre_paper_share',
+        text: '分享给组里，效率翻倍',
+        outcomes: [{
+          weight: 1,
+          narrative: '你让她在组会上介绍了这个流程。她讲了二十分钟，条理清晰得像产品说明书，组里几个人当场表示要试试。一周后大家的文献综述效率都提高了，有人问她要不要出一个教程，她说"整理完发你们"，然后真的发了，文档写得比PPT还详细。',
+          effects: [
+            { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 8 },
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'allStudents', stat: 'happiness', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'qdd_mediocre_paper_formalize',
+        text: '把这个判断标准做成工具',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"如果这套逻辑可以形式化，可以做成自动分类器。" 钱多多想了想，说"可以，而且如果数据够多，还能反过来分析是什么特征导致了论文质量低——那个才是有意思的部分。" 她的眼神变得算盘味十足，你知道这个想法在她脑子里已经开始估算ROI了。',
+          effects: [
+            { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'qian_duoduo', stat: 'skills.engineering', delta: 3 },
+            { type: 'unlockIdea', projectId: 'mediocre_paper_detector' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

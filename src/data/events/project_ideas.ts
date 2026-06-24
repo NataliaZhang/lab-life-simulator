@@ -1567,7 +1567,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'todo_cleanup',
-        text: '发起大扫除，两周内必须处理完所有遗留 TODO',
+        text: '发起大扫除，迅速处理所有遗留 TODO',
         outcomes: [
           {
             weight: 1,
@@ -1581,7 +1581,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
       },
       {
         id: 'plot_todo_growth',
-        text: '按时间排个序，看看这些 TODO 的增长曲线长什么样',
+        text: '按时间排序，观察 TODO 的增长曲线',
         outcomes: [
           {
             weight: 1,

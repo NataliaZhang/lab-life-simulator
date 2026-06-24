@@ -558,10 +558,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activeProjects = removeLeaderOnStudentLeave(tempState, boundStudentId).activeProjects;
       }
 
-      // When a student graduates, purge queued events bound to them.
+      // When a student graduates or leaves, purge queued events bound to them.
+      // This prevents stale graduation-check events from firing after a student already departed.
       // Alumni-visit events are injected months later by monthlyUpdate and won't be in queue yet.
       let prunedQueue = nextQueue;
-      if (hasGraduate && boundStudentId) {
+      if ((hasGraduate || hasLeave) && boundStudentId) {
         prunedQueue = nextQueue.filter(
           qe => qe.studentId !== boundStudentId && qe.student2Id !== boundStudentId,
         );

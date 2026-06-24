@@ -405,12 +405,13 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋花了几天把手写稿转成LaTeX，排版一丝不苟，每个符号都和手稿对应。投稿前她要求安排两位独立验证者逐步核对，这是她自己提出的要求。论文出来后一个月内收到三封同行邮件，都说他们也在这个问题上卡过很久。叶知秋对此的评价是："那说明证明是有非平凡价值的。"',
+            narrative: '叶知秋花了几天把手写稿转成LaTeX，排版一丝不苟，每个符号都和手稿对应。投稿前她要求安排两位独立验证者逐步核对，这是她自己提出的要求。论文出来后一个月内收到三封同行邮件，都说他们也在这个问题上卡过很久。叶知秋对此的评价是："那说明证明是有非平凡价值的。" 期刊编辑随后发来补充邮件，说该期设有一个小额"杰出贡献"奖励。叶知秋转发给你，正文只有一行："是否接受。"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 15 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 12 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 15 },
               { type: 'lab', stat: 'reputation', delta: 5 },
+              { type: 'lab', stat: 'funding', delta: 2 },
             ],
           },
         ],
@@ -471,6 +472,94 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
             ],
           },
         ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+
+  yzq_reviewer_rant: {
+    id: 'yzq_reviewer_rant',
+    title: '叶知秋：审稿人要求，她整理了一份名词表',
+    description: [
+      '投稿被拒，审稿意见今天到了。叶知秋坐在那儿，把审稿人的要求逐条读完，然后合上邮件，用一种非常平静的语气说："这三条要求两两矛盾。"',
+      '她打开文档，给你展示了一个表格：左列是审稿人1的要求，右列是审稿人2的要求，中间是她标注的冲突位置，用数学符号写着"⊥"。最后一行写：如果同时满足所有要求，命题不成立。',
+      '"我不是说不修改，" 她补充，语气格外认真，"我是说，这个问题本身是可以证明的。"',
+    ],
+    prompt: '叶知秋想对审稿人的矛盾要求做数学证明，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'ye_zhiqiu', stat: 'skills.theory', op: '>=', value: 55 },
+    ],
+    options: [
+      {
+        id: 'yzq_reviewer_rant_revise',
+        text: '先修改，证明的事以后再说',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说修改论文是当务之急，证明的事之后再谈。叶知秋点了点头，把表格合上，然后开始改稿，改得极其认真，每一处修改都附上了形式化理由。审稿人下一轮回评："逻辑严密，修改到位。" 那个矛盾依然存在，但现在被埋得足够深了。',
+          effects: [
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -3 },
+            { type: 'lab', stat: 'reputation', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'yzq_reviewer_rant_prove',
+        text: '你说能证明？那就证明',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"行，把这个矛盾形式化，写成一个小结论。" 叶知秋点了点头，表情没有变化。你以为她会先回去改稿，但经过她桌子时，她已经在推导了——那个表格后面还有好几张纸，每一页都写得密密麻麻，最顶上写着日期：三天前。"你已经在做了？" "我在等你说可以做。" 你们都知道结论不能发给审稿人，但它站得住脚，而且现在有了正当性。',
+          effects: [
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'skills.theory', delta: 5 },
+            { type: 'unlockIdea', projectId: 'reviewer_impossibility' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  yzq_abstract_war: {
+    id: 'yzq_abstract_war',
+    title: '叶知秋：摘要已经改到第十三稿',
+    description: [
+      '论文摘要的字数限制是二百五十词。叶知秋的初稿是四百词，精简到三百词，然后精简到二百七十词，然后发现删掉某个从句之后语义变了，又加回来变成二百八十词。这个过程已经持续了五天。',
+      '今天她拿着第十三版来找你，说："老师，我觉得这件事有一个理论下界。"',
+      '"摘要有字数下界？"',
+      '"信息有密度上界。" 她把两个版本的摘要铺开，"你看这里，同样的信息，这七个词我已经找不到更紧凑的表达了。再删就失真了。"',
+    ],
+    prompt: '叶知秋在研究摘要的信息压缩极限，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', op: '>=', value: 50 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'yzq_abstract_war_accept',
+        text: '第十三稿够了，就这个吧',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"够了，就第十三稿，今天提交。" 叶知秋把文档关上，提交了，表情介于释然和遗憾之间。三天后收到系统收到确认，她发来一条消息："老师，我觉得第十二稿最后一句其实更准确。" 你没有回复。有些真相不需要确认。',
+          effects: [
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -3 },
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'yzq_abstract_war_formalize',
+        text: '把这个"下界"好好写一写',
+        outcomes: [{
+          weight: 1,
+          narrative: '"信息密度上界这个说法是认真的吗？" 你问。叶知秋点头，说她比较了四十多篇顶会论文的摘要，发现了一个最小不可压缩单元的模式。你说"这个整理出来，说不定本身就是个有意思的研究。" 她想了两秒，拿起铅笔，开始在草稿纸上推公式。摘要第十四稿无限期搁置。',
+          effects: [
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'ye_zhiqiu', stat: 'skills.theory', delta: 5 },
+            { type: 'unlockIdea', projectId: 'abstract_compression' },
+          ],
+        }],
       },
     ],
     tags: ['student_specific'],

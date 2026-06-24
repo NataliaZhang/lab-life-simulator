@@ -499,4 +499,95 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  tkl_acknowledgment_map: {
+    id: 'tkl_acknowledgment_map',
+    title: '唐扩列：他在分析论文致谢',
+    description: [
+      '唐扩列在看一篇顶会论文，突然说了一句"这个致谢写得挺有意思的"。你凑过去看，致谢里感谢了七个人、两个实验室、一个读书会，还有"某次不知名会议茶歇上的对话"。',
+      '"这有什么有意思的？"',
+      '"致谢里出现的名字，比作者列表更真实地反映了信息流通的网络，" 他说，"而且大家很少分析它，所以里面的信息很干净——没有策略成分。"',
+      '他把手机翻出来，给你看了一个他在手机备忘录里积累了好几个月的致谢名单，里面的人名按出现频次排了序，第一名你认识，是个各处开会都会遇到的大佬。',
+    ],
+    prompt: '唐扩列在挖掘致谢里的关系信息，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'tang_kuolie', stat: 'skills.social', op: '>=', value: 55 },
+    ],
+    options: [
+      {
+        id: 'tkl_acknowledgment_cute',
+        text: '你认识的人还挺多的',
+        outcomes: [{
+          weight: 1,
+          narrative: '"那这个第一名你认识吗？" 你指着名单最顶上。唐扩列说"认识，上次会议加了微信，他回复很快。" 你不知道他是怎么做到的，但他确实好像在任何一个场合都能找到值得聊的人，且完全不是那种让人不舒服的形式社交。这个技能大概和他的致谢分析有某种互相成就的关系。',
+          effects: [
+            { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'tkl_acknowledgment_research',
+        text: '把这个做成系统研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '"如果你爬一批顶会的致谢，能还原出这个领域的隐性协作网络，" 你说，"这比看合著关系更有信息量。" 唐扩列的眼睛亮了，说"我就是这么想的！而且你可以追踪一个想法被致谢了多少次，理解它是怎么流动的。" 他已经在想数据收集方案了，说话的同时拿出了手机开始记备忘。',
+          effects: [
+            { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'tang_kuolie', stat: 'skills.social', delta: 4 },
+            { type: 'unlockIdea', projectId: 'acknowledgment_network' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  tkl_six_degrees: {
+    id: 'tkl_six_degrees',
+    title: '唐扩列：他说他能用五步认识任何人',
+    description: [
+      '唐扩列声称他能在学术圈找到从自己到任何研究者的五步以内的联系链。你表示怀疑。',
+      '他说"老师你举个名字，圈内任何人都行。"',
+      '你随手说了一个你听说过但毫无交集的外国教授名字。他思考了大约四十秒，然后扳着手指数："我 → 上届师兄 → 他的合导 → 对方实验室的访问学者 → 那位教授。四步。"',
+      '"访问学者那步是怎么认识的？" 你问。"上次会议后的餐叙，凌晨十二点多，就我们俩还没走，聊了很久。" 他说得一本正经，好像这是完全正常的人脉建立时间窗口。',
+      '你没法验证这条链是不是真实存在，但他说的每个中间人你都能对上号，而且每一步的连接都说得出理由。你开始觉得这件事也许不是吹牛。',
+    ],
+    prompt: '唐扩列展示了他的学术人脉网络感知能力，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'tang_kuolie', stat: 'favor', op: '>=', value: 55 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'tkl_six_degrees_use',
+        text: '好，帮我联系那位教授',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"那就帮我搭一下线，我对他的工作确实有兴趣。" 唐扩列点头，说"没问题，大概一周内。" 八天后，那位教授的邮件出现在你收件箱里，开头写着"听XXX说您在做的方向，很感兴趣聊一下。" 你把邮件读完，发现最后一段提到他所在机构有一个小额国际合作启动资金，条件我们正好符合，只需要互签一封意向函。你转发给唐扩列说了一句谢谢，他回了一条消息："老师，我本来就说去认识认识，没想到还带这个。"',
+          effects: [
+            { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 10 },
+            { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 8 },
+            { type: 'lab', stat: 'reputation', delta: 8 },
+            { type: 'lab', stat: 'funding', delta: 4 },
+          ],
+        }],
+      },
+      {
+        id: 'tkl_six_degrees_verify',
+        text: '这个规律值得验证一下',
+        outcomes: [{
+          weight: 1,
+          narrative: '"学术圈的小世界效应到底有多小，能不能量化？" 你说，"你的直觉是数据，如果真的系统测一下说不定很有意思。" 唐扩列愣了一下，说他之前没想过从研究角度去看，只是觉得"好玩"。你说好玩的往往够做论文。他拿出手机，用了五分钟搜了三篇相关文献，然后说"确实没人做过这么细的。"',
+          effects: [
+            { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'tang_kuolie', stat: 'skills.theory', delta: 3 },
+            { type: 'unlockIdea', projectId: 'academic_six_degrees' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

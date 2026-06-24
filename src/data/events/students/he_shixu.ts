@@ -500,4 +500,98 @@ export const heShixuEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  hsx_todo_theory: {
+    id: 'hsx_todo_theory',
+    title: '贺时序：他统计了所有没完成的TODO',
+    description: [
+      '贺时序拿着一份报告，标题是《组内代码库TODO注释现状分析》，副标题是"兼论为什么有些TODO永远不会被执行"。他说自己花了周末扫描了所有仓库，统计结果如下：组里共有二百三十七条TODO，其中百分之六十三存活超过六个月，百分之二十一的作者已经毕业离组。',
+      '"这个最老的TODO是什么？" 你问。',
+      '"2017年留下的，" 他说，"原作者不知道在哪里了，注释写的是`待优化，下周搞定`。"',
+      '你们沉默了片刻。"那你的结论是什么？"',
+      '"我有一些想法，" 他说，"关于TODO的半衰期和可完成性之间的关系。"',
+    ],
+    prompt: '贺时序发现了组里TODO的深层规律，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'he_shixu', stat: 'skills.engineering', op: '>=', value: 55 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'hsx_todo_cleanup',
+        text: '清一清，留着占地方',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"先把明显不可能完成的删掉。" 贺时序给每个TODO分了三类：可执行、存疑、纪念性。纪念性那类他一条都没删，说"留着有历史价值。"清理之后仓库干净了，贺时序制作了一个TODO清除记录文档，注明清除时间和理由，比那些TODO本身写得还详细。',
+          effects: [
+            { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 5 },
+            { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: -3 },
+          ],
+        }],
+      },
+      {
+        id: 'hsx_todo_research',
+        text: '"半衰期和可完成性"，说说看',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"把这个想法展开。" 贺时序的表情明显舒展了——他显然准备好了这个问题。他解释了他的假设：TODO的可完成性和它的诞生时间点存在关联，越是在高压节点（DDL前、组会前）产生的TODO越不可能被执行。他已经做了初步分类，现在缺的是更大规模的数据。你说"那就做"。',
+          effects: [
+            { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'he_shixu', stat: 'skills.theory', delta: 4 },
+            { type: 'unlockIdea', projectId: 'todo_completeness' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  hsx_meeting_timing: {
+    id: 'hsx_meeting_timing',
+    title: '贺时序：他做了一份组会参与度分析',
+    description: [
+      '组会结束，贺时序留在最后，拿着一张打印出来的表格，有点犹豫地递给你。表格记录了过去半年所有组会的每个人发言时长、发言时间点（是否在第一个小时还是最后二十分钟）、打断次数，以及"结论被讨论有效改变"的比例。',
+      '"这个……你记了半年？"',
+      '"只是觉得很有意思，" 他说，有一点不好意思，"我自己发言比较少，就顺便观察了一下别人的规律。"',
+      '"你的结论呢？"',
+      '"会议时长超过九十分钟之后，有效结论产生率下降约百分之四十。还有，第一个发言的人的观点被采纳率远高于后来者。"他顿了一下，补了一句，"另外，老师您在所有组会的第四十七分钟之后的发言，被采纳率接近于零，所有组会都成立，误差率百分之六。"',
+    ],
+    prompt: '贺时序偷偷研究了组会博弈，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'he_shixu', stat: 'favor', op: '>=', value: 50 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'hsx_meeting_timing_apply',
+        text: '好，下次组会按你说的改',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"那下次控制在九十分钟以内，鼓励大家开头发言。"贺时序立刻发来了一份新的组会流程表，把发言引导时间点都标注好了，附注写着"预计可提升约20%的有效结论产出"。你也不知道那个数字是怎么算出来的，但组会确实变短了，而且有几次讨论质量明显提升了。',
+          effects: [
+            { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'he_shixu', stat: 'happiness', delta: 8 },
+            { type: 'lab', stat: 'energy', delta: 5 },
+            { type: 'allStudents', stat: 'happiness', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'hsx_meeting_timing_publish',
+        text: '这个拿来发表挺有意思',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"这个如果系统化成一个研究，很有意思——组会里的信息流动和权力结构。" 贺时序沉默了三秒，然后说"我确实想过。我以为老师会觉得太边缘。"他打开笔记本，那里有一份他已经整理了很久的分析框架，连数据可视化都做好了，等的就是一个"可以做"的信号。',
+          effects: [
+            { type: 'student', studentId: 'he_shixu', stat: 'favor', delta: 10 },
+            { type: 'student', studentId: 'he_shixu', stat: 'skills.social', delta: 3 },
+            { type: 'unlockIdea', projectId: 'meeting_game_theory' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

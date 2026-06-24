@@ -517,4 +517,92 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  bxm_conference_map: {
+    id: 'bxm_conference_map',
+    title: '白小满：她知道所有人认识谁',
+    description: [
+      '学术会议的懒人午餐环节，大家拿着盘子站着聊天，白小满却坐在角落，对着一张餐巾纸在写写画画。你走过去一看：她在画一张关系图，圆圈是人名，连线是"在哪里认识的"。',
+      '"这是……你做的网络图？"',
+      '"嗯，这个领域的人其实就这么多，" 她说，"而且聚集模式特别明显。做NLP的那桌，以前有三个是在同一个workshop认识的。" 她指了指那一桌，然后指了指她的图，角度对得上。',
+    ],
+    prompt: '白小满把会议摸清了一个遍，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', op: '>=', value: 55 },
+    ],
+    options: [
+      {
+        id: 'bxm_conference_map_use',
+        text: '帮我再认识几个人',
+        outcomes: [{
+          weight: 1,
+          narrative: '你问她能不能帮你引荐几个感兴趣的研究者。白小满立刻把那张餐巾纸翻过来，用手指头圈出三个名字，告诉你他们各自在哪个方向上和你的工作有交集。接下来两小时，你依次聊了其中两个，全部聊得很顺。你们坐回来的时候，她已经在更新图谱了，把你们的交流也标注进去了。',
+          effects: [
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: 7 },
+            { type: 'lab', stat: 'reputation', delta: 5 },
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'bxm_conference_map_research',
+        text: '这个图本身可以做研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"你这个聚集模式如果系统收集数据，说不定真能找到规律。" 白小满眼睛一亮，说"对啊，而且不同会议的社交模式应该不一样！"她当场用手机拍下了那张餐巾纸，发到自己的备忘录，备注"以后做这个"，然后继续去聊天了，脚步轻快，仿佛整件事只是一个周末计划。',
+          effects: [
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 6 },
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.social', delta: 3 },
+            { type: 'unlockIdea', projectId: 'conference_social_matching' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  bxm_late_submit_data: {
+    id: 'bxm_late_submit_data',
+    title: '白小满：晚交的论文好像更容易过',
+    description: [
+      '白小满拿着一堆会议接收结果来找你，表情是那种"我发现了一件不该发现的事"。',
+      '"老师，我统计了一下过去两年咱们组投的稿，发现一个奇怪的现象。" 她摊开一张表，"截止前二十四小时投的，接收率偏高一点点，而很早投的，有几篇反而拒了。"',
+      '"这可能只是样本偏差，"你说。',
+      '"我知道，" 她点头，"但如果不是偶然呢？审稿人的状态会不会也有时序效应？" 她停顿了一下，"这个如果做成研究，感觉会很好玩，但结论出来我们可能都不知道该不该公开。"',
+    ],
+    prompt: '白小满发现了一个有趣但微妙的现象，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', op: '>=', value: 40 },
+      { type: 'time', field: 'year', op: '>=', value: 1 },
+    ],
+    options: [
+      {
+        id: 'bxm_late_submit_coincidence',
+        text: '别多想，样本太小了',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说样本量太小，随机性太高，别对号入座。白小满很快接受了，点头说"也对"，把那张表叠起来放回包里，然后接着聊别的了。你心里有一丁点觉得她说的也不是没道理，但你没说出来。',
+          effects: [
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'happiness', delta: -5 },
+          ],
+        }],
+      },
+      {
+        id: 'bxm_late_submit_investigate',
+        text: '好玩的问题，值得认真查',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"确实好玩，不管结论是什么，这个效应本身值得系统研究一下，找更大的数据集。" 白小满立刻从包里掏出那张表，展开，说"我已经想好怎么爬会议投稿数据了。" 那张表背面密密麻麻写着方法设计，明显是来之前就想好的，等的就是你这句话。',
+          effects: [
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'bai_xiaoman', stat: 'skills.theory', delta: 3 },
+            { type: 'unlockIdea', projectId: 'late_submission_effect' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

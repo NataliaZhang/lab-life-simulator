@@ -485,4 +485,96 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+
+  gmm_whiteboard_mystery: {
+    id: 'gmm_whiteboard_mystery',
+    title: '顾眠眠：白板上的字消失了',
+    description: [
+      '上周你在白板上留了一串推导——实验室里公认"不可删，重要"的那种，旁边还贴了张便签写着"请勿擦"。今天早上你进来，白板干干净净，便签落在地上。',
+      '顾眠眠坐在她的工位上，帽子盖着脑袋，周围气氛一如往常。你环顾四周，没有别的嫌疑人。',
+      '"眠眠，白板……" 你开口。帽子微微一动，传出一句话："我拍了照片，发给你了，昨晚发现有个地方推错了，帮你改了一下，改完就顺手擦掉了。"',
+      '你打开手机，确实有张照片，照片里有完整的推导，还有一段红笔修改，修改是对的。',
+    ],
+    prompt: '白板被顾眠眠秘密修改了，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', op: '>=', value: 50 },
+    ],
+    options: [
+      {
+        id: 'gmm_whiteboard_thank',
+        text: '谢谢，这修改很好',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"修改是对的，谢谢。" 帽子动了一下，传来一句"那就好。" 就这样结束了。你站在洁白如初的白板前，意识到某种更高效的协作模式可能在这里自发运行了好一阵子了，而你完全没有察觉。',
+          effects: [
+            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'gmm_whiteboard_curious',
+        text: '等等，这个规律本身挺有意思的',
+        outcomes: [{
+          weight: 1,
+          narrative: '你坐下来问她，这种"写在物理媒介上、被当成暂存空间然后消失"的模式是不是很普遍。顾眠眠从帽子里抬起头，想了一会儿，说"组里白板平均寿命大概三天"，然后拉出一个表格，上面是她无意间统计的白板内容存活时长数据，你当场宣布这应该做成一个研究。',
+          effects: [
+            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 4 },
+            { type: 'unlockIdea', projectId: 'whiteboard_erasure_theorem' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  gmm_server_prophecy: {
+    id: 'gmm_server_prophecy',
+    title: '顾眠眠：服务器宕机，她早知道',
+    description: [
+      '服务器在下午三点宕机了，正好是你们的实验跑到一半的时候，进度全没了。大家在群里叫苦，运维那边说是未知错误，排查需要几小时。',
+      '你去找顾眠眠问她的实验有没有备份。帽衫里传来一句话："我早上备份了。"',
+      '"为什么早上备份？"',
+      '"感觉今天会宕机。"',
+      '你停顿了一下。"……感觉？"',
+      '"嗯。CPU风扇响声频率不对，昨天有两次磁盘延迟刺峰，加上今天是周三，历史上周三宕机概率最高。" 帽子轻轻耸了下，"不算玄学，是统计。"',
+    ],
+    prompt: '顾眠眠用玄学名义讲统计，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'gu_mianmian', stat: 'projectProgress', op: '>=', value: 25 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'gmm_server_relief',
+        text: '算你厉害，下次教教我',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"你这个预感模型很准，下次提前说一声。" 她嗯了一声，第二天组里悄悄多了一条共享文档，里面有一张"宕机风险日历"，注明信息来源和置信区间。没有人知道什么时候创建的，也没有人的工作内容再因宕机丢失过。',
+          effects: [
+            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
+            { type: 'lab', stat: 'energy', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'gmm_server_formalize',
+        text: '这个统计值得研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '你问她能不能把这个判断过程系统化。她从帽衫里抬起头，想了一会儿，说"可以，我之前一直在记。" 她打开一个本地文档，里面是她一年多以来记录的服务器异常信号和宕机时间对照表，数据详尽得离谱。你当场打开项目文档，开始做结构化整理。没过多久，学校机房的老师路过，问你们在研究什么，顾眠眠用三句话解释了一遍，对方沉默了五秒，说："这个能不能给我们用？我们每次宕机都要赔各组实验用电费的。" 顾眠眠从帽衫里抬起头，报了一个服务费，精确到个位数。你和她对视了一下，她已经把帽子拉回去了。',
+          effects: [
+            { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
+            { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 3 },
+            { type: 'unlockIdea', projectId: 'server_downtime_oracle' },
+            { type: 'lab', stat: 'funding', delta: 3 },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

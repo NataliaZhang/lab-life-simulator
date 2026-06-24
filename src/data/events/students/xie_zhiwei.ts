@@ -805,4 +805,92 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
     tags: ['student_specific'],
   },
 
+  xzw_prompt_archaeology: {
+    id: 'xzw_prompt_archaeology',
+    title: '谢之微：她在仓库里找到了很古老的prompt',
+    description: [
+      '谢之微在整理旧代码仓库，找到了一个两年前创建的文件夹，里面是一批prompt，最早的一条写于系统连接AI功能的第一周，内容是："请你帮我解释一下什么是注意力机制，语气亲切一点。"',
+      '她把整个文件夹翻完，发现prompt的风格从非常礼貌、充满试探，逐渐演变成简洁、专业，甚至有点命令式。',
+      '"这是一个人学习用AI的全过程，" 她说，把笔记本推过来，"我记了一下演变的阶段，每个阶段的提问策略都不太一样。这挺有意思的。"',
+      '她说话的时候声音很轻，但记录得很细，每个阶段都有引用，时间都对得上。',
+    ],
+    prompt: '谢之微在研究prompt的历史演变，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.engineering', op: '>=', value: 45 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'xzw_prompt_archaeology_archive',
+        text: '留档，以后说不定有用',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"这个值得留着，放到组里的文档里。" 谢之微整理了一份完整的存档，按时间轴排列，加了简短的注释，文档做得比你预期精细很多。她发完说"我也整理了其他几个同类文件夹"，附件里还有四份类似的分析，看来她早就做了，等的只是一个说出来的时机。',
+          effects: [
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 6 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 5 },
+          ],
+        }],
+      },
+      {
+        id: 'xzw_prompt_archaeology_research',
+        text: '把这个做成研究',
+        outcomes: [{
+          weight: 1,
+          narrative: '"prompt的演化轨迹可以反映用户的AI认知发展过程，" 你说，"这个数据如果规模化，研究价值很高。" 谢之微停了一下，问"可以用匿名的公开仓库来做吗？" 你说当然可以。她点头，说她知道几个Github上有大量历史commit的AI工具项目，可以用来做语料，然后低头开始记——她的笔记本里已经有一半了，今天聊的只是另一半。',
+          effects: [
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 4 },
+            { type: 'unlockIdea', projectId: 'prompt_archaeology' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  xzw_citation_bomb: {
+    id: 'xzw_citation_bomb',
+    title: '谢之微：这篇论文的参考文献有点可疑',
+    description: [
+      '谢之微在调研一个方向，发现了一篇引用量异常高的论文，但里面的实验她怎么看都觉得平平。她对着引用列表看了很久，来找你说了一件事。',
+      '"这篇论文的引用来源，有三十七篇出自同一个小型会议，那个会议只有两届，主办者之一是这篇论文的共同作者。"',
+      '你问她有没有确认过那三十七篇文章的内容。',
+      '"都看了，" 她说，"其中二十一篇互相引用，引用理由很薄。" 她说话很平，不像在八卦，像在汇报审计结果，只是语气稍微有点沉。',
+    ],
+    prompt: '谢之微发现了可疑的引用模式，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', op: '>=', value: 50 },
+      { type: 'time', field: 'year', op: '>=', value: 2 },
+    ],
+    options: [
+      {
+        id: 'xzw_citation_bomb_note',
+        text: '记下来，研究里不引这篇',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"那我们自己的文章里不引，别的不管。" 谢之微点头，把那篇论文标了红色注释："引用来源存疑，不建议直接引用。" 然后继续整理文献。你注意到她的文献库维护得极其干净，每一篇都有她自己的质量标注。不声不响地，已经做了很久了。',
+          effects: [
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 5 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'happiness', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'xzw_citation_bomb_investigate',
+        text: '把这个模式做成检测方法',
+        outcomes: [{
+          weight: 1,
+          narrative: '"如果这种引用网络操作是可以检测出来的，那就值得做一套方法论，" 你说，"你已经有数据了。" 谢之微想了一下，说"我还发现了另外两个类似的案例，当时觉得可能是我多想了，没有说。" 她打开文件夹，那两个案例整理得同样详细，同样有时间戳，像是等待有人来问的书信。',
+          effects: [
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'xie_zhiwei', stat: 'skills.theory', delta: 5 },
+            { type: 'unlockIdea', projectId: 'citation_bomb_defense' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
 };

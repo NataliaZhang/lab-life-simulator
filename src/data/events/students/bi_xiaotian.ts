@@ -330,13 +330,14 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"这个类比用得很好，说明你是真的理解那个协议了。喜欢的话可以继续做，每次发之前给我检查一下内容准确性。" 毕小天点头，顺带问能不能在视频简介里也提一下你们的实验室。',
+            narrative: '"这个类比用得很好，说明你是真的理解那个协议了。喜欢的话可以继续做，每次发之前给我检查一下内容准确性。" 毕小天点头，顺带问能不能在视频简介里也提一下你们的实验室。三周后他发来截图，一家做科研效率工具的公司看了视频，想小额赞助下一期，条件是提一次名字。他把谈判结果告诉你："我说不能写赞助，只能注明感谢他们提供的工具，他们接受了，然后问有没有推荐费分给实验室，我说有，他们就转了一笔。" 你盯着这条消息，意识到他刚才完成了一次完整的商务谈判。',
             effects: [
               { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: 8 },
               { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.engineering', delta: 4 },
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'lab', stat: 'energy', delta: -10 },
+              { type: 'lab', stat: 'funding', delta: 3 },
             ],
           },
         ],
@@ -558,6 +559,96 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
             ],
           },
         ],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+
+  bxt_gpu_queue_exploit: {
+    id: 'bxt_gpu_queue_exploit',
+    title: '毕小天：他在赌GPU何时空闲',
+    description: [
+      '你发现组里的GPU利用率最近异常均匀——往常总有深夜高峰，现在却像一条水平线。你问毕小天是不是有什么新工具在调度。',
+      '"没有工具，" 他说，"是我手动选时间的。" 他打开一个自己写的脚本，里面是一套基于历史利用率的提交时间预测逻辑，加上一点点对其他人作息习惯的预判。',
+      '"你在预测别人什么时候不用GPU？"',
+      '"对，这样我的任务基本不排队。" 他停了一下，"但我发现大家如果都这么做，均衡会崩掉。这其实是个博弈问题。"',
+    ],
+    prompt: '毕小天在玩GPU排队博弈，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.engineering', op: '>=', value: 55 },
+    ],
+    options: [
+      {
+        id: 'bxt_gpu_queue_ban',
+        text: '别这样，大家公平用就好',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说大家都这么做的话会形成军备竞赛，建议他别搞这套。毕小天点头，说"好的老师，那我用普通队列。" 脚本关掉了，GPU重新出现了高峰。某个深夜他的任务等了三个小时，他在群里发了一个笑哭表情，没有多说。',
+          effects: [
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: -3 },
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: -5 },
+          ],
+        }],
+      },
+      {
+        id: 'bxt_gpu_queue_formalize',
+        text: '这个博弈建模一下',
+        outcomes: [{
+          weight: 1,
+          narrative: '"那你把纳什均衡的位置算一下。" 毕小天把脚本往旁边推，打开了表格的最后一个标签页——标题是"博弈分析（草稿，未完成）"，里面是一个已经写了一半的混合策略矩阵，批注写着"趋同策略 → 效率下降约18%，但没有验证，先放着。" 他看了你一眼，有点不好意思："我自己觉得有点绕远了，就没提。" 你说"完成它。" 他的表情一下子很复杂，然后收起那股不好意思，认认真真地点了个头。',
+          effects: [
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 7 },
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.theory', delta: 4 },
+            { type: 'unlockIdea', projectId: 'gpu_queue_game_theory' },
+          ],
+        }],
+      },
+    ],
+    tags: ['student_specific'],
+  },
+
+  bxt_variable_naming: {
+    id: 'bxt_variable_naming',
+    title: '毕小天：他的变量名是一种艺术',
+    description: [
+      '你在review毕小天的代码，翻到一个变量：`final_final_v3_ACTUALLY_FINAL`。再往下：`temp_but_not_really`、`flag_idk_what_this_does`、`this_should_work`。你叫他来解释。',
+      '毕小天看了半分钟，表情开始变得复杂。"老师这个……是有历史的，" 他说，"这个 `final_final_v3` 是当时改了好多版之后觉得终于对了，所以……"',
+      '"那 `ACTUALLY_FINAL` 是？"',
+      '"之后又改了一次。"',
+      '你们沉默了一会儿。他说："老师你有没有发现，其实从变量名能还原出写代码时候的心理状态？"',
+    ],
+    prompt: '毕小天的变量名是一部心路历程，你选择：',
+    triggerConditions: [
+      { type: 'student', studentId: 'bi_xiaotian', stat: 'projectProgress', op: '>=', value: 30 },
+      { type: 'time', field: 'year', op: '>=', value: 1 },
+    ],
+    options: [
+      {
+        id: 'bxt_variable_naming_refactor',
+        text: '给我改，今天改完',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"今天统一改了，建议用有意义的英文短语。" 毕小天坐下来花了两个小时，改完之后发你看，代码确实清晰了很多。但你注意到最后有一个变量叫 `should_i_even_rename_this`，你选择视而不见，因为那里确实是一段暂时性代码。',
+          effects: [
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: -3 },
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'happiness', delta: -5 },
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.engineering', delta: 3 },
+          ],
+        }],
+      },
+      {
+        id: 'bxt_variable_naming_observe',
+        text: '你说的对，这是一种信息',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"其实这个想法不错——变量名确实是一种认知痕迹。拿一批真实项目验证一下？" 毕小天立刻说"我爬过一些开源仓库，有数据！"他跑去翻，拿来了一个他之前随手收集的变量名语料库，里面已经按"命名信心度"大致分了类。你意识到这个研究已经开始了好一阵子，只是他没跟你说过。',
+          effects: [
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'favor', delta: 8 },
+            { type: 'student', studentId: 'bi_xiaotian', stat: 'skills.theory', delta: 3 },
+            { type: 'unlockIdea', projectId: 'variable_naming_law' },
+          ],
+        }],
       },
     ],
     tags: ['student_specific'],
