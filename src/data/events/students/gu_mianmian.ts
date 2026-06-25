@@ -255,7 +255,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
     id: 'gmm_code_quality',
     title: '那份没有注释的代码',
     description: [
-      '顾眠眠提交了一个 PR。你打开一看：三百行，注释栏只有一行："功能见变量名。"',
+      '顾眠眠提交了一个分支代码。你打开一看：三百行代码，注释栏只有一行："功能见变量名。"',
       '但变量名确实见功能。`stale_grad_accumulator`、`fence_before_sync`、`shadow_buffer_offset`，每个名字都精确到不需要解释，函数拆分干净，边界条件处理完整，逻辑一眼读到底，像一本没有页码也能翻的书。',
       '提交时间戳：昨天凌晨一点半。昨天上午组会她一直闭着眼睛，你以为她不在状态。',
     ],
@@ -272,7 +272,8 @@ export const guMianmianEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '她回了个"好"，两小时后推了新提交，注释全部补齐，每一条都精准，写法和变量名一个风格。唯一的问题是 `handle_edge_case_7` 下面多出一行："这个情况我梦里见过两次。" 你盯着这行注释想了很久，最后决定保留。',
             effects: [
-              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: -2 },
+              { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: -5 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 3 },
             ],
           },
@@ -280,7 +281,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
       },
       {
         id: 'gmm_code_merge',
-        text: '变量名即文档，合了',
+        text: '变量名即文档，接受合并代码',
         outcomes: [
           {
             weight: 1,

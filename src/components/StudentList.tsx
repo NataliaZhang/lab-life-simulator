@@ -163,7 +163,7 @@ export function StudentList({
           ))}
         </div>
         {!isGameOver && (
-          <div className="student-panel__actions">
+          <div className="student-panel__actions desktop-only">
             <button
               className="btn btn--primary"
               onClick={onAdvanceMonth}

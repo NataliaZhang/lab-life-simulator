@@ -523,13 +523,13 @@ export const reviewerEvents: Record<string, GameEvent> = {
 
   desk_reject_48h: {
     id: 'desk_reject_48h',
-    title: '周三早上，拒稿了',
+    title: '周三早上，同一封邮件',
     description: [
-      '周一往ICOP投了一篇稿。周三早上，投稿系统发来邮件："我们遗憾地通知您，经过编辑初审，您的论文与本会议的发表范围不够契合，因此无法进入同行评审流程。"',
-      '连正式的同行评审都没有进入——就这样被拦在门口了。没有任何具体理由。',
-      '你曾在ICOP发过两篇论文，其中一篇，是台上做口头报告的那种。',
+      '周一往ICOP投了一篇稿。周三早上，收到一封标题为"ICOP投稿相关事宜"的邮件，你点开来。',
+      '第一段是拒稿："经过编辑初审，您的投稿与本次会议的发表范围不够契合，无法进入同行评审流程，特此通知。"',
+      '第二段是邀请函："我们诚挚邀请您担任本次会议程序委员会委员，协助评审投稿论文。您深厚的研究积累将为本届会议的审稿工作带来重要价值。"两段文字，同一封邮件。',
     ],
-    prompt: '在自己发表过口头报告的会议被48小时拦在门口，你决定',
+    prompt: '你把邮件读完，决定',
     options: [
       {
         id: 'email_clarification',
@@ -547,7 +547,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '你发了邮件。编辑回复说："您的论文与我们目前的重点方向存在一定距离，具体体现在……"随后列了两条真实的反馈。你读完，发现其中一条是误解，另一条是合理意见。你修改了论文，下次投稿前专门对照了那条反馈，最终通过了。那封邮件意外地成了整个过程里最有用的东西。',
             effects: [
-              { type: 'lab', stat: 'reputation', delta: 3 },
+              { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
               { type: 'allStudents', stat: 'projectProgress', delta: 5 },
             ],
@@ -578,15 +578,15 @@ export const reviewerEvents: Record<string, GameEvent> = {
         ],
       },
       {
-        id: 'professional_email',
-        text: '写了封讨伐信，存进草稿箱',
+        id: 'post_arxiv',
+        text: '留在arXiv不管它',
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封信，陈述了这篇论文与会议主题的契合度，列举了你此前在该会议的发表记录，措辞专业、逻辑无懈可击。你读了三遍，觉得它很好。然后你把它保存到草稿箱，关掉邮件客户端，打开了新的投稿目标。\n\n草稿箱里现在有好几封类似这样的信，没有一封发出去过。这大概是正确的选择。',
+            narrative: '你把稿子传到arXiv，五分钟后论文号到账。然后往下翻这封邮件，看到了程序委员会那段邀请，想了一下，回复了"接受"——既然来了，就评。三个月后你审了七篇投到ICOP的稿，其中一篇和你这个被拦在门口的稿子研究方向几乎一模一样，你给了条件接受。',
             effects: [
-              { type: 'lab', stat: 'energy', delta: 10 },
-              { type: 'lab', stat: 'reputation', delta: 1 },
+              { type: 'lab', stat: 'energy', delta: 8 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
             ],
           },
