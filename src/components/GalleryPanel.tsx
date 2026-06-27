@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { GalleryData } from '../engine/gallery';
 import { allCandidates } from '../data/studentPool';
-import { portraitUrl, coloredPortraitUrl } from '../data/studentArt';
+import { portraitUrl, coloredPortraitUrl, silhouettePortraitUrl } from '../data/studentArt';
 import { projectById } from '../data/projects';
 import { audioManager } from '../engine/audioManager';
 
@@ -95,14 +95,8 @@ function EndingsTab({ gallery }: { gallery: GalleryData }) {
 function CharactersTab({ gallery }: { gallery: GalleryData }) {
   const [flippedId, setFlippedId] = useState<string | null>(null);
 
-  if (gallery.studentsSeen.length === 0) {
-    return (
-      <div className="gallery-empty">
-        <p>尚未录取任何学生。</p>
-        <p className="gallery-empty__hint">录取学生后，他们将永久收录于此。</p>
-      </div>
-    );
-  }
+  const seenIds = new Set(gallery.studentsSeen);
+  const unseenCandidates = allCandidates.filter(c => !seenIds.has(c.id));
 
   return (
     <>
@@ -110,6 +104,7 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
         已收录 <span className="gallery-section-stat__num">{gallery.studentsSeen.length}</span> 位成员
       </p>
       <div className="gallery-characters-grid">
+        {/* Recruited characters — full display */}
         {gallery.studentsSeen.map(studentId => {
           const candidate = allCandidates.find(c => c.id === studentId);
           if (!candidate) return null;
@@ -132,7 +127,6 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
               style={maxFavorUnlocked ? { cursor: 'pointer' } : undefined}
             >
               <div className="gallery-char-card__inner">
-                {/* Front face */}
                 <div className="gallery-char-card__front">
                   <div className="gallery-char-card__portrait-frame">
                     {portrait ? (
@@ -153,7 +147,6 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
                     <div className="gallery-char-card__tagline">{candidate.tagline}</div>
                   </div>
                 </div>
-                {/* Back face — farewell message, only rendered for max-favor cards */}
                 {maxFavorUnlocked && (
                   <div className="gallery-char-card__back">
                     <div className="gallery-char-card__back-name">{candidate.name}</div>
@@ -162,6 +155,34 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Unrecruited characters — silhouette with hidden identity */}
+        {unseenCandidates.map(candidate => {
+          const silhouette = silhouettePortraitUrl(candidate.id);
+          return (
+            <div key={candidate.id} className="gallery-char-card gallery-char-card--unknown">
+              <div className="gallery-char-card__inner">
+                <div className="gallery-char-card__front">
+                  <div className="gallery-char-card__portrait-frame">
+                    {silhouette ? (
+                      <img
+                        className="gallery-char-card__portrait"
+                        src={silhouette}
+                        alt="未知角色"
+                        onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ) : (
+                      <div className="gallery-char-card__portrait-placeholder">？</div>
+                    )}
+                  </div>
+                  <div className="gallery-char-card__body">
+                    <div className="gallery-char-card__name gallery-char-card__name--unknown">？？？</div>
+                  </div>
+                </div>
               </div>
             </div>
           );

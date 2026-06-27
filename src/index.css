@@ -1868,6 +1868,16 @@ html, body {
   line-height: 1.55;
 }
 
+.gallery-char-card--unknown {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.gallery-char-card__name--unknown {
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
 @media (max-width: 680px) {
   .gallery-characters-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

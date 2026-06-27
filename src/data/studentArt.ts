@@ -86,6 +86,11 @@ export function coloredPortraitUrl(studentId: string): string {
   return path ? `${BASE}/${path}` : '';
 }
 
+export function silhouettePortraitUrl(studentId: string): string {
+  // Silhouette files follow the convention: img/students/portrait/{id}_silhouette.PNG
+  return studentArt[studentId] ? `${BASE}/img/students/portrait/${studentId}_silhouette.PNG` : '';
+}
+
 export function expressionUrl(studentId: string, expression: StudentExpression): string {
   const dir = studentArt[studentId]?.expressionDir;
   return dir ? `${BASE}/${dir}/${expression}.jpg` : '';
