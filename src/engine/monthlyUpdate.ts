@@ -637,9 +637,13 @@ export function applyMonthlyUpdate(state: GameState): GameState {
   }
 
   // independent_meeting: 当在读人数首次达到3人时触发（任何时间）
+  // independent_meeting_4: 当在读人数首次达到4人时触发（处理一次招募2人跳过3→4的情况）
   const activeCount = stateWithDepletionTracked.students.filter(s => s.status === 'active').length;
   if (activeCount >= 3 && !seenEventIds.has('independent_meeting')) {
     tutorialEvents.push({ id: 'independent_meeting' });
+  }
+  if (activeCount >= 4 && !seenEventIds.has('independent_meeting_4')) {
+    tutorialEvents.push({ id: 'independent_meeting_4' });
   }
 
   // ── Daily event pool ─────────────────────────────────────────────────────

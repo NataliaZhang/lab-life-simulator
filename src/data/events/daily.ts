@@ -237,7 +237,8 @@ export const dailyEvents: Record<string, GameEvent> = {
             weight: 2,
             narrative: '讲到第三段，{studentName}自己停下来了，对着空气发出了一种介于"啊"和"哦"之间的声音："我懂了，是学习率太大了。" \n\n橡皮鸭调试法又一次拯救了人类。你没说一句话，问题解决了。这是你今天最省力的一次答疑。',
             effects: [
-              { type: 'randomStudent', stat: 'happiness', delta: 10 },
+              { type: 'randomStudent', stat: 'happiness', delta: 5 },
+              { type: 'randomStudent', stat: 'favor', delta: 3 },
               { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
             ],
           },
@@ -266,7 +267,7 @@ export const dailyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '加了裁剪，NaN消失了，但loss从此变成一条直线，纹丝不动，像是在用另一种方式表达绝望。{studentName}盯着那条曲线发了好一会儿呆，问："老师，这是不是更糟了？" 你说："是的。"',
+            narrative: '加了裁剪，NaN消失了，但loss从此变成一条直线，纹丝不动，像是在用另一种方式表达绝望。\n\n{studentName}盯着那条曲线发了好一会儿呆，问："老师，这是不是更糟了？" 你说："是的。"',
             effects: [
               { type: 'randomStudent', stat: 'happiness', delta: -8 },
             ],
@@ -278,9 +279,10 @@ export const dailyEvents: Record<string, GameEvent> = {
         text: '先查数据有没有inf',
         outcomes: [{
           weight: 1,
-          narrative: '果然——有几条样本含有无穷大的值，安静地藏在数据集里，一直等着这个时机发挥作用。清洗之后，{studentName}的训练曲线优雅得像教科书示例。这种bug最难找，但每次找到都有一种侦探破案的满足感。',
+          narrative: '果然——有几条样本含有无穷大的值，安静地藏在数据集里，一直等着这个时机发挥作用。\n\n清洗之后，{studentName}的训练曲线优雅得像教科书示例。\n\n这种bug最难找，但每次找到都有一种侦探破案的满足感。',
           effects: [
             { type: 'randomStudent', stat: 'happiness', delta: 6 },
+            { type: 'randomStudent', stat: 'favor', delta: 3 },
             { type: 'randomStudent', stat: 'skills.engineering', delta: 5 },
             { type: 'randomStudent', stat: 'projectProgress', delta: 2 },
           ],

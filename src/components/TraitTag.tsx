@@ -29,10 +29,10 @@ export function TraitTag({ traitId }: Props) {
     const rect = tagRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const CARD_W = 228;
-    const CARD_H = 140;
+    const CARD_W = 250;
+    const CARD_H = 160;
 
-    const left = Math.min(rect.left, vw - CARD_W - 8);
+    const left = Math.max(8, Math.min(rect.left, vw - CARD_W - 8));
     const below = rect.bottom + 6;
     const top = below + CARD_H > vh ? rect.top - CARD_H - 6 : below;
 

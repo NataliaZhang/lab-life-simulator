@@ -42,7 +42,6 @@ export const hypeEvents: Record<string, GameEvent> = {
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 3 },
               { type: 'randomStudent', stat: 'happiness', delta: -5 },
-              { type: 'lab', stat: 'energy', delta: -15 },
             ],
           },
         ],

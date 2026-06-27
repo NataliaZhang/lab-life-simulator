@@ -182,7 +182,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           weight: 1,
           narrative: '你批了采购申请。看见入库确认单的{studentName}大喜过望，抬起头说"谢谢老师"。服务器到货的那天，{studentName}中午都没出去吃饭，一直在机房调环境。你偷偷看了一眼实验室的GPU使用率：满载。',
           effects: [
-            { type: 'randomStudent', stat: 'favor', delta: 2 },
+            { type: 'randomStudent', stat: 'favor', delta: 5 },
             { type: 'randomStudent', stat: 'happiness', delta: 8 },
             { type: 'randomStudent', stat: 'skills.engineering', delta: 4 },
           ],
@@ -198,6 +198,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'randomStudent', stat: 'favor', delta: -2 },
             { type: 'randomStudent', stat: 'happiness', delta: -2 },
+            { type: 'randomStudent', stat: 'skills.engineering', delta: 2 },
           ],
         }],
       },
@@ -375,6 +376,47 @@ export const mainlineEvents: Record<string, GameEvent> = {
             { type: 'allStudents', stat: 'happiness', delta: 8 },
             { type: 'allStudents', stat: 'favor', delta: 3 },
             { type: 'allStudents', stat: 'skills.social', delta: 3 },
+          ],
+        }],
+      },
+    ],
+    tags: ['mainline'],
+  },
+
+  independent_meeting_4: {
+    id: 'independent_meeting_4',
+    title: '四个人了',
+    description: [
+      '你数了一下：四个。实验室里现在有四名在读学生，四个包、四套作息、四种对"尽快回复消息"的不同理解。',
+      '有时候你觉得三人是个刚好的数字——小到每个人都能顾到，大到能分工。但四个人，会议室开始有点挤了，白板上的内容需要分区，组会的顺序也得认真排一排。',
+      '你在群里发了一条消息：下周五组会换大会议室，记得提前占位。',
+    ],
+    prompt: '四个人的实验室，下一步怎么走？',
+    options: [
+      {
+        id: 'independent_meeting_4_structure',
+        text: '重新分一下工，责任要清楚',
+        outcomes: [{
+          weight: 1,
+          narrative: '你在白板上画了个简单的结构图：谁负责哪个项目线，谁互相搭档，谁在推进哪个阶段。四个人第一次围在白板前讨论，有人提意见，有人补充，有人开始在笔记本上记。你意识到一件事：一个人能管的上限，大概就在这里了——再多一个，就需要真正意义上的组织了。',
+          effects: [
+            { type: 'lab', stat: 'reputation', delta: 3 },
+            { type: 'allStudents', stat: 'happiness', delta: 4 },
+            { type: 'allStudents', stat: 'projectProgress', delta: 5 },
+            { type: 'allStudents', stat: 'skills.social', delta: 2 },
+          ],
+        }],
+      },
+      {
+        id: 'independent_meeting_4_celebrate',
+        text: '先庆祝一下，下午去吃顿好的',
+        outcomes: [{
+          weight: 1,
+          narrative: '你说"四个人了，得庆祝一下"，然后带着他们去了楼下那家一直说要去、一直没去的馆子。饭桌上聊了很多——项目、论文、也聊了一些不那么正式的事。回来的路上你注意到大家走在一起的样子，有一点像个组了。',
+          effects: [
+            { type: 'lab', stat: 'energy', delta: 8 },
+            { type: 'allStudents', stat: 'happiness', delta: 10 },
+            { type: 'allStudents', stat: 'favor', delta: 4 },
           ],
         }],
       },
@@ -859,7 +901,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           narrative: '你们在白板前逐字写下这一年做过的事。起初只有几条，后来越写越多，连失败项目和离谱事故都被算了进去。{studentName}看着写满的白板，感慨说：「原来我们真的做了挺多。」你在旁边又画了一个圈，写下：第二年。',
           effects: [
             { type: 'randomStudent', stat: 'skills.theory', delta: 5 },
-            { type: 'randomStudent', stat: 'favor', delta: 3 },
+            { type: 'randomStudent', stat: 'favor', delta: 5 },
             { type: 'randomStudent', stat: 'happiness', delta: 5 },
           ],
         }],

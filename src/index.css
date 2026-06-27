@@ -938,13 +938,14 @@ html, body {
 
   .student-panel {
     position: fixed;
-    top: 48px; /* below status bar so the toggle button stays reachable */
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 150;
     max-height: none;
     overflow-y: auto;
+    padding-top: 60px; /* clear the status bar which floats above at z-index 200 */
   }
 
   .student-card {
@@ -956,6 +957,8 @@ html, body {
   }
 
   .status-bar {
+    position: relative;
+    z-index: 200;
     padding: 0 8px;
   }
 
@@ -2091,6 +2094,14 @@ html, body {
 @media (max-width: 680px) {
   .proj-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .trait-card {
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
   }
 }
 

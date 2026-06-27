@@ -234,7 +234,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在群里发起了投票，选项是"直接扔""留48小时再决定""请物主自行处理"。投票结果是三票"直接扔"，一票"留48小时"，一票"不投了感觉太荒诞了"。民主胜利了，你把它扔了，同时对整件事的荒诞程度有了新的量化认知。',
+            narrative: '你在群里发起了投票，选项是"直接扔""留48小时再决定""请物主自行处理"。\n\n投票结果是三票"直接扔"，一票"留48小时"，一票"不投了感觉太荒诞了"。\n\n民主胜利了，你把它扔了，同时对整件事的荒诞程度有了新的量化认知。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 4 },
               { type: 'allStudents', stat: 'favor', delta: 2 },
