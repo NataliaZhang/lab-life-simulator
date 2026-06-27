@@ -116,7 +116,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你们当天把这个隐含条件整理成独立命题，附上证明和适用范围。叶知秋主笔，写完发来附言："建议作为方法论第一个脚注，因为后续所有结论都依赖此处。"审稿人后来专门批注：方法论严谨性令人印象深刻。叶知秋看到这条评语，在笔记本上记下："外部验证：严谨性。"',
+            narrative: '你们当天把这个隐含条件整理成独立命题，附上证明和适用范围。叶知秋主笔，写完发来附言："建议作为方法论第一个脚注，因为后续所有结论都依赖此处。"\n\n审稿人后来专门批注：方法论严谨性令人印象深刻。叶知秋看到这条评语，在笔记本上记下："外部验证：严谨性。"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
@@ -132,7 +132,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋点点头，把打印纸叠好收进文件夹，说："好的，我先把完整证明写出来，方便下周直接用。"你说不用那么急，她说："顺手的，今晚写完。"次日早上你打开收件箱：四页推导文档，标注清晰，无一处跳步。她的"顺手"和普通人的"认真"在量级上大约差两个数量级。',
+            narrative: '叶知秋点点头，把打印纸叠好收进文件夹，说："好的，我先把完整证明写出来，方便下周直接用。"你说不用那么急，她说："顺手的，今晚写完。"\n\n次日早上你打开收件箱：四页推导文档，标注清晰，无一处跳步。她的"顺手"和普通人的"认真"在量级上大约差两个数量级。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 5 },
@@ -165,7 +165,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你陪她花了一个下午把环境配好，途中踩了两个闻所未闻的坑。叶知秋全程用笔记本记录每一步操作，最后整理成一份"环境配置备忘录（附排错日志及根因分析）"，末尾加了一条致谢："感谢老师的工程支援。"你盯着"工程支援"这个词，感到一种复杂的情绪在胃里慢慢发酵。',
+            narrative: '你陪她花了一个下午把环境配好，途中踩了两个闻所未闻的坑。叶知秋全程用笔记本记录每一步操作，最后整理成一份"环境配置备忘录（附排错日志及根因分析）"，末尾加了一条致谢："感谢老师的工程支援。"\n\n你盯着"工程支援"这个词，感到一种复杂的情绪在胃里慢慢发酵。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 5 },
@@ -180,7 +180,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋的表情迅速完成了从"高度痛苦"到"高度专注"的切换，像是有人关掉了一个一直在报警的传感器。一周后她发来二十页理论框架，附言："实验部分已用构造性证明替代，结论的强度实际上更高。"你意识到，这从来就不是逃避，她只是终于找到了正确的坐标系。',
+            narrative: '叶知秋的表情迅速完成了从"高度痛苦"到"高度专注"的切换，像是有人关掉了一个一直在报警的传感器。一周后她发来二十页理论框架，附言："实验部分已用构造性证明替代，结论的强度实际上更高。"\n\n你意识到，这从来就不是逃避，她只是终于找到了正确的坐标系。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 6 },
@@ -212,7 +212,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你花了两小时把三十二条挨个核对，第七条的数据引用问题确实存在，第十九条格式建议颇有道理。材料质量肉眼可见地提升了。你回复"清单非常有用"，她回："如您觉得合适，我可以把通用版本沉淀为组里的标准作业流程。"你说好。就这样，组里多了一套三十二条的质量管控体系，起点是你一句随口的"帮我看看"。',
+            narrative: '你花了两小时把三十二条挨个核对，第七条的数据引用问题确实存在，第十九条格式建议颇有道理。材料质量肉眼可见地提升了。你回复"清单非常有用"，她回："如您觉得合适，我可以把通用版本沉淀为组里的标准作业流程。"你说好。\n\n就这样，组里多了一套三十二条的质量管控体系，起点是你一句随口的"帮我看看"。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 6 },
@@ -227,7 +227,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '材料交上去后，申请委员会回来说第七条数据引用格式有误，需修改重提。你翻出清单，第七条写得清清楚楚，连修改建议都附上了。叶知秋没有说任何抱怨的话，只是在你发出修改版之后，发来一条消息："已收到。下次需要我在清单里把高优先级条目标红吗？"',
+            narrative: '材料交上去后，申请委员会回来说第七条数据引用格式有误，需修改重提。你翻出清单，第七条写得清清楚楚，连修改建议都附上了。\n\n叶知秋没有说任何抱怨的话，只是在你发出修改版之后，发来一条消息："已收到。下次需要我在清单里把高优先级条目标红吗？"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 3 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -2 },
@@ -259,7 +259,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"你说得对，我们用你的版本。"叶知秋把替代类比写进组里的概念文档，注明"原类比因映射性质不符已替换，V2.0"。下次你讲同一个概念，感觉少了点烟火气，但组里再也没有人把那个步骤理解歪过。有时候严谨本身就是最好的类比。',
+            narrative: '"你说得对，我们用你的版本。"叶知秋把替代类比写进组里的概念文档，注明"原类比因映射性质不符已替换，V2.0"。下次你讲同一个概念，感觉少了点烟火气，但组里再也没有人把那个步骤理解歪过。\n\n有时候严谨本身就是最好的类比。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 7 },
@@ -274,7 +274,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"老师，"她停顿了一下，"我理解直觉的价值。但如果这个类比被引用来支持后续论点，不严格的部分可能会传播误解。"她没有进一步坚持，只是在笔记本上写了什么，你没看见内容。此后每次你用类比讲概念，她都会在旁边安静地补充一句"严格来说"。每次，不落。',
+            narrative: '"老师，"她停顿了一下，"我理解直觉的价值。但如果这个类比被引用来支持后续论点，不严格的部分可能会传播误解。"她没有进一步坚持，只是在笔记本上写了什么，你没看见内容。\n\n此后每次你用类比讲概念，她都会在旁边安静地补充一句"严格来说"。每次，不落。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 4 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -3 },
@@ -306,7 +306,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"理论部分做得很扎实，"你说，"但最终要有能跑出来的数字。"叶知秋点头："我明白。我会请工程方向的同学配合来做这部分。""工程"这个词她说得格外清晰，像是在使用一门虽然不流利但态度认真的外语。',
+            narrative: '"理论部分做得很扎实，"你说，"但最终要有能跑出来的数字。"叶知秋点头："我明白。我会请工程方向的同学配合来做这部分。"\n\n"工程"这个词她说得格外清晰，像是在使用一门虽然不流利但态度认真的外语。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 6 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 3 },
@@ -321,7 +321,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋翻到"实验部分（构造性）"那页，沉默地看了一会儿，然后抬头："好的老师，我这周把环境再试一遍。"一周后你收到代码：能跑，有结果，注释密度堪称文学作品，每行都附了对应的数学符号和推导编号。运行效率一般，结果完全正确，旁边还有一行注释："此处实现与定理3.2第四步等价，见附录B。"',
+            narrative: '叶知秋翻到"实验部分（构造性）"那页，沉默地看了一会儿，然后抬头："好的老师，我这周把环境再试一遍。"\n\n一周后你收到代码：能跑，有结果，注释密度堪称文学作品，每行都附了对应的数学符号和推导编号。运行效率一般，结果完全正确，旁边还有一行注释："此处实现与定理3.2第四步等价，见附录B。"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 2 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -4 },
@@ -355,7 +355,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋点点头，表情平静，像是在确认一件计划内的事情。"如有需要，附录B我可以单独整理成独立文档存档。"你说好，她说"今晚发给你"，然后离开了。你盯着那份文件看了一会儿，感到一种罕见的、被人完全托住的踏实。',
+            narrative: '叶知秋点点头，表情平静，像是在确认一件计划内的事情。"如有需要，附录B我可以单独整理成独立文档存档。"你说好，她说"今晚发给你"，然后离开了。\n\n你盯着那份文件看了一会儿，感到一种罕见的、被人完全托住的踏实。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 8 },
@@ -372,7 +372,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"我第一天把任务拆成了十个子任务，"叶知秋说，"给每个子任务分配了时间预算，最后留一天用于整合和检查。所以第十三天完成是计划内的。附录部分是检查阶段发现的遗漏点，没有占用额外时间窗口。"你点点头，在心里悄悄更新了一下"高效"的定义。',
+            narrative: '"我第一天把任务拆成了十个子任务，"叶知秋说，"给每个子任务分配了时间预算，最后留一天用于整合和检查。所以第十三天完成是计划内的。附录部分是检查阶段发现的遗漏点，没有占用额外时间窗口。"\n\n你点点头，在心里悄悄更新了一下"高效"的定义。',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 6 },
@@ -405,7 +405,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋花了几天把手写稿转成LaTeX，排版一丝不苟，每个符号都和手稿对应。投稿前她要求安排两位独立验证者逐步核对，这是她自己提出的要求。论文出来后一个月内收到三封同行邮件，都说他们也在这个问题上卡过很久。叶知秋对此的评价是："那说明证明是有非平凡价值的。" 期刊编辑随后发来补充邮件，说该期设有一个小额"杰出贡献"奖励。叶知秋转发给你，正文只有一行："是否接受。"',
+            narrative: '叶知秋花了几天把手写稿转成LaTeX，排版一丝不苟，每个符号都和手稿对应。投稿前她要求安排两位独立验证者逐步核对，这是她自己提出的要求。\n\n论文出来后一个月内收到三封同行邮件，都说他们也在这个问题上卡过很久。叶知秋对此的评价是："那说明证明是有非平凡价值的。"\n\n期刊编辑随后发来补充邮件，说该期设有一个小额"杰出贡献"奖励。叶知秋转发给你，正文只有一行："是否接受。"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 15 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 12 },
@@ -422,7 +422,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"这是正确的做法，"叶知秋说，"我自己核对了很多遍，但独立验证是必要的协议。"你找了组里理论最强的人把证明过了一遍，两天，结论：正确，零漏洞。那位同学私下告诉你："第十四步那个构造挺妙，我没想到可以那么拼。"叶知秋听到反馈后，在笔记本上记了一行："外部评价：第十四步构造——妙。"',
+            narrative: '"这是正确的做法，"叶知秋说，"我自己核对了很多遍，但独立验证是必要的协议。"你找了组里理论最强的人把证明过了一遍，两天，结论：正确，零漏洞。\n\n那位同学私下告诉你："第十四步那个构造挺妙，我没想到可以那么拼。"叶知秋听到反馈后，在笔记本上记了一行："外部评价：第十四步构造——妙。"',
             effects: [
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 10 },
@@ -453,7 +453,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '叶知秋回复："好的，谢谢老师确认。我把第二处漏洞的描述稍微软化了一下，加了「建议核实」，其余保持原样。"三天后她发来消息：审稿意见已发，对方作者回复"非常感谢，这些问题确实存在"。你把这封邮件存进了一个专门的文件夹。她还是她，只是从你的组飞去了更远的地方，依然认真，依然精准，依然会在发出每一份批评性文字之前，先问一句"老师，这样是否太直接"。',
+            narrative: '叶知秋回复："好的，谢谢老师确认。我把第二处漏洞的描述稍微软化了一下，加了「建议核实」，其余保持原样。"三天后她发来消息：审稿意见已发，对方作者回复"非常感谢，这些问题确实存在"。你把这封邮件存进了一个专门的文件夹。\n\n她还是她，只是从你的组飞去了更远的地方，依然认真，依然精准，依然会在发出每一份批评性文字之前，先问一句"老师，这样是否太直接"。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 12 },
             ],
@@ -466,7 +466,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"我理解老师的考量，"她回复，"我会在每处漏洞前加「建议进一步核实」。但漏洞本身我还是会完整列出，读者有权知道证明的边界。"你看着这封邮件，想到她毕竟还是来问过你的，想到她在附件最后写的那句"如果语气有不妥请老师帮我调整"。对叶知秋来说，那已经是最大程度的温柔了。',
+            narrative: '"我理解老师的考量，"她回复，"我会在每处漏洞前加「建议进一步核实」。但漏洞本身我还是会完整列出，读者有权知道证明的边界。"\n\n你看着这封邮件，想到她毕竟还是来问过你的，想到她在附件最后写的那句"如果语气有不妥请老师帮我调整"。对叶知秋来说，那已经是最大程度的温柔了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 6 },
             ],
@@ -496,7 +496,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         text: '先修改，证明的事以后再说',
         outcomes: [{
           weight: 1,
-          narrative: '你说修改论文是当务之急，证明的事之后再谈。叶知秋点了点头，把表格合上，然后开始改稿，改得极其认真，每一处修改都附上了形式化理由。审稿人下一轮回评："逻辑严密，修改到位。" 那个矛盾依然存在，但现在被埋得足够深了。',
+          narrative: '你说修改论文是当务之急，证明的事之后再谈。叶知秋点了点头，把表格合上，然后开始改稿，改得极其认真，每一处修改都附上了形式化理由。审稿人下一轮回评："逻辑严密，修改到位。"\n\n那个矛盾依然存在，但现在被埋得足够深了。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -3 },
@@ -509,7 +509,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         text: '你说能证明？那就证明',
         outcomes: [{
           weight: 1,
-          narrative: '你说"行，把这个矛盾形式化，写成一个小结论。" 叶知秋点了点头，表情没有变化。你以为她会先回去改稿，但经过她桌子时，她已经在推导了——那个表格后面还有好几张纸，每一页都写得密密麻麻，最顶上写着日期：三天前。"你已经在做了？" "我在等你说可以做。" 你们都知道结论不能发给审稿人，但它站得住脚，而且现在有了正当性。',
+          narrative: '你说"行，把这个矛盾形式化，写成一个小结论。" 叶知秋点了点头，表情没有变化。\n\n你以为她会先回去改稿，但经过她桌子时，她已经在推导了——那个表格后面还有好几张纸，每一页都写得密密麻麻，最顶上写着日期：三天前。"你已经在做了？" "我在等你说可以做。"\n\n你们都知道结论不能发给审稿人，但它站得住脚，而且现在有了正当性。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'skills.theory', delta: 5 },
@@ -541,7 +541,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         text: '第十三稿够了，就这个吧',
         outcomes: [{
           weight: 1,
-          narrative: '你说"够了，就第十三稿，今天提交。" 叶知秋把文档关上，提交了，表情介于释然和遗憾之间。三天后收到系统收到确认，她发来一条消息："老师，我觉得第十二稿最后一句其实更准确。" 你没有回复。有些真相不需要确认。',
+          narrative: '你说"够了，就第十三稿，今天提交。" 叶知秋把文档关上，提交了，表情介于释然和遗憾之间。\n\n三天后收到系统收到确认，她发来一条消息："老师，我觉得第十二稿最后一句其实更准确。" 你没有回复。有些真相不需要确认。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: -3 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
@@ -553,7 +553,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
         text: '把这个"下界"好好写一写',
         outcomes: [{
           weight: 1,
-          narrative: '"信息密度上界这个说法是认真的吗？" 你问。叶知秋点头，说她比较了四十多篇顶会论文的摘要，发现了一个最小不可压缩单元的模式。你说"这个整理出来，说不定本身就是个有意思的研究。" 她想了两秒，拿起铅笔，开始在草稿纸上推公式。摘要第十四稿无限期搁置。',
+          narrative: '"信息密度上界这个说法是认真的吗？" 你问。叶知秋点头，说她比较了四十多篇顶会论文的摘要，发现了一个最小不可压缩单元的模式。你说"这个整理出来，说不定本身就是个有意思的研究。"\n\n她想了两秒，拿起铅笔，开始在草稿纸上推公式。摘要第十四稿无限期搁置。',
           effects: [
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'ye_zhiqiu', stat: 'skills.theory', delta: 5 },

@@ -21,7 +21,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '宣布：迟到文化，到此为止',
         outcomes: [{
           weight: 1,
-          narrative: '你清了清嗓子，正式点名迟到问题。林小卷立刻收起笑容，点头点得极其诚恳，"老师说得对，下次一定"，像背课文一样流畅。组会散场后，他跑来问你组里有没有推荐的奶茶店，你盯着他认真掏手机备注的背影，意识到他那几句话可能全程只走到了耳朵边缘。',
+          narrative: '你清了清嗓子，正式点名迟到问题。林小卷立刻收起笑容，点头点得极其诚恳，"老师说得对，下次一定"，像背课文一样流畅。\n\n组会散场后，他跑来问你组里有没有推荐的奶茶店，你盯着他认真掏手机备注的背影，意识到他那几句话可能全程只走到了耳朵边缘。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -5 },
@@ -34,7 +34,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '随他，出活比签到重要',
         outcomes: [{
           weight: 1,
-          narrative: '你挥挥手，示意他坐好接着开会。林小卷立刻把奶茶往旁边一推，翻开一本笔记本，你瞥了一眼，封面密密麻麻写满了想法，字迹凌乱但数量惊人，每一行都像是某个凌晨二点的突发奇想。看来他不是没在思考，只是思考发生的时间一直不太对。',
+          narrative: '你挥挥手，示意他坐好接着开会。林小卷立刻把奶茶往旁边一推，翻开一本笔记本，你瞥了一眼，封面密密麻麻写满了想法，字迹凌乱但数量惊人，每一行都像是某个凌晨二点的突发奇想。\n\n看来他不是没在思考，只是思考发生的时间一直不太对。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 7 },
@@ -65,7 +65,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '放大招：日更进度，精确到小时',
         outcomes: [{
           weight: 1,
-          narrative: '你要求他当场列出详细时间表。林小卷拿出笔，在纸上写了三行，对着天花板沉思了一会儿，又加了两行，然后把纸推过来，时间节点精确到小时，子任务拆得事无巨细。你盯着那张纸愣了一秒：这份计划根本不是现写的，他早就有，只是没打算主动拿出来。',
+          narrative: '你要求他当场列出详细时间表。林小卷拿出笔，在纸上写了三行，对着天花板沉思了一会儿，又加了两行，然后把纸推过来，时间节点精确到小时，子任务拆得事无巨细。\n\n你盯着那张纸愣了一秒：这份计划根本不是现写的，他早就有，只是没打算主动拿出来。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', delta: 5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -5 },
@@ -78,7 +78,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '躺平，静待奇迹',
         outcomes: [{
           weight: 1,
-          narrative: '你叹了口气，决定再观察一段时间。林小卷察觉到追问停止，立刻松了口气，翻开笔记本刷刷写起来，你凑近一看，记的是一个和项目毫无关系的新想法。不过仔细一瞧，这个新想法和项目有大约百分之三十的交集。也许这就叫螺旋式靠近。',
+          narrative: '你叹了口气，决定再观察一段时间。林小卷察觉到追问停止，立刻松了口气，翻开笔记本刷刷写起来，你凑近一看，记的是一个和项目毫无关系的新想法。不过仔细一瞧，这个新想法和项目有大约百分之三十的交集。\n\n也许这就叫螺旋式靠近。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 3 },
@@ -109,7 +109,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '颁发DDL战神勋章',
         outcomes: [{
           weight: 1,
-          narrative: '你发消息："这次完成得相当好。" 过了一会儿收到回复：一个大拇指表情，然后是"谢谢老师，我去睡了"。接下来两天他彻底消失，据室友说一觉睡了好久，打破了实验室纪录，那个纪录之前也是他自己创下的。传奇打破传奇，闭环完美。',
+          narrative: '你发消息："这次完成得相当好。" 过了一会儿收到回复：一个大拇指表情，然后是"谢谢老师，我去睡了"。接下来两天他彻底消失，据室友说一觉睡了好久，打破了实验室纪录，那个纪录之前也是他自己创下的。\n\n传奇打破传奇，闭环完美。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 7 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 5 },
@@ -124,7 +124,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '今天必须谈谈人生',
         outcomes: [{
           weight: 1,
-          narrative: '你约他谈话，认真讲了一刻钟关于科研节奏与可持续发展的道理。林小卷全程点头，表情诚恳到令人心疼。谈话结束，他说"老师说得很对，我认真反思"，然后问你下一个截止日期是什么时候，拿出手机备注好，表情已经在规划下一次冲刺了。你看着他走出门，意识到这堵墙可能真的不是你能推倒的。',
+          narrative: '你约他谈话，认真讲了一刻钟关于科研节奏与可持续发展的道理。林小卷全程点头，表情诚恳到令人心疼。谈话结束，他说"老师说得很对，我认真反思"，然后问你下一个截止日期是什么时候，拿出手机备注好，表情已经在规划下一次冲刺了。\n\n你看着他走出门，意识到这堵墙可能真的不是你能推倒的。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -5 },
@@ -154,7 +154,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '凌晨召开紧急研讨会',
         outcomes: [{
           weight: 1,
-          narrative: '你放下手机，打开电脑，把他那团思绪仔细梳理了一遍，发现核心概念是真的有价值的。你们来回消息到天快亮，把那团混沌一点点捋成了一根看得见方向的线。第二天林小卷顶着两个硬币大的黑眼圈出现，说"老师你也没睡？" 你们对视了一眼，同时伸手按下了咖啡机。',
+          narrative: '你放下手机，打开电脑，把他那团思绪仔细梳理了一遍，发现核心概念是真的有价值的。你们来回消息到天快亮，把那团混沌一点点捋成了一根看得见方向的线。\n\n第二天林小卷顶着两个硬币大的黑眼圈出现，说"老师你也没睡？" 你们对视了一眼，同时伸手按下了咖啡机。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 7 },
@@ -168,7 +168,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '已读，睡了，明天说',
         outcomes: [{
           weight: 1,
-          narrative: '你回了消息："明天聊。" 第二天林小卷如约而至，把那个想法又讲了一遍，白天版本逻辑清晰了不止一倍，明显是睡醒之后自己又整理了一轮。有些想法就像发酵面团，需要在黑暗里静置一夜才能膨胀成可以烤的形状。',
+          narrative: '你回了消息："明天聊。" 第二天林小卷如约而至，把那个想法又讲了一遍，白天版本逻辑清晰了不止一倍，明显是睡醒之后自己又整理了一轮。\n\n有些想法就像发酵面团，需要在黑暗里静置一夜才能膨胀成可以烤的形状。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
@@ -198,7 +198,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '真香，必须夸！',
         outcomes: [{
           weight: 1,
-          narrative: '你发消息："写得很好，审稿人评价也高。" 林小卷回了一个正在喝奶茶的猫咪表情包，紧接着："谢谢老师，我也觉得还不错。" 这种不加掩饰的自信让你一时语塞——但摘要确实写得好，你不得不在心里承认，这个人和"谦虚"之间大概隔着整个银河系。',
+          narrative: '你发消息："写得很好，审稿人评价也高。" 林小卷回了一个正在喝奶茶的猫咪表情包，紧接着："谢谢老师，我也觉得还不错。"\n\n这种不加掩饰的自信让你一时语塞——但摘要确实写得好，你不得不在心里承认，这个人和"谦虚"之间大概隔着整个银河系。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 7 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 7 },
@@ -212,7 +212,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '结果好≠方法对，说清楚',
         outcomes: [{
           weight: 1,
-          narrative: '你认真告诉他，这次只是运气好，下次万一翻车怎么办。林小卷听完，想了想，说："那我下次提前半小时开始。" 你深吸一口气，慢慢呼出来，决定换个角度看人生。至少摘要是真的写得好，而这个事实已经无法被任何方法论所撤销。',
+          narrative: '你认真告诉他，这次只是运气好，下次万一翻车怎么办。林小卷听完，想了想，说："那我下次提前半小时开始。"\n\n你深吸一口气，慢慢呼出来，决定换个角度看人生。至少摘要是真的写得好，而这个事实已经无法被任何方法论所撤销。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -3 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -5 },
@@ -243,7 +243,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '甩代码仓库链接过去',
         outcomes: [{
           weight: 1,
-          narrative: '你什么都没说，只把代码仓库链接发给他，备注"有空看看"。林小卷沉默了一会儿，然后仓库出现了一次新提交：填上了两个 `pass`，把 `TODO_FIXME_URGENT` 悄悄改成了 `TODO_IN_PROGRESS`。进步微小，但至少是真实发生过的。',
+          narrative: '你什么都没说，只把代码仓库链接发给他，备注"有空看看"。林小卷沉默了一会儿，然后仓库出现了一次新提交：填上了两个 `pass`，把 `TODO_FIXME_URGENT` 悄悄改成了 `TODO_IN_PROGRESS`。\n\n进步微小，但至少是真实发生过的。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 3 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', delta: 3 },
@@ -256,7 +256,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '开门见山：三个pass什么意思',
         outcomes: [{
           weight: 1,
-          narrative: '你把代码截图发过去，问"这三个 pass 怎么回事"。沉默了好一会儿，林小卷发来消息："老师，实际上……大概四十五？" 后面跟了一个苦笑表情，然后："我这周搞定两个，你给我一周。" 一周后，仓库出现了两次提交，进度单数字更新，这次是真实的。人在被戳穿之后往往比正常状态跑得更快。',
+          narrative: '你把代码截图发过去，问"这三个 pass 怎么回事"。沉默了好一会儿，林小卷发来消息："老师，实际上……大概四十五？" 后面跟了一个苦笑表情，然后："我这周搞定两个，你给我一周。" 一周后，仓库出现了两次提交，进度单数字更新，这次是真实的。\n\n人在被戳穿之后往往比正常状态跑得更快。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -8 },
@@ -288,7 +288,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '拉把椅子，随便聊聊',
         outcomes: [{
           weight: 1,
-          narrative: '你拉了把椅子，什么都没问，只是说"最近怎么样"。林小卷沉默了一下，然后开口，说了好一会儿，从项目卡死的地方说到对自己的怀疑，再说到一个他从来没跟人讲过的想法。说完他缓了口气，把那张白纸翻过来推给你——上面写着：我到底适不适合做科研。你们又聊了好一阵。你离开的时候，那杯凉咖啡已经不见了，换成了一杯热的。',
+          narrative: '你拉了把椅子，什么都没问，只是说"最近怎么样"。林小卷沉默了一下，然后开口，说了好一会儿，从项目卡死的地方说到对自己的怀疑，再说到一个他从来没跟人讲过的想法。说完他缓了口气，把那张白纸翻过来推给你——上面写着：我到底适不适合做科研。\n\n你们又聊了好一阵。你离开的时候，那杯凉咖啡已经不见了，换成了一杯热的。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 8 },
@@ -302,7 +302,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '今天先回去睡，明天见',
         outcomes: [{
           weight: 1,
-          narrative: '你告诉他今天先回去，明天再说。林小卷点了点头，把那张白纸叠起来塞进口袋，开始收书包。出门前他停了一下，回头说："老师，谢谢。" 没有解释谢什么。有时候不需要解释，时机对了，一句就够了。',
+          narrative: '你告诉他今天先回去，明天再说。林小卷点了点头，把那张白纸叠起来塞进口袋，开始收书包。出门前他停了一下，回头说："老师，谢谢。"\n\n没有解释谢什么。有时候不需要解释，时机对了，一句就够了。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 8 },
@@ -332,7 +332,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '直接冲！今天就开始写论文',
         outcomes: [{
           weight: 1,
-          narrative: '你们当天就开始整理，把那个漏洞做成了一篇分析文章。林小卷第一次作为思路核心参与写作，落笔停不下来，连自己都没料到能写得这么顺。文章投出后，审稿人回评里有一句话他截图保存了，发给你看："这个观察非常敏锐。" 截图附带了一条消息："老师看。"',
+          narrative: '你们当天就开始整理，把那个漏洞做成了一篇分析文章。林小卷第一次作为思路核心参与写作，落笔停不下来，连自己都没料到能写得这么顺。文章投出后，审稿人回评里有一句话他截图保存了，发给你看："这个观察非常敏锐。"\n\n截图附带了一条消息："老师看。"',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 10 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 12 },
@@ -346,7 +346,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '先构造反例，把漏洞钉死',
         outcomes: [{
           weight: 1,
-          narrative: '你叫他先跑一套专门设计的测试案例，把边界失效的情况坐实。林小卷花了几天构造了一批反例，漏洞不仅被确认，还比他最初描述的更普遍，覆盖了更多情形。这让文章从"发现问题"升级成"证明问题并给出修复方向"，分量重了不止一个量级。他兴奋地说"老师这比我想的还大"，白板上的字又多了一圈。',
+          narrative: '你叫他先跑一套专门设计的测试案例，把边界失效的情况坐实。林小卷花了几天构造了一批反例，漏洞不仅被确认，还比他最初描述的更普遍，覆盖了更多情形。这让文章从"发现问题"升级成"证明问题并给出修复方向"，分量重了不止一个量级。\n\n他兴奋地说"老师这比我想的还大"，白板上的字又多了一圈。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 8 },
@@ -378,7 +378,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '赌一把，按计划执行',
         outcomes: [{
           weight: 1,
-          narrative: '你拍拍他的肩膀："好，按计划来，每周给我看一次进展。" 接下来一个月，他每周准时出现，带来的章节每次都比你预期多，质量也过得去。最后几天连续熬夜，但论文准时提交，还比格式要求多了好多页。答辩委员会说"内容扎实"，林小卷回来转告你，表情高度克制，但脚在地板上悄悄踩了一个小舞步，以为你没看见。',
+          narrative: '你拍拍他的肩膀："好，按计划来，每周给我看一次进展。" 接下来一个月，他每周准时出现，带来的章节每次都比你预期多，质量也过得去。最后几天连续熬夜，但论文准时提交，还比格式要求多了好多页。\n\n答辩委员会说"内容扎实"，林小卷回来转告你，表情高度克制，但脚在地板上悄悄踩了一个小舞步，以为你没看见。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 12 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 10 },
@@ -393,7 +393,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '不行，必须日报',
         outcomes: [{
           weight: 1,
-          narrative: '你要求他每天下午五点发一份当日进展，字数不少于三百字。前三天他发了规规矩矩的文字报告，第四天发来一段语音，第五天发来一张白板照片。内容是真实的，格式是自由发挥的。高压之下他确实写得更快，只是到最后，汇报形式变成了每天主动来敲你的门，比发报告麻烦，但效率出奇地高。',
+          narrative: '你要求他每天下午五点发一份当日进展，字数不少于三百字。前三天他发了规规矩矩的文字报告，第四天发来一段语音，第五天发来一张白板照片。内容是真实的，格式是自由发挥的。\n\n高压之下他确实写得更快，只是到最后，汇报形式变成了每天主动来敲你的门，比发报告麻烦，但效率出奇地高。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: -5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: -8 },
@@ -425,7 +425,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '所以结论是什么，继续摸鱼吗',
         outcomes: [{
           weight: 1,
-          narrative: '你说"所以结论是，你发现了一个好借口。"林小卷没有反驳，只是把折线图放大，说"老师你看这个峰值，学术上叫——" 你打断他："叫来不及了。" 他愣了一秒，然后哈哈大笑，把手机揣回口袋，然后补了一句："老师，你要我把这个做成真项目我也可以的。"',
+          narrative: '你说"所以结论是，你发现了一个好借口。"林小卷没有反驳，只是把折线图放大，说"老师你看这个峰值，学术上叫——" 你打断他："叫来不及了。"\n\n他愣了一秒，然后哈哈大笑，把手机揣回口袋，然后补了一句："老师，你要我把这个做成真项目我也可以的。"',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'happiness', delta: 5 },
@@ -437,7 +437,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '数据不错，你有没有想过做成研究',
         outcomes: [{
           weight: 1,
-          narrative: '你说"你有没有想过把这个做成研究？" 林小卷沉默了一下，然后开口：N=1，方法论上有问题，实验者和被试是同一个人还有混淆效应……他越说越快，听起来不像在抱怨障碍，更像是已经思考过很多遍了。停下来之后他想了想，说"如果把自我观察本身也建模成一个变量，好像可以回避掉一部分问题。" 你没有说话。他开始在旁边找笔。',
+          narrative: '你说"你有没有想过把这个做成研究？" 林小卷沉默了一下，然后开口：N=1，方法论上有问题，实验者和被试是同一个人还有混淆效应……他越说越快，听起来不像在抱怨障碍，更像是已经思考过很多遍了。停下来之后他想了想，说"如果把自我观察本身也建模成一个变量，好像可以回避掉一部分问题。"\n\n你没有说话。他开始在旁边找笔。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
@@ -468,7 +468,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '先修bug，别追溯了',
         outcomes: [{
           weight: 1,
-          narrative: '你说别翻了，先把bug修掉。林小卷用了两小时打出一个干净的补丁，提交信息写着"修复某些情况下可能引发的边缘问题（来源不可溯，存疑，建议日后调查）"。这是他今年写得最学术的一行注释。',
+          narrative: '你说别翻了，先把bug修掉。林小卷用了两小时打出一个干净的补丁，提交信息写着"修复某些情况下可能引发的边缘问题（来源不可溯，存疑，建议日后调查）"。\n\n这是他今年写得最学术的一行注释。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'projectProgress', delta: 5 },
             { type: 'lab', stat: 'energy', delta: -3 },
@@ -480,7 +480,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '把这个传播路径记录下来',
         outcomes: [{
           weight: 1,
-          narrative: '你说"等等，把这个链条整理一下，这个传播路径本身很有意思。" 林小卷神情一振，二十分钟后发来了一张有向图：节点是人，边是"谁继承了谁的代码"，最末端是那篇2019年的论文。图画得非常漂亮，bug本身反而成了次要的事。',
+          narrative: '你说"等等，把这个链条整理一下，这个传播路径本身很有意思。" 林小卷神情一振，二十分钟后发来了一张有向图：节点是人，边是"谁继承了谁的代码"，最末端是那篇2019年的论文。\n\n图画得非常漂亮，bug本身反而成了次要的事。',
           effects: [
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'favor', delta: 5 },
             { type: 'student', studentId: 'lin_xiaojuan', stat: 'skills.theory', delta: 3 },
@@ -509,7 +509,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '接，老学生来了得支持',
         outcomes: [{
           weight: 1,
-          narrative: '你回复说可以，问他什么时候方便细聊。没多久他回来了，附上视频会议链接，时间定在明天早上九点，你高度怀疑那个链接在邮件发出之前就已经创建好了。合作正式启动，实验室拿到一笔行业资金。你看着他名字出现在合作协议上，想起那个端着奶茶迟到进组会的新人，觉得时间这件事有时候挺有意思的。',
+          narrative: '你回复说可以，问他什么时候方便细聊。没多久他回来了，附上视频会议链接，时间定在明天早上九点，你高度怀疑那个链接在邮件发出之前就已经创建好了。合作正式启动，实验室拿到一笔行业资金。\n\n你看着他名字出现在合作协议上，想起那个端着奶茶迟到进组会的新人，觉得时间这件事有时候挺有意思的。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 8 },
             { type: 'lab', stat: 'funding', delta: 12 },
@@ -521,7 +521,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
         text: '婉拒，近期排不开',
         outcomes: [{
           weight: 1,
-          narrative: '你礼貌地说组里最近任务比较满，暂时接不了新合作。林小卷回复"好的老师，有机会再说"，然后附了一句："组里最近在忙什么方向，我顺便帮你留意一下人。" 你盯着这条消息看了一会儿，他毕业不到一年，已经在给你介绍人了。你把邮件存进"日后跟进"文件夹，想着那个总说"快了快了"的学生，现在确实快了。',
+          narrative: '你礼貌地说组里最近任务比较满，暂时接不了新合作。林小卷回复"好的老师，有机会再说"，然后附了一句："组里最近在忙什么方向，我顺便帮你留意一下人。"\n\n你盯着这条消息看了一会儿，他毕业不到一年，已经在给你介绍人了。你把邮件存进"日后跟进"文件夹，想着那个总说"快了快了"的学生，现在确实快了。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: 3 },
           ],

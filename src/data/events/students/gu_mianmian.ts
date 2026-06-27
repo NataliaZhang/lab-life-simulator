@@ -31,7 +31,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你们聊了好一会儿，她对框架的每一个判断都精准得令人发毛。聊完她打了个哈欠，把帽子重新盖回脑袋。"那老师没别的事我继续了。" 你离开的时候还是搞不清楚"继续"是继续工作还是继续睡，或者两件事在她那儿根本是同一件事。',
+            narrative: '你们聊了好一会儿，她对框架的每一个判断都精准得令人发毛。聊完她打了个哈欠，把帽子重新盖回脑袋。"那老师没别的事我继续了。"\n\n你离开的时候还是搞不清楚"继续"是继续工作还是继续睡，或者两件事在她那儿根本是同一件事。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -46,7 +46,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你问她刚才到底睡着了没有。她认真地想了想，回答："不确定。" 停顿一下，补充："但结论应该是对的。" 然后把帽衫重新盖上，进入下一轮"不确定的状态"。你站在那里，意识到自己连跟进问题都想不出来。',
+            narrative: '你问她刚才到底睡着了没有。她认真地想了想，回答："不确定。" 停顿一下，补充："但结论应该是对的。" 然后把帽衫重新盖上，进入下一轮"不确定的状态"。\n\n你站在那里，意识到自己连跟进问题都想不出来。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 3 },
@@ -80,7 +80,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '走廊里有人小声问你："顾眠眠刚才是睡着了还是……" 你说不知道。对方点了点头，表情跟你一模一样，那种见鬼了又无法举证的表情。顾眠眠已经背包消失了，走得比所有人都快。',
+            narrative: '走廊里有人小声问你："顾眠眠刚才是睡着了还是……" 你说不知道。对方点了点头，表情跟你一模一样，那种见鬼了又无法举证的表情。\n\n顾眠眠已经背包消失了，走得比所有人都快。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
             ],
@@ -93,7 +93,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说："顾眠眠，观察很仔细。" 她抬头，神情有点茫然，像是刚意识到自己说了话。"哦，" 她点头，"那我走了。" 汇报人已经在重跑实验，脸色不太好看。你心想，这大概是实验室里性价比最高的质量控制手段。',
+            narrative: '你说："顾眠眠，观察很仔细。" 她抬头，神情有点茫然，像是刚意识到自己说了话。"哦，" 她点头，"那我走了。" 汇报人已经在重跑实验，脸色不太好看。\n\n你心想，这大概是实验室里性价比最高的质量控制手段。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 3 },
@@ -127,7 +127,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你问她消息从哪来的。她歪头想了想，回答："不知道，可能梦里听说的。" 然后补了一句："服务器配额那边你要注意，他们可能还会来。" 说完她已经在原地眯眼了，站着就能挂起后台进程，当着你的面。',
+            narrative: '你问她消息从哪来的。她歪头想了想，回答："不知道，可能梦里听说的。" 然后补了一句："服务器配额那边你要注意，他们可能还会来。"\n\n说完她已经在原地眯眼了，站着就能挂起后台进程，当着你的面。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -141,7 +141,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你顺手问她还知道什么。她闭上眼，打了个哈欠，用一种介于梦境和清醒之间的语调，报出了另外两件你不知道的事，附带来源和时间线，准确到令人不安。你站在走廊认真记笔记，隐约觉得自己在采访一个不插电运行的信息系统。',
+            narrative: '你顺手问她还知道什么。她闭上眼，打了个哈欠，用一种介于梦境和清醒之间的语调，报出了另外两件你不知道的事，附带来源和时间线，准确到令人不安。\n\n你站在走廊认真记笔记，隐约觉得自己在采访一个不插电运行的信息系统。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 3 },
@@ -175,7 +175,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"对，" 她回复，"梦里在跑实验，看到 worker 的 handle 没有正确释放，醒来就改了。" 你盯着这条消息看了好一会儿，最后回了个"……好的谢谢"。她没有继续回复，大概又睡了，把改好的代码留在现实里，人已经回去后台了。',
+            narrative: '"对，" 她回复，"梦里在跑实验，看到 worker 的 handle 没有正确释放，醒来就改了。" 你盯着这条消息看了好一会儿，最后回了个"……好的谢谢"。\n\n她没有继续回复，大概又睡了，把改好的代码留在现实里，人已经回去后台了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 5 },
@@ -190,7 +190,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"好主意，" 她说，"我一直是这么用的。" 停顿，补充："不过梦里有时候会改出新 bug，所以醒来还是要跑一下测试。" 你意识到你正在认真讨论梦境 CI/CD 管道，而且这套逻辑完全自洽。',
+            narrative: '"好主意，" 她说，"我一直是这么用的。" 停顿，补充："不过梦里有时候会改出新 bug，所以醒来还是要跑一下测试。"\n\n你意识到你正在认真讨论梦境 CI/CD 管道，而且这套逻辑完全自洽。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -223,7 +223,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"睡了一下，" 她说，然后拿笔改了一处。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
+            narrative: '"睡了一下，" 她说，然后拿笔改了一处。"在哪睡的？" "走廊尽头有个沙发。" 你想了想，走廊尽头确实有个沙发，你来了这么久，今天才知道有人把它当床用。\n\n你回到自己工位，没有继续问了。有些基础设施你了解得还不如她。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 2 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -237,7 +237,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你把报告拿过来通读了一遍。结构清晰，结论准确，你只改了两个标点。然后把它发给组里，邮件里没有提她这两小时去向不明。有些现象，记录就好，不必解释。',
+            narrative: '你把报告拿过来通读了一遍。结构清晰，结论准确，你只改了两个标点。然后把它发给组里，邮件里没有提她这两小时去向不明。\n\n有些现象，记录就好，不必解释。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 3 },
@@ -270,7 +270,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她回了个"好"，两小时后推了新提交，注释全部补齐，每一条都精准，写法和变量名一个风格。唯一的问题是 `handle_edge_case_7` 下面多出一行："这个情况我梦里见过两次。" 你盯着这行注释想了很久，最后决定保留。',
+            narrative: '她回了个"好"，两小时后推了新提交，注释全部补齐，每一条都精准，写法和变量名一个风格。唯一的问题是 `handle_edge_case_7` 下面多出一行："这个情况我梦里见过两次。"\n\n你盯着这行注释想了很久，最后决定保留。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: -2 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: -5 },
@@ -285,7 +285,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你 approve 了，留言"变量命名很好"。她回"谢谢老师"。其他人看到合并记录，打开代码读了很久，然后在群里发消息："她是什么时候写的这个？" 没有人回答得上来，因为凌晨一点半不是一个大家有印象的时间段。',
+            narrative: '你 approve 了，留言"变量命名很好"。她回"谢谢老师"。其他人看到合并记录，打开代码读了很久，然后在群里发消息："她是什么时候写的这个？"\n\n没有人回答得上来，因为凌晨一点半不是一个大家有印象的时间段。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -319,7 +319,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"不客气，" 她说，然后把帽衫帽子拉下来盖住脑袋，工位恢复了无人状态。你去改了 bug，十分钟搞定。你在心里默默感谢了一个此刻不确定是否还清醒的人。',
+            narrative: '"不客气，" 她说，然后把帽衫帽子拉下来盖住脑袋，工位恢复了无人状态。你去改了 bug，十分钟搞定。\n\n你在心里默默感谢了一个此刻不确定是否还清醒的人。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -334,7 +334,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她歪头认真想了想："调用路径里有个 lock 没有 release，这种模式我见过，可能在某个梦里见过。" 你盯着她看了一会儿，然后决定今晚认真睡一觉，把它当作一种学习方法来试试。',
+            narrative: '她歪头认真想了想："调用路径里有个 lock 没有 release，这种模式我见过，可能在某个梦里见过。"\n\n你盯着她看了一会儿，然后决定今晚认真睡一觉，把它当作一种学习方法来试试。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 12 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 5 },
@@ -368,7 +368,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '"在家睡觉，" 她说，"睡了大概十六个小时，中间醒了两次跑了下实验，然后继续睡。" 你消化了一下这套工作流：睡前提交任务，醒来收结果，再睡。你意识到这是一种你从未见过的异步人类。她已经打开下一个文件了。',
+            narrative: '"在家睡觉，" 她说，"睡了大概十六个小时，中间醒了两次跑了下实验，然后继续睡。" 你消化了一下这套工作流：睡前提交任务，醒来收结果，再睡。\n\n你意识到这是一种你从未见过的异步人类。她已经打开下一个文件了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 8 },
@@ -382,7 +382,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你夸了她。"谢谢老师，" 她说，然后趴在桌上，三分钟内完成关机。你拿着那份报告看了很久，数据完整度全组第一。你在心里把"DDL前催顾眠眠"这条提醒永久删除了。',
+            narrative: '你夸了她。"谢谢老师，" 她说，然后趴在桌上，三分钟内完成关机。你拿着那份报告看了很久，数据完整度全组第一。\n\n你在心里把"DDL前催顾眠眠"这条提醒永久删除了。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 6 },
@@ -416,7 +416,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你若无其事地转移了话题，她也没有追问，继续打哈欠。你回到工位后坐了一会儿，在脑子里把那间会议室复盘了一遍，窗帘是拉着的，门是关着的，手机全程没有响过。最终你决定不再深想。有些事情，知道答案比不知道更让人不安。',
+            narrative: '你若无其事地转移了话题，她也没有追问，继续打哈欠。你回到工位后坐了一会儿，在脑子里把那间会议室复盘了一遍，窗帘是拉着的，门是关着的，手机全程没有响过。\n\n最终你决定不再深想。有些事情，知道答案比不知道更让人不安。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 5 },
             ],
@@ -429,7 +429,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '她愣了一下，歪头认真想了想，然后说："我不知道……可能上周在哪儿睡着的时候听到了什么，不确定。" 她自己也搞不清楚信息的来源。你盯着她看了一会儿，决定接受这个答案，因为另一个可能的解释，你不太敢想到底。',
+            narrative: '她愣了一下，歪头认真想了想，然后说："我不知道……可能上周在哪儿睡着的时候听到了什么，不确定。" 她自己也搞不清楚信息的来源。\n\n你盯着她看了一会儿，决定接受这个答案，因为另一个可能的解释，你不太敢想到底。',
             effects: [
               { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 10 },
               { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -506,7 +506,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         text: '谢谢，这修改很好',
         outcomes: [{
           weight: 1,
-          narrative: '你说"修改是对的，谢谢。" 帽子动了一下，传来一句"那就好。" 就这样结束了。你站在洁白如初的白板前，意识到某种更高效的协作模式可能在这里自发运行了好一阵子了，而你完全没有察觉。',
+          narrative: '你说"修改是对的，谢谢。" 帽子动了一下，传来一句"那就好。" 就这样结束了。\n\n你站在洁白如初的白板前，意识到某种更高效的协作模式可能在这里自发运行了好一阵子了，而你完全没有察觉。',
           effects: [
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 8 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -518,7 +518,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         text: '等等，这个规律本身挺有意思的',
         outcomes: [{
           weight: 1,
-          narrative: '你坐下来问她，这种"写在物理媒介上、被当成暂存空间然后消失"的模式是不是很普遍。顾眠眠从帽子里抬起头，想了一会儿，说"组里白板平均寿命大概三天"，然后拉出一个表格，上面是她无意间统计的白板内容存活时长数据，你当场宣布这应该做成一个研究。',
+          narrative: '你坐下来问她，这种"写在物理媒介上、被当成暂存空间然后消失"的模式是不是很普遍。顾眠眠从帽子里抬起头，想了一会儿，说"组里白板平均寿命大概三天"，然后拉出一个表格，上面是她无意间统计的白板内容存活时长数据。\n\n你当场宣布这应该做成一个研究。',
           effects: [
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'skills.theory', delta: 4 },
@@ -552,7 +552,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         text: '算你厉害，下次教教我',
         outcomes: [{
           weight: 1,
-          narrative: '你说"你这个预感模型很准，下次提前说一声。" 她嗯了一声，第二天组里悄悄多了一条共享文档，里面有一张"宕机风险日历"，注明信息来源和置信区间。没有人知道什么时候创建的，也没有人的工作内容再因宕机丢失过。',
+          narrative: '你说"你这个预感模型很准，下次提前说一声。" 她嗯了一声，第二天组里悄悄多了一条共享文档，里面有一张"宕机风险日历"，注明信息来源和置信区间。\n\n没有人知道什么时候创建的，也没有人的工作内容再因宕机丢失过。',
           effects: [
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 7 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'happiness', delta: 5 },
@@ -565,7 +565,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
         text: '这个统计值得研究',
         outcomes: [{
           weight: 1,
-          narrative: '你问她能不能把这个判断过程系统化。她从帽衫里抬起头，想了一会儿，说"可以，我之前一直在记。" 她打开一个本地文档，里面是她一年多以来记录的服务器异常信号和宕机时间对照表，数据详尽得离谱。你当场打开项目文档，开始做结构化整理。没过多久，学校机房的老师路过，问你们在研究什么，顾眠眠用三句话解释了一遍，对方沉默了五秒，说："这个能不能给我们用？我们每次宕机都要赔各组实验用电费的。" 顾眠眠从帽衫里抬起头，报了一个服务费，精确到个位数。你和她对视了一下，她已经把帽子拉回去了。',
+          narrative: '你问她能不能把这个判断过程系统化。她从帽衫里抬起头，想了一会儿，说"可以，我之前一直在记。" 她打开一个本地文档，里面是她一年多以来记录的服务器异常信号和宕机时间对照表，数据详尽得离谱。你当场打开项目文档，开始做结构化整理。\n\n没过多久，学校机房的老师路过，问你们在研究什么，顾眠眠用三句话解释了一遍，对方沉默了五秒，说："这个能不能给我们用？我们每次宕机都要赔各组实验用电费的。" 顾眠眠从帽衫里抬起头，报了一个服务费，精确到个位数。你和她对视了一下，她已经把帽子拉回去了。',
           effects: [
             { type: 'student', studentId: 'gu_mianmian', stat: 'favor', delta: 6 },
             { type: 'student', studentId: 'gu_mianmian', stat: 'skills.engineering', delta: 3 },

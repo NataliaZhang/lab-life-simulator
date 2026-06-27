@@ -31,14 +31,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你打开Overleaf，灌了两杯咖啡，开始逐张调图。到凌晨四点，23张图全部处理完毕，论文精确落在9.97页，在要求的10页内，格式完全合规，页边距误差在0.01mm以内。提交成功。你把电脑关上，心想：学术界有一种苦是专门为排版设计的。',
+            narrative: '你打开Overleaf，灌了两杯咖啡，开始逐张调图。到凌晨四点，23张图全部处理完毕，论文精确落在9.97页，在要求的10页内，格式完全合规，页边距误差在0.01mm以内。提交成功。\n\n你把电脑关上，心想：学术界有一种苦是专门为排版设计的。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
           {
             weight: 1,
-            narrative: '你通宵排版，图表调了一遍又一遍，到第18张的时候不小心把参考文献的字号改成了8pt，提交前五分钟才发现。临时改回来，格式崩了，重新编译，倒计时归零。截稿超出了四十秒。系统不接受。你盯着那个错误页面，脑子里有什么东西悄悄断开了——然后你非常冷静地开始找AC的邮箱地址，逻辑完整，手没抖。',
+            narrative: '你通宵排版，图表调了一遍又一遍，到第18张的时候不小心把参考文献的字号改成了8pt，提交前五分钟才发现。临时改回来，格式崩了，重新编译，倒计时归零。截稿超出了四十秒。系统不接受。\n\n你盯着那个错误页面，脑子里有什么东西悄悄断开了——然后你非常冷静地开始找AC的邮箱地址，逻辑完整，手没抖。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
@@ -52,14 +52,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你用旧模板提交了，在备注栏写了"模板更新时间距截稿不足48小时，特此说明"，语气不卑不亢，逻辑无懈可击。大会官方没有任何回应。论文进了审稿流程。你至今不知道有没有人注意到那0.3页。',
+            narrative: '你用旧模板提交了，在备注栏写了"模板更新时间距截稿不足48小时，特此说明"，语气不卑不亢，逻辑无懈可击。大会官方没有任何回应。论文进了审稿流程。\n\n你至今不知道有没有人注意到那0.3页。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '论文因格式不符被desk reject，通知邮件发在截稿后三小时，措辞简洁：格式要求参见官网最新模板。你想反驳，但大会的邮件是no-reply地址。这份愤怒无处投递，最终只能存档在那个已经有七个子文件夹的"审稿人问题"文件夹里，再新建一个叫"行政问题"的子文件夹。',
+            narrative: '论文因格式不符被desk reject，通知邮件发在截稿后三小时，措辞简洁：格式要求参见官网最新模板。你想反驳，但大会的邮件是no-reply地址。\n\n这份愤怒无处投递，最终只能存档在那个已经有七个子文件夹的"审稿人问题"文件夹里，再新建一个叫"行政问题"的子文件夹。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -4 },
               { type: 'allStudents', stat: 'happiness', delta: -10 },
@@ -73,7 +73,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你给组委会发了一封言辞有理有据的申请邮件，说明模板更新时间线不合理，请求48小时延期。收到了自动回复：您的邮件已收到，工作人员将在5-7个工作日内回复。截稿在明天。你把论文关掉，开始重新排版。',
+            narrative: '你给组委会发了一封言辞有理有据的申请邮件，说明模板更新时间线不合理，请求48小时延期。收到了自动回复：您的邮件已收到，工作人员将在5-7个工作日内回复。\n\n截稿在明天。你把论文关掉，开始重新排版。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -100,7 +100,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '11:58pm，页面突然活了。你以从未有过的速度完成上传、填写信息、确认提交，在11:59:47收到确认邮件。你放下鼠标，手有点抖——不是紧张，是这十三分钟之后的生理后遗症。',
+            narrative: '11:58pm，页面突然活了。你以从未有过的速度完成上传、填写信息、确认提交，在11:59:47收到确认邮件。\n\n你放下鼠标，手有点抖——不是紧张，是这十三分钟之后的生理后遗症。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -108,7 +108,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '系统在午夜前三分钟恢复了，但你因为长时间刷新导致浏览器缓存出问题，上传时文件校验失败，重新上传时超时。截稿。你在推特上看到有人成功提交的庆祝，感到了一种深入骨髓的孤独。',
+            narrative: '系统在午夜前三分钟恢复了，但你因为长时间刷新导致浏览器缓存出问题，上传时文件校验失败，重新上传时超时。截稿。\n\n你在推特上看到有人成功提交的庆祝，感到了一种深入骨髓的孤独。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -123,14 +123,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你给PC chair发了邮件，说明论文已准备好，系统崩溃导致无法提交，附上了论文PDF。回复在两天后到达："感谢您的反馈，本次提交系统故障已记录在案，受影响的投稿请于24小时内重新提交。" 你把论文重新提交了，感觉整件事就像是和一堵墙进行了一次有效的对话。',
+            narrative: '你给PC chair发了邮件，说明论文已准备好，系统崩溃导致无法提交，附上了论文PDF。回复在两天后到达："感谢您的反馈，本次提交系统故障已记录在案，受影响的投稿请于24小时内重新提交。"\n\n你把论文重新提交了，感觉整件事就像是和一堵墙进行了一次有效的对话。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 1 },
             ],
           },
           {
             weight: 1,
-            narrative: '你发了邮件，没有收到回复。系统恢复后你补提交了，但提交记录显示的时间戳是00:07，超过了午夜截止。你至今不知道这篇论文有没有进入审稿流程，因为后来收到的拒稿通知里没有任何线索，也许是被拒了，也许是因为超时被直接丢弃，这个问题永远没有答案了。',
+            narrative: '你发了邮件，没有收到回复。系统恢复后你补提交了，但提交记录显示的时间戳是00:07，超过了午夜截止。\n\n你至今不知道这篇论文有没有进入审稿流程，因为后来收到的拒稿通知里没有任何线索，也许是被拒了，也许是因为超时被直接丢弃，这个问题永远没有答案了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -2 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
@@ -144,7 +144,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你关掉电脑，心想反正崩溃不是你的问题，通常这种情况大会都会延期。早上六点，系统已恢复，并且大会官方宣布截止延长至当天正午。你在所有同行还在论坛里互相问"你能提交了吗"的时候，不动声色地提交了论文，甚至来得及检查了一遍参考文献。',
+            narrative: '你关掉电脑，心想反正崩溃不是你的问题，通常这种情况大会都会延期。早上六点，系统已恢复，并且大会官方宣布截止延长至当天正午。\n\n你在所有同行还在论坛里互相问"你能提交了吗"的时候，不动声色地提交了论文，甚至来得及检查了一遍参考文献。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: 2 },
@@ -152,7 +152,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '系统在凌晨三点恢复，没有延期通知。你早上六点打开电脑，看到一封邮件：投稿已于00:00关闭，本轮不再接受提交。你喝了第一口咖啡，心里有什么东西安静地碎掉了。',
+            narrative: '系统在凌晨三点恢复，没有延期通知。你早上六点打开电脑，看到一封邮件：投稿已于00:00关闭，本轮不再接受提交。\n\n你喝了第一口咖啡，心里有什么东西安静地碎掉了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -4 },
               { type: 'allStudents', stat: 'happiness', delta: -12 },
@@ -180,14 +180,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了两周写完3000字伦理说明，措辞严谨，逻辑无懈可击，每一段都引用了相关政策条文。两封推荐信请到了，伦理委员会批了——只用了五周，快于预期。论文顺利进入投稿流程。你把这份3000字的声明存档，心想也许将来还会用到，但希望永远不会。',
+            narrative: '你花了两周写完3000字伦理说明，措辞严谨，逻辑无懈可击，每一段都引用了相关政策条文。两封推荐信请到了，伦理委员会批了——只用了五周，快于预期。\n\n论文顺利进入投稿流程。你把这份3000字的声明存档，心想也许将来还会用到，但希望永远不会。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
             ],
           },
           {
             weight: 1,
-            narrative: '六周后，伦理委员会反馈：说明材料中"潜在社会影响"一节不够详尽，需要补充"对就业市场的具体量化分析"。这是一篇关于梯度下降收敛速度的论文。你补充了这一节，又等了三周。会议截稿已经过了。',
+            narrative: '六周后，伦理委员会反馈：说明材料中"潜在社会影响"一节不够详尽，需要补充"对就业市场的具体量化分析"。这是一篇关于梯度下降收敛速度的论文。\n\n你补充了这一节，又等了三周。会议截稿已经过了。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -8 },
             ],
@@ -200,7 +200,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一封详细的申诉信，逐点说明本研究不触及任何伦理审查标准，并附上了委员会官方触发条件的原文，用红字标注了本研究不符合的每一条。委员会回复：已将您的申诉转交相关部门处理，预计4至6周内给予答复。你在等待期间把论文投到了一个没有这个审查要求的会议。',
+            narrative: '你写了一封详细的申诉信，逐点说明本研究不触及任何伦理审查标准，并附上了委员会官方触发条件的原文，用红字标注了本研究不符合的每一条。委员会回复：已将您的申诉转交相关部门处理，预计4至6周内给予答复。\n\n你在等待期间把论文投到了一个没有这个审查要求的会议。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 1 },
               { type: 'lab', stat: 'energy', delta: -5 },
@@ -208,7 +208,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你的申诉被驳回，理由是："触发机制为自动系统生成，不受人工干预。" 你把这句话截图，发给了三个同行，他们每个人的回复都不一样：一个发了个旋转表情，一个回了"……"，一个发来了一篇2019年的论文说"我之前也遇到过这个"。论文最终换了个会投出去，没有任何问题。',
+            narrative: '你的申诉被驳回，理由是："触发机制为自动系统生成，不受人工干预。" 你把这句话截图，发给了三个同行，他们每个人的回复都不一样：一个发了个旋转表情，一个回了"……"，一个发来了一篇2019年的论文说"我之前也遇到过这个"。\n\n论文最终换了个会投出去，没有任何问题。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -8 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -222,7 +222,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你写了一份完全合规的3000字声明。第一节讨论梯度下降的历史起源，第二节探讨优化算法与人类认知偏差的关系，第三节引入了一段关于"收敛"在存在主义语境下的讨论，第四节回到技术层面，以一种不动声色的方式描述了为什么这篇论文对人类毫无威胁。委员会批了，回复只有一行字：材料完整，审核通过。',
+            narrative: '你写了一份完全合规的3000字声明。第一节讨论梯度下降的历史起源，第二节探讨优化算法与人类认知偏差的关系，第三节引入了一段关于"收敛"在存在主义语境下的讨论，第四节回到技术层面，以一种不动声色的方式描述了为什么这篇论文对人类毫无威胁。\n\n委员会批了，回复只有一行字：材料完整，审核通过。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 4 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -230,7 +230,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '委员会在"潜在影响"一节发现你引用了一段尼采，要求你澄清"与本研究的直接关联性"。你回复说那是一个关于梯度和意志的隐喻。对方消失了十天，然后批准了，附言是："建议未来声明保持学术风格。" 你把这封邮件存进了一个名叫"值得纪念"的文件夹。',
+            narrative: '委员会在"潜在影响"一节发现你引用了一段尼采，要求你澄清"与本研究的直接关联性"。你回复说那是一个关于梯度和意志的隐喻。对方消失了十天，然后批准了，附言是："建议未来声明保持学术风格。"\n\n你把这封邮件存进了一个名叫"值得纪念"的文件夹。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'lab', stat: 'energy', delta: -5 },
@@ -257,14 +257,14 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你坐在后排，电脑打开，表情专注——你确实在做记录，只是记录的是自己的论文草稿。中途回答了一个关于实验室安全规范的问题，显得参与度很高。会议结束，你完成了论文的两个小节，甚至比在办公室写得更专心，大概是因为没有人来敲门。',
+            narrative: '你坐在后排，电脑打开，表情专注——你确实在做记录，只是记录的是自己的论文草稿。中途回答了一个关于实验室安全规范的问题，显得参与度很高。\n\n会议结束，你完成了论文的两个小节，甚至比在办公室写得更专心，大概是因为没有人来敲门。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 5 },
             ],
           },
           {
             weight: 1,
-            narrative: '第四十分钟，系主任点名让你就"实验室科研产出规范"发表意见，而你正在改一个图的配色。你抬头，看了一眼PPT，即兴说了三句话，逻辑基本连贯。会后有同事走过来问你"你刚才那个观点是认真的吗"，你说"是的"，没有继续解释。',
+            narrative: '第四十分钟，系主任点名让你就"实验室科研产出规范"发表意见，而你正在改一个图的配色。你抬头，看了一眼PPT，即兴说了三句话，逻辑基本连贯。\n\n会后有同事走过来问你"你刚才那个观点是认真的吗"，你说"是的"，没有继续解释。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'lab', stat: 'reputation', delta: -2 },
@@ -279,7 +279,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你全程认真听，做了笔记，参与了讨论，在"其他事项"环节提出了三条具体建议。系主任对其中一条当场表示采纳。散会后你发现，会上随口提到的一个新申报项目的方向，跟你接下来的研究计划高度重合，这个信息值那两个半小时。',
+            narrative: '你全程认真听，做了笔记，参与了讨论，在"其他事项"环节提出了三条具体建议。系主任对其中一条当场表示采纳。\n\n散会后你发现，会上随口提到的一个新申报项目的方向，跟你接下来的研究计划高度重合，这个信息值那两个半小时。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'lab', stat: 'funding', delta: 3 },
@@ -298,7 +298,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了二十分钟写了一封邮件，言辞诚恳，理由是"实验室正在处理一个时间敏感的投稿事项，本人无法脱身，深表歉意，如有重要决议请知悉"。系主任回复："好的，知道了。" 你用省下来的两小时推进了论文，比预期多写了半节。',
+            narrative: '你花了二十分钟写了一封邮件，言辞诚恳，理由是"实验室正在处理一个时间敏感的投稿事项，本人无法脱身，深表歉意，如有重要决议请知悉"。系主任回复："好的，知道了。"\n\n你用省下来的两小时推进了论文，比预期多写了半节。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 10 },
               { type: 'lab', stat: 'reputation', delta: -1 },
@@ -306,7 +306,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你发了请假邮件，理由充分，表达诚恳。但会后有位同事转告你，会上讨论了新学年TA分配方案，你的实验室因为"无代表出席"被分配了最重的一档，三个本科课程，每周六课时。你在邮件里找回了那两个半小时，然后在课程表里还了回去。',
+            narrative: '你发了请假邮件，理由充分，表达诚恳。但会后有位同事转告你，会上讨论了新学年TA分配方案，你的实验室因为"无代表出席"被分配了最重的一档，三个本科课程，每周六课时。\n\n你在邮件里找回了那两个半小时，然后在课程表里还了回去。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -333,7 +333,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '系主任听完这件事，往椅背上靠了一下，说"我来处理"。三天后，财务办公室主动联系你，说表格问题已经解决，35美元将在下一个支付周期到账。两周后，账上多了35美元。你为这件事消耗的时间成本，折合时薪大约是0.4美元。你觉得这没有什么关系，关键是原则。',
+            narrative: '系主任听完这件事，往椅背上靠了一下，说"我来处理"。三天后，财务办公室主动联系你，说表格问题已经解决，35美元将在下一个支付周期到账。\n\n两周后，账上多了35美元。你为这件事消耗的时间成本，折合时薪大约是0.4美元。你觉得这没有什么关系，关键是原则。',
             effects: [
               { type: 'lab', stat: 'funding', delta: 0 },
               { type: 'lab', stat: 'reputation', delta: 1 },
@@ -341,7 +341,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '系主任说会处理，但后来这件事进入了某个他也无法进入的流程迷宫。又过了六周，财务办公室告知，由于该笔申请超过报销有效期（四个月），现已无法处理。共历时六个月，耗费七封邮件、三次电话、两次当面沟通，结果是：35美元丢失。你把这件事写进了一个名为"案例研究"的文档。',
+            narrative: '系主任说会处理，但后来这件事进入了某个他也无法进入的流程迷宫。又过了六周，财务办公室告知，由于该笔申请超过报销有效期（四个月），现已无法处理。\n\n共历时六个月，耗费七封邮件、三次电话、两次当面沟通，结果是：35美元丢失。你把这件事写进了一个名为"案例研究"的文档。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
             ],
@@ -354,7 +354,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你关掉邮件，心想35美元换来了一次对大学财务系统的深度了解，这属于不可复制的田野调查经验。你把这件事从待办事项里删掉，感到了一种轻盈。下次出差你改用信用卡，自己承担，不报销，生活质量提升了30%。',
+            narrative: '你关掉邮件，心想35美元换来了一次对大学财务系统的深度了解，这属于不可复制的田野调查经验。你把这件事从待办事项里删掉，感到了一种轻盈。\n\n下次出差你改用信用卡，自己承担，不报销，生活质量提升了30%。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 8 },
             ],
@@ -367,7 +367,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你联系到了退休主管的前同事，辗转拿到了联系方式，发了一封邮件。对方在三天内回复，表示愿意签字，但需要你邮寄纸质表格。你去打印店打印、盖章、邮寄。两周后收到签好字的表格，重新提交财务。财务告知，B-7(rev.2024)版本已废止，请使用B-7(rev.2025)。',
+            narrative: '你联系到了退休主管的前同事，辗转拿到了联系方式，发了一封邮件。对方在三天内回复，表示愿意签字，但需要你邮寄纸质表格。你去打印店打印、盖章、邮寄。两周后收到签好字的表格，重新提交财务。\n\n财务告知，B-7(rev.2024)版本已废止，请使用B-7(rev.2025)。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -20 },
               { type: 'allStudents', stat: 'happiness', delta: 8 },
@@ -394,7 +394,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在系统里搜了一圈，找到了一间尚未被预定的小会议室，容量刚好够用，投影仪有点旧，遥控器没有电池。你借来了两节五号电池，会议照常进行。有学生说"这间屋子的椅子比以前那间好坐"，这条信息被纳入了未来选房标准。',
+            narrative: '你在系统里搜了一圈，找到了一间尚未被预定的小会议室，容量刚好够用，投影仪有点旧，遥控器没有电池。你借来了两节五号电池，会议照常进行。\n\n有学生说"这间屋子的椅子比以前那间好坐"，这条信息被纳入了未来选房标准。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -3 },
               { type: 'allStudents', stat: 'happiness', delta: 3 },
@@ -402,7 +402,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '系统显示当天所有会议室都已被占用。你们最终在走廊尽头的一个休息区，围着两张拼在一起的咖啡桌开了组会。有人蹲着，有人站着，有人坐在地上。会议效率出奇地高，大概是因为站着开会没有人想拖长。这个姿势获得了一种意外的好评。',
+            narrative: '系统显示当天所有会议室都已被占用。你们最终在走廊尽头的一个休息区，围着两张拼在一起的咖啡桌开了组会。有人蹲着，有人站着，有人坐在地上。\n\n会议效率出奇地高，大概是因为站着开会没有人想拖长。这个姿势获得了一种意外的好评。',
             effects: [
               { type: 'allStudents', stat: 'skills.social', delta: 3 },
               { type: 'lab', stat: 'energy', delta: -5 },
@@ -416,7 +416,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你推开门，说："请问我们能一起参加吗？" 活动组织者愣了一下，然后说"当然"。接下来四十分钟，你和组里的学生一起做了正念呼吸练习、填写了一份"压力来源识别表"，发现前三名分别是：截稿日期、实验结果、和导师开会。活动结束后，两名学生说"这个比组会轻松"，你决定今天取消组会。',
+            narrative: '你推开门，说："请问我们能一起参加吗？" 活动组织者愣了一下，然后说"当然"。接下来四十分钟，你和组里的学生一起做了正念呼吸练习、填写了一份"压力来源识别表"，发现前三名分别是：截稿日期、实验结果、和导师开会。\n\n活动结束后，两名学生说"这个比组会轻松"，你决定今天取消组会。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: 15 },
               { type: 'allStudents', stat: 'favor', delta: 8 },
@@ -431,7 +431,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你调出预定记录，把时间戳截图发给了设施管理，指出你的预定早于对方八天，按照规则应当受到保护。设施管理回复："健康活动属于优先类别，如有异议请联系部门行政。" 你联系了部门行政，得到回复："此类事项由设施管理负责。" 你在走廊里站了二十分钟，最终找了另一间会议室。旁边那盆绿萝没有动。',
+            narrative: '你调出预定记录，把时间戳截图发给了设施管理，指出你的预定早于对方八天，按照规则应当受到保护。设施管理回复："健康活动属于优先类别，如有异议请联系部门行政。" 你联系了部门行政，得到回复："此类事项由设施管理负责。"\n\n你在走廊里站了二十分钟，最终找了另一间会议室。旁边那盆绿萝没有动。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -8 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -466,7 +466,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在组群发了一条消息，说{studentName}拿了ICOP最佳论文，让大家都来祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜，语气里混合着真诚的高兴和一种无声的压力。有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
+            narrative: '你在组群发了一条消息，说{studentName}拿了ICOP最佳论文，让大家都来祝贺。现任学生先是各自在群里点开了消息又没有立刻回，然后陆续发来恭喜，语气里混合着真诚的高兴和一种无声的压力。\n\n有人当天晚上十点多还在实验室。你发现你可能不经意间创造了一个激励，或者一场竞赛。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
@@ -496,7 +496,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发了一个"🎉"，然后放下手机，坐了一会儿。你想起{studentName}第一次进实验室的样子，想起你当时讲loss收敛的时候对方一脸"我懂了"但明显没懂的表情。现在{studentName}去rethink了整个方向，你还在这里讲loss收敛。你把手机再拿起来，发了一条消息："记得请全组吃饭，你请。"',
+            narrative: '你发了一个"🎉"，然后放下手机，坐了一会儿。你想起{studentName}第一次进实验室的样子，想起你当时讲loss收敛的时候对方一脸"我懂了"但明显没懂的表情。\n\n现在{studentName}去rethink了整个方向，你还在这里讲loss收敛。你把手机再拿起来，发了一条消息："记得请全组吃饭，你请。"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 6 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },
@@ -536,7 +536,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '报告很扎实，问题也很扎实，最后一个问题你没有答上来，支吾了片刻，现场布满了令人脚趾抠地的安静气氛。幸好你最终给出了一个部分答案。还是有几个人在记笔记的，你安慰自己。',
+            narrative: '报告很扎实，问题也很扎实，最后一个问题你没有答上来，支吾了片刻，现场布满了令人脚趾抠地的安静气氛。幸好你最终给出了一个部分答案。\n\n还是有几个人在记笔记的，你安慰自己。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -5 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -550,7 +550,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满开发问题的报告。台下有人频繁点头，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。你的名字在接下来两周里，被引用的频率上升了一个可见的幅度。',
+            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满开发问题的报告。台下有人频繁点头，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。\n\n你的名字在接下来两周里，被引用的频率上升了一个可见的幅度。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 10 },
@@ -580,7 +580,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你讲了那次被拒，台下笑了，然后你过渡到正式内容。糟糕的是，时间控制出了问题，那个故事讲了太久，剩下的研究内容只能被狠狠压缩，最后两个实验完全没来得及展示。有人会后说："报告挺有意思，但感觉结尾有点仓促。"',
+            narrative: '你讲了那次被拒，台下笑了，然后你过渡到正式内容。糟糕的是，时间控制出了问题，那个故事讲了太久，剩下的研究内容只能被狠狠压缩，最后两个实验完全没来得及展示。\n\n有人会后说："报告挺有意思，但感觉结尾有点仓促。"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'lab', stat: 'energy', delta: -8 },
@@ -626,7 +626,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你跟{studentName}聊了一个多小时，讲了学术自由、研究方向的自主权、以及那种"你的名字永远附着在你的发现上"的满足感。{studentName}认真听了，最后说"让我再想想"。三天后告诉你决定留下来，语气里有一种刚做完决定的轻盈。半年后，{studentName}的论文进了最佳论文提名——你没有说"我早说了"，但你想到了这句话。',
+            narrative: '你跟{studentName}聊了一个多小时，讲了学术自由、研究方向的自主权、以及那种"你的名字永远附着在你的发现上"的满足感。{studentName}认真听了，最后说"让我再想想"。\n\n三天后告诉你决定留下来，语气里有一种刚做完决定的轻盈。半年后，{studentName}的论文进了最佳论文提名——你没有说"我早说了"，但你想到了这句话。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'randomStudent', stat: 'favor', delta: 12 },
@@ -635,7 +635,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你讲了学术的价值，{studentName}认真听了，然后说："老师，我考虑清楚了，我还是想去。" 你点了点头，说好，祝顺利。{studentName}走后，你坐在椅子上想了一会儿，意识到那一个小时讲的，其实也是说给你自己听的。',
+            narrative: '你讲了学术的价值，{studentName}认真听了，然后说："老师，我考虑清楚了，我还是想去。" 你点了点头，说好，祝顺利。\n\n{studentName}走后，你坐在椅子上想了一会儿，意识到那一个小时讲的，其实也是说给你自己听的。',
             effects: [
               { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: 2 },
@@ -651,7 +651,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你给{studentName}提高了补贴，争取到了一个独立带项目的机会，还承诺第一作者优先权。{studentName}考虑了两天，说决定留下来，原因不全是钱，更多是"在这里我知道我在做什么，那边我不确定"。这是一笔你认为花得值的钱，虽然下个季度经费会有点紧。',
+            narrative: '你给{studentName}提高了补贴，争取到了一个独立带项目的机会，还承诺第一作者优先权。{studentName}考虑了两天，说决定留下来，原因不全是钱，更多是"在这里我知道我在做什么，那边我不确定"。\n\n这是一笔你认为花得值的钱，虽然下个季度经费会有点紧。',
             effects: [
               { type: 'randomStudent', stat: 'favor', delta: 20 },
               { type: 'randomStudent', stat: 'happiness', delta: 12 },
@@ -661,7 +661,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你提高了条件，{studentName}感谢了你的诚意，然后还是去了。大概这件事的结局从那封offer邮件到达的时候就已经定了，你们两个只是把道别仪式拉长了一点。你把那10万额度放回了经费计划里，调整了研究方向，继续往前。',
+            narrative: '你提高了条件，{studentName}感谢了你的诚意，然后还是去了。大概这件事的结局从那封offer邮件到达的时候就已经定了，你们两个只是把道别仪式拉长了一点。\n\n你把那10万额度放回了经费计划里，调整了研究方向，继续往前。',
             effects: [
               { type: 'leaveStudent' },
               { type: 'randomStudent', stat: 'favor', delta: 10 },
@@ -694,7 +694,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你把那天的日程稍微整理了一下，叮嘱学生正常工作即可，不用刻意表演。记者来了，拍了很多照片，问了一些你没预料到的好问题，比如"你觉得这份工作最难的部分是什么"，你回答得很诚实，说了好一会儿。报道发出来之后，有几个本科生说因为那篇文章决定申请读博。你感到一种你很难命名的情绪，大约是责任感的另一个侧面。',
+            narrative: '你把那天的日程稍微整理了一下，叮嘱学生正常工作即可，不用刻意表演。记者来了，拍了很多照片，问了一些你没预料到的好问题，比如"你觉得这份工作最难的部分是什么"，你回答得很诚实，说了好一会儿。\n\n报道发出来之后，有几个本科生说因为那篇文章决定申请读博。你感到一种你很难命名的情绪，大约是责任感的另一个侧面。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 5 },
@@ -725,7 +725,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '记者到了，恰好是组里气氛最安静的一天，所有人都在单独对着屏幕，午饭是各自在工位解决的外卖，下午你处理了三封行政邮件，没有任何激动人心的事情发生。报道发出来，标题是《AI研究室的日常：比想象中安静得多》，评论里有人说"这篇文章劝退了我读博"，也有人说"这才是我想要的生活"。正好各一半。',
+            narrative: '记者到了，恰好是组里气氛最安静的一天，所有人都在单独对着屏幕，午饭是各自在工位解决的外卖，下午你处理了三封行政邮件，没有任何激动人心的事情发生。\n\n报道发出来，标题是《AI研究室的日常：比想象中安静得多》，评论里有人说"这篇文章劝退了我读博"，也有人说"这才是我想要的生活"。正好各一半。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -2 },
             ],
@@ -738,7 +738,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回复说感谢邀请，目前实验室处于一个关键研究节点，不适合接受外部访问，如有机会未来再合作。记者表示理解，说"期待你们的工作发表"。你把那天的日历清空，把原本要准备的时间花在了论文上，多写了一节，感觉很好。',
+            narrative: '你回复说感谢邀请，目前实验室处于一个关键研究节点，不适合接受外部访问，如有机会未来再合作。记者表示理解，说"期待你们的工作发表"。\n\n你把那天的日历清空，把原本要准备的时间花在了论文上，多写了一节，感觉很好。',
             effects: [
               { type: 'lab', stat: 'energy', delta: 8 },
               { type: 'allStudents', stat: 'happiness', delta: 3 },
@@ -769,7 +769,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了三天如实填写了每一项，包括两个未完成的目标，每个后面都附了详细的解释：领域进展导致假设失效，方向调整后的新成果等。评审委员会的反馈是："材料诚实，方向调整有充分学术理由，实际成果超出预期，建议续期。" 你把那份评审意见存进了一个单独的文件夹，里面目前只有这一个文件。',
+            narrative: '你花了三天如实填写了每一项，包括两个未完成的目标，每个后面都附了详细的解释：领域进展导致假设失效，方向调整后的新成果等。评审委员会的反馈是："材料诚实，方向调整有充分学术理由，实际成果超出预期，建议续期。"\n\n你把那份评审意见存进了一个单独的文件夹，里面目前只有这一个文件。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 8 },
               { type: 'lab', stat: 'funding', delta: 15 },
@@ -777,7 +777,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你如实填写，评审委员会对两个未完成事项提出了书面质疑，要求你在答辩时作出解释。你准备了二十页PPT，解释得清晰、有理、有数据支撑。委员会最终批了，但整个过程比直接成功多花了三周，消耗了你本来打算用来写新论文的时间。诚实的代价有时候是效率。',
+            narrative: '你如实填写，评审委员会对两个未完成事项提出了书面质疑，要求你在答辩时作出解释。你准备了二十页PPT，解释得清晰、有理、有数据支撑。委员会最终批了，但整个过程比直接成功多花了三周，消耗了你本来打算用来写新论文的时间。\n\n诚实的代价有时候是效率。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'lab', stat: 'funding', delta: 12 },
@@ -792,7 +792,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你写道："原计划目标在实施过程中经过系统性评估，依据最新领域进展进行了方向迭代，最终产出了更具前沿价值的研究成果，包括……"后面跟了你最好的三篇论文列表。这是完全真实的，只是叙事策略选择了乐观视角。续期批了，速度比预期快了两周。',
+            narrative: '你写道："原计划目标在实施过程中经过系统性评估，依据最新领域进展进行了方向迭代，最终产出了更具前沿价值的研究成果，包括……"后面跟了你最好的三篇论文列表。这是完全真实的，只是叙事策略选择了乐观视角。\n\n续期批了，速度比预期快了两周。',
             effects: [
               { type: 'lab', stat: 'funding', delta: 15 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -814,7 +814,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你发给了一位共事多年的同事，附言是"帮我看看这几个地方怎么写比较好"。对方回来的稿子改了六个地方，每一处都比你的原版更准确也更合理——不是在帮你掩盖什么，而是帮你把真实的事情说清楚了。你修改后提交，评审顺利通过，附了一条"材料完整清晰"的评语。外部视角值那顿饭的钱。',
+            narrative: '你发给了一位共事多年的同事，附言是"帮我看看这几个地方怎么写比较好"。对方回来的稿子改了六个地方，每一处都比你的原版更准确也更合理——不是在帮你掩盖什么，而是帮你把真实的事情说清楚了。\n\n你修改后提交，评审顺利通过，附了一条"材料完整清晰"的评语。外部视角值那顿饭的钱。',
             effects: [
               { type: 'lab', stat: 'funding', delta: 15 },
               { type: 'lab', stat: 'reputation', delta: 6 },
