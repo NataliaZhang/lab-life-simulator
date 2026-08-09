@@ -5,3 +5,4 @@ design_notes.md
 .venv-imgproc/
 .DS_Store
 dist/
+node_modules/
