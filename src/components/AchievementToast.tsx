@@ -7,10 +7,10 @@ interface Props {
 }
 
 // Top-center banner announcing a newly unlocked achievement.
-// Stays for 4 seconds, then calls onDone so the caller can advance its queue.
+// Stays for 2.5 seconds, then calls onDone so the caller can advance its queue.
 export function AchievementToast({ achievementId, onDone }: Props) {
   useEffect(() => {
-    const timer = setTimeout(onDone, 4000);
+    const timer = setTimeout(onDone, 2500);
     return () => clearTimeout(timer);
   }, [achievementId, onDone]);
 

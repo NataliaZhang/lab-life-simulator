@@ -11,13 +11,13 @@
  *
  * 2. 时间耗尽结局 — 第6年12月结束后，由 monthlyUpdate 按条件选择一个注入
  *    判定优先级从高到低：
- *    - ending_time_famous        : 声望>200 且 已毕业>3           → phaseChange: 'won'
+ *    - ending_time_famous        : 声望>260 且 已毕业>4           → phaseChange: 'won'
  *    - ending_time_wealthy       : 仅当玩家在 industry_invite 事件中选择"接受" → phaseChange: 'won'
- *    - ending_time_great         : 声望>165 且 已毕业>2           → phaseChange: 'won'
- *    - ending_time_steady        : 声望>130  且 已毕业≥1           → phaseChange: 'won'
- *    - ending_be_no_successor    : 声望>130 且 完成项目≥4 且 毕业=0  → phaseChange: 'gameover' (BE)
- *    - ending_be_rep_low         : 声望<100                       → phaseChange: 'gameover' (BE)
- *    - ending_be_proj_insufficient: 完成项目<3                   → phaseChange: 'gameover' (BE)
+ *    - ending_time_great         : 声望>220 且 已毕业>3           → phaseChange: 'won'
+ *    - ending_time_steady        : 声望>160  且 已毕业≥2           → phaseChange: 'won'
+ *    - ending_be_no_successor    : 声望>160 且 完成项目≥5 且 毕业=0  → phaseChange: 'gameover' (BE)
+ *    - ending_be_rep_low         : 声望<120                       → phaseChange: 'gameover' (BE)
+ *    - ending_be_proj_insufficient: 完成项目<5                   → phaseChange: 'gameover' (BE)
  *    - ending_time_struggle      : 其余情况                       → phaseChange: 'won'
  *
  * 触发前，monthlyUpdate 会先向 storyLog 写入一条汇总系统日志，

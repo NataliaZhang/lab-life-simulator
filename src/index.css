@@ -2535,7 +2535,7 @@ html, body {
   padding: 10px 20px;
   pointer-events: none;
   white-space: nowrap;
-  animation: achievement-toast-inout 4s ease forwards;
+  animation: achievement-toast-inout 2.5s ease forwards;
 }
 
 .achievement-toast__label {

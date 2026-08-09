@@ -44,6 +44,10 @@ export function checkAchievementUnlocks(
     unlocked.push('lab_decorated');
   }
 
+  if (eventId === 'new_year_gift' && optionId.startsWith('gift_')) {
+    unlocked.push('first_gift');
+  }
+
   return unlocked;
 }
 

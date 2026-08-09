@@ -100,6 +100,14 @@ export const achievements: AchievementDefinition[] = [
     title: '守得云开见月明',
     criteria: '成功通过 tenure',
   },
+
+  // ── 日常互动 ──────────────────────────────────────────────────────────────
+  {
+    id: 'first_gift',
+    image: 'img/students/illustration/gift_box.jpg',
+    title: '新年快乐',
+    criteria: '给学生送新年礼物',
+  },
 ];
 
 export const achievementById: Record<string, AchievementDefinition> =

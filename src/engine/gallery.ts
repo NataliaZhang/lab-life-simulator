@@ -4,6 +4,8 @@
  * Intentionally independent from the per-run game save.
  */
 
+import { allCandidates } from '../data/studentPool';
+
 const GALLERY_KEY = 'lab-life-simulator-gallery';
 const GALLERY_VERSION = 1;
 
@@ -33,6 +35,23 @@ function emptyGallery(): GalleryData {
   };
 }
 
+// Players who reached a student's max favor before the achievement system existed
+// already have it recorded in studentsMaxFavor but never got the matching
+// achievementsUnlocked entry. Derive those (and max_favor_all, if all 10 are covered)
+// on every load so the Gallery shows them as unlocked retroactively. This runs on
+// load rather than as a live trigger, so it never queues a toast banner.
+function backfillMaxFavorAchievements(data: GalleryData): GalleryData {
+  const unlocked = new Set(data.achievementsUnlocked);
+  for (const studentId of data.studentsMaxFavor) {
+    unlocked.add(`max_favor_${studentId}`);
+  }
+  if (allCandidates.every(c => unlocked.has(`max_favor_${c.id}`))) {
+    unlocked.add('max_favor_all');
+  }
+  if (unlocked.size === data.achievementsUnlocked.length) return data;
+  return { ...data, achievementsUnlocked: [...unlocked] };
+}
+
 export function loadGallery(): GalleryData {
   try {
     const raw = localStorage.getItem(GALLERY_KEY);
@@ -47,14 +66,14 @@ export function loadGallery(): GalleryData {
       achievementsUnlocked?: string[];
     };
     if (parsed.version !== GALLERY_VERSION) return emptyGallery();
-    return {
+    return backfillMaxFavorAchievements({
       endingsSeen: parsed.endingsSeen ?? [],
       studentsSeen: parsed.studentsSeen ?? [],
       studentsMaxFavor: parsed.studentsMaxFavor ?? [],
       projectsStarted: parsed.projectsStarted ?? [],
       projectsCompleted: parsed.projectsCompleted ?? [],
       achievementsUnlocked: parsed.achievementsUnlocked ?? [],
-    };
+    });
   } catch {
     return emptyGallery();
   }

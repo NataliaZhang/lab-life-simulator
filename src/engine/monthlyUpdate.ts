@@ -251,12 +251,12 @@ function pickTimeEnding(state: GameState): string {
   // Player explicitly chose industry path via industry_invite event
   if (state.chosenOptionIds.includes('industry_invite_accept')) return 'ending_time_wealthy';
 
-  if (rep > 200 && graduated > 3)                   return 'ending_time_famous';
-  if (rep > 165 && graduated > 2)                   return 'ending_time_great';
-  if (rep > 130 && graduated >= 1)                  return 'ending_time_steady';
-  if (rep > 130 && completed >= 4 && graduated === 0) return 'ending_be_no_successor';
-  if (rep < 100)                                    return 'ending_be_rep_low';
-  if (completed < 3)                                return 'ending_be_proj_insufficient';
+  if (rep > 260 && graduated > 4)                   return 'ending_time_famous';
+  if (rep > 220 && graduated > 3)                   return 'ending_time_great';
+  if (rep > 160 && graduated >= 2)                  return 'ending_time_steady';
+  if (rep > 160 && completed >= 5 && graduated === 0) return 'ending_be_no_successor';
+  if (rep < 120)                                    return 'ending_be_rep_low';
+  if (completed < 5)                                return 'ending_be_proj_insufficient';
   return 'ending_time_struggle';
 }
 
