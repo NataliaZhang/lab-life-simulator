@@ -69,5 +69,23 @@ export function useGallery() {
     });
   }, []);
 
-  return { gallery, recordEnding, recordStudent, recordMaxFavor, recordProjectStarted, recordProjectCompleted };
+  // Record an achievement the first time it unlocks (deduplicates by achievementId).
+  const recordAchievement = useCallback((achievementId: string) => {
+    setGallery(prev => {
+      if (prev.achievementsUnlocked.includes(achievementId)) return prev;
+      const next = { ...prev, achievementsUnlocked: [...prev.achievementsUnlocked, achievementId] };
+      saveGallery(next);
+      return next;
+    });
+  }, []);
+
+  return {
+    gallery,
+    recordEnding,
+    recordStudent,
+    recordMaxFavor,
+    recordProjectStarted,
+    recordProjectCompleted,
+    recordAchievement,
+  };
 }

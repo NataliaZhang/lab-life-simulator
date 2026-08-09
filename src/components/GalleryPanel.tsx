@@ -3,9 +3,12 @@ import type { GalleryData } from '../engine/gallery';
 import { allCandidates } from '../data/studentPool';
 import { portraitUrl, coloredPortraitUrl, silhouettePortraitUrl } from '../data/studentArt';
 import { projectById } from '../data/projects';
+import { achievements } from '../data/achievements';
 import { audioManager } from '../engine/audioManager';
 
-type GalleryTab = 'endings' | 'characters' | 'projects';
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+type GalleryTab = 'endings' | 'characters' | 'projects' | 'achievements';
 
 interface Props {
   gallery: GalleryData;
@@ -42,6 +45,12 @@ export function GalleryPanel({ gallery, onClose }: Props) {
           >
             项目
           </button>
+          <button
+            className={`gallery-tab-btn${tab === 'achievements' ? ' gallery-tab-btn--active' : ''}`}
+            onClick={() => switchTab('achievements')}
+          >
+            成就
+          </button>
         </div>
         <button
           className="btn btn--ghost btn--sm gallery-panel__close"
@@ -56,6 +65,7 @@ export function GalleryPanel({ gallery, onClose }: Props) {
         {tab === 'endings' && <EndingsTab gallery={gallery} />}
         {tab === 'characters' && <CharactersTab gallery={gallery} />}
         {tab === 'projects' && <ProjectsTab gallery={gallery} />}
+        {tab === 'achievements' && <AchievementsTab gallery={gallery} />}
       </div>
     </div>
   );
@@ -263,6 +273,68 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
               );
             })}
           </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ─── Achievements tab ──────────────────────────────────────────────────────
+
+function AchievementsTab({ gallery }: { gallery: GalleryData }) {
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
+  const unlockedCount = achievements.filter(a => gallery.achievementsUnlocked.includes(a.id)).length;
+
+  return (
+    <>
+      <p className="gallery-section-stat">
+        已解锁 <span className="gallery-section-stat__num">{unlockedCount}</span> / {achievements.length} 个成就
+      </p>
+      <div className="gallery-achievements-list">
+        {achievements.map(a => {
+          const unlocked = gallery.achievementsUnlocked.includes(a.id);
+          return (
+            <div
+              key={a.id}
+              className={`gallery-achievement-card${unlocked ? '' : ' gallery-achievement-card--locked'}`}
+            >
+              <div
+                className="gallery-achievement-card__image-frame"
+                onClick={() => {
+                  if (!unlocked) return;
+                  audioManager.playSfx('click');
+                  setEnlargedImage(`${BASE}/${a.image}`);
+                }}
+                style={unlocked ? { cursor: 'pointer' } : undefined}
+              >
+                {unlocked ? (
+                  <img
+                    className="gallery-achievement-card__image"
+                    src={`${BASE}/${a.image}`}
+                    alt={a.title}
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
+                ) : (
+                  <div className="gallery-achievement-card__image-placeholder">？</div>
+                )}
+              </div>
+              <div className="gallery-achievement-card__body">
+                <div className="gallery-achievement-card__title">
+                  {unlocked ? a.title : '？？？'}
+                </div>
+                <div className="gallery-achievement-card__criteria">{a.criteria}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {enlargedImage && (
+        <div
+          className="achievement-image-overlay"
+          onClick={() => setEnlargedImage(null)}
+        >
+          <img className="achievement-image-overlay__img" src={enlargedImage} alt="" />
         </div>
       )}
     </>

@@ -11,7 +11,9 @@ import { AdmissionModal } from './components/AdmissionModal';
 import { StudentList } from './components/StudentList';
 import { ProjectsPanel } from './components/ProjectsPanel';
 import { GalleryPanel } from './components/GalleryPanel';
+import { AchievementToast } from './components/AchievementToast';
 import { events } from './data/events';
+import { checkAchievementUnlocks, checkEndingAchievements } from './engine/achievements';
 
 // ─── Audio controls panel ─────────────────────────────────────────────────────
 
@@ -107,11 +109,34 @@ export function App() {
     closeModal,
   } = useGameEngine();
 
-  const { gallery, recordEnding, recordStudent, recordMaxFavor, recordProjectStarted, recordProjectCompleted } = useGallery();
+  const {
+    gallery,
+    recordEnding,
+    recordStudent,
+    recordMaxFavor,
+    recordProjectStarted,
+    recordProjectCompleted,
+    recordAchievement,
+  } = useGallery();
 
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
   const [projectPanelOpen, setProjectPanelOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+
+  // Queue of newly unlocked achievement IDs pending their top-of-screen banner.
+  // Diffing against gallery.achievementsUnlocked (rather than enqueuing inline where it's
+  // recorded) keeps this correct even under React StrictMode's double-invoked updaters,
+  // and naturally skips achievements already unlocked in a prior run/session.
+  const [achievementToastQueue, setAchievementToastQueue] = useState<string[]>([]);
+  const prevAchievementsRef = useRef<string[]>(gallery.achievementsUnlocked);
+  useEffect(() => {
+    const prev = prevAchievementsRef.current;
+    const newlyUnlocked = gallery.achievementsUnlocked.filter(id => !prev.includes(id));
+    if (newlyUnlocked.length > 0) {
+      setAchievementToastQueue(q => [...q, ...newlyUnlocked]);
+    }
+    prevAchievementsRef.current = gallery.achievementsUnlocked;
+  }, [gallery.achievementsUnlocked]);
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
@@ -161,6 +186,13 @@ export function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameOver, state.endingEventId]);
 
+  // Unlock the tenure achievement on transition into any winning ending.
+  // recordAchievement is stable and self-dedupes, so re-running while phase stays 'won' is harmless.
+  useEffect(() => {
+    checkEndingAchievements(state.phase).forEach(recordAchievement);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.phase]);
+
   // Wrap dispatch to intercept START_PROJECT for gallery tracking.
   const galleryDispatch: typeof dispatch = useCallback((action) => {
     if (action.type === 'START_PROJECT') {
@@ -189,12 +221,20 @@ export function App() {
       const projectId = raw.endsWith('_pi') ? raw.slice(0, -3) : raw;
       recordProjectCompleted(projectId);
     }
+    checkAchievementUnlocks(eventId, optionId, gallery).forEach(recordAchievement);
   };
 
   const isInitialScreen = state.storyLog.length === 0;
 
   return (
     <div className="app">
+      {achievementToastQueue.length > 0 && (
+        <AchievementToast
+          key={achievementToastQueue[0]}
+          achievementId={achievementToastQueue[0]}
+          onDone={() => setAchievementToastQueue(q => q.slice(1))}
+        />
+      )}
       {!isInitialScreen && (
         <StatusBar
           state={state}

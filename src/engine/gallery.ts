@@ -19,6 +19,7 @@ export interface GalleryData {
   studentsMaxFavor: string[];  // IDs of students whose max_favor event has fired
   projectsStarted: string[];   // project IDs ever started (across all runs)
   projectsCompleted: string[]; // project IDs ever completed (across all runs)
+  achievementsUnlocked: string[]; // achievement IDs ever unlocked (across all runs)
 }
 
 function emptyGallery(): GalleryData {
@@ -28,6 +29,7 @@ function emptyGallery(): GalleryData {
     studentsMaxFavor: [],
     projectsStarted: [],
     projectsCompleted: [],
+    achievementsUnlocked: [],
   };
 }
 
@@ -42,6 +44,7 @@ export function loadGallery(): GalleryData {
       studentsMaxFavor?: string[];
       projectsStarted?: string[];
       projectsCompleted?: string[];
+      achievementsUnlocked?: string[];
     };
     if (parsed.version !== GALLERY_VERSION) return emptyGallery();
     return {
@@ -50,6 +53,7 @@ export function loadGallery(): GalleryData {
       studentsMaxFavor: parsed.studentsMaxFavor ?? [],
       projectsStarted: parsed.projectsStarted ?? [],
       projectsCompleted: parsed.projectsCompleted ?? [],
+      achievementsUnlocked: parsed.achievementsUnlocked ?? [],
     };
   } catch {
     return emptyGallery();
