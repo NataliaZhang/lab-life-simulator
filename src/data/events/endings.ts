@@ -35,7 +35,7 @@ export const endingEvents: Record<string, GameEvent> = {
     title: '经费耗尽',
     tagline: '若干年后，有人的致谢里还会提到这里。',
     description: [
-      '账户余额归零。不是比喻，实验室的银行账户上真的是0.00元。',
+      '账户余额归零。这不是什么玩笑，实验室的银行账户上真的是0.00元。',
       '学院财务办公室发来了一封措辞客气但含义明确的邮件，询问实验室后续运营规划。你攥着鼠标，盯着这行字看了很久。',
       '你想起最初拿到第一笔启动资金时的感觉，那时候觉得够用好久。',
     ],
@@ -100,7 +100,7 @@ export const endingEvents: Record<string, GameEvent> = {
             { type: 'lab', stat: 'energy', delta: 20 },
             { type: 'lab', stat: 'reputation', delta: 5 },
           ],
-          phaseChange: 'won',
+          phaseChange: 'gameover',
         }],
       },
       {
@@ -112,7 +112,7 @@ export const endingEvents: Record<string, GameEvent> = {
           effects: [
             { type: 'lab', stat: 'reputation', delta: 12 },
           ],
-          phaseChange: 'won',
+          phaseChange: 'gameover',
         }],
       },
     ],

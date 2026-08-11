@@ -285,13 +285,20 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
   const unlockedCount = achievements.filter(a => gallery.achievementsUnlocked.includes(a.id)).length;
 
+  // Unlocked achievements first, then locked — stable within each group (data-file order).
+  const orderedAchievements = [...achievements].sort((a, b) => {
+    const aUnlocked = gallery.achievementsUnlocked.includes(a.id);
+    const bUnlocked = gallery.achievementsUnlocked.includes(b.id);
+    return aUnlocked === bUnlocked ? 0 : aUnlocked ? -1 : 1;
+  });
+
   return (
     <>
       <p className="gallery-section-stat">
         已解锁 <span className="gallery-section-stat__num">{unlockedCount}</span> / {achievements.length} 个成就
       </p>
       <div className="gallery-achievements-list">
-        {achievements.map(a => {
+        {orderedAchievements.map(a => {
           const unlocked = gallery.achievementsUnlocked.includes(a.id);
           return (
             <div
@@ -315,14 +322,14 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
                     onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 ) : (
-                  <div className="gallery-achievement-card__image-placeholder">？</div>
+                  <div className="gallery-achievement-card__image-placeholder">🔒</div>
                 )}
               </div>
               <div className="gallery-achievement-card__body">
-                <div className="gallery-achievement-card__title">
-                  {unlocked ? a.title : '？？？'}
+                <div className={`gallery-achievement-card__title${unlocked ? '' : ' gallery-achievement-card__title--locked'}`}>
+                  {a.title}
                 </div>
-                <div className="gallery-achievement-card__criteria">{a.criteria}</div>
+                <div className="gallery-achievement-card__criteria">{unlocked ? a.criteria : '？'}</div>
               </div>
             </div>
           );

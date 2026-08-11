@@ -186,12 +186,12 @@ export function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isGameOver, state.endingEventId]);
 
-  // Unlock the tenure achievement on transition into any winning ending.
-  // recordAchievement is stable and self-dedupes, so re-running while phase stays 'won' is harmless.
+  // Unlock the tenure/bad-ending achievements on transition into any winning/gameover ending.
+  // recordAchievement is stable and self-dedupes, so re-running while phase stays put is harmless.
   useEffect(() => {
-    checkEndingAchievements(state.phase).forEach(recordAchievement);
+    checkEndingAchievements(state.phase, state.endingEventId).forEach(recordAchievement);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.phase]);
+  }, [state.phase, state.endingEventId]);
 
   // Wrap dispatch to intercept START_PROJECT for gallery tracking.
   const galleryDispatch: typeof dispatch = useCallback((action) => {

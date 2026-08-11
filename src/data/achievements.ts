@@ -100,6 +100,18 @@ export const achievements: AchievementDefinition[] = [
     title: '守得云开见月明',
     criteria: '成功通过 tenure',
   },
+  {
+    id: 'bad_ending',
+    image: 'img/students/illustration/bad_ending.jpg',
+    title: '未竟之事',
+    criteria: '触发任意失败结局',
+  },
+  {
+    id: 'ending_time_wealthy',
+    image: 'img/students/illustration/industry.jpg',
+    title: '另一条道路',
+    criteria: '触发进军业界结局',
+  },
 
   // ── 日常互动 ──────────────────────────────────────────────────────────────
   {
@@ -107,6 +119,12 @@ export const achievements: AchievementDefinition[] = [
     image: 'img/students/illustration/gift_box.jpg',
     title: '新年快乐',
     criteria: '给学生送新年礼物',
+  },
+  {
+    id: 'pi_fifth_burnout',
+    image: 'img/students/illustration/hospital.PNG',
+    title: '偶尔断电',
+    criteria: '同一局内精力耗尽5次',
   },
 ];
 

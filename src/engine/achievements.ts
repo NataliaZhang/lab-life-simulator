@@ -48,11 +48,29 @@ export function checkAchievementUnlocks(
     unlocked.push('first_gift');
   }
 
+  // Fires regardless of which option is chosen — the achievement is about reaching
+  // this event (5 energy-depletion collapses in one run), not about the choice made.
+  if (eventId === 'pi_fifth_burnout') {
+    unlocked.push(eventId);
+  }
+
+  // Fires regardless of which option is chosen — reaching the industry-offer ending
+  // at all is what matters, not whether the player reminisces about academia after.
+  if (eventId === 'ending_time_wealthy') {
+    unlocked.push(eventId);
+  }
+
   return unlocked;
 }
 
-// Any ending that resolves to a "win" (as opposed to a gameover/BE ending)
-// unlocks the tenure achievement, regardless of which specific ending it was.
-export function checkEndingAchievements(phase: GamePhase): string[] {
-  return phase === 'won' ? ['tenure_granted'] : [];
+// Any ending that resolves to a "win" unlocks the tenure achievement — except
+// ending_time_wealthy, which phaseChanges to 'won' too but means the player left
+// for industry before ever going through tenure review, so it doesn't count as
+// having passed tenure (it has its own achievement instead, see above).
+// Any ending that resolves to "gameover" (funding crisis, all-students-left,
+// burnout, or a failed tenure review) unlocks the bad-ending achievement.
+export function checkEndingAchievements(phase: GamePhase, endingEventId: string | null): string[] {
+  if (phase === 'won') return endingEventId === 'ending_time_wealthy' ? [] : ['tenure_granted'];
+  if (phase === 'gameover') return ['bad_ending'];
+  return [];
 }
