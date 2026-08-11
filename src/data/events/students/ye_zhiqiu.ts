@@ -391,7 +391,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
     title: 'QED',
     description: [
       '这个收敛性证明卡了将近两个学期。之前两个人尝试过，在同一个地方撞墙两次，之后大家心照不宣地把它归入"战略性搁置"文件夹。',
-      '某个周五下午，叶知秋发来一条消息，附件是手写扫描件，二十七页，字迹工整，每步都有前提标注，推导链完整无断点。',
+      '某个周五下午，叶知秋发来一条消息，附件是手写扫描件，字迹工整，每步都有前提标注，推导链完整无断点。',
       '最后一行写着"QED"，旁边用圆珠笔画了一个小勾，低调得像是在核对待办事项，随手划掉了一件本来不可能完成的事。',
     ],
     prompt: '你怎么回应这个突破？',
@@ -407,8 +407,8 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '叶知秋花了几天把手写稿转成LaTeX，排版一丝不苟，每个符号都和手稿对应。投稿前她要求安排两位独立验证者逐步核对，这是她自己提出的要求。\n\n论文出来后一个月内收到三封同行邮件，都说他们也在这个问题上卡过很久。叶知秋对此的评价是："那说明证明是有非平凡价值的。"\n\n期刊编辑随后发来补充邮件，说该期设有一个小额"杰出贡献"奖励。叶知秋转发给你，正文只有一行："是否接受。"',
             effects: [
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 15 },
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 12 },
+              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 5 },
+              { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 10 },
               { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 15 },
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'lab', stat: 'funding', delta: 2 },
@@ -424,9 +424,9 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '"这是正确的做法，"叶知秋说，"我自己核对了很多遍，但独立验证是必要的协议。"你找了组里理论最强的人把证明过了一遍，两天，结论：正确，零漏洞。\n\n那位同学私下告诉你："第十四步那个构造挺妙，我没想到可以那么拼。"叶知秋听到反馈后，在笔记本上记了一行："外部评价：第十四步构造——妙。"',
             effects: [
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 12 },
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 10 },
-              { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 12 },
+              { type: 'student', studentId: 'ye_zhiqiu', stat: 'favor', delta: 10 },
+              { type: 'student', studentId: 'ye_zhiqiu', stat: 'happiness', delta: 6 },
+              { type: 'student', studentId: 'ye_zhiqiu', stat: 'projectProgress', delta: 5 },
               { type: 'lab', stat: 'reputation', delta: 4 },
             ],
           },

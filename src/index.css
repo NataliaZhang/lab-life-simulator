@@ -37,6 +37,7 @@
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'Consolas', monospace;
+  --font-handwriting: 'LXGWWenKai', var(--font-serif);
 
   --radius: 6px;
   --radius-lg: 10px;
@@ -750,7 +751,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 300; /* must stack above mobile-only fixed panels (student-panel: 150, status-bar: 200) */
   padding: 16px;
   backdrop-filter: blur(2px);
 }
@@ -912,9 +913,14 @@ html, body {
   border-color: transparent;
 }
 
-.btn--ghost:hover {
+.btn--ghost:hover:not(:disabled) {
   color: var(--color-text);
   background: var(--color-border);
+}
+
+.btn--ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn--sm {
@@ -1099,6 +1105,33 @@ html, body {
   padding: 20px 28px;
   display: flex;
   justify-content: center;
+}
+
+/* ─── Confirm Dialog ────────────────────────────────────────────────────────── */
+
+.confirm-dialog {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 360px;
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.confirm-dialog__message {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 /* ─── Admission Modal ───────────────────────────────────────────────────────── */
@@ -1809,9 +1842,10 @@ html, body {
 }
 
 .gallery-char-card__farewell {
-  font-family: var(--font-serif);
-  font-size: 15px;
-  line-height: 1.9;
+  font-family: var(--font-handwriting);
+  font-size: 17px;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
   color: var(--color-text);
   margin: 0 0 0.6em;
 }

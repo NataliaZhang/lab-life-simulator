@@ -8,6 +8,7 @@ import { StoryLog } from './components/StoryLog';
 import { EventModal } from './components/EventModal';
 import { EndingModal } from './components/EndingModal';
 import { AdmissionModal } from './components/AdmissionModal';
+import { ConfirmDialog } from './components/ConfirmDialog';
 import { StudentList } from './components/StudentList';
 import { ProjectsPanel } from './components/ProjectsPanel';
 import { GalleryPanel } from './components/GalleryPanel';
@@ -122,6 +123,7 @@ export function App() {
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
   const [projectPanelOpen, setProjectPanelOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Queue of newly unlocked achievement IDs pending their top-of-screen banner.
   // Diffing against gallery.achievementsUnlocked (rather than enqueuing inline where it's
@@ -380,10 +382,28 @@ export function App() {
           </button>
           <AudioControls />
         </div>
-        <button className="btn btn--ghost btn--sm" onClick={deleteSaveAndRestart}>
+        <button
+          className="btn btn--ghost btn--sm"
+          onClick={() => { audioManager.playSfx('click'); setShowResetConfirm(true); }}
+          disabled={isInitialScreen}
+        >
           重置游戏
         </button>
       </footer>
+
+      {showResetConfirm && (
+        <ConfirmDialog
+          message="确定要重置游戏吗？当前进度将被清除，且无法恢复。"
+          confirmLabel="重置"
+          cancelLabel="取消"
+          onConfirm={() => {
+            audioManager.playSfx('click');
+            setShowResetConfirm(false);
+            deleteSaveAndRestart();
+          }}
+          onCancel={() => { audioManager.playSfx('click'); setShowResetConfirm(false); }}
+        />
+      )}
 
       {galleryOpen && (
         <GalleryPanel
