@@ -542,7 +542,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
 
   mwx_hyperparameter_ritual: {
     id: 'mwx_hyperparameter_ritual',
-    title: '莫问玄：调参靠直觉，直觉靠天象',
+    title: '调参靠直觉，直觉靠天象',
     description: [
       '莫问玄的实验跑出来了，结果比组里任何人都好。你让他汇报调参过程。他说："学习率0.000137，batch size 88，dropout 0.23。"',
       '"为什么这几个值？"',
@@ -586,7 +586,7 @@ export const moWenxuanEvents: Record<string, GameEvent> = {
 
   mwx_agent_civilization: {
     id: 'mwx_agent_civilization',
-    title: '莫问玄：他把AI agents写成了文明史',
+    title: '他把AI agents写成了文明史',
     description: [
       '莫问玄交来了一份相关工作综述，你打开一看，前三页是正常的文献梳理，第四页开始画风一变：他开始用"部族"、"迁徙"、"文明演替"等词描述不同类型agent的发展历史，还有一张配图，画的是agent技术演进图，右下角的时间轴标注是"元年"到"第五纪"。',
       '你问他为什么这样写。',

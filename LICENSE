@@ -1,0 +1,221 @@
+LAB LIFE SIMULATOR NON-COMMERCIAL LICENSE
+Version 1.0 — October 2026
+
+Copyright © 2026 Natalia Zhang.
+All rights reserved.
+
+This license governs the use of Lab Life Simulator, including its source code and original game content, except for third-party components that are explicitly provided under separate licenses.
+
+By copying, modifying, accessing, or otherwise using materials from this repository beyond ordinary gameplay, you agree to the terms of this license.
+
+⸻
+
+1. DEFINITIONS
+
+“Project” means Lab Life Simulator as a whole, including its source code, game logic, configuration, documentation, original content, and assets distributed as part of this repository.
+
+“Source Code” means the software source code created for Lab Life Simulator, excluding Third-Party Materials.
+
+“Game Content” means original creative material associated with Lab Life Simulator, including, where applicable, characters, character designs, names created specifically for the game, narrative text, dialogue, events, storylines, settings, worldbuilding, illustrations, artwork, CGs, icons, interface artwork, and other original audiovisual or literary material.
+
+“Non-Commercial Use” means use primarily intended for personal, educational, academic, research, experimental, or other purposes that are not primarily intended for commercial advantage or monetary compensation.
+
+“Commercial Use” means use primarily intended for commercial advantage, business benefit, revenue generation, monetary compensation, advertising revenue, paid access, commercial distribution, or incorporation into a commercial product or service.
+
+“Third-Party Materials” means software, fonts, libraries, assets, or other materials included in or used by the Project whose rights are owned by third parties and which may be subject to separate license terms.
+
+“Copyright Holder” means Natalia Zhang.
+
+⸻
+
+2. OWNERSHIP
+
+Except for Third-Party Materials and to the extent permitted by applicable law, all rights, title, and interest in the original portions of the Project remain with the Copyright Holder.
+
+Making the Project publicly accessible, publishing its source code, or allowing free access to the game does not constitute a transfer, abandonment, or waiver of copyright or other intellectual property rights.
+
+No ownership rights are transferred under this license.
+
+⸻
+
+3. PERMITTED PERSONAL AND EDUCATIONAL USE
+
+Subject to the terms of this license, you may:
+
+a. access and play Lab Life Simulator for personal and non-commercial purposes;
+
+b. view, inspect, and study the Source Code;
+
+c. download or clone the repository for personal, educational, academic, research, or experimental purposes;
+
+d. modify the Source Code for your own personal, educational, academic, research, or experimental use;
+
+e. create private forks or working copies of the Project for such purposes;
+
+f. create public forks for legitimate non-commercial development, study, research, or contribution purposes, provided that the fork clearly identifies Lab Life Simulator as the original project, preserves applicable copyright and license notices, and complies with all other terms of this license;
+
+g. share links to the official game, repository, or other pages published by the Copyright Holder; and
+
+h. discuss, review, critique, teach from, or demonstrate the Project to the extent permitted by this license and applicable law.
+
+These permissions are granted without charge.
+
+⸻
+
+4. REDISTRIBUTION AND PUBLIC COPIES
+
+Permission to access, study, fork, or modify the Project does not grant an unrestricted right to redistribute the complete game.
+
+You may not, without prior written permission from the Copyright Holder:
+
+a. republish or redistribute the Project, or a substantially complete copy of it, as an independent game;
+
+b. host or deploy a substantially complete copy of the game primarily for public consumption under another name, identity, or branding;
+
+c. distribute a lightly modified, rebranded, or substantially equivalent version of Lab Life Simulator as your own game;
+
+d. redistribute substantial collections of the Game Content separately from the Project; or
+
+e. represent a fork, adaptation, or derivative project as the official Lab Life Simulator.
+
+This section does not prohibit ordinary public source-code forks made in good faith for non-commercial development, education, research, preservation of modifications, or contribution back to the original Project.
+
+⸻
+
+5. COMMERCIAL USE REQUIRES SEPARATE PERMISSION
+
+Commercial Use of the Project, Source Code, or Game Content is not granted under this license.
+
+Without prior written permission from the Copyright Holder, you may not:
+
+a. sell, license for a fee, rent, or commercially distribute the Project or a derivative version of it;
+
+b. charge users for access to the Project or a substantially derived version of it;
+
+c. monetize a copy, fork, adaptation, or derivative version of the Project through advertising, subscriptions, sponsorships, in-app purchases, donations tied to access or functionality, or other revenue-generating mechanisms;
+
+d. incorporate substantial portions of the Project into a commercial product or paid service;
+
+e. use substantial portions of the Source Code as part of a commercial game or commercial software product;
+
+f. sell, commercially license, or commercially distribute original Game Content;
+
+g. commercially exploit characters, artwork, narrative content, dialogue, illustrations, CGs, or other original assets from the Project; or
+
+h. use the Project primarily to promote, market, or support a commercial product or service.
+
+Commercial rights may be granted separately by the Copyright Holder through a written commercial license or other written agreement.
+
+A commercial license grants only the rights expressly stated in that agreement. Unless an agreement explicitly states otherwise, granting commercial permission does not transfer ownership of the underlying copyright or other intellectual property rights.
+
+⸻
+
+6. GAME CONTENT AND CREATIVE ASSETS
+
+Except where explicitly stated otherwise, this license does not grant a general license to extract, reproduce, redistribute, or create independent derivative works from the Game Content.
+
+In particular, publication of Game Content in a publicly accessible repository does not mean that the Game Content is in the public domain.
+
+The Copyright Holder reserves all rights not expressly granted under this license with respect to original characters, character designs, narrative content, dialogue, events, storylines, artwork, illustrations, CGs, game-specific settings, worldbuilding, interface artwork, and other original creative assets.
+
+Reasonable use of screenshots, short excerpts, or other limited material for commentary, criticism, review, education, or discussion is not intended to be restricted by this license where such use is otherwise permitted by applicable law.
+
+⸻
+
+7. ATTRIBUTION AND NOTICES
+
+Any permitted public fork or permitted redistribution of Source Code must:
+
+a. preserve this copyright notice;
+
+b. include a copy of this license or a clear reference to it;
+
+c. identify Lab Life Simulator as the original project;
+
+d. identify Natalia Zhang as the original copyright holder where appropriate; and
+
+e. clearly indicate if modifications have been made.
+
+You may not imply that the Copyright Holder endorses, sponsors, approves, or is affiliated with your modified version, project, organization, product, or service unless you have received written permission to make that representation.
+
+⸻
+
+8. THIRD-PARTY MATERIALS
+
+This license applies only to rights held by the Copyright Holder.
+
+Third-Party Materials included in or used by the Project remain subject to their respective copyright notices, licenses, and terms.
+
+Nothing in this license modifies, replaces, expands, or restricts rights granted by the owners of Third-Party Materials.
+
+You are responsible for complying with applicable third-party licenses when copying, modifying, distributing, or otherwise using such materials.
+
+⸻
+
+9. GENERATIVE AI ASSISTANCE
+
+Portions of the Project may have been created, developed, edited, or refined with the assistance of generative artificial intelligence tools.
+
+This license applies to the Copyright Holder’s rights in the Project to the extent that such rights exist under applicable law.
+
+Nothing in this license represents or guarantees that every individual element produced with generative AI assistance is independently eligible for copyright protection.
+
+The inclusion of AI-assisted material does not grant users any rights in the Project beyond those expressly provided by this license.
+
+⸻
+
+10. NO TRADEMARK LICENSE
+
+This license does not grant permission to use “Lab Life Simulator,” its logos, distinctive branding, or other source-identifying elements in a manner that suggests that another game, product, service, or organization is the original Project or is endorsed by the Copyright Holder.
+
+Any trademark or similar rights that may exist are reserved.
+
+⸻
+
+11. NO WARRANTY
+
+THE PROJECT IS PROVIDED “AS IS” AND “AS AVAILABLE,” WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+THE COPYRIGHT HOLDER DOES NOT WARRANT THAT THE PROJECT WILL BE ERROR-FREE, SECURE, AVAILABLE, OR SUITABLE FOR ANY PARTICULAR PURPOSE.
+
+⸻
+
+12. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES, LOSS, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE PROJECT OR THE USE, COPYING, MODIFICATION, DISTRIBUTION, OR INABILITY TO USE THE PROJECT.
+
+⸻
+
+13. TERMINATION
+
+Your rights under this license terminate automatically if you materially violate its terms.
+
+Upon termination, you must cease any use, distribution, or exploitation of the Project that depended on permissions granted by this license.
+
+Termination does not affect rights that you may independently have under applicable law.
+
+The Copyright Holder may provide written permission to reinstate rights following a violation.
+
+⸻
+
+14. OTHER RIGHTS
+
+This license grants only the permissions expressly stated above.
+
+Nothing in this license is intended to restrict uses that do not require permission under applicable law, including applicable exceptions and limitations to copyright.
+
+All rights not expressly granted are reserved by the Copyright Holder.
+
+⸻
+
+15. COMMERCIAL LICENSING AND ADDITIONAL PERMISSIONS
+
+Uses outside the scope of this license, including commercial use, commercial distribution, substantial redistribution of the complete game, or other exploitation of reserved Game Content, require separate permission from the Copyright Holder.
+
+Requests for commercial licensing or additional permissions should be directed to the Copyright Holder.
+
+The Copyright Holder is under no obligation to offer or grant a commercial license.
+
+⸻
+
+END OF LICENSE

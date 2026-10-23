@@ -15,10 +15,12 @@ import { GalleryPanel } from './components/GalleryPanel';
 import { AchievementToast } from './components/AchievementToast';
 import { events } from './data/events';
 import { checkAchievementUnlocks, checkEndingAchievements } from './engine/achievements';
+import { useI18n } from './i18n/I18nProvider';
 
 // ─── Audio controls panel ─────────────────────────────────────────────────────
 
 function AudioControls() {
+  const { m } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const [muted,    setMuted]    = useState(() => audioManager.isMuted());
   const [bgmVol,   setBgmVol]   = useState(() => audioManager.getBgmVolume());
@@ -49,8 +51,8 @@ function AudioControls() {
       <button
         className="btn btn--ghost btn--sm audio-controls__icon"
         onClick={() => setExpanded(o => !o)}
-        title="音频设置"
-        aria-label="音频设置"
+        title={m.app.audioSettings}
+        aria-label={m.app.audioSettings}
       >
         {icon}
       </button>
@@ -60,10 +62,10 @@ function AudioControls() {
             className={`btn btn--sm audio-controls__mute-btn${muted ? ' audio-controls__mute-btn--active' : ' btn--ghost'}`}
             onClick={handleMuteToggle}
           >
-            {muted ? '取消静音' : '静音'}
+            {muted ? m.app.unmute : m.app.mute}
           </button>
           <label className="audio-controls__row">
-            <span className="audio-controls__label">BGM</span>
+            <span className="audio-controls__label">{m.app.bgm}</span>
             <input
               className="audio-controls__slider"
               type="range"
@@ -74,7 +76,7 @@ function AudioControls() {
             />
           </label>
           <label className="audio-controls__row">
-            <span className="audio-controls__label">音效</span>
+            <span className="audio-controls__label">{m.app.sfx}</span>
             <input
               className="audio-controls__slider"
               type="range"
@@ -90,13 +92,29 @@ function AudioControls() {
   );
 }
 
+// Toggles between the two languages. The label is always written in the
+// language you would switch *to*, so each reader can find it.
+function LanguageToggle() {
+  const { locale, setLocale, m } = useI18n();
+  return (
+    <button
+      className="btn btn--ghost btn--sm"
+      onClick={() => { audioManager.playSfx('click'); setLocale(locale === 'zh' ? 'en' : 'zh'); }}
+      title={m.app.switchLanguageTitle}
+      aria-label={m.app.switchLanguageTitle}
+      lang={locale === 'zh' ? 'en' : 'zh'}
+    >
+      {m.app.switchLanguage}
+    </button>
+  );
+}
+
 export function App() {
+  const { m, event: localizeEvent } = useI18n();
   const {
     state,
     dispatch,
     activeEvent,
-    boundStudentName,
-    boundStudent2Name,
     modalVisible,
     canContinue,
     chooseOption,
@@ -118,6 +136,8 @@ export function App() {
     recordProjectStarted,
     recordProjectCompleted,
     recordAchievement,
+    importCode,
+    isSyncedAchievement,
   } = useGallery();
 
   const [studentPanelOpen, setStudentPanelOpen] = useState(false);
@@ -129,16 +149,20 @@ export function App() {
   // Diffing against gallery.achievementsUnlocked (rather than enqueuing inline where it's
   // recorded) keeps this correct even under React StrictMode's double-invoked updaters,
   // and naturally skips achievements already unlocked in a prior run/session.
+  // Achievements synced from another tab or an imported backup code are skipped too.
   const [achievementToastQueue, setAchievementToastQueue] = useState<string[]>([]);
   const prevAchievementsRef = useRef<string[]>(gallery.achievementsUnlocked);
   useEffect(() => {
     const prev = prevAchievementsRef.current;
-    const newlyUnlocked = gallery.achievementsUnlocked.filter(id => !prev.includes(id));
+    const newlyUnlocked = gallery.achievementsUnlocked.filter(
+      id => !prev.includes(id) && !isSyncedAchievement(id),
+    );
     if (newlyUnlocked.length > 0) {
       setAchievementToastQueue(q => [...q, ...newlyUnlocked]);
+      audioManager.playSfx('achievement');
     }
     prevAchievementsRef.current = gallery.achievementsUnlocked;
-  }, [gallery.achievementsUnlocked]);
+  }, [gallery.achievementsUnlocked, isSyncedAchievement]);
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
@@ -161,7 +185,8 @@ export function App() {
   useAudioTriggers(state);
 
   const isGameOver = state.phase !== 'playing';
-  const endingEvent = state.endingEventId ? events[state.endingEventId] : null;
+  const endingSource = state.endingEventId ? events[state.endingEventId] : null;
+  const endingEvent = endingSource ? localizeEvent(endingSource) : null;
 
   // Defer EndingModal until the player explicitly clicks through after game-over.
   // Initialise to true when loading a save that's already finished (so modal shows immediately).
@@ -281,9 +306,9 @@ export function App() {
               handleContinue();
             }}
             disabled={!canContinue}
-            title={canContinue ? '' : '请先做出选择'}
+            title={canContinue ? '' : m.app.chooseFirst}
           >
-            {isInitialScreen ? '开始游戏' : '继续'}
+            {isInitialScreen ? m.app.start : m.app.continue}
           </button>
         </div>
       )}
@@ -295,7 +320,7 @@ export function App() {
             className="btn btn--primary btn--bottom"
             onClick={() => { audioManager.playSfx('click'); setEndingConfirmed(true); }}
           >
-            继续
+            {m.app.continue}
           </button>
         </div>
       )}
@@ -328,8 +353,9 @@ export function App() {
           lab={state.lab}
           chosenOptionIds={state.chosenOptionIds}
           activeStudentIds={state.students.filter(s => s.status === 'active').map(s => s.id)}
-          boundStudentName={boundStudentName}
-          boundStudent2Name={boundStudent2Name}
+          students={state.students}
+          boundStudentId={state.activeBoundStudentId}
+          boundStudent2Id={state.activeBoundStudent2Id}
           onChoose={handleChoose}
           onClose={closeModal}
         />
@@ -356,8 +382,8 @@ export function App() {
             className="btn btn--ghost btn--sm"
             onClick={() => changeFontSize(-1)}
             disabled={fontSize <= 11}
-            title="缩小字体"
-            aria-label="缩小字体"
+            title={m.app.fontSmaller}
+            aria-label={m.app.fontSmaller}
           >
             A-
           </button>
@@ -365,8 +391,8 @@ export function App() {
             className="btn btn--ghost btn--sm"
             onClick={() => changeFontSize(1)}
             disabled={fontSize >= 20}
-            title="放大字体"
-            aria-label="放大字体"
+            title={m.app.fontLarger}
+            aria-label={m.app.fontLarger}
           >
             A+
           </button>
@@ -375,27 +401,28 @@ export function App() {
           <button
             className="btn btn--ghost btn--sm"
             onClick={() => { audioManager.playSfx('click'); setGalleryOpen(true); }}
-            title="图鉴"
-            aria-label="打开图鉴"
+            title={m.app.gallery}
+            aria-label={m.app.openGallery}
           >
-            图鉴
+            {m.app.gallery}
           </button>
           <AudioControls />
+          <LanguageToggle />
         </div>
         <button
           className="btn btn--ghost btn--sm"
           onClick={() => { audioManager.playSfx('click'); setShowResetConfirm(true); }}
           disabled={isInitialScreen}
         >
-          重置游戏
+          {m.app.reset}
         </button>
       </footer>
 
       {showResetConfirm && (
         <ConfirmDialog
-          message="确定要重置游戏吗？当前进度将被清除，且无法恢复。"
-          confirmLabel="重置"
-          cancelLabel="取消"
+          message={m.app.resetConfirm}
+          confirmLabel={m.app.resetConfirmLabel}
+          cancelLabel={m.app.cancel}
           onConfirm={() => {
             audioManager.playSfx('click');
             setShowResetConfirm(false);
@@ -408,6 +435,7 @@ export function App() {
       {galleryOpen && (
         <GalleryPanel
           gallery={gallery}
+          onImport={importCode}
           onClose={() => { audioManager.playSfx('click'); setGalleryOpen(false); }}
         />
       )}

@@ -5,6 +5,7 @@ import { allCandidates } from '../data/studentPool';
 import { TraitTag } from './TraitTag';
 import { projectById } from '../data/projects';
 import { portraitUrl, expressionUrl, pickExpression } from '../data/studentArt';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface Props {
   student: Student;
@@ -21,13 +22,15 @@ function DetailPortrait({ student }: { student: Student }) {
   const pUrl = portraitUrl(student.id);
   const eUrl = expressionUrl(student.id, expression);
   const [exprFailed, setExprFailed] = useState(false);
+  const { m, studentName } = useI18n();
+  const name = studentName(student);
 
   // Prefer portrait; fall back to expression avatar; fall back to letter block
   if (!portraitFailed && pUrl) {
     return (
       <img
         src={pUrl}
-        alt={`${student.name} 立绘`}
+        alt={m.admission.portraitAlt(name)}
         className="detail-portrait"
         onError={() => setPortraitFailed(true)}
       />
@@ -37,7 +40,7 @@ function DetailPortrait({ student }: { student: Student }) {
     return (
       <img
         src={eUrl}
-        alt={`${student.name}`}
+        alt={name}
         className="detail-portrait detail-portrait--expr"
         onError={() => setExprFailed(true)}
       />
@@ -45,7 +48,7 @@ function DetailPortrait({ student }: { student: Student }) {
   }
   return (
     <div className="detail-portrait detail-portrait--placeholder">
-      {student.name.charAt(0)}
+      {name.charAt(0)}
     </div>
   );
 }
@@ -73,15 +76,16 @@ function DetailBar({
 // ── Skill radar chart (equilateral triangle) ──────────────────────────────────
 
 function SkillRadar({ skills }: { skills: StudentSkills }) {
+  const { m } = useI18n();
   const CX = 110, CY = 82, R = 52, LOFF = 20;
   const MAX = 100;
   const deg = (d: number) => (d * Math.PI) / 180;
 
   // Theory points up, engineering lower-right, social lower-left
   const AXES = [
-    { key: 'theory'      as const, label: '理论', a: deg(-90) },
-    { key: 'engineering' as const, label: '工程', a: deg( 30) },
-    { key: 'social'      as const, label: '社交', a: deg(150) },
+    { key: 'theory'      as const, label: m.stat.theory,      a: deg(-90) },
+    { key: 'engineering' as const, label: m.stat.engineering, a: deg( 30) },
+    { key: 'social'      as const, label: m.stat.social,      a: deg(150) },
   ];
 
   const ringPts = (ratio: number) =>
@@ -151,23 +155,27 @@ function SkillRadar({ skills }: { skills: StudentSkills }) {
 export function StudentDetailModal({
   student, activeProjects, completedProjects, onClose,
 }: Props) {
-  const candidate = allCandidates.find(c => c.id === student.id);
+  const { m, candidate: candidateText, project: projectText, studentName } = useI18n();
+  const source = allCandidates.find(c => c.id === student.id);
+  const candidate = source ? candidateText(source) : undefined;
+  const nameOfProject = (id: string) => {
+    const def = projectById[id];
+    return def ? projectText(def).name : id;
+  };
   const assignedProject = activeProjects.find(p => p.leaderId === student.id);
-  const projectName = assignedProject
-    ? (projectById[assignedProject.projectId]?.name ?? assignedProject.projectId)
-    : null;
+  const projectName = assignedProject ? nameOfProject(assignedProject.projectId) : null;
 
   const doneProjects = completedProjects
     .filter(p => p.leaderId === student.id)
     .map(p => ({
-      name: projectById[p.projectId]?.name ?? p.projectId,
+      name: nameOfProject(p.projectId),
       at: p.completedAt,
     }));
 
   const statusLabel =
-    student.status === 'graduated' ? '已毕业' :
-    student.status === 'left'      ? '已离组' :
-    `博士 ${student.year} 年级`;
+    student.status === 'graduated' ? m.studentStatus.graduated :
+    student.status === 'left'      ? m.studentStatus.left :
+    m.detail.yearStatus(student.year);
 
   return (
     <div
@@ -178,7 +186,7 @@ export function StudentDetailModal({
     >
       <div className="detail-modal">
         {/* Close */}
-        <button className="detail-modal__close" onClick={onClose} aria-label="关闭">×</button>
+        <button className="detail-modal__close" onClick={onClose} aria-label={m.detail.close}>×</button>
 
         {/* Portrait column */}
         <div className="detail-modal__portrait-col">
@@ -190,13 +198,13 @@ export function StudentDetailModal({
 
           {/* Name + year */}
           <div className="detail-modal__name-row">
-            <h2 className="detail-modal__name">{student.name}</h2>
+            <h2 className="detail-modal__name">{studentName(student)}</h2>
             <span className="detail-modal__badge">{statusLabel}</span>
           </div>
 
           {/* Signature / tagline */}
           {candidate?.tagline && (
-            <p className="detail-modal__tagline">「{candidate.tagline}」</p>
+            <p className="detail-modal__tagline">{m.detail.tagline(candidate.tagline)}</p>
           )}
 
           {/* Bio */}
@@ -219,8 +227,8 @@ export function StudentDetailModal({
           {student.status === 'active' ? (
             <div className="detail-modal__stats-grid">
               <div className="detail-modal__section">
-                <DetailBar label="好感" value={student.favor} warn={student.favor <= 40} />
-                <DetailBar label="心　情" value={student.happiness} warn={student.happiness < 30} />
+                <DetailBar label={m.detail.favor} value={student.favor} warn={student.favor <= 40} />
+                <DetailBar label={m.detail.mood} value={student.happiness} warn={student.happiness < 30} />
               </div>
               <div className="detail-modal__section">
                 <SkillRadar skills={student.skills} />
@@ -235,16 +243,16 @@ export function StudentDetailModal({
           {/* Current project */}
           {student.status === 'active' && (
             <div className="detail-modal__section">
-              <h3 className="detail-modal__section-title">当前项目</h3>
+              <h3 className="detail-modal__section-title">{m.detail.currentProject}</h3>
               {projectName
                 ? <span className="detail-modal__project">{projectName}</span>
-                : <span className="detail-modal__project detail-modal__project--none">暂无进行中的项目</span>}
+                : <span className="detail-modal__project detail-modal__project--none">{m.detail.noCurrentProject}</span>}
             </div>
           )}
 
           {/* Completed projects */}
           <div className="detail-modal__section">
-            <h3 className="detail-modal__section-title">已完成项目</h3>
+            <h3 className="detail-modal__section-title">{m.detail.completedProjects}</h3>
             {doneProjects.length > 0
               ? (
                 <div className="detail-modal__done-list">
@@ -253,21 +261,21 @@ export function StudentDetailModal({
                       <span className="detail-modal__project detail-modal__project--done">{p.name}</span>
                       {p.at && (
                         <span className="detail-modal__done-time">
-                          第{p.at.year}年{p.at.month}月
+                          {m.time.compact(p.at.year, p.at.month)}
                         </span>
                       )}
                     </div>
                   ))}
                 </div>
               )
-              : <span className="detail-modal__project detail-modal__project--none">暂未完成任何项目</span>
+              : <span className="detail-modal__project detail-modal__project--none">{m.detail.noCompletedProjects}</span>
             }
           </div>
 
           {/* Graduation info */}
           {student.status === 'graduated' && student.graduatedAt && (
             <p className="detail-modal__grad-note">
-              毕业于第 {student.graduatedAt.year} 年 {student.graduatedAt.month} 月
+              {m.detail.graduatedAt(student.graduatedAt.year, student.graduatedAt.month)}
             </p>
           )}
 

@@ -4,7 +4,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_first_meeting: {
     id: 'qdd_first_meeting',
-    title: '钱多多：灵魂第一问',
+    title: '灵魂第一问',
     description: [
       '钱多多是组里最新来的博士生。你第一次找他正式谈话，花了好一会儿介绍研究方向：技术路线、数据来源、现有的未解决问题，讲得条理清晰，相当专业。',
       '他认真听完，点了点头，然后问出了他的第一个问题："老师，这个技术做出来，用户是谁？"',
@@ -49,7 +49,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_group_meeting_derail: {
     id: 'qdd_group_meeting_derail',
-    title: '钱多多：组会跑题',
+    title: '组会跑题',
     description: [
       '组会进行到一半，大家正在讨论实验数据，分析对照组结果为什么跟预期有偏差。气氛正常，讨论算是深入。',
       '然后钱多多开口了。他说："等等，我从另一个角度问一下，如果这个方法要商业化，定价模型应该怎么设计？按使用量收费还是订阅制？因为这个会影响我们最后选哪个指标来优化。"',
@@ -96,11 +96,11 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_user_interview: {
     id: 'qdd_user_interview',
-    title: '钱多多：自己去做访谈了',
+    title: '自己去做访谈了',
     description: [
-      '钱多多来找你，说他上个周末做了些"课外工作"。你以为是额外的文献调研，他摊开笔记本——是用户访谈记录，密密麻麻二十个人的反馈摘要。',
-      '他利用两个周末，在校园里找了二十个潜在目标用户，问他们现在用什么工具、卡在哪里、愿不愿为解决这个问题付出代价。最后还做了一份分类PPT：哪些人有"真实需求"，哪些人只是"觉得有趣"，清清楚楚。',
-      '"老师，需求是真实的，"他说，"二十个人里十四个说，有这个工具他们会用。"他停了一下，补充道："我没问会不会付钱，问了数字会缩水，没意义。"他用户研究做得比很多产品经理都靠谱，而这只是他的周末活动。',
+      '钱多多来找你，说他上个周末做了些"课外工作"。你以为是额外的文献调研，他摊开笔记本——是用户访谈记录，密密麻麻写了好多反馈摘要。',
+      '他利用两个周末，在校园里找了十多个潜在目标用户，问他们现在用什么工具、卡在哪里、愿不愿为解决这个问题付出代价。最后还做了一份分类PPT：哪些人有"真实需求"，哪些人只是"觉得有趣"，清清楚楚。',
+      '"老师，需求是真实的，"他说，"这里面大部分人都回答，有这个工具他们会用。"他停了一下，补充道："我没问会不会付钱，问了数字会缩水，没意义。"他的用户研究做得比很多产品经理都靠谱，而这只是他一个博士生的周末活动。',
     ],
     prompt: '钱多多自行做了用户访谈，你选择：',
     triggerConditions: [
@@ -110,10 +110,10 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'qdd_user_interview_praise',
-        text: '主动性加分，好好聊聊',
+        text: '主动性不错，好好聊聊',
         outcomes: [{
           weight: 1,
-          narrative: '你告诉他，主动去找真实用户的意识很少见，访谈设计也想得比较清楚。钱多多点头，说"我就是想搞清楚我们做的东西有没有人真的需要，不然论文发出去了，落不了地，感觉很浪费"。你一时有些语塞，这个逻辑在学术圈不太流行，但你找不到哪里错了。有些问题就是这样，简单到让人没法反驳。',
+          narrative: '你告诉他，主动去找真实用户的意识很少见，访谈设计也想得比较清楚。\n\n钱多多点头，说："我就是想搞清楚我们做的东西有没有人真的需要，不然论文发出去了，落不了地，感觉很浪费"。\n\n你一时不知如何接话，这个逻辑听起来合情合理，只是在学术圈不太流行。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 7 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'happiness', delta: 5 },
@@ -124,10 +124,10 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
       },
       {
         id: 'qdd_user_interview_redirect',
-        text: '思路不错，先把研究做扎实',
+        text: '先把自己研究做扎实',
         outcomes: [{
           weight: 1,
-          narrative: '你告诉他方向是对的，但现阶段最要紧的是把核心方法做扎实，用户验证等技术成熟了再系统推进。钱多多听完，把PPT收起来，说"那我先放这，等技术做出来再拿出来对比"。说完认认真真打开了文献库。你感觉他不是在敷衍你，他只是在内心把这件事挪到了任务队列的稍后位置，标记为"依赖：研究进度"。',
+          narrative: '你告诉钱多多方向是对的，但现阶段最要紧的是把核心方法做扎实，用户验证等技术成熟了再系统推进。\n\n钱多多听完，把PPT收起来，说"那我先放这，等技术做出来再拿出来对比"。说完认认真真打开了文献库。\n\n你感觉他不是在敷衍你，他只是在内心把这件事挪到了任务队列的稍后位置。',
           effects: [
             { type: 'student', studentId: 'qian_duoduo', stat: 'favor', delta: 3 },
             { type: 'student', studentId: 'qian_duoduo', stat: 'projectProgress', delta: 5 },
@@ -141,7 +141,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_startup_plan: {
     id: 'qdd_startup_plan',
-    title: '钱多多：拉你入伙',
+    title: '拉你入伙',
     description: [
       '钱多多约你单独谈，看起来准备了很久。他说他有一个创业计划，想用实验室的技术方向做一个真正落地的产品，已经找了两个联合创始人，设计、运营各一个，他负责产品和技术方向。',
       '"我想请老师做技术顾问，"他说，"不需要太多时间，主要是技术判断上帮我把关，让我们少踩坑。"他递过来一份文档，封面写着《项目概述：第一版》，底部标注了版本号：v0.7。',
@@ -186,7 +186,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_pitch_practice: {
     id: 'qdd_pitch_practice',
-    title: '钱多多：路演PPT第六页',
+    title: '路演PPT第六页',
     description: [
       '钱多多在参加高校创业大赛，路演下周，他来找你帮他看PPT。',
       '你打开文件，做得相当专业：用户痛点、解决方案、技术差异点、市场规模，逻辑清楚，视觉干净，不像学生作品，更像一家正经公司做的材料。你翻到第六页，标题是"技术验证"，页面正中贴着一张实验结果图——是实验室最新一篇投稿里的核心数据，论文还没有发表。',
@@ -231,7 +231,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_investor_drama: {
     id: 'qdd_investor_drama',
-    title: '钱多多：投资人突然造访',
+    title: '投资人突然造访',
     description: [
       '一个下午，一个陌生人跟着钱多多走进了实验室。钱多多介绍说，对方是他在某个活动上认识的天使投资人，"对我们做的方向很感兴趣，想顺便看看实验室"。你不记得有人提前告诉过你这件事。',
       '"顺便"。',
@@ -277,7 +277,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_product_insight: {
     id: 'qdd_product_insight',
-    title: '钱多多：从用户痛点倒推',
+    title: '从用户痛点倒推',
     description: [
       '讨论下一步研究方向时，组里争论了很久。技术路线有两条，各有支持者，谁都说不服谁，气氛有点僵。',
       '钱多多一直没怎么说话。等大家停下来，他才开口："我换个角度想，如果是用户，他们最卡的那个步骤是什么？不是技术最难的，是他们最不想手动做的那个。从那个点往回推，我们应该选哪条路？"',
@@ -324,7 +324,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_anti_finance: {
     id: 'qdd_anti_finance',
-    title: '钱多多：这个方向没意思',
+    title: '这个方向没意思',
     description: [
       '内部讨论时有人提了个建议，说实验室的技术可以在量化交易领域做一些应用，潜在回报相当可观。几个人觉得值得考虑。',
       '钱多多在那次讨论里没有说什么。但当晚他来找你，说他想单独聊几分钟，开门见山：他觉得量化交易这个方向没意思。',
@@ -368,7 +368,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_real_impact: {
     id: 'qdd_real_impact',
-    title: '钱多多：真实用户来了',
+    title: '真实用户来了',
     description: [
       '钱多多发来一张截图，没有附任何说明。你打开，发现是某个垂直社区的帖子，他上传的一个小Demo开始被用户自发转发，评论区里有人说"我等这个东西等了三年"，有人说"这解决了我每天都要手动做的问题"，还有几条留言带着联系方式问能不能进内测。',
       '过了一分钟，他发来一条消息："老师，这是我读博以来最开心的一天。"',
@@ -414,7 +414,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
   // 🎓 毕业后回访 — 建议引擎在graduation后约6个月注入
   qdd_alumni_visit: {
     id: 'qdd_alumni_visit',
-    title: '钱多多：融完天使回来了',
+    title: '融完天使回来了',
     triggerConditions: [{ type: 'studentStatus', studentId: 'qian_duoduo', status: 'graduated' }],
     description: [
       '毕业半年后，你收到一封邮件，发件人是钱多多。标题是：汇报近况 + 一个提议。',
@@ -453,7 +453,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_pi_email_timing: {
     id: 'qdd_pi_email_timing',
-    title: '钱多多：她知道什么时候发邮件最有效',
+    title: '她知道什么时候发邮件最有效',
     description: [
       '钱多多拿着一份回复率统计来找你。她说她发现了一个规律：同样的邮件，周三上午十点发，你的回复平均在两小时内；周五下午发，要等到下周。她问你是不是真的如此。',
       '你想了想，说"大概？"',
@@ -499,7 +499,7 @@ export const qianDuoduoEvents: Record<string, GameEvent> = {
 
   qdd_mediocre_paper_filter: {
     id: 'qdd_mediocre_paper_filter',
-    title: '钱多多：她三分钟判断一篇论文值不值得看',
+    title: '她三分钟判断一篇论文值不值得看',
     description: [
       '文献调研周，钱多多三天读了三十篇论文，效率异常地高。你问她怎么做到的。',
       '"过滤机制，" 她说，"大概三分钟可以判断要不要精读。" 她解释了她的判断流程：先看摘要里有没有三个特定位置的hedge词，再看实验部分有没有消融分析，然后扫一遍结论，如果结论比摘要更弱，直接跳过。',

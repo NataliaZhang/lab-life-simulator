@@ -16,7 +16,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_first_meeting: {
     id: 'bxm_first_meeting',
-    title: '白小满：第一次见面',
+    title: '第一次见面',
     description: [
       '新生报到那天，白小满进门时两只手都满着，左手一杯奶茶，右手一杯奶茶，用手肘顶开了你办公室的门，表情堪比送外卖的职业选手。',
       '她把其中一杯推到你面前，神情一本正经："老师，我做了个小调研——第一次见面给导师带奶茶，录取成功率会提高百分之二十三。这个数据是我编的，但奶茶是真的，全糖少冰，希望你喜欢。"',
@@ -65,7 +65,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_crisis_mediator: {
     id: 'bxm_crisis_mediator',
-    title: '白小满：危机调解',
+    title: '危机调解',
     description: [
       '实验室最近气氛有点微妙，任务分配引发了一些情绪，组会开始出现"我说完了"之后片刻的真空，走廊里的问候也变得比往常简洁了一截。',
       '白小满敲门进来，关上门，坐下来先把问题的症结说了一遍，分析得比你想象中清楚，然后不急不忙地总结："我觉得我们现在需要外卖。好的外卖。大家坐一块，不谈工作，让情绪先流通二十分钟。"',
@@ -117,7 +117,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_failure_reframe: {
     id: 'bxm_failure_reframe',
-    title: '白小满：失败重构',
+    title: '失败重构',
     description: [
       '上周白小满的实验全线崩了，三组对照全部跑崩，数据不收敛，模型在测试集上约等于随机猜测。你已经准备好了一份措辞温和的反馈，打算今天找她谈。',
       '她的汇报邮件先到了你的收件箱，标题是：「重大进展：我们成功排除了十八种可能性（附：第十九种正在验证中）」。',
@@ -168,7 +168,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_morale_boost: {
     id: 'bxm_morale_boost',
-    title: '白小满：主动打气',
+    title: '主动打气',
     description: [
       '实验室最近整体状态下滑，声望遭到质疑，几个项目进展缓慢，组会开始出现"我说完了"之后无人接话的片刻真空。你还没想好怎么处理这个气氛，白小满已经自己动了。',
       '组群里出现了一条消息："本周五晚上有个非强制性但强烈建议参加的饭局，楼下火锅店，我来订位，AA制（保底两人成行），主题是：不谈工作。"',
@@ -218,7 +218,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_tea_strategy: {
     id: 'bxm_tea_strategy',
-    title: '白小满：奶茶战略',
+    title: '奶茶战略',
     description: [
       '你正在为一个棘手的决定发愁，经费分配、人员调整，或者某个项目的走向，总之是那种盯着屏幕半小时屏幕还是那个屏幕的类型。',
       '白小满推开门，把一杯奶茶放在你桌上，神情严肃："老师，我观察了一段时间。你做困难决定的时候手边有奶茶，通过率会高百分之三十一。"',
@@ -266,7 +266,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_social_talent: {
     id: 'bxm_social_talent',
-    title: '白小满：社交天才',
+    title: '社交天才',
     description: [
       '系里有位老师，向来难以接近，审经费严，推荐信惜字如金，跨院合作项目一律保持距离。你有过念头，估计了一下成功率，搁置了。',
       '上周五，白小满代表实验室去参加了一个跨院系学生交流活动。昨天汇报时顺带提了一句："对了老师，王老师说他那边有个经费来源，想问问我们合不合适——是他主动问的。"',
@@ -315,7 +315,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_genuine_struggle: {
     id: 'bxm_genuine_struggle',
-    title: '白小满：真正的瓶颈',
+    title: '真正的瓶颈',
     description: [
       '白小满来找你，破天荒地两手空空进来，没有奶茶，没有笔记本，连平时那种随手拿着支笔的习惯都消失了。',
       '她在椅子上坐直，直接开口："老师，我遇到一个问题，想了两周，真的不知道怎么做。"',
@@ -374,7 +374,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_encourage_others: {
     id: 'bxm_encourage_others',
-    title: '白小满：帮你安慰学生',
+    title: '帮你安慰学生',
     description: [
       '组里有个学生陷进了瓶颈，项目推不动，状态越来越内耗，你找他谈过一次，效果有限，那种沉默带着防御，像堵墙，硬撞只会把自己撞疼。',
       '你正在想怎么谈第二次，白小满路过你办公室，探头进来问了一句："你是在想某某的事吗？"',
@@ -426,7 +426,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_optimism_tested: {
     id: 'bxm_optimism_tested',
-    title: '白小满：乐观的边界',
+    title: '乐观的边界',
     description: [
       '最近白小满碰了好几个壁，投稿被拒，合作谈崩，一个做了两个月的方向在讨论中被整体推翻。她来找你，这次没有带奶茶，也没有把困难先包装成"排除了若干可能性"。',
       '她坐下来，沉默了一下，说："老师，我跟你说一个事——我其实不是真的完全不担心的。"',
@@ -475,7 +475,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_alumni_visit: {
     id: 'bxm_alumni_visit',
-    title: '白小满：毕业回访',
+    title: '毕业回访',
     triggerConditions: [{ type: 'studentStatus', studentId: 'bai_xiaoman', status: 'graduated' }],
     description: [
       // 🎓 毕业后回访 — 建议引擎在 graduation 后约6个月注入
@@ -520,7 +520,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_conference_map: {
     id: 'bxm_conference_map',
-    title: '白小满：她知道所有人认识谁',
+    title: '她知道所有人认识谁',
     description: [
       '学术会议的懒人午餐环节，大家拿着盘子站着聊天，白小满却坐在角落，对着一张餐巾纸在写写画画。你走过去一看：她在画一张关系图，圆圈是人名，连线是"在哪里认识的"。',
       '"这是……你做的网络图？"',
@@ -564,7 +564,7 @@ export const baiXiaomanEvents: Record<string, GameEvent> = {
 
   bxm_late_submit_data: {
     id: 'bxm_late_submit_data',
-    title: '白小满：晚交的论文好像更容易过',
+    title: '晚交的论文好像更容易过',
     description: [
       '白小满拿着一堆会议接收结果来找你，表情是那种"我发现了一件不该发现的事"。',
       '"老师，我统计了一下过去两年咱们组投的稿，发现一个奇怪的现象。" 她摊开一张表，"截止前二十四小时投的，接收率偏高一点点，而很早投的，有几篇反而拒了。"',

@@ -8,8 +8,6 @@ export interface GameEngine {
   state: GameState;
   dispatch: (action: GameAction) => void;
   activeEvent: GameEvent | null;
-  boundStudentName: string | undefined;
-  boundStudent2Name: string | undefined;
   modalVisible: boolean;
   canContinue: boolean;
   chooseOption: (eventId: string, optionId: string) => void;
@@ -40,14 +38,6 @@ export function useGameEngine(): GameEngine {
 
   const activeEvent: GameEvent | null =
     state.activeEventId ? getEvent(state.activeEventId) : null;
-
-  const boundStudentName: string | undefined = state.activeBoundStudentId
-    ? state.students.find(s => s.id === state.activeBoundStudentId)?.name
-    : undefined;
-
-  const boundStudent2Name: string | undefined = state.activeBoundStudent2Id
-    ? state.students.find(s => s.id === state.activeBoundStudent2Id)?.name
-    : undefined;
 
   // Button is available whenever there's no open modal and no admission pending
   const canContinue = state.phase === 'playing' && !modalVisible && state.admissionState === null;
@@ -136,8 +126,6 @@ export function useGameEngine(): GameEngine {
     state,
     dispatch,
     activeEvent,
-    boundStudentName,
-    boundStudent2Name,
     modalVisible,
     canContinue,
     chooseOption,

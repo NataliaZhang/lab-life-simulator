@@ -5,31 +5,21 @@ import { TraitTag } from './TraitTag';
 import { expressionUrl, pickExpression } from '../data/studentArt';
 import type { StudentExpression } from '../types/studentArt';
 import { StudentDetailModal } from './StudentDetailModal';
-
-const PI_BIOS = [
-  '实验室头号保姆',
-  '有偿情感支持提供者',
-  '背锅侠（兼义务审稿员）',
-  '经费的掘墓人',
-  '每周计划写论文，每周成功开会',
-  '帮学生改论文，顺便改人生',
-  '坐拥服务器，身无三篇文',
-  '组里唯一读懂审稿意见的人（存疑）',
-  '理想状态：学者。实际状态：客服',
-  '热爱科研，恐惧填表',
-];
+import { useI18n } from '../i18n/I18nProvider';
 
 function PICard() {
-  const [idx, setIdx] = useState(() => Math.floor(Math.random() * PI_BIOS.length));
+  const { m } = useI18n();
+  const bios = m.members.piBios;
+  const [idx, setIdx] = useState(() => Math.floor(Math.random() * bios.length));
   return (
     <div className="student-card student-card--pi">
-      <div className="student-card__name">你</div>
+      <div className="student-card__name">{m.members.you}</div>
       <div className="student-card__pi-bio">
-        <span>{PI_BIOS[idx]}</span>
+        <span>{bios[idx % bios.length]}</span>
         <button
           className="pi-bio-refresh"
-          onClick={() => setIdx(i => (i + 1) % PI_BIOS.length)}
-          title="换一句"
+          onClick={() => setIdx(i => (i + 1) % bios.length)}
+          title={m.members.anotherLine}
         >↻</button>
       </div>
     </div>
@@ -79,11 +69,14 @@ function StudentCard({
   student: Student;
   onOpenDetail: (s: Student) => void;
 }) {
+  const { m, studentName } = useI18n();
+  const name = studentName(student);
+
   if (student.status === 'graduated') {
     return (
       <div className="student-card student-card--graduated">
-        <div className="student-card__name">{student.name}</div>
-        <div className="student-card__status">已毕业</div>
+        <div className="student-card__name">{name}</div>
+        <div className="student-card__status">{m.studentStatus.graduated}</div>
       </div>
     );
   }
@@ -91,8 +84,8 @@ function StudentCard({
   if (student.status === 'left') {
     return (
       <div className="student-card student-card--left">
-        <div className="student-card__name">{student.name}</div>
-        <div className="student-card__status">已离组</div>
+        <div className="student-card__name">{name}</div>
+        <div className="student-card__status">{m.studentStatus.left}</div>
       </div>
     );
   }
@@ -106,18 +99,18 @@ function StudentCard({
         <button
           className="student-avatar-btn"
           onClick={() => onOpenDetail(student)}
-          title="查看角色详情"
+          title={m.members.viewDetail}
         >
           <ExpressionAvatar
             studentId={student.id}
             expression={expression}
-            name={student.name}
+            name={name}
           />
         </button>
         <div className="student-card__header-text">
           <div className="student-card__name-line">
-            <span className="student-card__name">{student.name}</span>
-            <span className="student-card__year">博{student.year}</span>
+            <span className="student-card__name">{name}</span>
+            <span className="student-card__year">{m.members.yearBadge(student.year)}</span>
           </div>
           <div className="student-card__traits">
             {student.traitIds.map(id => (
@@ -130,8 +123,8 @@ function StudentCard({
       {/* Mood stats */}
       <div className="student-card__attrs">
         <div className="student-card__mood-row">
-          <span className={`skill skill--mood${student.favor <= 40 ? ' skill--warn' : ''}`} title="好感度">好感:{Math.round(student.favor)}</span>
-          <span className={`skill skill--mood${student.happiness < 30 ? ' skill--warn' : ''}`} title="心情">心情:{Math.round(student.happiness)}</span>
+          <span className={`skill skill--mood${student.favor <= 40 ? ' skill--warn' : ''}`} title={m.members.favorTitle}>{m.members.favorChip(Math.round(student.favor))}</span>
+          <span className={`skill skill--mood${student.happiness < 30 ? ' skill--warn' : ''}`} title={m.stat.happiness}>{m.members.moodChip(Math.round(student.happiness))}</span>
         </div>
       </div>
     </div>
@@ -147,11 +140,12 @@ export function StudentList({
   isGameOver,
 }: Props) {
   const [detailStudent, setDetailStudent] = useState<Student | null>(null);
+  const { m } = useI18n();
 
   return (
     <>
       <aside className="student-panel">
-        <h3 className="student-panel__title">实验室成员</h3>
+        <h3 className="student-panel__title">{m.members.title}</h3>
         <div className="student-panel__list">
           <PICard />
           {students.map(s => (
@@ -168,9 +162,9 @@ export function StudentList({
               className="btn btn--primary"
               onClick={onAdvanceMonth}
               disabled={!canAdvanceMonth}
-              title={canAdvanceMonth ? '' : '请先做出选择'}
+              title={canAdvanceMonth ? '' : m.app.chooseFirst}
             >
-              继续
+              {m.app.continue}
             </button>
           </div>
         )}

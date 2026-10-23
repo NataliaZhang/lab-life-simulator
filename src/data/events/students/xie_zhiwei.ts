@@ -807,7 +807,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
 
   xzw_prompt_archaeology: {
     id: 'xzw_prompt_archaeology',
-    title: '谢之微：她在仓库里找到了很古老的prompt',
+    title: '她在仓库里找到了很古老的prompt',
     description: [
       '谢之微在整理旧代码仓库，找到了一个两年前创建的文件夹，里面是一批prompt，最早的一条写于系统连接AI功能的第一周，内容是："请你帮我解释一下什么是注意力机制，语气亲切一点。"',
       '她把整个文件夹翻完，发现prompt的风格从非常礼貌、充满试探，逐渐演变成简洁、专业，甚至有点命令式。',
@@ -851,7 +851,7 @@ export const xieZhiweiEvents: Record<string, GameEvent> = {
 
   xzw_citation_bomb: {
     id: 'xzw_citation_bomb',
-    title: '谢之微：这篇论文的参考文献有点可疑',
+    title: '这篇论文的参考文献有点可疑',
     description: [
       '谢之微在调研一个方向，发现了一篇引用量异常高的论文，但里面的实验她怎么看都觉得平平。她对着引用列表看了很久，来找你说了一件事。',
       '"这篇论文的引用来源，有三十七篇出自同一个小型会议，那个会议只有两届，主办者之一是这篇论文的共同作者。"',

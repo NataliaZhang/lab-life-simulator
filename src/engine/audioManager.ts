@@ -23,6 +23,7 @@ const SFX_FILES: Record<string, string> = {
   continue:        '/audio/sfx/book.mp3',
   new_student:     '/audio/sfx/new_student.mp3',
   star:            '/audio/sfx/star.mp3',
+  achievement:     '/audio/sfx/achievement.mp3',
   // Placeholders — add the corresponding mp3 files to assets/audio/sfx/ to activate:
   idea:            '/audio/sfx/idea.mp3',
   project_start:   '/audio/sfx/project_start.mp3',

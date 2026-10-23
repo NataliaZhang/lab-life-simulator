@@ -1,22 +1,27 @@
-import { useState } from 'react';
-import type { GalleryData } from '../engine/gallery';
+import { useMemo, useRef, useState } from 'react';
+import type { GalleryData, GalleryImportResult } from '../engine/gallery';
+import { encodeGalleryCode } from '../engine/gallery';
 import { allCandidates } from '../data/studentPool';
 import { portraitUrl, coloredPortraitUrl, silhouettePortraitUrl } from '../data/studentArt';
 import { projectById } from '../data/projects';
 import { achievements } from '../data/achievements';
 import { audioManager } from '../engine/audioManager';
+import { events } from '../data/events';
+import { useI18n } from '../i18n/I18nProvider';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-type GalleryTab = 'endings' | 'characters' | 'projects' | 'achievements';
+type GalleryTab = 'endings' | 'characters' | 'projects' | 'achievements' | 'backup';
 
 interface Props {
   gallery: GalleryData;
+  onImport: (code: string) => GalleryImportResult;
   onClose: () => void;
 }
 
-export function GalleryPanel({ gallery, onClose }: Props) {
+export function GalleryPanel({ gallery, onImport, onClose }: Props) {
   const [tab, setTab] = useState<GalleryTab>('endings');
+  const { m } = useI18n();
 
   const switchTab = (next: GalleryTab) => {
     audioManager.playSfx('click');
@@ -31,33 +36,39 @@ export function GalleryPanel({ gallery, onClose }: Props) {
             className={`gallery-tab-btn${tab === 'endings' ? ' gallery-tab-btn--active' : ''}`}
             onClick={() => switchTab('endings')}
           >
-            结局
+            {m.gallery.tabEndings}
           </button>
           <button
             className={`gallery-tab-btn${tab === 'characters' ? ' gallery-tab-btn--active' : ''}`}
             onClick={() => switchTab('characters')}
           >
-            角色
+            {m.gallery.tabCharacters}
           </button>
           <button
             className={`gallery-tab-btn${tab === 'projects' ? ' gallery-tab-btn--active' : ''}`}
             onClick={() => switchTab('projects')}
           >
-            项目
+            {m.gallery.tabProjects}
           </button>
           <button
             className={`gallery-tab-btn${tab === 'achievements' ? ' gallery-tab-btn--active' : ''}`}
             onClick={() => switchTab('achievements')}
           >
-            成就
+            {m.gallery.tabAchievements}
+          </button>
+          <button
+            className={`gallery-tab-btn${tab === 'backup' ? ' gallery-tab-btn--active' : ''}`}
+            onClick={() => switchTab('backup')}
+          >
+            {m.gallery.tabBackup}
           </button>
         </div>
         <button
           className="btn btn--ghost btn--sm gallery-panel__close"
           onClick={onClose}
-          aria-label="关闭图鉴"
+          aria-label={m.gallery.closeAria}
         >
-          关闭
+          {m.gallery.close}
         </button>
       </div>
 
@@ -66,6 +77,7 @@ export function GalleryPanel({ gallery, onClose }: Props) {
         {tab === 'characters' && <CharactersTab gallery={gallery} />}
         {tab === 'projects' && <ProjectsTab gallery={gallery} />}
         {tab === 'achievements' && <AchievementsTab gallery={gallery} />}
+        {tab === 'backup' && <BackupTab gallery={gallery} onImport={onImport} />}
       </div>
     </div>
   );
@@ -73,28 +85,46 @@ export function GalleryPanel({ gallery, onClose }: Props) {
 
 // ─── Endings tab ───────────────────────────────────────────────────────────
 
+// Renders [text, number, text, number, …] with the numbers highlighted.
+function StatLine({ parts }: { parts: readonly string[] }) {
+  return (
+    <p className="gallery-section-stat">
+      {parts.map((part, i) =>
+        i % 2 === 1
+          ? <span key={i} className="gallery-section-stat__num">{part}</span>
+          : <span key={i}>{part}</span>,
+      )}
+    </p>
+  );
+}
+
 function EndingsTab({ gallery }: { gallery: GalleryData }) {
+  const { m, event } = useI18n();
   if (gallery.endingsSeen.length === 0) {
     return (
       <div className="gallery-empty">
-        <p>尚未达成任何结局。</p>
-        <p className="gallery-empty__hint">完成一局游戏后，结局将永久记录在此。</p>
+        <p>{m.gallery.endingsEmpty}</p>
+        <p className="gallery-empty__hint">{m.gallery.endingsEmptyHint}</p>
       </div>
     );
   }
 
   return (
     <>
-      <p className="gallery-section-stat">
-        已达成 <span className="gallery-section-stat__num">{gallery.endingsSeen.length}</span> 个结局
-      </p>
+      <StatLine parts={m.gallery.endingsStat(gallery.endingsSeen.length)} />
       <div className="gallery-endings-grid">
-        {gallery.endingsSeen.map(ending => (
-          <div key={ending.eventId} className="gallery-ending-card">
-            <div className="gallery-ending-card__title">{ending.title}</div>
-            <div className="gallery-ending-card__tagline">{ending.tagline}</div>
-          </div>
-        ))}
+        {gallery.endingsSeen.map(ending => {
+          // Records store the text from when the ending was reached; prefer the
+          // current-language event text when the event still exists.
+          const source = events[ending.eventId];
+          const localized = source ? event(source) : undefined;
+          return (
+            <div key={ending.eventId} className="gallery-ending-card">
+              <div className="gallery-ending-card__title">{localized?.title ?? ending.title}</div>
+              <div className="gallery-ending-card__tagline">{localized?.tagline ?? ending.tagline}</div>
+            </div>
+          );
+        })}
       </div>
     </>
   );
@@ -104,20 +134,20 @@ function EndingsTab({ gallery }: { gallery: GalleryData }) {
 
 function CharactersTab({ gallery }: { gallery: GalleryData }) {
   const [flippedId, setFlippedId] = useState<string | null>(null);
+  const { m, candidate: candidateText } = useI18n();
 
   const seenIds = new Set(gallery.studentsSeen);
   const unseenCandidates = allCandidates.filter(c => !seenIds.has(c.id));
 
   return (
     <>
-      <p className="gallery-section-stat">
-        已收录 <span className="gallery-section-stat__num">{gallery.studentsSeen.length}</span> 位成员
-      </p>
+      <StatLine parts={m.gallery.charactersStat(gallery.studentsSeen.length)} />
       <div className="gallery-characters-grid">
         {/* Recruited characters — full display */}
         {gallery.studentsSeen.map(studentId => {
-          const candidate = allCandidates.find(c => c.id === studentId);
-          if (!candidate) return null;
+          const source = allCandidates.find(c => c.id === studentId);
+          if (!source) return null;
+          const candidate = candidateText(source);
           const maxFavorUnlocked = gallery.studentsMaxFavor.includes(studentId);
           const colored = maxFavorUnlocked ? coloredPortraitUrl(studentId) : '';
           const portrait = colored || portraitUrl(studentId);
@@ -182,15 +212,15 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
                       <img
                         className="gallery-char-card__portrait"
                         src={silhouette}
-                        alt="未知角色"
+                        alt={m.gallery.unknownCharacter}
                         onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                       />
                     ) : (
-                      <div className="gallery-char-card__portrait-placeholder">？</div>
+                      <div className="gallery-char-card__portrait-placeholder">{m.gallery.unknownPortrait}</div>
                     )}
                   </div>
                   <div className="gallery-char-card__body">
-                    <div className="gallery-char-card__name gallery-char-card__name--unknown">？？？</div>
+                    <div className="gallery-char-card__name gallery-char-card__name--unknown">{m.gallery.unknownName}</div>
                   </div>
                 </div>
               </div>
@@ -205,11 +235,12 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
 // ─── Projects tab ──────────────────────────────────────────────────────────
 
 function ProjectsTab({ gallery }: { gallery: GalleryData }) {
+  const { m, project } = useI18n();
   if (gallery.projectsStarted.length === 0) {
     return (
       <div className="gallery-empty">
-        <p>尚未立项任何项目。</p>
-        <p className="gallery-empty__hint">在游戏中立项后，项目将永久记录在此。</p>
+        <p>{m.gallery.projectsEmpty}</p>
+        <p className="gallery-empty__hint">{m.gallery.projectsEmptyHint}</p>
       </div>
     );
   }
@@ -229,13 +260,11 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
 
   return (
     <>
-      <p className="gallery-section-stat">
-        已立项 <span className="gallery-section-stat__num">{gallery.projectsStarted.length}</span> 个项目，完成 <span className="gallery-section-stat__num">{completed.length}</span> 个
-      </p>
+      <StatLine parts={m.gallery.projectsStat(gallery.projectsStarted.length, completed.length)} />
 
       {completed.length > 0 && (
         <div className="gallery-projects-section">
-          <h3 className="gallery-projects-section__heading">已完成</h3>
+          <h3 className="gallery-projects-section__heading">{m.gallery.completed}</h3>
           <div className="gallery-projects-list">
             {completed.map(id => {
               const def = projectById[id];
@@ -244,10 +273,10 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
                 <div key={id} className="gallery-project-card gallery-project-card--completed">
                   <div className="gallery-project-card__header">
                     <span className={`gallery-project-card__grade gallery-project-card__grade--${def.grade.toLowerCase()}`}>{def.grade}</span>
-                    <span className="gallery-project-card__name">{def.name}</span>
+                    <span className="gallery-project-card__name">{project(def).name}</span>
                   </div>
-                  <p className="gallery-project-card__desc">{def.description}</p>
-                  <p className="gallery-project-card__result">{def.completionSummary}</p>
+                  <p className="gallery-project-card__desc">{project(def).description}</p>
+                  <p className="gallery-project-card__result">{project(def).completionSummary}</p>
                 </div>
               );
             })}
@@ -257,7 +286,7 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
 
       {incomplete.length > 0 && (
         <div className="gallery-projects-section">
-          <h3 className="gallery-projects-section__heading">未完成</h3>
+          <h3 className="gallery-projects-section__heading">{m.gallery.incomplete}</h3>
           <div className="gallery-projects-list">
             {incomplete.map(id => {
               const def = projectById[id];
@@ -266,9 +295,9 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
                 <div key={id} className="gallery-project-card">
                   <div className="gallery-project-card__header">
                     <span className={`gallery-project-card__grade gallery-project-card__grade--${def.grade.toLowerCase()}`}>{def.grade}</span>
-                    <span className="gallery-project-card__name">{def.name}</span>
+                    <span className="gallery-project-card__name">{project(def).name}</span>
                   </div>
-                  <p className="gallery-project-card__desc">{def.description}</p>
+                  <p className="gallery-project-card__desc">{project(def).description}</p>
                 </div>
               );
             })}
@@ -283,6 +312,7 @@ function ProjectsTab({ gallery }: { gallery: GalleryData }) {
 
 function AchievementsTab({ gallery }: { gallery: GalleryData }) {
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
+  const { m, achievement } = useI18n();
   const unlockedCount = achievements.filter(a => gallery.achievementsUnlocked.includes(a.id)).length;
 
   // Unlocked achievements first, then locked — stable within each group (data-file order).
@@ -294,12 +324,11 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
 
   return (
     <>
-      <p className="gallery-section-stat">
-        已解锁 <span className="gallery-section-stat__num">{unlockedCount}</span> / {achievements.length} 个成就
-      </p>
+      <StatLine parts={m.gallery.achievementsStat(unlockedCount, achievements.length)} />
       <div className="gallery-achievements-list">
         {orderedAchievements.map(a => {
           const unlocked = gallery.achievementsUnlocked.includes(a.id);
+          const text = achievement(a);
           return (
             <div
               key={a.id}
@@ -318,7 +347,7 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
                   <img
                     className="gallery-achievement-card__image"
                     src={`${BASE}/${a.image}`}
-                    alt={a.title}
+                    alt={text.title}
                     onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 ) : (
@@ -327,9 +356,9 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
               </div>
               <div className="gallery-achievement-card__body">
                 <div className={`gallery-achievement-card__title${unlocked ? '' : ' gallery-achievement-card__title--locked'}`}>
-                  {a.title}
+                  {text.title}
                 </div>
-                <div className="gallery-achievement-card__criteria">{unlocked ? a.criteria : '？'}</div>
+                <div className="gallery-achievement-card__criteria">{unlocked ? text.criteria : m.gallery.lockedCriteria}</div>
               </div>
             </div>
           );
@@ -345,5 +374,94 @@ function AchievementsTab({ gallery }: { gallery: GalleryData }) {
         </div>
       )}
     </>
+  );
+}
+
+// ─── Backup tab ────────────────────────────────────────────────────────────
+
+// Export / import of the gallery as a plain-text backup code (see engine/gallery.ts).
+function BackupTab({ gallery, onImport }: { gallery: GalleryData; onImport: (code: string) => GalleryImportResult }) {
+  const { m } = useI18n();
+  const exportCode = useMemo(() => encodeGalleryCode(gallery), [gallery]);
+  const exportRef = useRef<HTMLTextAreaElement>(null);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [importText, setImportText] = useState('');
+  const [importResult, setImportResult] = useState<GalleryImportResult | null>(null);
+
+  const handleCopy = async () => {
+    audioManager.playSfx('click');
+    try {
+      await navigator.clipboard.writeText(exportCode);
+      setCopyStatus('copied');
+    } catch {
+      // The clipboard API is missing in some in-app browsers and on plain http;
+      // select the text so the player can copy it by hand.
+      exportRef.current?.select();
+      setCopyStatus('failed');
+    }
+  };
+
+  const handleImport = () => {
+    audioManager.playSfx('click');
+    const result = onImport(importText);
+    setImportResult(result);
+    if (result !== 'invalid') setImportText('');
+  };
+
+  return (
+    <div className="gallery-backup">
+      <p className="gallery-backup__intro">{m.gallery.backupIntro}</p>
+
+      <section className="gallery-backup__section">
+        <h3 className="gallery-projects-section__heading">{m.gallery.exportHeading}</h3>
+        <p className="gallery-backup__hint">{m.gallery.exportHint}</p>
+        <textarea
+          ref={exportRef}
+          className="gallery-backup__code"
+          value={exportCode}
+          readOnly
+          rows={4}
+          aria-label={m.gallery.exportHeading}
+          onFocus={e => e.currentTarget.select()}
+        />
+        <div className="gallery-backup__actions">
+          <button className="btn btn--primary btn--sm" onClick={handleCopy}>
+            {m.gallery.copyCode}
+          </button>
+          {copyStatus !== 'idle' && (
+            <span className={`gallery-backup__status${copyStatus === 'failed' ? ' gallery-backup__status--error' : ''}`}>
+              {copyStatus === 'copied' ? m.gallery.copied : m.gallery.copyFailed}
+            </span>
+          )}
+        </div>
+      </section>
+
+      <section className="gallery-backup__section">
+        <h3 className="gallery-projects-section__heading">{m.gallery.importHeading}</h3>
+        <p className="gallery-backup__hint">{m.gallery.importHint}</p>
+        <textarea
+          className="gallery-backup__code"
+          value={importText}
+          rows={4}
+          placeholder={m.gallery.importPlaceholder}
+          aria-label={m.gallery.importHeading}
+          onChange={e => { setImportText(e.target.value); setImportResult(null); }}
+        />
+        <div className="gallery-backup__actions">
+          <button
+            className="btn btn--primary btn--sm"
+            onClick={handleImport}
+            disabled={importText.trim() === ''}
+          >
+            {m.gallery.importButton}
+          </button>
+          {importResult && (
+            <span className={`gallery-backup__status${importResult === 'invalid' ? ' gallery-backup__status--error' : ''}`}>
+              {m.gallery.importResult[importResult]}
+            </span>
+          )}
+        </div>
+      </section>
+    </div>
   );
 }

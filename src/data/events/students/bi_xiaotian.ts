@@ -567,7 +567,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
 
   bxt_gpu_queue_exploit: {
     id: 'bxt_gpu_queue_exploit',
-    title: '毕小天：他在赌GPU何时空闲',
+    title: '他在赌GPU何时空闲',
     description: [
       '你发现组里的GPU利用率最近异常均匀——往常总有深夜高峰，现在却像一条水平线。你问毕小天是不是有什么新工具在调度。',
       '"没有工具，" 他说，"是我手动选时间的。" 他打开一个自己写的脚本，里面是一套基于历史利用率的提交时间预测逻辑，加上一点点对其他人作息习惯的预判。',
@@ -610,7 +610,7 @@ export const biXiaotianEvents: Record<string, GameEvent> = {
 
   bxt_variable_naming: {
     id: 'bxt_variable_naming',
-    title: '毕小天：他的变量名是一种艺术',
+    title: '他的变量名是一种艺术',
     description: [
       '你在review毕小天的代码，翻到一个变量：`final_final_v3_ACTUALLY_FINAL`。再往下：`temp_but_not_really`、`flag_idk_what_this_does`、`this_should_work`。你叫他来解释。',
       '毕小天看了半分钟，表情开始变得复杂。"老师这个……是有历史的，" 他说，"这个 `final_final_v3` 是当时改了好多版之后觉得终于对了，所以……"',

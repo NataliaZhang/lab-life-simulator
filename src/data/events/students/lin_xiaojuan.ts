@@ -4,7 +4,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_first_meeting: {
     id: 'lxj_first_meeting',
-    title: '林小卷：迟到的大明星驾到',
+    title: '迟到的大明星驾到',
     description: [
       '第一次见面定在了下午三点，林小卷迟到了整整十五分钟。你坐在办公室里，刚开始考虑发消息催人，门轰然打开了——他手里端着一杯珍珠奶茶，吸管含在嘴里，表情如沐春风，完全活在另一个时区。',
       '他把奶茶放在你桌对面，拉开椅子，以一种叫人无从发火的镇定坐了下来，然后用聊天气的语气开口："老师好，我是林小卷，新来的，以后多关照。" 停顿了一下，把奶茶往前推了推："这家真不错，要不要来一口？"',
@@ -49,7 +49,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_progress_check: {
     id: 'lxj_progress_check',
-    title: '林小卷："快了快了"之量子态进度',
+    title: '"快了快了"之量子态进度',
     description: [
       '你已经是第三次问林小卷进度了。每一次，他都用同一个语气、同一张平静的脸回答："快了快了，就差最后一步。" 那"最后一步"听起来触手可及，却像地平线一样，永远比你以为的再远一点。',
       '这句话他已经说了整整两个月。你悄悄打开日历，做了个不太乐观的数学题，然后合上日历，选择眼不见心不烦。与此同时，他的"最后一步"依然在量子叠加态中悠然存在，既完成又未完成，直到有人去观测它。',
@@ -92,7 +92,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_ddl_miracle: {
     id: 'lxj_ddl_miracle',
-    title: '林小卷：DDL前十分钟，传说降临',
+    title: 'DDL前十分钟，传说降临',
     description: [
       '截止日期前48小时，林小卷蒸发了。微信已读不回，邮件已读不复，实验室工位空着像个标本，连他最常去的奶茶店老板都说两天没见到人。你一度开始思考要不要报警。',
       '提交截止前整整十分钟，手机震动——是一个压缩包链接，后面跟着一行字："老师，发过去了，麻烦帮我看看格式对不对。" 你颤着手打开文件：代码完整，注释清晰，实验结果比预期还要漂亮，文档甚至配了图表，参考文献格式一条不差。',
@@ -138,7 +138,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_midnight_message: {
     id: 'lxj_midnight_message',
-    title: '林小卷：凌晨两点的天才发言',
+    title: '凌晨两点的天才发言',
     description: [
       '凌晨两点，手机屏幕亮了。林小卷。你以为出了什么紧急状况，点开一看：一条长达八百字的消息在屏幕上炸开，像一颗话痨手雷。那不是求救——是感悟。',
       '他用一种混乱得近乎艺术的逻辑，描述了对某个研究问题的突发顿悟，中途出现三处"等等我重说一遍"，最后附了一张手绘草图的照片，图里有箭头、圆圈、一个画歪的三角形，旁边潦草写着"大概是这个意思"。',
@@ -182,7 +182,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_conference_abstract: {
     id: 'lxj_conference_abstract',
-    title: '林小卷：五点截止，四点五十八分交卷',
+    title: '五点截止，四点五十八分交卷',
     description: [
       '会议摘要截止今天下午五点。早上十一点，林小卷还在组会上认真讨论别人的实验方案，对截止时间毫无感知，仿佛生活在夏令时比全世界慢三小时的独立时区。',
       '下午四点半，他轻描淡写地说"老师我去写摘要了"，然后消失。你刷了几次邮件，寂静如深夜。心里默默盘算起紧急联系方案。',
@@ -226,7 +226,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_fake_progress: {
     id: 'lxj_fake_progress',
-    title: '林小卷：进度汇报，注水两成半',
+    title: '进度汇报，注水两成半',
     description: [
       '林小卷在月度汇报里宣布项目进度已达百分之七十，语气自信满满，PPT做得图文并茂，配色甚至挺好看。你听着听着，发现几个关键实验只展示了结果截图，方法细节全程蒸发。',
       '会后你打开他的代码仓库，最近一次提交停在三周前。实验脚本里有三个函数体清一色写着 `pass`，一条名为 `TODO_FIXME_URGENT` 的注释已经存活了整整两个月，风吹不动，雨打不散。',
@@ -271,7 +271,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_lost_in_lab: {
     id: 'lxj_lost_in_lab',
-    title: '林小卷：深夜，一个人，一杯凉咖啡',
+    title: '深夜，一个人，一杯凉咖啡',
     description: [
       '你深夜回实验室取文件，以为早没人了，推门一看——林小卷坐在工位上。不是在敲代码，不是在看文献，是对着一个半写的函数发呆，光标孤零零地闪着，像在等什么命令。',
       '他听到动静转过头，看了你一秒，用碰见熟人打招呼的语气说："老师你也还在啊。" 没有尴尬，没有慌张，只有一点还没收回来的出神。',
@@ -316,7 +316,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_sudden_expert: {
     id: 'lxj_sudden_expert',
-    title: '林小卷：等等，这里有个大漏洞',
+    title: '等等，这里有个大漏洞',
     description: [
       '林小卷敲门进来，说"老师，我发现了一个问题"，语气比平时高出整整一个八度。你示意他坐——他没坐。他走到白板前，拿起笔，开始写。',
       '他指出了组里一直在用的理论框架里的一个裂缝：在某个边界条件下，核心假设会悄悄失效，而所有现有实验恰好全部绕开了那个边界，所以没有一个人发现过。他讲了好一阵，逻辑环环相扣，你中途插了两个问题，他都答上来了，没有丝毫停顿。',
@@ -361,7 +361,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_graduation_panic: {
     id: 'lxj_graduation_panic',
-    title: '林小卷：毕业论文？我有计划的',
+    title: '毕业论文？我有计划的',
     description: [
       '距离毕业论文提交整整一个月，你约林小卷谈话，开门见山问他论文写到哪里了。他回答："刚开始。" 你眨了眨眼，确认自己没听错。',
       '他接着说："不过老师，我有计划。" 手机屏幕转过来：一张备忘录截图，标题《毕业论文一个月冲刺计划》，分四个阶段，每个阶段有子任务，有颜色标注，连"收集打印装订材料"都列进去了，看起来严密得像军事行动。',
@@ -408,7 +408,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_procrastination_log: {
     id: 'lxj_procrastination_log',
-    title: '林小卷：这个数据夹在实验记录里面',
+    title: '这个数据夹在实验记录里面',
     description: [
       '周例会，你在翻林小卷的项目笔记本确认进度，翻着翻着翻到了一页夹在实验记录之间的图表——X轴是"距DDL剩余小时数"，Y轴是"代码提交频率"。曲线在倒计时二十四小时处断崖式上扬，后面是一根近乎垂直的峰值线。你抬起头看他。',
       '"跟踪了三个月，" 他说，语气像在汇报别人的实验，"我是一个对截止压力高度敏感的非线性生产力系统。"',
@@ -451,7 +451,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
 
   lxj_blame_chain: {
     id: 'lxj_blame_chain',
-    title: '林小卷：这个bug是谁的责任',
+    title: '这个bug是谁的责任',
     description: [
       '代码review那天，出了一个很深的bug。林小卷看了五分钟，翻出提交历史，说"最原始的错误在这个函数，是两个月前写的"。他看了看提交者。沉默了一秒。"是我。"',
       '然后他继续往后翻，"但我是接着之前的逻辑写的"，又翻，"之前那个逻辑好像是组里XX的范式——他现在毕业了"。再翻，"这个范式最早来自一篇2019年的论文，这个论文有17个follow-up，没有人发现问题。"',
@@ -495,7 +495,7 @@ export const linXiaojuanEvents: Record<string, GameEvent> = {
   // 🎓 毕业后回访 — 建议引擎在graduation后约6个月注入
   lxj_alumni_visit: {
     id: 'lxj_alumni_visit',
-    title: '林小卷：毕业后来信',
+    title: '毕业后来信',
     triggerConditions: [{ type: 'studentStatus', studentId: 'lin_xiaojuan', status: 'graduated' }],
     description: [
       '你的收件箱里出现了一个熟悉的名字：林小卷。邮件标题是"老师好，顺便汇报一下近况"。你点开，发现"顺便"后面跟着将近两千字。',

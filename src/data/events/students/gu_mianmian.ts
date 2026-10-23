@@ -489,7 +489,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
 
   gmm_whiteboard_mystery: {
     id: 'gmm_whiteboard_mystery',
-    title: '顾眠眠：白板上的字消失了',
+    title: '白板上的字消失了',
     description: [
       '上周你在白板上留了一串推导——实验室里公认"不可删，重要"的那种，旁边还贴了张便签写着"请勿擦"。今天早上你进来，白板干干净净，便签落在地上。',
       '顾眠眠坐在她的工位上，帽子盖着脑袋，周围气氛一如往常。你环顾四周，没有别的嫌疑人。',
@@ -532,7 +532,7 @@ export const guMianmianEvents: Record<string, GameEvent> = {
 
   gmm_server_prophecy: {
     id: 'gmm_server_prophecy',
-    title: '顾眠眠：服务器宕机，她早知道',
+    title: '服务器宕机，她早知道',
     description: [
       '服务器在下午三点宕机了，正好是你们的实验跑到一半的时候，进度全没了。大家在群里叫苦，运维那边说是未知错误，排查需要几小时。',
       '你去找顾眠眠问她的实验有没有备份。帽衫里传来一句话："我早上备份了。"',

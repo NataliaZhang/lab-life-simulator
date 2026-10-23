@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { traitDefs } from '../data/traits';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface Props {
   traitId: string;
@@ -11,7 +12,9 @@ export function TraitTag({ traitId }: Props) {
   const tagRef = useRef<HTMLSpanElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const trait = traitDefs[traitId];
+  const { m, trait: localizeTrait } = useI18n();
+  const def = traitDefs[traitId];
+  const trait = def ? localizeTrait(def) : undefined;
 
   const clearHideTimer = () => {
     if (hideTimer.current) clearTimeout(hideTimer.current);
@@ -49,7 +52,7 @@ export function TraitTag({ traitId }: Props) {
         className="trait-tag trait-tag--interactive"
         role="button"
         tabIndex={0}
-        aria-label={`天赋：${trait.name}`}
+        aria-label={m.trait.aria(trait.name)}
         onClick={(e) => { e.stopPropagation(); open ? setOpen(false) : showCard(); }}
         onMouseEnter={showCard}
         onMouseLeave={scheduleHide}
@@ -66,7 +69,7 @@ export function TraitTag({ traitId }: Props) {
         >
           <div className="trait-card__name">{trait.name}</div>
           <p className="trait-card__desc">{trait.description}</p>
-          <div className="trait-card__effect-label">天赋效果</div>
+          <div className="trait-card__effect-label">{m.trait.effectLabel}</div>
           <p className="trait-card__effect">{trait.effect}</p>
         </div>
       )}

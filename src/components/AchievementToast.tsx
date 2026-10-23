@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { achievementById } from '../data/achievements';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface Props {
   achievementId: string;
@@ -14,13 +15,14 @@ export function AchievementToast({ achievementId, onDone }: Props) {
     return () => clearTimeout(timer);
   }, [achievementId, onDone]);
 
+  const { m, achievement } = useI18n();
   const def = achievementById[achievementId];
   if (!def) return null;
 
   return (
     <div className="achievement-toast" role="status">
-      <span className="achievement-toast__label">解锁成就：</span>
-      <span className="achievement-toast__title">{def.title}</span>
+      <span className="achievement-toast__label">{m.achievement.unlocked}</span>
+      <span className="achievement-toast__title">{achievement(def).title}</span>
     </div>
   );
 }

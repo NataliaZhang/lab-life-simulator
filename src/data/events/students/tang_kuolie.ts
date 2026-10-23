@@ -411,8 +411,8 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
     title: '他认识评委',
     description: [
       '你正在准备一个重要的经费申请，时间紧，竞争大，心里没底。',
-      '这天唐扩列打电话过来，语气一如既往地平静："老师，我有个朋友好像是这次基金的评委之一，论坛上认识的，聊得挺好的。你要不要我帮你引荐一下，见面聊聊？"',
-      '他补了一句："就是纯认识一下，我不是说走后门，就是觉得多认识一个人总是好的。"',
+      '这天唐扩列打电话过来，唠嗑家常一般地说："老师，我有个朋友好像是这次基金的评委之一，论坛上认识的，聊得挺好的。你要不要我帮你引荐一下，你们见面聊聊？"',
+      '他补了一句："就是纯认识一下啦，我不是说走后门，就是觉得多认识一个人总是好的。"',
     ],
     prompt: '你选择：',
     triggerConditions: [
@@ -428,7 +428,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '唐扩列安排了一次简短的线下见面，介绍时只说了双方背景，什么都没多说。对方是个很正直的学者，聊了一会儿，全是关于研究本身的话题。几个月后申请通过了，你不知道那次见面有没有起作用，也许没有。但那个领域里多了一个真正了解你在做什么的人，这本身已经够了。',
             effects: [
-              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 12 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 8 },
               { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 8 },
               { type: 'lab', stat: 'reputation', delta: 5 },
               { type: 'lab', stat: 'funding', delta: 6 },
@@ -444,8 +444,9 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
             weight: 1,
             narrative: '"好的老师，我理解。" 他没有多说，只又补了一句："那个朋友我还是会跟的，跟申请没关系，就是挺聊得来的。" 你点了点头，心里觉得他对这件事的分寸，其实比你想象中清楚得多。',
             effects: [
-              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: 6 },
-              { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: 3 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'favor', delta: -3 },
+              { type: 'student', studentId: 'tang_kuolie', stat: 'happiness', delta: -3 },
+              { type: 'lab', stat: 'reputation', delta: 2 },
             ],
           },
         ],
@@ -502,7 +503,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
 
   tkl_acknowledgment_map: {
     id: 'tkl_acknowledgment_map',
-    title: '唐扩列：他在分析论文致谢',
+    title: '他在分析论文致谢',
     description: [
       '唐扩列在看一篇顶会论文，突然说了一句"这个致谢写得挺有意思的"。你凑过去看，致谢里感谢了七个人、两个实验室、一个读书会，还有"某次不知名会议茶歇上的对话"。',
       '"这有什么有意思的？"',
@@ -545,7 +546,7 @@ export const tangKuolieEvents: Record<string, GameEvent> = {
 
   tkl_six_degrees: {
     id: 'tkl_six_degrees',
-    title: '唐扩列：他说他能用五步认识任何人',
+    title: '他说他能用五步认识任何人',
     description: [
       '唐扩列声称他能在学术圈找到从自己到任何研究者的五步以内的联系链。你表示怀疑。',
       '他说"老师你举个名字，圈内任何人都行。"',

@@ -1,33 +1,34 @@
-import type { GameEvent, LabStats } from '../types';
+import type { GameEvent, LabStats, Student } from '../types';
 import { audioManager } from '../engine/audioManager';
+import { useI18n } from '../i18n/I18nProvider';
+import { resolvePlaceholders } from '../i18n/placeholders';
 
 interface Props {
   event: GameEvent;
   lab: LabStats;
   chosenOptionIds: string[];
   activeStudentIds: string[];
-  boundStudentName?: string;
-  boundStudent2Name?: string;
+  students: Student[];
+  boundStudentId: string | null;
+  boundStudent2Id: string | null;
   onChoose: (eventId: string, optionId: string) => void;
   onClose: () => void;
 }
 
-function resolve(text: string, name?: string, name2?: string): string {
-  let result = text;
-  if (name) result = result.replace(/\{studentName\}/g, name);
-  if (name2) result = result.replace(/\{student2Name\}/g, name2);
-  return result;
-}
+export function EventModal({ event: sourceEvent, lab, chosenOptionIds, activeStudentIds, students, boundStudentId, boundStudent2Id, onChoose, onClose }: Props) {
+  const { locale, m, event: localize } = useI18n();
+  const event = localize(sourceEvent);
+  const resolve = (text: string) =>
+    resolvePlaceholders(text, { students, studentId: boundStudentId, student2Id: boundStudent2Id }, locale);
 
-export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boundStudentName, boundStudent2Name, onChoose, onClose }: Props) {
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
       <div className="modal">
         <div className="modal__header">
-          <h2 className="modal__title" id="event-title">{resolve(event.title, boundStudentName, boundStudent2Name)}</h2>
-          <button className="modal__close" onClick={onClose} aria-label="暂时关闭">✕</button>
+          <h2 className="modal__title" id="event-title">{resolve(event.title)}</h2>
+          <button className="modal__close" onClick={onClose} aria-label={m.event.closeForNow}>✕</button>
         </div>
-        <div className="modal__prompt">{resolve(event.prompt ?? '', boundStudentName, boundStudent2Name)}</div>
+        <div className="modal__prompt">{resolve(event.prompt ?? '')}</div>
         <div className="modal__options">
           {(event.options ?? []).filter(option =>
             !option.requireStudentActive || activeStudentIds.includes(option.requireStudentActive)
@@ -45,11 +46,11 @@ export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boun
                   onChoose(event.id, option.id);
                 }}
               >
-                <span className="modal__option-text">{resolve(option.text, boundStudentName, boundStudent2Name)}</span>
+                <span className="modal__option-text">{resolve(option.text)}</span>
                 <span className="modal__option-costs">
                   {option.fundingCost != null && (
                     <span className={`option-cost${!fundingOk ? ' option-cost--unaffordable' : ''}`}>
-                      💰 {option.fundingCost}万
+                      💰 {m.money(option.fundingCost)}
                     </span>
                   )}
                   {option.energyCost != null && (
@@ -59,7 +60,7 @@ export function EventModal({ event, lab, chosenOptionIds, activeStudentIds, boun
                   )}
                   {!choiceOk && (
                     <span className="option-cost option-cost--unaffordable">
-                      🔒 需先购买服务器
+                      {m.event.requiresServer}
                     </span>
                   )}
                 </span>

@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import type { LogEntry, StatChange } from '../types';
 import { expressionUrl } from '../data/studentArt';
+import { useI18n } from '../i18n/I18nProvider';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const FEEDBACK_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor';
 
 function FeedbackModal({ onClose }: { onClose: () => void }) {
+  const { m } = useI18n();
   return (
     <div
       style={{
@@ -28,24 +30,24 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
         }}
         onClick={e => e.stopPropagation()}
       >
-        <p style={{ margin: '0 0 0.5rem', fontWeight: 700, fontSize: '1rem' }}>感谢你玩这个游戏</p>
+        <p style={{ margin: '0 0 0.5rem', fontWeight: 700, fontSize: '1rem' }}>{m.intro.feedbackTitle}</p>
         <p style={{
           margin: '0 0 1.5rem',
           fontSize: '0.875rem',
           lineHeight: 1.7,
           color: 'var(--color-text-muted)',
         }}>
-          如果你愿意，可以花两分钟填写一份简短的反馈问卷，帮助我们改进游戏。
+          {m.intro.feedbackBody}
         </p>
         <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
           <button
             className="btn btn--primary btn--sm"
             onClick={() => { window.open(FEEDBACK_URL, '_blank', 'noopener,noreferrer'); onClose(); }}
           >
-            去填写
+            {m.intro.feedbackGo}
           </button>
           <button className="btn btn--ghost btn--sm" onClick={onClose}>
-            下次再说
+            {m.intro.feedbackLater}
           </button>
         </div>
       </div>
@@ -57,7 +59,13 @@ interface Props {
   log: LogEntry[];
 }
 
+function formatDelta(c: StatChange, moneyDelta: (d: number) => string): string {
+  if (c.unit === 'funding') return moneyDelta(c.delta);
+  return (c.delta >= 0 ? `+${c.delta}` : `${c.delta}`) + (c.suffix ?? '');
+}
+
 function StatChangePills({ changes }: { changes: StatChange[] }) {
+  const { m, text } = useI18n();
   return (
     <div className="stat-changes">
       {changes.map((c, i) => (
@@ -65,7 +73,7 @@ function StatChangePills({ changes }: { changes: StatChange[] }) {
           key={i}
           className={`stat-change-pill ${c.delta >= 0 ? 'stat-change-pill--pos' : 'stat-change-pill--neg'}`}
         >
-          {c.label} {c.delta >= 0 ? `+${c.delta}` : c.delta}{c.suffix ?? ''}
+          {text(c.label)} {formatDelta(c, m.moneyDelta)}
         </span>
       ))}
     </div>
@@ -73,16 +81,17 @@ function StatChangePills({ changes }: { changes: StatChange[] }) {
 }
 
 function LogEntryItem({ entry }: { entry: LogEntry }) {
+  const { m, text } = useI18n();
   const choiceEl = entry.choiceText && (
     <div className="log-entry__choice">
-      <span className="log-entry__choice-label">选择：</span>
-      {entry.choiceText}
+      <span className="log-entry__choice-label">{m.log.choice}</span>
+      {text(entry.choiceText)}
     </div>
   );
 
   const narrativeEl = (
     <div className="log-entry__narrative">
-      {entry.narrative.split('\n\n').map((para, i) => (
+      {text(entry.narrative).split('\n\n').map((para, i) => (
         <p key={i}>{para}</p>
       ))}
     </div>
@@ -91,9 +100,9 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
   return (
     <article className={`log-entry log-entry--${entry.type}`}>
       <header className="log-entry__header">
-        <span className="log-entry__title">{entry.title}</span>
+        <span className="log-entry__title">{text(entry.title)}</span>
         <span className="log-entry__time">
-          第{entry.time.year}年&thinsp;{entry.time.month}月
+          {m.time.log(entry.time.year, entry.time.month)}
         </span>
       </header>
       {entry.studentPortrait ? (
@@ -128,7 +137,7 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
       )}
       {entry.imageRevealed && entry.narrativeAfterImage && (
         <div className="log-entry__narrative">
-          {entry.narrativeAfterImage.split('\n\n').map((para, i) => (
+          {text(entry.narrativeAfterImage).split('\n\n').map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </div>
@@ -140,18 +149,14 @@ function LogEntryItem({ entry }: { entry: LogEntry }) {
 export function StoryLog({ log }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const { m } = useI18n();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [log]);
 
   if (log.length === 0) {
-    const features = [
-      '招募卷王、天才、摸鱼怪和未来创业家',
-      '见证学生毕业、跑路、延毕或一夜成名',
-      '申请经费、回复 Reviewer、拯救服务器',
-      '调查到底是谁偷偷占满了全部 GPU',
-    ] as const;
+    const features = m.intro.features;
 
     return (
       <>
@@ -179,7 +184,7 @@ export function StoryLog({ log }: Props) {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
             }}>
-              欢迎来到奇妙实验室模拟器！
+              {m.intro.welcome}
             </h2>
           </div>
 
@@ -199,7 +204,7 @@ export function StoryLog({ log }: Props) {
             opacity: 0.7,
             fontSize: '0.875rem',
           }}>
-            你是一名刚刚入职计算机系的助理教授，拥有一间空实验室、一笔启动经费，以及一个没人知道会变成什么样的未来。
+            {m.intro.premise}
           </p>
 
           {/* 特性列表 */}
@@ -211,7 +216,7 @@ export function StoryLog({ log }: Props) {
               textTransform: 'uppercase',
               opacity: 0.38,
             }}>
-              在接下来的六年里，你将有机会：
+              {m.intro.featuresHeading}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               {features.map((text, i) => (
@@ -250,11 +255,11 @@ export function StoryLog({ log }: Props) {
             borderTop: '1px solid currentColor',
             opacity: 0.55,
           }}>
-            <p style={{ margin: '0 0 0.2rem', fontSize: '0.8rem' }}>无论如何，</p>
+            <p style={{ margin: '0 0 0.2rem', fontSize: '0.8rem' }}>{m.intro.closingLead}</p>
             <p style={{ margin: '0 0 0.35rem', fontWeight: 700, fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
-              请努力活到 Tenure。
+              {m.intro.closingMain}
             </p>
-            <p style={{ margin: 0, fontSize: '0.8rem' }}>祝你好运！</p>
+            <p style={{ margin: 0, fontSize: '0.8rem' }}>{m.intro.closingTail}</p>
           </div>
 
           {/* 反馈按钮 */}
@@ -264,7 +269,7 @@ export function StoryLog({ log }: Props) {
               style={{ fontSize: '0.75rem', opacity: 0.5 }}
               onClick={() => setFeedbackOpen(true)}
             >
-              反馈
+              {m.intro.feedback}
             </button>
           </div>
 

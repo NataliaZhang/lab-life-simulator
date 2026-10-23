@@ -11,6 +11,9 @@ import type {
   QueuedEvent,
   GameTime,
   ActiveProject,
+  GameEvent,
+  Locale,
+  LocalizedText,
 } from '../types';
 import { initialPoolIds, allCandidates, year1RestrictedIds } from '../data/studentPool';
 import { openingEventIds } from '../data/events';
@@ -18,6 +21,11 @@ import { getEvent, pickOutcome } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
 import { projectById } from '../data/projects';
+import { bothLocales, joinText } from '../i18n/locale';
+import { getMessages } from '../i18n/messages';
+import { localizeEvent, nameOf, getCandidateText } from '../i18n/content';
+import { resolvePlaceholders } from '../i18n/placeholders';
+import type { PlaceholderContext } from '../i18n/placeholders';
 
 // Admission cost rises in year 3+ when PhD stipends doubled.
 function getAdmissionCost(year: number): number {
@@ -107,45 +115,35 @@ export function createInitialState(): GameState {
 
 // ─── Stat labels ───────────────────────────────────────────────────────────
 
-function labStatLabel(stat: LabStatKey): string {
-  const map: Record<LabStatKey, string> = {
-    funding: '资金',
-    reputation: '声望',
-    energy: '精力',
-    energyDepletedCount: '精力耗尽次数',
-  };
-  return map[stat];
+function labStatLabel(stat: LabStatKey, locale: Locale): string {
+  return getMessages(locale).stat[stat];
 }
 
-function studentStatLabel(stat: StudentStatKey): string {
-  const map: Record<StudentStatKey, string> = {
-    favor: '好感',
-    happiness: '心情',
-    projectProgress: '项目进度',
-    'skills.theory': '理论',
-    'skills.engineering': '工程',
-    'skills.social': '社交',
-  };
-  return map[stat] ?? stat;
+function studentStatLabel(stat: StudentStatKey, locale: Locale): string {
+  const labels = getMessages(locale).stat;
+  switch (stat) {
+    case 'skills.theory':      return labels.theory;
+    case 'skills.engineering': return labels.engineering;
+    case 'skills.social':      return labels.social;
+    default:                   return labels[stat];
+  }
 }
 
-// ─── Placeholder resolution ────────────────────────────────────────────────
+// Stat-pill label "<student> · <stat>" in every language.
+function studentStatChangeLabel(student: Student, stat: StudentStatKey): LocalizedText {
+  return bothLocales(l => getMessages(l).engine.statFor(nameOf(student, l), studentStatLabel(stat, l)));
+}
 
-function resolvePlaceholders(
-  text: string,
-  studentId: string | null,
-  students: Student[],
-  student2Id?: string | null,
-  projectMonths?: number | null,
-): string {
-  let result = text;
-  const s1 = studentId ? students.find(s => s.id === studentId) : null;
-  const s2 = student2Id ? students.find(s => s.id === student2Id) : null;
-  if (s1) result = result.replace(/\{studentName\}/g, s1.name);
-  if (s2) result = result.replace(/\{student2Name\}/g, s2.name);
-  if (projectMonths != null) result = result.replace(/\{projectMonths\}/g, String(projectMonths));
-  else result = result.replace(/\{projectMonths\}/g, '数');
-  return result;
+// ─── Event text ────────────────────────────────────────────────────────────
+
+// Renders one text field of an event in every language with placeholders filled.
+// `pick` reads the field from the event as localized for that language.
+function eventText(
+  event: GameEvent,
+  pick: (localized: GameEvent) => string,
+  ctx: PlaceholderContext,
+): LocalizedText {
+  return bothLocales(l => resolvePlaceholders(pick(localizeEvent(event, l)), ctx, l));
 }
 
 // ─── Effect Application ────────────────────────────────────────────────────
@@ -188,17 +186,16 @@ interface ApplyEffectsResult {
 // Applies a projectProgress delta to the project the student is currently leading.
 // Returns the updated activeProjects array, and pushes a stat change entry if applicable.
 function applyProjectProgressEffect(
-  studentId: string,
-  studentName: string,
+  student: Student,
   delta: number,
   activeProjects: ActiveProject[],
   statChanges: StatChange[],
 ): ActiveProject[] {
-  const projectIdx = activeProjects.findIndex(ap => ap.leaderId === studentId);
+  const projectIdx = activeProjects.findIndex(ap => ap.leaderId === student.id);
   if (projectIdx === -1) return activeProjects; // student not leading any project — skip
   const ap = activeProjects[projectIdx]!;
   const newProgress = Math.min(100, Math.max(0, ap.progress + delta));
-  statChanges.push({ label: `${studentName}·项目进度`, delta });
+  statChanges.push({ label: studentStatChangeLabel(student, 'projectProgress'), delta });
   return activeProjects.map((p, i) => i === projectIdx ? { ...p, progress: newProgress } : p);
 }
 
@@ -223,13 +220,17 @@ function applyEffects(
   for (const effect of effects) {
     if (effect.type === 'lab') {
       lab = applyLabEffect(lab, effect.stat, effect.delta);
-      statChanges.push({ label: labStatLabel(effect.stat), delta: effect.delta });
+      statChanges.push({
+        label: bothLocales(l => labStatLabel(effect.stat, l)),
+        delta: effect.delta,
+        ...(effect.stat === 'funding' ? { unit: 'funding' as const } : {}),
+      });
     } else if (effect.type === 'student') {
       if (effect.stat === 'projectProgress') {
         // Redirect to the student's active project progress
         const target = state.students.find(s => s.id === effect.studentId);
         if (target) {
-          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+          activeProjects = applyProjectProgressEffect(target, effect.delta, activeProjects, statChanges);
         }
       } else {
         if (effect.stat === 'happiness') trackMood(effect.studentId, effect.delta);
@@ -238,7 +239,7 @@ function applyEffects(
         );
         const target = state.students.find(s => s.id === effect.studentId);
         if (target) {
-          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+          statChanges.push({ label: studentStatChangeLabel(target, effect.stat), delta: effect.delta });
         }
       }
     } else if (effect.type === 'allStudents') {
@@ -246,7 +247,7 @@ function applyEffects(
       if (effect.stat === 'projectProgress') {
         // Apply progress to each student's active project individually
         for (const s of activeStudents) {
-          activeProjects = applyProjectProgressEffect(s.id, s.name, effect.delta, activeProjects, statChanges);
+          activeProjects = applyProjectProgressEffect(s, effect.delta, activeProjects, statChanges);
         }
       } else {
         if (effect.stat === 'happiness') {
@@ -255,9 +256,10 @@ function applyEffects(
         students = students.map(s =>
           s.status === 'active' ? applyStudentStat(s, effect.stat, effect.delta) : s,
         );
-        const allLabel = activeStudents.length === 1 && activeStudents[0]
-          ? `${activeStudents[0].name}·${studentStatLabel(effect.stat)}`
-          : `全体·${studentStatLabel(effect.stat)}`;
+        const only = activeStudents.length === 1 ? activeStudents[0] : undefined;
+        const allLabel = only
+          ? studentStatChangeLabel(only, effect.stat)
+          : bothLocales(l => getMessages(l).engine.everyone(studentStatLabel(effect.stat, l)));
         statChanges.push({ label: allLabel, delta: effect.delta });
       }
     } else if (effect.type === 'randomStudent') {
@@ -267,13 +269,13 @@ function applyEffects(
         : active[Math.floor(Math.random() * active.length)];
       if (target) {
         if (effect.stat === 'projectProgress') {
-          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+          activeProjects = applyProjectProgressEffect(target, effect.delta, activeProjects, statChanges);
         } else {
           if (effect.stat === 'happiness') trackMood(target.id, effect.delta);
           students = students.map(s =>
             s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
           );
-          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+          statChanges.push({ label: studentStatChangeLabel(target, effect.stat), delta: effect.delta });
         }
       }
     } else if (effect.type === 'randomStudent2') {
@@ -283,13 +285,13 @@ function applyEffects(
         : active[Math.floor(Math.random() * active.length)];
       if (target) {
         if (effect.stat === 'projectProgress') {
-          activeProjects = applyProjectProgressEffect(target.id, target.name, effect.delta, activeProjects, statChanges);
+          activeProjects = applyProjectProgressEffect(target, effect.delta, activeProjects, statChanges);
         } else {
           if (effect.stat === 'happiness') trackMood(target.id, effect.delta);
           students = students.map(s =>
             s.id === target.id ? applyStudentStat(s, effect.stat, effect.delta) : s,
           );
-          statChanges.push({ label: `${target.name}·${studentStatLabel(effect.stat)}`, delta: effect.delta });
+          statChanges.push({ label: studentStatChangeLabel(target, effect.stat), delta: effect.delta });
         }
       }
     } else if (effect.type === 'graduateStudent') {
@@ -302,7 +304,7 @@ function applyEffects(
             ? { ...s, status: 'graduated' as const, graduatedAt: { ...state.time } }
             : s,
         );
-        statChanges.push({ label: `${target.name}·毕业`, delta: 1 });
+        statChanges.push({ label: bothLocales(l => getMessages(l).engine.graduated(nameOf(target, l))), delta: 1 });
       }
     } else if (effect.type === 'leaveStudent') {
       const target = boundStudentId
@@ -312,7 +314,7 @@ function applyEffects(
         students = students.map(s =>
           s.id === target.id ? { ...s, status: 'left' as const } : s,
         );
-        statChanges.push({ label: `${target.name}·离组`, delta: -1 });
+        statChanges.push({ label: bothLocales(l => getMessages(l).engine.left(nameOf(target, l))), delta: -1 });
       }
     } else if (effect.type === 'unlockIdea') {
       // Add the project idea only if not already owned or active/completed
@@ -343,13 +345,19 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const boundStudent2Id = nextQueued.student2Id ?? null;
 
       const qProjectMonths = nextQueued.projectMonths ?? null;
+      const ctx: PlaceholderContext = {
+        students: state.students,
+        studentId: boundStudentId,
+        student2Id: boundStudent2Id,
+        projectMonths: qProjectMonths,
+      };
       const introEntry: LogEntry = {
         id: `${nextQueued.id}_p0_${Date.now()}`,
         eventId: nextQueued.id,
         time: { ...state.time },
         type: 'event-intro',
-        title: resolvePlaceholders(event.title, boundStudentId, state.students, boundStudent2Id, qProjectMonths),
-        narrative: resolvePlaceholders(event.description[0] ?? '', boundStudentId, state.students, boundStudent2Id, qProjectMonths),
+        title: eventText(event, e => e.title, ctx),
+        narrative: eventText(event, e => e.description[0] ?? '', ctx),
         // If the event has a description image, attach it now but keep it hidden until clicked.
         ...(event.descriptionImage
           ? { image: event.descriptionImage, imageRevealed: false }
@@ -388,13 +396,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const nextIdx = state.activeParagraphIndex + 1;
       if (nextIdx >= event.description.length) return state;
 
-      const para = resolvePlaceholders(
-        event.description[nextIdx] ?? '',
-        state.activeBoundStudentId,
-        state.students,
-        state.activeBoundStudent2Id,
-        state.activeProjectMonths,
-      );
+      const para = eventText(event, e => e.description[nextIdx] ?? '', {
+        students: state.students,
+        studentId: state.activeBoundStudentId,
+        student2Id: state.activeBoundStudent2Id,
+        projectMonths: state.activeProjectMonths,
+      });
 
       // Append to the last event-intro entry for this event.
       // After the description image is revealed, paragraphs go into narrativeAfterImage
@@ -406,10 +413,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         );
         if (!isLast) return e;
         if (state.activeDescriptionImageRevealed) {
-          const prev = e.narrativeAfterImage ?? '';
-          return { ...e, narrativeAfterImage: prev ? prev + '\n\n' + para : para };
+          const prev = e.narrativeAfterImage;
+          return { ...e, narrativeAfterImage: prev ? joinText(prev, para, '\n\n') : para };
         }
-        return { ...e, narrative: e.narrative + '\n\n' + para };
+        return { ...e, narrative: joinText(e.narrative, para, '\n\n') };
       });
 
       return {
@@ -466,6 +473,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       const outcome = pickOutcome(option.outcomes, state);
       if (!outcome) return state;
+      // Index into the outcome list so the matching narrative can be read in every language.
+      const outcomeIdx = option.outcomes.indexOf(outcome);
 
       const costEffects: StateEffect[] = [];
       if (fundingCost > 0) costEffects.push({ type: 'lab', stat: 'funding', delta: -fundingCost });
@@ -502,14 +511,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         action.optionId === 'archive' &&
         state.activeBoundStudentId !== null;
 
+      const ctx: PlaceholderContext = {
+        students: state.students,
+        studentId: state.activeBoundStudentId,
+        student2Id: state.activeBoundStudent2Id,
+        projectMonths: state.activeProjectMonths,
+      };
+      const pickOption = (e: GameEvent) => e.options?.find(o => o.id === option.id) ?? option;
       const logEntry: LogEntry = {
         id: `${action.eventId}_${Date.now()}`,
         eventId: action.eventId,
         time: { ...state.time },
         type: 'event',
-        title: resolvePlaceholders(event.title, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
-        choiceText: resolvePlaceholders(option.text, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
-        narrative: resolvePlaceholders(outcome.narrative, state.activeBoundStudentId, state.students, state.activeBoundStudent2Id, state.activeProjectMonths),
+        title: eventText(event, e => e.title, ctx),
+        choiceText: eventText(event, e => pickOption(e).text, ctx),
+        narrative: eventText(event, e => pickOption(e).outcomes[outcomeIdx]?.narrative ?? outcome.narrative, ctx),
         statChanges: statChanges.length > 0 ? statChanges : undefined,
         studentPortrait: isStudentLedProjectComplete ? state.activeBoundStudentId ?? undefined : undefined,
         // Attach image as hidden; revealed on the next click via REVEAL_PENDING_IMAGE.
@@ -574,8 +590,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         id: `hint_first_idea_${action.eventId}`,
         time: { ...state.time },
         type: 'system',
-        title: '',
-        narrative: '💡 点击右上角的"项目"可以查看灵感，并安排学生推进研究项目。',
+        title: bothLocales(() => ''),
+        narrative: bothLocales(l => getMessages(l).engine.firstIdeaHint),
       } : null;
 
       return {
@@ -608,7 +624,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         id: `summary_slide_${remaining.length}_${state.time.year}_${state.time.month}`,
         time: { ...state.time },
         type: 'system',
-        title: '六年总结',
+        title: bothLocales(l => getMessages(l).engine.summaryTitle),
         narrative: currentSlide,
       };
       return { ...state, pendingSummarySlides: remaining, storyLog: [...state.storyLog, slideEntry] };
@@ -640,17 +656,20 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const canOfferMore = state.time.year >= 3 && newRecruitedCount < 2 && unshownPool.length >= 2;
 
       const isFirstStudent = state.students.filter(s => s.status === 'active').length === 0;
-      const admitNarrative = isFirstStudent
-        ? `${candidate.name}正式入组。${candidate.tagline}\n\n💡 点击右上角的"成员"可以随时查看实验室所有成员的状态。`
-        : `${candidate.name}正式入组。${candidate.tagline}`;
+      const admitNarrative = bothLocales(l => {
+        const m = getMessages(l).engine;
+        const { name, tagline } = getCandidateText(candidate, l);
+        const line = m.admitNarrative(name, tagline);
+        return isFirstStudent ? `${line}\n\n${m.firstStudentHint}` : line;
+      });
 
       const logEntry: LogEntry = {
         id: `admit_${candidateId}_${Date.now()}`,
         time: { ...state.time },
         type: 'system',
-        title: `${candidate.name} 加入实验室`,
+        title: bothLocales(l => getMessages(l).engine.admitTitle(getCandidateText(candidate, l).name)),
         narrative: admitNarrative,
-        statChanges: [{ label: '资金', delta: -admissionCost }],
+        statChanges: [{ label: bothLocales(l => labStatLabel('funding', l)), delta: -admissionCost, unit: 'funding' }],
       };
 
       // Immediately queue the student's first-meeting event, bound to this student

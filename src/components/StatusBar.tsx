@@ -1,5 +1,5 @@
 import type { GameState } from '../types';
-import { formatTime } from '../types';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface Props {
   state: GameState;
@@ -9,53 +9,71 @@ interface Props {
   onToggleProjectPanel: () => void;
 }
 
-function reputationDesc(rep: number): string {
-  if (rep === 0) return 'Google搜你，前几条结果还不是你';
-  if (rep < 5)   return '有几篇引用，大多是自引';
-  if (rep < 15)  return '圈内有人偶尔听说过你';
-  if (rep < 30)  return '同方向小有名气';
-  if (rep < 60)  return '顶会常客，圈内大佬';
-  return '学术大牛，门生满天下';
+// Index into the localized reputation tier descriptions.
+function reputationTier(rep: number): number {
+  if (rep === 0) return 0;
+  if (rep < 5)   return 1;
+  if (rep < 15)  return 2;
+  if (rep < 30)  return 3;
+  if (rep < 60)  return 4;
+  return 5;
+}
+
+// Full label on wide screens, compact label on phones (see .status-text--* in index.css).
+function StatLabel({ full, short }: { full: string; short: string }) {
+  return (
+    <>
+      <span className="stat-label status-text--full">{full}</span>
+      {short && <span className="stat-label status-text--short">{short}</span>}
+    </>
+  );
 }
 
 export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, projectPanelOpen, onToggleProjectPanel }: Props) {
   const { lab, time, phase } = state;
+  const { m } = useI18n();
 
   return (
     <header className="status-bar">
       <div className="status-left">
-        <span className="game-title">实验室模拟器</span>
-        <span className="time-display">{formatTime(time)}</span>
+        <span className="game-title">{m.app.title}</span>
+        <span className="time-display">
+          <span className="status-text--full">{m.time.full(time.year, time.month)}</span>
+          <span className="status-text--short">{m.time.short(time.year, time.month)}</span>
+        </span>
         {phase !== 'playing' && (
-          <span className="phase-badge">{phase === 'won' ? '毕业了' : '结束了'}</span>
+          <span className="phase-badge">
+            <span className="status-text--full">{phase === 'won' ? m.status.phaseWon : m.status.phaseOver}</span>
+            <span className="status-text--short">{phase === 'won' ? m.status.phaseWonShort : m.status.phaseOverShort}</span>
+          </span>
         )}
       </div>
       <div className="status-right">
         <span className={`stat-chip${lab.funding < 10 ? ' stat-chip--warn' : ''}`}>
-          <span className="stat-label">资金</span>
-          <span className="stat-value">{lab.funding}</span>
+          <StatLabel full={m.stat.funding} short={m.status.shortLabel.funding} />
+          <span className="stat-value">{m.moneyShort(lab.funding)}</span>
         </span>
-        <span className="stat-chip" title={reputationDesc(lab.reputation)}>
-          <span className="stat-label">声望</span>
+        <span className="stat-chip" title={m.status.reputationDesc[reputationTier(lab.reputation)]}>
+          <StatLabel full={m.stat.reputation} short={m.status.shortLabel.reputation} />
           <span className="stat-value">{lab.reputation}</span>
         </span>
         <span className={`stat-chip${lab.energy < 30 ? ' stat-chip--warn' : ''}`}>
-          <span className="stat-label">精力</span>
+          <StatLabel full={m.stat.energy} short={m.status.shortLabel.energy} />
           <span className="stat-value">{lab.energy}</span>
         </span>
         <button
           className={`panel-toggle-btn${projectPanelOpen ? ' panel-toggle-btn--active' : ''}`}
           onClick={onToggleProjectPanel}
-          title={projectPanelOpen ? '关闭项目面板' : '查看项目'}
+          title={projectPanelOpen ? m.status.closeProjects : m.status.openProjects}
         >
-          项目{state.projectIdeas.length > 0 && !projectPanelOpen ? ` (${state.projectIdeas.length})` : ''}
+          {m.status.projects}{state.projectIdeas.length > 0 && !projectPanelOpen ? ` (${state.projectIdeas.length})` : ''}
         </button>
         <button
           className={`panel-toggle-btn${studentPanelOpen ? ' panel-toggle-btn--active' : ''}`}
           onClick={onToggleStudentPanel}
-          title={studentPanelOpen ? '隐藏成员' : '查看成员'}
+          title={studentPanelOpen ? m.status.hideMembers : m.status.showMembers}
         >
-          成员
+          {m.status.members}
         </button>
       </div>
     </header>

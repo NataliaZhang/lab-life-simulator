@@ -480,7 +480,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
 
   yzq_reviewer_rant: {
     id: 'yzq_reviewer_rant',
-    title: '叶知秋：审稿人要求，她整理了一份名词表',
+    title: '审稿人要求，她整理了一份名词表',
     description: [
       '投稿被拒，审稿意见今天到了。叶知秋坐在那儿，把审稿人的要求逐条读完，然后合上邮件，用一种非常平静的语气说："这三条要求两两矛盾。"',
       '她打开文档，给你展示了一个表格：左列是审稿人1的要求，右列是审稿人2的要求，中间是她标注的冲突位置，用数学符号写着"⊥"。最后一行写：如果同时满足所有要求，命题不成立。',
@@ -523,7 +523,7 @@ export const yeZhiqiuEvents: Record<string, GameEvent> = {
 
   yzq_abstract_war: {
     id: 'yzq_abstract_war',
-    title: '叶知秋：摘要已经改到第十三稿',
+    title: '摘要已经改到第十三稿',
     description: [
       '论文摘要的字数限制是二百五十词。叶知秋的初稿是四百词，精简到三百词，然后精简到二百七十词，然后发现删掉某个从句之后语义变了，又加回来变成二百八十词。这个过程已经持续了五天。',
       '今天她拿着第十三版来找你，说："老师，我觉得这件事有一个理论下界。"',

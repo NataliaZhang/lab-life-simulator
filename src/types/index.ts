@@ -1,5 +1,7 @@
 import type { ActiveProject, CompletedProject } from './project';
+import type { LocalizedText } from './i18n';
 export type { ActiveProject, CompletedProject } from './project';
+export type { Locale, LocalizedText } from './i18n';
 
 // ─── Time ──────────────────────────────────────────────────────────────────
 
@@ -10,10 +12,6 @@ export interface GameTime {
 
 export function timeToMonths(t: GameTime): number {
   return (t.year - 1) * 12 + (t.month - 1);
-}
-
-export function formatTime(t: GameTime): string {
-  return `第 ${t.year} 年 ${t.month} 月`;
 }
 
 // ─── Students ──────────────────────────────────────────────────────────────
@@ -127,12 +125,15 @@ export interface GameEvent {
 
 // 'event-intro' — description logged when event is presented
 // 'event'       — choice + outcome logged after player chooses
+// Text fields hold every language (LocalizedText) so the log re-renders on a language switch.
+// Saves from before localization hold plain strings; the save loader upgrades them.
 export type LogEntryType = 'event-intro' | 'event' | 'monthly' | 'system';
 
 export interface StatChange {
-  label: string;
+  label: LocalizedText;
   delta: number;
   suffix?: string; // optional unit appended to delta, e.g. '%'
+  unit?: 'funding'; // delta is money (万元); formatted per language when rendered
 }
 
 export interface LogEntry {
@@ -140,9 +141,9 @@ export interface LogEntry {
   eventId?: string;
   time: GameTime;
   type: LogEntryType;
-  title: string;
-  choiceText?: string;
-  narrative: string;
+  title: LocalizedText;
+  choiceText?: LocalizedText;
+  narrative: LocalizedText;
   statChanges?: StatChange[];
   /** Student ID whose smug portrait to show alongside this entry's narrative. */
   studentPortrait?: string;
@@ -151,7 +152,7 @@ export interface LogEntry {
   /** false = image hasn't been revealed yet (pending a click); true/undefined = visible. */
   imageRevealed?: boolean;
   /** Description paragraphs that were revealed after the image; rendered below the image. */
-  narrativeAfterImage?: string;
+  narrativeAfterImage?: LocalizedText;
 }
 
 // ─── Admission ─────────────────────────────────────────────────────────────
@@ -219,7 +220,7 @@ export interface GameState {
   // Ending-summary paragraphs queued for one-at-a-time reveal.
   // Each click dismisses the first entry and appends it to storyLog.
   // Blocks PRESENT_EVENT and ADVANCE_MONTH until empty.
-  pendingSummarySlides: string[];
+  pendingSummarySlides: LocalizedText[];
   // Events deferred via nextMonthEventIds — injected into the queue at the next ADVANCE_MONTH.
   deferredEvents: QueuedEvent[];
   // Students whose happiness was ≤ 0 last month. First offence → grace period (low-mood events fire

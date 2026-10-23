@@ -1,6 +1,9 @@
-import type { GameState, LogEntry, QueuedEvent } from '../types';
+import type { GameState, LogEntry, QueuedEvent, Locale } from '../types';
 import type { ActiveProject, CompletedProject, ProjectDefinition } from '../types/project';
 import { projectById } from '../data/projects';
+import { bothLocales } from '../i18n/locale';
+import { getMessages } from '../i18n/messages';
+import { getProjectText, nameOf } from '../i18n/content';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -98,10 +101,13 @@ export function getStudentActiveProject(
 export function getLeaderDisplayName(
   leaderId: string | null,
   students: GameState['students'],
+  locale: Locale,
 ): string {
-  if (!leaderId) return '未分配';
-  if (leaderId === 'pi') return 'PI';
-  return students.find(s => s.id === leaderId)?.name ?? '未分配';
+  const m = getMessages(locale).projects;
+  if (!leaderId) return m.unassigned;
+  if (leaderId === 'pi') return m.pi;
+  const student = students.find(s => s.id === leaderId);
+  return student ? nameOf(student, locale) : m.unassigned;
 }
 
 // ─── Start a project ───────────────────────────────────────────────────────
@@ -284,8 +290,10 @@ export function processMonthlyProjects(state: GameState): MonthlyProjectResult {
           id: `project_pi_stall_${ap.projectId}_${state.time.year}_${state.time.month}`,
           time: { ...state.time },
           type: 'system',
-          title: `「${projectDef.name}」你的精力耗尽`,
-          narrative: `你的精力耗尽，「${projectDef.name}」本月完成推进后，项目负责人自动解除，进度回退至 ${progressAfterPenalty}%。请重新分配负责人。`,
+          title: bothLocales(l => getMessages(l).engine.piStallTitle(getProjectText(projectDef, l).name)),
+          narrative: bothLocales(l =>
+            getMessages(l).engine.piStallNarrative(getProjectText(projectDef, l).name, progressAfterPenalty),
+          ),
         });
         continue;
       }

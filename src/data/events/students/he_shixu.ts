@@ -503,7 +503,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
 
   hsx_todo_theory: {
     id: 'hsx_todo_theory',
-    title: '贺时序：他统计了所有没完成的TODO',
+    title: '他统计了所有没完成的TODO',
     description: [
       '贺时序拿着一份报告，标题是《组内代码库TODO注释现状分析》，副标题是"兼论为什么有些TODO永远不会被执行"。他说自己花了周末扫描了所有仓库，统计结果如下：组里共有二百三十七条TODO，其中百分之六十三存活超过六个月，百分之二十一的作者已经毕业离组。',
       '"这个最老的TODO是什么？" 你问。',
@@ -549,7 +549,7 @@ export const heShixuEvents: Record<string, GameEvent> = {
 
   hsx_meeting_timing: {
     id: 'hsx_meeting_timing',
-    title: '贺时序：他做了一份组会参与度分析',
+    title: '他做了一份组会参与度分析',
     description: [
       '组会结束，贺时序留在最后，拿着一张打印出来的表格，有点犹豫地递给你。表格记录了过去半年所有组会的每个人发言时长、发言时间点（是否在第一个小时还是最后二十分钟）、打断次数，以及"结论被讨论有效改变"的比例。',
       '"这个……你记了半年？"',

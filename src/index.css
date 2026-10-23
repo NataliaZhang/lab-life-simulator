@@ -254,6 +254,11 @@ html, body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Status bar text has a full and a compact variant; the compact one is for phones. */
+.status-text--short {
+  display: none;
+}
+
 .panel-toggle-btn {
   padding: 4px 10px;
   background: var(--color-surface);
@@ -980,6 +985,52 @@ html, body {
     padding: 2px 7px;
     font-size: 11px;
   }
+
+  .status-text--full {
+    display: none;
+  }
+
+  .status-text--short {
+    display: inline;
+  }
+
+  /* English labels run longer than Chinese; keep the bar on one line at phone widths. */
+  html[lang="en"] .time-display,
+  html[lang="en"] .panel-toggle-btn {
+    white-space: nowrap;
+  }
+
+  html[lang="en"] .status-right .panel-toggle-btn {
+    padding: 4px 7px;
+  }
+
+  html[lang="en"] .status-right .stat-chip {
+    padding: 2px 6px;
+  }
+
+  html[lang="en"] .status-bar {
+    padding: 0 6px;
+  }
+
+  html[lang="en"] .status-right {
+    gap: 3px;
+  }
+
+  html[lang="en"] .status-right .panel-toggle-btn:first-of-type {
+    margin-left: 2px;
+  }
+}
+
+/* Below 360px even compact English can't fit on one line; wrap like the Chinese bar does. */
+@media (max-width: 359px) {
+  html[lang="en"] .time-display,
+  html[lang="en"] .panel-toggle-btn {
+    white-space: normal;
+  }
+
+  html[lang="en"] .status-right .panel-toggle-btn {
+    padding: 4px 5px;
+  }
 }
 
 /* ─── Ending Modal ──────────────────────────────────────────────────────────── */
@@ -1034,6 +1085,7 @@ html, body {
 
 .ending-modal__stats {
   display: flex;
+  flex-wrap: wrap; /* longer English labels wrap on phones instead of widening the modal */
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -1649,6 +1701,10 @@ html, body {
   gap: 0;
   align-self: stretch;
   align-items: flex-end;
+  /* Scroll sideways on narrow screens instead of squeezing the close button */
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .gallery-tab-btn {
@@ -1664,6 +1720,8 @@ html, body {
   color: var(--color-text-muted);
   transition: color 0.15s, border-color 0.15s;
   letter-spacing: 0.02em;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .gallery-tab-btn:hover {
@@ -1679,6 +1737,7 @@ html, body {
 .gallery-panel__close {
   align-self: center;
   margin-bottom: 2px;
+  flex-shrink: 0;
 }
 
 .gallery-panel__body {
@@ -1925,6 +1984,73 @@ html, body {
   .gallery-panel__body {
     padding: 16px;
   }
+
+  .gallery-panel__header {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .gallery-tab-btn {
+    padding: 8px 12px;
+  }
+
+  /* iOS zooms into focused fields smaller than 16px */
+  .gallery-backup__code {
+    font-size: 16px;
+  }
+}
+
+/* ─── Gallery — Backup tab ────────────────────────────────────────────────── */
+
+.gallery-backup {
+  max-width: 640px;
+}
+
+.gallery-backup__intro {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+
+.gallery-backup__section {
+  margin-bottom: 28px;
+}
+
+.gallery-backup__hint {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0 0 10px;
+}
+
+.gallery-backup__code {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  word-break: break-all;
+  resize: vertical;
+}
+
+.gallery-backup__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.gallery-backup__status {
+  font-size: 13px;
+  color: var(--color-success);
+}
+
+.gallery-backup__status--error {
+  color: var(--color-warn);
 }
 
 /* ─── Gallery — Projects tab ──────────────────────────────────────────────── */

@@ -9,12 +9,10 @@ import {
   calcEfficiencyMultiplier,
 } from '../engine/projectEngine';
 import { audioManager } from '../engine/audioManager';
+import { useI18n } from '../i18n/I18nProvider';
+import type { Messages } from '../i18n/messages';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
-
-function formatTime(t: { year: number; month: number }): string {
-  return `第${t.year}年${t.month}月`;
-}
 
 function calcMonthlyProgress(ap: ActiveProject, def: ProjectDefinition, students: Student[]): number {
   if (!ap.leaderId) return 0;
@@ -61,8 +59,9 @@ function RequirementBadge({
 // ─── Grade Badge ───────────────────────────────────────────────────────────
 
 function GradeBadge({ grade }: { grade: ProjectGrade }) {
+  const { m } = useI18n();
   return (
-    <span className={`proj-grade proj-grade--${grade.toLowerCase()}`} aria-label={`${grade}级项目`}>
+    <span className={`proj-grade proj-grade--${grade.toLowerCase()}`} aria-label={m.projects.gradeAria(grade)}>
       {grade}
     </span>
   );
@@ -70,11 +69,11 @@ function GradeBadge({ grade }: { grade: ProjectGrade }) {
 
 // ─── Idea Card ─────────────────────────────────────────────────────────────
 
-function startupCostLabel(def: ProjectDefinition): string {
+function startupCostLabel(def: ProjectDefinition, m: Messages): string {
   const parts: string[] = [];
-  if (def.startupEnergyCost > 0) parts.push(`精力 -${def.startupEnergyCost}`);
-  if (def.startupFundingCost > 0) parts.push(`资金 -${def.startupFundingCost}万`);
-  return parts.join('，');
+  if (def.startupEnergyCost > 0) parts.push(m.projects.costEnergy(def.startupEnergyCost));
+  if (def.startupFundingCost > 0) parts.push(m.projects.costFunding(m.money(def.startupFundingCost)));
+  return parts.join(m.projects.costSeparator);
 }
 
 function IdeaCard({
@@ -86,35 +85,37 @@ function IdeaCard({
   state: GameState;
   dispatch: (a: GameAction) => void;
 }) {
+  const { m, project } = useI18n();
   const def = projectById[projectId];
   if (!def) return null;
+  const text = project(def);
 
   const canAffordEnergy = def.startupEnergyCost === 0 || state.lab.energy >= def.startupEnergyCost;
   const canAffordFunding = def.startupFundingCost === 0 || state.lab.funding >= def.startupFundingCost;
   const canAfford = canAffordEnergy && canAffordFunding;
 
   const disabledReason = !canAffordEnergy
-    ? `精力不足（需 ${def.startupEnergyCost}）`
+    ? m.projects.needEnergy(def.startupEnergyCost)
     : !canAffordFunding
-    ? `资金不足（需 ${def.startupFundingCost}万）`
+    ? m.projects.needFunding(m.money(def.startupFundingCost))
     : '';
 
   return (
     <div className="proj-card proj-card--idea">
       <div className="proj-card__header">
-        <span className="proj-card__name">💡 {def.name}</span>
+        <span className="proj-card__name">💡 {text.name}</span>
         <GradeBadge grade={def.grade} />
       </div>
-      <p className="proj-card__desc">{def.description}</p>
+      <p className="proj-card__desc">{text.description}</p>
       <div className="proj-card__sources">
-        {def.ideaSources.map((src, i) => (
+        {text.ideaSources.map((src, i) => (
           <span key={i} className="idea-source-tag">{src}</span>
         ))}
       </div>
       <div className="proj-card__reqs">
-        <RequirementBadge label="理论" required={def.theoryRequired} />
-        <RequirementBadge label="工程" required={def.engineeringRequired} />
-        <RequirementBadge label="社交" required={def.socialRequired} />
+        <RequirementBadge label={m.stat.theory} required={def.theoryRequired} />
+        <RequirementBadge label={m.stat.engineering} required={def.engineeringRequired} />
+        <RequirementBadge label={m.stat.social} required={def.socialRequired} />
       </div>
       <div className="proj-card__actions">
         <button
@@ -126,7 +127,7 @@ function IdeaCard({
             dispatch({ type: 'START_PROJECT', projectId });
           }}
         >
-          立项（{startupCostLabel(def)}）
+          {m.projects.launch(startupCostLabel(def, m))}
         </button>
       </div>
     </div>
@@ -148,12 +149,13 @@ function LeaderSelector({
   onSelect: (leaderId: string) => void;
   onClose: () => void;
 }) {
+  const { m, studentName } = useI18n();
   const activeStudents = state.students.filter(s => s.status === 'active');
 
   return (
     <div className="leader-selector">
       <div className="leader-selector__header">
-        <span>选择负责人</span>
+        <span>{m.projects.chooseLead}</span>
         <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>
       </div>
 
@@ -164,15 +166,15 @@ function LeaderSelector({
           <div
             className={`leader-option${ap.leaderId === 'pi' ? ' leader-option--current' : ''}${piDisabled ? ' leader-option--disabled' : ''}`}
             onClick={() => { if (!piDisabled) onSelect('pi'); }}
-            title={piDisabled ? '精力为 0，无法亲自负责项目' : undefined}
+            title={piDisabled ? m.projects.piDisabledTitle : undefined}
           >
-            <div className="leader-option__name">你（亲自负责）</div>
+            <div className="leader-option__name">{m.projects.piSelf}</div>
             <div className="leader-option__detail">
               {piDisabled
-                ? '精力耗尽，无法接手项目'
-                : `每月消耗精力 15，效率 ×1.00，月推进 ${def.baseMonthlyProgress.toFixed(1)}%`}
+                ? m.projects.piOutOfEnergy
+                : m.projects.piDetail(def.baseMonthlyProgress.toFixed(1))}
             </div>
-            {ap.leaderId === 'pi' && <span className="leader-option__badge">当前</span>}
+            {ap.leaderId === 'pi' && <span className="leader-option__badge">{m.projects.current}</span>}
           </div>
         );
       })()}
@@ -194,21 +196,21 @@ function LeaderSelector({
             }}
           >
             <div className="leader-option__name">
-              {s.name}
-              {isCurrent && <span className="leader-option__badge">当前</span>}
-              {busy && !isCurrent && <span className="leader-option__badge leader-option__badge--warn">已有项目</span>}
+              {studentName(s)}
+              {isCurrent && <span className="leader-option__badge">{m.projects.current}</span>}
+              {busy && !isCurrent && <span className="leader-option__badge leader-option__badge--warn">{m.projects.busy}</span>}
             </div>
             <div className="leader-option__skills">
-              <RequirementBadge label="理论" required={def.theoryRequired} actual={s.skills.theory} />
-              <RequirementBadge label="工程" required={def.engineeringRequired} actual={s.skills.engineering} />
-              <RequirementBadge label="社交" required={def.socialRequired} actual={s.skills.social} />
+              <RequirementBadge label={m.stat.theory} required={def.theoryRequired} actual={s.skills.theory} />
+              <RequirementBadge label={m.stat.engineering} required={def.engineeringRequired} actual={s.skills.engineering} />
+              <RequirementBadge label={m.stat.social} required={def.socialRequired} actual={s.skills.social} />
             </div>
             {eligible && multiplier !== null && (
               <div className="leader-option__detail">
-                效率 ×{multiplier.toFixed(2)}，月推进 {(def.baseMonthlyProgress * multiplier).toFixed(1)}%
+                {m.projects.studentDetail(multiplier.toFixed(2), (def.baseMonthlyProgress * multiplier).toFixed(1))}
               </div>
             )}
-            {!eligible && <div className="leader-option__detail leader-option__detail--warn">属性不足，无法分配</div>}
+            {!eligible && <div className="leader-option__detail leader-option__detail--warn">{m.projects.notQualified}</div>}
           </div>
         );
       })}
@@ -234,18 +236,19 @@ function SwapConfirmModal({
   onCancel: () => void;
 }) {
   const after = Math.round(currentProgress * 0.7);
+  const { m } = useI18n();
   return (
     <div className="swap-confirm-overlay" onClick={onCancel}>
       <div className="swap-confirm-modal" onClick={e => e.stopPropagation()}>
         <p className="swap-confirm-modal__msg">
           {swapIsFree
-            ? '白小满的天赋「乐观心大」，进度不会回退。'
-            : <>当前进度 <strong>{Math.round(currentProgress)}%</strong> 将回退至 <strong>{after}%</strong>（-30%）。</>
+            ? m.projects.swapFree
+            : <>{m.projects.swapPenaltyBefore}<strong>{Math.round(currentProgress)}%</strong>{m.projects.swapPenaltyMiddle}<strong>{after}%</strong>{m.projects.swapPenaltyAfter}</>
           }
         </p>
         <div className="swap-confirm-modal__actions">
-          <button className="btn btn--primary btn--sm" onClick={onConfirm}>确认</button>
-          <button className="btn btn--ghost btn--sm" onClick={onCancel}>取消</button>
+          <button className="btn btn--primary btn--sm" onClick={onConfirm}>{m.projects.confirm}</button>
+          <button className="btn btn--ghost btn--sm" onClick={onCancel}>{m.projects.cancel}</button>
         </div>
       </div>
     </div>
@@ -263,10 +266,12 @@ function ActiveProjectCard({
 }) {
   const [showSelector, setShowSelector] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
+  const { m, locale, project } = useI18n();
   const def = projectById[ap.projectId];
   if (!def) return null;
+  const text = project(def);
 
-  const leaderName = getLeaderDisplayName(ap.leaderId, state.students);
+  const leaderName = getLeaderDisplayName(ap.leaderId, state.students, locale);
   const monthlyGain = calcMonthlyProgress(ap, def, state.students);
   const currentLeader = ap.leaderId ? state.students.find(s => s.id === ap.leaderId) : null;
   const swapIsFree = currentLeader?.traitIds.includes('optimistic_heart') ?? false;
@@ -298,31 +303,31 @@ function ActiveProjectCard({
   return (
     <div className="proj-card proj-card--active">
       <div className="proj-card__header">
-        <span className="proj-card__name">{def.name}</span>
+        <span className="proj-card__name">{text.name}</span>
         <div className="proj-card__header-right">
           <GradeBadge grade={def.grade} />
           <span className="proj-card__progress-num">{Math.round(ap.progress)}%</span>
         </div>
       </div>
-      <p className="proj-card__desc">{def.description}</p>
+      <p className="proj-card__desc">{text.description}</p>
       <ProgressBar value={ap.progress} />
       <div className="proj-card__reqs">
-        <RequirementBadge label="理论" required={def.theoryRequired} />
-        <RequirementBadge label="工程" required={def.engineeringRequired} />
-        <RequirementBadge label="社交" required={def.socialRequired} />
+        <RequirementBadge label={m.stat.theory} required={def.theoryRequired} />
+        <RequirementBadge label={m.stat.engineering} required={def.engineeringRequired} />
+        <RequirementBadge label={m.stat.social} required={def.socialRequired} />
       </div>
       <div className="proj-card__leader-row">
-        <span className="proj-card__leader-label">负责人：</span>
+        <span className="proj-card__leader-label">{m.projects.leadLabel}</span>
         <span className={`proj-card__leader${!ap.leaderId ? ' proj-card__leader--none' : ''}`}>
           {leaderName}
         </span>
         {ap.leaderId && (
           <span className="proj-card__monthly">
-            月推进 {monthlyGain.toFixed(1)}%
+            {m.projects.monthly(monthlyGain.toFixed(1))}
           </span>
         )}
         {!ap.leaderId && (
-          <span className="proj-card__stalled">⏸ 停滞中</span>
+          <span className="proj-card__stalled">{m.projects.stalled}</span>
         )}
       </div>
       <div className="proj-card__actions">
@@ -330,15 +335,15 @@ function ActiveProjectCard({
           className="btn btn--secondary btn--sm"
           onClick={() => { audioManager.playSfx('click'); setShowSelector(v => !v); }}
         >
-          {showSelector ? '收起' : (ap.leaderId ? '换人' : '分配负责人')}
+          {showSelector ? m.projects.collapse : (ap.leaderId ? m.projects.changeLead : m.projects.assignLead)}
         </button>
         {ap.leaderId && (
           <button
             className="btn btn--ghost btn--sm"
             onClick={() => setPendingAction({ type: 'remove' })}
-            title="解除负责人，项目停滞"
+            title={m.projects.removeLeadTitle}
           >
-            解除
+            {m.projects.removeLead}
           </button>
         )}
       </div>
@@ -376,21 +381,23 @@ function CompletedProjectCard({
   completedAt: { year: number; month: number };
   students: Student[];
 }) {
+  const { m, locale, project } = useI18n();
   const def = projectById[projectId];
   if (!def) return null;
-  const leaderName = getLeaderDisplayName(leaderId, students);
+  const text = project(def);
+  const leaderName = getLeaderDisplayName(leaderId, students, locale);
   return (
     <div className="proj-card proj-card--completed">
       <div className="proj-card__header">
-        <span className="proj-card__name">✓ {def.name}</span>
+        <span className="proj-card__name">✓ {text.name}</span>
         <div className="proj-card__header-right">
           <GradeBadge grade={def.grade} />
-          <span className="proj-card__done-time">{formatTime(completedAt)}</span>
+          <span className="proj-card__done-time">{m.time.compact(completedAt.year, completedAt.month)}</span>
         </div>
       </div>
-      <p className="proj-card__desc">{def.description}</p>
+      <p className="proj-card__desc">{text.description}</p>
       <div className="proj-card__done-meta">
-        负责人：{leaderName}　奖励：+{def.fundingReward}万 / 声望+{def.reputationReward}
+        {m.projects.completedMeta(leaderName, m.money(def.fundingReward), def.reputationReward)}
       </div>
     </div>
   );
@@ -405,11 +412,12 @@ interface Props {
 }
 
 export function ProjectsPanel({ state, dispatch, onClose }: Props) {
+  const { m } = useI18n();
 
   return (
     <div className="projects-panel">
       <div className="projects-panel__header">
-        <h2 className="projects-panel__title">项目管理</h2>
+        <h2 className="projects-panel__title">{m.projects.title}</h2>
         <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>
       </div>
 
@@ -418,11 +426,11 @@ export function ProjectsPanel({ state, dispatch, onClose }: Props) {
         {/* Ideas */}
         <section className="proj-section">
           <h3 className="proj-section__title">
-            灵感库
+            {m.projects.ideas}
             <span className="proj-section__count">{state.projectIdeas.length}</span>
           </h3>
           {state.projectIdeas.length === 0 ? (
-            <p className="proj-empty">还没有任何研究灵感。推进剧情事件，说不定会有收获。</p>
+            <p className="proj-empty">{m.projects.ideasEmpty}</p>
           ) : (
             <div className="proj-grid">
               {state.projectIdeas.map(id => (
@@ -435,11 +443,11 @@ export function ProjectsPanel({ state, dispatch, onClose }: Props) {
         {/* Active */}
         <section className="proj-section">
           <h3 className="proj-section__title">
-            进行中
+            {m.projects.active}
             <span className="proj-section__count">{state.activeProjects.length}</span>
           </h3>
           {state.activeProjects.length === 0 ? (
-            <p className="proj-empty">暂无进行中的项目。立项后项目会在这里出现。</p>
+            <p className="proj-empty">{m.projects.activeEmpty}</p>
           ) : (
             <div className="proj-grid">
               {state.activeProjects.map(ap => (
@@ -458,7 +466,7 @@ export function ProjectsPanel({ state, dispatch, onClose }: Props) {
         {state.completedProjects.length > 0 && (
           <section className="proj-section">
             <h3 className="proj-section__title">
-              已完成
+              {m.projects.completed}
               <span className="proj-section__count">{state.completedProjects.length}</span>
             </h3>
             <div className="proj-grid">

@@ -3,17 +3,19 @@ import type { AdmissionState, LabStats } from '../types';
 import { allCandidates } from '../data/studentPool';
 import { TraitTag } from './TraitTag';
 import { portraitUrl } from '../data/studentArt';
+import { useI18n } from '../i18n/I18nProvider';
 
 /** 立绘装裱框，统一裁切为 2:3 比例。图片缺失时整个框隐藏。 */
 function CandidatePortrait({ studentId, name }: { studentId: string; name: string }) {
   const [failed, setFailed] = useState(false);
+  const { m } = useI18n();
   const url = portraitUrl(studentId);
   if (failed || !url) return null;
   return (
     <div className="portrait-frame">
       <img
         src={url}
-        alt={`${name} 立绘`}
+        alt={m.admission.portraitAlt(name)}
         className="candidate-portrait"
         onError={() => setFailed(true)}
       />
@@ -51,6 +53,7 @@ export function AdmissionModal({
   onRefresh,
 }: Props) {
   const { candidates, round, recruitedCount, hasRefreshed } = admissionState;
+  const { m, candidate: candidateText } = useI18n();
 
   if (candidates === null) {
     // "Offer continue" state: one student admitted, player can stop or recruit another
@@ -62,11 +65,9 @@ export function AdmissionModal({
     return (
       <div className="modal-overlay" role="dialog" aria-modal="true">
         <div className="modal admission-modal">
-          <h2 className="modal__title">已录取一名新生</h2>
+          <h2 className="modal__title">{m.admission.admittedTitle}</h2>
           <p className="modal__prompt">
-            {hasPoolForContinue
-              ? '是否继续招募本年度第二名学生？'
-              : '候选人已全部看过，无法再招募第二名。'}
+            {hasPoolForContinue ? m.admission.askSecond : m.admission.noMoreCandidates}
           </p>
           <div className="admission-continue-bar">
             {hasPoolForContinue && (
@@ -77,8 +78,8 @@ export function AdmissionModal({
               >
                 <span className="modal__option-text">
                   {!hasFundingForContinue
-                    ? `资金不足（需${CONTINUE_FUNDING_MIN}万）`
-                    : '继续招募第二名'}
+                    ? m.admission.notEnoughFunding(m.money(CONTINUE_FUNDING_MIN))
+                    : m.admission.recruitSecond}
                 </span>
                 <span className="modal__option-costs">
                   <span className={`option-cost${!canAffordContinue ? ' option-cost--unaffordable' : ''}`}>
@@ -88,7 +89,7 @@ export function AdmissionModal({
               </button>
             )}
             <button className="modal__option-btn" onClick={onPass}>
-              结束本年招生
+              {m.admission.endAdmissions}
             </button>
           </div>
         </div>
@@ -112,23 +113,24 @@ export function AdmissionModal({
     <div className="modal-overlay" role="dialog" aria-modal="true">
       <div className="modal admission-modal">
         <h2 className="modal__title">
-          {round === 1 ? `第 ${gameYear} 年招生季` : `第 ${round} 轮候选`}
-          <span className="admission-modal__cost-hint">录取费：{admissionCost}万/人</span>
+          {round === 1 ? m.admission.seasonTitle(gameYear) : m.admission.roundTitle(round)}
+          <span className="admission-modal__cost-hint">{m.admission.costHint(m.money(admissionCost))}</span>
         </h2>
-        <p className="modal__prompt">两份申请材料摆在面前，选一位加入实验室：</p>
+        <p className="modal__prompt">{m.admission.prompt}</p>
 
         <div className="admission-candidates">
           {candidateData.map(candidate => {
             if (!candidate) return null;
+            const ct = candidateText(candidate);
             return (
               <div key={candidate.id} className="candidate-card">
-                <CandidatePortrait studentId={candidate.id} name={candidate.name} />
+                <CandidatePortrait studentId={candidate.id} name={ct.name} />
                 <div className="candidate-card__body">
                   <div className="candidate-card__header">
-                    <span className="candidate-card__name">{candidate.name}</span>
-                    <span className="candidate-card__tagline">{candidate.tagline}</span>
+                    <span className="candidate-card__name">{ct.name}</span>
+                    <span className="candidate-card__tagline">{ct.tagline}</span>
                   </div>
-                  <p className="candidate-card__bio">{candidate.bio}</p>
+                  <p className="candidate-card__bio">{ct.bio}</p>
                   <div className="candidate-card__traits">
                     {candidate.traitIds.map(tid => (
                       <TraitTag key={tid} traitId={tid} />
@@ -139,7 +141,7 @@ export function AdmissionModal({
                     onClick={() => onAdmit(candidate.id)}
                     disabled={!canAfford}
                   >
-                    {canAfford ? `录取 ${candidate.name}` : `资金不足（需${admissionCost}万）`}
+                    {canAfford ? m.admission.admit(ct.name) : m.admission.notEnoughFunding(m.money(admissionCost))}
                   </button>
                 </div>
               </div>
@@ -156,18 +158,18 @@ export function AdmissionModal({
               disabled={!canRefresh}
               title={
                 !canRefreshPool
-                  ? '候选人已不足，无法换批'
+                  ? m.admission.refreshNoPool
                   : !canAffordRefresh
-                    ? `精力不足（需${REFRESH_ENERGY_COST}点）`
-                    : `消耗${REFRESH_ENERGY_COST}点精力，换一批候选人`
+                    ? m.admission.refreshNoEnergy(REFRESH_ENERGY_COST)
+                    : m.admission.refreshHint(REFRESH_ENERGY_COST)
               }
             >
-              换一批 ⚡{REFRESH_ENERGY_COST}
+              {m.admission.refresh} ⚡{REFRESH_ENERGY_COST}
             </button>
           )}
           {canPass && (
             <button className="btn btn--ghost" onClick={onPass}>
-              今年不招了
+              {m.admission.skipYear}
             </button>
           )}
         </div>
