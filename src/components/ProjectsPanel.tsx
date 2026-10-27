@@ -10,6 +10,8 @@ import {
   calcEfficiencyMultiplier,
 } from '../engine/projectEngine';
 import { audioManager } from '../engine/audioManager';
+import { tutorialTargetId } from '../engine/projectTutorial';
+import type { TutorialStep } from '../engine/projectTutorial';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Messages } from '../i18n/messages';
 
@@ -123,6 +125,7 @@ function IdeaCard({
           className="btn btn--secondary btn--sm"
           disabled={!canAfford}
           title={disabledReason}
+          data-tutorial-target={tutorialTargetId({ kind: 'launch', projectId })}
           onClick={() => {
             audioManager.playSfx('click');
             dispatch({ type: 'START_PROJECT', projectId });
@@ -137,16 +140,31 @@ function IdeaCard({
 
 // ─── Leader Selector ───────────────────────────────────────────────────────
 
+// Leader options are divs; this makes them reachable and operable from the keyboard as well.
+function optionButtonProps(disabled: boolean, select: () => void) {
+  return {
+    role: 'button',
+    tabIndex: disabled ? -1 : 0,
+    'aria-disabled': disabled,
+    onKeyDown: (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!disabled) select(); }
+    },
+  };
+}
+
+// `tutorial`: first-project tutorial step. Only students can be picked and the selector can't be closed.
 function LeaderSelector({
   ap,
   def,
   state,
+  tutorial,
   onSelect,
   onClose,
 }: {
   ap: ActiveProject;
   def: ProjectDefinition;
   state: GameState;
+  tutorial: boolean;
   onSelect: (leaderId: string) => void;
   onClose: () => void;
 }) {
@@ -154,24 +172,29 @@ function LeaderSelector({
   const activeStudents = state.students.filter(s => s.status === 'active');
 
   return (
-    <div className="leader-selector">
+    <div className="leader-selector" data-tutorial-target={tutorialTargetId({ kind: 'chooseLead', projectId: ap.projectId })}>
       <div className="leader-selector__header">
         <span>{m.projects.chooseLead}</span>
-        <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>
+        {!tutorial && <button className="btn btn--ghost btn--sm" onClick={onClose}>✕</button>}
       </div>
 
-      {/* PI option — disabled when energy is 0 */}
+      {/* PI option — disabled when energy is 0, and during the tutorial */}
       {(() => {
-        const piDisabled = state.lab.energy <= 0 && ap.leaderId !== 'pi';
+        const outOfEnergy = state.lab.energy <= 0 && ap.leaderId !== 'pi';
+        const piDisabled = tutorial || outOfEnergy;
+        const selectPi = () => { if (!piDisabled) onSelect('pi'); };
         return (
           <div
             className={`leader-option${ap.leaderId === 'pi' ? ' leader-option--current' : ''}${piDisabled ? ' leader-option--disabled' : ''}`}
-            onClick={() => { if (!piDisabled) onSelect('pi'); }}
-            title={piDisabled ? m.projects.piDisabledTitle : undefined}
+            onClick={selectPi}
+            {...optionButtonProps(piDisabled, selectPi)}
+            title={tutorial ? m.tutorial.piLocked : outOfEnergy ? m.projects.piDisabledTitle : undefined}
           >
             <div className="leader-option__name">{m.projects.piSelf}</div>
             <div className="leader-option__detail">
-              {piDisabled
+              {tutorial
+                ? m.tutorial.piLocked
+                : outOfEnergy
                 ? m.projects.piOutOfEnergy
                 : m.projects.piDetail(def.baseMonthlyProgress.toFixed(1))}
             </div>
@@ -186,15 +209,17 @@ function LeaderSelector({
         const busy = studentHasActiveProject(s.id, state.activeProjects) && s.id !== ap.leaderId;
         const isCurrent = ap.leaderId === s.id;
         const multiplier = eligible ? calcEfficiencyMultiplier(s, def) : null;
+        const select = () => {
+          if (!eligible || busy) return;
+          onSelect(s.id);
+        };
 
         return (
           <div
             key={s.id}
             className={`leader-option${isCurrent ? ' leader-option--current' : ''}${!eligible || busy ? ' leader-option--disabled' : ''}`}
-            onClick={() => {
-              if (!eligible || busy) return;
-              onSelect(s.id);
-            }}
+            onClick={select}
+            {...optionButtonProps(!eligible || busy, select)}
           >
             <div className="leader-option__name">
               {studentName(s)}
@@ -258,17 +283,21 @@ function SwapConfirmModal({
   );
 }
 
+// `tutorialLead`: the tutorial is waiting for this project's lead, so the selector stays open.
 function ActiveProjectCard({
   ap,
   state,
   dispatch,
+  tutorialLead,
 }: {
   ap: ActiveProject;
   state: GameState;
   dispatch: (a: GameAction) => void;
+  tutorialLead: boolean;
 }) {
   const [showSelector, setShowSelector] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
+  const selectorOpen = showSelector || tutorialLead;
   const { m, locale, project } = useI18n();
   const def = projectById[ap.projectId];
   if (!def) return null;
@@ -338,7 +367,7 @@ function ActiveProjectCard({
           className="btn btn--secondary btn--sm"
           onClick={() => { audioManager.playSfx('click'); setShowSelector(v => !v); }}
         >
-          {showSelector ? m.projects.collapse : (ap.leaderId ? m.projects.changeLead : m.projects.assignLead)}
+          {selectorOpen ? m.projects.collapse : (ap.leaderId ? m.projects.changeLead : m.projects.assignLead)}
         </button>
         {ap.leaderId && (
           <button
@@ -350,11 +379,12 @@ function ActiveProjectCard({
           </button>
         )}
       </div>
-      {showSelector && (
+      {selectorOpen && (
         <LeaderSelector
           ap={ap}
           def={def}
           state={state}
+          tutorial={tutorialLead}
           onSelect={handleSelectLeader}
           onClose={() => setShowSelector(false)}
         />
@@ -412,9 +442,10 @@ interface Props {
   state: GameState;
   dispatch: (a: GameAction) => void;
   onClose: () => void;
+  tutorialStep: TutorialStep | null; // first-project tutorial step, if one is running
 }
 
-export function ProjectsPanel({ state, dispatch, onClose }: Props) {
+export function ProjectsPanel({ state, dispatch, onClose, tutorialStep }: Props) {
   const { m } = useI18n();
 
   return (
@@ -459,6 +490,7 @@ export function ProjectsPanel({ state, dispatch, onClose }: Props) {
                   ap={ap}
                   state={state}
                   dispatch={dispatch}
+                  tutorialLead={tutorialStep?.kind === 'chooseLead' && tutorialStep.projectId === ap.projectId}
                 />
               ))}
             </div>

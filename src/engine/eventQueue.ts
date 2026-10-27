@@ -87,6 +87,9 @@ export function checkConditions(conditions: EventCondition[], state: GameState):
       if (cond.type === 'studentStatus') {
         return state.students.some(s => s.id === cond.studentId && s.status === cond.status);
       }
+      if (cond.type === 'anyGraduate') {
+        return state.students.some(s => s.status === 'graduated');
+      }
       return true;
     });
 }
@@ -124,6 +127,11 @@ function findTriggeringStudents(
   conditions: EventCondition[],
   state: GameState,
 ): { studentId?: string; student2Id?: string } {
+  // Alumni events bind one of this run's graduates and never fall back to a current student.
+  if (conditions.some(c => c.type === 'anyGraduate')) {
+    return { studentId: randomOf(state.students.filter(s => s.status === 'graduated'))?.id };
+  }
+
   const needsTwo = conditions.some(c => c.type === 'minStudentCount' && c.value >= 2);
   const active = state.students.filter(s => s.status === 'active');
 
@@ -209,11 +217,17 @@ function randomOf<T>(items: T[]): T | undefined {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+// Whether an event is about a former student (see the 'anyGraduate' condition).
+export function bindsGraduate(event: GameEvent): boolean {
+  return event.triggerConditions?.some(c => c.type === 'anyGraduate') ?? false;
+}
+
 // An event whose text names {studentName}/{student2Name} must have those students bound,
 // or the placeholder renders literally. Most paths bind already (triggerConditions, chains,
 // direct injection); this fills any gap with a random active student and returns null when
 // nobody is available (e.g. every student has left), so callers can skip the event.
 // Already-bound students are kept even if no longer active (alumni visits bind graduates).
+// Alumni events ('anyGraduate') only ever bind a graduate, and are skipped without one.
 export function bindRequiredStudents(queued: QueuedEvent, state: GameState): QueuedEvent | null {
   const event = events[queued.id];
   if (!event) return queued;
@@ -222,9 +236,14 @@ export function bindRequiredStudents(queued: QueuedEvent, state: GameState): Que
 
   const exists = (id?: string) => id !== undefined && state.students.some(s => s.id === id);
   const active = state.students.filter(s => s.status === 'active');
+  const alumni = bindsGraduate(event);
+  const graduates = state.students.filter(s => s.status === 'graduated');
   let { studentId, student2Id } = queued;
 
-  if (s1 && !exists(studentId)) {
+  if (s1 && alumni && !graduates.some(s => s.id === studentId)) {
+    studentId = randomOf(graduates.filter(s => s.id !== student2Id))?.id;
+    if (!studentId) return null;
+  } else if (s1 && !exists(studentId)) {
     studentId = randomOf(active.filter(s => s.id !== student2Id))?.id;
     if (!studentId) return null;
   }

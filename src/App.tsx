@@ -13,8 +13,10 @@ import { StudentList } from './components/StudentList';
 import { ProjectsPanel } from './components/ProjectsPanel';
 import { GalleryPanel } from './components/GalleryPanel';
 import { AchievementToast } from './components/AchievementToast';
+import { TutorialOverlay } from './components/TutorialOverlay';
 import { events } from './data/events';
 import { checkAchievementUnlocks, checkEndingAchievements } from './engine/achievements';
+import { getTutorialStep } from './engine/projectTutorial';
 import { useI18n } from './i18n/I18nProvider';
 
 // ─── Audio controls panel ─────────────────────────────────────────────────────
@@ -258,6 +260,10 @@ export function App() {
 
   const isInitialScreen = state.storyLog.length === 0;
 
+  // First-project tutorial: while a step is showing, only its target can be used.
+  // Paused while the gallery or reset dialog is open so it never stacks over them.
+  const tutorialStep = galleryOpen || showResetConfirm ? null : getTutorialStep(state, projectPanelOpen);
+
   return (
     <div className="app">
       {achievementToastQueue.length > 0 && (
@@ -335,8 +341,11 @@ export function App() {
           state={state}
           dispatch={galleryDispatch}
           onClose={() => setProjectPanelOpen(false)}
+          tutorialStep={tutorialStep}
         />
       )}
+
+      {tutorialStep && <TutorialOverlay step={tutorialStep} />}
 
       {isGameOver && endingEvent && endingConfirmed && (
         <EndingModal

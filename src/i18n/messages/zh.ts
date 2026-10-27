@@ -231,6 +231,15 @@ export const zh = {
     pi: 'PI',
   },
 
+  // First-project tutorial (TutorialOverlay, LeaderSelector).
+  tutorial: {
+    label: (step: number, total: number) => `新手引导 ${step}/${total}`,
+    openProjects: (idea: string) => `你有了第一个研究灵感「${idea}」。点击「项目」打开项目管理。`,
+    launch: (idea: string) => `灵感要立项才会变成项目，立项会消耗精力或资金。点击「${idea}」的「立项」。`,
+    chooseLead: '项目有了负责人才会每月推进，完成后能拿到经费和声望。第一个项目请交给学生，选一位吧。',
+    piLocked: '第一个项目请交给学生负责',
+  },
+
   gallery: {
     tabEndings: '结局',
     tabCharacters: '角色',

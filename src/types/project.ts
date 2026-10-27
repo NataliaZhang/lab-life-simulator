@@ -41,3 +41,11 @@ export interface CompletedProject {
   leaderId: string | null;
   completedAt: GameTime;
 }
+
+// ─── First-project tutorial ────────────────────────────────────────────────
+// pending = not shown yet; active = guiding the launch of projectId; done = never shown again.
+// See src/engine/projectTutorial.ts.
+export type ProjectTutorial =
+  | { status: 'pending' }
+  | { status: 'active'; projectId: string }
+  | { status: 'done' };

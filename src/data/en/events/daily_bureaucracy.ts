@@ -201,7 +201,7 @@ export const dailyBureaucracyEventsEn: EventTranslations = {
     title: 'Your Student Made It',
     description: [
       'Your phone lights up with a message from {studentName}. You still remember {studentName}: the one who set the learning rate to 1.0, watched the loss curve shoot into the stratosphere, and then casually asked, “Is this normal?”',
-      'The message reads: “Professor!!! I got Best Paper at ICOP!!!! The committee said our work ‘fundamentally rethinks’ the entire field!!!!!!” You remember that {studentName}’s first paper was rejected four times for an “unclear contribution.” After the third rejection, {studentName} sat in your office for a long time, staring glumly out the window.',
+      'The message reads: “Professor!!! I got Best Paper at ICOP!!!! The committee said our work ‘fundamentally rethinks’ the entire field!!!!!!” You think back to {studentName}’s first paper, years ago, which was rejected four times for an “unclear contribution.” After the third rejection, {studentName} sat in your office for a long time, staring glumly out the window.',
     ],
     prompt: '{studentName} won Best Paper. What do you do?',
     options: {
@@ -214,7 +214,7 @@ export const dailyBureaucracyEventsEn: EventTranslations = {
       reply_privately: {
         text: 'Send a heartfelt private message',
         outcomes: [
-          'You reply: “Congratulations.” Then, after a moment’s thought, your fingers outrun your judgment and send one more: “You know the first code you ever put on the server? I secretly had AI fix it.”\n\n{studentName}: “?”\n\n“The second one too.”\n\n{studentName}: “???”\n\nOne clean hit. You close the chat window immediately. Any more secrets will have to wait until after graduation.',
+          'You reply: “Congratulations.” Then, after a moment’s thought, your fingers outrun your judgment and send one more: “You know the first code you ever put on the server? I secretly had AI fix it.”\n\n{studentName}: “?”\n\n“The second one too.”\n\n{studentName}: “???”\n\nOne clean hit. You close the chat window immediately. Some secrets you only tell after graduation.',
         ],
       },
       feel_ancient: {

@@ -1,5 +1,6 @@
 import type { GameState } from '../types';
 import { useI18n } from '../i18n/I18nProvider';
+import { PROJECTS_BUTTON_TARGET } from '../engine/projectTutorial';
 
 interface Props {
   state: GameState;
@@ -62,6 +63,7 @@ export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, proje
           className={`panel-toggle-btn${projectPanelOpen ? ' panel-toggle-btn--active' : ''}`}
           onClick={onToggleProjectPanel}
           title={projectPanelOpen ? m.status.closeProjects : m.status.openProjects}
+          data-tutorial-target={PROJECTS_BUTTON_TARGET}
         >
           {m.status.projects}{state.projectIdeas.length > 0 && !projectPanelOpen ? ` (${state.projectIdeas.length})` : ''}
         </button>

@@ -54,6 +54,17 @@ monthly progress.
 - Completion bonuses: `startup_saint` (+3 funding), `product_mindset` (+2 rep),
   `network_magnet` (+4 rep)
 
+**First-project tutorial** (one-time, guides Projects → Launch → pick a student lead):
+- Rules: `src/engine/projectTutorial.ts`. Status lives in `GameState.projectTutorial`
+  (`pending` / `active` + projectId / `done`); `gameReducer` runs `syncProjectTutorial()` after
+  every action. It only activates when the idea is affordable and some student qualifies, so it
+  can't soft-lock. `done` is carried into new runs; old saves that already have ideas or
+  projects load as `done`.
+- UI: `src/components/TutorialOverlay.tsx` spotlights the element with the matching
+  `data-tutorial-target` and blocks all other clicks and keys. The step is derived from state plus
+  whether the projects panel is open, so a reload resumes at the right step. Text: `tutorial` in
+  `src/i18n/messages/`.
+
 ## Implementation Rules
 
 - Keep game logic out of React components.
@@ -90,6 +101,10 @@ A `studentId` is set on a queued event in exactly three ways:
 
 1. **`triggerConditions` present** — `filterTriggerable()` calls `findTriggeringStudents()`,
    which always picks a random active student even if no `anyStudent` condition exists.
+   Exception, **alumni events:** an `{ type: 'anyGraduate' }` condition binds a random student
+   with `status: 'graduated'` instead (never an active one, never one who `'left'`); the event
+   can't trigger without one, and its `randomStudent` effects apply to that graduate's record
+   (Rapport persists after graduation). Example: `late_alumni_success`.
    Any condition array (e.g. a `time` gate) is enough.
 2. **Chain event via `nextEventIds`** — inherits the parent event's bound student.
 3. **Direct injection by `monthlyUpdate.ts`** — e.g. graduation checks, `lab_birthday`.

@@ -63,7 +63,14 @@ export function loadGame(): GameState | null {
       console.warn('Save file version mismatch — starting fresh.');
       return null;
     }
-    return upgradeLegacyText(file.state);
+    const state = upgradeLegacyText(file.state);
+    // Saves from before the first-project tutorial: skip it if the run has already
+    // reached the project system, otherwise let it start with the first idea.
+    const reachedProjects = state.projectIdeas.length + state.activeProjects.length + state.completedProjects.length > 0;
+    return {
+      ...state,
+      projectTutorial: state.projectTutorial ?? { status: reachedProjects ? 'done' : 'pending' },
+    };
   } catch {
     console.warn('Failed to parse save file — starting fresh.');
     return null;

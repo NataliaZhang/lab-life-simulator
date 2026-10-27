@@ -455,9 +455,11 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
       '消息是这样写的："老师！！！我中了ICOP Best Paper！！！！评委说我们的工作fundamentally rethinks了整个方向！！！！！！" 你想起来，当年{studentName}的第一篇论文因为"contribution不够清晰"被拒了四次，第三次被拒的时候{studentName}在你办公室坐了很久，看着窗外发愁。',
     ],
     prompt: '{studentName}拿了最佳论文奖，你想：',
+    // {studentName} 是本局已毕业的学生（不含中途离开的）；"现任学生"和"全组"指仍在组里的人。
     triggerConditions: [
       { type: 'time', field: 'year', op: '>=', value: 3 },
-      { type: 'anyStudent', stat: 'projectProgress', op: '>=', value: 0 },
+      { type: 'anyGraduate' },
+      { type: 'minStudentCount', value: 1 },
     ],
     options: [
       {
@@ -482,7 +484,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你回复："恭喜。"想了想，又手比嘴快地发了一句："你知道吗，你写在服务器上的第一份代码，其实我偷偷让AI改过。"\n\n"{studentName}：？"\n\n"第二份也是。"\n\n"{studentName}：？？？"\n\n你一击得胜，立马关掉聊天框。再多的秘密，就只适合毕业之后再说了。',
+            narrative: '你回复："恭喜。"想了想，又手比嘴快地发了一句："你知道吗，你写在服务器上的第一份代码，其实我偷偷让AI改过。"\n\n"{studentName}：？"\n\n"第二份也是。"\n\n"{studentName}：？？？"\n\n你一击得胜，立马关掉聊天框。有些秘密，就只适合毕业之后再说。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'randomStudent', stat: 'favor', delta: 10 },

@@ -1,6 +1,6 @@
-import type { ActiveProject, CompletedProject } from './project';
+import type { ActiveProject, CompletedProject, ProjectTutorial } from './project';
 import type { LocalizedText } from './i18n';
-export type { ActiveProject, CompletedProject } from './project';
+export type { ActiveProject, CompletedProject, ProjectTutorial } from './project';
 export type { Locale, LocalizedText } from './i18n';
 
 // ─── Time ──────────────────────────────────────────────────────────────────
@@ -81,7 +81,10 @@ export type EventCondition =
   | { type: 'minStudentCount'; value: number }  // event only triggers when ≥ N students are active
   | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number } // year/month gate
   | { type: 'seenEvent'; eventId: string }      // event only triggers after this event has appeared in the log
-  | { type: 'studentStatus'; studentId: string; status: StudentStatus }; // gate on a specific student's status
+  | { type: 'studentStatus'; studentId: string; status: StudentStatus } // gate on a specific student's status
+  // Alumni event: needs a student who graduated this run (not one who left) and binds one of them
+  // as {studentName} instead of an active student; 'randomStudent' effects then target that graduate.
+  | { type: 'anyGraduate' };
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
@@ -206,6 +209,8 @@ export interface GameState {
   projectIdeas: string[];              // project IDs of unlocked but not-yet-started ideas
   activeProjects: ActiveProject[];
   completedProjects: CompletedProject[];
+  // One-time guided walkthrough of the first project launch. Carried into new runs once done.
+  projectTutorial: ProjectTutorial;
   noStudentMonths: number;             // consecutive months with zero active students (for grace-period ending)
   /** Image path pending reveal on the next "继续" click (description or outcome image). */
   pendingImage: string | null;

@@ -241,6 +241,14 @@ export const en: Messages = {
     pi: 'PI',
   },
 
+  tutorial: {
+    label: (step: number, total: number) => `Tutorial ${step}/${total}`,
+    openProjects: (idea: string) => `You have your first research idea: “${idea}”. Open Projects to see it.`,
+    launch: (idea: string) => `An idea becomes a project once you launch it, which costs energy or funding. Launch “${idea}”.`,
+    chooseLead: 'A project only moves forward with a lead, and pays out funding and reputation when it’s done. Pick a student to lead this first one.',
+    piLocked: 'Give your first project to a student',
+  },
+
   gallery: {
     tabEndings: 'Endings',
     tabCharacters: 'Characters',

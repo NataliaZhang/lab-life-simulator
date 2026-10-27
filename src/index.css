@@ -2731,3 +2731,75 @@ html[lang="en"] .game-title { white-space: nowrap; }
     text-align: center;
   }
 }
+
+/* ─── First-project Tutorial ─────────────────────────────────────────────── */
+
+/* Above the projects panel and modals (300), below the achievement toast (400). */
+.tutorial {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  pointer-events: none;
+}
+
+/* Transparent; catches clicks around the highlighted target. */
+.tutorial__blocker {
+  position: fixed;
+  pointer-events: auto;
+}
+
+/* Fallback dim when the target isn't on screen (blocks nothing). */
+.tutorial__dim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 15, 0.55);
+}
+
+.tutorial__spotlight {
+  position: fixed;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 9999px rgba(20, 18, 15, 0.55);
+}
+
+.tutorial__spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  border-radius: inherit;
+  animation: tutorial-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes tutorial-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutorial__spotlight::after { animation: none; }
+}
+
+.tutorial__card {
+  position: fixed;
+  right: 12px;
+  width: min(320px, calc(100vw - 24px));
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 12px 16px;
+  transition: top 0.15s ease;
+}
+
+.tutorial__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.tutorial__text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
