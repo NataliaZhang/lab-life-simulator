@@ -101,10 +101,6 @@ A `studentId` is set on a queued event in exactly three ways:
 
 1. **`triggerConditions` present** — `filterTriggerable()` calls `findTriggeringStudents()`,
    which always picks a random active student even if no `anyStudent` condition exists.
-   Exception, **alumni events:** an `{ type: 'anyGraduate' }` condition binds a random student
-   with `status: 'graduated'` instead (never an active one, never one who `'left'`); the event
-   can't trigger without one, and its `randomStudent` effects apply to that graduate's record
-   (Rapport persists after graduation). Example: `late_alumni_success`.
    Any condition array (e.g. a `time` gate) is enough.
 2. **Chain event via `nextEventIds`** — inherits the parent event's bound student.
 3. **Direct injection by `monthlyUpdate.ts`** — e.g. graduation checks, `lab_birthday`.

@@ -17,7 +17,7 @@ import type {
 } from '../types';
 import { initialPoolIds, allCandidates, year1RestrictedIds } from '../data/studentPool';
 import { openingEventIds } from '../data/events';
-import { getEvent, pickOutcome, bindRequiredStudents, bindsGraduate } from './eventQueue';
+import { getEvent, pickOutcome, bindRequiredStudents } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
 import { syncProjectTutorial, carryOverTutorial } from './projectTutorial';
@@ -201,14 +201,11 @@ function applyProjectProgressEffect(
   return activeProjects.map((p, i) => i === projectIdx ? { ...p, progress: newProgress } : p);
 }
 
-// `alumniEvent`: the bound student is a graduate (see the 'anyGraduate' condition), so
-// 'randomStudent' effects reach that graduate's record and are never redirected to a current student.
 function applyEffects(
   state: GameState,
   effects: StateEffect[],
   boundStudentId?: string,
   boundStudent2Id?: string,
-  alumniEvent = false,
 ): ApplyEffectsResult {
   let lab = { ...state.lab };
   let students = [...state.students];
@@ -269,9 +266,7 @@ function applyEffects(
       }
     } else if (effect.type === 'randomStudent') {
       const active = students.filter(s => s.status === 'active');
-      const target = alumniEvent
-        ? students.find(s => s.id === boundStudentId && s.status === 'graduated')
-        : boundStudentId
+      const target = boundStudentId
         ? (students.find(s => s.id === boundStudentId && s.status === 'active') ?? active[Math.floor(Math.random() * active.length)])
         : active[Math.floor(Math.random() * active.length)];
       if (target) {
@@ -508,7 +503,7 @@ function reduceAction(state: GameState, action: GameAction): GameState {
       const { lab, students: effectStudents, activeProjects: effectProjects, statChanges, newProjectIdeas, moodChanges } = applyEffects(state, [
         ...costEffects,
         ...(outcome.effects ?? []),
-      ], boundStudentId, boundStudent2Id, bindsGraduate(event));
+      ], boundStudentId, boundStudent2Id);
 
       // schedule_is_justice: when energy is spent on a choice, the bound student gains +1 engineering
       let students = effectStudents;

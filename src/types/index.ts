@@ -81,10 +81,7 @@ export type EventCondition =
   | { type: 'minStudentCount'; value: number }  // event only triggers when ≥ N students are active
   | { type: 'time'; field: 'year' | 'month'; op: ConditionOp; value: number } // year/month gate
   | { type: 'seenEvent'; eventId: string }      // event only triggers after this event has appeared in the log
-  | { type: 'studentStatus'; studentId: string; status: StudentStatus } // gate on a specific student's status
-  // Alumni event: needs a student who graduated this run (not one who left) and binds one of them
-  // as {studentName} instead of an active student; 'randomStudent' effects then target that graduate.
-  | { type: 'anyGraduate' };
+  | { type: 'studentStatus'; studentId: string; status: StudentStatus }; // gate on a specific student's status
 
 // ─── Events ────────────────────────────────────────────────────────────────
 
