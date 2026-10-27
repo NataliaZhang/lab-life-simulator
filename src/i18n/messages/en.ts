@@ -5,15 +5,14 @@ import type { Messages } from './zh';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// Funding is stored in 万元 (10,000). English shows dollars: 5 → $50K, 150 → $1.5M.
+// Funding is stored in 万. English normalizes the game economy to 1万 → $1K (a display scale,
+// not an exchange rate): 5 → $5K, 37 → $37K, 1500 → $1.5M, 0.3 → $300.
 function money(amount: number): string {
   const sign = amount < 0 ? '-' : '';
-  const thousands = Math.abs(amount) * 10;
-  if (thousands >= 1000) {
-    const millions = Math.round((thousands / 1000) * 100) / 100;
-    return `${sign}$${millions}M`;
-  }
-  return `${sign}$${Math.round(thousands * 10) / 10}K`;
+  const thousands = Math.abs(amount);
+  if (thousands >= 1000) return `${sign}$${Math.round(thousands / 10) / 100}M`;
+  if (thousands >= 1) return `${sign}$${Math.round(thousands * 10) / 10}K`;
+  return `${sign}$${Math.round(thousands * 1000)}`;
 }
 
 const plural = (n: number, one: string, many: string) => (n === 1 ? one : many);
@@ -46,7 +45,7 @@ export const en: Messages = {
   list: (items: string[]) => items.join(', '),
 
   app: {
-    title: 'Lab Simulator',
+    title: 'Lab Life Simulator',
     start: 'Start',
     continue: 'Continue',
     chooseFirst: 'Make a choice first',
@@ -89,7 +88,7 @@ export const en: Messages = {
   },
 
   intro: {
-    welcome: 'Welcome to Lab Simulator!',
+    welcome: 'Welcome to Lab Life Simulator!',
     premise: 'You’re a brand-new assistant professor of computer science, with an empty lab, some startup funding, and a future nobody can predict.',
     featuresHeading: 'Over the next six years, you’ll get to:',
     features: [
@@ -169,7 +168,7 @@ export const en: Messages = {
     you: 'You',
     anotherLine: 'Another one',
     viewDetail: 'View details',
-    yearBadge: (year: number) => `Y${year}`,
+    yearBadge: (year: number) => `G${year}`,
     favorTitle: 'Rapport',
     favorChip: (n: number) => `Rapport: ${n}`,
     moodChip: (n: number) => `Mood: ${n}`,

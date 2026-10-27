@@ -512,7 +512,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
     id: 'late_invited_talk',
     title: 'Keynote邀请',
     description: [
-      '邮件的主题是："Keynote Invitation — ICOP 2026"。你念着这句话，想起曾经你在ICOP投的第一篇论文，被拒了，审稿人二号用了"superficial"这个词，你至今记得。',
+      '邮件的主题是："Keynote Invitation — ICOP 2026"。你念着这句话，想起曾经你在ICOP投的第一篇论文，被拒了，审稿人2号用了"superficial"这个词，你至今记得。',
       '邮件说："您的研究组在过去几年产生了持续的影响力，我们诚挚邀请您在今年的会议上做45分钟keynote报告，题目由您自行拟定。" \n\n四十五分钟。你上一次做那么长时间的报告是在某次院系内部汇报，中间有人睡着了。但这次性质不同。',
     ],
     prompt: '你被邀请做Keynote了，你打算讲什么',
@@ -572,7 +572,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你在PPT第三页放了一张截图，就是那封拒信，审稿人二号用了"superficial"。你花了四分钟讲那次被拒，台下的年轻研究者们露出善意的笑，原来大佬也曾被这样对待过。\n\n后来那张拒信截图被转发了三百次，每一条转发都附了不同版本的"我也有一封这样的邮件"。',
+            narrative: '你在PPT第三页放了一张截图，就是那封拒信，审稿人2号用了"superficial"。你花了四分钟讲那次被拒，台下的年轻研究者们露出善意的笑，原来大佬也曾被这样对待过。\n\n后来那张拒信截图被转发了三百次，每一条转发都附了不同版本的"我也有一封这样的邮件"。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'favor', delta: 8 },
@@ -611,7 +611,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你说："去吧，这是一个好机会，你值得。" {studentName}愣了一秒，大概是没预料到你这么干脆。虽然没能拿到博士毕业证书，但你也送出去了一个找到方向的人。\n\n{studentName}临走前郑重道谢，你听出了里面真诚的感激。\n\n{studentName}走后，实验室少了一个人，多了一段让你之后在学生面前讲的故事。某次会议上你偶尔看到{studentName}的名字出现在一篇高引论文的致谢里，排在第一位。',
+            narrative: '你说："去吧，这是一个好机会，你值得。" {studentName}愣了一秒，大概是没预料到你这么干脆。虽然没能拿到博士毕业证书，但你也送出去了一个找到方向的人。\n\n{studentName}临走前郑重道谢，你听出了里面真诚的感激。\n\n{studentName}走后，实验室少了一个人，多了一段让你之后在学生面前讲的故事。某次会议上，你偶然读到{studentName}的一篇高引论文，致谢里排在第一位的，是你的名字。',
             effects: [
               { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: 4 },

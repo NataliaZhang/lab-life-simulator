@@ -346,7 +346,7 @@ export const hypeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你说先投个workshop。审稿人一号说"promising direction"，审稿人二号直接说"n=17 is statistically inadequate for any meaningful conclusion"，并附上了一段五百字的统计学科普。论文拒了。{studentName}回来的时候神情复杂，说"老师，审稿人二号说得好像……没错"。你说：对，他说得对，但不用谢谢他。',
+            narrative: '你说先投个workshop。审稿人1号说"promising direction"，审稿人2号直接说"n=17 is statistically inadequate for any meaningful conclusion"，并附上了一段五百字的统计学科普。论文拒了。{studentName}回来的时候神情复杂，说"老师，审稿人2号说得好像……没错"。你说：对，他说得对，但不用谢谢他。',
             effects: [
               { type: 'randomStudent', stat: 'skills.theory', delta: 8 },
               { type: 'randomStudent', stat: 'happiness', delta: -10 },

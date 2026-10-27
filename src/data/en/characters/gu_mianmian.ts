@@ -350,7 +350,7 @@ export const guMianmianEn: CharacterPack = {
         '',
         'She is still holding the bag of snacks, her drink by her feet, her eyelashes casting faint shadows in the sunlight. It’s quiet, apart from the occasional sound from the ball field in the distance. It occurs to you that she didn’t ask you here to say anything especially important.',
         '',
-        'She just wanted to share a little of this afternoon with you.',
+        'She just wanted to give you a little of this afternoon.',
       ],
       prompt: '{studentName} is asleep. You:',
       options: {

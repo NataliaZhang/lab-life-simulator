@@ -53,7 +53,7 @@ export const dailyServerEventsEn: EventTranslations = {
       lecture_sternly: {
         text: 'Give a stern lecture and lay down the law',
         outcomes: [
-          'You make it clear: the shared server is a shared resource. Occupying it without notice blocks everyone’s workflow. This isn’t a technical issue, it’s a professionalism issue.\n\n{studentName}’s face goes through three phases: white → red → white again. For the next week, the whole lab requests every single GPU job in the chat with extreme politeness, formatted as rigorously as an IRB application.',
+          'You make it clear: the shared server is a shared resource. Occupying it without notice blocks everyone’s workflow. This isn’t a technical issue, it’s a professionalism issue.\n\n{studentName}’s face goes through three phases: white → red → white again. For the next week, the whole lab requests every single GPU job in the chat with extreme politeness, formatted as rigorously as an ethics-review application.',
           'Your lecture is rigorous, logical and well supported. {studentName} listens carefully, apologizes sincerely, then goes back and posts a 2,000-word written self-reflection to the group chat, along with an AI-generated GPU usage schedule accurate to the minute.\n\nThe overreaction leaves you staring at that schedule for a long time, unsure whether to praise {him} or worry.',
         ],
       },
@@ -91,7 +91,7 @@ export const dailyServerEventsEn: EventTranslations = {
       accept_fate: {
         text: 'Philosophically accept your fate and wait',
         outcomes: [
-          'You post: “It’s updated, so it’s updated. We wait for the reboot. If it lives, great. If not, we fix it.” Someone replies “…”, and someone else posts a sticker of a person kowtowing.\n\nThe server lives in the end, but the reboot takes nineteen minutes, and for those nineteen minutes nobody in the lab says a word. Everyone just stares at their own screen and waits. 1,127 days of uptime, gone to zero just like that, and the faces in front of those screens carry the hard-to-name heaviness of people watching an era end.',
+          'You post: “It’s updated, so it’s updated. We wait for the reboot. If it lives, great. If not, we fix it.” Someone replies “…”, and someone else posts a sticker of someone bowing down in prayer.\n\nThe server lives in the end, but the reboot takes nineteen minutes, and for those nineteen minutes nobody in the lab says a word. Everyone just stares at their own screen and waits. 1,127 days of uptime, gone to zero just like that, and the faces in front of those screens carry the hard-to-name heaviness of people watching an era end.',
           'You post that you’ll wait for the reboot, then go get a glass of water. When you come back, someone has already posted a complete “Server Death Contingency Plan” doc in the chat, including backup locations, a temporary migration plan and SSH keys for three standby servers.\n\nSo everyone had been carrying a version of this doc around in their head all along. They just never mentioned it. The server lives in the end, and the doc goes into the lab’s Confluence, the sole positive legacy of the whole affair.',
         ],
       },
@@ -114,9 +114,9 @@ export const dailyServerEventsEn: EventTranslations = {
         ],
       },
       buy_storage: {
-        text: 'Buy a new drive and be done with it (costs $30K)',
+        text: 'Buy a new drive and be done with it (costs $3K)',
         outcomes: [
-          'You spend $30K on an 8 TB NAS and mount it. The percentage in df -h instantly drops to 12%. The chat erupts in cheers. Nobody cleaned up anything, nobody set up any rules, and the checkpoint files keep growing at 50 GB a week.\n\nThe next crisis already has a slot booked on the calendar, roughly eleven months from now. But that’s a problem for the future.',
+          'You spend $3K on an 8 TB NAS and mount it. The percentage in df -h instantly drops to 12%. The chat erupts in cheers. Nobody cleaned up anything, nobody set up any rules, and the checkpoint files keep growing at 50 GB a week.\n\nThe next crisis already has a slot booked on the calendar, roughly eleven months from now. But that’s a problem for the future.',
           'You buy the drive, and when you go to mount it, you find the filesystem format is incompatible. Reformatting eats another morning. In the meantime /data actually fills up, and three people’s training jobs crash with “no space left on device.”\n\nThe drive gets mounted eventually, but today’s casualties can’t be undone.',
         ],
       },
@@ -217,7 +217,7 @@ export const dailyServerEventsEn: EventTranslations = {
       calculate_damage: {
         text: 'First, work out how much money you lost',
         outcomes: [
-          'You put together a full damage estimate: 61 days × 12% of compute × 8 A100s × on-demand cloud rental rates ≈ $88,000. You share the number with the lab. For a while nobody responds. Then someone writes: “Professor, that’s more than my stipend for a year.”\n\nYou then report it to the university, using the figure as a footnote on how serious the incident is. Once the security office sees the number, their response time noticeably improves.',
+          'You put together a full damage estimate: 61 days × 12% of compute × 8 A100s × on-demand cloud rental rates ≈ $8,800. You share the number with the lab. For a while nobody responds. Then someone writes: “Professor, that’s more than my stipend for a year.”\n\nYou then report it to the university, using the figure as a footnote on how serious the incident is. Once the security office sees the number, their response time noticeably improves.',
         ],
       },
     },
@@ -320,7 +320,7 @@ export const dailyServerEventsEn: EventTranslations = {
     title: 'Power Outage at Hour 47',
     description: [
       'This afternoon the building lost power. Reportedly, construction next door cut through a cable. Details to follow. Details did not follow.',
-      'The lab’s main server was in the middle of a 48-hour training run, at 47 hours and 12 minutes. The last checkpoint was saved at hour 12. That’s 35 hours of training progress lost, which at 8 A100s comes to roughly $14,000 in cloud compute, gone. The outage also took down two other debugging jobs in the lab, but those are comparatively minor.',
+      'The lab’s main server was in the middle of a 48-hour training run, at 47 hours and 12 minutes. The last checkpoint was saved at hour 12. That’s 35 hours of training progress lost, which at 8 A100s comes to roughly $1,400 in cloud compute, gone. The outage also took down two other debugging jobs in the lab, but those are comparatively minor.',
     ],
     prompt: '35 hours of training reset to zero at hour 47. You decide to…',
     options: {
@@ -332,16 +332,16 @@ export const dailyServerEventsEn: EventTranslations = {
         ],
       },
       buy_ups: {
-        text: 'Buy a UPS, buy peace of mind (costs $20K)',
+        text: 'Buy a UPS, buy peace of mind (costs $2K)',
         outcomes: [
-          'That afternoon you contact an equipment vendor. Three days later, an APC SUA3000RMi2U UPS rated at 3000 VA is installed beneath the server rack. Test run: simulated power cut, the server switches over smoothly and keeps running, with about 20 minutes of battery life.\n\nTwo months later the building loses power again, this time for seven minutes, and the training run doesn’t lose a thing. You post in the chat: “The UPS has paid for itself.” $20K for lasting peace of mind. A good deal.',
+          'That afternoon you contact an equipment vendor. Three days later, an APC SUA3000RMi2U UPS rated at 3000 VA is installed beneath the server rack. Test run: simulated power cut, the server switches over smoothly and keeps running, with about 20 minutes of battery life.\n\nTwo months later the building loses power again, this time for seven minutes, and the training run doesn’t lose a thing. You post in the chat: “The UPS has paid for itself.” $2K for lasting peace of mind. A good deal.',
           'You buy the UPS, install it, it passes the test, and you’re satisfied. Two weeks later, during normal use, it suddenly lets out an unsettling beep and enters self-test mode. The self-test lasts four hours, during which the server stays remarkably stable under the UPS’s “Testing” status.\n\nThe manual says this is a normal calibration routine that runs every three months and lasts 2–6 hours, and recommends keeping “external power available” during that time. This is slightly at odds with why you bought it in the first place, which was to protect against power loss.',
         ],
       },
       checkpoint_rule: {
         text: 'Make it law: checkpoint every two hours, or be sacrificed to the gods',
         outcomes: [
-          'You announce a new rule: every training script must save a checkpoint at least every two hours, and scripts that don’t comply can’t be submitted to the server. You also provide a template wrapper that plugs into any training loop in three lines of code.\n\nThis outage cost 35 hours, but from now on the rule caps any future accidental loss at 2 hours. It’s the most valuable decision of the day, even though it can’t bring back the $14,000 that already vanished.',
+          'You announce a new rule: every training script must save a checkpoint at least every two hours, and scripts that don’t comply can’t be submitted to the server. You also provide a template wrapper that plugs into any training loop in three lines of code.\n\nThis outage cost 35 hours, but from now on the rule caps any future accidental loss at 2 hours. It’s the most valuable decision of the day, even though it can’t bring back the $1,400 that already vanished.',
           'You announce the checkpoint rule and provide the wrapper template. Everyone says great, everyone says they’ll use it. Two weeks later, someone submits a new training script that does include checkpoint logic, saving once every 24 hours.\n\nYou decide not to quibble over the 22-hour gap between “2 hours” and “24 hours.” Something beats nothing, and this person’s disk probably can’t hold that many checkpoints anyway.',
         ],
       },

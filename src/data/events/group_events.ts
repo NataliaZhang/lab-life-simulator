@@ -448,7 +448,7 @@ export const groupEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'investigate',
-        text: '查蓝牙连接记录，绑架凶手',
+        text: '查蓝牙连接记录，抓出凶手',
         outcomes: [
           {
             weight: 2,

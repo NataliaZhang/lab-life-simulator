@@ -13,43 +13,43 @@ export const newYearEventsEn: EventTranslations = {
     prompt: 'Give the gift to…',
     options: {
       gift_lin_xiaojuan: {
-        text: 'Jamie ($20K)',
+        text: 'Jamie ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Jamie’s desk.'],
       },
       gift_gu_mianmian: {
-        text: 'Mina ($20K)',
+        text: 'Mina ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Mina’s desk.'],
       },
       gift_ye_zhiqiu: {
-        text: 'Ada ($20K)',
+        text: 'Ada ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Ada’s desk.'],
       },
       gift_bai_xiaoman: {
-        text: 'Sunny ($20K)',
+        text: 'Sunny ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Sunny’s desk.'],
       },
       gift_bi_xiaotian: {
-        text: 'Theo ($20K)',
+        text: 'Theo ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Theo’s desk.'],
       },
       gift_qian_duoduo: {
-        text: 'Dorian ($20K)',
+        text: 'Dorian ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Dorian’s desk.'],
       },
       gift_he_shixu: {
-        text: 'Serena ($20K)',
+        text: 'Serena ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Serena’s desk.'],
       },
       gift_tang_kuolie: {
-        text: 'Nico ($20K)',
+        text: 'Nico ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Nico’s desk.'],
       },
       gift_mo_wenxuan: {
-        text: 'Orion ($20K)',
+        text: 'Orion ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Orion’s desk.'],
       },
       gift_xie_zhiwei: {
-        text: 'Zoe ($20K)',
+        text: 'Zoe ($2K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Zoe’s desk.'],
       },
       no_gift: {

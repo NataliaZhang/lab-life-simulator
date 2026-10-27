@@ -7,7 +7,7 @@ export const yeZhiqiuEn: CharacterPack = {
     pronoun: 'she',
     tagline: 'Code gets deprecated. Proofs are forever.',
     bio: 'There are always a few papers spread open on her desk, next to a notebook crammed with annotations. Rumor has it she once turned an experimental problem into a theory problem just to avoid setting up an environment. Thorough enough to be reassuring, and thorough enough to make you question your life choices.',
-    farewell: 'I want to prove almost everything. Only one thing has never needed a proof.\n\nDoing research with you was the most correct choice I ever made.',
+    farewell: 'I want to prove almost everything. Only one thing has never needed a proof.\n\nChoosing to do research with you was simply correct.',
   },
   events: {
 
@@ -101,7 +101,7 @@ export const yeZhiqiuEn: CharacterPack = {
           ],
         },
         yzq_env_crisis_theorize: {
-          text: 'Render unto math what is math’s, and the environment… never mind',
+          text: 'Math is math. As for the environment… never mind',
           outcomes: [
             'Ada’s expression switches from “deeply pained” to “deeply focused” in an instant, as if someone had switched off a sensor that had been sounding an alarm the whole time. A week later she sends a twenty-page theoretical framework, with a note: “The experimental section has been replaced by a constructive proof. The conclusions are in fact stronger.”\n\nYou realize this was never avoidance. She had just finally found the right coordinate system.',
           ],

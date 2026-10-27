@@ -82,7 +82,7 @@ export const conditionalEventsEn: EventTranslations = {
     prompt: '{studentName}’s body has forced a hard shutdown. What do you do?',
     options: {
       medical_subsidy: {
-        text: 'Cover the checkup and recovery costs (spend $20K)',
+        text: 'Cover the checkup and recovery costs (spend $2K)',
         outcomes: [
           'You cover the costs and text {him}: “Don’t come to the lab for a few days. I mean it.” {studentName} asks “Are you sure?” three separate times. On the third night, {he} sneaks up to the lab door holding a bubble tea and says, “Professor, rest really does work. I woke up and figured out where the bug is.” You very nearly march {him} straight back to the dorm.',
         ],
@@ -179,7 +179,7 @@ export const conditionalEventsEn: EventTranslations = {
       '3:15. Again.',
       '3:17. Same person.',
       'By the time you open your eyes, there are 27 unread messages from {studentName}.',
-      'They include: “professor am I just not cut out for research,” “maybe I’m meant to run a food truck,” “if I opened one would you invest,” “is Reviewer #2 kind of right,” “no Reviewer #2 definitely doesn’t get it,” “wait I just figured it out,” “no I didn’t.”',
+      'They include: “professor am I just not cut out for research,” “maybe I’m meant to run a street-food stand,” “if I opened one would you invest,” “is Reviewer 2 kind of right,” “no Reviewer 2 definitely doesn’t get it,” “wait I just figured it out,” “no I didn’t.”',
       'The last one: “professor are you asleep?”',
       'Sent at 3:16.',
     ],

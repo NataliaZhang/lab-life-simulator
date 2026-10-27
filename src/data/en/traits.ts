@@ -68,7 +68,7 @@ export const traitsEn: Record<string, TraitTranslation> = {
   startup_saint: {
     name: 'Founder in Waiting',
     description: 'Looks at any project and immediately asks who the users are, where the need is, and how the business model closes the loop. Catchphrase: “Does anyone actually use this?”',
-    effect: '+$50K extra Funding when their project is completed',
+    effect: '+$5K extra Funding when their project is completed',
   },
 
   product_mindset: {

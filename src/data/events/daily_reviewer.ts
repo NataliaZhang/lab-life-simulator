@@ -13,11 +13,11 @@ export const reviewerEvents: Record<string, GameEvent> = {
     id: 'reviewer_agi_prerequisite',
     title: '先解决AGI再来投稿',
     description: [
-      'ICOP的审稿意见到了。一号条件接受，三号语气友善。',
-      '二号写道："作者提出的方案技术上尚可，但本文的核心局限在于：它无法处理需要通用智能才能解决的情形。建议作者在提交修改稿之前，首先解决通用人工智能问题。在获得令人满意的AGI方案之前，本人建议拒稿。"',
+      'ICOP的审稿意见到了。1号条件接受，3号语气友善。',
+      '2号写道："作者提出的方案技术上尚可，但本文的核心局限在于：它无法处理需要通用智能才能解决的情形。建议作者在提交修改稿之前，首先解决通用人工智能问题。在获得令人满意的AGI方案之前，本人建议拒稿。"',
       '你把这段话重读了三遍，确认不是翻译软件的问题，也不是对方的玩笑。',
     ],
-    prompt: '二号审稿人建议你先解决AGI，再来改稿——你决定',
+    prompt: '审稿人2号建议你先解决AGI，再来改稿——你决定',
     options: [
       {
         id: 'rebuttal_deadpan',
@@ -33,7 +33,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你写了一份有理有据的申辩，附带对"通用人工智能"定义的文献梳理，温和指出该标准适用于全体AI论文。二号没有回应。\n\n论文以"审稿人分歧较大"为由送到了第四位审稿人那里。第四位写了两条意见：第一条是"为什么不考虑扩散模型"，第二条是"格式有问题"。',
+            narrative: '你写了一份有理有据的申辩，附带对"通用人工智能"定义的文献梳理，温和指出该标准适用于全体AI论文。2号没有回应。\n\n论文以"审稿人分歧较大"为由送到了第四位审稿人那里。第四位写了两条意见：第一条是"为什么不考虑扩散模型"，第二条是"格式有问题"。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -47,7 +47,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你把那条意见截图存进了专用文件夹，命名"二号经典收藏"，然后关掉投稿系统，打开新目标。改投IISC，两个月后论文过了，一号写道："本文思路清晰，实验充分。"\n\n你对着屏幕点了点头，感觉世界大体是公平的，只是有些会议活在另一个物理层上。',
+            narrative: '你把那条意见截图存进了专用文件夹，命名"2号经典收藏"，然后关掉投稿系统，打开新目标。改投IISC，两个月后论文过了，1号写道："本文思路清晰，实验充分。"\n\n你对着屏幕点了点头，感觉世界大体是公平的，只是有些会议活在另一个物理层上。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -55,7 +55,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你换投了GRF。GRF的三号写道："本文方法有效，但缺乏对更广泛场景的泛化能力的讨论——在极端情况下，是否需要更强的推理能力？"\n\n你盯着这条意见看了很久，感觉ICOP那个二号换了个马甲，跟着你跑到了另一个会。',
+            narrative: '你换投了GRF。GRF的3号写道："本文方法有效，但缺乏对更广泛场景的泛化能力的讨论——在极端情况下，是否需要更强的推理能力？"\n\n你盯着这条意见看了很久，感觉ICOP那个2号换了个马甲，跟着你跑到了另一个会。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -8 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -70,7 +70,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你查阅了大量文献，认真梳理了AGI的定义与主流路径，写了一份附录，提出一个"轻量级通用性框架"，逻辑自洽，措辞严谨，塞进了申辩稿。\n\n二号回复："这部分内容超出了本次审稿的评估范围。"\n\n论文被拒。附录后来单独投了一篇论文，过了。',
+            narrative: '你查阅了大量文献，认真梳理了AGI的定义与主流路径，写了一份附录，提出一个"轻量级通用性框架"，逻辑自洽，措辞严谨，塞进了申辩稿。\n\n2号回复："这部分内容超出了本次审稿的评估范围。"\n\n论文被拒。附录后来单独投了一篇论文，过了。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 10 },
               { type: 'allStudents', stat: 'skills.theory', delta: 5 },
@@ -86,11 +86,11 @@ export const reviewerEvents: Record<string, GameEvent> = {
     id: 'reviewer_citation_demand',
     title: '审稿人顺手发来了一份购物清单',
     description: [
-      '三号审稿人写道："本文文献综述不够充分，严重忽视了该领域的重要工作。"随后附了一份参考文献清单。',
+      '审稿人2号写道："本文文献综述不够充分，严重忽视了该领域的重要工作。"随后附了一份参考文献清单。',
       '你逐条检索，发现清单上绝大多数论文来自同一位作者——姑且称他为X教授。你随手查了一下本次会议的主办机构，结果耐人寻味。',
       '也许只是巧合。',
     ],
-    prompt: '三号附上的清单高度可疑，你决定',
+    prompt: '2号附上的清单高度可疑，你决定',
     options: [
       {
         id: 'cite_all',
@@ -120,7 +120,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你仔细看完清单，找出真正与本文相关的几篇，整进综述，写了两句说明关联。三号在修改审中写道："作者文献引用仍不充分，但整体工作尚可接受。"\n\n论文勉强过了，像是被夹子夹着放进了接受列表。',
+            narrative: '你仔细看完清单，找出真正与本文相关的几篇，整进综述，写了两句说明关联。2号在修改审中写道："作者文献引用仍不充分，但整体工作尚可接受。"\n\n论文勉强过了，像是被夹子夹着放进了接受列表。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -128,7 +128,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你只引了相关的几篇，在申辩里解释了选择标准。三号回复"这与我的建议明显不一致"，维持负面评价，论文以弱拒收场。\n\n组里有人低声问了一句"老师，他们是不是同一个人"，你没有回答，因为你不知道怎么回答。',
+            narrative: '你只引了相关的几篇，在申辩里解释了选择标准。2号回复"这与我的建议明显不一致"，维持负面评价，论文以弱拒收场。\n\n组里有人低声问了一句"老师，他们是不是同一个人"，你没有回答，因为你不知道怎么回答。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -1 },
               { type: 'allStudents', stat: 'happiness', delta: -5 },
@@ -150,7 +150,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 2,
-            narrative: '你在申辩里委婉指出了文献分布的规律，措辞极为克制，没有直接点名。三号随即追加了两条新意见，都与文献引用无关，但都是负面的。程序主席回复："综合审稿意见，本文暂不接受。"\n\n你把这份申辩存档，想着总有一天能用上。大概率用不上。',
+            narrative: '你在申辩里委婉指出了文献分布的规律，措辞极为克制，没有直接点名。2号随即追加了两条新意见，都与文献引用无关，但都是负面的。程序主席回复："综合审稿意见，本文暂不接受。"\n\n你把这份申辩存档，想着总有一天能用上。大概率用不上。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -210,7 +210,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你撤稿，重投到另一个会。新会的一号写道："这篇论文我好像在哪里见过类似的工作，建议作者说明与现有工作的区别。"\n\n你很想告诉他，那篇"类似的工作"就是你自己的论文，它在另一个系统里量子叠加了好几个月。但你没有，你写了申辩，耐心解释了区别。',
+            narrative: '你撤稿，重投到另一个会。新会的1号写道："这篇论文我好像在哪里见过类似的工作，建议作者说明与现有工作的区别。"\n\n你很想告诉他，那篇"类似的工作"就是你自己的论文，它在另一个系统里量子叠加了好几个月。但你没有，你写了申辩，耐心解释了区别。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'happiness', delta: -3 },
@@ -313,11 +313,11 @@ export const reviewerEvents: Record<string, GameEvent> = {
     id: 'reviewer_insider',
     title: '他知道的比应该知道的多',
     description: [
-      '审稿意见到了，二号的第三条写道："作者在处理长尾数据分布时的采样策略存在偏差，这在内部的对比实验中也有所体现——但这个问题在公开版本的方案里尚未被讨论过。"',
+      '审稿意见到了，2号的第三条写道："作者在处理长尾数据分布时的采样策略存在偏差，这在内部的对比实验中也有所体现——但这个问题在公开版本的方案里尚未被讨论过。"',
       '你重新读了一遍。那组内部对比实验从未对外公开，采样策略的细节应该只有组里的人知道。',
-      '二号了解一些他不该了解的东西。',
+      '2号了解一些他不该了解的东西。',
     ],
-    prompt: '审稿人二号知道的比他应该知道的多，你决定',
+    prompt: '审稿人2号知道的比他应该知道的多，你决定',
     options: [
       {
         id: 'report_to_ac',
@@ -347,7 +347,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你在申辩里对那个具体问题进行了详尽的补充实验，写得非常有针对性，仿佛你早就知道这会是核心争议——因为你确实知道。二号在修改审里说"作者已充分回应"，给了弱接受。\n\n你没有对外提过这件事，它成了一段只存在于你记忆里的经历。',
+            narrative: '你在申辩里对那个具体问题进行了详尽的补充实验，写得非常有针对性，仿佛你早就知道这会是核心争议——因为你确实知道。2号在修改审里说"作者已充分回应"，给了弱接受。\n\n你没有对外提过这件事，它成了一段只存在于你记忆里的经历。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.engineering', delta: 3 },
@@ -355,7 +355,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你写了一份异常精准的申辩，直接回应了那组内部实验的问题。二号回复："作者的回应令人生疑，精准度超出正常范围。"\n\n论文被拒，理由是"存在某些程序性疑虑"。没有人解释这意味着什么。',
+            narrative: '你写了一份异常精准的申辩，直接回应了那组内部实验的问题。2号回复："作者的回应令人生疑，精准度超出正常范围。"\n\n论文被拒，理由是"存在某些程序性疑虑"。没有人解释这意味着什么。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -4 },
               { type: 'lab', stat: 'energy', delta: -15 },
@@ -369,7 +369,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '你写了一份正常的申辩，没有提那些细节，按常规逐条回应了审稿意见。论文过了，二号的那条意见被归入"已解决"。\n\n你把原始截图存进了一个文件夹，文件夹名叫"备用"——这是第一个文件，不知道下面还会不会有东西放进来。',
+            narrative: '你写了一份正常的申辩，没有提那些细节，按常规逐条回应了审稿意见。论文过了，2号的那条意见被归入"已解决"。\n\n你把原始截图存进了一个文件夹，文件夹名叫"备用"——这是第一个文件，不知道下面还会不会有东西放进来。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 2 },
               { type: 'lab', stat: 'energy', delta: 5 },
@@ -451,7 +451,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
     id: 'reviewer_retroactive_scoop',
     title: '昨天下午三点上传的论文',
     description: [
-      '审稿意见里，二号写道："本文的核心贡献已被另一项近期工作覆盖，建议拒稿并请作者参阅。"随后附上了引用。',
+      '审稿意见里，2号写道："本文的核心贡献已被另一项近期工作覆盖，建议拒稿并请作者参阅。"随后附上了引用。',
       '你去查了那篇引用。它是昨天下午三点整才上传到arxiv的。而这是你半年前投进GRF的稿子，GRF的审稿周期出了名的漫长。',
       '你盯着时间戳看了好一会儿，开始思考人类对"优先权"这个概念的理解是否存在某种根本性的哲学错误。',
     ],
@@ -471,7 +471,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你提交了清晰的时间线证明。二号回复："尽管如此，鉴于该工作已公开，本文需要更明确地说明差异化贡献。"你更新了相关章节，把差异写清楚，花了两周。\n\n论文最终接受，新增的那段把论文变得更完整了——代价只是你脑子里那段无声的抗议。',
+            narrative: '你提交了清晰的时间线证明。2号回复："尽管如此，鉴于该工作已公开，本文需要更明确地说明差异化贡献。"你更新了相关章节，把差异写清楚，花了两周。\n\n论文最终接受，新增的那段把论文变得更完整了——代价只是你脑子里那段无声的抗议。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 3 },
@@ -494,7 +494,7 @@ export const reviewerEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你加了引用，写了差异说明，重新提交。一号说"本文与引用工作差异化贡献仍不够清晰"。你把两篇论文重新对比读了一遍，差异其实相当明显，只是被你写得太学术，让人看不出来。\n\n你改写了引言，换了组词，审稿终于通过了。',
+            narrative: '你加了引用，写了差异说明，重新提交。1号说"本文与引用工作差异化贡献仍不够清晰"。你把两篇论文重新对比读了一遍，差异其实相当明显，只是被你写得太学术，让人看不出来。\n\n你改写了引言，换了组词，审稿终于通过了。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -15 },
               { type: 'allStudents', stat: 'skills.social', delta: 3 },

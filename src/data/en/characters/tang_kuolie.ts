@@ -17,7 +17,7 @@ export const tangKuolieEn: CharacterPack = {
     tkl_first_meeting: {
       title: 'While we’re here, let’s swap contacts',
       description: [
-        'It’s Nico Tang’s first day in the lab. You head out to the hallway to meet him and find him already leaning against the doorframe, deep in lively conversation with two students from the lab next door, the three of them taking turns scanning each other’s phones, like a spontaneous meetup had broken out right there in the doorway.',
+        'It’s Nico Tang’s first day in the lab. You head out to the hallway to meet him and find him already leaning against the doorframe, deep in lively conversation with two students from the lab next door, the three of them passing their phones back and forth to add each other, like a spontaneous meetup had broken out right there in the doorway.',
         'Back in your office, you’re about to bring up research directions when he pulls out his phone. “Prof, do you know Professor Kapoor? I just added him in the hallway. He says our directions overlap. Want me to start a group chat with the three of us?”',
         'He says this with one hundred percent sincere enthusiasm. It has not occurred to him at all that you haven’t said a single word about research yet.',
       ],
@@ -168,7 +168,7 @@ export const tangKuolieEn: CharacterPack = {
       title: 'He threw his own meetup',
       description: [
         'For a while you have no idea what Nico is busy with outside the lab, until he messages you: “Prof, last week I put together a small AI meetup on campus. Twenty-some alumni came, some still in school, some working. It was a good time.”',
-        'You ask him why he organized it. “Well, while we’re all here, you know? Everyone’s in the same circle. It’s nice to get to know each other.” You can’t shake the feeling that the phrase doesn’t quite make sense here, but he says it so naturally that you can’t argue.',
+        'You ask him why he organized it. “Well, while we’re here, you know? Everyone’s in the same circle. It’s nice to get to know each other.” You can’t shake the feeling that the phrase doesn’t quite make sense here, but he says it so naturally that you can’t argue.',
         'He goes on: “A few people asked about our lab, so I gave them the rundown. One of them said he wants to donate an old server. They just upgraded, and it still works fine.”',
       ],
       prompt: 'You choose:',
@@ -321,22 +321,22 @@ export const tangKuolieEn: CharacterPack = {
       title: '{studentName} went out for breakfast and came back with a person',
       description: [
         '{studentName} says he’s running downstairs to get breakfast and will be back in ten minutes. Twenty minutes later he appears at the door, and next to him is someone you’ve never seen before.',
-        '“Prof,” he says, holding up a soy milk, “let me introduce you. This is Dr. Mehta. He just published that paper last month you said you wanted to read, the sparse attention one.”',
+        '“Prof,” he says, holding up a coffee, “let me introduce you. This is Dr. Mehta. He just published that paper last month you said you wanted to read, the sparse attention one.”',
         'Dr. Mehta looks a little bewildered himself. Clearly someone just struck up a conversation with him while he was buying breakfast, and he hasn’t entirely figured out what’s going on.',
-        '“I said my advisor might be interested, and Dr. Mehta said he didn’t mind chatting,” {studentName} says, handing out soy milk to everyone as if nothing were unusual. “It was on the way.”',
+        '“I said my advisor might be interested, and Dr. Mehta said he didn’t mind chatting,” {studentName} says, handing out coffee to everyone as if nothing were unusual. “It was on the way.”',
       ],
       prompt: 'You:',
       options: {
         half_favor_tkl_chat: {
           text: 'Have a real conversation with Dr. Mehta',
           outcomes: [
-            'You talk for nearly an hour, from his paper to your research directions. {studentName} sits nearby drinking his soy milk, chiming in now and then but mostly looking at his phone. Yet every time the conversation stalls, he drops in exactly the right prompt and it picks right back up. After Dr. Mehta leaves, he looks up. “Went pretty well, right?” You say it went great. He nods. “Told you two would hit it off.” He says it completely calmly, as if he’d had it all figured out from the start.',
+            'You talk for nearly an hour, from his paper to your research directions. {studentName} sits nearby drinking his coffee, chiming in now and then but mostly looking at his phone. Yet every time the conversation stalls, he drops in exactly the right prompt and it picks right back up. After Dr. Mehta leaves, he looks up. “Went pretty well, right?” You say it went great. He nods. “Told you two would hit it off.” He says it completely calmly, as if he’d had it all figured out from the start.',
           ],
         },
         half_favor_tkl_how: {
           text: 'How do you meet someone buying breakfast?',
           outcomes: [
-            '{studentName} thinks about it. “I said the soy milk wasn’t as good as yesterday’s, and he said yeah. I asked which lab he was in, he said computer science, I said my advisor does research in CS too, and we just got talking.” He smiles. “I think as long as you’re willing to open your mouth, the people around you are all pretty easy to talk to.” You and Dr. Mehta exchange a glance. He seems to still be processing this logic too.',
+            '{studentName} thinks about it. “I said the coffee wasn’t as good as yesterday’s, and he said yeah. I asked which lab he was in, he said computer science, I said my advisor does research in CS too, and we just got talking.” He smiles. “I think as long as you’re willing to open your mouth, the people around you are all pretty easy to talk to.” You and Dr. Mehta exchange a glance. He seems to still be processing this logic too.',
           ],
         },
       },

@@ -203,6 +203,12 @@ html, body {
   color: var(--color-accent);
 }
 
+/* The English title is longer; drop it before it wraps (phones already hide it). */
+html[lang="en"] .game-title { white-space: nowrap; }
+@media (max-width: 860px) {
+  html[lang="en"] .game-title { display: none; }
+}
+
 .time-display {
   font-size: 13px;
   color: var(--color-text-muted);
@@ -2577,7 +2583,7 @@ html, body {
 .detail-stat__label {
   font-size: 14px;
   color: var(--color-text-muted);
-  width: 40px;
+  width: 58px;
   flex-shrink: 0;
   white-space: nowrap;
 }

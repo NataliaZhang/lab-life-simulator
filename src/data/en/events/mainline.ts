@@ -30,7 +30,7 @@ export const mainlineEventsEn: EventTranslations = {
     description: [
       'Early the next morning, an email arrives from the college finance office. Subject: “Notice Regarding the Disbursement of Startup Funds for Junior Faculty.”',
       'The body is long. You scroll straight to the bottom. When you see the number, you can’t help checking it again.',
-      '$500,000. Half a million. Yesterday your lab was a whiteboard. Today you’re deciding how to spend half a million dollars.',
+      '$50,000. Fifty thousand. Yesterday your lab was a whiteboard. Today you’re deciding how to spend fifty thousand dollars.',
       'One of the most surreal things about becoming a professor is that people actually hand you money and then expect you to make good decisions with it.',
     ],
     prompt: 'How will you spend your first startup funds?',
@@ -38,13 +38,13 @@ export const mainlineEventsEn: EventTranslations = {
       buy_server: {
         text: 'Buy servers first',
         outcomes: [
-          'You spend $200K on servers. The procurement process is roughly as complicated as a visa application. But the moment the confirmation email arrives, you suddenly feel like you really have a lab. Remaining funds: $300K.',
+          'You spend $20K on servers. The procurement process is roughly as complicated as a visa application. But the moment the confirmation email arrives, you suddenly feel like you really have a lab. Remaining funds: $30K.',
         ],
       },
       renovate_lab: {
         text: 'Fix up the lab first',
         outcomes: [
-          'You buy office furniture, monitors, and a coffee machine. Your research capacity hasn’t improved in the slightest, but the lab has finally been upgraded from “unused room” to “place that looks like it could publish papers.” Remaining funds: $400K.',
+          'You buy office furniture, monitors, and a coffee machine. Your research capacity hasn’t improved in the slightest, but the lab has finally been upgraded from “unused room” to “place that looks like it could publish papers.” Remaining funds: $40K.',
         ],
       },
       save_money: {
@@ -356,7 +356,7 @@ export const mainlineEventsEn: EventTranslations = {
   grant_deadline: {
     title: 'Early-Career Grant Deadline',
     description: [
-      'The national early-career grant proposal is due in a week. It’s a document that takes fifty thousand words to justify what you plan to do over the next three years, in a format nobody actually enjoys writing but everyone has to.',
+      'The early-career research grant proposal is due in a week. It’s a document that takes fifty thousand words to justify what you plan to do over the next three years, in a format nobody actually enjoys writing but everyone has to.',
       'You sit at your computer. The progress bar is still on chapter one. This is the national-level mission an assistant professor faces alone: no students who can help, no senior labmates to ask, just a deadline approaching at a rate of one second per second.',
     ],
     prompt: 'One week left. What’s the plan?',
@@ -371,7 +371,7 @@ export const mainlineEventsEn: EventTranslations = {
       hire_help: {
         text: 'Hire a professional to polish it',
         outcomes: [
-          'You find a grant-writing consultant with years of experience. On receiving your draft, the consultant pauses for about three seconds, a pause containing a professional’s complete assessment of your first draft, then replies: “I’ll take it from here.” Five days later, a clearly structured, properly worded, perfectly formatted proposal lands in your inbox. You saved about forty hours and spent $30K. Feels like a fair trade.',
+          'You find a grant-writing consultant with years of experience. On receiving your draft, the consultant pauses for about three seconds, a pause containing a professional’s complete assessment of your first draft, then replies: “I’ll take it from here.” Five days later, a clearly structured, properly worded, perfectly formatted proposal lands in your inbox. You saved about forty hours and spent $3K. Feels like a fair trade.',
         ],
       },
       skip_this_year: {
@@ -394,7 +394,7 @@ export const mainlineEventsEn: EventTranslations = {
       share_result: {
         text: 'Share the result with the lab',
         outcomes: [
-          'Funded. $240K, officially awarded. You post the news in the lab Slack. The first reply is a “!!!”, followed by a stream of celebrations. With money in hand, the pressure drops a whole level, and the lab is noticeably more relaxed for the next two weeks.',
+          'Funded. $24K, officially awarded. You post the news in the lab Slack. The first reply is a “!!!”, followed by a stream of celebrations. With money in hand, the pressure drops a whole level, and the lab is noticeably more relaxed for the next two weeks.',
           'Not funded. At group meeting, you say, “The grant didn’t come through this time. We’ll try again next year,” and move straight on to the next item. Someone quietly flips the pen in their hand around, then everyone looks back up at the slides, all very naturally. The advisor isn’t falling apart. That’s the signal. We keep going.',
         ],
       },
@@ -435,7 +435,7 @@ export const mainlineEventsEn: EventTranslations = {
       submit_celebrate: {
         text: 'Submit, then go out for a good meal',
         outcomes: [
-          'You click, then stand up and grab your coat. “Come on. Let’s eat.” {studentName} grabs {his} phone and follows, and by the door the “am I supposed to be happy right now?” look on {his} face finally turns into a real smile. You go to a Sichuan place nearby and order clearly more food than two people can eat.\n\nHalfway through, {studentName} says, “Professor, if we get in, let’s come back here again.” You say yes. An academic manifesto, with two dinners riding on it.',
+          'You click, then stand up and grab your coat. “Come on. Let’s eat.” {studentName} grabs {his} phone and follows, and by the door the “am I supposed to be happy right now?” look on {his} face finally turns into a real smile. You go to a little place nearby and order clearly more food than two people can eat.\n\nHalfway through, {studentName} says, “Professor, if we get in, let’s come back here again.” You say yes. An academic manifesto, with two dinners riding on it.',
         ],
       },
     },

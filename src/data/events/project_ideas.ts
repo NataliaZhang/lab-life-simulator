@@ -100,10 +100,10 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
 
   idea_auto_rebuttal: {
     id: 'idea_auto_rebuttal',
-    title: 'Reviewer #2 又来了',
+    title: '审稿人2号又来了',
     description: [
-      '论文审稿结果回来了，Reviewer #2 的意见长达两页，充满了哲学质疑。',
-      'Reviewer #2 给出了一个令人叹为观止的审稿意见：第一条质疑你的动机，第二条质疑实验室的存在意义，第三条建议你去读一条2003年的冷门论文。',
+      '论文审稿结果回来了，审稿人2号的意见长达两页，充满了哲学质疑。',
+      '审稿人2号给出了一个令人叹为观止的审稿意见：第一条质疑你的动机，第二条质疑实验室的存在意义，第三条建议你去读一条2003年的冷门论文。',
       '你不是第一次面对这种无厘头的意见了。你打开三年前的 Rebuttal，发现格式几乎可以完全复用。',
       '这个模式太强了。审稿意见的结构是可重复的，历史 Rebuttal 库加上大模型，完全可以自动化这个痛苦过程。',
     ],
@@ -114,11 +114,11 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
     options: [
       {
         id: 'write_rebuttal_idea',
-        text: '先存个思路，回来再怼 Reviewer #2',
+        text: '先存个思路，回来再怼审稿人2号',
         outcomes: [
           {
             weight: 1,
-            narrative: '你用两分钟把这个系统的框架写进备忘录，然后切回去应对 Reviewer #2。Rebuttal 写了半天，发现这件事交给人类做果然太痛苦了。\n\n💡 获得灵感：「自动 Rebuttal」——已记录到项目面板。',
+            narrative: '你用两分钟把这个系统的框架写进备忘录，然后切回去应对审稿人2号。Rebuttal 写了半天，发现这件事交给人类做果然太痛苦了。\n\n💡 获得灵感：「自动 Rebuttal」——已记录到项目面板。',
             effects: [
               { type: 'unlockIdea', projectId: 'auto_rebuttal' },
               { type: 'lab', stat: 'energy', delta: -10 },
@@ -132,7 +132,7 @@ export const projectIdeaEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 3,
-            narrative: '你把杂念清出脑海，集中火力干掉了 Reviewer #2。三天后提交，等待结果。',
+            narrative: '你把杂念清出脑海，集中火力干掉了审稿人2号。三天后提交，等待结果。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -5 },
               { type: 'lab', stat: 'reputation', delta: 1 },

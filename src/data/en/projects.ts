@@ -18,7 +18,7 @@ export const projectsEn: Record<string, ProjectTranslation> = {
   pi_email_delay_game_theory: {
     name: 'A Multi-Agent Game-Theoretic Model of PI Email Latency',
     description: 'Model academic email exchanges as a game of incomplete information: the PI and the student each have a strategy set, and a delayed reply is an equilibrium, not an accident. A theoretical framework plus small-scale survey data, aimed at a workshop.',
-    completionSummary: 'Accepted at the workshop. Anonymous Reviewer #2 wrote: “Are the authors aware that this study itself exhibits the ‘delayed acknowledgment bias’ described in the paper?” The comment gets quoted at group meeting again and again.',
+    completionSummary: 'Accepted at the workshop. Anonymous Reviewer 2 wrote: “Are the authors aware that this study itself exhibits the ‘delayed acknowledgment bias’ described in the paper?” The comment gets quoted at group meeting again and again.',
     ideaSources: ['The “advisor left me on read” study', 'After seriously discussing that absurd paper with a student'],
   },
 
@@ -32,8 +32,8 @@ export const projectsEn: Record<string, ProjectTranslation> = {
   auto_rebuttal: {
     name: 'Automated Rebuttal',
     description: 'Use historical review data to automatically generate high-quality rebuttals.',
-    completionSummary: 'Our system outscores human authors by an average of 23% across ten top-venue datasets, but Reviewer #3 still finds the logic “not sufficiently rigorous.”',
-    ideaSources: ['A rejection notice', 'A review meeting', 'The Reviewer #2 incident', 'A student discussion'],
+    completionSummary: 'Our system outscores human authors by an average of 23% across ten top-venue datasets, but Reviewer 2 still finds the logic “not sufficiently rigorous.”',
+    ideaSources: ['A rejection notice', 'A review meeting', 'The Reviewer 2 incident', 'A student discussion'],
   },
 
   campus_agent: {
@@ -53,7 +53,7 @@ export const projectsEn: Record<string, ProjectTranslation> = {
   email_politeness_tax: {
     name: 'The Email Politeness Tax',
     description: 'Analyze the causal relationship between how polite a greeting is and email reply rates.',
-    completionSummary: 'Each additional “hope you’re doing well” raises the reply rate by 11%, but returns diminish after three, at which point the recipient’s “this person wants something” alarm goes off.',
+    completionSummary: 'Each additional “I hope this email finds you well” raises the reply rate by 11%, but returns diminish after three, at which point the recipient’s “this person wants something” alarm goes off.',
     ideaSources: ['Emailing someone for a favor', 'Waiting too long for a reply', 'A discussion of how students write emails'],
   },
 
@@ -102,8 +102,8 @@ export const projectsEn: Record<string, ProjectTranslation> = {
   reviewer_impossibility: {
     name: 'The Reviewer Impossibility Theorem',
     description: 'Use social choice theory to prove that no reviewer can simultaneously be “constructive,” “has read the whole paper,” and “easy to get accepted by.” The theorem is structurally similar to Arrow’s impossibility theorem.',
-    completionSummary: 'Proof complete: any two of the three conditions can hold at once, but all three together lead to a contradiction. After submission, Reviewer #2 left a comment that was both constructive and clearly written without reading the whole paper. The authors included it as Appendix A.',
-    ideaSources: ['The Reviewer #2 incident', 'Contradictory reviews', 'A discussion about the review system'],
+    completionSummary: 'Proof complete: any two of the three conditions can hold at once, but all three together lead to a contradiction. After submission, Reviewer 2 left a comment that was both constructive and clearly written without reading the whole paper. The authors included it as Appendix A.',
+    ideaSources: ['The Reviewer 2 incident', 'Contradictory reviews', 'A discussion about the review system'],
   },
 
   // ── Normal projects ─────────────────────────────────────────────────────
@@ -119,7 +119,7 @@ export const projectsEn: Record<string, ProjectTranslation> = {
     name: 'Reviewer Alignment',
     description: 'Train a model that simulates the preferences of reviewers at different conferences, so a paper’s style can be aligned with them in advance.',
     completionSummary: 'Trained on 23,000 historical reviews, the model predicts review decisions with 82% accuracy, but declines to give specific reasons.',
-    ideaSources: ['Decoding reviewer comments', 'The Reviewer #2 incident', 'Submission results'],
+    ideaSources: ['Decoding reviewer comments', 'The Reviewer 2 incident', 'Submission results'],
   },
 
   coffee_social_network: {
@@ -268,7 +268,7 @@ export const projectsEn: Record<string, ProjectTranslation> = {
     name: 'AI Reviewer Alignment',
     description: 'Train a model whose reviewing style precisely matches the historical acceptance preferences of top venues.',
     completionSummary: 'After RLHF training, the review model’s acceptance rate is within 2.1% of the target conference’s historical rate, but it gave perfect scores to papers from its own institution.',
-    ideaSources: ['A discussion of review bias', 'The Reviewer #2 incident', 'Research on submission strategy'],
+    ideaSources: ['A discussion of review bias', 'The Reviewer 2 incident', 'Research on submission strategy'],
   },
 
   late_submission_effect: {

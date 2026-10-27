@@ -70,7 +70,7 @@ export const studentSpecificEventsEn: EventTranslations = {
       extend_three_years: {
         text: 'Then… one more year?',
         outcomes: [
-          'Before you can finish, {studentName} is already on {his} feet. “Professor, I’ve thought this through.” {He} leaves the four-hundred-page dissertation on your desk, swings {his} backpack over {his} shoulder, gives a small bow, and walks out.\n\nThree weeks later, an email arrives: “{studentName} has officially left the lab. Thank you to my advisor for three years of mentorship.”\n\nOn the campus subreddit, someone has posted a map of the college with your lab labeled: “Vintage PhD Aging Cellar.”',
+          'Before you can finish, {studentName} is already on {his} feet. “Professor, I’ve thought this through.” {He} leaves the four-hundred-page dissertation on your desk, swings {his} backpack over {his} shoulder, gives a small bow, and walks out.\n\nThree weeks later, an email arrives: “{studentName} has officially left the lab. Thank you to my advisor for three years of mentorship.”\n\nOn the campus forum, someone has posted a map of the college with your lab labeled: “Vintage PhD Aging Cellar.”',
         ],
       },
     },

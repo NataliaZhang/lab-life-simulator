@@ -27,7 +27,7 @@ export const CONFERENCES: Record<string, ConferenceProfile> = {
     topics: '智能系统的基础开放问题',
     culture: '每年讨论同一批问题，每年都有新论文宣称"终于解决了"',
     meme: 'ICOP Best Paper 的真正归宿是成为下一年最大的挑战对象',
-    reviewerLore: '3号审稿人从1997年起从未缺席，所有人都知道，没有人能证明',
+    reviewerLore: '审稿人2号从1997年起从未缺席，所有人都知道，没有人能证明',
   },
 
   GRF: {

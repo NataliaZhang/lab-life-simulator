@@ -20,7 +20,7 @@ export const endingsEventsEn: EventTranslations = {
       emergency_loan: {
         text: 'One last shot: ask the college for an emergency advance',
         outcomes: [
-          'The college makes an exception and approves $50K in bridge funding, on the condition that you submit a grant proposal within three months. You’ve won one last chance. Whether the lab survives comes down to these three months.',
+          'The college makes an exception and approves $5K in bridge funding, on the condition that you submit a grant proposal within three months. You’ve won one last chance. Whether the lab survives comes down to these three months.',
           'The college says there’s nothing it can do. Without funding, the lab can’t keep running. You tell each of your students and help them find new advisors. On the last day, you stay in the office packing until late.',
         ],
       },

@@ -164,6 +164,11 @@ export function App() {
     prevAchievementsRef.current = gallery.achievementsUnlocked;
   }, [gallery.achievementsUnlocked, isSyncedAchievement]);
 
+  // Must keep a stable identity: AchievementToast restarts its timer whenever onDone
+  // changes, so an inline arrow would reset it on every App render (every click) and
+  // leave the faded-out banner mounted, blocking the rest of the queue.
+  const dismissAchievementToast = useCallback(() => setAchievementToastQueue(q => q.slice(1)), []);
+
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
     const size = saved ? parseInt(saved, 10) : 17;
@@ -259,7 +264,7 @@ export function App() {
         <AchievementToast
           key={achievementToastQueue[0]}
           achievementId={achievementToastQueue[0]}
-          onDone={() => setAchievementToastQueue(q => q.slice(1))}
+          onDone={dismissAchievementToast}
         />
       )}
       {!isInitialScreen && (

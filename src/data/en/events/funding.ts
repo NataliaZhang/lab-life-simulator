@@ -5,7 +5,7 @@ export const fundingEventsEn: EventTranslations = {
   funding_crisis_grant: {
     title: 'Grant-Writing Season',
     description: [
-      'Account balance: under $50K.',
+      'Account balance: under $5K.',
       'The number reminds you of something you should have done a long time ago: write a grant. Official name: “Application for Research Funding.” Typical length: fifty to a hundred thousand words. Content: “what you plan to do over the next three years.” Format requirements: “written in a way nobody wants to read.” Review outcome: “if you’re lucky, someone skims the abstract.”',
       'You open a new document, type a title, pause for a few seconds, delete it, type something else, and finally type the original title back in.',
     ],
@@ -20,7 +20,7 @@ export const fundingEventsEn: EventTranslations = {
       grant_medium: {
         text: 'Good enough is good enough. Throw one together',
         outcomes: [
-          'You dig out last year’s proposal, change the year in the title, swap two words in the abstract, and add one line under “Innovation”: “Incorporates state-of-the-art large language model technology.” That same line was probably added to eight hundred other proposals nationwide this cycle. Result: funded, money in the account. Enough to get by. It’ll do.',
+          'You dig out last year’s proposal, change the year in the title, swap two words in the abstract, and add one line under “Innovation”: “Incorporates state-of-the-art large language model technology.” That same line was probably added to eight hundred other proposals this cycle. Result: funded, money in the account. Enough to get by. It’ll do.',
         ],
       },
       grant_minimal: {

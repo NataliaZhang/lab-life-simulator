@@ -157,7 +157,7 @@ export const dailyBureaucracyEventsEn: EventTranslations = {
       bureaucracy_speedrun: {
         text: 'Get reimbursed or die trying',
         outcomes: [
-          'You reach a former colleague of the retired chair, get the contact information secondhand, and send an email. A reply comes within three days: happy to sign, but you’ll need to mail a paper form. You go to a print shop, print the form, get it notarized and mail it. Two weeks later the signed form arrives, and you resubmit it to finance.\n\nFinance informs you that form B-7 (rev. 2024) has been discontinued. Please use B-7 (rev. 2025).',
+          'You reach a former colleague of the retired chair, get the contact information secondhand, and send an email. A reply comes within three days: happy to sign, but you’ll need to mail a paper form. You go to a print shop, print the form, get it stamped and mail it. Two weeks later the signed form arrives, and you resubmit it to finance.\n\nFinance informs you that form B-7 (rev. 2024) has been discontinued. Please use B-7 (rev. 2025).',
         ],
       },
     },
@@ -269,7 +269,7 @@ export const dailyBureaucracyEventsEn: EventTranslations = {
       encourage_to_go: {
         text: 'Let {him} go: academia isn’t the only path',
         outcomes: [
-          'You say, “Go. It’s a great opportunity, and you’ve earned it.” {studentName} freezes for a second, probably not expecting you to be so straightforward. There will be no PhD diploma, but you have sent someone out into the world who found {his} direction.\n\nBefore leaving, {studentName} thanks you formally, and you can hear how sincere it is.\n\nAfter {studentName} leaves, the lab has one fewer person and one more story for you to tell your students. Some time later, at a conference, you happen to see {studentName}’s name in the acknowledgments of a highly cited paper, listed first.',
+          'You say, “Go. It’s a great opportunity, and you’ve earned it.” {studentName} freezes for a second, probably not expecting you to be so straightforward. There will be no PhD diploma, but you have sent someone out into the world who found {his} direction.\n\nBefore leaving, {studentName} thanks you formally, and you can hear how sincere it is.\n\nAfter {studentName} leaves, the lab has one fewer person and one more story for you to tell your students. Some time later, at a conference, you come across a highly cited paper by {studentName}. The first name in the acknowledgments is yours.',
         ],
       },
       keep_in_academia: {
@@ -283,7 +283,7 @@ export const dailyBureaucracyEventsEn: EventTranslations = {
         text: 'Throw money at the problem',
         outcomes: [
           'You raise {studentName}’s stipend, secure a chance for {him} to lead a project independently, and promise first-author priority. {studentName} thinks it over for two days and decides to stay. It isn’t all about the money, {he} says. It’s more that “here I know what I’m doing, and over there I’m not sure.”\n\nYou consider it money well spent, even if funding will be a little tight next quarter.',
-          'You improve your offer. {studentName} thanks you for the sincere effort, and goes anyway. The ending was probably decided the moment that offer email arrived; the two of you just stretched out the goodbye a little.\n\nYou put the $100K back into the budget, adjust your research plans, and keep going.',
+          'You improve your offer. {studentName} thanks you for the sincere effort, and goes anyway. The ending was probably decided the moment that offer email arrived; the two of you just stretched out the goodbye a little.\n\nYou put the $10K back into the budget, adjust your research plans, and keep going.',
         ],
       },
     },

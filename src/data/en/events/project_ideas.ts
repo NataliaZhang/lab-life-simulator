@@ -60,24 +60,24 @@ export const projectIdeasEventsEn: EventTranslations = {
   // ── Automated Rebuttal ──────────────────────────────────────────────────
 
   idea_auto_rebuttal: {
-    title: 'Reviewer #2 Strikes Again',
+    title: 'Reviewer 2 Strikes Again',
     description: [
-      'The reviews are back. Reviewer #2’s comments run two full pages and are packed with philosophical doubts.',
-      'Reviewer #2 has delivered a truly breathtaking review. Point one questions your motivation. Point two questions why your lab exists. Point three suggests you read an obscure paper from 2003.',
+      'The reviews are back. Reviewer 2’s comments run two full pages and are packed with philosophical doubts.',
+      'Reviewer 2 has delivered a truly breathtaking review. Point one questions your motivation. Point two questions why your lab exists. Point three suggests you read an obscure paper from 2003.',
       'This isn’t the first nonsensical review you’ve had to face. You open a rebuttal from three years ago and find the format can be reused almost entirely.',
       'The pattern is too strong. Reviews have a repeatable structure, and a library of past rebuttals plus an LLM could completely automate this painful process.',
     ],
     options: {
       write_rebuttal_idea: {
-        text: 'Jot down the idea, then get back to fighting Reviewer #2',
+        text: 'Jot down the idea, then get back to fighting Reviewer 2',
         outcomes: [
-          'You spend two minutes sketching the system’s framework in your notes app, then switch back to Reviewer #2. After half a day of rebuttal writing, you conclude that this job really is too painful to leave to humans.\n\n💡 New idea: “Automated Rebuttal” (saved to the Projects panel)',
+          'You spend two minutes sketching the system’s framework in your notes app, then switch back to Reviewer 2. After half a day of rebuttal writing, you conclude that this job really is too painful to leave to humans.\n\n💡 New idea: “Automated Rebuttal” (saved to the Projects panel)',
         ],
       },
       just_rebuttal: {
         text: 'Rebuttal first. Inspiration is unreliable',
         outcomes: [
-          'You clear your head and concentrate all your firepower on taking down Reviewer #2. Three days later you submit and wait for the result.',
+          'You clear your head and concentrate all your firepower on taking down Reviewer 2. Three days later you submit and wait for the result.',
           'Halfway through writing, it suddenly hits you that this whole process could be automated.\n\n💡 New idea: “Automated Rebuttal” (saved to the Projects panel)',
         ],
       },
@@ -246,7 +246,7 @@ export const projectIdeasEventsEn: EventTranslations = {
     title: 'The Art of Email',
     description: [
       'You wrote an extremely polite email, and the reply came back within three minutes.',
-      'Last week’s email, which simply asked for help, vanished without a trace. This week you added four “hope you’re doing well”s and two “sorry to bother you”s, and got a reply within three minutes.',
+      'Last week’s email, which simply asked for help, vanished without a trace. This week you wrote “I hope this email finds you well” four times and “sorry to bother you” twice, and got a reply within three minutes.',
       'You start thinking about the pattern. Is there a functional relationship between politeness and reply speed? What about the form of address? “Prof.” vs. “Professor” vs. first name?',
       'If you extracted these variables from your email history and ran a systematic causal analysis…',
     ],
@@ -260,7 +260,7 @@ export const projectIdeasEventsEn: EventTranslations = {
       just_remember: {
         text: 'Pass the magic phrases on to your students',
         outcomes: [
-          'You share the finding at group meeting. The students start adding “hope you’re doing well” to their emails that same day. That afternoon you receive an extremely courteous request for a day off, written by one of them.',
+          'You share the finding at group meeting. The students start opening their emails with “I hope this email finds you well” that same day. That afternoon you receive an extremely courteous request for a day off, written by one of them.',
         ],
       },
     },

@@ -37,11 +37,11 @@ export const dailyReviewerEventsEn: EventTranslations = {
   reviewer_citation_demand: {
     title: 'The Reviewer Threw In a Shopping List',
     description: [
-      'Reviewer 3 writes: “The literature review is insufficient and seriously overlooks important prior work in this area.” A list of references follows.',
+      'Reviewer 2 writes: “The literature review is insufficient and seriously overlooks important prior work in this area.” A list of references follows.',
       'You look them up one by one and find that the vast majority are by the same author. Let’s call him Professor X. Out of idle curiosity, you check which institution is organizing this year’s conference. The result is intriguing.',
       'Maybe it’s just a coincidence.',
     ],
-    prompt: 'Reviewer 3’s reading list is highly suspicious. What do you do?',
+    prompt: 'Reviewer 2’s reading list is highly suspicious. What do you do?',
     options: {
       cite_all: {
         text: 'Cite them all, no questions asked',
@@ -53,15 +53,15 @@ export const dailyReviewerEventsEn: EventTranslations = {
       cite_selectively: {
         text: 'Cite only what’s relevant. Stand your ground.',
         outcomes: [
-          'You go through the list carefully, pick out the few papers that are actually relevant, work them into the related work, and add a couple of sentences explaining the connection. In the revision round, Reviewer 3 writes: “The authors’ coverage of the literature remains insufficient, but the overall work is acceptable.”\n\nThe paper squeaks through, as if someone picked it up with tongs and dropped it onto the accepted list.',
-          'You cite only the relevant ones and explain your selection criteria in the rebuttal. Reviewer 3 replies, “This is clearly inconsistent with my recommendation,” and keeps the negative score. The paper ends as a weak reject.\n\nSomeone in the lab asks quietly, “Professor, are they the same person?” You don’t answer, because you don’t know how.',
+          'You go through the list carefully, pick out the few papers that are actually relevant, work them into the related work, and add a couple of sentences explaining the connection. In the revision round, Reviewer 2 writes: “The authors’ coverage of the literature remains insufficient, but the overall work is acceptable.”\n\nThe paper squeaks through, as if someone picked it up with tongs and dropped it onto the accepted list.',
+          'You cite only the relevant ones and explain your selection criteria in the rebuttal. Reviewer 2 replies, “This is clearly inconsistent with my recommendation,” and keeps the negative score. The paper ends as a weak reject.\n\nSomeone in the lab asks quietly, “Professor, are they the same person?” You don’t answer, because you don’t know how.',
         ],
       },
       counter_rebuttal: {
         text: 'Call out the pattern in the rebuttal',
         outcomes: [
           'In the rebuttal, you write, politely but unmistakably: “We note that a substantial proportion of the recommended references are by a single author. After assessing their relevance, we have selectively cited those that are directly related to this work and noted this in the main text.”\n\nThree days later, the program chair sends a notice: the paper will be re-reviewed by a new reviewer. It is eventually accepted. When a colleague asks how you pulled that off, you say innocently, “I just wrote a normal rebuttal.”',
-          'In the rebuttal, you tactfully point out the pattern in the references, with extreme restraint and without naming names. Reviewer 3 promptly adds two new comments. Neither is about citations. Both are negative. The program chair writes: “Taking all reviews into consideration, the paper cannot be accepted at this time.”\n\nYou archive the rebuttal, thinking it might come in handy someday. In all likelihood, it won’t.',
+          'In the rebuttal, you tactfully point out the pattern in the references, with extreme restraint and without naming names. Reviewer 2 promptly adds two new comments. Neither is about citations. Both are negative. The program chair writes: “Taking all reviews into consideration, the paper cannot be accepted at this time.”\n\nYou archive the rebuttal, thinking it might come in handy someday. In all likelihood, it won’t.',
         ],
       },
     },

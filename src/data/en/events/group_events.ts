@@ -185,7 +185,7 @@ export const groupEventsEn: EventTranslations = {
       charge_rent: {
         text: 'Charge rent. Space costs money.',
         outcomes: [
-          'You announce that each floor tile of common space now costs $5 a month, payable to the lab fund. {studentName} and {student2Name} both freeze for a moment, each count up how many tiles they’re occupying, and ask in unison: “Do you take Venmo?” The lab is unexpectedly $40 richer this month.',
+          'You announce that each floor tile of common space now costs 50 cents a month, payable to the lab fund. {studentName} and {student2Name} both freeze for a moment, each count up how many tiles they’re occupying, and ask in unison: “Can we pay by transfer?” The lab is unexpectedly $4 richer this month.',
         ],
       },
     },
@@ -308,14 +308,14 @@ export const groupEventsEn: EventTranslations = {
       check_order: {
         text: 'Check their Amazon orders. Whoever bought one gets it.',
         outcomes: [
-          '{studentName} pulls up a screenshot of the order: clear timestamp, $38.90. Sovereignty established. {student2Name} glances silently at {his2} bag, then walks back to {his2} desk without explanation. So one charger wasn’t enough after all.',
+          '{studentName} pulls up a screenshot of the order: clear timestamp, $3.89. Sovereignty established. {student2Name} glances silently at {his2} bag, then walks back to {his2} desk without explanation. So one charger wasn’t enough after all.',
           'Both of them produce order screenshots: purchased three days apart, identical model. Ownership remains undetermined. You declare the charger lab property, available to both, first come first served. They frown in unison, but accept the ruling.',
         ],
       },
       buy_new: {
         text: 'Buy a new one and keep the peace',
         outcomes: [
-          'You spend $38.90 on a new one and the problem is solved. {studentName} and {student2Name} each take one, and the conflict dissolves. From then on, the lab’s charger population enters a period of steady growth: every time there’s a dispute, you buy another one.',
+          'You spend $3.89 on a new one and the problem is solved. {studentName} and {student2Name} each take one, and the conflict dissolves. From then on, the lab’s charger population enters a period of steady growth: every time there’s a dispute, you buy another one.',
           'The new charger arrives and you declare the dispute over. That afternoon, {studentName}’s old charger turns up too, proving the original really was {student2Name}’s. {student2Name} says, “Well, why didn’t you say so,” grabs the charger, and leaves.',
         ],
       },
@@ -419,7 +419,7 @@ export const groupEventsEn: EventTranslations = {
       buy_chair: {
         text: 'Buy a second chair. Solve it at the root.',
         outcomes: [
-          'You spend $300 on an identical folding chair and bring it into the lab. {studentName} and {student2Name} each claim one, and both sleep soundly all afternoon. Your most successful resource-allocation decision of the month.',
+          'You spend $30 on an identical folding chair and bring it into the lab. {studentName} and {student2Name} each claim one, and both sleep soundly all afternoon. Your most successful resource-allocation decision of the month.',
           'The new chair arrives, but {studentName} says it isn’t as comfortable as the old one and wants to keep using the old one. You realize this is no longer about resources. It’s about belonging. You decide to stay out of it and let time sort it out.',
         ],
       },

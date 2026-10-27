@@ -10,7 +10,7 @@ export interface ProjectDefinition {
   name: string;
   description: string;
   grade: ProjectGrade;           // C = tutorial, B = short, A = normal, S = long
-  ideaSources: string[];         // Human-readable sources (e.g. "Reviewer #2 事件")
+  ideaSources: string[];         // Human-readable sources (e.g. "审稿人2号事件")
 
   startupEnergyCost: number;     // Option A: PI writes proposal, costs energy
   startupFundingCost: number;    // Option B: buy external resources, costs funding (万)

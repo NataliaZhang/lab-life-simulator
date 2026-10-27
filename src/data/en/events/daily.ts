@@ -11,7 +11,7 @@ export const dailyEventsEn: EventTranslations = {
     prompt: 'The GPU is OOMing again. What do you do?',
     options: {
       apply_gpu: {
-        text: 'Request more GPU quota ($50K)',
+        text: 'Request more GPU quota ($5K)',
         outcomes: [
           'Procurement takes a week, but the new GPUs finally arrive. That night, {studentName} messages you: the loss is going down. You stare at the screen, high-five yourself internally, and reply “good,” as if this were routine. The corners of your mouth give you away.',
         ],

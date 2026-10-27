@@ -5,7 +5,7 @@ export const dailyHypeEventsEn: EventTranslations = {
   llm_everything: {
     title: 'LLM Maximalism',
     description: [
-      '{studentName} walks into your office with a system design diagram printed on 11×17 paper and spreads it out across your desk. This isn’t the first time {he} has pitched “replace everything with an LLM,” but it is the first time it has come with a full architecture diagram: the data preprocessing module becomes a GPT-4 API call, the model itself becomes a GPT-4 API call, the evaluation metric becomes a GPT-4 API call, and the figure caption generator also becomes a GPT-4 API call. Every box on the page contains the same word.',
+      '{studentName} walks into your office with a system design diagram printed on A3 paper and spreads it out across your desk. This isn’t the first time {he} has pitched “replace everything with an LLM,” but it is the first time it has come with a full architecture diagram: the data preprocessing module becomes a GPT-4 API call, the model itself becomes a GPT-4 API call, the evaluation metric becomes a GPT-4 API call, and the figure caption generator also becomes a GPT-4 API call. Every box on the page contains the same word.',
       '“LLMs can handle everything.” {studentName} says it gravely, as if stating a law of physics. You look at the diagram and count the API-call boxes: eleven. Your first thought is the monthly bill.',
     ],
     prompt: 'What do you do with the all-LLM blueprint?',
@@ -28,7 +28,7 @@ export const dailyHypeEventsEn: EventTranslations = {
         text: 'Green-light a prototype',
         outcomes: [
           'You say, “Fine, build a prototype and let’s see.” {studentName}’s eyes light up. Three weeks later, the prototype really does run end to end, and it really is somewhat useful, but there’s one line on the API bill that is hard to look at. The bigger problem: {studentName} now believes this proves LLMs can handle everything, and plans to write a paper called “An Empirical Study of Fully-LLM Pipelines.” You opened that door yourself.',
-          'You say, “Fine, build a prototype.” {studentName} heads off, rubbing {his} hands together. Two weeks later {he} comes back with findings: GPT-4 hallucinates 23% of the time in the evaluation step; in preprocessing, it starts randomly deleting columns whenever it hits non-English characters; and the caption generator insists on describing every figure as “a figure showing trends in the data.” The bill: $2,300. {studentName} hesitates, then asks, “So our next step is…” You say, “Write up an analysis of LLM limitations.”',
+          'You say, “Fine, build a prototype.” {studentName} heads off, rubbing {his} hands together. Two weeks later {he} comes back with findings: GPT-4 hallucinates 23% of the time in the evaluation step; in preprocessing, it starts randomly deleting columns whenever it hits non-English characters; and the caption generator insists on describing every figure as “a figure showing trends in the data.” The bill: $230. {studentName} hesitates, then asks, “So our next step is…” You say, “Write up an analysis of LLM limitations.”',
         ],
       },
     },

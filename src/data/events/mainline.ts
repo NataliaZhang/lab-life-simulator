@@ -454,7 +454,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         text: '相信数据，直接写论文',
         outcomes: [{
           weight: 1,
-          narrative: '你和{studentName}兴奋地花了两周写完论文，信心满满地投出去。审稿意见回来了，审稿人二号：第一条——"请在附录中详细说明评估协议及数据划分方式。" 你盯着这句话看了三秒，内心经历了一套完整的情绪——从"这是什么意思"到"哦"到"哦不"——然后把截图转发给了{studentName}。',
+          narrative: '你和{studentName}兴奋地花了两周写完论文，信心满满地投出去。审稿意见回来了，审稿人2号：第一条——"请在附录中详细说明评估协议及数据划分方式。" 你盯着这句话看了三秒，内心经历了一套完整的情绪——从"这是什么意思"到"哦"到"哦不"——然后把截图转发给了{studentName}。',
           effects: [
             { type: 'lab', stat: 'reputation', delta: -3 },
             { type: 'randomStudent', stat: 'happiness', delta: -10 },
@@ -796,14 +796,14 @@ export const mainlineEvents: Record<string, GameEvent> = {
 
   reviewer_two: {
     id: 'reviewer_two',
-    title: '审稿人二号来了',
+    title: '审稿人2号来了',
     description: [
       '两个月过去了。OWRC的审稿意见到了。',
-      '审稿人一号好评，措辞友好，建议小修。三号中性，提了三个可选修改方向，语气像个没睡醒的人，但没有恶意。',
-      '然后是审稿人二号。整整一页，第一条："这篇论文的核心假设存在根本性缺陷，作者似乎对该领域最近的工作一无所知。"',
+      '审稿人1号好评，措辞友好，建议小修。3号中性，提了三个可选修改方向，语气像个没睡醒的人，但没有恶意。',
+      '然后是审稿人2号。整整一页，第一条："这篇论文的核心假设存在根本性缺陷，作者似乎对该领域最近的工作一无所知。"',
       '你重新看了一眼作者列表，确认上面有你的名字。',
     ],
-    prompt: '面对审稿人二号的炮火，你选择：',
+    prompt: '面对审稿人2号的炮火，你选择：',
     options: [
       {
         id: 'rebuttal_gracious',
@@ -811,7 +811,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你写了一份措辞礼貌到近乎卑微的rebuttal，每条意见都认真回应，每个误解都耐心解释，甚至感谢了审稿人的"宝贵意见"。审稿人二号最终说"作者的回应解释了大部分问题"，给了个弱接受。你和{studentName}在群里发了个熟练工式的庆祝表情，然后继续改论文。',
+            narrative: '你写了一份措辞礼貌到近乎卑微的rebuttal，每条意见都认真回应，每个误解都耐心解释，甚至感谢了审稿人的"宝贵意见"。审稿人2号最终说"作者的回应解释了大部分问题"，给了个弱接受。你和{studentName}在群里发了个熟练工式的庆祝表情，然后继续改论文。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: 3 },
               { type: 'allStudents', stat: 'skills.theory', delta: 3 },
@@ -819,7 +819,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你写了rebuttal，逐条回应，有理有据，态度诚恳。审稿人二号看都没看，维持原分，直接拒了。这种事在学术界有个公认的解释，叫"运气不好"。改完换个会吧，换个运气。',
+            narrative: '你写了rebuttal，逐条回应，有理有据，态度诚恳。审稿人2号看都没看，维持原分，直接拒了。这种事在学术界有个公认的解释，叫"运气不好"。改完换个会吧，换个运气。',
             effects: [
               { type: 'allStudents', stat: 'happiness', delta: -5 },
             ],
@@ -840,7 +840,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
           },
           {
             weight: 2,
-            narrative: '你的rebuttal语气稍微硬了一点。审稿人二号把它理解为"挑衅"，随即补充了三条新意见，每一条都比上一条更刁钻，像是在进行一场个人恩怨的延续。论文被拒。{studentName}发来消息问"老师，我们是不是认识了什么仇人？"',
+            narrative: '你的rebuttal语气稍微硬了一点。审稿人2号把它理解为"挑衅"，随即补充了三条新意见，每一条都比上一条更刁钻，像是在进行一场个人恩怨的延续。论文被拒。{studentName}发来消息问"老师，我们是不是认识了什么仇人？"',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -2 },
               { type: 'allStudents', stat: 'happiness', delta: -8 },
@@ -873,7 +873,7 @@ export const mainlineEvents: Record<string, GameEvent> = {
       '早上打开实验室门的时候，你发现白板角落多了一行字：「实验室一周年快乐。」字写得不大，旁边还画了一个歪歪扭扭的小蛋糕。没有彩带，没有气球，没有热闹的合照——毕竟实验室现在只有你和{studentName}。',
       '你站在门口看了一会儿，才意识到真的已经一年了。去年八月，这里还是几张没拆封的桌子、一块空白白板和一个看起来像临时仓库的办公室。现在桌上有论文草稿、项目计划、没洗的杯子、贴歪的便利贴，还有{studentName}留下的各种生活痕迹。',
       '{studentName}今天来得比平时早，正在假装认真看屏幕，但你注意到对方已经往白板那里看了三次。你问是不是写了什么。{studentName}立刻移开目光，说：「没有啊，可能是白板自己长出来的。」',
-      '中午的时候，你们翻出了实验室第一天的照片。照片里的房间空得离谱，白板干净得像从未经历过Reviewer二号。{studentName}看了半天，忽然说：「这一年居然真的把这里填满了。」',
+      '中午的时候，你们翻出了实验室第一天的照片。照片里的房间空得离谱，白板干净得像从未经历过审稿人2号。{studentName}看了半天，忽然说：「这一年居然真的把这里填满了。」',
       '房间里还是只有两个人，但不知道为什么，看起来已经不像刚开始那么空了。',
     ],
     prompt: '一周年，你打算：',

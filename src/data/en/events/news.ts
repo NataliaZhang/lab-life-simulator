@@ -75,7 +75,7 @@ export const newsEventsEn: EventTranslations = {
   news_reviewer_3_found: {
     title: 'Academic Bulletin',
     description: [
-      'Shockwaves in academia: a researcher claims to have pinned down the true identity of “Reviewer 3.” After years of textual analysis, linguistic pattern matching, and time-zone inference, he has released a forty-page investigative report. The report has since been submitted to three journals and was rejected by Reviewer 3 at all of them.',
+      'Shockwaves in academia: a researcher claims to have pinned down the true identity of “Reviewer 2.” After years of textual analysis, linguistic pattern matching, and time-zone inference, he has released a forty-page investigative report. The report has since been submitted to three journals and was rejected by Reviewer 2 at all of them.',
     ],
   },
 

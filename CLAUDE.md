@@ -70,7 +70,7 @@ monthly progress.
 
 ## Localization
 
-The game ships in Chinese and English. `LOCALIZATION_GUIDE.md` is the reference (names, glossary, voices, style); read it before writing English.
+The game ships in Chinese and English. `LOCALIZATION_GUIDE.md` is the reference (setting, names, glossary and money scale, voices, style); read it before writing English.
 
 - Chinese data in `src/data/` stays the source of truth. English lives in `src/data/en/` as text-only overlays keyed by the same IDs: `events/<file>.ts` mirrors `src/data/events/<file>.ts`; `characters/<id>.ts` holds a main student's profile and all their personal events.
 - UI and engine strings: `src/i18n/messages/zh.ts` and `en.ts` (en is typed against zh). Runtime lookup: `src/i18n/content.ts`, `placeholders.ts`, `I18nProvider.tsx`. Types: `src/types/i18n.ts`.

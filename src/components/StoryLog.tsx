@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import type { LogEntry, StatChange } from '../types';
+import type { Locale } from '../types/i18n';
 import { expressionUrl } from '../data/studentArt';
 import { useI18n } from '../i18n/I18nProvider';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const FEEDBACK_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor';
+// Separate feedback surveys per UI language.
+const FEEDBACK_URL: Record<Locale, string> = {
+  zh: 'https://docs.google.com/forms/d/e/1FAIpQLSdJuktfSdSF9zmmM4ihdafhVA58nfYcDOd0bIiRc083fwA41Q/viewform?usp=publish-editor',
+  en: 'https://docs.google.com/forms/d/e/1FAIpQLSdGaeu6fxNvoci48s0kOefViPar4S7K8AjBSnxhw1xv1jHjBg/viewform?usp=publish-editor',
+};
 
 function FeedbackModal({ onClose }: { onClose: () => void }) {
-  const { m } = useI18n();
+  const { m, locale } = useI18n();
   return (
     <div
       style={{
@@ -42,7 +47,7 @@ function FeedbackModal({ onClose }: { onClose: () => void }) {
         <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
           <button
             className="btn btn--primary btn--sm"
-            onClick={() => { window.open(FEEDBACK_URL, '_blank', 'noopener,noreferrer'); onClose(); }}
+            onClick={() => { window.open(FEEDBACK_URL[locale], '_blank', 'noopener,noreferrer'); onClose(); }}
           >
             {m.intro.feedbackGo}
           </button>

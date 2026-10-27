@@ -14,10 +14,10 @@ export const dailyLifeEventsEn: EventTranslations = {
     prompt: 'Day four of the coffee outage. You decide to…',
     options: {
       buy_new_machine: {
-        text: 'Just buy a new one ($10K)',
+        text: 'Just buy a new one ($1K)',
         outcomes: [
           'The new machine arrives that afternoon, built-in grinder included. Someone unboxes it immediately and posts a photo to the group chat with the caption “reborn.” The moment the first cup pours, the whole lab visibly loosens up. Someone even starts humming. Nobody removes the “Under repair” sign from the old machine. It stays there for another two weeks, like a monument.',
-          'The new machine arrives. Unbox, plug in, discover the plug is the wrong type. You spend an afternoon hunting for an adapter, find one, and the machine works fine. The whole thing eats the two hours you had set aside for your grant proposal. The proposal slips by three days. The grant later comes in $100K short. You’re not sure the two are causally related, but you think about it sometimes.',
+          'The new machine arrives. Unbox, plug in, discover the plug is the wrong type. You spend an afternoon hunting for an adapter, find one, and the machine works fine. The whole thing eats the two hours you had set aside for your grant proposal. The proposal slips by three days. The grant later comes in $10K short. You’re not sure the two are causally related, but you think about it sometimes.',
         ],
       },
       self_service_coffee: {
@@ -129,7 +129,7 @@ export const dailyLifeEventsEn: EventTranslations = {
       install_fridge_policy: {
         text: 'Legislate: a Fridge Charter, effective immediately',
         outcomes: [
-          'That afternoon you draft the “Lab Shared Refrigerator Usage Guidelines,” requiring every item to be labeled with a name, date stored and expected pickup date. Overdue items are automatically considered ownerless. The document is printed and taped to the fridge.\n\nOne student remarks privately that it reads “like HOA bylaws,” but for the next two semesters, no unidentified presence ever appears in the fridge again.\n\nDrafting regulations bought order. The price: one afternoon.',
+          'That afternoon you draft the “Lab Shared Refrigerator Usage Guidelines,” requiring every item to be labeled with a name, date stored and expected pickup date. Overdue items are automatically considered ownerless. The document is printed and taped to the fridge.\n\nOne student remarks privately that it reads “like a landlord’s rulebook,” but for the next two semesters, no unidentified presence ever appears in the fridge again.\n\nDrafting regulations bought order. The price: one afternoon.',
         ],
       },
     },
@@ -247,7 +247,7 @@ export const dailyLifeEventsEn: EventTranslations = {
       check_the_usb: {
         text: 'Plug in the USB drive and see',
         outcomes: [
-          'You find a spare computer and plug in the drive. Inside: a file named “final_REALLY_final_this_time_for_real_v7.pptx,” an unnamed zip archive containing raw data from a 2021 group meeting, a photo of a cat, and a txt file with three lines: “If you’re reading this, you found it. My original experimental data is in here. Contact xxx.” The contact is a university email address that has long since been deactivated.',
+          'You find a spare computer and plug in the drive. Inside: a file named “final_REALLY_final_this_time_for_real_v7.pptx,” an unnamed zip archive containing raw data from a 2021 group meeting, a photo of a cat, and a txt file with three lines: “If you’re reading this, you found it. My original experimental data is in here. Get in touch.” Below it is the handle of a long-dead chat account.',
           'You plug in the drive. It shows up as read-only, and the file system throws an error. Nothing is accessible. You try several computers. Same result every time.\n\nThe drive may be dead, or it may have some exotic internal file system, or it may never have held anything important at all, and “IMPORTANT - DO NOT DELETE” was just a form of emotional self-reassurance.',
         ],
       },
