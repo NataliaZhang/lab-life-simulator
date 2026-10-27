@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { GameState, GameAction, Student } from '../types';
 import type { ActiveProject, ProjectDefinition, ProjectGrade } from '../types/project';
 import { projectById } from '../data/projects';
+import { traitDefs } from '../data/traits';
 import {
   canAssignStudent,
   studentHasActiveProject,
@@ -224,25 +225,27 @@ type PendingAction =
   | { type: 'assign'; leaderId: string }
   | { type: 'remove' };
 
+// `freeSwapBy` is set when the outgoing leader's optimistic_heart trait waives the penalty.
 function SwapConfirmModal({
   currentProgress,
-  swapIsFree,
+  freeSwapBy,
   onConfirm,
   onCancel,
 }: {
   currentProgress: number;
-  swapIsFree: boolean;
+  freeSwapBy: Student | null;
   onConfirm: () => void;
   onCancel: () => void;
 }) {
   const after = Math.round(currentProgress * 0.7);
-  const { m } = useI18n();
+  const { m, studentName, trait } = useI18n();
+  const freeTrait = traitDefs['optimistic_heart'];
   return (
     <div className="swap-confirm-overlay" onClick={onCancel}>
       <div className="swap-confirm-modal" onClick={e => e.stopPropagation()}>
         <p className="swap-confirm-modal__msg">
-          {swapIsFree
-            ? m.projects.swapFree
+          {freeSwapBy && freeTrait
+            ? m.projects.swapFree(studentName(freeSwapBy), trait(freeTrait).name)
             : <>{m.projects.swapPenaltyBefore}<strong>{Math.round(currentProgress)}%</strong>{m.projects.swapPenaltyMiddle}<strong>{after}%</strong>{m.projects.swapPenaltyAfter}</>
           }
         </p>
@@ -274,7 +277,7 @@ function ActiveProjectCard({
   const leaderName = getLeaderDisplayName(ap.leaderId, state.students, locale);
   const monthlyGain = calcMonthlyProgress(ap, def, state.students);
   const currentLeader = ap.leaderId ? state.students.find(s => s.id === ap.leaderId) : null;
-  const swapIsFree = currentLeader?.traitIds.includes('optimistic_heart') ?? false;
+  const freeSwapBy = currentLeader?.traitIds.includes('optimistic_heart') ? currentLeader : null;
 
   // Called when the user picks a leader from the selector.
   const handleSelectLeader = (leaderId: string) => {
@@ -359,7 +362,7 @@ function ActiveProjectCard({
       {pendingAction && (
         <SwapConfirmModal
           currentProgress={ap.progress}
-          swapIsFree={swapIsFree}
+          freeSwapBy={freeSwapBy}
           onConfirm={handleConfirm}
           onCancel={() => setPendingAction(null)}
         />

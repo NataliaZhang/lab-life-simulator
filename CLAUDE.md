@@ -34,9 +34,9 @@ clicks "立项" in ProjectsPanel (`START_PROJECT` action, costs energy or fundin
 
 **Leader assignment** (`ASSIGN_PROJECT_LEADER` → `assignLeader()`):
 - Leader is a student ID or `'pi'`. No leader → project stalls (no monthly progress).
-- Forced swap deducts 10 progress points, unless the outgoing leader has `optimistic_heart`.
-- On student graduation/leave, `removeLeaderOnStudentLeave()` stalls the project (same penalty,
-  waived for `optimistic_heart`).
+- Forced swap keeps 70% of current progress (−30%), unless the outgoing leader has `optimistic_heart`.
+- On student graduation/leave, `removeLeaderOnStudentLeave()` stalls the project with no progress
+  penalty (the departure isn't the PI's choice).
 
 **Efficiency formula** (student leaders only):
 `multiplier = clamp(1 + 0.75 × avg(skill/required − 1), 1.0, 1.75)` across required dimensions.
@@ -66,7 +66,17 @@ monthly progress.
 - Keep events data-driven; do not hardcode event content in UI components.
 - Use TypeScript types strictly. Do not use any unless unavoidable.
 - Keep UI mobile-friendly.
-- All the language in the game should be in Chinese (except small technical terms like "AI", "debug", "agent"), but you can write code and comments in English.
+- Chinese is the source language for all game text (small technical terms like "AI", "debug", "agent" may stay English); code and comments may be in English. Every player-facing string also needs English — see Localization below.
+
+## Localization
+
+The game ships in Chinese and English. `LOCALIZATION_GUIDE.md` is the reference (names, glossary, voices, style); read it before writing English.
+
+- Chinese data in `src/data/` stays the source of truth. English lives in `src/data/en/` as text-only overlays keyed by the same IDs: `events/<file>.ts` mirrors `src/data/events/<file>.ts`; `characters/<id>.ts` holds a main student's profile and all their personal events.
+- UI and engine strings: `src/i18n/messages/zh.ts` and `en.ts` (en is typed against zh). Runtime lookup: `src/i18n/content.ts`, `placeholders.ts`, `I18nProvider.tsx`. Types: `src/types/i18n.ts`.
+- The engine writes story-log text in both languages at once (`bothLocales()` → `LocalizedText`), so never build log text from the current UI language.
+- Student names: `nameOf()` / `studentName()` give the reference form (English first name); `fullNameOf()` / `studentFullName()` are for identity surfaces only (admission card, member card, profile, gallery).
+- Adding content: write the Chinese, add the English overlay with the same event/option IDs and outcome order, then run `npm run check:i18n`.
 
 ## Placeholder Resolution Rule — CRITICAL
 
@@ -89,6 +99,13 @@ A `studentId` is set on a queued event in exactly three ways:
 > Any event that uses `{studentName}` or `{student2Name}` MUST fall into one of the
 > three categories above. Events in the **monthly pool without triggerConditions will
 > never have a bound student.**
+
+As a safety net, `bindRequiredStudents()` (engine/eventQueue.ts) binds a random active student
+to any event whose text needs one, and skips the event if no student is available. Still follow
+the rule: the safety net only guarantees *a* student, not the one whose stats triggered the event.
+
+English text may also use pronoun placeholders for the bound student: `{he}` `{him}` `{his}`
+`{himself}` (and capitalized / `…2` forms), resolved to he/she from the student's profile.
 
 ### Checklist before writing a pool event
 
@@ -142,9 +159,17 @@ After changes, run:
 
 bash npm run build 
 
+If you touched game text, also run `npm run check:i18n` (English coverage, structure, placeholders, names).
+
 Also run lint/typecheck if available.
 
 When modifying engine logic, add or update small tests if the project already has a test setup.
+
+Tests use Vitest (`npm test`) and live in `src/engine/__tests__/`. They deliberately cover only
+persistence and rules where a regression would be silent: gallery storage/merge/backup codes,
+achievement backfill vs. live unlock rules, and run-save compatibility.
+`fixtures/save-v11-pre-localization.json` is a real save written by commit a67a398. If a test
+there fails after a GameState change, add a load-time default rather than editing the fixture.
 
 ## Change Style
 

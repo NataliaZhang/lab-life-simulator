@@ -3,6 +3,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const yeZhiqiuEn: CharacterPack = {
   profile: {
     name: 'Ada Yeh',
+    firstName: 'Ada',
     pronoun: 'she',
     tagline: 'Code gets deprecated. Proofs are forever.',
     bio: 'There are always a few papers spread open on her desk, next to a notebook crammed with annotations. Rumor has it she once turned an experimental problem into a theory problem just to avoid setting up an environment. Thorough enough to be reassuring, and thorough enough to make you question your life choices.',
@@ -255,7 +256,7 @@ export const yeZhiqiuEn: CharacterPack = {
     yzq_reviewer_rant: {
       title: 'Reviewer Requests, Tabulated',
       description: [
-        'The paper was rejected, and the reviews came in today. Ada sits and reads through the reviewers’ requests one by one, closes the email, and says in a very calm voice, “These three requests are pairwise contradictory.”',
+        'The reviews came in today: major revision. Ada sits and reads through the reviewers’ requests one by one, closes the email, and says in a very calm voice, “These three requests are pairwise contradictory.”',
         'She opens a document and shows you a table: Reviewer 1’s requests in the left column, Reviewer 2’s in the right, and in the middle, the points of conflict she has marked with the symbol “⊥”. The last row reads: if all requests are satisfied simultaneously, the proposition does not hold.',
         '“I’m not saying we won’t revise,” she adds, unusually earnest. “I’m saying the problem itself is provable.”',
       ],
@@ -309,7 +310,7 @@ export const yeZhiqiuEn: CharacterPack = {
         'It’s the afternoon coffee break. You’re sitting at the little table by the hallway, and {studentName} is ordering from a takeout menu.',
         'She studies it for about three minutes, then puts it down with a slightly troubled look. “This menu,” she says, “has a problem with how it uses the word ‘signature.’ It marks four dishes as signature dishes, but a restaurant can’t have four signature dishes at once. That’s a logical contradiction.”',
         'You tell her it’s just marketing. She nods. “I know.” A pause. “But if you have four signature dishes, you have no signature dish.”',
-        'You order anyway. Ada flips the menu over and continues: “Also, the layout of this menu violates Fitts’s law. The most frequently ordered items should be in the visual center.” She says it in exactly the tone she uses to present experimental results.',
+        'You both go back to the menu. Ada flips it over and continues: “Also, the layout of this menu violates Fitts’s law. The most frequently ordered items should be in the visual center.” She says it in exactly the tone she uses to present experimental results.',
       ],
       prompt: '{studentName}’s precision is giving you a headache, but you:',
       options: {

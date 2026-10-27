@@ -614,7 +614,7 @@ export const groupEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '{student2Name}知道你押了自己之后，压力过大，实验跑崩了。你输掉了赌注，还要替{student2Name}写半页Related Work。{studentName}表示非常感谢。',
+            narrative: '{student2Name}知道你押了自己之后，压力过大，实验跑崩了。你输掉了赌注，还要替{studentName}写半页Related Work。{studentName}表示非常感谢。',
             effects: [
               { type: 'randomStudent2', stat: 'happiness', delta: -5 },
               { type: 'randomStudent', stat: 'happiness', delta: 10 },

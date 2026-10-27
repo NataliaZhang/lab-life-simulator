@@ -16,7 +16,7 @@ import {
   getProjectText,
   getAchievementText,
   nameOf,
-  studentDisplayName,
+  fullNameOf,
 } from './content';
 
 export interface I18n {
@@ -31,8 +31,10 @@ export interface I18n {
   trait: (t: TraitDef) => ReturnType<typeof getTraitText>;
   project: (p: ProjectDefinition) => ReturnType<typeof getProjectText>;
   achievement: (a: AchievementDefinition) => ReturnType<typeof getAchievementText>;
+  /** Reference form ("Jamie" in English) — the default for any mention of a student. */
   studentName: (s: Pick<Student, 'id' | 'name'>) => string;
-  studentNameById: (id: string) => string;
+  /** Full form ("Jamie Lin") — identity surfaces only: member cards, profiles, rosters. */
+  studentFullName: (s: Pick<Student, 'id' | 'name'>) => string;
 }
 
 const I18nContext = createContext<I18n | null>(null);
@@ -61,7 +63,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     project: p => getProjectText(p, locale),
     achievement: a => getAchievementText(a, locale),
     studentName: s => nameOf(s, locale),
-    studentNameById: id => studentDisplayName(id, locale),
+    studentFullName: s => fullNameOf(s, locale),
   }), [locale, setLocale]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;

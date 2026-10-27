@@ -22,8 +22,8 @@ function DetailPortrait({ student }: { student: Student }) {
   const pUrl = portraitUrl(student.id);
   const eUrl = expressionUrl(student.id, expression);
   const [exprFailed, setExprFailed] = useState(false);
-  const { m, studentName } = useI18n();
-  const name = studentName(student);
+  const { m, studentFullName } = useI18n();
+  const name = studentFullName(student);
 
   // Prefer portrait; fall back to expression avatar; fall back to letter block
   if (!portraitFailed && pUrl) {
@@ -155,7 +155,7 @@ function SkillRadar({ skills }: { skills: StudentSkills }) {
 export function StudentDetailModal({
   student, activeProjects, completedProjects, onClose,
 }: Props) {
-  const { m, candidate: candidateText, project: projectText, studentName } = useI18n();
+  const { m, candidate: candidateText, project: projectText, studentFullName } = useI18n();
   const source = allCandidates.find(c => c.id === student.id);
   const candidate = source ? candidateText(source) : undefined;
   const nameOfProject = (id: string) => {
@@ -198,7 +198,7 @@ export function StudentDetailModal({
 
           {/* Name + year */}
           <div className="detail-modal__name-row">
-            <h2 className="detail-modal__name">{studentName(student)}</h2>
+            <h2 className="detail-modal__name">{studentFullName(student)}</h2>
             <span className="detail-modal__badge">{statusLabel}</span>
           </div>
 

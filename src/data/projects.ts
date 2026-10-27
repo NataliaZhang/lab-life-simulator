@@ -211,7 +211,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     grade: 'B',
     name: '命名即命运',
     description: '研究变量命名长度与语义清晰度对程序正确率的影响。假设是名字越清晰、bug越少——但数据拒绝给出期望的答案。',
-    completionSummary: '分析50万行代码发现，变量名长度与bug密度呈倒U形关系：过短（如a、x）和过长（如userInputValidationCheckResultFlagBoolean）都与更高bug率相关，最优区间是8-12个字符，但没有人遵守。',
+    completionSummary: '分析50万行代码发现，变量名长度与bug密度呈U形关系：过短（如a、x）和过长（如userInputValidationCheckResultFlagBoolean）都与更高bug率相关，最优区间是8-12个字符，但没有人遵守。',
     ideaSources: ['代码review事件', '学生命名灾难', '祖传代码库事件'],
     startupEnergyCost: 15,
     startupFundingCost: 0,

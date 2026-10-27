@@ -7,6 +7,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const biXiaotianEn: CharacterPack = {
   profile: {
     name: 'Theo Bell',
+    firstName: 'Theo',
     pronoun: 'he',
     tagline: 'This paper is absurd. I found it inspiring.',
     bio: 'He has a knack for digging up paper titles from the deepest corners of the internet that leave a room speechless, and then earnestly explaining their academic value. Everyone else just wants to close the browser tab. He’s already sketching a roadmap for follow-up work.',

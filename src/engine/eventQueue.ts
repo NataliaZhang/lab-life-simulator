@@ -186,6 +186,57 @@ function getRequiredStudentIds(event: GameEvent): string[] {
   return [...ids];
 }
 
+// ─── Student binding for placeholder text ──────────────────────────────────
+
+// Whether an event's (Chinese source) text names a bound student anywhere.
+// English overlays may only use student placeholders when Chinese does (check:i18n).
+const placeholderCache = new Map<string, { s1: boolean; s2: boolean }>();
+
+export function studentPlaceholders(event: GameEvent): { s1: boolean; s2: boolean } {
+  const cached = placeholderCache.get(event.id);
+  if (cached) return cached;
+  const texts = [event.title, event.prompt ?? '', ...event.description];
+  for (const option of event.options ?? []) {
+    texts.push(option.text, ...option.outcomes.map(o => o.narrative));
+  }
+  const all = texts.join('\n');
+  const result = { s1: all.includes('{studentName}'), s2: all.includes('{student2Name}') };
+  placeholderCache.set(event.id, result);
+  return result;
+}
+
+function randomOf<T>(items: T[]): T | undefined {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+// An event whose text names {studentName}/{student2Name} must have those students bound,
+// or the placeholder renders literally. Most paths bind already (triggerConditions, chains,
+// direct injection); this fills any gap with a random active student and returns null when
+// nobody is available (e.g. every student has left), so callers can skip the event.
+// Already-bound students are kept even if no longer active (alumni visits bind graduates).
+export function bindRequiredStudents(queued: QueuedEvent, state: GameState): QueuedEvent | null {
+  const event = events[queued.id];
+  if (!event) return queued;
+  const { s1, s2 } = studentPlaceholders(event);
+  if (!s1 && !s2) return queued;
+
+  const exists = (id?: string) => id !== undefined && state.students.some(s => s.id === id);
+  const active = state.students.filter(s => s.status === 'active');
+  let { studentId, student2Id } = queued;
+
+  if (s1 && !exists(studentId)) {
+    studentId = randomOf(active.filter(s => s.id !== student2Id))?.id;
+    if (!studentId) return null;
+  }
+  if (s2 && !exists(student2Id)) {
+    student2Id = randomOf(active.filter(s => s.id !== studentId))?.id;
+    if (!student2Id) return null;
+  }
+  return studentId === queued.studentId && student2Id === queued.student2Id
+    ? queued
+    : { ...queued, studentId, student2Id };
+}
+
 // Filter events whose triggerConditions are all satisfied.
 // Returns QueuedEvent objects that carry the bound studentId when applicable.
 export function filterTriggerable(eventIds: string[], state: GameState): QueuedEvent[] {
@@ -201,7 +252,9 @@ export function filterTriggerable(eventIds: string[], state: GameState): QueuedE
     const { studentId, student2Id } = event.triggerConditions
       ? findTriggeringStudents(event.triggerConditions, state)
       : {};
-    result.push({ id, studentId, student2Id });
+    // Leave out events that would have to show a student nobody can fill in.
+    const queued = bindRequiredStudents({ id, studentId, student2Id }, state);
+    if (queued) result.push(queued);
   }
   return result;
 }

@@ -38,7 +38,10 @@ export type EventTranslations = Record<string, EventTranslation>;
 // ─── Static content overlays ───────────────────────────────────────────────
 
 export interface CandidateTranslation {
+  /** Canonical full name ("Jamie Lin") — identity surfaces only: admission card, member card, gallery. */
   name: string;
+  /** How prose and system text refer to the student once introduced ("Jamie"). */
+  firstName: string;
   pronoun: 'he' | 'she';
   tagline: string;
   bio: string;

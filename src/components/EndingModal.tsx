@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function EndingModal({ endingTitle, tagline, phase, lab, students, ideasCollected, projectsStarted, projectsCompleted, onNewGame }: Props) {
-  const { m, studentName } = useI18n();
+  const { m, studentFullName } = useI18n();
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ending-title">
       <div className="ending-modal">
@@ -48,7 +48,7 @@ export function EndingModal({ endingTitle, tagline, phase, lab, students, ideasC
             <div className="ending-modal__students-list">
               {students.map(s => (
                 <div key={s.id} className="ending-modal__student-row">
-                  <span className="ending-modal__student-name">{studentName(s)}</span>
+                  <span className="ending-modal__student-name">{studentFullName(s)}</span>
                   <span className={`ending-modal__student-status ending-modal__student-status--${s.status}`}>
                     {m.studentStatus[s.status]}
                   </span>

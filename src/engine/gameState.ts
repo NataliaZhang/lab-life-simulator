@@ -17,7 +17,7 @@ import type {
 } from '../types';
 import { initialPoolIds, allCandidates, year1RestrictedIds } from '../data/studentPool';
 import { openingEventIds } from '../data/events';
-import { getEvent, pickOutcome } from './eventQueue';
+import { getEvent, pickOutcome, bindRequiredStudents } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
 import { projectById } from '../data/projects';
@@ -338,8 +338,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
 
     case 'PRESENT_EVENT': {
-      const [nextQueued, ...restQueue] = state.eventQueue;
-      if (!nextQueued) return state;
+      // Bind any student the event's text needs; drop events nobody can fill in
+      // (e.g. a student-centred event queued after every student has left).
+      let restQueue = state.eventQueue;
+      let nextQueued: QueuedEvent | null = null;
+      while (restQueue.length > 0 && !nextQueued) {
+        const [head, ...tail] = restQueue;
+        restQueue = tail;
+        nextQueued = bindRequiredStudents(head!, state);
+      }
+      if (!nextQueued) return restQueue === state.eventQueue ? state : { ...state, eventQueue: restQueue };
       const event = getEvent(nextQueued.id);
       const boundStudentId = nextQueued.studentId ?? null;
       const boundStudent2Id = nextQueued.student2Id ?? null;
@@ -658,8 +666,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const isFirstStudent = state.students.filter(s => s.status === 'active').length === 0;
       const admitNarrative = bothLocales(l => {
         const m = getMessages(l).engine;
-        const { name, tagline } = getCandidateText(candidate, l);
-        const line = m.admitNarrative(name, tagline);
+        // First appearance of the student in the story: introduce them by full name.
+        const { fullName, tagline } = getCandidateText(candidate, l);
+        const line = m.admitNarrative(fullName, tagline);
         return isFirstStudent ? `${line}\n\n${m.firstStudentHint}` : line;
       });
 
@@ -667,7 +676,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         id: `admit_${candidateId}_${Date.now()}`,
         time: { ...state.time },
         type: 'system',
-        title: bothLocales(l => getMessages(l).engine.admitTitle(getCandidateText(candidate, l).name)),
+        title: bothLocales(l => getMessages(l).engine.admitTitle(getCandidateText(candidate, l).fullName)),
         narrative: admitNarrative,
         statChanges: [{ label: bothLocales(l => labStatLabel('funding', l)), delta: -admissionCost, unit: 'funding' }],
       };

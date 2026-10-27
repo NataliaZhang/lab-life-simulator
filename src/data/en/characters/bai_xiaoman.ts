@@ -7,6 +7,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const baiXiaomanEn: CharacterPack = {
   profile: {
     name: 'Sunny Bai',
+    firstName: 'Sunny',
     pronoun: 'she',
     tagline: 'It is what it is. Let’s eat first.',
     bio: 'No matter how badly a project blows up, she’s always the first to comfort everyone: “Well, at least now we know this one’s a dead end.” Once, with the server down, every experiment failing and two days left before the deadline, she earnestly proposed ordering bubble tea first, because “you can’t fall apart on an empty stomach.”',

@@ -124,10 +124,10 @@ export function AdmissionModal({
             const ct = candidateText(candidate);
             return (
               <div key={candidate.id} className="candidate-card">
-                <CandidatePortrait studentId={candidate.id} name={ct.name} />
+                <CandidatePortrait studentId={candidate.id} name={ct.fullName} />
                 <div className="candidate-card__body">
                   <div className="candidate-card__header">
-                    <span className="candidate-card__name">{ct.name}</span>
+                    <span className="candidate-card__name">{ct.fullName}</span>
                     <span className="candidate-card__tagline">{ct.tagline}</span>
                   </div>
                   <p className="candidate-card__bio">{ct.bio}</p>
@@ -141,7 +141,7 @@ export function AdmissionModal({
                     onClick={() => onAdmit(candidate.id)}
                     disabled={!canAfford}
                   >
-                    {canAfford ? m.admission.admit(ct.name) : m.admission.notEnoughFunding(m.money(admissionCost))}
+                    {canAfford ? m.admission.admit(ct.fullName) : m.admission.notEnoughFunding(m.money(admissionCost))}
                   </button>
                 </div>
               </div>

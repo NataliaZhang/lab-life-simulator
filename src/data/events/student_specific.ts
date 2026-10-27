@@ -19,7 +19,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     description: [
       '六月。{studentName}发来一条极其正式的消息："老师，我想预约个时间聊聊毕业的事。" 你回了个"好的"，心里隐约预感到接下来会发生什么。',
       '见面时，{studentName}把一本打印装订好的文档推到你面前——封面上印着《博士学位论文（初稿）》，页脚写着"第一稿·仅供导师审阅"。整体看起来准备得相当充分，装订甚至还用了彩色。',
-      '"{studentName}坐直了身体，语气认真得有点像在做组会汇报："老师，我觉得差不多了。按时间线，今年六月可以完成答辩。"',
+      '{studentName}坐直了身体，语气认真得有点像在做组会汇报："老师，我觉得差不多了。按时间线，今年六月可以完成答辩。"',
     ],
     prompt: '第一次毕业请愿，你怎么回应？',
     options: [
@@ -62,7 +62,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
     title: '{studentName}的第二次毕业请愿',
     description: [
       '又是六月。你正在喝咖啡，{studentName}敲了敲门，把一本文档轻轻放在你桌上——和去年那本几乎一模一样，除了封面换成了蓝色。蓝色。',
-      '"{studentName}忐忑不安地开口："老师，我给毕设论文加了三章，补了实验，跑了新的 baseline，还把第二章全重写了。这次应该够了吧。"',
+      '{studentName}忐忑不安地开口："老师，我给毕设论文加了三章，补了实验，跑了新的 baseline，还把第二章全重写了。这次应该够了吧。"',
       '你翻到最后一页，看了一眼。页脚还是写着："第一稿·仅供导师审阅"。',
     ],
     prompt: '第二次来请愿了，你怎么说？',
@@ -73,7 +73,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '{studentName}立刻从椅子上站起来，差点把椅子带倒。答辩那天，他们穿了件正式衬衫，领带没系好，但眼睛是亮的。通过了。你去参加了庆功饭，吃到十一点。',
+            narrative: '{studentName}立刻从椅子上站起来，差点把椅子带倒。答辩那天，TA穿了件正式衬衫，领带没系好，但眼睛是亮的。通过了。你去参加了庆功饭，吃到十一点。',
             effects: [
               { type: 'graduateStudent' },
               { type: 'lab', stat: 'reputation', delta: 5 },
@@ -131,7 +131,7 @@ export const studentSpecificEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 1,
-            narrative: '话还没说完，{studentName}已经站起来了。"老师，我想清楚了。" 他们把那本四百页的论文留在你桌上，双肩包往肩上一甩，鞠了个躬，转身走了。\n\n三周后你收到邮件："{studentName}已正式离组，感谢导师三年培养。"\n\n学校论坛上有人把你的组标在了学院地图上，标注：陈年博士生培养区。',
+            narrative: '话还没说完，{studentName}已经站起来了。"老师，我想清楚了。" TA把那本四百页的论文留在你桌上，双肩包往肩上一甩，鞠了个躬，转身走了。\n\n三周后你收到邮件："{studentName}已正式离组，感谢导师三年培养。"\n\n学校论坛上有人把你的组标在了学院地图上，标注：陈年博士生培养区。',
             effects: [
               { type: 'leaveStudent' },
               { type: 'lab', stat: 'reputation', delta: -10 },

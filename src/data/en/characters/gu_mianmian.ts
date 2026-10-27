@@ -3,6 +3,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const guMianmianEn: CharacterPack = {
   profile: {
     name: 'Mina Koo',
+    firstName: 'Mina',
     pronoun: 'she',
     tagline: 'Not asleep. Running in the background.',
     bio: 'By general agreement, the person in the lab who sleeps the most. She once slept through twenty minutes of a group meeting, woke up, and pointed out the critical bug in the presentation. Nobody knows whether she’s asleep or doing some kind of low-power thinking.',
@@ -13,7 +14,7 @@ export const guMianmianEn: CharacterPack = {
     // ── Personal events (src/data/events/students/gu_mianmian.ts) ──────────
 
     gmm_first_meeting: {
-      title: 'First Impressions: Mina Koo',
+      title: 'First Impressions: Mina',
       description: [
         'You go to talk to Mina Koo about joining the lab. She is slumped over her desk with her hood pulled over her entire head, one hand resting on the keyboard. The monitor is on. There is no sign of human life.',
         'You clear your throat. She lifts her head, and her eyes are so alert that you briefly question your grip on reality. The first thing she says is: “You’re here about which framework to use, right? I think JAX has a trap here, look—” She flips her notebook open to a specific page and launches straight in.',
@@ -319,7 +320,7 @@ export const guMianmianEn: CharacterPack = {
         half_favor_gmm_whiteboard: {
           text: 'Write her solution on the whiteboard and credit her',
           outcomes: [
-            'When the meeting ends, {studentName} slowly opens her eyes and sees her solution written clearly on the whiteboard, with a circled note beside it: “Mina Koo, best comment of the day.” Her eyes crinkle a little. “Glad it works.” She picks up her drink, takes a sip, and goes back to staring into space.',
+            'When the meeting ends, {studentName} slowly opens her eyes and sees her solution written clearly on the whiteboard, with a circled note beside it: “Mina, best comment of the day.” Her eyes crinkle a little. “Glad it works.” She picks up her drink, takes a sip, and goes back to staring into space.',
           ],
         },
         half_favor_gmm_continue: {

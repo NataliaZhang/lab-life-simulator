@@ -42,10 +42,7 @@ export function StatusBar({ state, studentPanelOpen, onToggleStudentPanel, proje
           <span className="status-text--short">{m.time.short(time.year, time.month)}</span>
         </span>
         {phase !== 'playing' && (
-          <span className="phase-badge">
-            <span className="status-text--full">{phase === 'won' ? m.status.phaseWon : m.status.phaseOver}</span>
-            <span className="status-text--short">{phase === 'won' ? m.status.phaseWonShort : m.status.phaseOverShort}</span>
-          </span>
+          <span className="phase-badge">{phase === 'won' ? m.status.phaseWon : m.status.phaseOver}</span>
         )}
       </div>
       <div className="status-right">

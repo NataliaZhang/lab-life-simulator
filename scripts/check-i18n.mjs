@@ -46,9 +46,18 @@ function collectEnStrings(tr) {
   return out.filter(s => typeof s === 'string');
 }
 
-function checkText(where, s, allowS1, allowS2) {
+// Canonical English full names ("Jamie Lin"), filled from the character packs at startup.
+// Prose refers to established students by first name; full names belong on identity
+// surfaces and in first-meeting introductions, which live in the character packs.
+let FULL_NAMES = [];
+
+function checkText(where, s, allowS1, allowS2, allowFullNames = true) {
   if (typeof s !== 'string') return err(where, 'not a string');
   if (s.trim() === '' ) return;
+  if (!allowFullNames) {
+    const full = FULL_NAMES.find(n => s.includes(n));
+    if (full) err(where, `uses the full name “${full}”; refer to students by first name (see LOCALIZATION_GUIDE.md §2)`);
+  }
   if (HAN.test(s)) err(where, `contains Chinese characters: “${s.match(/.{0,20}[㐀-鿿　-〿！-｠].{0,20}/)?.[0]}”`);
   if (PINYIN.test(s)) err(where, `uses a pinyin name (${s.match(PINYIN)[0]}); use the canonical English name`);
   // Untranslated markers like [[TODO]] or TODO(i18n); a plain “TODO” can be legitimate story text.
@@ -63,7 +72,7 @@ function checkText(where, s, allowS1, allowS2) {
   if (/\w'\w/.test(s)) warn(where, 'straight apostrophe; prefer ’');
 }
 
-function checkEvent(id, zh, tr) {
+function checkEvent(id, zh, tr, inPack) {
   const w = `event ${id}`;
   if (!zh) return err(w, 'no Chinese event with this ID');
   const zhAll = collectStrings(zh).join('\n');
@@ -102,7 +111,7 @@ function checkEvent(id, zh, tr) {
     fields.push([`option ${k} text`, o.text]);
     (o.outcomes ?? []).forEach((x, i) => fields.push([`option ${k} outcome[${i}]`, x]));
   }
-  for (const [f, s] of fields) if (s !== undefined) checkText(`${w} ${f}`, s, allowS1, allowS2);
+  for (const [f, s] of fields) if (s !== undefined) checkText(`${w} ${f}`, s, allowS1, allowS2, inPack);
 
   const enAll = collectEnStrings(tr).join('\n');
   if (allowS1 && !/\{studentName\}/.test(enAll)) warn(w, 'Chinese uses {studentName} but English never does (fine only if intentional)');
@@ -154,11 +163,24 @@ try {
     const zh = allCandidates.find(c => c.id === id);
     const w = `profile ${id}`;
     if (!zh) return err(w, 'unknown candidate');
-    for (const f of ['name', 'tagline', 'bio']) if (!p[f]) err(w, `missing ${f}`);
+    for (const f of ['name', 'firstName', 'tagline', 'bio']) if (!p[f]) err(w, `missing ${f}`);
+    if (p.name && p.firstName && !p.name.startsWith(`${p.firstName} `)) err(w, 'firstName must be the first word of name');
     if (zh.farewell && !p.farewell) err(w, 'missing farewell');
     const expectPronoun = zh.pronoun === '她' ? 'she' : 'he';
     if (p.pronoun !== expectPronoun) err(w, `pronoun should be ${expectPronoun}`);
     for (const f of ['name', 'tagline', 'bio', 'farewell']) if (p[f]) checkText(`${w} ${f}`, p[f], false, false);
+  }
+
+  // Character packs: collect full names and which events are personal (allowed to use them).
+  const packEventIds = new Set();
+  for (const id of Object.keys(CHAR_PREFIX)) {
+    try {
+      const pack = Object.values(await server.ssrLoadModule(`/src/data/en/characters/${id}.ts`))[0];
+      if (pack?.profile?.name) FULL_NAMES.push(pack.profile.name);
+      for (const e of Object.keys(pack?.events ?? {})) packEventIds.add(e);
+    } catch {
+      // A pack that fails to load is reported when it is checked directly.
+    }
   }
 
   if (targets.length > 0) {
@@ -168,7 +190,7 @@ try {
       const isPack = exported && 'profile' in exported && 'events' in exported;
       const trs = isPack ? exported.events : exported;
       if (isPack) checkProfile(t.match(/([a-z_]+)\.ts$/)[1], exported.profile);
-      for (const [id, tr] of Object.entries(trs)) checkEvent(id, zhEvents[id], tr);
+      for (const [id, tr] of Object.entries(trs)) checkEvent(id, zhEvents[id], tr, isPack);
       const expected = await expectedIds(t);
       const missing = expected.filter(id => !trs[id]);
       if (missing.length) err(t, `missing ${missing.length} event(s): ${missing.join(', ')}`);
@@ -178,7 +200,7 @@ try {
     // Full mode loads every overlay; targeted mode above loads only the requested modules
     // so a half-finished file elsewhere cannot break someone else's check.
     const en = await server.ssrLoadModule('/src/data/en/index.ts');
-    for (const [id, tr] of Object.entries(en.eventsEn)) checkEvent(id, zhEvents[id], tr);
+    for (const [id, tr] of Object.entries(en.eventsEn)) checkEvent(id, zhEvents[id], tr, packEventIds.has(id));
     const missing = Object.keys(zhEvents).filter(id => !en.eventsEn[id]);
     if (missing.length) err('coverage', `${missing.length} event(s) without English: ${missing.join(', ')}`);
 
@@ -190,23 +212,23 @@ try {
       const t = en.traitsEn[id];
       if (!t) { err('coverage', `no English trait ${id}`); continue; }
       for (const f of ['name', 'description', 'effect']) {
-        if (!t[f]) err(`trait ${id}`, `missing ${f}`); else checkText(`trait ${id} ${f}`, t[f], false, false);
+        if (!t[f]) err(`trait ${id}`, `missing ${f}`); else checkText(`trait ${id} ${f}`, t[f], false, false, false);
       }
     }
     for (const p of projectDefinitions) {
       const t = en.projectsEn[p.id];
       if (!t) { err('coverage', `no English project ${p.id}`); continue; }
       for (const f of ['name', 'description', 'completionSummary']) {
-        if (!t[f]) err(`project ${p.id}`, `missing ${f}`); else checkText(`project ${p.id} ${f}`, t[f], false, false);
+        if (!t[f]) err(`project ${p.id}`, `missing ${f}`); else checkText(`project ${p.id} ${f}`, t[f], false, false, false);
       }
       if (t.ideaSources.length !== p.ideaSources.length) err(`project ${p.id}`, 'ideaSources length differs from Chinese');
-      t.ideaSources.forEach((s, i) => checkText(`project ${p.id} ideaSources[${i}]`, s, false, false));
+      t.ideaSources.forEach((s, i) => checkText(`project ${p.id} ideaSources[${i}]`, s, false, false, false));
     }
     for (const a of achievements) {
       const t = en.achievementsEn[a.id];
       if (!t) { err('coverage', `no English achievement ${a.id}`); continue; }
-      checkText(`achievement ${a.id} title`, t.title, false, false);
-      checkText(`achievement ${a.id} criteria`, t.criteria, false, false);
+      checkText(`achievement ${a.id} title`, t.title, false, false, false);
+      checkText(`achievement ${a.id} criteria`, t.criteria, false, false, false);
     }
     console.log(`Events: ${Object.keys(en.eventsEn).length}/${Object.keys(zhEvents).length} translated`);
   }

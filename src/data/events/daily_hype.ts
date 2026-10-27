@@ -16,7 +16,7 @@ export const hypeEvents: Record<string, GameEvent> = {
     title: 'LLM万能论',
     description: [
       '{studentName}拿着一张A3打印的系统设计图走进你的办公室，展开来铺在桌上。这已经不是{studentName}第一次提出"用LLM替换一切"这个观点了，但这是第一次拿出了完整的架构图：数据预处理模块换成GPT-4 API调用，模型主体换成GPT-4 API调用，评测指标换成GPT-4 API调用，图表说明文字生成器也换成GPT-4 API调用。整张图纸上，每个方框里都写着同一个词。',
-      '"{studentName}认为LLM可以处理一切。" {studentName}神情严肃，像是在陈述一条物理定律。你看着那张图，数了一下API调用的方框：十一个。你想到的第一件事是每月账单。',
+      '"我认为LLM可以处理一切。" {studentName}神情严肃，像是在陈述一条物理定律。你看着那张图，数了一下API调用的方框：十一个。你想到的第一件事是每月账单。',
     ],
     prompt: '面对这份LLM全家桶方案，你选择',
     triggerConditions: BIND_ANY_STUDENT,

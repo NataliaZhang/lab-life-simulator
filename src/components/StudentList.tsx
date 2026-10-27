@@ -69,8 +69,9 @@ function StudentCard({
   student: Student;
   onOpenDetail: (s: Student) => void;
 }) {
-  const { m, studentName } = useI18n();
-  const name = studentName(student);
+  const { m, studentFullName } = useI18n();
+  // Member cards label who the student is, so they use the full name.
+  const name = studentFullName(student);
 
   if (student.status === 'graduated') {
     return (

@@ -5,6 +5,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const linXiaojuanEn: CharacterPack = {
   profile: {
     name: 'Jamie Lin',
+    firstName: 'Jamie',
     pronoun: 'he',
     tagline: 'Seldom seen. Deadlines unlock his final form.',
     bio: 'Lives in a near-permanent state of “concerning project progress.” Slow to reply, slow to run experiments, in no particular hurry even when walking. Only when a deadline closes in does he enter some unknown form: no sleep for days, a month of work compressed into 48 hours.',
@@ -136,7 +137,7 @@ export const linXiaojuanEn: CharacterPack = {
       description: [
         'In his monthly update, Jamie announces that the project is 70% done. He says it with total confidence, and the slides are nicely illustrated, with a genuinely pleasant color scheme. As you listen, you notice that several key experiments are shown only as screenshots of results. The methods have evaporated entirely.',
         'After the meeting you open his repo. The last commit was three weeks ago. Three function bodies in the experiment script all read `pass`, and a comment called `TODO_FIXME_URGENT` has survived two whole months, unmoved by wind or rain.',
-        'You look down at the progress sheet you just signed: 70%. Then at the code: closer to 40%. Between those two numbers lies exactly one Jamie Lin–sized optimistic estimate.',
+        'You look down at the progress sheet you just signed: 70%. Then at the code: closer to 40%. Between those two numbers lies exactly one Jamie-sized optimistic estimate.',
       ],
       prompt: 'The progress has been padded. You:',
       options: {

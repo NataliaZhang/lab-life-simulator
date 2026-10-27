@@ -550,7 +550,7 @@ export const bureaucracyEvents: Record<string, GameEvent> = {
         outcomes: [
           {
             weight: 2,
-            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满开发问题的报告。台下有人频繁点头，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。\n\n你的名字在接下来两周里，被引用的频率上升了一个可见的幅度。',
+            narrative: '你花了两周想清楚了整个领域接下来五年应该往哪走，做成了一个充满开放问题的报告。台下有人频繁点头，有人记了大量笔记，有人在PPT里截图。散会后有两个年轻研究者来找你聊，一聊聊了一个小时。\n\n你的名字在接下来两周里，被引用的频率上升了一个可见的幅度。',
             effects: [
               { type: 'lab', stat: 'energy', delta: -10 },
               { type: 'lab', stat: 'reputation', delta: 10 },

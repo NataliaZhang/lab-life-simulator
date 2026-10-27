@@ -13,43 +13,43 @@ export const newYearEventsEn: EventTranslations = {
     prompt: 'Give the gift to…',
     options: {
       gift_lin_xiaojuan: {
-        text: 'Jamie Lin ($20K)',
+        text: 'Jamie ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Jamie’s desk.'],
       },
       gift_gu_mianmian: {
-        text: 'Mina Koo ($20K)',
+        text: 'Mina ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Mina’s desk.'],
       },
       gift_ye_zhiqiu: {
-        text: 'Ada Yeh ($20K)',
+        text: 'Ada ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Ada’s desk.'],
       },
       gift_bai_xiaoman: {
-        text: 'Sunny Bai ($20K)',
+        text: 'Sunny ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Sunny’s desk.'],
       },
       gift_bi_xiaotian: {
-        text: 'Theo Bell ($20K)',
+        text: 'Theo ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Theo’s desk.'],
       },
       gift_qian_duoduo: {
-        text: 'Dorian Vale ($20K)',
+        text: 'Dorian ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Dorian’s desk.'],
       },
       gift_he_shixu: {
-        text: 'Serena Ho ($20K)',
+        text: 'Serena ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Serena’s desk.'],
       },
       gift_tang_kuolie: {
-        text: 'Nico Tang ($20K)',
+        text: 'Nico ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Nico’s desk.'],
       },
       gift_mo_wenxuan: {
-        text: 'Orion Moreau ($20K)',
+        text: 'Orion ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Orion’s desk.'],
       },
       gift_xie_zhiwei: {
-        text: 'Zoe Hsieh ($20K)',
+        text: 'Zoe ($20K)',
         outcomes: ['The gift, wrapped in a red gift box, is quietly left on Zoe’s desk.'],
       },
       no_gift: {

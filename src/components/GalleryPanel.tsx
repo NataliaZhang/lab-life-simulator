@@ -173,23 +173,23 @@ function CharactersTab({ gallery }: { gallery: GalleryData }) {
                       <img
                         className="gallery-char-card__portrait"
                         src={portrait}
-                        alt={candidate.name}
+                        alt={candidate.fullName}
                         onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                       />
                     ) : (
                       <div className="gallery-char-card__portrait-placeholder">
-                        {candidate.name.slice(0, 1)}
+                        {candidate.fullName.slice(0, 1)}
                       </div>
                     )}
                   </div>
                   <div className="gallery-char-card__body">
-                    <div className="gallery-char-card__name">{candidate.name}</div>
+                    <div className="gallery-char-card__name">{candidate.fullName}</div>
                     <div className="gallery-char-card__tagline">{candidate.tagline}</div>
                   </div>
                 </div>
                 {maxFavorUnlocked && (
                   <div className="gallery-char-card__back">
-                    <div className="gallery-char-card__back-name">{candidate.name}</div>
+                    <div className="gallery-char-card__back-name">{candidate.fullName}</div>
                     {(candidate.farewell ?? '').split('\n\n').map((para, i) => (
                       <p key={i} className="gallery-char-card__farewell">{para}</p>
                     ))}

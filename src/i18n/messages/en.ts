@@ -70,8 +70,6 @@ export const en: Messages = {
   status: {
     phaseWon: 'Graduated',
     phaseOver: 'Game over',
-    phaseWonShort: '🎓',
-    phaseOverShort: 'Over',
     projects: 'Projects',
     openProjects: 'View projects',
     closeProjects: 'Close projects',
@@ -225,7 +223,7 @@ export const en: Messages = {
     busy: 'Busy',
     studentDetail: (mult: string, progress: string) => `Efficiency ×${mult} · +${progress}%/mo`,
     notQualified: 'Skills too low to assign',
-    swapFree: 'Sunny Bai’s trait “Unsinkable”: no progress is lost.',
+    swapFree: (name: string, trait: string) => `${name}’s trait “${trait}”: no progress is lost.`,
     swapPenaltyBefore: 'Current progress ',
     swapPenaltyMiddle: ' will drop to ',
     swapPenaltyAfter: ' (−30%).',
@@ -315,7 +313,7 @@ export const en: Messages = {
     memberGraduated: (name: string) => `${name} has finished and officially graduated.`,
     memberLeft: (name: string) => `${name} has left the lab.`,
     memberStalledProjects: (names: string[]) =>
-      `${plural(names.length, 'Project', 'Projects')} ${names.map(n => `“${n}”`).join(', ')} ${plural(names.length, 'is', 'are')} paused because the lead changed. Progress −10.`,
+      `${plural(names.length, 'Project', 'Projects')} ${names.map(n => `“${n}”`).join(', ')} ${plural(names.length, 'is', 'are')} paused because the lead changed. Assign a new lead to resume.`,
 
     piStallTitle: (project: string) => `“${project}”: You’re Out of Energy`,
     piStallNarrative: (project: string, progress: number) =>

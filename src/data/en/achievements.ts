@@ -9,16 +9,16 @@ export const achievementsEn: Record<string, AchievementTranslation> = {
   lab_decorated: { title: 'A Fresh Start',    criteria: 'Decorate the lab' },
 
   // ── Max Rapport (single student) ─────────────────────────────────────────
-  max_favor_lin_xiaojuan: { title: 'Late-Night Glow',            criteria: 'Reach max Rapport with Jamie Lin' },
-  max_favor_gu_mianmian:  { title: 'An Afternoon of Sunlit Naps', criteria: 'Reach max Rapport with Mina Koo' },
-  max_favor_ye_zhiqiu:    { title: 'More Than the Page Can Hold', criteria: 'Reach max Rapport with Ada Yeh' },
-  max_favor_bai_xiaoman:  { title: 'Long Live Dessert',          criteria: 'Reach max Rapport with Sunny Bai' },
-  max_favor_bi_xiaotian:  { title: 'Absurd, Yet Sound',          criteria: 'Reach max Rapport with Theo Bell' },
-  max_favor_qian_duoduo:  { title: 'Not for Sale',               criteria: 'Reach max Rapport with Dorian Vale' },
-  max_favor_he_shixu:     { title: 'A File Still Open',          criteria: 'Reach max Rapport with Serena Ho' },
-  max_favor_tang_kuolie:  { title: 'Everyone Knows Your Name',   criteria: 'Reach max Rapport with Nico Tang' },
-  max_favor_mo_wenxuan:   { title: 'A Most Auspicious Reading',  criteria: 'Reach max Rapport with Orion Moreau' },
-  max_favor_xie_zhiwei:   { title: 'On the Same Frequency',      criteria: 'Reach max Rapport with Zoe Hsieh' },
+  max_favor_lin_xiaojuan: { title: 'Late-Night Glow',            criteria: 'Reach max Rapport with Jamie' },
+  max_favor_gu_mianmian:  { title: 'An Afternoon of Sunlit Naps', criteria: 'Reach max Rapport with Mina' },
+  max_favor_ye_zhiqiu:    { title: 'More Than the Page Can Hold', criteria: 'Reach max Rapport with Ada' },
+  max_favor_bai_xiaoman:  { title: 'Long Live Dessert',          criteria: 'Reach max Rapport with Sunny' },
+  max_favor_bi_xiaotian:  { title: 'Absurd, Yet Sound',          criteria: 'Reach max Rapport with Theo' },
+  max_favor_qian_duoduo:  { title: 'Not for Sale',               criteria: 'Reach max Rapport with Dorian' },
+  max_favor_he_shixu:     { title: 'A File Still Open',          criteria: 'Reach max Rapport with Serena' },
+  max_favor_tang_kuolie:  { title: 'Everyone Knows Your Name',   criteria: 'Reach max Rapport with Nico' },
+  max_favor_mo_wenxuan:   { title: 'A Most Auspicious Reading',  criteria: 'Reach max Rapport with Orion' },
+  max_favor_xie_zhiwei:   { title: 'On the Same Frequency',      criteria: 'Reach max Rapport with Zoe' },
 
   // ── Max Rapport (everyone) ───────────────────────────────────────────────
   max_favor_all: { title: 'So Glad I Met You All', criteria: 'Reach max Rapport with every character' },

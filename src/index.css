@@ -1019,6 +1019,11 @@ html, body {
   html[lang="en"] .status-right .panel-toggle-btn:first-of-type {
     margin-left: 2px;
   }
+
+  /* No room for the English game-over badge; the ending modal already announces it. */
+  html[lang="en"] .phase-badge {
+    display: none;
+  }
 }
 
 /* Below 360px even compact English can't fit on one line; wrap like the Chinese bar does. */

@@ -54,8 +54,17 @@ export function localizeEvent(event: GameEvent, locale: Locale): GameEvent {
 
 // ─── Students ──────────────────────────────────────────────────────────────
 
+// A student's name comes in two forms:
+//   'reference' — how prose, dialogue, logs and system text refer to an established
+//                 character. English: first name ("Jamie"). Chinese: the full name, as before.
+//   'full'      — the canonical name used as an identity label (admission card, member
+//                 card, gallery, detail profile). English: "Jamie Lin".
+// Default to 'reference'; only identity surfaces should ask for 'full'.
+export type NameForm = 'reference' | 'full';
+
 export interface CandidateText {
-  name: string;
+  fullName: string;
+  referenceName: string;
   tagline: string;
   bio: string;
   farewell?: string;
@@ -64,22 +73,35 @@ export interface CandidateText {
 export function getCandidateText(candidate: StudentCandidate, locale: Locale): CandidateText {
   const en = locale === 'en' ? candidatesEn[candidate.id] : undefined;
   return {
-    name: en?.name || candidate.name,
+    fullName: en?.name || candidate.name,
+    referenceName: en?.firstName || en?.name || candidate.name,
     tagline: en?.tagline || candidate.tagline,
     bio: en?.bio || candidate.bio,
     farewell: en?.farewell ?? candidate.farewell,
   };
 }
 
-/** Display name for a student ID. `fallback` covers IDs outside the candidate pool. */
-export function studentDisplayName(studentId: string, locale: Locale, fallback = studentId): string {
+/** Name for a student ID in the requested form. `fallback` covers IDs outside the candidate pool. */
+export function studentDisplayName(
+  studentId: string,
+  locale: Locale,
+  form: NameForm = 'reference',
+  fallback = studentId,
+): string {
   const candidate = allCandidates.find(c => c.id === studentId);
   if (!candidate) return fallback;
-  return getCandidateText(candidate, locale).name;
+  const text = getCandidateText(candidate, locale);
+  return form === 'full' ? text.fullName : text.referenceName;
 }
 
+/** Reference form ("Jamie") — use for anything that mentions the student in running text. */
 export function nameOf(student: Pick<Student, 'id' | 'name'>, locale: Locale): string {
-  return studentDisplayName(student.id, locale, student.name);
+  return studentDisplayName(student.id, locale, 'reference', student.name);
+}
+
+/** Full form ("Jamie Lin") — use only where the name labels who the character is. */
+export function fullNameOf(student: Pick<Student, 'id' | 'name'>, locale: Locale): string {
+  return studentDisplayName(student.id, locale, 'full', student.name);
 }
 
 export type PronounForm = 'he' | 'him' | 'his' | 'himself';

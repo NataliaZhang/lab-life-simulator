@@ -59,8 +59,6 @@ export const zh = {
   status: {
     phaseWon: '毕业了',
     phaseOver: '结束了',
-    phaseWonShort: '毕业了',
-    phaseOverShort: '结束了',
     projects: '项目',
     openProjects: '查看项目',
     closeProjects: '关闭项目面板',
@@ -214,7 +212,7 @@ export const zh = {
     busy: '已有项目',
     studentDetail: (mult: string, progress: string) => `效率 ×${mult}，月推进 ${progress}%`,
     notQualified: '属性不足，无法分配',
-    swapFree: '白小满的天赋「乐观心大」，进度不会回退。',
+    swapFree: (name: string, trait: string) => `${name}的天赋「${trait}」，进度不会回退。`,
     swapPenaltyBefore: '当前进度 ',
     swapPenaltyMiddle: ' 将回退至 ',
     swapPenaltyAfter: '（-30%）。',
@@ -274,6 +272,8 @@ export const zh = {
   },
 
   // Text the engine writes into the story log (rendered in every language at once).
+  // Student names passed in are the reference form (nameOf → "Jamie" in English), except
+  // admitTitle/admitNarrative, which introduce a new student by full name.
   engine: {
     unknownMonths: '数',
     statFor: (name: string, stat: string) => `${name}·${stat}`,
@@ -304,7 +304,7 @@ export const zh = {
     memberChangeTitle: '成员动态',
     memberGraduated: (name: string) => `${name} 完成学业，正式毕业。`,
     memberLeft: (name: string) => `${name} 离开了实验室。`,
-    memberStalledProjects: (names: string[]) => `进行中项目《${names.join('》《')}》因负责人变动暂停，进度 -10。`,
+    memberStalledProjects: (names: string[]) => `进行中项目《${names.join('》《')}》因负责人变动暂停，请重新分配负责人。`,
 
     piStallTitle: (project: string) => `「${project}」你的精力耗尽`,
     piStallNarrative: (project: string, progress: number) =>

@@ -1,0 +1,532 @@
+{
+  "version": 11,
+  "savedAt": "2026-10-24T00:32:36.368Z",
+  "state": {
+    "phase": "playing",
+    "endingEventId": null,
+    "time": {
+      "year": 3,
+      "month": 3
+    },
+    "students": [
+      {
+        "id": "lin_xiaojuan",
+        "name": "林小卷",
+        "year": 2,
+        "enrolledAt": 1,
+        "skills": {
+          "theory": 64,
+          "engineering": 61,
+          "social": 61
+        },
+        "favor": 65,
+        "happiness": 98,
+        "projectProgress": 52.825,
+        "status": "active",
+        "traitIds": [
+          "ddl_warrior",
+          "last_minute_genius"
+        ]
+      },
+      {
+        "id": "mo_wenxuan",
+        "name": "莫问玄",
+        "year": 1,
+        "enrolledAt": 2,
+        "skills": {
+          "theory": 61,
+          "engineering": 47,
+          "social": 63
+        },
+        "favor": 18,
+        "happiness": 86,
+        "projectProgress": 15.974999999999998,
+        "status": "active",
+        "traitIds": [
+          "research_mysticism",
+          "fortune_engineer"
+        ]
+      }
+    ],
+    "studentPool": [
+      "gu_mianmian",
+      "ye_zhiqiu",
+      "bai_xiaoman",
+      "bi_xiaotian",
+      "qian_duoduo",
+      "he_shixu",
+      "tang_kuolie",
+      "xie_zhiwei"
+    ],
+    "admissionState": null,
+    "eventQueue": [],
+    "activeEventId": "bureau_submission_portal_dies",
+    "activeBoundStudentId": null,
+    "activeBoundStudent2Id": null,
+    "activeProjectMonths": null,
+    "activeParagraphIndex": 1,
+    "graduationChecksSeen": [],
+    "graduationExtensions": {},
+    "storyLog": [
+      {
+        "id": "lab_opening_p0_1792801956359",
+        "eventId": "lab_opening",
+        "time": {
+          "year": 1,
+          "month": 8
+        },
+        "type": "event-intro",
+        "title": "实验室的第一天",
+        "narrative": "钥匙在锁孔里轻轻转动了一下。门开了。这就是你的实验室。",
+        "image": "img/students/illustration/lab_empty.PNG",
+        "imageRevealed": true,
+        "narrativeAfterImage": "未来六年，你将在这里申请经费、指导学生、熬夜改论文、和 Reviewer 斗智斗勇，也可能在某个凌晨三点怀疑自己为什么没有去卖奶茶。\n\n房间并不大。一块空白的白板、一张空办公桌、几个还没拆封的箱子、一扇能看到校园的窗户。除此之外，什么都没有。\n\n没有成果。没有学生。没有声望。甚至连实验室官网都是默认模板。\n\n你站在门口看了很久。然后忽然意识到一件事。\n\n从今天开始，所有人都会觉得——你应该知道自己在做什么。"
+      },
+      {
+        "id": "funding_crisis_grant_p0_1792801956365",
+        "eventId": "funding_crisis_grant",
+        "time": {
+          "year": 2,
+          "month": 10
+        },
+        "type": "event-intro",
+        "title": "本子时间到了",
+        "narrative": "账户余额：不足5万。\n\n这个数字让你想起了一件很久以前就该做的事：写本子。学名\"科研经费申请书\"，字数通常五到十万字，内容是\"你打算用三年时间做什么\"，格式要求是\"用没有人想读的方式写出来\"，审核结果是\"运气好的话有人扫一眼摘要\"。\n\n你打开一个新文档，标题敲了几下，停顿了几秒，删了，又打，最后重新打回原样。"
+      },
+      {
+        "id": "funding_crisis_grant_1792801956365",
+        "eventId": "funding_crisis_grant",
+        "time": {
+          "year": 2,
+          "month": 10
+        },
+        "type": "event",
+        "title": "本子时间到了",
+        "choiceText": "破釜沉舟，肝出一篇大本子",
+        "narrative": "你在办公室泡了三天，输出了八万字。其中两万字是你自己的新想法，三万字是合理化这些想法的\"理论框架\"，剩下三万字是描述你将如何\"整合前沿交叉学科进行系统性深度研究，形成具有重要理论意义与实践价值的重大成果\"。本子投出去了。几个月后，评审意见回来：优先资助。你不确定是哪段话起了决定性作用，但那三万字大概功不可没。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": -40
+          },
+          {
+            "label": "资金",
+            "delta": 15
+          }
+        ]
+      },
+      {
+        "id": "monthly_2_11",
+        "time": {
+          "year": 2,
+          "month": 11
+        },
+        "type": "monthly",
+        "title": "第 2 年 11 月",
+        "narrative": "资金 19万 · 声望 16 · 精力 70。\n\n在读成员：林小卷（好感 49，心情 97）；莫问玄（好感 5，心情 63）。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": 10
+          }
+        ]
+      },
+      {
+        "id": "lab_stray_cat_p0_1792801956365",
+        "eventId": "lab_stray_cat",
+        "time": {
+          "year": 2,
+          "month": 11
+        },
+        "type": "event-intro",
+        "title": "那只猫又来了",
+        "narrative": "实验室窗口朝南，靠近一楼，窗台正好是一只流浪猫能跳上来的高度。它第一次来是三周前，莫问玄给它放了一点饼干，于是它开始每天来。它现在有了自己的角落——靠暖气管的那块地毯，莫问玄从家里带来的——还有了一个名字，也是莫问玄取的。\n\n昨天，它在一台没锁屏的笔记本上踩了一圈，向组会群发送了一条由它的爪子键入的消息。内容是\"vbbbbbbbbnnn\"。有两个人给它点了赞。"
+      },
+      {
+        "id": "lab_stray_cat_1792801956366",
+        "eventId": "lab_stray_cat",
+        "time": {
+          "year": 2,
+          "month": 11
+        },
+        "type": "event",
+        "title": "那只猫又来了",
+        "choiceText": "正式任命，纳入编制",
+        "narrative": "你批准了这只猫的驻组申请，买了猫粮、猫砂盆和一个小猫厕所。\n\n莫问玄为它建了一个档案，包含照片、到来日期，以及那条\"vbbbbbbbbnnn\"作为第一份学术贡献。\n\n这只猫成为了实验室迄今为止唯一一个不需要写年度总结的成员，实验室群的活跃度提升了一个量级，日常话题终于有了非科研的补充选项。",
+        "statChanges": [
+          {
+            "label": "资金",
+            "delta": -1
+          },
+          {
+            "label": "全体·心情",
+            "delta": 10
+          },
+          {
+            "label": "莫问玄·好感",
+            "delta": 5
+          }
+        ]
+      },
+      {
+        "id": "idea_variable_naming_p0_1792801956366",
+        "eventId": "idea_variable_naming",
+        "time": {
+          "year": 2,
+          "month": 11
+        },
+        "type": "event-intro",
+        "title": "这个变量叫什么",
+        "narrative": "莫问玄的代码 review 里，连续三屏都是 `data2`、`result_tmp`、`flag_new_v2`。\n\n你指着某一行问：\"这个 `tmp3` 是什么意思？\"停顿了五秒，莫问玄说：\"就是个临时变量。\"你再问：\"那 `tmp4` 呢？\"又是停顿。\n\n你最终数了一下：整个文件有22个以 tmp 开头的变量，没有两个含义完全相同。"
+      },
+      {
+        "id": "idea_variable_naming_1792801956366",
+        "eventId": "idea_variable_naming",
+        "time": {
+          "year": 2,
+          "month": 11
+        },
+        "type": "event",
+        "title": "这个变量叫什么",
+        "choiceText": "给莫问玄发一份命名规范，必须改好",
+        "narrative": "莫问玄把所有 tmp 都改了，改完后的代码一目了然，review 速度快了将近一倍。你满意地关上标签页，想到了每个月那两次同样的对话。",
+        "statChanges": [
+          {
+            "label": "莫问玄·好感",
+            "delta": -2
+          },
+          {
+            "label": "莫问玄·心情",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "id": "monthly_2_12",
+        "time": {
+          "year": 2,
+          "month": 12
+        },
+        "type": "monthly",
+        "title": "第 2 年 12 月",
+        "narrative": "资金 18万 · 声望 16 · 精力 80。\n\n在读成员：林小卷（好感 50，心情 100）；莫问玄（好感 8，心情 76）。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": 10
+          },
+          {
+            "label": "莫问玄天赋·工程",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "id": "news_squirrel_server_p0_1792801956366",
+        "eventId": "news_squirrel_server",
+        "time": {
+          "year": 2,
+          "month": 12
+        },
+        "type": "event-intro",
+        "title": "校园快讯",
+        "narrative": "隔壁楼的计算机系通报：一只松鼠进入机房，咬断了三根网线，导致某实验室的服务器下线四小时。系主任在公告里补充：\"建议大家在门缝处加装挡板，同时不要在机房存放坚果类食品。\""
+      },
+      {
+        "id": "half_favor_lin_xiaojuan_p0_1792801956366",
+        "eventId": "half_favor_lin_xiaojuan",
+        "time": {
+          "year": 2,
+          "month": 12
+        },
+        "type": "event-intro",
+        "title": "林小卷在骂他的代码",
+        "narrative": "那天下午你回实验室取东西，走廊里隐约传来一阵压低的自言自语。你以为是有人打电话，走近了才发现是林小卷对着屏幕在说话。\n\n「你他妈的为什么又是NaN。」他眉头皱着，语气介于恳求和指控之间，「你上午还好好的，你背叛我了吗。」停了一下，继续：「你把梯度藏哪里了？你说！」\n\n他完全没注意到你站在门口。你看了一会儿，发现他不只是在骂——他骂完之后会停下来认真看报错信息，骂完再看，骂完再看，像是把情绪发泄和debug同步进行，效率奇高。"
+      },
+      {
+        "id": "half_favor_lin_xiaojuan_1792801956366",
+        "eventId": "half_favor_lin_xiaojuan",
+        "time": {
+          "year": 2,
+          "month": 12
+        },
+        "type": "event",
+        "title": "林小卷在骂他的代码",
+        "choiceText": "轻咳一声，假装刚到",
+        "narrative": "林小卷回头，瞬间切换成正常人脸。「哦老师你回来了。」语气非常正经，仿佛刚才什么都没发生。你也假装什么都没看见，各干各的。但他转回去的时候，你听见他压低声音对屏幕说了一句：「待会再跟你算账。」",
+        "statChanges": [
+          {
+            "label": "林小卷·心情",
+            "delta": 12
+          },
+          {
+            "label": "林小卷·好感",
+            "delta": 10
+          }
+        ]
+      },
+      {
+        "id": "monthly_3_1",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "monthly",
+        "title": "第 3 年 1 月",
+        "narrative": "资金 18万 · 声望 16 · 精力 90。\n\n在读成员：林小卷（好感 61，心情 100）；莫问玄（好感 8，心情 76）。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": 10
+          }
+        ]
+      },
+      {
+        "id": "bureau_reimbursement_quest_p0_1792801956366",
+        "eventId": "bureau_reimbursement_quest",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event-intro",
+        "title": "35美元的漫漫报销路",
+        "narrative": "四个月前，你参加了一个会议，在当地吃了顿35美元的工作餐，保留了发票，按照要求提交了报销申请。四个月过去了，这35美元仍然处于\"审核中\"。你第三次联系财务办公室，得到了回复：您的申请需要一份新版本的附加说明表格，请填写B-7(rev.2024)版本并重新提交。\n\n你找到B-7(rev.2024)表格，发现第三栏\"部门主管签字\"需要你所在部门的前任主管签字，那位主管去年已经退休，现居另一个城市，联系方式不明。"
+      },
+      {
+        "id": "bureau_reimbursement_quest_1792801956366",
+        "eventId": "bureau_reimbursement_quest",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event",
+        "title": "35美元的漫漫报销路",
+        "choiceText": "越级上报，找系主任",
+        "narrative": "系主任听完这件事，往椅背上靠了一下，说\"我来处理\"。三天后，财务办公室主动联系你，说表格问题已经解决，35美元将在下一个支付周期到账。\n\n两周后，账上多了35美元。你为这件事消耗的时间成本，折合时薪大约是0.4美元。你觉得这没有什么关系，关键是原则。",
+        "statChanges": [
+          {
+            "label": "资金",
+            "delta": 0
+          },
+          {
+            "label": "声望",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "new_year_gift_p0_1792801956366",
+        "eventId": "new_year_gift",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event-intro",
+        "title": "新年礼物",
+        "narrative": "元旦快到了。你在某购物平台的\"新年礼物推荐\"里逛了二十分钟，把一堆时尚小垃圾加进购物车，又删到了一件。\n\n实验室里每个人这一年都不容易。如果只能挑一个，你准备送给谁？"
+      },
+      {
+        "id": "new_year_gift_1792801956367",
+        "eventId": "new_year_gift",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event",
+        "title": "新年礼物",
+        "choiceText": "莫问玄（花2万）",
+        "narrative": "礼物包装成红色礼盒，悄悄放在了莫问玄的工位上。",
+        "statChanges": [
+          {
+            "label": "资金",
+            "delta": -2
+          }
+        ]
+      },
+      {
+        "id": "new_year_gift_result_mo_wenxuan_p0_1792801956367",
+        "eventId": "new_year_gift_result_mo_wenxuan",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event-intro",
+        "title": "莫问玄的反应",
+        "narrative": "莫问玄接过礼盒，闭眼感受了一会儿。"
+      },
+      {
+        "id": "new_year_gift_result_mo_wenxuan_1792801956367",
+        "eventId": "new_year_gift_result_mo_wenxuan",
+        "time": {
+          "year": 3,
+          "month": 1
+        },
+        "type": "event",
+        "title": "莫问玄的反应",
+        "choiceText": "观察",
+        "narrative": "莫问玄抱着礼盒闭眼感受了一会儿，然后忽然掏出塔罗牌抽了一张。「我就知道。」他一脸自信地把牌展示给你：「今天抽到的是圣杯九，愿望实现的意思。」\n\n你问愿望是什么，他难得有点不好意思：「不能说，说出来就不灵了。但大概已经实现一部分了。」",
+        "statChanges": [
+          {
+            "label": "莫问玄·好感",
+            "delta": 10
+          },
+          {
+            "label": "莫问玄·心情",
+            "delta": 10
+          }
+        ]
+      },
+      {
+        "id": "monthly_3_2",
+        "time": {
+          "year": 3,
+          "month": 2
+        },
+        "type": "monthly",
+        "title": "第 3 年 2 月",
+        "narrative": "资金 16万 · 声望 17 · 精力 100。\n\n在读成员：林小卷（好感 62，心情 100）；莫问玄（好感 18，心情 86）。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": 10
+          }
+        ]
+      },
+      {
+        "id": "idea_auto_rebuttal_p0_1792801956367",
+        "eventId": "idea_auto_rebuttal",
+        "time": {
+          "year": 3,
+          "month": 2
+        },
+        "type": "event-intro",
+        "title": "Reviewer #2 又来了",
+        "narrative": "论文审稿结果回来了，Reviewer #2 的意见长达两页，充满了哲学质疑。\n\nReviewer #2 给出了一个令人叹为观止的审稿意见：第一条质疑你的动机，第二条质疑实验室的存在意义，第三条建议你去读一条2003年的冷门论文。\n\n你不是第一次面对这种无厘头的意见了。你打开三年前的 Rebuttal，发现格式几乎可以完全复用。\n\n这个模式太强了。审稿意见的结构是可重复的，历史 Rebuttal 库加上大模型，完全可以自动化这个痛苦过程。"
+      },
+      {
+        "id": "idea_auto_rebuttal_1792801956367",
+        "eventId": "idea_auto_rebuttal",
+        "time": {
+          "year": 3,
+          "month": 2
+        },
+        "type": "event",
+        "title": "Reviewer #2 又来了",
+        "choiceText": "先存个思路，回来再怼 Reviewer #2",
+        "narrative": "你用两分钟把这个系统的框架写进备忘录，然后切回去应对 Reviewer #2。Rebuttal 写了半天，发现这件事交给人类做果然太痛苦了。\n\n💡 获得灵感：「自动 Rebuttal」——已记录到项目面板。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": -10
+          }
+        ]
+      },
+      {
+        "id": "hint_first_idea_idea_auto_rebuttal",
+        "time": {
+          "year": 3,
+          "month": 2
+        },
+        "type": "system",
+        "title": "",
+        "narrative": "💡 点击右上角的\"项目\"可以查看灵感，并安排学生推进研究项目。"
+      },
+      {
+        "id": "monthly_3_3",
+        "time": {
+          "year": 3,
+          "month": 3
+        },
+        "type": "monthly",
+        "title": "第 3 年 3 月",
+        "narrative": "资金 8万 · 声望 17 · 精力 100。\n\n在读成员：林小卷（好感 65，心情 98）；莫问玄（好感 18，心情 86）。\n\n进行中项目：自动 Rebuttal（18%，林小卷）。",
+        "statChanges": [
+          {
+            "label": "精力",
+            "delta": 10
+          },
+          {
+            "label": "林小卷·工程",
+            "delta": 1
+          },
+          {
+            "label": "林小卷天赋·好感",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "id": "bureau_submission_portal_dies_p0_1792801956368",
+        "eventId": "bureau_submission_portal_dies",
+        "time": {
+          "year": 3,
+          "month": 3
+        },
+        "type": "event-intro",
+        "title": "投稿系统崩了",
+        "narrative": "11:45pm。截稿是午夜。论文已经准备好了，你打开投稿系统，页面转了大概三秒，然后显示了一个HTTP 503。你刷新。503。再刷新。503。官方推特上有条三分钟前发的推文：\"We are aware of the issue and working to resolve it.\"\n\n你打开学术推特，发现一千四百个人正在经历同样的事，其中有一位大佬用了全大写，还有人在实时更新刷新次数。这是一种奇特的集体行动：所有人同时、单独地、无效地刷新着同一个页面。"
+      }
+    ],
+    "lab": {
+      "funding": 8,
+      "reputation": 17,
+      "energy": 100,
+      "energyDepletedCount": 0
+    },
+    "projectIdeas": [],
+    "activeProjects": [
+      {
+        "projectId": "auto_rebuttal",
+        "progress": 17.5,
+        "leaderId": "lin_xiaojuan",
+        "startedAt": {
+          "year": 3,
+          "month": 2
+        }
+      }
+    ],
+    "completedProjects": [],
+    "noStudentMonths": 0,
+    "chosenOptionIds": [
+      "begin",
+      "save_money",
+      "poster_blast",
+      "lxj_first_meeting_strict",
+      "join_joint",
+      "clear_admin",
+      "diy_minutes",
+      "encourage",
+      "submit_celebrate",
+      "academic_integrity",
+      "buy_server_late",
+      "gift_lin_xiaojuan",
+      "ack",
+      "rebuttal_gracious",
+      "send_home",
+      "fill_again",
+      "assert_booking_rights",
+      "check_data",
+      "review_their_paper",
+      "party",
+      "mwx_first_meeting_stop",
+      "trust_results",
+      "rebuttal_gracious",
+      "lxj_abstract_praise",
+      "grant_full",
+      "officially_adopt",
+      "send_naming_guide",
+      "half_favor_lxj_cough",
+      "escalate_to_chair",
+      "gift_mo_wenxuan",
+      "ack",
+      "write_rebuttal_idea"
+    ],
+    "studentConditionalLog": {},
+    "moodChangesThisMonth": {},
+    "pendingSummarySlides": [],
+    "deferredEvents": [],
+    "happinessWarned": [],
+    "pendingImage": null,
+    "activeDescriptionImageRevealed": false
+  }
+}

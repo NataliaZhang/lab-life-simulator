@@ -53,7 +53,14 @@ Run `npm run check:i18n` (whole game) or `npm run check:i18n -- <en file>` (one 
 | mo_wenxuan | 莫问玄 | Orion Moreau | he | Orion |
 | xie_zhiwei | 谢之微 | Zoe Hsieh | she | Zoe |
 
-Chinese nicknames (小卷, 小天, 小满 …) become the first name. Use the full name only where Chinese uses the full name for formal effect (introductions, lists); otherwise first names read more naturally in English prose.
+**First name vs. full name.** Once a student is established, English refers to them by first name everywhere: narration, dialogue, choices, results, stat pills, monthly summaries, notifications, achievements, and references inside other characters' events ("Jamie seems unusually productive today", "Mina · Rapport +5"). The full name is an identity label, used only where the UI presents *who the character is*:
+
+- the admission candidate card and admit button, and the "X Joins the Lab" log entry that introduces them;
+- member cards, the student detail profile, the ending-screen roster;
+- Gallery character cards;
+- in-story labels such as an email sender, a slide credit, or a self-introduction / first mention in a first-meeting scene.
+
+Code: each English profile stores `name` ("Jamie Lin") and `firstName` ("Jamie"). `nameOf()` / `useI18n().studentName()` return the reference form and `{studentName}` resolves to it; `fullNameOf()` / `studentFullName()` return the full form. Chinese returns the existing full Chinese name for both, so Chinese behavior is unchanged. Chinese nicknames (小卷, 小天, 小满 …) also become the first name. `npm run check:i18n` rejects full names in general event, trait, project and achievement text.
 
 ### Recurring minor characters
 
@@ -160,7 +167,7 @@ Read each event in order (trigger → description → prompt → options → out
 
 | Placeholder | Resolves to |
 |---|---|
-| `{studentName}` / `{student2Name}` | bound student's English name |
+| `{studentName}` / `{student2Name}` | bound student's name (English: first name, e.g. Jamie) |
 | `{he}` `{him}` `{his}` `{himself}` `{He}` `{His}` | he/she, him/her, his/her, himself/herself for the first bound student |
 | `{he2}` `{him2}` `{his2}` `{himself2}` `{He2}` `{His2}` | same for the second bound student |
 | `{projectMonths}` | months a project took ("several" if unknown) |

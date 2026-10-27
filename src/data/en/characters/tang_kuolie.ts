@@ -6,6 +6,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const tangKuolieEn: CharacterPack = {
   profile: {
     name: 'Nico Tang',
+    firstName: 'Nico',
     pronoun: 'he',
     tagline: 'While we’re here, let’s swap contacts.',
     bio: 'The best thing he brings home from an academic conference is never a paper. It’s his contact list. Professors, admin staff, industry reps, some alum who happened to walk by: give him five minutes and they’re old friends.',

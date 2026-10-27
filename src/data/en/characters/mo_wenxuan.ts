@@ -6,6 +6,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const moWenxuanEn: CharacterPack = {
   profile: {
     name: 'Orion Moreau',
+    firstName: 'Orion',
     pronoun: 'he',
     tagline: 'Code won’t run? Check which way it’s facing.',
     bio: 'His backpack is never without a tarot deck, a few copper coins, and a luck-turning charm from who knows where. He firmly believes research is a science, but success still needs a little fortune on its side.',
@@ -286,9 +287,9 @@ export const moWenxuanEn: CharacterPack = {
     mwx_hyperparameter_ritual: {
       title: 'Tuning by Intuition, Intuition by the Stars',
       description: [
-        'Orion’s experiments are done, and his results beat everyone else’s in the group. You ask him to walk you through his tuning. He says, “Learning rate 0.000137, batch size 88, dropout 0.23.”',
+        'Orion’s experiments are done, and his results beat everyone else’s in the group. You ask him to walk you through his tuning. He says, “Learning rate 0.000138, batch size 88, dropout 0.23.”',
         '“Why those values?”',
-        '“They felt right.” A pause. “Also, the digits of 0.000137 add up to twelve, and this is my zodiac year, and twelve corresponds to… You don’t need to remember this part, Professor,” he adds, seeing your face. “But the results are right.”',
+        '“They felt right.” A pause. “Also, the digits of 0.000138 add up to twelve, and this is my zodiac year, and twelve corresponds to… You don’t need to remember this part, Professor,” he adds, seeing your face. “But the results are right.”',
         'The results really are right. You check his experiment log: he ran twenty-seven different configurations, each choice accompanied by a scribbled note. Some contain legitimate ablation reasoning, mixed in with annotations you can’t quite follow, but overall they trace an effective search path.',
       ],
       prompt: 'Orion’s mystical tuning delivered. What do you do?',

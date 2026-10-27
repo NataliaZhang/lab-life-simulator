@@ -5,6 +5,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const qianDuoduoEn: CharacterPack = {
   profile: {
     name: 'Dorian Vale',
+    firstName: 'Dorian',
     pronoun: 'he',
     tagline: 'So who’s actually going to use this?',
     bio: 'Has a strange gift: while everyone else is still discussing the experimental results, he’s already asking who the users are. After group meeting, other people remember the conclusions. Dorian remembers the needs. Nobody knows for sure whether there’s a product manager living in his head, on call 24/7.',

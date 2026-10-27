@@ -3,6 +3,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const heShixuEn: CharacterPack = {
   profile: {
     name: 'Serena Ho',
+    firstName: 'Serena',
     pronoun: 'she',
     tagline: 'Professor, is the part you promised me done?',
     bio: 'Other people run their research on inspiration. She runs hers on a plan. The latest version of her schedule is always on her desk, accurate to the minute, and the schedule includes her advisor.',

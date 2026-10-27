@@ -5,6 +5,7 @@ import type { CharacterPack } from '../../../types/i18n';
 export const xieZhiweiEn: CharacterPack = {
   profile: {
     name: 'Zoe Hsieh',
+    firstName: 'Zoe',
     pronoun: 'she',
     tagline: 'I’m just looking. I won’t touch anything.',
     bio: 'Took apart every appliance in the house as a kid, then grew up and moved on to code. She always wants to see how a device works, how a system actually runs. Whether she ends up changing a little something while she’s in there is another matter entirely.',
