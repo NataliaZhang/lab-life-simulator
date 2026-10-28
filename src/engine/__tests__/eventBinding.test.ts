@@ -77,6 +77,15 @@ describe('placeholder events in play', () => {
     expect(filterTriggerable([ONE_STUDENT_EVENT], empty)).toEqual([]);
   });
 
+  it('pool draws bind a preferred student when one is active, otherwise anyone', () => {
+    const others = [student('bai_xiaoman'), student('he_shixu'), student('tang_kuolie')];
+    const withPreferred = stateWith([...others, student('gu_mianmian')]);
+    expect(filterTriggerable(['visitor_worst_timing'], withPreferred)[0]?.studentId).toBe('gu_mianmian');
+    const withoutPreferred = stateWith(others);
+    expect(others.map(s => s.id)).toContain(
+      filterTriggerable(['visitor_worst_timing'], withoutPreferred)[0]?.studentId);
+  });
+
   it('PRESENT_EVENT binds a student for an unbound queued event', () => {
     const state = stateWith([student('gu_mianmian')], [{ id: ONE_STUDENT_EVENT }]);
     const next = gameReducer(state, { type: 'PRESENT_EVENT' });

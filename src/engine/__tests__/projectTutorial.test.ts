@@ -1,7 +1,7 @@
 /**
  * First-project tutorial. Guards the ways it could misbehave without anyone
- * noticing: showing up again in later runs or after a reload, resuming at the
- * wrong step, or starting when it can't be finished (which would lock the UI).
+ * noticing: showing up again after a reload, missing from a new run, resuming at
+ * the wrong step, or starting when it can't be finished (which would lock the UI).
  */
 
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -49,7 +49,7 @@ function reload(state: GameState): GameState {
 }
 
 describe('first-project tutorial', () => {
-  it('starts with the first idea, resumes after reloads, and stays finished in later runs', () => {
+  it('starts with the first idea, resumes after reloads, and starts over in every new run', () => {
     let state = takeIdea(atIdeaEvent([student('a', 60), student('b', 10)]));
     expect(state.projectTutorial).toEqual({ status: 'active', projectId: IDEA });
     expect(getTutorialStep(state, false)).toEqual({ kind: 'openProjects', projectId: IDEA });
@@ -64,8 +64,8 @@ describe('first-project tutorial', () => {
     expect(state.projectTutorial).toEqual({ status: 'done' });
     expect(getTutorialStep(reload(state), true)).toBeNull();
 
-    // Starting a new run (ending screen or reset) keeps it finished.
-    expect(gameReducer(state, { type: 'NEW_GAME' }).projectTutorial).toEqual({ status: 'done' });
+    // A new run (ending screen or reset) shows it again with that run's first idea.
+    expect(gameReducer(state, { type: 'NEW_GAME' }).projectTutorial).toEqual({ status: 'pending' });
   });
 
   it('waits while no student can lead the idea, and is skipped once the player launches a project alone', () => {

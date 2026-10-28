@@ -190,7 +190,7 @@ export const dailyLifeEventsEn: EventTranslations = {
         text: 'Give an honest tour. This is what research looks like.',
         outcomes: [
           'You greet the visitor and give the tour with no cleanup and no excuses. Passing the napper, you say, “We’re in a high-intensity phase before a deadline. Irregular sleep schedules are normal.”\n\nAt the takeout, you say, “The team works long hours in the lab, so meals mostly happen on-site.”\n\nThe visitor nods seriously and later describes the tour as “very authentic, deeply memorable.”\n\nThis is one of the most confusing pieces of positive feedback you have ever received.',
-          'You give the visitor an honest tour. Right then, the napper rolls over, the headphones pop out, and a very loud burst of video game sound effects fills the room.\n\nThe visitor smiles, waits for it to stop, and says, “Good to see everyone finds ways to blow off steam.” You feel the social cost of this visit was slightly higher than anticipated.',
+          'You give the visitor an honest tour. Right then, {studentName}, still napping, rolls over, {his} headphones pop out, and a very loud burst of video game sound effects fills the room.\n\nThe visitor smiles, waits for it to stop, and says, “Good to see everyone finds ways to blow off steam.” You feel the social cost of this visit was slightly higher than anticipated.',
         ],
       },
       reroute_to_conference: {

@@ -118,6 +118,7 @@ export interface GameEvent {
   options?: EventOption[];   // Omit for passive events; engine auto-dismisses when empty
   tags?: string[];
   triggerConditions?: EventCondition[]; // event enters queue only if ALL conditions met
+  preferStudentIds?: string[];          // when no condition picks the bound student, prefer these (if active) over a random one
   prioritizeNext?: boolean;             // when true, nextEventIds are prepended to queue front instead of appended
 }
 
@@ -206,7 +207,7 @@ export interface GameState {
   projectIdeas: string[];              // project IDs of unlocked but not-yet-started ideas
   activeProjects: ActiveProject[];
   completedProjects: CompletedProject[];
-  // One-time guided walkthrough of the first project launch. Carried into new runs once done.
+  // Guided walkthrough of the run's first project launch (once per run).
   projectTutorial: ProjectTutorial;
   noStudentMonths: number;             // consecutive months with zero active students (for grace-period ending)
   /** Image path pending reveal on the next "继续" click (description or outcome image). */

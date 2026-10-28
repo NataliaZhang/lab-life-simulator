@@ -20,7 +20,7 @@ import { openingEventIds } from '../data/events';
 import { getEvent, pickOutcome, bindRequiredStudents } from './eventQueue';
 import { applyMonthlyUpdate } from './monthlyUpdate';
 import { startProject, assignLeader, removeLeader, removeLeaderOnStudentLeave } from './projectEngine';
-import { syncProjectTutorial, carryOverTutorial } from './projectTutorial';
+import { syncProjectTutorial } from './projectTutorial';
 import { projectById } from '../data/projects';
 import { bothLocales, joinText } from '../i18n/locale';
 import { getMessages } from '../i18n/messages';
@@ -804,7 +804,7 @@ function reduceAction(state: GameState, action: GameAction): GameState {
     }
 
     case 'NEW_GAME': {
-      return { ...createInitialState(), projectTutorial: carryOverTutorial(state) };
+      return createInitialState();
     }
 
     case 'START_PROJECT': {

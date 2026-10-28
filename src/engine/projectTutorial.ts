@@ -4,10 +4,11 @@ import { projectById } from '../data/projects';
 import { canAssignStudent, studentHasActiveProject } from './projectEngine';
 
 // ─── First-project tutorial ────────────────────────────────────────────────
-// A one-time walkthrough the first time the player holds a project idea:
+// A walkthrough the first time the player holds a project idea in each run:
 // open Projects → launch the idea → pick a student as lead.
 //
-// Only the status is stored (GameState.projectTutorial, saved with the run).
+// Only the status is stored (GameState.projectTutorial, saved with the run, so
+// every new game starts it over).
 // The current step is derived from game state plus whether the projects panel
 // is open, so a reload mid-tutorial resumes at the right step. The UI locks
 // everything except the current step's target; the reducer itself enforces
@@ -101,9 +102,4 @@ export function getTutorialStep(state: GameState, projectPanelOpen: boolean): Tu
   return state.projectIdeas.includes(projectId)
     ? { kind: 'launch', projectId }
     : { kind: 'chooseLead', projectId };
-}
-
-// A new run keeps a finished tutorial finished; anything else starts over.
-export function carryOverTutorial(previous: GameState): ProjectTutorial {
-  return previous.projectTutorial?.status === 'done' ? DONE : PENDING;
 }

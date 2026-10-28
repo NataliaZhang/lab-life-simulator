@@ -54,11 +54,11 @@ monthly progress.
 - Completion bonuses: `startup_saint` (+3 funding), `product_mindset` (+2 rep),
   `network_magnet` (+4 rep)
 
-**First-project tutorial** (one-time, guides Projects → Launch → pick a student lead):
+**First-project tutorial** (once per run, guides Projects → Launch → pick a student lead):
 - Rules: `src/engine/projectTutorial.ts`. Status lives in `GameState.projectTutorial`
   (`pending` / `active` + projectId / `done`); `gameReducer` runs `syncProjectTutorial()` after
   every action. It only activates when the idea is affordable and some student qualifies, so it
-  can't soft-lock. `done` is carried into new runs; old saves that already have ideas or
+  can't soft-lock. Every new game starts it over; old saves that already have ideas or
   projects load as `done`.
 - UI: `src/components/TutorialOverlay.tsx` spotlights the element with the matching
   `data-tutorial-target` and blocks all other clicks and keys. The step is derived from state plus

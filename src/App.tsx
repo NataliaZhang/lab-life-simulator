@@ -173,8 +173,8 @@ export function App() {
 
   const [fontSize, setFontSize] = useState<number>(() => {
     const saved = localStorage.getItem('lab-font-size');
-    const size = saved ? parseInt(saved, 10) : 17;
-    document.documentElement.style.setProperty('--content-font-size', `${size}px`);
+    const size = saved ? parseInt(saved, 10) : DEFAULT_FONT_SIZE;
+    applyFontSize(size);
     return size;
   });
 
@@ -183,7 +183,7 @@ export function App() {
     setFontSize(prev => {
       const next = Math.max(11, Math.min(20, prev + delta));
       localStorage.setItem('lab-font-size', String(next));
-      document.documentElement.style.setProperty('--content-font-size', `${next}px`);
+      applyFontSize(next);
       return next;
     });
   };

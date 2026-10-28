@@ -123,6 +123,7 @@ export function filterUnseen(candidates: string[], seenIds: Set<string>): string
 function findTriggeringStudents(
   conditions: EventCondition[],
   state: GameState,
+  preferIds: string[] = [],
 ): { studentId?: string; student2Id?: string } {
   const needsTwo = conditions.some(c => c.type === 'minStudentCount' && c.value >= 2);
   const active = state.students.filter(s => s.status === 'active');
@@ -156,6 +157,11 @@ function findTriggeringStudents(
         studentId = id;
       }
     }
+  }
+
+  // Preferred fallback: the event names students who fit the scene best (preferStudentIds).
+  if (!studentId) {
+    studentId = randomOf(active.filter(s => preferIds.includes(s.id)))?.id;
   }
 
   // Final fallback: no deterministic student found — pick a random active student.
@@ -250,7 +256,7 @@ export function filterTriggerable(eventIds: string[], state: GameState): QueuedE
     const required = getRequiredStudentIds(event);
     if (required.some(sid => !activeIds.has(sid))) continue;
     const { studentId, student2Id } = event.triggerConditions
-      ? findTriggeringStudents(event.triggerConditions, state)
+      ? findTriggeringStudents(event.triggerConditions, state, event.preferStudentIds)
       : {};
     // Leave out events that would have to show a student nobody can fill in.
     const queued = bindRequiredStudents({ id, studentId, student2Id }, state);

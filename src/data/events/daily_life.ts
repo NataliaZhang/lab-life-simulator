@@ -404,6 +404,8 @@ export const labLifeEvents: Record<string, GameEvent> = {
       { type: 'lab', stat: 'reputation', op: '>=', value: 15 },
       { type: 'minStudentCount' as const, value: 3 },
     ],
+    // The napper in the honest-tour outcome is named; these two fit the role best.
+    preferStudentIds: ['gu_mianmian', 'lin_xiaojuan'],
     options: [
       {
         id: 'emergency_cleanup',
@@ -441,7 +443,7 @@ export const labLifeEvents: Record<string, GameEvent> = {
           },
           {
             weight: 1,
-            narrative: '你如实带访客参观。午休那位刚好在这时候翻身，耳机脱落，弹出一段非常响亮的游戏音效，充满了整个房间。\n\n访客微笑着等到声音停下，说了一句"看来大家工作压力也会疏解一下"。你觉得这次参观的社会代价比预期的略高。',
+            narrative: '你如实带访客参观。午休的{studentName}刚好在这时候翻身，耳机脱落，弹出一段非常响亮的游戏音效，充满了整个房间。\n\n访客微笑着等到声音停下，说了一句"看来大家工作压力也会疏解一下"。你觉得这次参观的社会代价比预期的略高。',
             effects: [
               { type: 'lab', stat: 'reputation', delta: -3 },
               { type: 'allStudents', stat: 'happiness', delta: 5 },

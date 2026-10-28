@@ -43,7 +43,7 @@ export interface CompletedProject {
 }
 
 // ─── First-project tutorial ────────────────────────────────────────────────
-// pending = not shown yet; active = guiding the launch of projectId; done = never shown again.
+// pending = not shown yet; active = guiding the launch of projectId; done = finished for this run.
 // See src/engine/projectTutorial.ts.
 export type ProjectTutorial =
   | { status: 'pending' }
