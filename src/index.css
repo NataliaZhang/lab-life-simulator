@@ -45,6 +45,9 @@
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
 
   --content-font-size: 14px;
+  /* px offset from the default A-/A+ size; event-related text adds it to its own base.
+     max(10px, …) keeps small labels readable at the smallest setting. */
+  --font-step: 0px;
 }
 
 html, body {
@@ -362,11 +365,11 @@ html[lang="en"] .game-title { white-space: nowrap; }
 
 .log-entry__title {
   font-weight: 600;
-  font-size: 14px;
+  font-size: max(10px, 14px + var(--font-step));
 }
 
 .log-entry__time {
-  font-size: 11px;
+  font-size: max(10px, 11px + var(--font-step));
   color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -374,7 +377,7 @@ html[lang="en"] .game-title { white-space: nowrap; }
 }
 
 .log-entry__choice {
-  font-size: 12px;
+  font-size: max(10px, 12px + var(--font-step));
   color: var(--color-accent);
   background: var(--color-accent-light);
   border-radius: 4px;
@@ -445,7 +448,7 @@ html[lang="en"] .game-title { white-space: nowrap; }
 }
 
 .stat-change-pill {
-  font-size: 11px;
+  font-size: max(10px, 11px + var(--font-step));
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 99px;
@@ -885,6 +888,12 @@ html[lang="en"] .game-title { white-space: nowrap; }
   background: var(--color-neg-bg);
   color: var(--color-neg);
 }
+
+/* Event modal text follows the A-/A+ setting; the admission modal shares these
+   classes but keeps fixed sizes so candidate cards don't reflow. */
+.event-modal .modal__title { font-size: max(10px, 18px + var(--font-step)); }
+.event-modal .modal__option-btn { font-size: max(10px, 14px + var(--font-step)); }
+.event-modal .option-cost { font-size: max(10px, 11px + var(--font-step)); }
 
 /* ─── Buttons ──────────────────────────────────────────────────────────────── */
 

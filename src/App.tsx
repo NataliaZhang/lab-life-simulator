@@ -111,6 +111,19 @@ function LanguageToggle() {
   );
 }
 
+// ─── Font size ────────────────────────────────────────────────────────────────
+
+const DEFAULT_FONT_SIZE = 17;
+
+// The A-/A+ setting is the event body size. Event titles, dates, chosen-option
+// lines, option buttons and stat pills keep their own base sizes and shift by the
+// same number of px (--font-step), so their relative sizes stay intact.
+function applyFontSize(size: number) {
+  const root = document.documentElement.style;
+  root.setProperty('--content-font-size', `${size}px`);
+  root.setProperty('--font-step', `${size - DEFAULT_FONT_SIZE}px`);
+}
+
 export function App() {
   const { m, event: localizeEvent } = useI18n();
   const {

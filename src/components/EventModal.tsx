@@ -23,7 +23,7 @@ export function EventModal({ event: sourceEvent, lab, chosenOptionIds, activeStu
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="event-title">
-      <div className="modal">
+      <div className="modal event-modal">
         <div className="modal__header">
           <h2 className="modal__title" id="event-title">{resolve(event.title)}</h2>
           <button className="modal__close" onClick={onClose} aria-label={m.event.closeForNow}>✕</button>
